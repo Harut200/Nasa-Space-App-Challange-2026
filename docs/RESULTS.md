@@ -1,5 +1,7 @@
 # Results at a glance
 
+Every test and experiment behind these numbers, with links to the proof: [EVIDENCE.md](EVIDENCE.md).
+
 NASA Space Apps 2026, "Dancing with the SARs". State of 14 November 2026, about 22:00 (Armenia time). Full method: [DETECTION.md](DETECTION.md). Design: [ARCHITECTURE.md](ARCHITECTURE.md).
 
 ## What the project shows
