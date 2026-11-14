@@ -1,0 +1,15 @@
+{
+  "story": {
+    "see": "Little changes until mid-August. Then field after field across the plain north of the Mekong turns darker, mostly in September and October, and a few patches become open water. Most of the flood shows as 'got darker' rather than clear open water: the water is shallow and broken up by dikes, canals and crops. Orchards and towns stay bright.",
+    "physics": "Each wet season the Mekong rises and spills onto the low plain on the Vietnam–Cambodia border, including the Plain of Reeds. Farmers have built dikes to hold some of it back and grow extra rice crops; water spreads across fields between the dikes and drains again after the season.",
+    "lband": "Shallow water lying between rice stalks and reeds partly mirrors the radar away, so HH gets darker but not black. L-band's long wavelength sees through the crop to the water beneath. Where fields are fully open water, they turn black and our water layer marks them blue.",
+    "people": "The Mekong Delta in Vietnam is home to about 19 million people and grew more than half of Vietnam's rice in 2011. The yearly flood brings fish and silt but also damages homes and roads, so knowing when and where it spreads helps farmers and planners."
+  },
+  "spots": [
+    {"id": "plain-of-reeds", "label": "Plain of Reeds (darkens from September)", "lngLat": [105.9, 10.75], "radius_m": 1200},
+    {"id": "flooded-fields", "label": "Fields flooded August–September", "lngLat": [105.8, 10.8], "radius_m": 1000},
+    {"id": "cambodia-side", "label": "Fields on the Cambodian side (water by October)", "lngLat": [105.54, 11.097], "radius_m": 1000},
+    {"id": "rice-cycle", "label": "Rice fields (dark, bright, dark again)", "lngLat": [106.1, 10.7], "radius_m": 1000},
+    {"id": "orchards", "label": "Orchards and settlements (stable reference)", "lngLat": [106.016, 10.385], "radius_m": 1200}
+  ]
+}

@@ -1,0 +1,248 @@
+{
+  "id": "rondonia",
+  "name": "Rond\u00f4nia forest frontier, Brazil",
+  "bounds": [
+    -62.8,
+    -10.060263882526822,
+    -61.420371868306134,
+    -8.799999999999999
+  ],
+  "dates": [
+    "2026-06-30",
+    "2026-08-17",
+    "2026-08-29",
+    "2026-09-10",
+    "2026-10-04",
+    "2026-10-16"
+  ],
+  "gaps": [
+    [
+      "2026-07-27",
+      "2026-08-10"
+    ]
+  ],
+  "layers": [
+    {
+      "id": "hh",
+      "label": "HH brightness (preview)",
+      "dates": [
+        "2026-06-30",
+        "2026-08-17",
+        "2026-08-29",
+        "2026-09-10",
+        "2026-10-04",
+        "2026-10-16"
+      ],
+      "legend": {
+        "type": "ramp",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": 0,
+        "max": 100,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    },
+    {
+      "id": "water",
+      "label": "Water and flooded vegetation",
+      "dates": [
+        "2026-06-30",
+        "2026-08-17",
+        "2026-08-29",
+        "2026-09-10",
+        "2026-10-04",
+        "2026-10-16"
+      ],
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#2f6fde",
+            "label": "Open water"
+          },
+          {
+            "color": "#35b04a",
+            "label": "Possible water under vegetation"
+          },
+          {
+            "color": "#7fd3c4",
+            "label": "Going under: vegetation submerging, or part open water"
+          },
+          {
+            "color": "#f28e2b",
+            "label": "Usually water, not today (wind?)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "when",
+      "label": "When it changed for good",
+      "dates": null,
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#440154",
+            "label": "17 Aug"
+          },
+          {
+            "color": "#3b528b",
+            "label": "29 Aug"
+          },
+          {
+            "color": "#21918c",
+            "label": "10 Sep"
+          },
+          {
+            "color": "#5ec962",
+            "label": "4 Oct"
+          },
+          {
+            "color": "#fde725",
+            "label": "16 Oct"
+          }
+        ]
+      }
+    },
+    {
+      "id": "classes",
+      "label": "Season classes",
+      "dates": null,
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#08306b",
+            "label": "Permanent water"
+          },
+          {
+            "color": "#4292c6",
+            "label": "Seasonal open water"
+          },
+          {
+            "color": "#41ab5d",
+            "label": "Flooded vegetation"
+          },
+          {
+            "color": "#9ecae1",
+            "label": "Got darker, not open water (wetter ground, shallow or partial flooding)"
+          },
+          {
+            "color": "#c994c7",
+            "label": "Got brighter (growing crops and other causes)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "change",
+      "label": "Change since first pass (HV)",
+      "dates": [
+        "2026-08-17",
+        "2026-08-29",
+        "2026-09-10",
+        "2026-10-04",
+        "2026-10-16"
+      ],
+      "legend": {
+        "type": "diverging",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": -35,
+        "max": 35,
+        "colors": [
+          "#2166ac",
+          "#00000000",
+          "#b2182b"
+        ],
+        "labels": [
+          "darker: new water, cleared forest",
+          "brighter: flooded vegetation, growth"
+        ]
+      }
+    },
+    {
+      "id": "rgb",
+      "label": "Three-date composite",
+      "dates": null,
+      "legend": {
+        "type": "text",
+        "text": "HV: red = 30 Jun, green = 10 Sep, blue = 16 Oct. Grey = no change."
+      }
+    },
+    {
+      "id": "hv",
+      "label": "HV brightness (preview)",
+      "dates": [
+        "2026-06-30",
+        "2026-08-17",
+        "2026-08-29",
+        "2026-09-10",
+        "2026-10-04",
+        "2026-10-16"
+      ],
+      "legend": {
+        "type": "ramp",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": 0,
+        "max": 100,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    }
+  ],
+  "story": {
+    "see": "In HV, standing forest is bright and cleared land is dark, so the settlement roads and farm plots show as a dark 'fishbone' cut into the forest. Most of it was cleared before 2026 and looks the same on every date. A few small blocks at the forest edge drop sharply in HV between late August and early October.",
+    "physics": "Settlers and ranchers clear forest along roads and side roads, plot by plot, turning it into pasture and fields. Clearing and burning mostly happen in the dry season. Once trees are gone the land holds far less plant material, and it rarely grows back to full forest.",
+    "lband": "HV is the cross-polarised channel: the signal comes back mainly after bouncing around inside a 3D canopy of trunks and branches. L-band's 24 cm waves penetrate the canopy and scatter in that woody volume, so forest is bright in HV and pasture dark. Clouds and smoke do not block radar, which matters in the burning season.",
+    "people": "Rond\u00f4nia is one of the Brazilian states that clears the most forest; by 2003 around 70,000 km\u00b2 of its rainforest had been cleared. Radar can flag new clearings through clouds and smoke. Our previews are coarse (about 180 m), so only larger clearings show; three corrupt previews (18 June, 12 and 24 July) were removed."
+  },
+  "spots": [
+    {
+      "id": "new-clearing-west",
+      "label": "Forest block that darkened in early October",
+      "lngLat": [
+        -62.639,
+        -9.287
+      ]
+    },
+    {
+      "id": "new-clearing-north",
+      "label": "Forest block that darkened in early October (north)",
+      "lngLat": [
+        -62.63,
+        -8.841
+      ]
+    },
+    {
+      "id": "new-clearing-east",
+      "label": "Forest block that darkened in late August",
+      "lngLat": [
+        -61.558,
+        -9.31
+      ]
+    },
+    {
+      "id": "settlement-plots",
+      "label": "Cleared plots in the fishbone (reference)",
+      "lngLat": [
+        -62.262,
+        -9.579
+      ]
+    },
+    {
+      "id": "intact-forest",
+      "label": "Intact forest (reference)",
+      "lngLat": [
+        -61.6,
+        -9.85
+      ]
+    }
+  ],
+  "credits": "NISAR GCOV preview images: NASA/JPL-Caltech and ISRO, distributed by ASF DAAC. Uncalibrated previews at about 180 m; values are display brightness, not backscatter.",
+  "source": "preview"
+}

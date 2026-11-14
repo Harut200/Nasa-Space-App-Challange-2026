@@ -1,0 +1,46 @@
+{
+  "story": {
+    "see": "The lakes and channels of the permanent swamp stay black on every date. The seasonal change is at the edges: pools on the south-western floodplain fill in mid-August and stay full to our last image, 18 October. The grassland plain to the west first brightens with new growth in August, then turns darker by October as the ground gets wetter.",
+    "physics": "The White Nile spreads out here into a vast swamp. Water levels rise in the wet season and the swamp expands over grasslands that are dry for the rest of the year. During the wet season it may extend to over 130,000 km², and levels can vary by up to 1.5 m.",
+    "lband": "Open water mirrors L-band radar away, so lakes are black. Dense papyrus and reeds standing in water send the signal back strongly, so the core swamp looks bright white all season. L-band's 24 cm waves reach through the grass to wet soil, which is why the western plain darkens as it soaks up water.",
+    "people": "Nuer and Dinka pastoralists use the Sudd and its surroundings extensively; livestock and rain-fed farming support most people here. The seasonal grasslands are vital grazing land. Clouds and remoteness make the swamp hard to watch from the ground or with optical satellites, while radar sees through both. One preview (6 October) was corrupt and removed."
+  },
+  "spots": [
+    {
+      "id": "swamp-lake",
+      "label": "Lake in the permanent swamp (always water)",
+      "lngLat": [
+        31.076,
+        7.667
+      ],
+      "radius_m": 1500
+    },
+    {
+      "id": "floodplain-pools",
+      "label": "Floodplain pools (fill in August)",
+      "lngLat": [
+        30.276,
+        6.973
+      ],
+      "radius_m": 1000
+    },
+    {
+      "id": "swamp-vegetation",
+      "label": "Dense swamp vegetation (bright, stable)",
+      "lngLat": [
+        30.933,
+        7.32
+      ],
+      "radius_m": 1500
+    },
+    {
+      "id": "western-plain",
+      "label": "Western grassland plain (seasonal)",
+      "lngLat": [
+        30.15,
+        7.2
+      ],
+      "radius_m": 1500
+    }
+  ]
+}

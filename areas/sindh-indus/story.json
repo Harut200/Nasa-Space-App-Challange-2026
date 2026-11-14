@@ -1,0 +1,14 @@
+{
+  "story": {
+    "see": "No flood shows on this stretch of the Indus in 2026: the river channel stays the same. The change is farming. West of the river, fields darken in late July and August, then become very bright in September and October. A dark sand desert east of the river stays dark all season and is correctly not called water.",
+    "physics": "Sindh is mostly arid; farming depends on the Indus and its canals. In the monsoon season many fields west of the river are flooded to grow rice. Once the paddies are planted the crop grows tall and dense through autumn until harvest.",
+    "lband": "A newly flooded paddy mirrors the radar and turns dark in HH. As rice grows, the signal bounces between water and stems and back to the satellite, so the same fields become very bright. HV rises too as leaves fill in. The dark-then-bright pattern is a crop calendar written in radar.",
+    "people": "Sindh had 55.7 million people in the 2023 census. Rice and other irrigated crops along the Indus feed the province and its cities. Seeing when fields are flooded and how the crop develops helps track water use and harvest timing across a whole province at once."
+  },
+  "spots": [
+    {"id": "rice-west", "label": "Rice fields west of the Indus", "lngLat": [68.0, 27.3], "radius_m": 1200},
+    {"id": "rice-north", "label": "Rice fields near the north edge", "lngLat": [68.094, 27.405], "radius_m": 1000},
+    {"id": "stable-land", "label": "Farmland and settlements (stable)", "lngLat": [68.3, 26.8], "radius_m": 1200},
+    {"id": "sand-desert", "label": "Sand desert east of the Indus (dark but dry)", "lngLat": [68.757, 26.571], "radius_m": 1500}
+  ]
+}

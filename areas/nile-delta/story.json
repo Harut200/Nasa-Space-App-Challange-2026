@@ -1,0 +1,15 @@
+{
+  "story": {
+    "see": "The northern half of the delta brightens steadily from late June, peaks around 13–25 August, then falls back in mid-to-late September to where it started. The southern delta changes much less. Our open-water layer is empty: the coastal lagoons and the sea look grey, not black, in these images, so the detector does not call them water.",
+    "physics": "The delta is a patchwork of small irrigated fields fed by canals from the Nile. Egypt's rice crop is grown in the Nile Delta, and rice is typically harvested from late August to mid-September. The summer crop grows from bare, flooded fields to dense green canopy, then is cut.",
+    "lband": "As rice and other summer crops grow, L-band radar bounces between the water or wet soil and the plant stems and returns to the satellite, so HH brightens; after harvest the fields go dark again. Rough water on windy days and reeds in shallow lagoons send some signal back too, which hides open water from a simple brightness threshold.",
+    "people": "The delta is Egypt's farming heartland. Most of its rice is irrigated with agricultural drainage water, reusing the Nile's water before it reaches the Mediterranean. Mapping when fields green up and are harvested, field by field and across the whole delta, helps track crops and water use."
+  },
+  "spots": [
+    {"id": "north-fields", "label": "Northern delta fields (bright in August, harvested in September)", "lngLat": [30.7, 31.2], "radius_m": 1500},
+    {"id": "north-fields-east", "label": "Northern delta fields, east", "lngLat": [31.0, 31.3], "radius_m": 1500},
+    {"id": "south-fields", "label": "Southern delta farmland (little change)", "lngLat": [31.1, 30.6], "radius_m": 1500},
+    {"id": "burullus", "label": "Lake Burullus lagoon (grey, not black)", "lngLat": [30.9, 31.45], "radius_m": 1500},
+    {"id": "west-reference", "label": "Land west of the delta (stable reference)", "lngLat": [30.429, 30.692], "radius_m": 1500}
+  ]
+}

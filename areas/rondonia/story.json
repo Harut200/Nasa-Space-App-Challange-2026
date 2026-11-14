@@ -1,0 +1,15 @@
+{
+  "story": {
+    "see": "In HV, standing forest is bright and cleared land is dark, so the settlement roads and farm plots show as a dark 'fishbone' cut into the forest. Most of it was cleared before 2026 and looks the same on every date. A few small blocks at the forest edge drop sharply in HV between late August and early October.",
+    "physics": "Settlers and ranchers clear forest along roads and side roads, plot by plot, turning it into pasture and fields. Clearing and burning mostly happen in the dry season. Once trees are gone the land holds far less plant material, and it rarely grows back to full forest.",
+    "lband": "HV is the cross-polarised channel: the signal comes back mainly after bouncing around inside a 3D canopy of trunks and branches. L-band's 24 cm waves penetrate the canopy and scatter in that woody volume, so forest is bright in HV and pasture dark. Clouds and smoke do not block radar, which matters in the burning season.",
+    "people": "Rondônia is one of the Brazilian states that clears the most forest; by 2003 around 70,000 km² of its rainforest had been cleared. Radar can flag new clearings through clouds and smoke. Our previews are coarse (about 180 m), so only larger clearings show; three corrupt previews (18 June, 12 and 24 July) were removed."
+  },
+  "spots": [
+    {"id": "new-clearing-west", "label": "Forest block that darkened in early October", "lngLat": [-62.639, -9.287], "radius_m": 500},
+    {"id": "new-clearing-north", "label": "Forest block that darkened in early October (north)", "lngLat": [-62.63, -8.841], "radius_m": 500},
+    {"id": "new-clearing-east", "label": "Forest block that darkened in late August", "lngLat": [-61.558, -9.31], "radius_m": 500},
+    {"id": "settlement-plots", "label": "Cleared plots in the fishbone (reference)", "lngLat": [-62.262, -9.579], "radius_m": 600},
+    {"id": "intact-forest", "label": "Intact forest (reference)", "lngLat": [-61.6, -9.85], "radius_m": 1500}
+  ]
+}
