@@ -81,7 +81,7 @@ export function EventExplore({ place, layerId, layer, setLayer, opacity, setOpac
       <section className="dock panel ev-dock" aria-label="Before and after">
         <div className="ev-head">
           {quake ? <div className="ev-fig"><strong>{e.magnitude != null ? `M ${Number(e.magnitude).toFixed(1)}` : 'Earthquake'}</strong><span className="mono">{place.name.split(',')[0]}, {fmtDate(day(e.time))}</span></div>
-            : <div className="ev-fig"><strong className="ev-title">{e.summary || e.title || place.name}</strong><span className="mono">{e.title || place.name}, {fmtDate(day(e.time))}{e.time_note ? ` · ${e.time_note}` : ''}</span></div>}
+            : <div className="ev-fig"><strong className="ev-title">{e.summary || e.title || place.name}</strong><span className="mono">{e.title || place.name}{String(e.title || '').includes(String(day(e.time)).slice(0, 4)) ? '' : `, ${fmtDate(day(e.time))}`}{e.time_note ? ` · ${e.time_note}` : ''}</span></div>}
           {quake && good[0] && <div className="ev-fig"><strong>≈ {good[0].p2p_cm}<small> cm</small></strong><span className="mono">ground motion along the line of sight{(e.views || []).length > 1 ? `, ${good[0].label}, track ${good[0].track}` : ''}</span></div>}
         </div>
         <EventStrip event={e} />

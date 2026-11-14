@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import * as maplibregl from 'maplibre-gl'
 import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?url'
 import 'maplibre-gl/dist/maplibre-gl.css'
@@ -35,7 +35,7 @@ function addSlots(m, names, bounds) {
   names.forEach((n) => {
     if (m.getSource(n)) return
     m.addSource(n, { type: 'image', url: 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==', coordinates: quad(bounds) })
-    m.addLayer({ id: n, type: 'raster', source: n, paint: { 'raster-opacity': 0, 'raster-opacity-transition': { duration: reduced() ? 0 : 320 }, 'raster-fade-duration': 0, 'raster-resampling': 'linear' } })
+    m.addLayer({ id: n, type: 'raster', source: n, paint: { 'raster-opacity': 0, 'raster-opacity-transition': { duration: reduced() ? 0 : 420 }, 'raster-fade-duration': 0, 'raster-resampling': 'linear' } })
   })
 }
 
@@ -68,7 +68,8 @@ function crossfade(st, m, url, bounds, opacity) {
  * props: bounds, url, opacity, padding, camera ({key, focus:[lng,lat], zoomBoost}), spots, activeSpot, onSpot,
  *        interactive, compare {on, split, url}
  */
-export default function MapStage({ bounds, url, opacity = 0.9, padding, camera, spots = [], showSpots, activeSpot, onSpot, interactive = true, star, compare, onSplit, onReady, outline, ring, starLabel = 'Epicentre' }) {
+export default function MapStage({ bounds, url, opacity = 0.9, padding, camera, spots = [], showSpots, activeSpot, onSpot, interactive = true, star, compare, onSplit, onReady, outline, ring, starLabel = 'Epicentre', hold = false }) {
+  const [flying, setFlying] = useState(false) // a place-to-place flight is under way: the picture waits for arrival
   const el = useRef(null), el2 = useRef(null)
   const map = useRef(null), map2 = useRef(null)
   const st = useRef({ token: 0, active: 'a', ready: false, token2: 0, active2: 'a' })
@@ -140,11 +141,15 @@ export default function MapStage({ bounds, url, opacity = 0.9, padding, camera, 
     m.getCanvas().style.cursor = interactive ? '' : 'default'
   }, [interactive])
 
-  // image frame / opacity
+  // image frame / opacity. While a flight to another place runs (or the caller holds it), the picture fades out in place and the new one fades in on arrival.
   const bkey = bounds.join()
+  const [seenB, setSeenB] = useState(bkey)
+  if (seenB !== bkey) { setSeenB(bkey); if (!camera?.jump && !reduced()) setFlying(true) } // decided while rendering, so the old picture never jumps to the new place
+  const held = hold || flying
   useEffect(() => {
     const m = map.current
     if (!st.current.ready) return
+    if (held) { crossfade(st.current, m, null, bounds, opacity); return }
     ;['sar-a', 'sar-b'].forEach((n) => m.getSource(n)?.setCoordinates?.(quad(bounds)))
     crossfade(st.current, m, url, bounds, opacity)
     // watchdog: a slow or dropped image load must never leave the map bare
@@ -155,7 +160,7 @@ export default function MapStage({ bounds, url, opacity = 0.9, padding, camera, 
     }, 2200)
     return () => clearTimeout(t)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [url, bkey])
+  }, [url, bkey, held])
   useEffect(() => {
     const m = map.current
     if (st.current.ready) m.getLayer(`sar-${st.current.active}`) && url && m.setPaintProperty(`sar-${st.current.active}`, 'raster-opacity', opacity)
@@ -164,29 +169,37 @@ export default function MapStage({ bounds, url, opacity = 0.9, padding, camera, 
 
   // camera
   const ckey = `${bkey}|${camera?.key ?? ''}|${padding ? JSON.stringify(padding) : ''}`
-  const lastB = useRef(null)
+  const lastB = useRef(null), lastPad = useRef(null)
   useEffect(() => {
     const m = map.current
-    const go = () => {
-      const dur = reduced() ? 0 : (camera?.duration ?? 1500)
-      const pad = padding || 40
-      const placeChanged = lastB.current !== null && lastB.current !== bkey
-      lastB.current = bkey
-      const bb = [[bounds[0], bounds[1]], [bounds[2], bounds[3]]]
-      if (camera?.focus) {
-        const cam = m.cameraForBounds(bb, { padding: pad })
-        const off = typeof pad === 'object' ? [((pad.left || 0) - (pad.right || 0)) / 2, ((pad.top || 0) - (pad.bottom || 0)) / 2] : [0, 0]
-        m.easeTo({ center: camera.focus, zoom: (cam?.zoom ?? 7) + (camera.zoomBoost ?? 1.3), duration: dur, offset: off, easing: EASE })
-      } else if (placeChanged && !reduced()) {
-        // another place: a short hop along the great circle, out a little and back in
-        const cam = m.cameraForBounds(bb, { padding: pad })
-        if (cam) m.flyTo({ center: cam.center, zoom: Math.min(cam.zoom, 11), duration: Math.min(2000, dur + 400), curve: 1.4, easing: EASE, essential: true })
-        else m.fitBounds(bb, { padding: pad, duration: dur, maxZoom: 11, easing: EASE })
-      } else {
-        m.fitBounds(bb, { padding: pad, duration: dur, maxZoom: 11, easing: EASE })
-      }
+    const pad = padding || 40
+    const placeChanged = lastB.current !== null && lastB.current !== bkey
+    const prevPad = lastPad.current
+    lastB.current = bkey; lastPad.current = pad
+    // a small change of the free area (a panel finishing its layout) is a short settle, not a second long move
+    const near = prevPad && typeof pad === 'object' && typeof prevPad === 'object' && !placeChanged && ['top', 'left', 'right', 'bottom'].every((k) => Math.abs((pad[k] || 0) - (prevPad[k] || 0)) < 64)
+    let dur = reduced() || camera?.jump ? 0 : (camera?.duration ?? 1500)
+    if (near && dur) dur = Math.min(dur, 520)
+    const bb = [[bounds[0], bounds[1]], [bounds[2], bounds[3]]]
+    let off
+    if (camera?.focus) {
+      setFlying(false)
+      const cam = m.cameraForBounds(bb, { padding: pad })
+      const o = typeof pad === 'object' ? [((pad.left || 0) - (pad.right || 0)) / 2, ((pad.top || 0) - (pad.bottom || 0)) / 2] : [0, 0]
+      m.easeTo({ center: camera.focus, zoom: (cam?.zoom ?? 7) + (camera.zoomBoost ?? 1.3), duration: dur, offset: o, easing: EASE })
+    } else if (placeChanged && dur) {
+      // another place: pull back along the great circle and come in again; the picture is held until arrival
+      const cam = m.cameraForBounds(bb, { padding: pad })
+      const arrive = () => { clearTimeout(tm); m.off('moveend', arrive); setFlying(false) }
+      const tm = setTimeout(arrive, Math.min(2200, dur + 500) + 600)
+      if (cam) {
+        m.once('moveend', arrive)
+        m.flyTo({ center: cam.center, zoom: Math.min(cam.zoom, 11), duration: Math.min(2200, dur + 500), curve: 1.5, speed: 1, easing: EASE, essential: true })
+      } else { setFlying(false); m.fitBounds(bb, { padding: pad, duration: dur, maxZoom: 11, easing: EASE }) }
+    } else {
+      setFlying(false)
+      m.fitBounds(bb, { padding: pad, duration: dur, maxZoom: 11, easing: EASE })
     }
-    go()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ckey])
 

@@ -66,6 +66,8 @@ export default function App() {
   const [stubs, setStubs] = useState({})
   const [diveKeep, setDiveKeep] = useState('full')
   const diveRef = useRef(false)
+  const [diveTo, setDiveTo] = useState(null) // the place the camera is flying to: the map underneath is made ready for it (still hidden)
+  const [overlayHold, setOverlayHold] = useState(false)
   const [selected, setSelected] = useState(null)
   const [near, setNear] = useState(null)
   const [panelOpen, setPanelOpen] = useState(false)
@@ -257,7 +259,7 @@ export default function App() {
   const padding = mode === 'places' || mode === 'globe' ? { top: 60, bottom: 60, left: 40, right: 40 }
     : mode === 'open' ? (phone ? { top: 150, bottom: 400, left: 20, right: 20 } : { top: 72, bottom: height <= 760 ? 240 : 272, left: Math.round(width * 0.46), right: 40 })
     : phone ? { top: mode === 'story' ? 116 : 250, left: 20, right: 20, bottom: mode === 'story' ? 380 : 300 }
-    : mode === 'story' ? { top: 74, bottom: storyLegend ? 126 : 70, left: 524, right: 44 }
+    : mode === 'story' ? { top: 74, bottom: storyLegend ? 126 : 70, left: Math.round(24 + Math.min(640, Math.max(440, width * 0.27)) + 28), right: 44 }
     : { top: 74, bottom: dockH + 84, left: 240, right: 40 }
   // The free area is measured from the real panel rectangles (and re-measured when they resize), so the footprint stays clear at any window size.
   const [measured, setMeasured] = useState(null)
@@ -288,7 +290,8 @@ export default function App() {
     window.addEventListener('resize', later)
     return () => { clearTimeout(timer); clearTimeout(t2); ro.disconnect(); window.removeEventListener('resize', later) }
   }, [inPlace, diving, phone, mode, sceneN, placeId, layerId, width, height])
-  const camera = { key: focusSpot ? focusSpot.id : 'fit', focus: focusSpot?.lngLat, zoomBoost: 1.25, duration: mode === 'story' ? 1000 : 1500 }
+  const storyPad = phone ? { top: 116, left: 20, right: 20, bottom: 380 } : { top: 74, bottom: 70, left: Math.round(24 + Math.min(640, Math.max(440, width * 0.27)) + 28), right: 44 }
+  const camera = { key: focusSpot ? focusSpot.id : 'fit', focus: focusSpot?.lngLat, zoomBoost: 1.25, duration: mode === 'story' ? 1000 : 1500, jump: !!diveTo }
 
   // ---- navigation ----
   const origin = inPlace ? (route.globe ? 'globe' : route.from) : mode === 'globe' ? 'globe' : mode === 'places' ? 'places' : 'home'
@@ -448,21 +451,26 @@ export default function App() {
     const r = Math.PI / 180, ang = (a, b) => Math.acos(Math.min(1, Math.max(-1, Math.sin(a[1] * r) * Math.sin(b[1] * r) + Math.cos(a[1] * r) * Math.cos(b[1] * r) * Math.cos((a[0] - b[0]) * r)))) / r
     return ms.map((c) => [c, ms.filter((o) => ang(c, o) < 25).length]).sort((x, y) => y[1] - x[1])[0][0]
   }, [globeFull, kind, list])
+  const diveT = useRef([])
+  const later = (fn, ms) => diveT.current.push(setTimeout(fn, ms))
+  const onDiveStart = (id) => { diveT.current.forEach(clearTimeout); diveT.current = []; setOverlayHold(true); setDiveTo(id) }
   const onDive = (id) => { if (id === placeId && inPlace) { closeGlobe(); return } diveRef.current = true; setDiveKeep(mode === 'open' ? 'landing' : 'full'); setDiving(true); openPlace(id) }
+  // After the flight: the globe dissolves while the map underneath comes in (it zooms the last bit), then the picture fades in, then the panel and the corner globe arrive.
   const onDiveEnd = () => {
-    if (!diveRef.current) return
+    if (!diveRef.current) { setDiveTo(null); setOverlayHold(false); return }
     diveRef.current = false
     setPhase('dissolve')
-    setTimeout(() => { setDiving(false); setPhase('snap'); setTimeout(() => { setPhase('pop'); setTimeout(() => setPhase(''), 800) }, 90) }, 460)
+    later(() => setOverlayHold(false), 100)
+    later(() => { setDiving(false); setDiveTo(null); setPhase('snap'); later(() => { setPhase('pop'); later(() => setPhase(''), 800) }, 90) }, 560)
   }
   const globeOpenPlace = (id) => { if (id === placeId && inPlace) closeGlobe(); else openPlace(id) }
 
   if (failed) return <div className="fatal"><h1>Data not available</h1><p>The place list could not be loaded.</p></div>
 
   return (
-    <div className={`app mode-${mode} ${diving ? 'diving' : ''} ${phone ? 'phone' : ''} ${ev && inPlace ? 'ev' : ''} ${globeFull ? 'globe-on' : ''}`}>
+    <div className={`app mode-${mode} ${diving || diveTo ? 'diving' : ''} ${phase === 'dissolve' ? 'dv-dissolve' : ''} ${phase ? 'dv-reveal' : ''} ${phone ? 'phone' : ''} ${ev && inPlace ? 'ev' : ''} ${globeFull ? 'globe-on' : ''}`}>
       <Suspense fallback={null}><MapStage
-        bounds={bounds} url={mode === 'places' || mode === 'globe' || mode === 'open' ? null : url} opacity={opacity} padding={inPlace && measured ? measured : padding} camera={camera}
+        bounds={(diveTo && (places[diveTo]?.bounds || stubs[diveTo]?.bounds)) || bounds} hold={overlayHold} url={mode === 'places' || mode === 'globe' || mode === 'open' ? null : url} opacity={opacity} padding={diveTo || diving ? storyPad : inPlace && measured ? measured : padding} camera={camera}
         spots={(ev ? place.spots.filter((s) => s.id !== 'epicentre') : place?.spots) || []} showSpots={!!place && inPlace && spotsOn} activeSpot={activeSpot}
         onSpot={(id) => { if (inPlace) setActiveSpot((a) => (a === id ? null : id)) }}
         interactive={inPlace} star={ev && inPlace && Array.isArray(place.event.lngLat) ? place.event.lngLat : null}
@@ -504,7 +512,7 @@ export default function App() {
 
       {(gMounted || globeMode !== 'hidden') && (
         <Suspense fallback={null}><GlobeMap mode={globeMode} places={list} currentId={inPlace ? placeId : null} matchIds={matchIds} paused={!!matchIds} phase={phase} faceLL={faceLL} faceKey={kind}
-          onDive={onDive} onDiveEnd={onDiveEnd} onOpen={globeOpenPlace} onExpand={openGlobe} onSelect={setSelected} selectedId={selected} /></Suspense>
+          onDiveStart={onDiveStart} onDive={onDive} onDiveEnd={onDiveEnd} divePad={storyPad} onOpen={globeOpenPlace} onExpand={openGlobe} onSelect={setSelected} selectedId={selected} /></Suspense>
       )}
       {globeFull && (
         <GlobeUI list={list} q={q} setQ={setQ} kind={kind} setKind={setKind} selected={selected} onSelect={setSelected} onOpen={globeOpenPlace} onRandom={random} onNear={nearMe} near={near}

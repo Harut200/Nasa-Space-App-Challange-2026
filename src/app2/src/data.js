@@ -148,4 +148,4 @@ export function classList(entries, summary) {
   return out
 }
 // "floods, lakes and wetlands" from labels
-export const joinList = (a) => (a.length > 1 ? `${a.slice(0, -1).join(', ')} and ${a[a.length - 1]}` : a[0] || '')
+export const joinList = (a) => a.join(', ') // plain commas: some labels already contain "and"

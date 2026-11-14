@@ -927,3 +927,16 @@ button:active:not(:disabled):not(.handle):not(.globe-hit):not(.beat):not(.spot) 
 @media (prefers-reduced-motion: reduce) { .quake-star svg { animation: none; } }
 .app:not(.phone) .dock.panel.has-caution { height: calc(min(330px, 43vh) + 24px); }
 .app:not(.phone):has(.dock.has-caution) .legend { bottom: calc(min(330px, 43vh) + 36px); }
+
+/* ===================== motion: globe and place ===================== */
+/* The globe changes shape with transform and clip-path only (see GlobeMap): no geometry is animated. */
+.globe-shell, .globe-shell.landing, .globe-shell.full, .globe-shell.mini { transition: opacity .35s var(--e-out), transform .35s var(--spring), box-shadow .5s; }
+.globe-shell.dissolve { transition: opacity .5s var(--e-move); }
+.globe-shell.full, .globe-shell.landing { will-change: transform, clip-path; }
+/* dive: the map underneath is made ready while hidden, then comes in as the globe dissolves, zooming the last bit */
+.stage-map { transform-origin: var(--dive-ox, 50%) var(--dive-oy, 50%); }
+.diving .stage-map { opacity: 0; transition: none; }
+.diving.dv-dissolve .stage-map { opacity: 1; transition: opacity .5s var(--e-move); }
+.app.dv-reveal .stage-map { animation: stagein .75s var(--e-out) both; }
+@keyframes stagein { from { transform: scale(var(--dive-s, .86)); } to { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .app.dv-reveal .stage-map { animation: none; } .diving.dv-dissolve .stage-map { transition: opacity .2s; } }

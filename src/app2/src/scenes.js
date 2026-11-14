@@ -205,7 +205,7 @@ function buildQuakeScenes(p) {
   const ctlNoisy = noisy.filter((v) => v.control_p2p_cm != null)
   if (ctl.length || ctlNoisy.length) {
     const c0 = ctl[0]
-    const noisyTxt = ctlNoisy.length ? ` ${ctlNoisy.map(viewName).join('; ')}: ${NOISY}, because the control pair shows nearly as much motion as the earthquake pair.` : ''
+    const noisyTxt = ctlNoisy.length ? ` One pair is ${NOISY}: ${ctlNoisy.map(viewName).join('; ')}, because its control pair shows nearly as much motion as its earthquake pair.` : ''
     scenes.push({
       key: 'control', kicker: 'The control', title: 'The control', layer: has('fringes') ? 'fringes' : lposLayer, compare: false,
       text: (ctl.length === 0 ? 'As a check, we measured the same way on a pair from before the earthquake.'
