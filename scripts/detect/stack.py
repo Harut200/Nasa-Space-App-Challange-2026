@@ -39,6 +39,7 @@ class Stack:
     bounds: tuple[float, float, float, float]  # west, south, east, north (pixel edges)
     km2_per_px: float
     source: str              # "preview" (uncalibrated) or "gamma0"
+    shifts: list | None = None  # per date (rows, cols) correction applied to line it up with the first date
 
     @property
     def shape(self):
@@ -51,7 +52,7 @@ class Stack:
 
     def to(self, device) -> "Stack":
         return Stack(self.area, self.dates, self.x.to(device), self.valid.to(device),
-                     self.bounds, self.km2_per_px, self.source)
+                     self.bounds, self.km2_per_px, self.source, self.shifts)
 
 
 def device() -> torch.device:
@@ -95,39 +96,74 @@ def _inside(poly: list[tuple[float, float]], lon: torch.Tensor, lat: torch.Tenso
     return inside
 
 
-def load_preview_stack(area_id: str, bbox: tuple[float, float, float, float] | None = None) -> Stack:
-    """All preview dates of an area, resampled onto one north-up lon/lat grid."""
+def _shift(a: torch.Tensor, b: torch.Tensor, mask: torch.Tensor) -> tuple[float, float]:
+    """Sub-pixel (rows, cols) such that b(r, c) ~ a(r - rows, c - cols): peak of the
+    FFT cross-correlation of the two images after removing their local mean."""
+    def prep(x):
+        local = F.avg_pool2d(x[None, None], 15, 1, 7, count_include_pad=False)[0, 0]
+        x = (x - local) * mask
+        return x * torch.hann_window(x.shape[0], periodic=False)[:, None] * torch.hann_window(x.shape[1], periodic=False)[None]
+
+    cc = torch.fft.irfft2(torch.fft.rfft2(prep(b)) * torch.fft.rfft2(prep(a)).conj(), s=a.shape)
+    h, w = cc.shape
+    py, px = divmod(int(cc.argmax()), w)
+
+    def peak(m1, m0, p1):
+        den = float(m1 - 2 * m0 + p1)
+        return 0.0 if abs(den) < 1e-12 else float(0.5 * (m1 - p1) / den)
+
+    sy = py + peak(cc[(py - 1) % h, px], cc[py, px], cc[(py + 1) % h, px])
+    sx = px + peak(cc[py, (px - 1) % w], cc[py, px], cc[py, (px + 1) % w])
+    return (sy if sy < h / 2 else sy - h), (sx if sx < w / 2 else sx - w)
+
+
+def load_preview_stack(area_id: str, bbox: tuple[float, float, float, float] | None = None,
+                       align: bool = True) -> Stack:
+    """All preview dates of an area, resampled onto one north-up lon/lat grid.
+
+    The corner-based georeferencing of a preview is only good to a few pixels, so
+    with align=True every date is then shifted onto the first date by image
+    correlation (residual below about 0.1 pixel).
+    """
     area = load_area(area_id)
     w, s, e, n = bbox or area["bbox"]
     folder = ROOT / "data" / "raw" / "previews" / f"T{area['track']}_F{area['frame']}"
     passes = json.loads((folder / "meta.json").read_text())["passes"]
 
-    grid = None
-    xs, valids, dates = [], [], []
+    images = []
     for p in passes:
         rgb = np.asarray(Image.open(folder / f"{p['date']}.png").convert("RGB"))
         poly = _polygon(p["wkt"])
-        a, b, c, d = _georef(rgb, poly)
-        if grid is None:  # target grid: the first date's pixel size
-            wd, h = round((e - w) / a), round((s - n) / c)
-            lon = w + (torch.arange(wd) + 0.5) * (e - w) / wd
-            lat = n - (torch.arange(h) + 0.5) * (n - s) / h
-            lat_g, lon_g = torch.meshgrid(lat, lon, indexing="ij")
-            mid = math.radians((s + n) / 2)
-            km2 = ((e - w) / wd * 111.32 * math.cos(mid)) * ((n - s) / h * 110.57)
-            grid = True
+        images.append((rgb, poly, _georef(rgb, poly)))
+
+    a0, _, c0, _ = images[0][2]  # target grid: the first date's pixel size
+    wd, h = round((e - w) / a0), round((s - n) / c0)
+    dlon, dlat = (e - w) / wd, (s - n) / h
+    lon = w + (torch.arange(wd) + 0.5) * dlon
+    lat = n + (torch.arange(h) + 0.5) * dlat
+    lat_g, lon_g = torch.meshgrid(lat, lon, indexing="ij")
+    km2 = (dlon * 111.32 * math.cos(math.radians((s + n) / 2))) * (-dlat * 110.57)
+
+    def resample(rgb, poly, geo, rows=0.0, cols=0.0):
+        a, b, c, d = geo
+        lo, la = lon_g + cols * dlon, lat_g + rows * dlat
         src_h, src_w = rgb.shape[:2]
-        col = (lon_g - b) / a - 0.5
-        row = (lat_g - d) / c - 0.5
-        sample = torch.stack([col / (src_w - 1) * 2 - 1, row / (src_h - 1) * 2 - 1], dim=-1)[None]
+        sample = torch.stack([((lo - b) / a - 0.5) / (src_w - 1) * 2 - 1,
+                              ((la - d) / c - 0.5) / (src_h - 1) * 2 - 1], dim=-1)[None]
         img = torch.from_numpy(rgb[..., :2].copy()).permute(2, 0, 1)[None].float() / 255.0  # R=HH, G=HV
         out = F.grid_sample(img, sample, mode="bilinear", padding_mode="zeros", align_corners=True)[0]
-        in_image = (sample.abs() <= 1).all(dim=-1)[0]
-        xs.append(out)
-        valids.append(_inside(poly, lon_g, lat_g) & in_image)
-        dates.append(p["date"])
+        return out, _inside(poly, lo, la) & (sample.abs() <= 1).all(dim=-1)[0]
 
-    return Stack(area, dates, torch.stack(xs), torch.stack(valids), (w, s, e, n), km2, "preview")
+    first = [resample(*im) for im in images]
+    shifts = [(0.0, 0.0)] * len(images)
+    if align:
+        common = torch.stack([v for _, v in first]).all(0).float()
+        ref = first[0][0].mean(0)
+        shifts = [(0.0, 0.0)] + [_shift(ref, x.mean(0), common) for x, _ in first[1:]]
+        first = [resample(*im, rows=sy, cols=sx) for im, (sy, sx) in zip(images, shifts)]
+
+    return Stack(area, [p["date"] for p in passes], torch.stack([x for x, _ in first]),
+                 torch.stack([v for _, v in first]), (w, s, e, n), km2, "preview", shifts)
 
 
 if __name__ == "__main__":
