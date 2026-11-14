@@ -1,0 +1,4079 @@
+{
+ "rule": {
+  "water_hh_max": 0.08,
+  "water_hv_max": 0.25,
+  "fv_dhh_min": 0.69,
+  "fv_dhv_max": 0.25,
+  "fv_app_hh_min": 0.25,
+  "split_land_hh": 0.5
+ },
+ "defaults": {
+  "k_app": 6,
+  "k_chg": 6,
+  "n_fit": 100000,
+  "n_init": 3,
+  "n_states": 3,
+  "hmm_fit": 200000,
+  "prior_strength": 0.0,
+  "leak": 0.05,
+  "p_thr": 0.5,
+  "min_blob_px": 4,
+  "seed": 0
+ },
+ "areas": {
+  "sevan": {
+   "terrain_mask_available": true,
+   "times_s": {
+    "load_and_ops_pipeline": 4.1,
+    "detect_total": 25.8,
+    "fit_mixtures": 23.07,
+    "baum_welch": 1.15,
+    "smooth_viterbi": 0.65
+   },
+   "components_appearance": [
+    {
+     "k": 0,
+     "weight": 0.1819,
+     "mean_logit": [
+      -4.288,
+      -2.148
+     ],
+     "sd_logit": [
+      0.04,
+      0.966
+     ],
+     "corr": 0.03,
+     "mean_HH": 0.0038,
+     "mean_HV": 0.0966,
+     "role": "open water"
+    },
+    {
+     "k": 1,
+     "weight": 0.0167,
+     "mean_logit": [
+      -3.815,
+      -2.08
+     ],
+     "sd_logit": [
+      0.352,
+      0.854
+     ],
+     "corr": -0.248,
+     "mean_HH": 0.012,
+     "mean_HV": 0.1033,
+     "role": "open water"
+    },
+    {
+     "k": 2,
+     "weight": 0.0807,
+     "mean_logit": [
+      -2.897,
+      -1.245
+     ],
+     "sd_logit": [
+      0.84,
+      0.211
+     ],
+     "corr": 0.246,
+     "mean_HH": 0.0434,
+     "mean_HV": 0.2181,
+     "role": "open water"
+    },
+    {
+     "k": 3,
+     "weight": 0.0994,
+     "mean_logit": [
+      -1.065,
+      -2.728
+     ],
+     "sd_logit": [
+      0.47,
+      1.005
+     ],
+     "corr": 0.505,
+     "mean_HH": 0.2515,
+     "mean_HV": 0.0526,
+     "role": "bright (can be flooded veg)"
+    },
+    {
+     "k": 4,
+     "weight": 0.5058,
+     "mean_logit": [
+      -0.248,
+      -0.486
+     ],
+     "sd_logit": [
+      0.775,
+      0.863
+     ],
+     "corr": 0.765,
+     "mean_HH": 0.4371,
+     "mean_HV": 0.3786,
+     "role": "bright (can be flooded veg)"
+    },
+    {
+     "k": 5,
+     "weight": 0.1156,
+     "mean_logit": [
+      1.702,
+      0.717
+     ],
+     "sd_logit": [
+      1.07,
+      1.473
+     ],
+     "corr": 0.538,
+     "mean_HH": 0.8527,
+     "mean_HV": 0.6754,
+     "role": "bright (can be flooded veg)"
+    }
+   ],
+   "components_change": [
+    {
+     "k": 0,
+     "weight": 0.0377,
+     "mean_logit": [
+      -0.311,
+      -0.166
+     ],
+     "sd_logit": [
+      0.387,
+      0.61
+     ],
+     "corr": 0.382,
+     "HH_ratio": 0.733,
+     "HV_ratio": 0.847,
+     "role": "other change"
+    },
+    {
+     "k": 1,
+     "weight": 0.2673,
+     "mean_logit": [
+      -0.015,
+      0.096
+     ],
+     "sd_logit": [
+      0.302,
+      0.28
+     ],
+     "corr": 0.554,
+     "HH_ratio": 0.985,
+     "HV_ratio": 1.101,
+     "role": "other change"
+    },
+    {
+     "k": 2,
+     "weight": 0.4823,
+     "mean_logit": [
+      -0.013,
+      0.016
+     ],
+     "sd_logit": [
+      0.105,
+      0.099
+     ],
+     "corr": 0.37,
+     "HH_ratio": 0.988,
+     "HV_ratio": 1.016,
+     "role": "other change"
+    },
+    {
+     "k": 3,
+     "weight": 0.1035,
+     "mean_logit": [
+      -0.001,
+      0.627
+     ],
+     "sd_logit": [
+      0.046,
+      0.652
+     ],
+     "corr": 0.075,
+     "HH_ratio": 0.999,
+     "HV_ratio": 1.872,
+     "role": "other change"
+    },
+    {
+     "k": 4,
+     "weight": 0.0915,
+     "mean_logit": [
+      0.191,
+      0.175
+     ],
+     "sd_logit": [
+      0.883,
+      0.178
+     ],
+     "corr": 0.235,
+     "HH_ratio": 1.21,
+     "HV_ratio": 1.192,
+     "role": "other change"
+    },
+    {
+     "k": 5,
+     "weight": 0.0177,
+     "mean_logit": [
+      0.74,
+      0.709
+     ],
+     "sd_logit": [
+      0.682,
+      0.537
+     ],
+     "corr": 0.03,
+     "HH_ratio": 2.096,
+     "HV_ratio": 2.033,
+     "role": "other change"
+    }
+   ],
+   "hmm": {
+    "pi": [
+     0.2805,
+     0.0,
+     0.7195
+    ],
+    "A_per_12_days": [
+     [
+      1.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0306,
+      0.0,
+      0.9694
+     ],
+     [
+      0.0,
+      0.0,
+      1.0
+     ]
+    ],
+    "A_24_days": [
+     [
+      1.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0306,
+      0.0,
+      0.9694
+     ],
+     [
+      0.0,
+      0.0,
+      1.0
+     ]
+    ],
+    "baum_welch_loglik": [
+     -22.201,
+     -20.6883,
+     -20.6688,
+     -20.6678,
+     -20.6677
+    ],
+    "state_names": [
+     "open water",
+     "flooded vegetation",
+     "land"
+    ],
+    "dt_steps": [
+     1,
+     1,
+     1,
+     2,
+     1,
+     1,
+     1,
+     1,
+     1
+    ],
+    "loglik_per_pixel": -20.6677,
+    "max_abs_gamma_sum_minus_1": 0.00025200843811035156
+   },
+   "hmm_no_terrain": {
+    "A_per_12_days": [
+     [
+      1.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0433,
+      0.0,
+      0.9567
+     ],
+     [
+      0.0001,
+      0.0,
+      0.9999
+     ]
+    ],
+    "loglik_per_pixel": -20.6065,
+    "water_km2": [
+     1274.6,
+     1274.6,
+     1274.7,
+     1275.0,
+     1275.3,
+     1275.7,
+     1276.2,
+     1276.4,
+     1276.5,
+     1276.5
+    ],
+    "flooded_veg_km2": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "path_dry_fv_water_km2": 0.0
+   },
+   "hmm_with_prior": {
+    "A_per_12_days": [
+     [
+      0.9998,
+      0.0001,
+      0.0002
+     ],
+     [
+      0.2009,
+      0.6986,
+      0.1005
+     ],
+     [
+      0.0001,
+      0.0001,
+      0.9999
+     ]
+    ],
+    "loglik_per_pixel": -20.669,
+    "water_km2": [
+     1260.9,
+     1260.9,
+     1260.9,
+     1261.0,
+     1261.2,
+     1261.5,
+     1261.6,
+     1261.6,
+     1261.6,
+     1261.6
+    ],
+    "flooded_veg_km2": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "path_dry_fv_water_km2": 0.0
+   },
+   "hmm_4_states": {
+    "A_per_12_days": [
+     [
+      1.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0726,
+      0.0,
+      0.9272,
+      0.0002
+     ],
+     [
+      0.0,
+      0.0,
+      1.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ]
+    ],
+    "loglik_per_pixel": -18.3897,
+    "water_km2": [
+     1259.2,
+     1259.2,
+     1259.2,
+     1259.2,
+     1259.3,
+     1259.3,
+     1259.3,
+     1259.3,
+     1259.3,
+     1259.3
+    ],
+    "flooded_veg_km2": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "path_dry_fv_water_km2": 0.0
+   },
+   "metrics": {
+    "dates": [
+     "2026-06-20",
+     "2026-07-02",
+     "2026-07-14",
+     "2026-07-26",
+     "2026-08-19",
+     "2026-08-31",
+     "2026-09-12",
+     "2026-09-24",
+     "2026-10-06",
+     "2026-10-18"
+    ],
+    "km2_per_px": 0.033866386800863735,
+    "domain_km2": 4499.3,
+    "current": {
+     "water_km2": [
+      1239.0,
+      1226.9,
+      1228.3,
+      1252.8,
+      1240.6,
+      1210.5,
+      1176.4,
+      1244.8,
+      1251.6,
+      1255.2
+     ],
+     "flooded_veg_km2": [
+      0.0,
+      0.0,
+      0.1,
+      0.3,
+      0.3,
+      6.5,
+      0.0,
+      0.2,
+      0.1,
+      0.5
+     ],
+     "false_water_far_from_jrc_km2": [
+      8.8,
+      10.4,
+      9.0,
+      19.3,
+      13.4,
+      15.3,
+      22.3,
+      21.3,
+      16.0,
+      22.4
+     ],
+     "late_false_water_far_from_jrc_km2": 31.6,
+     "water_share_inside_jrc_max_extent": [
+      0.9925,
+      0.9905,
+      0.9916,
+      0.9821,
+      0.9882,
+      0.9849,
+      0.9796,
+      0.9812,
+      0.9858,
+      0.9803
+     ],
+     "fv_any_date_km2": 7.9,
+     "fv_any_share_within_1px_of_jrc_water": 0.056,
+     "largest_body_km2": [
+      1229.7,
+      1215.5,
+      1218.3,
+      1230.5,
+      1226.1,
+      1186.5,
+      1133.8,
+      1221.9,
+      1234.1,
+      1230.8
+     ],
+     "largest_body_error_pct_vs_1242": [
+      -1.0,
+      -2.1,
+      -1.9,
+      -0.9,
+      -1.3,
+      -4.5,
+      -8.7,
+      -1.6,
+      -0.6,
+      -0.9
+     ],
+     "permanent_water_vs_jrc": {
+      "occ_ge75": {
+       "iou": 0.9446,
+       "precision": 0.9907,
+       "recall": 0.953,
+       "ours_km2": 1200.0,
+       "ref_km2": 1247.4
+      },
+      "occ_ge90": {
+       "iou": 0.9448,
+       "precision": 0.9875,
+       "recall": 0.9562,
+       "ours_km2": 1200.0,
+       "ref_km2": 1239.3
+      },
+      "seasonality12": {
+       "iou": 0.9421,
+       "precision": 0.9944,
+       "recall": 0.9471,
+       "ours_km2": 1200.0,
+       "ref_km2": 1259.9
+      }
+     },
+     "floodplain_spearman_occurrence_vs_n_water_dates": 0.51
+    },
+    "gmm_per_date": {
+     "water_km2": [
+      1239.0,
+      1235.1,
+      1239.3,
+      1246.3,
+      1249.3,
+      1188.2,
+      1234.3,
+      1262.0,
+      1248.3,
+      1259.7
+     ],
+     "flooded_veg_km2": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "false_water_far_from_jrc_km2": [
+      8.5,
+      10.1,
+      8.4,
+      18.1,
+      15.6,
+      21.9,
+      25.3,
+      26.1,
+      13.5,
+      24.2
+     ],
+     "late_false_water_far_from_jrc_km2": 30.9,
+     "water_share_inside_jrc_max_extent": [
+      0.9923,
+      0.991,
+      0.9917,
+      0.9832,
+      0.9858,
+      0.9791,
+      0.9776,
+      0.977,
+      0.9881,
+      0.9783
+     ],
+     "fv_any_date_km2": 0.0,
+     "fv_any_share_within_1px_of_jrc_water": 0.0,
+     "largest_body_km2": [
+      1229.5,
+      1224.0,
+      1229.1,
+      1225.3,
+      1231.6,
+      1157.7,
+      1201.3,
+      1233.3,
+      1233.5,
+      1232.4
+     ],
+     "largest_body_error_pct_vs_1242": [
+      -1.0,
+      -1.4,
+      -1.0,
+      -1.3,
+      -0.8,
+      -6.8,
+      -3.3,
+      -0.7,
+      -0.7,
+      -0.8
+     ],
+     "permanent_water_vs_jrc": {
+      "occ_ge75": {
+       "iou": 0.9639,
+       "precision": 0.9902,
+       "recall": 0.9731,
+       "ours_km2": 1225.8,
+       "ref_km2": 1247.4
+      },
+      "occ_ge90": {
+       "iou": 0.9654,
+       "precision": 0.9878,
+       "recall": 0.9771,
+       "ours_km2": 1225.8,
+       "ref_km2": 1239.3
+      },
+      "seasonality12": {
+       "iou": 0.9604,
+       "precision": 0.9934,
+       "recall": 0.9666,
+       "ours_km2": 1225.8,
+       "ref_km2": 1259.9
+      }
+     },
+     "floodplain_spearman_occurrence_vs_n_water_dates": 0.467,
+     "floodplain_spearman_occurrence_vs_mean_p_water": 0.512
+    },
+    "hmm": {
+     "water_km2": [
+      1261.1,
+      1261.1,
+      1261.1,
+      1261.1,
+      1261.2,
+      1261.4,
+      1261.4,
+      1261.5,
+      1261.5,
+      1261.5
+     ],
+     "flooded_veg_km2": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "false_water_far_from_jrc_km2": [
+      22.8,
+      22.8,
+      22.8,
+      22.9,
+      22.9,
+      22.9,
+      23.0,
+      23.0,
+      23.0,
+      23.0
+     ],
+     "late_false_water_far_from_jrc_km2": 23.0,
+     "water_share_inside_jrc_max_extent": [
+      0.9795,
+      0.9795,
+      0.9795,
+      0.9795,
+      0.9794,
+      0.9793,
+      0.9793,
+      0.9792,
+      0.9792,
+      0.9792
+     ],
+     "fv_any_date_km2": 0.0,
+     "fv_any_share_within_1px_of_jrc_water": 0.0,
+     "largest_body_km2": [
+      1235.3,
+      1235.3,
+      1235.3,
+      1235.3,
+      1235.3,
+      1235.3,
+      1235.3,
+      1235.3,
+      1235.3,
+      1235.3
+     ],
+     "largest_body_error_pct_vs_1242": [
+      -0.5,
+      -0.5,
+      -0.5,
+      -0.5,
+      -0.5,
+      -0.5,
+      -0.5,
+      -0.5,
+      -0.5,
+      -0.5
+     ],
+     "permanent_water_vs_jrc": {
+      "occ_ge75": {
+       "iou": 0.9617,
+       "precision": 0.9752,
+       "recall": 0.9858,
+       "ours_km2": 1261.1,
+       "ref_km2": 1247.4
+      },
+      "occ_ge90": {
+       "iou": 0.9623,
+       "precision": 0.9723,
+       "recall": 0.9894,
+       "ours_km2": 1261.1,
+       "ref_km2": 1239.3
+      },
+      "seasonality12": {
+       "iou": 0.9605,
+       "precision": 0.9794,
+       "recall": 0.9803,
+       "ours_km2": 1261.1,
+       "ref_km2": 1259.9
+      }
+     },
+     "floodplain_spearman_occurrence_vs_n_water_dates": 0.42,
+     "floodplain_spearman_occurrence_vs_mean_p_water": 0.462
+    },
+    "current_no_terrain": {
+     "water_km2": [
+      1245.3,
+      1235.0,
+      1234.8,
+      1283.8,
+      1260.6,
+      1236.1,
+      1197.1,
+      1279.2,
+      1329.1,
+      1304.0
+     ],
+     "flooded_veg_km2": [
+      0.0,
+      0.0,
+      0.1,
+      0.3,
+      0.3,
+      6.5,
+      0.0,
+      0.2,
+      0.1,
+      0.5
+     ],
+     "false_water_far_from_jrc_km2": [
+      14.7,
+      18.1,
+      15.1,
+      49.3,
+      33.0,
+      40.4,
+      42.4,
+      55.0,
+      92.6,
+      70.3
+     ],
+     "late_false_water_far_from_jrc_km2": 121.7,
+     "water_share_inside_jrc_max_extent": [
+      0.9877,
+      0.9843,
+      0.9866,
+      0.9587,
+      0.9728,
+      0.9646,
+      0.9629,
+      0.955,
+      0.9284,
+      0.9438
+     ],
+     "fv_any_date_km2": 7.9,
+     "fv_any_share_within_1px_of_jrc_water": 0.056,
+     "largest_body_km2": [
+      1229.7,
+      1215.5,
+      1218.3,
+      1230.5,
+      1226.1,
+      1186.5,
+      1133.8,
+      1221.9,
+      1234.1,
+      1230.8
+     ],
+     "largest_body_error_pct_vs_1242": [
+      -1.0,
+      -2.1,
+      -1.9,
+      -0.9,
+      -1.3,
+      -4.5,
+      -8.7,
+      -1.6,
+      -0.6,
+      -0.9
+     ],
+     "permanent_water_vs_jrc": {
+      "occ_ge75": {
+       "iou": 0.9416,
+       "precision": 0.9873,
+       "recall": 0.9532,
+       "ours_km2": 1204.4,
+       "ref_km2": 1247.4
+      },
+      "occ_ge90": {
+       "iou": 0.9417,
+       "precision": 0.9841,
+       "recall": 0.9563,
+       "ours_km2": 1204.4,
+       "ref_km2": 1239.3
+      },
+      "seasonality12": {
+       "iou": 0.9391,
+       "precision": 0.9909,
+       "recall": 0.9473,
+       "ours_km2": 1204.4,
+       "ref_km2": 1259.9
+      }
+     },
+     "floodplain_spearman_occurrence_vs_n_water_dates": 0.512
+    },
+    "hmm_no_terrain": {
+     "water_km2": [
+      1274.6,
+      1274.6,
+      1274.7,
+      1275.0,
+      1275.3,
+      1275.7,
+      1276.2,
+      1276.4,
+      1276.5,
+      1276.5
+     ],
+     "flooded_veg_km2": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "false_water_far_from_jrc_km2": [
+      36.1,
+      36.1,
+      36.1,
+      36.4,
+      36.5,
+      36.7,
+      37.2,
+      37.4,
+      37.5,
+      37.5
+     ],
+     "late_false_water_far_from_jrc_km2": 37.5,
+     "water_share_inside_jrc_max_extent": [
+      0.969,
+      0.969,
+      0.969,
+      0.9688,
+      0.9686,
+      0.9684,
+      0.968,
+      0.9679,
+      0.9678,
+      0.9678
+     ],
+     "fv_any_date_km2": 0.0,
+     "fv_any_share_within_1px_of_jrc_water": 0.0,
+     "largest_body_km2": [
+      1235.1,
+      1235.1,
+      1235.2,
+      1235.2,
+      1235.3,
+      1235.4,
+      1235.5,
+      1235.5,
+      1235.5,
+      1235.5
+     ],
+     "largest_body_error_pct_vs_1242": [
+      -0.6,
+      -0.6,
+      -0.5,
+      -0.5,
+      -0.5,
+      -0.5,
+      -0.5,
+      -0.5,
+      -0.5,
+      -0.5
+     ],
+     "permanent_water_vs_jrc": {
+      "occ_ge75": {
+       "iou": 0.9515,
+       "precision": 0.9648,
+       "recall": 0.9858,
+       "ours_km2": 1274.6,
+       "ref_km2": 1247.4
+      },
+      "occ_ge90": {
+       "iou": 0.9521,
+       "precision": 0.962,
+       "recall": 0.9894,
+       "ours_km2": 1274.6,
+       "ref_km2": 1239.3
+      },
+      "seasonality12": {
+       "iou": 0.9504,
+       "precision": 0.9689,
+       "recall": 0.9802,
+       "ours_km2": 1274.6,
+       "ref_km2": 1259.9
+      }
+     },
+     "floodplain_spearman_occurrence_vs_n_water_dates": 0.419
+    },
+    "gmm_per_date_no_terrain": {
+     "water_km2": [
+      1244.1,
+      1241.2,
+      1246.1,
+      1259.1,
+      1262.5,
+      1202.7,
+      1246.8,
+      1276.6,
+      1267.5,
+      1278.3
+     ],
+     "flooded_veg_km2": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "false_water_far_from_jrc_km2": [
+      13.4,
+      15.7,
+      15.1,
+      30.5,
+      28.2,
+      36.3,
+      37.3,
+      40.4,
+      32.6,
+      42.5
+     ],
+     "late_false_water_far_from_jrc_km2": 59.4,
+     "water_share_inside_jrc_max_extent": [
+      0.9882,
+      0.9863,
+      0.9863,
+      0.9733,
+      0.9755,
+      0.9673,
+      0.9678,
+      0.9658,
+      0.9731,
+      0.964
+     ],
+     "fv_any_date_km2": 0.0,
+     "fv_any_share_within_1px_of_jrc_water": 0.0,
+     "largest_body_km2": [
+      1229.5,
+      1224.0,
+      1229.1,
+      1225.3,
+      1231.6,
+      1157.7,
+      1201.3,
+      1233.3,
+      1233.5,
+      1232.4
+     ],
+     "largest_body_error_pct_vs_1242": [
+      -1.0,
+      -1.4,
+      -1.0,
+      -1.3,
+      -0.8,
+      -6.8,
+      -3.3,
+      -0.7,
+      -0.7,
+      -0.8
+     ],
+     "permanent_water_vs_jrc": {
+      "occ_ge75": {
+       "iou": 0.9606,
+       "precision": 0.9868,
+       "recall": 0.9731,
+       "ours_km2": 1230.1,
+       "ref_km2": 1247.4
+      },
+      "occ_ge90": {
+       "iou": 0.9622,
+       "precision": 0.9844,
+       "recall": 0.9771,
+       "ours_km2": 1230.1,
+       "ref_km2": 1239.3
+      },
+      "seasonality12": {
+       "iou": 0.9572,
+       "precision": 0.99,
+       "recall": 0.9666,
+       "ours_km2": 1230.1,
+       "ref_km2": 1259.9
+      }
+     },
+     "floodplain_spearman_occurrence_vs_n_water_dates": 0.467
+    },
+    "hmm_first_water_km2_by_date": {
+     "2026-07-02": 0.0,
+     "2026-07-14": 0.0,
+     "2026-07-26": 0.0,
+     "2026-08-19": 0.0,
+     "2026-08-31": 0.1,
+     "2026-09-12": 0.1,
+     "2026-09-24": 0.0,
+     "2026-10-06": 0.0,
+     "2026-10-18": 0.0
+    },
+    "path_dry_fv_water": {
+     "km2": 0.0,
+     "share_inside_jrc_max_extent": 0.0
+    },
+    "fv_peak_km2_sensitivity": {
+     "hmm": {
+      "0.3": 0.0,
+      "0.5": 0.0,
+      "0.7": 0.0,
+      "0.9": 0.0
+     },
+     "gmm_per_date": {
+      "0.3": 0.0,
+      "0.5": 0.0,
+      "0.7": 0.0,
+      "0.9": 0.0
+     },
+     "current_rule_hh_rise": {
+      "0.1": 101.9,
+      "0.12": 37.8,
+      "0.15": 6.5,
+      "0.2": 0.8
+     }
+    }
+   },
+   "bic": {
+    "app": {
+     "2": {
+      "bic_per_sample": 5.93914,
+      "aic_per_sample": 5.93609,
+      "loglik": -2.96768,
+      "n_iter": 43
+     },
+     "3": {
+      "bic_per_sample": 5.67722,
+      "aic_per_sample": 5.67251,
+      "loglik": -2.83569,
+      "n_iter": 38
+     },
+     "4": {
+      "bic_per_sample": 5.53523,
+      "aic_per_sample": 5.52886,
+      "loglik": -2.76366,
+      "n_iter": 42
+     },
+     "5": {
+      "bic_per_sample": 5.39204,
+      "aic_per_sample": 5.384,
+      "loglik": -2.69104,
+      "n_iter": 79
+     },
+     "6": {
+      "bic_per_sample": 5.32535,
+      "aic_per_sample": 5.31566,
+      "loglik": -2.65667,
+      "n_iter": 300
+     },
+     "7": {
+      "bic_per_sample": 5.3212,
+      "aic_per_sample": 5.30984,
+      "loglik": -2.65356,
+      "n_iter": 300
+     },
+     "8": {
+      "bic_per_sample": 5.27816,
+      "aic_per_sample": 5.26514,
+      "loglik": -2.63101,
+      "n_iter": 300
+     }
+    },
+    "chg": {
+     "2": {
+      "bic_per_sample": 0.22094,
+      "aic_per_sample": 0.21789,
+      "loglik": -0.10858,
+      "n_iter": 45
+     },
+     "3": {
+      "bic_per_sample": -0.05494,
+      "aic_per_sample": -0.05965,
+      "loglik": 0.03039,
+      "n_iter": 48
+     },
+     "4": {
+      "bic_per_sample": -0.16355,
+      "aic_per_sample": -0.16992,
+      "loglik": 0.08572,
+      "n_iter": 55
+     },
+     "5": {
+      "bic_per_sample": -0.12646,
+      "aic_per_sample": -0.13449,
+      "loglik": 0.06837,
+      "n_iter": 13
+     },
+     "6": {
+      "bic_per_sample": -0.21119,
+      "aic_per_sample": -0.22088,
+      "loglik": 0.11161,
+      "n_iter": 144
+     },
+     "7": {
+      "bic_per_sample": -0.19189,
+      "aic_per_sample": -0.20325,
+      "loglik": 0.10315,
+      "n_iter": 14
+     },
+     "8": {
+      "bic_per_sample": -0.20932,
+      "aic_per_sample": -0.22233,
+      "loglik": 0.11288,
+      "n_iter": 16
+     }
+    }
+   },
+   "seed_stability": {
+    "app": {
+     "loglik_per_seed": [
+      -2.66445,
+      -2.67042,
+      -2.65657
+     ],
+     "max_matched_mean_shift_logit": [
+      3.611,
+      1.428
+     ]
+    },
+    "chg": {
+     "loglik_per_seed": [
+      0.09235,
+      0.09422,
+      0.0948
+     ],
+     "max_matched_mean_shift_logit": [
+      0.591,
+      0.119
+     ]
+    }
+   },
+   "decision_boundary_HH": {
+    "p_water_0.5_crossing": {
+     "HV=HHx0.5": 0.0419,
+     "HV=HHx1.0": 0.0409
+    },
+    "hysteresis_strong": 0.06,
+    "hysteresis_weak": 0.12,
+    "otsu_HH_all_dates": 0.391
+   }
+  },
+  "tonle-sap": {
+   "terrain_mask_available": true,
+   "times_s": {
+    "load_and_ops_pipeline": 14.2,
+    "detect_total": 120.8,
+    "fit_mixtures": 81.5,
+    "baum_welch": 3.02,
+    "smooth_viterbi": 10.71
+   },
+   "components_appearance": [
+    {
+     "k": 0,
+     "weight": 0.0414,
+     "mean_logit": [
+      -4.287,
+      -4.286
+     ],
+     "sd_logit": [
+      0.042,
+      0.038
+     ],
+     "corr": 0.073,
+     "mean_HH": 0.0038,
+     "mean_HV": 0.0038,
+     "role": "open water"
+    },
+    {
+     "k": 1,
+     "weight": 0.033,
+     "mean_logit": [
+      -3.155,
+      -3.59
+     ],
+     "sd_logit": [
+      0.826,
+      0.658
+     ],
+     "corr": 0.302,
+     "mean_HH": 0.0317,
+     "mean_HV": 0.0174,
+     "role": "open water"
+    },
+    {
+     "k": 2,
+     "weight": 0.3401,
+     "mean_logit": [
+      -0.065,
+      -0.626
+     ],
+     "sd_logit": [
+      1.039,
+      0.849
+     ],
+     "corr": 0.963,
+     "mean_HH": 0.4834,
+     "mean_HV": 0.3455,
+     "role": "bright (can be flooded veg)"
+    },
+    {
+     "k": 3,
+     "weight": 0.2891,
+     "mean_logit": [
+      0.148,
+      -0.416
+     ],
+     "sd_logit": [
+      0.676,
+      0.866
+     ],
+     "corr": 0.924,
+     "mean_HH": 0.5376,
+     "mean_HV": 0.3955,
+     "role": "bright (can be flooded veg)"
+    },
+    {
+     "k": 4,
+     "weight": 0.192,
+     "mean_logit": [
+      1.468,
+      1.742
+     ],
+     "sd_logit": [
+      0.489,
+      1.253
+     ],
+     "corr": 0.801,
+     "mean_HH": 0.819,
+     "mean_HV": 0.8579,
+     "role": "bright (can be flooded veg)"
+    },
+    {
+     "k": 5,
+     "weight": 0.1044,
+     "mean_logit": [
+      2.549,
+      1.585
+     ],
+     "sd_logit": [
+      1.008,
+      1.183
+     ],
+     "corr": 0.593,
+     "mean_HH": 0.9361,
+     "mean_HV": 0.8365,
+     "role": "bright (can be flooded veg)"
+    }
+   ],
+   "components_change": [
+    {
+     "k": 0,
+     "weight": 0.0198,
+     "mean_logit": [
+      -1.494,
+      -1.969
+     ],
+     "sd_logit": [
+      1.729,
+      0.92
+     ],
+     "corr": 0.519,
+     "HH_ratio": 0.225,
+     "HV_ratio": 0.14,
+     "role": "other change"
+    },
+    {
+     "k": 1,
+     "weight": 0.1674,
+     "mean_logit": [
+      -0.477,
+      -0.468
+     ],
+     "sd_logit": [
+      0.946,
+      0.924
+     ],
+     "corr": 0.815,
+     "HH_ratio": 0.62,
+     "HV_ratio": 0.626,
+     "role": "other change"
+    },
+    {
+     "k": 2,
+     "weight": 0.1303,
+     "mean_logit": [
+      -0.396,
+      -0.16
+     ],
+     "sd_logit": [
+      0.289,
+      0.311
+     ],
+     "corr": 0.657,
+     "HH_ratio": 0.673,
+     "HV_ratio": 0.852,
+     "role": "other change"
+    },
+    {
+     "k": 3,
+     "weight": 0.5507,
+     "mean_logit": [
+      0.013,
+      0.031
+     ],
+     "sd_logit": [
+      0.19,
+      0.142
+     ],
+     "corr": 0.772,
+     "HH_ratio": 1.013,
+     "HV_ratio": 1.032,
+     "role": "other change"
+    },
+    {
+     "k": 4,
+     "weight": 0.0983,
+     "mean_logit": [
+      0.411,
+      0.339
+     ],
+     "sd_logit": [
+      0.263,
+      0.197
+     ],
+     "corr": 0.295,
+     "HH_ratio": 1.508,
+     "HV_ratio": 1.404,
+     "role": "other change"
+    },
+    {
+     "k": 5,
+     "weight": 0.0336,
+     "mean_logit": [
+      1.384,
+      0.205
+     ],
+     "sd_logit": [
+      0.876,
+      0.608
+     ],
+     "corr": 0.332,
+     "HH_ratio": 3.993,
+     "HV_ratio": 1.227,
+     "role": "flooded-veg change"
+    }
+   ],
+   "hmm": {
+    "pi": [
+     0.0642,
+     0.0,
+     0.9358
+    ],
+    "A_per_12_days": [
+     [
+      0.9975,
+      0.0006,
+      0.0019
+     ],
+     [
+      0.0016,
+      0.8987,
+      0.0998
+     ],
+     [
+      0.0035,
+      0.014,
+      0.9825
+     ]
+    ],
+    "A_24_days": [
+     [
+      0.995,
+      0.0012,
+      0.0039
+     ],
+     [
+      0.0034,
+      0.809,
+      0.1877
+     ],
+     [
+      0.0069,
+      0.0264,
+      0.9667
+     ]
+    ],
+    "baum_welch_loglik": [
+     -27.2131,
+     -25.8492,
+     -25.8199,
+     -25.8181,
+     -25.8179
+    ],
+    "state_names": [
+     "open water",
+     "flooded vegetation",
+     "land"
+    ],
+    "dt_steps": [
+     1,
+     1,
+     1,
+     2,
+     1,
+     1,
+     1,
+     1,
+     1
+    ],
+    "loglik_per_pixel": -23.9743,
+    "max_abs_gamma_sum_minus_1": 0.00036716461181640625
+   },
+   "hmm_no_terrain": {
+    "A_per_12_days": [
+     [
+      0.9975,
+      0.0006,
+      0.0019
+     ],
+     [
+      0.0016,
+      0.8987,
+      0.0998
+     ],
+     [
+      0.0035,
+      0.014,
+      0.9825
+     ]
+    ],
+    "loglik_per_pixel": -23.9743,
+    "water_km2": [
+     2289.2,
+     2299.6,
+     2330.6,
+     2395.2,
+     2716.9,
+     2869.0,
+     3009.0,
+     3267.0,
+     3310.7,
+     3325.9
+    ],
+    "flooded_veg_km2": [
+     0.0,
+     7.8,
+     301.8,
+     675.3,
+     2143.3,
+     2969.0,
+     3206.5,
+     2528.6,
+     2419.5,
+     2344.8
+    ],
+    "path_dry_fv_water_km2": 8.0
+   },
+   "hmm_with_prior": {
+    "A_per_12_days": [
+     [
+      0.9964,
+      0.001,
+      0.0026
+     ],
+     [
+      0.0077,
+      0.893,
+      0.0993
+     ],
+     [
+      0.0034,
+      0.0142,
+      0.9824
+     ]
+    ],
+    "loglik_per_pixel": -23.9754,
+    "water_km2": [
+     2293.0,
+     2303.7,
+     2333.9,
+     2395.3,
+     2715.9,
+     2867.2,
+     3007.8,
+     3272.7,
+     3315.6,
+     3329.7
+    ],
+    "flooded_veg_km2": [
+     0.0,
+     8.1,
+     301.7,
+     677.3,
+     2154.6,
+     2985.5,
+     3223.0,
+     2525.5,
+     2416.5,
+     2340.4
+    ],
+    "path_dry_fv_water_km2": 22.5
+   },
+   "hmm_4_states": {
+    "A_per_12_days": [
+     [
+      0.9979,
+      0.0003,
+      0.0005,
+      0.0013
+     ],
+     [
+      0.0016,
+      0.8434,
+      0.1501,
+      0.0049
+     ],
+     [
+      0.0048,
+      0.0017,
+      0.9936,
+      0.0
+     ],
+     [
+      0.0013,
+      0.0322,
+      0.0153,
+      0.9511
+     ]
+    ],
+    "loglik_per_pixel": -21.7296,
+    "water_km2": [
+     2268.9,
+     2276.6,
+     2301.4,
+     2366.1,
+     2655.4,
+     2798.5,
+     2926.0,
+     3195.6,
+     3229.3,
+     3250.1
+    ],
+    "flooded_veg_km2": [
+     0.0,
+     3.5,
+     228.8,
+     558.6,
+     2255.4,
+     3070.6,
+     3096.6,
+     2227.0,
+     2081.7,
+     2004.5
+    ],
+    "path_dry_fv_water_km2": 25.5
+   },
+   "metrics": {
+    "dates": [
+     "2026-06-19",
+     "2026-07-01",
+     "2026-07-13",
+     "2026-07-25",
+     "2026-08-18",
+     "2026-08-30",
+     "2026-09-11",
+     "2026-09-23",
+     "2026-10-05",
+     "2026-10-17"
+    ],
+    "km2_per_px": 0.03266007149339352,
+    "domain_km2": 36035.6,
+    "current": {
+     "water_km2": [
+      2234.0,
+      2297.0,
+      2310.0,
+      2421.4,
+      2802.5,
+      2954.2,
+      3147.4,
+      3522.4,
+      3541.0,
+      3836.7
+     ],
+     "flooded_veg_km2": [
+      1.2,
+      0.4,
+      38.7,
+      98.5,
+      262.5,
+      610.6,
+      509.4,
+      263.6,
+      184.8,
+      143.6
+     ],
+     "false_water_far_from_jrc_km2": [
+      0.5,
+      7.6,
+      2.0,
+      9.3,
+      4.4,
+      0.5,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "late_false_water_far_from_jrc_km2": 0.0,
+     "water_share_inside_jrc_max_extent": [
+      0.9984,
+      0.9764,
+      0.9953,
+      0.9842,
+      0.9853,
+      0.9965,
+      0.9946,
+      0.9869,
+      0.9913,
+      0.9885
+     ],
+     "fv_any_date_km2": 1461.0,
+     "fv_any_share_within_1px_of_jrc_water": 0.8801,
+     "permanent_water_vs_jrc": {
+      "occ_ge75": {
+       "iou": 0.8373,
+       "precision": 0.9938,
+       "recall": 0.8417,
+       "ours_km2": 2173.4,
+       "ref_km2": 2566.4
+      },
+      "occ_ge90": {
+       "iou": 0.6343,
+       "precision": 0.6848,
+       "recall": 0.8958,
+       "ours_km2": 2173.4,
+       "ref_km2": 1661.5
+      },
+      "seasonality12": {
+       "iou": 0.8967,
+       "precision": 0.9821,
+       "recall": 0.9115,
+       "ours_km2": 2173.4,
+       "ref_km2": 2341.7
+      }
+     },
+     "floodplain_spearman_occurrence_vs_n_water_dates": 0.519
+    },
+    "gmm_per_date": {
+     "water_km2": [
+      2252.7,
+      2290.4,
+      2299.5,
+      2298.2,
+      2549.0,
+      2658.1,
+      2738.2,
+      3035.2,
+      2944.0,
+      3049.0
+     ],
+     "flooded_veg_km2": [
+      2.2,
+      0.0,
+      77.1,
+      89.1,
+      699.3,
+      1677.6,
+      1645.8,
+      775.4,
+      525.4,
+      463.8
+     ],
+     "false_water_far_from_jrc_km2": [
+      14.5,
+      9.8,
+      15.8,
+      5.1,
+      1.6,
+      0.3,
+      0.0,
+      0.5,
+      0.0,
+      0.0
+     ],
+     "late_false_water_far_from_jrc_km2": 0.5,
+     "water_share_inside_jrc_max_extent": [
+      0.9865,
+      0.9794,
+      0.9827,
+      0.9932,
+      0.9942,
+      0.9979,
+      0.9971,
+      0.9922,
+      0.9937,
+      0.9954
+     ],
+     "fv_any_date_km2": 2963.2,
+     "fv_any_share_within_1px_of_jrc_water": 0.762,
+     "permanent_water_vs_jrc": {
+      "occ_ge75": {
+       "iou": 0.8059,
+       "precision": 0.9975,
+       "recall": 0.8075,
+       "ours_km2": 2077.5,
+       "ref_km2": 2566.4
+      },
+      "occ_ge90": {
+       "iou": 0.6442,
+       "precision": 0.7052,
+       "recall": 0.8817,
+       "ours_km2": 2077.5,
+       "ref_km2": 1661.5
+      },
+      "seasonality12": {
+       "iou": 0.8683,
+       "precision": 0.9886,
+       "recall": 0.8771,
+       "ours_km2": 2077.5,
+       "ref_km2": 2341.7
+      }
+     },
+     "floodplain_spearman_occurrence_vs_n_water_dates": 0.458,
+     "floodplain_spearman_occurrence_vs_mean_p_water": 0.466
+    },
+    "hmm": {
+     "water_km2": [
+      2289.2,
+      2299.6,
+      2330.6,
+      2395.2,
+      2716.9,
+      2869.0,
+      3009.0,
+      3267.0,
+      3310.7,
+      3325.9
+     ],
+     "flooded_veg_km2": [
+      0.0,
+      7.8,
+      301.9,
+      675.3,
+      2143.3,
+      2968.9,
+      3206.6,
+      2528.6,
+      2419.5,
+      2344.8
+     ],
+     "false_water_far_from_jrc_km2": [
+      12.3,
+      12.4,
+      12.3,
+      7.2,
+      1.5,
+      0.6,
+      0.4,
+      0.4,
+      0.3,
+      0.3
+     ],
+     "late_false_water_far_from_jrc_km2": 0.4,
+     "water_share_inside_jrc_max_extent": [
+      0.9891,
+      0.989,
+      0.9893,
+      0.9936,
+      0.9966,
+      0.9971,
+      0.9963,
+      0.9948,
+      0.9942,
+      0.9941
+     ],
+     "fv_any_date_km2": 3809.6,
+     "fv_any_share_within_1px_of_jrc_water": 0.7007,
+     "permanent_water_vs_jrc": {
+      "occ_ge75": {
+       "iou": 0.8356,
+       "precision": 0.9762,
+       "recall": 0.853,
+       "ours_km2": 2242.4,
+       "ref_km2": 2566.4
+      },
+      "occ_ge90": {
+       "iou": 0.6295,
+       "precision": 0.6726,
+       "recall": 0.9077,
+       "ours_km2": 2242.4,
+       "ref_km2": 1661.5
+      },
+      "seasonality12": {
+       "iou": 0.8902,
+       "precision": 0.9628,
+       "recall": 0.9219,
+       "ours_km2": 2242.4,
+       "ref_km2": 2341.7
+      }
+     },
+     "floodplain_spearman_occurrence_vs_n_water_dates": 0.49,
+     "floodplain_spearman_occurrence_vs_mean_p_water": 0.456
+    },
+    "current_no_terrain": {
+     "water_km2": [
+      2234.0,
+      2297.0,
+      2310.0,
+      2421.4,
+      2802.5,
+      2954.2,
+      3147.4,
+      3522.4,
+      3541.0,
+      3836.7
+     ],
+     "flooded_veg_km2": [
+      1.2,
+      0.4,
+      38.7,
+      98.5,
+      262.5,
+      610.6,
+      509.4,
+      263.6,
+      184.8,
+      143.6
+     ],
+     "false_water_far_from_jrc_km2": [
+      0.5,
+      7.6,
+      2.0,
+      9.3,
+      4.4,
+      0.5,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "late_false_water_far_from_jrc_km2": 0.0,
+     "water_share_inside_jrc_max_extent": [
+      0.9984,
+      0.9764,
+      0.9953,
+      0.9842,
+      0.9853,
+      0.9965,
+      0.9946,
+      0.9869,
+      0.9913,
+      0.9885
+     ],
+     "fv_any_date_km2": 1461.0,
+     "fv_any_share_within_1px_of_jrc_water": 0.8801,
+     "permanent_water_vs_jrc": {
+      "occ_ge75": {
+       "iou": 0.8373,
+       "precision": 0.9938,
+       "recall": 0.8417,
+       "ours_km2": 2173.4,
+       "ref_km2": 2566.4
+      },
+      "occ_ge90": {
+       "iou": 0.6343,
+       "precision": 0.6848,
+       "recall": 0.8958,
+       "ours_km2": 2173.4,
+       "ref_km2": 1661.5
+      },
+      "seasonality12": {
+       "iou": 0.8967,
+       "precision": 0.9821,
+       "recall": 0.9115,
+       "ours_km2": 2173.4,
+       "ref_km2": 2341.7
+      }
+     },
+     "floodplain_spearman_occurrence_vs_n_water_dates": 0.519
+    },
+    "hmm_no_terrain": {
+     "water_km2": [
+      2289.2,
+      2299.6,
+      2330.6,
+      2395.2,
+      2716.9,
+      2869.0,
+      3009.0,
+      3267.0,
+      3310.7,
+      3325.9
+     ],
+     "flooded_veg_km2": [
+      0.0,
+      7.8,
+      301.8,
+      675.3,
+      2143.3,
+      2969.0,
+      3206.5,
+      2528.6,
+      2419.5,
+      2344.8
+     ],
+     "false_water_far_from_jrc_km2": [
+      12.3,
+      12.4,
+      12.3,
+      7.2,
+      1.5,
+      0.6,
+      0.4,
+      0.4,
+      0.3,
+      0.2
+     ],
+     "late_false_water_far_from_jrc_km2": 0.4,
+     "water_share_inside_jrc_max_extent": [
+      0.9891,
+      0.989,
+      0.9893,
+      0.9936,
+      0.9966,
+      0.9971,
+      0.9963,
+      0.9948,
+      0.9942,
+      0.9942
+     ],
+     "fv_any_date_km2": 3809.6,
+     "fv_any_share_within_1px_of_jrc_water": 0.7007,
+     "permanent_water_vs_jrc": {
+      "occ_ge75": {
+       "iou": 0.8356,
+       "precision": 0.9762,
+       "recall": 0.853,
+       "ours_km2": 2242.4,
+       "ref_km2": 2566.4
+      },
+      "occ_ge90": {
+       "iou": 0.6295,
+       "precision": 0.6726,
+       "recall": 0.9077,
+       "ours_km2": 2242.4,
+       "ref_km2": 1661.5
+      },
+      "seasonality12": {
+       "iou": 0.8902,
+       "precision": 0.9628,
+       "recall": 0.9219,
+       "ours_km2": 2242.4,
+       "ref_km2": 2341.7
+      }
+     },
+     "floodplain_spearman_occurrence_vs_n_water_dates": 0.49
+    },
+    "gmm_per_date_no_terrain": {
+     "water_km2": [
+      2252.7,
+      2290.4,
+      2299.5,
+      2298.2,
+      2549.0,
+      2658.1,
+      2738.2,
+      3035.2,
+      2944.0,
+      3049.0
+     ],
+     "flooded_veg_km2": [
+      2.2,
+      0.0,
+      77.1,
+      89.1,
+      699.3,
+      1677.6,
+      1645.7,
+      775.4,
+      525.4,
+      463.8
+     ],
+     "false_water_far_from_jrc_km2": [
+      14.5,
+      9.8,
+      15.8,
+      5.1,
+      1.6,
+      0.3,
+      0.0,
+      0.5,
+      0.0,
+      0.0
+     ],
+     "late_false_water_far_from_jrc_km2": 0.5,
+     "water_share_inside_jrc_max_extent": [
+      0.9865,
+      0.9794,
+      0.9827,
+      0.9932,
+      0.9942,
+      0.9979,
+      0.9971,
+      0.9922,
+      0.9937,
+      0.9954
+     ],
+     "fv_any_date_km2": 2963.1,
+     "fv_any_share_within_1px_of_jrc_water": 0.762,
+     "permanent_water_vs_jrc": {
+      "occ_ge75": {
+       "iou": 0.8059,
+       "precision": 0.9975,
+       "recall": 0.8075,
+       "ours_km2": 2077.5,
+       "ref_km2": 2566.4
+      },
+      "occ_ge90": {
+       "iou": 0.6442,
+       "precision": 0.7052,
+       "recall": 0.8817,
+       "ours_km2": 2077.5,
+       "ref_km2": 1661.5
+      },
+      "seasonality12": {
+       "iou": 0.8683,
+       "precision": 0.9886,
+       "recall": 0.8771,
+       "ours_km2": 2077.5,
+       "ref_km2": 2341.7
+      }
+     },
+     "floodplain_spearman_occurrence_vs_n_water_dates": 0.458
+    },
+    "timing_vs_change_date": {
+     "n_px": 25962,
+     "km2": 847.9,
+     "exact_share": 0.552,
+     "within_1_date_share": 0.836,
+     "mean_diff_dates": 0.67,
+     "pearson": 0.786
+    },
+    "hmm_first_water_km2_by_date": {
+     "2026-07-01": 1.5,
+     "2026-07-13": 34.1,
+     "2026-07-25": 91.9,
+     "2026-08-18": 323.1,
+     "2026-08-30": 176.0,
+     "2026-09-11": 139.2,
+     "2026-09-23": 255.3,
+     "2026-10-05": 26.6,
+     "2026-10-17": 0.0
+    },
+    "path_dry_fv_water": {
+     "km2": 8.0,
+     "share_inside_jrc_max_extent": 0.996,
+     "centroid_lonlat": [
+      104.691,
+      12.665
+     ]
+    },
+    "fv_peak_km2_sensitivity": {
+     "hmm": {
+      "0.3": 3725.2,
+      "0.5": 3291.2,
+      "0.7": 2895.9,
+      "0.9": 2338.8
+     },
+     "gmm_per_date": {
+      "0.3": 2178.2,
+      "0.5": 1727.2,
+      "0.7": 1377.0,
+      "0.9": 753.1
+     },
+     "current_rule_hh_rise": {
+      "0.1": 1542.0,
+      "0.12": 1082.8,
+      "0.15": 610.6,
+      "0.2": 138.5
+     }
+    }
+   },
+   "bic": {
+    "app": {
+     "2": {
+      "bic_per_sample": 5.53102,
+      "aic_per_sample": 5.52798,
+      "loglik": -2.76362,
+      "n_iter": 20
+     },
+     "3": {
+      "bic_per_sample": 5.20112,
+      "aic_per_sample": 5.19642,
+      "loglik": -2.59764,
+      "n_iter": 30
+     },
+     "4": {
+      "bic_per_sample": 5.06393,
+      "aic_per_sample": 5.05756,
+      "loglik": -2.52801,
+      "n_iter": 58
+     },
+     "5": {
+      "bic_per_sample": 4.83107,
+      "aic_per_sample": 4.82304,
+      "loglik": -2.41055,
+      "n_iter": 68
+     },
+     "6": {
+      "bic_per_sample": 4.81307,
+      "aic_per_sample": 4.80337,
+      "loglik": -2.40052,
+      "n_iter": 92
+     },
+     "7": {
+      "bic_per_sample": 4.6234,
+      "aic_per_sample": 4.61205,
+      "loglik": -2.30466,
+      "n_iter": 256
+     },
+     "8": {
+      "bic_per_sample": 4.62306,
+      "aic_per_sample": 4.61004,
+      "loglik": -2.30345,
+      "n_iter": 106
+     }
+    },
+    "chg": {
+     "2": {
+      "bic_per_sample": 1.23667,
+      "aic_per_sample": 1.23362,
+      "loglik": -0.61645,
+      "n_iter": 32
+     },
+     "3": {
+      "bic_per_sample": 1.11549,
+      "aic_per_sample": 1.11078,
+      "loglik": -0.55483,
+      "n_iter": 146
+     },
+     "4": {
+      "bic_per_sample": 1.08708,
+      "aic_per_sample": 1.08071,
+      "loglik": -0.53959,
+      "n_iter": 250
+     },
+     "5": {
+      "bic_per_sample": 1.07931,
+      "aic_per_sample": 1.07128,
+      "loglik": -0.53467,
+      "n_iter": 143
+     },
+     "6": {
+      "bic_per_sample": 1.06336,
+      "aic_per_sample": 1.05367,
+      "loglik": -0.52555,
+      "n_iter": 25
+     },
+     "7": {
+      "bic_per_sample": 1.04748,
+      "aic_per_sample": 1.03612,
+      "loglik": -0.51656,
+      "n_iter": 15
+     },
+     "8": {
+      "bic_per_sample": 1.05983,
+      "aic_per_sample": 1.04681,
+      "loglik": -0.52174,
+      "n_iter": 42
+     }
+    }
+   },
+   "seed_stability": {
+    "app": {
+     "loglik_per_seed": [
+      -2.31881,
+      -2.40054,
+      -2.31881
+     ],
+     "max_matched_mean_shift_logit": [
+      6.507,
+      0.0
+     ]
+    },
+    "chg": {
+     "loglik_per_seed": [
+      -0.53269,
+      -0.53446,
+      -0.53416
+     ],
+     "max_matched_mean_shift_logit": [
+      0.445,
+      0.664
+     ]
+    }
+   },
+   "decision_boundary_HH": {
+    "p_water_0.5_crossing": {
+     "HV=HHx0.5": 0.1017,
+     "HV=HHx1.0": 0.0439
+    },
+    "hysteresis_strong": 0.06,
+    "hysteresis_weak": 0.12,
+    "otsu_HH_all_dates": 0.5335
+   }
+  },
+  "ararat": {
+   "terrain_mask_available": true,
+   "times_s": {
+    "load_and_ops_pipeline": 2.2,
+    "detect_total": 17.1,
+    "fit_mixtures": 14.11,
+    "baum_welch": 1.63,
+    "smooth_viterbi": 1.0
+   },
+   "components_appearance": [
+    {
+     "k": 0,
+     "weight": 0.0396,
+     "mean_logit": [
+      -1.122,
+      -0.791
+     ],
+     "sd_logit": [
+      0.937,
+      0.631
+     ],
+     "corr": 0.112,
+     "mean_HH": 0.2406,
+     "mean_HV": 0.3083,
+     "role": "dark land"
+    },
+    {
+     "k": 1,
+     "weight": 0.0849,
+     "mean_logit": [
+      -0.933,
+      0.267
+     ],
+     "sd_logit": [
+      0.408,
+      0.146
+     ],
+     "corr": 0.279,
+     "mean_HH": 0.2779,
+     "mean_HV": 0.5676,
+     "role": "bright (can be flooded veg)"
+    },
+    {
+     "k": 2,
+     "weight": 0.5089,
+     "mean_logit": [
+      -0.358,
+      -0.091
+     ],
+     "sd_logit": [
+      0.477,
+      0.368
+     ],
+     "corr": 0.615,
+     "mean_HH": 0.4097,
+     "mean_HV": 0.4769,
+     "role": "bright (can be flooded veg)"
+    },
+    {
+     "k": 3,
+     "weight": 0.2783,
+     "mean_logit": [
+      0.422,
+      0.699
+     ],
+     "sd_logit": [
+      0.815,
+      0.5
+     ],
+     "corr": 0.415,
+     "mean_HH": 0.6061,
+     "mean_HV": 0.6714,
+     "role": "bright (can be flooded veg)"
+    },
+    {
+     "k": 4,
+     "weight": 0.0702,
+     "mean_logit": [
+      2.527,
+      1.784
+     ],
+     "sd_logit": [
+      1.243,
+      0.792
+     ],
+     "corr": -0.06,
+     "mean_HH": 0.9345,
+     "mean_HV": 0.8633,
+     "role": "bright (can be flooded veg)"
+    },
+    {
+     "k": 5,
+     "weight": 0.0181,
+     "mean_logit": [
+      4.185,
+      3.735
+     ],
+     "sd_logit": [
+      0.382,
+      0.642
+     ],
+     "corr": 0.31,
+     "mean_HH": 0.9947,
+     "mean_HV": 0.9862,
+     "role": "bright (can be flooded veg)"
+    }
+   ],
+   "components_change": [
+    {
+     "k": 0,
+     "weight": 0.0314,
+     "mean_logit": [
+      -0.31,
+      -0.287
+     ],
+     "sd_logit": [
+      0.407,
+      0.222
+     ],
+     "corr": 0.058,
+     "HH_ratio": 0.733,
+     "HV_ratio": 0.751,
+     "role": "other change"
+    },
+    {
+     "k": 1,
+     "weight": 0.121,
+     "mean_logit": [
+      -0.114,
+      -0.074
+     ],
+     "sd_logit": [
+      0.143,
+      0.119
+     ],
+     "corr": 0.015,
+     "HH_ratio": 0.893,
+     "HV_ratio": 0.929,
+     "role": "other change"
+    },
+    {
+     "k": 2,
+     "weight": 0.0277,
+     "mean_logit": [
+      -0.055,
+      -0.71
+     ],
+     "sd_logit": [
+      0.152,
+      0.543
+     ],
+     "corr": 0.29,
+     "HH_ratio": 0.946,
+     "HV_ratio": 0.492,
+     "role": "other change"
+    },
+    {
+     "k": 3,
+     "weight": 0.7143,
+     "mean_logit": [
+      0.011,
+      0.024
+     ],
+     "sd_logit": [
+      0.082,
+      0.068
+     ],
+     "corr": 0.29,
+     "HH_ratio": 1.011,
+     "HV_ratio": 1.024,
+     "role": "other change"
+    },
+    {
+     "k": 4,
+     "weight": 0.0929,
+     "mean_logit": [
+      0.269,
+      0.1
+     ],
+     "sd_logit": [
+      0.15,
+      0.102
+     ],
+     "corr": 0.206,
+     "HH_ratio": 1.309,
+     "HV_ratio": 1.105,
+     "role": "other change"
+    },
+    {
+     "k": 5,
+     "weight": 0.0127,
+     "mean_logit": [
+      0.611,
+      0.273
+     ],
+     "sd_logit": [
+      0.454,
+      0.329
+     ],
+     "corr": 0.079,
+     "HH_ratio": 1.842,
+     "HV_ratio": 1.314,
+     "role": "other change"
+    }
+   ],
+   "hmm": {
+    "pi": [
+     0.0,
+     0.0,
+     1.0
+    ],
+    "A_per_12_days": [
+     [
+      0.0,
+      0.0,
+      1.0
+     ],
+     [
+      0.0,
+      0.0,
+      1.0
+     ],
+     [
+      0.0,
+      0.0,
+      1.0
+     ]
+    ],
+    "A_24_days": [
+     [
+      0.0,
+      0.0,
+      1.0
+     ],
+     [
+      0.0,
+      0.0,
+      1.0
+     ],
+     [
+      0.0,
+      0.0,
+      1.0
+     ]
+    ],
+    "baum_welch_loglik": [
+     -7.3523,
+     -5.2336,
+     -5.2193,
+     -5.2179,
+     -5.2178,
+     -5.2177
+    ],
+    "state_names": [
+     "open water",
+     "flooded vegetation",
+     "land"
+    ],
+    "dt_steps": [
+     1,
+     1,
+     1,
+     2,
+     1,
+     1,
+     1,
+     1,
+     1
+    ],
+    "loglik_per_pixel": -5.2177,
+    "max_abs_gamma_sum_minus_1": 0.0
+   },
+   "hmm_no_terrain": {
+    "A_per_12_days": [
+     [
+      0.0,
+      0.0,
+      1.0
+     ],
+     [
+      0.0,
+      0.0,
+      1.0
+     ],
+     [
+      0.0,
+      0.0,
+      1.0
+     ]
+    ],
+    "loglik_per_pixel": -5.2177,
+    "water_km2": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "flooded_veg_km2": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "path_dry_fv_water_km2": 0.0
+   },
+   "hmm_with_prior": {
+    "A_per_12_days": [
+     [
+      0.9399,
+      0.02,
+      0.0402
+     ],
+     [
+      0.1998,
+      0.6995,
+      0.1007
+     ],
+     [
+      0.0,
+      0.0001,
+      0.9999
+     ]
+    ],
+    "loglik_per_pixel": -5.2185,
+    "water_km2": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "flooded_veg_km2": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "path_dry_fv_water_km2": 0.0
+   },
+   "hmm_4_states": {
+    "A_per_12_days": [
+     [
+      0.0,
+      0.0,
+      1.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      1.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      1.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+     ]
+    ],
+    "loglik_per_pixel": -1.156,
+    "water_km2": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "flooded_veg_km2": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "path_dry_fv_water_km2": 0.0
+   },
+   "metrics": {
+    "dates": [
+     "2026-06-20",
+     "2026-07-02",
+     "2026-07-14",
+     "2026-07-26",
+     "2026-08-19",
+     "2026-08-31",
+     "2026-09-12",
+     "2026-09-24",
+     "2026-10-06",
+     "2026-10-18"
+    ],
+    "km2_per_px": 0.03400424704665131,
+    "domain_km2": 3768.8,
+    "current": {
+     "water_km2": [
+      0.9,
+      1.0,
+      0.5,
+      0.6,
+      0.7,
+      0.6,
+      0.5,
+      0.6,
+      3.8,
+      0.5
+     ],
+     "flooded_veg_km2": [
+      0.0,
+      0.0,
+      1.2,
+      2.9,
+      5.0,
+      31.9,
+      2.0,
+      1.3,
+      2.7,
+      0.9
+     ],
+     "false_water_far_from_jrc_km2": [
+      0.6,
+      0.8,
+      0.5,
+      0.6,
+      0.7,
+      0.6,
+      0.5,
+      0.5,
+      2.4,
+      0.5
+     ],
+     "late_false_water_far_from_jrc_km2": 2.4,
+     "water_share_inside_jrc_max_extent": [
+      0.28,
+      0.1786,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.2632,
+      0.177,
+      0.0
+     ],
+     "fv_any_date_km2": 38.9,
+     "fv_any_share_within_1px_of_jrc_water": 0.0822,
+     "permanent_water_vs_jrc": {
+      "occ_ge75": {
+       "iou": 0.0,
+       "precision": 0.0,
+       "recall": 0.0,
+       "ours_km2": 0.4,
+       "ref_km2": 1.9
+      },
+      "occ_ge90": {
+       "iou": 0.0,
+       "precision": 0.0,
+       "recall": 0.0,
+       "ours_km2": 0.4,
+       "ref_km2": 1.1
+      },
+      "seasonality12": {
+       "iou": 0.0,
+       "precision": 0.0,
+       "recall": 0.0,
+       "ours_km2": 0.4,
+       "ref_km2": 4.1
+      }
+     },
+     "floodplain_spearman_occurrence_vs_n_water_dates": 0.133
+    },
+    "gmm_per_date": {
+     "water_km2": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "flooded_veg_km2": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "false_water_far_from_jrc_km2": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "late_false_water_far_from_jrc_km2": 0.0,
+     "water_share_inside_jrc_max_extent": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "fv_any_date_km2": 0.0,
+     "fv_any_share_within_1px_of_jrc_water": 0.0,
+     "permanent_water_vs_jrc": {
+      "occ_ge75": {
+       "iou": 0.0,
+       "precision": 0.0,
+       "recall": 0.0,
+       "ours_km2": 0.0,
+       "ref_km2": 1.9
+      },
+      "occ_ge90": {
+       "iou": 0.0,
+       "precision": 0.0,
+       "recall": 0.0,
+       "ours_km2": 0.0,
+       "ref_km2": 1.1
+      },
+      "seasonality12": {
+       "iou": 0.0,
+       "precision": 0.0,
+       "recall": 0.0,
+       "ours_km2": 0.0,
+       "ref_km2": 4.1
+      }
+     },
+     "floodplain_spearman_occurrence_vs_n_water_dates": 0.0,
+     "floodplain_spearman_occurrence_vs_mean_p_water": 0.0
+    },
+    "hmm": {
+     "water_km2": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "flooded_veg_km2": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "false_water_far_from_jrc_km2": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "late_false_water_far_from_jrc_km2": 0.0,
+     "water_share_inside_jrc_max_extent": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "fv_any_date_km2": 0.0,
+     "fv_any_share_within_1px_of_jrc_water": 0.0,
+     "permanent_water_vs_jrc": {
+      "occ_ge75": {
+       "iou": 0.0,
+       "precision": 0.0,
+       "recall": 0.0,
+       "ours_km2": 0.0,
+       "ref_km2": 1.9
+      },
+      "occ_ge90": {
+       "iou": 0.0,
+       "precision": 0.0,
+       "recall": 0.0,
+       "ours_km2": 0.0,
+       "ref_km2": 1.1
+      },
+      "seasonality12": {
+       "iou": 0.0,
+       "precision": 0.0,
+       "recall": 0.0,
+       "ours_km2": 0.0,
+       "ref_km2": 4.1
+      }
+     },
+     "floodplain_spearman_occurrence_vs_n_water_dates": 0.0,
+     "floodplain_spearman_occurrence_vs_mean_p_water": 0.0
+    },
+    "current_no_terrain": {
+     "water_km2": [
+      10.6,
+      10.5,
+      10.0,
+      15.2,
+      19.8,
+      21.7,
+      21.3,
+      19.7,
+      30.6,
+      18.2
+     ],
+     "flooded_veg_km2": [
+      0.0,
+      0.0,
+      1.2,
+      2.9,
+      5.0,
+      31.9,
+      2.0,
+      1.3,
+      2.7,
+      0.9
+     ],
+     "false_water_far_from_jrc_km2": [
+      9.8,
+      9.9,
+      9.8,
+      14.9,
+      19.1,
+      20.2,
+      20.3,
+      18.7,
+      27.8,
+      17.9
+     ],
+     "late_false_water_far_from_jrc_km2": 28.6,
+     "water_share_inside_jrc_max_extent": [
+      0.0288,
+      0.0194,
+      0.0034,
+      0.0022,
+      0.0017,
+      0.0031,
+      0.0032,
+      0.0104,
+      0.0278,
+      0.0019
+     ],
+     "fv_any_date_km2": 38.9,
+     "fv_any_share_within_1px_of_jrc_water": 0.0822,
+     "permanent_water_vs_jrc": {
+      "occ_ge75": {
+       "iou": 0.0,
+       "precision": 0.0,
+       "recall": 0.0,
+       "ours_km2": 8.9,
+       "ref_km2": 1.9
+      },
+      "occ_ge90": {
+       "iou": 0.0,
+       "precision": 0.0,
+       "recall": 0.0,
+       "ours_km2": 8.9,
+       "ref_km2": 1.1
+      },
+      "seasonality12": {
+       "iou": 0.0,
+       "precision": 0.0,
+       "recall": 0.0,
+       "ours_km2": 8.9,
+       "ref_km2": 4.1
+      }
+     },
+     "floodplain_spearman_occurrence_vs_n_water_dates": 0.121
+    },
+    "hmm_no_terrain": {
+     "water_km2": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "flooded_veg_km2": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "false_water_far_from_jrc_km2": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "late_false_water_far_from_jrc_km2": 0.0,
+     "water_share_inside_jrc_max_extent": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "fv_any_date_km2": 0.0,
+     "fv_any_share_within_1px_of_jrc_water": 0.0,
+     "permanent_water_vs_jrc": {
+      "occ_ge75": {
+       "iou": 0.0,
+       "precision": 0.0,
+       "recall": 0.0,
+       "ours_km2": 0.0,
+       "ref_km2": 1.9
+      },
+      "occ_ge90": {
+       "iou": 0.0,
+       "precision": 0.0,
+       "recall": 0.0,
+       "ours_km2": 0.0,
+       "ref_km2": 1.1
+      },
+      "seasonality12": {
+       "iou": 0.0,
+       "precision": 0.0,
+       "recall": 0.0,
+       "ours_km2": 0.0,
+       "ref_km2": 4.1
+      }
+     },
+     "floodplain_spearman_occurrence_vs_n_water_dates": 0.0
+    },
+    "gmm_per_date_no_terrain": {
+     "water_km2": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "flooded_veg_km2": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "false_water_far_from_jrc_km2": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "late_false_water_far_from_jrc_km2": 0.0,
+     "water_share_inside_jrc_max_extent": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "fv_any_date_km2": 0.0,
+     "fv_any_share_within_1px_of_jrc_water": 0.0,
+     "permanent_water_vs_jrc": {
+      "occ_ge75": {
+       "iou": 0.0,
+       "precision": 0.0,
+       "recall": 0.0,
+       "ours_km2": 0.0,
+       "ref_km2": 1.9
+      },
+      "occ_ge90": {
+       "iou": 0.0,
+       "precision": 0.0,
+       "recall": 0.0,
+       "ours_km2": 0.0,
+       "ref_km2": 1.1
+      },
+      "seasonality12": {
+       "iou": 0.0,
+       "precision": 0.0,
+       "recall": 0.0,
+       "ours_km2": 0.0,
+       "ref_km2": 4.1
+      }
+     },
+     "floodplain_spearman_occurrence_vs_n_water_dates": 0.0
+    },
+    "hmm_first_water_km2_by_date": {
+     "2026-07-02": 0.0,
+     "2026-07-14": 0.0,
+     "2026-07-26": 0.0,
+     "2026-08-19": 0.0,
+     "2026-08-31": 0.0,
+     "2026-09-12": 0.0,
+     "2026-09-24": 0.0,
+     "2026-10-06": 0.0,
+     "2026-10-18": 0.0
+    },
+    "path_dry_fv_water": {
+     "km2": 0.0,
+     "share_inside_jrc_max_extent": 0.0
+    },
+    "fv_peak_km2_sensitivity": {
+     "hmm": {
+      "0.3": 0.0,
+      "0.5": 0.0,
+      "0.7": 0.0,
+      "0.9": 0.0
+     },
+     "gmm_per_date": {
+      "0.3": 0.0,
+      "0.5": 0.0,
+      "0.7": 0.0,
+      "0.9": 0.0
+     },
+     "current_rule_hh_rise": {
+      "0.1": 257.3,
+      "0.12": 119.1,
+      "0.15": 31.9,
+      "0.2": 3.0
+     }
+    }
+   },
+   "bic": {
+    "app": {
+     "2": {
+      "bic_per_sample": 4.25219,
+      "aic_per_sample": 4.24914,
+      "loglik": -2.12421,
+      "n_iter": 36
+     },
+     "3": {
+      "bic_per_sample": 4.19129,
+      "aic_per_sample": 4.18659,
+      "loglik": -2.09273,
+      "n_iter": 155
+     },
+     "4": {
+      "bic_per_sample": 4.15722,
+      "aic_per_sample": 4.15085,
+      "loglik": -2.07466,
+      "n_iter": 300
+     },
+     "5": {
+      "bic_per_sample": 4.15121,
+      "aic_per_sample": 4.14318,
+      "loglik": -2.07062,
+      "n_iter": 164
+     },
+     "6": {
+      "bic_per_sample": 4.11429,
+      "aic_per_sample": 4.10459,
+      "loglik": -2.05114,
+      "n_iter": 300
+     },
+     "7": {
+      "bic_per_sample": 4.10772,
+      "aic_per_sample": 4.09636,
+      "loglik": -2.04682,
+      "n_iter": 231
+     },
+     "8": {
+      "bic_per_sample": 4.10395,
+      "aic_per_sample": 4.09093,
+      "loglik": -2.0439,
+      "n_iter": 208
+     }
+    },
+    "chg": {
+     "2": {
+      "bic_per_sample": -2.854,
+      "aic_per_sample": -2.85705,
+      "loglik": 1.42889,
+      "n_iter": 30
+     },
+     "3": {
+      "bic_per_sample": -2.99108,
+      "aic_per_sample": -2.99579,
+      "loglik": 1.49889,
+      "n_iter": 11
+     },
+     "4": {
+      "bic_per_sample": -2.99104,
+      "aic_per_sample": -2.99741,
+      "loglik": 1.49947,
+      "n_iter": 14
+     },
+     "5": {
+      "bic_per_sample": -3.04183,
+      "aic_per_sample": -3.04987,
+      "loglik": 1.52628,
+      "n_iter": 28
+     },
+     "6": {
+      "bic_per_sample": -3.04462,
+      "aic_per_sample": -3.05431,
+      "loglik": 1.52867,
+      "n_iter": 19
+     },
+     "7": {
+      "bic_per_sample": -3.0465,
+      "aic_per_sample": -3.05786,
+      "loglik": 1.53051,
+      "n_iter": 12
+     },
+     "8": {
+      "bic_per_sample": -3.05893,
+      "aic_per_sample": -3.07195,
+      "loglik": 1.53832,
+      "n_iter": 7
+     }
+    }
+   },
+   "seed_stability": {
+    "app": {
+     "loglik_per_seed": [
+      -2.05237,
+      -2.05059,
+      -2.05073
+     ],
+     "max_matched_mean_shift_logit": [
+      0.182,
+      0.162
+     ]
+    },
+    "chg": {
+     "loglik_per_seed": [
+      1.52776,
+      1.53089,
+      1.52008
+     ],
+     "max_matched_mean_shift_logit": [
+      0.458,
+      0.164
+     ]
+    }
+   },
+   "decision_boundary_HH": {
+    "p_water_0.5_crossing": {
+     "HV=HHx0.5": null,
+     "HV=HHx1.0": null
+    },
+    "hysteresis_strong": 0.06,
+    "hysteresis_weak": 0.12,
+    "otsu_HH_all_dates": 0.5694
+   }
+  }
+ },
+ "reliability": {
+  "hmm": {
+   "bins": [
+    {
+     "bin": [
+      0.0,
+      0.1
+     ],
+     "n": 2531493,
+     "mean_p": 0.0,
+     "observed_water": 0.0001
+    },
+    {
+     "bin": [
+      0.1,
+      0.2
+     ],
+     "n": 264,
+     "mean_p": 0.1424,
+     "observed_water": 0.0758
+    },
+    {
+     "bin": [
+      0.2,
+      0.3
+     ],
+     "n": 182,
+     "mean_p": 0.2539,
+     "observed_water": 0.0659
+    },
+    {
+     "bin": [
+      0.3,
+      0.4
+     ],
+     "n": 155,
+     "mean_p": 0.3537,
+     "observed_water": 0.0645
+    },
+    {
+     "bin": [
+      0.4,
+      0.5
+     ],
+     "n": 81,
+     "mean_p": 0.4578,
+     "observed_water": 0.1852
+    },
+    {
+     "bin": [
+      0.5,
+      0.6
+     ],
+     "n": 135,
+     "mean_p": 0.5554,
+     "observed_water": 0.1259
+    },
+    {
+     "bin": [
+      0.6,
+      0.7
+     ],
+     "n": 93,
+     "mean_p": 0.6556,
+     "observed_water": 0.1828
+    },
+    {
+     "bin": [
+      0.7,
+      0.8
+     ],
+     "n": 181,
+     "mean_p": 0.7561,
+     "observed_water": 0.1105
+    },
+    {
+     "bin": [
+      0.8,
+      0.9
+     ],
+     "n": 194,
+     "mean_p": 0.8525,
+     "observed_water": 0.134
+    },
+    {
+     "bin": [
+      0.9,
+      1.0
+     ],
+     "n": 342912,
+     "mean_p": 0.9999,
+     "observed_water": 0.9838
+    }
+   ],
+   "brier": 0.00215,
+   "n": 2875690,
+   "accuracy_at_0.5": 0.99775
+  },
+  "gmm_per_date": {
+   "bins": [
+    {
+     "bin": [
+      0.0,
+      0.1
+     ],
+     "n": 2529764,
+     "mean_p": 0.0014,
+     "observed_water": 0.0006
+    },
+    {
+     "bin": [
+      0.1,
+      0.2
+     ],
+     "n": 2785,
+     "mean_p": 0.1429,
+     "observed_water": 0.1616
+    },
+    {
+     "bin": [
+      0.2,
+      0.3
+     ],
+     "n": 1647,
+     "mean_p": 0.2472,
+     "observed_water": 0.2866
+    },
+    {
+     "bin": [
+      0.3,
+      0.4
+     ],
+     "n": 1288,
+     "mean_p": 0.3506,
+     "observed_water": 0.448
+    },
+    {
+     "bin": [
+      0.4,
+      0.5
+     ],
+     "n": 1477,
+     "mean_p": 0.4508,
+     "observed_water": 0.5647
+    },
+    {
+     "bin": [
+      0.5,
+      0.6
+     ],
+     "n": 1656,
+     "mean_p": 0.5524,
+     "observed_water": 0.6733
+    },
+    {
+     "bin": [
+      0.6,
+      0.7
+     ],
+     "n": 2115,
+     "mean_p": 0.652,
+     "observed_water": 0.7532
+    },
+    {
+     "bin": [
+      0.7,
+      0.8
+     ],
+     "n": 3048,
+     "mean_p": 0.7544,
+     "observed_water": 0.8186
+    },
+    {
+     "bin": [
+      0.8,
+      0.9
+     ],
+     "n": 6292,
+     "mean_p": 0.8586,
+     "observed_water": 0.8856
+    },
+    {
+     "bin": [
+      0.9,
+      1.0
+     ],
+     "n": 325618,
+     "mean_p": 0.9608,
+     "observed_water": 0.9925
+    }
+   ],
+   "brier": 0.00262,
+   "n": 2875690,
+   "accuracy_at_0.5": 0.997
+  }
+ },
+ "total_runtime_s_last_run": 578.8,
+ "pooled_and_transfer": {
+  "components_appearance": [
+   {
+    "k": 0,
+    "weight": 0.0752,
+    "mean_logit": [
+     -4.287,
+     -2.499
+    ],
+    "sd_logit": [
+     0.041,
+     1.191
+    ],
+    "corr": 0.043,
+    "mean_HH": 0.0038,
+    "mean_HV": 0.0675,
+    "role": "open water"
+   },
+   {
+    "k": 1,
+    "weight": 0.0091,
+    "mean_logit": [
+     -2.88,
+     -4.261
+    ],
+    "sd_logit": [
+     1.22,
+     0.077
+    ],
+    "corr": 0.161,
+    "mean_HH": 0.0442,
+    "mean_HV": 0.0042,
+    "role": "open water"
+   },
+   {
+    "k": 2,
+    "weight": 0.074,
+    "mean_logit": [
+     -2.166,
+     -2.055
+    ],
+    "sd_logit": [
+     1.135,
+     0.983
+    ],
+    "corr": -0.309,
+    "mean_HH": 0.0949,
+    "mean_HV": 0.1058,
+    "role": "dark land"
+   },
+   {
+    "k": 3,
+    "weight": 0.1932,
+    "mean_logit": [
+     -0.5,
+     -0.004
+    ],
+    "sd_logit": [
+     0.48,
+     0.424
+    ],
+    "corr": 0.164,
+    "mean_HH": 0.375,
+    "mean_HV": 0.499,
+    "role": "bright (can be flooded veg)"
+   },
+   {
+    "k": 4,
+    "weight": 0.5034,
+    "mean_logit": [
+     0.112,
+     -0.215
+    ],
+    "sd_logit": [
+     0.865,
+     0.969
+    ],
+    "corr": 0.839,
+    "mean_HH": 0.5285,
+    "mean_HV": 0.4453,
+    "role": "bright (can be flooded veg)"
+   },
+   {
+    "k": 5,
+    "weight": 0.145,
+    "mean_logit": [
+     2.043,
+     1.619
+    ],
+    "sd_logit": [
+     1.22,
+     1.356
+    ],
+    "corr": 0.456,
+    "mean_HH": 0.8929,
+    "mean_HV": 0.8413,
+    "role": "bright (can be flooded veg)"
+   }
+  ],
+  "components_change": [
+   {
+    "k": 0,
+    "weight": 0.0178,
+    "mean_logit": [
+     -0.327,
+     -0.944
+    ],
+    "sd_logit": [
+     1.834,
+     1.23
+    ],
+    "corr": 0.742,
+    "HH_ratio": 0.721,
+    "HV_ratio": 0.389,
+    "role": "other change"
+   },
+   {
+    "k": 1,
+    "weight": 0.0817,
+    "mean_logit": [
+     -0.283,
+     -0.272
+    ],
+    "sd_logit": [
+     0.838,
+     0.849
+    ],
+    "corr": 0.76,
+    "HH_ratio": 0.753,
+    "HV_ratio": 0.762,
+    "role": "other change"
+   },
+   {
+    "k": 2,
+    "weight": 0.0433,
+    "mean_logit": [
+     -0.006,
+     0.436
+    ],
+    "sd_logit": [
+     0.056,
+     0.772
+    ],
+    "corr": 0.171,
+    "HH_ratio": 0.994,
+    "HV_ratio": 1.547,
+    "role": "other change"
+   },
+   {
+    "k": 3,
+    "weight": 0.2708,
+    "mean_logit": [
+     0.001,
+     0.057
+    ],
+    "sd_logit": [
+     0.351,
+     0.271
+    ],
+    "corr": 0.676,
+    "HH_ratio": 1.001,
+    "HV_ratio": 1.059,
+    "role": "other change"
+   },
+   {
+    "k": 4,
+    "weight": 0.5481,
+    "mean_logit": [
+     0.003,
+     0.019
+    ],
+    "sd_logit": [
+     0.11,
+     0.088
+    ],
+    "corr": 0.489,
+    "HH_ratio": 1.003,
+    "HV_ratio": 1.019,
+    "role": "other change"
+   },
+   {
+    "k": 5,
+    "weight": 0.0383,
+    "mean_logit": [
+     0.384,
+     0.178
+    ],
+    "sd_logit": [
+     0.916,
+     0.187
+    ],
+    "corr": 0.159,
+    "HH_ratio": 1.468,
+    "HV_ratio": 1.194,
+    "role": "other change"
+   }
+  ],
+  "per_area": {
+   "tonle-sap": {
+    "pooled": {
+     "heldout_app_loglik": -2.9345,
+     "water_km2": [
+      2065.1,
+      2065.7,
+      2071.9,
+      2117.9,
+      2205.5,
+      2220.0,
+      2167.4,
+      2064.7,
+      2010.9,
+      2010.3
+     ],
+     "flooded_veg_km2": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "late_false_water_far_from_jrc_km2": 0.0,
+     "permanent_iou_occ_ge90": 0.6058,
+     "app_components": [
+      [
+       0.0038,
+       0.0675,
+       "open water"
+      ],
+      [
+       0.0442,
+       0.0042,
+       "open water"
+      ],
+      [
+       0.0949,
+       0.1058,
+       "dark land"
+      ],
+      [
+       0.375,
+       0.499,
+       "bright (can be flooded veg)"
+      ],
+      [
+       0.5285,
+       0.4453,
+       "bright (can be flooded veg)"
+      ],
+      [
+       0.8929,
+       0.8413,
+       "bright (can be flooded veg)"
+      ]
+     ]
+    },
+    "heldout_app_loglik_own": -2.2994
+   },
+   "sevan": {
+    "pooled": {
+     "heldout_app_loglik": -2.9823,
+     "water_km2": [
+      962.0,
+      956.8,
+      984.3,
+      974.2,
+      900.9,
+      858.2,
+      868.8,
+      955.9,
+      995.3,
+      1018.4
+     ],
+     "flooded_veg_km2": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "late_false_water_far_from_jrc_km2": 0.7,
+     "permanent_iou_occ_ge90": 0.6675,
+     "app_components": [
+      [
+       0.0038,
+       0.0675,
+       "open water"
+      ],
+      [
+       0.0442,
+       0.0042,
+       "open water"
+      ],
+      [
+       0.0949,
+       0.1058,
+       "dark land"
+      ],
+      [
+       0.375,
+       0.499,
+       "bright (can be flooded veg)"
+      ],
+      [
+       0.5285,
+       0.4453,
+       "bright (can be flooded veg)"
+      ],
+      [
+       0.8929,
+       0.8413,
+       "bright (can be flooded veg)"
+      ]
+     ],
+     "largest_body_km2": [
+      928.7,
+      925.2,
+      958.0,
+      949.9,
+      855.5,
+      821.4,
+      840.9,
+      926.3,
+      980.7,
+      1003.5
+     ]
+    },
+    "heldout_app_loglik_own": -2.6681,
+    "tonle_sap_model": {
+     "heldout_app_loglik": -5.6767,
+     "water_km2": [
+      1261.3,
+      1261.3,
+      1261.6,
+      1262.9,
+      1264.7,
+      1267.8,
+      1270.2,
+      1270.7,
+      1271.0,
+      1271.0
+     ],
+     "flooded_veg_km2": [
+      0.0,
+      0.0,
+      5.8,
+      13.9,
+      23.8,
+      46.8,
+      58.7,
+      61.2,
+      60.1,
+      61.0
+     ],
+     "late_false_water_far_from_jrc_km2": 32.1,
+     "permanent_iou_occ_ge90": 0.9623,
+     "app_components": [
+      [
+       0.0038,
+       0.0038,
+       "open water"
+      ],
+      [
+       0.0317,
+       0.0174,
+       "open water"
+      ],
+      [
+       0.4834,
+       0.3455,
+       "bright (can be flooded veg)"
+      ],
+      [
+       0.5376,
+       0.3955,
+       "bright (can be flooded veg)"
+      ],
+      [
+       0.819,
+       0.8579,
+       "bright (can be flooded veg)"
+      ],
+      [
+       0.9361,
+       0.8365,
+       "bright (can be flooded veg)"
+      ]
+     ],
+     "largest_body_km2": [
+      1235.4,
+      1235.4,
+      1235.4,
+      1235.4,
+      1235.4,
+      1235.6,
+      1235.6,
+      1235.6,
+      1235.8,
+      1235.8
+     ]
+    }
+   },
+   "ararat": {
+    "pooled": {
+     "heldout_app_loglik": -2.5786,
+     "water_km2": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "flooded_veg_km2": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "late_false_water_far_from_jrc_km2": 0.0,
+     "permanent_iou_occ_ge90": 0.0,
+     "app_components": [
+      [
+       0.0038,
+       0.0675,
+       "open water"
+      ],
+      [
+       0.0442,
+       0.0042,
+       "open water"
+      ],
+      [
+       0.0949,
+       0.1058,
+       "dark land"
+      ],
+      [
+       0.375,
+       0.499,
+       "bright (can be flooded veg)"
+      ],
+      [
+       0.5285,
+       0.4453,
+       "bright (can be flooded veg)"
+      ],
+      [
+       0.8929,
+       0.8413,
+       "bright (can be flooded veg)"
+      ]
+     ]
+    },
+    "heldout_app_loglik_own": -2.0491,
+    "tonle_sap_model": {
+     "heldout_app_loglik": -5.8923,
+     "water_km2": [
+      4.3,
+      4.3,
+      4.3,
+      4.3,
+      4.3,
+      4.3,
+      4.3,
+      4.3,
+      4.3,
+      4.3
+     ],
+     "flooded_veg_km2": [
+      0.0,
+      0.0,
+      0.1,
+      0.9,
+      4.6,
+      6.2,
+      6.1,
+      6.8,
+      6.4,
+      6.2
+     ],
+     "late_false_water_far_from_jrc_km2": 2.3,
+     "permanent_iou_occ_ge90": 0.0979,
+     "app_components": [
+      [
+       0.0038,
+       0.0038,
+       "open water"
+      ],
+      [
+       0.0317,
+       0.0174,
+       "open water"
+      ],
+      [
+       0.4834,
+       0.3455,
+       "bright (can be flooded veg)"
+      ],
+      [
+       0.5376,
+       0.3955,
+       "bright (can be flooded veg)"
+      ],
+      [
+       0.819,
+       0.8579,
+       "bright (can be flooded veg)"
+      ],
+      [
+       0.9361,
+       0.8365,
+       "bright (can be flooded veg)"
+      ]
+     ]
+    }
+   }
+  }
+ }
+}
