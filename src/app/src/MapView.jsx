@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { memo, useEffect, useRef, useState } from 'react'
 import * as maplibregl from 'maplibre-gl'
 import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?url'
 import 'maplibre-gl/dist/maplibre-gl.css'
@@ -9,18 +9,33 @@ maplibregl.setWorkerUrl(workerUrl)
 const STYLE = 'https://tiles.openfreemap.org/styles/dark' // no API key needed
 
 // One map with one radar image on it. `bounds` is [west, south, east, north].
-export default function MapView({ bounds, url, spots = [], colors = [], onMap, style }) {
+const NONE = [] // stable defaults so the markers effect does not re-run every render
+
+export default memo(function MapView({ bounds, url, spots = NONE, colors = NONE, onMap, style }) {
   const el = useRef(null)
   const map = useRef(null)
   const [ready, setReady] = useState(false)
 
   useEffect(() => {
-    const m = new maplibregl.Map({ container: el.current, style: STYLE, center: [60, 20], zoom: 1 })
-    m.addControl(new maplibregl.NavigationControl())
-    m.on('load', () => setReady(true))
-    map.current = m
-    onMap?.(m)
-    return () => { onMap?.(null); m.remove() }
+    // Build the map when near the viewport, or when the browser is idle after load.
+    let m, h
+    const idle = window.requestIdleCallback || ((f) => setTimeout(f, 2000))
+    const unidle = window.cancelIdleCallback || clearTimeout
+    const io = new IntersectionObserver(([e]) => e.isIntersecting && init(), { rootMargin: '25%' })
+    const onLoad = () => { h = idle(init, { timeout: 4000 }) }
+    const stop = () => { io.disconnect(); removeEventListener('load', onLoad); unidle(h) }
+    function init() {
+      stop()
+      m = new maplibregl.Map({ container: el.current, style: STYLE, center: [60, 20], zoom: 1 })
+      m.addControl(new maplibregl.NavigationControl())
+      m.on('load', () => setReady(true))
+      map.current = m
+      onMap?.(m)
+    }
+    io.observe(el.current)
+    if (document.readyState === 'complete') onLoad()
+    else addEventListener('load', onLoad)
+    return () => { stop(); if (m) { onMap?.(null); m.remove() } }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -52,4 +67,4 @@ export default function MapView({ bounds, url, spots = [], colors = [], onMap, s
   }, [ready, spots, colors])
 
   return <div ref={el} className="map" style={style} />
-}
+})

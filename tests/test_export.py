@@ -1,5 +1,5 @@
 """Run: .venv/bin/python tests/test_export.py"""
-import json, math, sys
+import json, math, sys, tempfile
 from pathlib import Path
 import numpy as np
 from PIL import Image
@@ -7,6 +7,7 @@ from PIL import Image
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts/ingest"))
 import make_fixture as mf
+from export import export
 
 R = 6378137.0
 merc_x = lambda lon: math.radians(lon) * R
@@ -14,14 +15,21 @@ merc_y = lambda lat: R * math.log(math.tan(math.pi / 4 + math.radians(lat) / 2))
 
 
 def test():
-    mf.main()
-    out = ROOT / "src/app/public/data/demo"
+    with tempfile.TemporaryDirectory() as td:  # never write the demo area into the real web app
+        root = Path(td)
+        mf.main(root)
+        export("demo", root)
+        check(root / "src/app/public/data")
+
+
+def check(pub):
+    out = pub / "demo"
     m = json.loads((out / "manifest.json").read_text())
     for k in ("id", "name", "bounds", "dates", "gaps", "layers", "story", "spots", "credits"):
         assert k in m, k
     for L in m["layers"]:
         assert {"id", "label", "dates", "legend"} <= set(L)
-    assert "demo" in json.loads((ROOT / "src/app/public/data/index.json").read_text())["areas"]
+    assert "demo" in json.loads((pub / "index.json").read_text())["areas"]
     assert (out / "timeseries.json").exists()
 
     w, s, e, n = m["bounds"]

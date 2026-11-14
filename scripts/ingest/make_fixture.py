@@ -1,11 +1,11 @@
-"""Synthetic `demo` area: contract A, a grey contract B stand-in, then export (contract C)."""
+"""Synthetic `demo` area: contract A and a grey contract B stand-in. Test input only:
+it is never exported into the web app. Tests export it into a temp dir."""
 import json
 from pathlib import Path
 import numpy as np
 import rasterio
 from rasterio.transform import from_origin, xy
 from rasterio.warp import transform
-from export import export
 
 ROOT = Path(__file__).resolve().parents[2]
 DATES = ["2026-06-20", "2026-07-02", "2026-07-14", "2026-08-10", "2026-08-22", "2026-09-03"]
@@ -27,11 +27,11 @@ def write(path, arr, **kw):
         dst.write(arr if arr.ndim == 3 else arr[None])
 
 
-def main():
+def main(root=ROOT):
     rng = np.random.default_rng(42)
     rr, cc = np.mgrid[:N, :N]
     dist = np.hypot(rr - DISC_RC[0], cc - DISC_RC[1])
-    area, A, P = ROOT / "areas/demo", ROOT / "data/processed/demo/gamma0", ROOT / "data/processed/demo/products"
+    area, A, P = root / "areas/demo", root / "data/processed/demo/gamma0", root / "data/processed/demo/products"
     area.mkdir(parents=True, exist_ok=True)
     (area / "area.json").write_text(json.dumps(
         {"id": "demo", "name": "Demo (synthetic)", "bbox": BBOX, "track": None, "frame": None,
@@ -50,7 +50,6 @@ def main():
         {"id": "hh", "label": "HH backscatter", "dated": True, "legend": legend(-25, -5)},
         {"id": "hv", "label": "HV backscatter", "dated": True, "legend": legend(-30, -10)}], indent=2))
     (P / "timeseries.json").write_text(json.dumps({"dates": DATES, "series": []}, indent=2))
-    export("demo")
 
 
 if __name__ == "__main__":

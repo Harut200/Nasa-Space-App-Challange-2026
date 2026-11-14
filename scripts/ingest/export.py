@@ -59,6 +59,8 @@ def export(area, root=ROOT):
     for L in layers_in:
         if L["dated"]:
             dates = sorted(p.stem for p in (prod / L["id"]).glob("*.tif"))
+            if not dates:  # listed but not produced yet: the app cannot show a dated layer with no dates
+                continue
             for d in dates:
                 to_webp(prod / L["id"] / f"{d}.tif", grid, pub / area / L["id"] / f"{d}.webp")
         else:
