@@ -4,7 +4,7 @@ import { Chart, Strip } from './Charts.jsx'
 
 const DATA = import.meta.env.BASE_URL + 'data/'
 const REPO = 'https://github.com/Harut200/Nasa-Space-App-Challange-2026'
-const COLORS = ['#e41a1c', '#377eb8', '#4daf4a', '#ff7f00', '#984ea3']
+const COLORS = ['#ff6b6b', '#5aa9ff', '#5ad17a', '#ffb347', '#c792ff', '#f0e442', '#5fd4c4']
 const STORY = [['see', 'What you see'], ['physics', 'What is happening'], ['lband', 'Why radar shows it'], ['people', 'Why it matters']]
 const NONE = []
 const HASH = new URLSearchParams(location.hash.slice(1)) // link state at page load
@@ -22,13 +22,25 @@ function frame(area, layer, date) {
 
 function Legend({ legend }) {
   if (!legend?.type) return null
-  if (legend.type === 'text') return <p>{legend.text}</p>
+  if (legend.type === 'text') return <p className="legend-text">{legend.text}</p>
+  if (legend.type === 'classes') {
+    return (
+      <ul className="legend-classes">
+        {(legend.items || NONE).map((it) => (
+          <li key={it.label}><i style={{ background: it.color }} />{it.label}</li>
+        ))}
+      </ul>
+    )
+  }
+  // A short unit ("dB") goes next to the numbers; a long one gets its own line.
+  const long = legend.unit && legend.unit.length > 6
+  const u = legend.unit && !long ? ` ${legend.unit}` : ''
   return (
-    <div>
-      <span>{legend.min} {legend.unit} </span>
-      <span className="legend-bar" style={{ display: 'inline-block', background: `linear-gradient(to right, ${legend.colors.join(',')})` }} />
-      <span> {legend.max} {legend.unit}</span>
-      {legend.labels && <div>{legend.labels.join(' ↔ ')}</div>}
+    <div className="legend-ramp">
+      <div className="legend-bar" style={{ background: `linear-gradient(to right, ${(legend.colors || ['#000', '#fff']).join(',')})` }} />
+      <div className="legend-ends"><span>{legend.min}{u}</span><span>{legend.max}{u}</span></div>
+      {legend.labels && <div className="legend-ends legend-labels">{legend.labels.map((l) => <span key={l}>{l}</span>)}</div>}
+      {long && <p className="legend-unit">{legend.unit}</p>}
     </div>
   )
 }
@@ -101,9 +113,9 @@ export default function App() {
   const setA = useMemo(() => (x) => setMaps((s) => ({ ...s, a: x })), [])
   const setB = useMemo(() => (x) => setMaps((s) => ({ ...s, b: x })), [])
 
-  if (error) return <p role="alert">Could not load the data: {error}. Reload the page to try again.</p>
-  if (!manifests) return <p>Loading…</p>
-  if (!m) return <p>No study areas published yet.</p>
+  if (error) return <p role="alert" className="splash">Could not load the data: {error}. Reload the page to try again.</p>
+  if (!manifests) return <p className="splash">Loading…</p>
+  if (!m) return <p className="splash">No study areas published yet.</p>
 
   const pickArea = (id) => { setAreaId(id); setDateIndex(0); setOtherIndex(0); setPlaying(false) }
   const now = frame(m.id, layer, date)
@@ -111,78 +123,120 @@ export default function App() {
   const ts = series[m.id]
   const pol = layer.id === 'hv' ? 'hv' : 'hh'
 
+  const step = (d) => { setPlaying(false); setDateIndex((i) => Math.min(n - 1, Math.max(0, i + d))) }
+  const preview = m.source === 'preview'
+  const facts = (ts?.facts || NONE).map((f) => ({ ...f, v: f.values[ts.dates.indexOf(date)] })).filter((f) => f.v != null)
+
   return (
-    <>
-      <header>
-        <h1>Dancing with the SARs</h1>
-        <nav aria-label="Study areas">
-          {manifests.map((x) => <button key={x.id} aria-pressed={x.id === m.id} onClick={() => pickArea(x.id)}>{x.name}</button>)}
+    <div className="app">
+      <header className="top">
+        <div className="brand">
+          <h1>Dancing with the SARs</h1>
+          <p className="pitch">Press play on a season of radar</p>
+        </div>
+        <nav aria-label="Study areas" className="areas">
+          {manifests.map((x) => <button key={x.id} className="chip" aria-pressed={x.id === m.id} onClick={() => pickArea(x.id)}>{x.name}</button>)}
         </nav>
-        <button onClick={() => about.current.showModal()}>About</button>
+        <button className="btn ghost about-btn" onClick={() => about.current.showModal()}>About</button>
       </header>
 
-      <main>
-        <div className="maps">
-          <MapView bounds={m.bounds} url={now.url} spots={m.spots} colors={COLORS} onMap={setA} />
-          {compare && <MapView bounds={m.bounds} url={other.url} onMap={setB} style={{ clipPath: `inset(0 0 0 ${split}%)` }} />}
+      <main className="layout">
+        <div className="stage">
+          <div className="maps">
+            <MapView bounds={m.bounds} url={now.url} spots={m.spots} colors={COLORS} onMap={setA} />
+            {compare && <MapView bounds={m.bounds} url={other.url} onMap={setB} style={{ clipPath: `inset(0 0 0 ${split}%)` }} />}
+            {compare && <div className="divider" style={{ left: `${split}%` }} aria-hidden="true" />}
+            <div className="map-tags" aria-hidden="true">
+              <span className="map-tag">{compare ? 'Left: ' : ''}{layer.dates ? words(now.shown) : 'Whole season'}</span>
+              {compare && <span className="map-tag">Right: {layer.dates ? words(other.shown) : 'Whole season'}</span>}
+            </div>
+          </div>
+          {preview && (
+            <p className="map-notice"><strong>Preview images</strong>, about 180 m per pixel, uncalibrated: patterns and timing are reliable, absolute values are not.</p>
+          )}
+
+          <section aria-label="Timeline" className="timeline">
+            <div className="timeline-head">
+              <button className="btn primary play" onClick={() => setPlaying(!playing)} disabled={n < 2} aria-label={playing ? 'Pause' : 'Play'}>
+                <span aria-hidden="true">{playing ? '❚❚' : '▶'}</span> {playing ? 'Pause' : 'Play'}
+              </button>
+              <button className="btn icon" onClick={() => step(-1)} disabled={dateIndex === 0} aria-label="Previous pass">‹</button>
+              <button className="btn icon" onClick={() => step(1)} disabled={dateIndex === n - 1} aria-label="Next pass">›</button>
+              <p className="timeline-date" aria-live="polite">
+                <strong>{words(date)}</strong> <span>pass {dateIndex + 1} of {n}</span>
+              </p>
+            </div>
+            <Strip dates={m.dates} gaps={m.gaps} index={dateIndex} onPick={(i) => { setPlaying(false); setDateIndex(i) }} />
+            {now.shown && now.shown !== date && <p role="status" className="status">No “{layer.label}” image for {words(date)}. Showing the nearest one, {words(now.shown)}.</p>}
+            {!layer.dates && (
+              <p role="status" className="status">“{layer.label}” sums up the whole season, so it stays the same as you move the timeline{ts?.series?.length ? '; the chart still follows the date' : ''}.</p>
+            )}
+          </section>
         </div>
 
-        <section aria-label="Layer">
-          {m.layers.map((l) => <button key={l.id} aria-pressed={l.id === layer.id} onClick={() => setLayerId(l.id)}>{l.label}</button>)}
-          <Legend legend={layer.legend} />
-          {now.shown && now.shown !== date && <p role="status">No {layer.label} image for {words(date)}. Showing {words(now.shown)}.</p>}
-          {!layer.dates && <p role="status">This layer covers the whole period. It does not change with the date.</p>}
-        </section>
-
-        <section aria-label="Timeline">
-          <Strip dates={m.dates} gaps={m.gaps} index={dateIndex} onPick={setDateIndex} />
-          <button onClick={() => setPlaying(!playing)} disabled={n < 2}>{playing ? 'Pause' : 'Play'}</button>
-          <input type="range" aria-label="Date" min="0" max={n - 1} value={dateIndex}
-            onChange={(e) => { setPlaying(false); setDateIndex(+e.target.value) }} />
-          <strong> {words(date)}</strong> <span>(pass {dateIndex + 1} of {n})</span>
-        </section>
-
-        <section aria-label="Compare two dates">
-          <label><input type="checkbox" checked={compare} onChange={(e) => setCompare(e.target.checked)} /> Compare two dates</label>
-          {compare && (
-            <>
-              <span> Left: {words(date)}. Right: </span>
-              <select aria-label="Right date" value={otherIndex} onChange={(e) => setOtherIndex(+e.target.value)}>
-                {m.dates.map((d, i) => <option key={d} value={i}>{words(d)}</option>)}
-              </select>
-              <input type="range" aria-label="Divider position" min="0" max="100" value={split} onChange={(e) => setSplit(+e.target.value)} />
-            </>
-          )}
-        </section>
-
-        {ts?.series?.length > 0 && (
-          <section aria-label="Backscatter over time">
-            <Chart ts={ts} pol={pol} gaps={m.gaps} index={Math.max(0, ts.dates.indexOf(date))} colors={COLORS} spots={m.spots}
-              onPick={(j) => setDateIndex(Math.max(0, m.dates.indexOf(ts.dates[j])))} />
+        <aside className="panel">
+          <section aria-label="Layer" className="card">
+            <h2 className="eyebrow">Layer</h2>
+            <div className="seg">
+              {m.layers.map((l) => <button key={l.id} className="chip" aria-pressed={l.id === layer.id} onClick={() => setLayerId(l.id)}>{l.label}</button>)}
+            </div>
+            <Legend legend={layer.legend} />
           </section>
-        )}
-        {(ts?.facts || NONE).map((f) => {
-          const v = f.values[ts.dates.indexOf(date)]
-          return v != null && <p key={f.label}>{f.label}: <strong>{v.toLocaleString('en')} {f.unit}</strong></p>
-        })}
 
-        <section aria-label="Story">
-          <h2>{m.name}</h2>
-          {STORY.map(([k, title]) => m.story[k] && <div key={k}><h3>{title}</h3><p>{m.story[k]}</p></div>)}
-        </section>
+          {(ts?.series?.length > 0 || facts.length > 0) && (
+            <section aria-label="Backscatter over time" className="card">
+              {facts.length > 0 && (
+                <dl className="facts">
+                  {facts.map((f) => <div key={f.label}><dt>{f.label}</dt><dd>{f.v.toLocaleString('en')} <span>{f.unit}</span></dd></div>)}
+                </dl>
+              )}
+              {ts?.series?.length > 0 && (
+                <Chart ts={ts} pol={pol} gaps={m.gaps} index={Math.max(0, ts.dates.indexOf(date))} colors={COLORS} spots={m.spots}
+                  onPick={(j) => { setPlaying(false); setDateIndex(Math.max(0, m.dates.indexOf(ts.dates[j]))) }} />
+              )}
+            </section>
+          )}
+
+          <section aria-label="Compare two dates" className="card">
+            <label className="check"><input type="checkbox" checked={compare} onChange={(e) => setCompare(e.target.checked)} /> Compare two dates</label>
+            {compare && (
+              <div className="compare">
+                {!layer.dates && <p className="status">This layer has one image for the whole season, so both sides look the same. Pick a dated layer to compare.</p>}
+                <p className="muted">Left: {words(date)} (the timeline)</p>
+                <label className="field">Right
+                  <select value={otherIndex} onChange={(e) => setOtherIndex(+e.target.value)}>
+                    {m.dates.map((d, i) => <option key={d} value={i}>{words(d)}</option>)}
+                  </select>
+                </label>
+                <label className="field">Divider
+                  <input type="range" min="0" max="100" value={split} onChange={(e) => setSplit(+e.target.value)} />
+                </label>
+              </div>
+            )}
+          </section>
+
+          <section aria-label="Story" className="card story">
+            <h2>{m.name}</h2>
+            {STORY.some(([k]) => m.story?.[k])
+              ? STORY.map(([k, title]) => m.story[k] && <div key={k}><h3>{title}</h3><p>{m.story[k]}</p></div>)
+              : <p className="muted">The story for this place is not written yet. Press Play and watch the image change.</p>}
+          </section>
+        </aside>
       </main>
 
-      <footer>
+      <footer className="foot">
         <p>{m.credits}</p>
         <p>Basemap: OpenFreeMap, OpenMapTiles, OpenStreetMap contributors. <a href={REPO}>Source code</a></p>
       </footer>
 
-      <dialog ref={about}>
+      <dialog ref={about} className="about">
         <h2>About</h2>
         <p>This app shows how the Earth's surface changed between June and October 2026, seen by the NISAR radar satellite. Pick a place, press Play, and watch water, forest and fields change from one pass to the next. Radar sees through cloud and at night, so no pass is lost to weather.</p>
+        <p>Between 27 July and 10 August the instrument was off, so there are no passes then. The timeline shows that gap.</p>
+        {preview && <p><strong>Preview images.</strong> The pictures for {m.name} are uncalibrated previews at about 180 m per pixel. Patterns and timing are reliable; absolute brightness values are not.</p>}
         <p>Data caveat: these are PROVISIONAL NISAR products. Calibration is not final.</p>
-        <form method="dialog"><button>Close</button></form>
+        <form method="dialog"><button className="btn primary">Close</button></form>
       </dialog>
-    </>
+    </div>
   )
 }
