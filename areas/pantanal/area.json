@@ -25,5 +25,6 @@
   "excluded_dates": [
     "2026-07-05"
   ],
-  "water_source": "fusion2"
+  "water_source": "fusion2",
+  "category": "wetland"
 }

@@ -23,5 +23,6 @@
     "2026-10-06",
     "2026-10-18"
   ],
-  "water_source": "fusion2"
+  "water_source": "fusion2",
+  "category": "lake"
 }

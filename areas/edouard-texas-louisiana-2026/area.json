@@ -1,0 +1,27 @@
+{
+  "id": "edouard-texas-louisiana-2026",
+  "name": "Sabine and Calcasieu lowlands after Edouard",
+  "bbox": [
+    -94.2,
+    29.7,
+    -93.16,
+    30.6
+  ],
+  "track": 12,
+  "frame": 73,
+  "direction": "descending",
+  "pixel_m": 100,
+  "mode": "40+5",
+  "dates": [
+    "2026-06-27",
+    "2026-07-09",
+    "2026-07-21",
+    "2026-08-14",
+    "2026-08-26",
+    "2026-09-07",
+    "2026-09-19",
+    "2026-10-01",
+    "2026-10-13"
+  ],
+  "water_source": "fusion2"
+}

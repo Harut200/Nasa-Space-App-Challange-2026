@@ -26,5 +26,6 @@
     "2026-07-12",
     "2026-07-24"
   ],
-  "water_source": "fusion2"
+  "water_source": "fusion2",
+  "category": "land"
 }

@@ -1,0 +1,14 @@
+{
+  "id": "qaidam-m56-2026",
+  "name": "Qaidam, China earthquake, M5.6, 18 Aug 2026",
+  "bbox": [
+    95.15,
+    37.55,
+    95.95,
+    38.15
+  ],
+  "track": 83,
+  "frame": 21,
+  "direction": "ascending and descending",
+  "pixel_m": 80
+}

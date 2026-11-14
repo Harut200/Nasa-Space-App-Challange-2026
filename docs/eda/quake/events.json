@@ -218,6 +218,81 @@
       8.3
      ]
     ]
+   },
+   "asc76n": {
+    "track": 76,
+    "frame": 6,
+    "direction": "A",
+    "co": {
+     "pair": "20261005_20261017",
+     "granule": "NISAR_L2_PR_GUNW_032_076_A_006_033_4000_SH_20261005T105632_20261005T105644_20261017T105632_20261017T105644_P05023_N_P_J_001"
+    },
+    "control": {
+     "pair": "20260923_20261005",
+     "granule": "NISAR_L2_PR_GUNW_031_076_A_006_032_4000_SH_20260923T105627_20260923T105648_20261005T105632_20261005T105644_P05023_N_P_J_001"
+    },
+    "label": "ascending",
+    "window": [
+     -81.9,
+     8.0,
+     -79.7,
+     9.3
+    ],
+    "heights": [
+     0,
+     1500
+    ],
+    "status": "north frame 6 (5-17 Oct): starts 40-100 km north of the epicentre; nothing above the atmosphere; not used"
+   },
+   "desc141n": {
+    "track": 141,
+    "frame": 84,
+    "direction": "D",
+    "co": {
+     "pair": "20260927_20261009",
+     "granule": "NISAR_L2_PR_GUNW_031_141_D_084_032_4000_SH_20260927T235307_20260927T235336_20261009T235308_20261009T235336_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260915_20260927",
+     "granule": "NISAR_L2_PR_GUNW_030_141_D_084_031_4000_SH_20260915T235307_20260915T235336_20260927T235307_20260927T235336_P05023_N_F_J_001"
+    },
+    "label": "descending",
+    "window": [
+     -81.9,
+     8.0,
+     -79.7,
+     9.3
+    ],
+    "heights": [
+     0,
+     1500
+    ],
+    "status": "north frame 84 (27 Sep-9 Oct): starts 40 km north; smooth gradients only, control as noisy; not used"
+   },
+   "asc4w": {
+    "track": 4,
+    "frame": 5,
+    "direction": "A",
+    "co": {
+     "pair": "20260930_20261012",
+     "granule": "NISAR_L2_PR_GUNW_032_004_A_005_033_4000_SH_20260930T110420_20260930T110435_20261012T110420_20261012T110436_P05023_N_P_J_001"
+    },
+    "control": {
+     "pair": "20260918_20260930",
+     "granule": "NISAR_L2_PR_GUNW_031_004_A_005_032_4000_SH_20260918T110419_20260918T110435_20260930T110420_20260930T110435_P05023_N_P_J_001"
+    },
+    "label": "ascending",
+    "window": [
+     -82.6,
+     7.0,
+     -80.6,
+     8.2
+    ],
+    "heights": [
+     0,
+     1500
+    ],
+    "status": "west frame 5 of track 4 (30 Sep-12 Oct): mostly sea, east edge at the epicentre, far field too small (variants 25 to 390 cm); unstable, not used"
    }
   },
   "verdict": "clear",
@@ -248,7 +323,11 @@
    "lband": "NISAR's L-band radar has a wavelength of about 24 cm, so one full colour cycle means about 12 cm of ground movement along the line of sight (we show 10 cm cycles). The same tracks two to four weeks earlier (descending 20 Sep to 2 Oct, ascending 30 Aug to 11 Sep) show only a smooth gradient of about 10 to 20 cm across the scene, from the atmosphere, and no fringes. The products are PROVISIONAL, and the sign convention (blue = toward the satellite) follows the interferogram definition we assumed, not a statement in the product guide.",
    "people": "This is a measurement of ground movement, not of damage. We did not look at reports of damage or casualties. Maps like this show where the ground moved and by how much, which feeds hazard models. The pairs span several days after the shaking, so they include aftershock movement, and the data frames cover only the part of the area east and south of the epicentre."
   },
-  "verdict_reason": "about a dozen concentric fringes in the descending pair, 133 cm p2p within 60 km vs 21 cm in the control; ascending pair 85 cm vs 15 cm; frames cover only the east and south of the epicentre"
+  "verdict_reason": "about a dozen concentric fringes in the descending pair, 133 cm p2p within 60 km vs 21 cm in the control; ascending pair 85 cm vs 15 cm; frames cover only the east and south of the epicentre",
+  "export_views": [
+   "desc40",
+   "asc"
+  ]
  },
  {
   "id": "kumamoto-m68-2026",
@@ -584,5 +663,432 @@
   },
   "verdict": "not detected",
   "verdict_reason": "epicentre 35 km offshore and 34-45 km deep; coast forest is decorrelated (1.4 percent valid pixels within 50 km); LOS within +/-10 cm and not above the control"
+ },
+ {
+  "id": "venezuela-m75-2026",
+  "usgs_id": "us6000t7zp",
+  "title": "M7.5 Venezuela earthquake, 24 Jun 2026",
+  "time": "2026-06-24T22:05:12Z",
+  "lat": 10.5955,
+  "lon": -67.2205,
+  "depth_km": 23.5,
+  "mag": 7.5,
+  "place": "20 km W of Catia La Mar, Venezuela",
+  "mechanism": "strike slip (nodal planes 355/86/-16 and 86/74/-176)",
+  "setting": "on land and coast, humid, vegetated",
+  "sources": [
+   {
+    "usgs_id": "us6000t7zc",
+    "lat": 10.3713,
+    "lon": -68.5564,
+    "mag": 7.2,
+    "note": "M7.2 strike-slip 38 s earlier, 146 km west"
+   }
+  ],
+  "window": [
+   -68.1,
+   9.95,
+   -66.3,
+   11.05
+  ],
+  "heights": [
+   0,
+   2500
+  ],
+  "gmin": 0.35,
+  "far_km": 45,
+  "radius_km": 60,
+  "fringe_cm": 10,
+  "los_lim_cm": 40,
+  "profile_az": 0,
+  "views": {
+   "asc61": {
+    "track": 61,
+    "frame": 7,
+    "direction": "A",
+    "co": {
+     "pair": "20260618_20260630",
+     "granule": "NISAR_L2_PR_GUNW_023_061_A_007_024_4000_SH_20260618T095836_20260618T095911_20260630T095835_20260630T095910_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260606_20260618",
+     "granule": "NISAR_L2_PR_GUNW_022_061_A_007_023_4000_SH_20260606T095837_20260606T095911_20260618T095836_20260618T095911_P05023_N_F_J_001"
+    },
+    "label": "ascending"
+   },
+   "desc126": {
+    "track": 126,
+    "frame": 83,
+    "direction": "D",
+    "co": {
+     "pair": "20260622_20260704",
+     "granule": "NISAR_L2_PR_GUNW_023_126_D_083_024_4000_SH_20260622T225416_20260622T225450_20260704T225415_20260704T225450_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260610_20260622",
+     "granule": "NISAR_L2_PR_GUNW_022_126_D_083_023_4000_SH_20260610T225417_20260610T225451_20260622T225416_20260622T225450_P05023_N_F_J_001"
+    },
+    "label": "descending"
+   }
+  },
+  "verdict": "clear",
+  "primary_view": "desc126",
+  "export_views": [
+   "desc126",
+   "asc61"
+  ],
+  "export_decomposition": false,
+  "area_name": "Venezuela earthquake, M7.5, 24 Jun 2026",
+  "verdict_reason": "desc: 48 cm p2p within 60 km vs 10.8 cm control, fringes along the coast east of the epicentre; asc (only 9 % valid pixels, epicentre on the frame edge) mirrors the sign, about 66 cm; M7.2 38 s earlier is in the same pairs (USGS finite-fault of the M7.5 solution is about 170 km long and starts at the M7.2 hypocentre, so the two are probably one sequence)",
+  "story": {
+   "see": "On 24 June 2026 USGS lists a magnitude 7.5 earthquake 20 km west of Catia La Mar, Venezuela (10.60 N, 67.22 W, depth about 24 km), 38 seconds after a magnitude 7.2 about 146 km to the west. Both fall inside every NISAR pair we could use, so this map shows the combined movement of the sequence in the east. The map shows how far the ground moved along the radar's line of sight between two passes, 22 June and 4 July from the descending track, with a second layer from the ascending track (18 to 30 June). Blue is ground that moved toward the satellite, red away from it. In the fringe layer, one colour cycle is 10 cm. Grey speckle is where the passes could not be compared (forest, mountains, water).",
+   "physics": "The US Geological Survey's moment tensor for the M7.5 shows strike-slip faulting, in which the two sides of a near-vertical fault slide past each other horizontally. Within 60 km of the epicentre the descending map spans about 48 cm of line-of-sight change from the most red to the most blue pixels (0.5th to 99.5th percentile), in bands of fringes that run east to west along the coast. The ascending pass sees the opposite sign (mostly red along the coast, up to about 65 cm), which is what mostly horizontal motion looks like from opposite sides. The north of the epicentre is sea and the ascending frame only covers the east, so we see only part of the pattern. Fault position and mechanism come from USGS; our map does not by itself tell which fault plane moved.",
+   "lband": "NISAR's L-band radar has a wavelength of about 24 cm, so one full colour cycle means about 12 cm of ground movement along the line of sight (we show 10 cm cycles). The same tracks one pair earlier (10 to 22 June descending, 6 to 18 June ascending), with no event in them, show only smooth variations of about 10 cm (descending) with far-field noise of about 2 cm. Only 36 percent (descending) and 9 percent (ascending) of the pixels within 60 km are usable because of vegetation and steep terrain. The products are PROVISIONAL and the sign convention (blue = toward the satellite) follows the interferogram definition we assumed, not a statement in the product guide.",
+   "people": "This is a measurement of ground movement, not of damage. We did not look at reports of damage or casualties. Maps like this show where the ground moved and by how much, which feeds hazard models. The pairs span several days after the shaking, so they include any aftershock movement, and the M7.2 and M7.5 signals cannot be separated here."
+  }
+ },
+ {
+  "id": "khuzdar-m57-2026",
+  "usgs_id": "us6000u2y1",
+  "title": "M5.7 Pakistan earthquake (Khuzdar), 17 Oct 2026",
+  "time": "2026-10-17T05:06:57Z",
+  "lat": 28.0196,
+  "lon": 66.1855,
+  "depth_km": 11.5,
+  "mag": 5.7,
+  "place": "47 km WNW of Khuzdar, Pakistan",
+  "mechanism": "strike slip (nodal planes 12/88/-11 and 103/79/-178)",
+  "setting": "on land, arid mountains",
+  "window": [
+   65.586,
+   27.52,
+   66.785,
+   28.52
+  ],
+  "heights": [
+   500,
+   3000
+  ],
+  "gmin": 0.35,
+  "far_km": 30,
+  "radius_km": 25,
+  "fringe_cm": 5,
+  "los_lim_cm": 10,
+  "profile_az": 0,
+  "views": {
+   "desc": {
+    "track": 92,
+    "frame": 74,
+    "direction": "D",
+    "co": {
+     "pair": "20261006_20261018",
+     "granule": "NISAR_L2_PR_GUNW_032_092_D_074_033_2000_SH_20261006T141306_20261006T141341_20261018T141306_20261018T141341_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260924_20261006",
+     "granule": "NISAR_L2_PR_GUNW_031_092_D_074_032_2000_SH_20260924T141306_20260924T141341_20261006T141306_20261006T141341_P05023_N_F_J_001"
+    },
+    "label": "descending"
+   }
+  },
+  "verdict": "not detected",
+  "verdict_reason": "epicentre 5 km from a swath edge; smooth gradients of 5-10 cm of the size of the atmosphere; control pair has unwrapping errors (far-field std 25 cm); nothing compact at the epicentre"
+ },
+ {
+  "id": "qaidam-m56-2026",
+  "usgs_id": "us6000tlrj",
+  "title": "M5.6 Qaidam, China earthquake, 18 Aug 2026",
+  "time": "2026-08-18T21:36:27Z",
+  "lat": 37.8363,
+  "lon": 95.5446,
+  "depth_km": 6,
+  "mag": 5.6,
+  "place": "269 km SSE of Dunhuang, China",
+  "mechanism": "thrust (nodal planes 120/68/101 and 273/25/66)",
+  "setting": "on land, arid Qaidam basin margin",
+  "window": [
+   94.945,
+   37.336,
+   96.145,
+   38.336
+  ],
+  "heights": [
+   2500,
+   4800
+  ],
+  "gmin": 0.35,
+  "far_km": 30,
+  "radius_km": 25,
+  "fringe_cm": 5,
+  "los_lim_cm": 10,
+  "profile_az": 0,
+  "views": {
+   "asc83": {
+    "track": 83,
+    "frame": 21,
+    "direction": "A",
+    "co": {
+     "pair": "20260725_20260818",
+     "granule": "NISAR_L2_PR_GUNW_026_083_A_021_028_2000_SH_20260725T224352_20260725T224426_20260818T224350_20260818T224425_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260713_20260725",
+     "granule": "NISAR_L2_PR_GUNW_025_083_A_021_026_2000_SH_20260713T224352_20260713T224427_20260725T224352_20260725T224426_P05023_N_F_J_001"
+    },
+    "label": "ascending"
+   },
+   "asc11": {
+    "track": 11,
+    "frame": 20,
+    "direction": "A",
+    "co": {
+     "pair": "20260813_20260825",
+     "granule": "NISAR_L2_PR_GUNW_028_011_A_020_029_2000_SH_20260813T225136_20260813T225211_20260825T225136_20260825T225211_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260825_20260906",
+     "granule": "NISAR_L2_PR_GUNW_029_011_A_020_030_2000_SH_20260825T225136_20260825T225211_20260906T225136_20260906T225210_P05023_N_F_J_001"
+    },
+    "label": "ascending"
+   },
+   "desc91": {
+    "track": 91,
+    "frame": 69,
+    "direction": "D",
+    "co": {
+     "pair": "20260726_20260819",
+     "granule": "NISAR_L2_PR_GUNW_026_091_D_069_028_2000_SH_20260726T123026_20260726T123101_20260819T123025_20260819T123100_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260714_20260726",
+     "granule": "NISAR_L2_PR_GUNW_025_091_D_069_026_2000_SH_20260714T123027_20260714T123102_20260726T123026_20260726T123101_P05023_N_F_J_001"
+    },
+    "label": "descending"
+   }
+  },
+  "verdict": "clear",
+  "primary_view": "asc83",
+  "export_views": [
+   "asc83",
+   "desc91"
+  ],
+  "export_decomposition": false,
+  "app_bbox": [
+   95.15,
+   37.55,
+   95.95,
+   38.15
+  ],
+  "area_name": "Qaidam, China earthquake, M5.6, 18 Aug 2026",
+  "verdict_reason": "compact patch about 5 km ESE of the USGS epicentre, seen in three independent pairs (two ascending tracks, one descending), absent in every pre-event control; small event, patch only a few km wide, peak values unreliable (steep gradient, decorrelated rim)",
+  "story": {
+   "see": "On 18 August 2026 USGS lists a magnitude 5.6 earthquake in the Qaidam region of China, 269 km south-southeast of Dunhuang (37.84 N, 95.54 E, depth about 6 km). The map shows how far the ground moved along the radar's line of sight between two NISAR passes, 25 July and 18 August from the ascending track, with a second layer from a descending track (26 July to 19 August). Blue is ground that moved toward the satellite, red away from it. The scale is small here: one colour cycle in the fringe layer is 5 cm. Grey speckle is where the two passes could not be compared. Most of the map shows only slow, smooth variations of a few centimetres.",
+   "physics": "The US Geological Survey's moment tensor shows thrust faulting, in which one block is pushed up and over another. About 5 km east-southeast of the USGS epicentre, which is within the usual location uncertainty for an earthquake this size, all three NISAR pairs we processed show the same small patch, about 3 to 4 km across, that moved toward the satellite: more than 5 cm over roughly 10 square kilometres, and up to 20 cm or more in its steepest part, where the pixels around it could not be compared. The steepest values are the least reliable. A single-sign patch is what a shallow thrust earthquake of this size can produce, but one patch alone does not tell us which fault plane moved.",
+   "lband": "NISAR's L-band radar has a wavelength of about 24 cm, so one full colour cycle means about 12 cm of ground movement along the line of sight (we show 5 cm cycles). The same tracks before the earthquake (13 to 25 July, ascending) show no patch at this place and variations of only a few centimetres; the same patch appears in a second ascending track (13 to 25 August) and in a descending track. This earthquake is small, so the signal is a few centimetres over a few kilometres and sits close to what atmosphere and processing can produce elsewhere in the map. The products are PROVISIONAL, and the sign convention (blue = toward the satellite) follows the interferogram definition we assumed, not a statement in the product guide.",
+   "people": "This is a measurement of ground movement, not of damage. We did not look at reports of damage or casualties. Maps like this show where the ground moved and by how much, which feeds hazard models. The pairs span 12 to 24 days, so they include any aftershock movement. From the views we processed we do not separate vertical from horizontal motion."
+  },
+  "toward_spot_only": true
+ },
+ {
+  "id": "redwood-valley-m56-2026",
+  "usgs_id": "nc75382936",
+  "title": "M5.6 Redwood Valley, California earthquake, 24 Jun 2026",
+  "time": "2026-06-24T15:10:40Z",
+  "lat": 39.3623,
+  "lon": -123.2288,
+  "depth_km": 8.85,
+  "mag": 5.6,
+  "place": "11 km N of Redwood Valley, CA",
+  "mechanism": "strike slip/oblique (nodal planes 60/80/50 and 318/41/164)",
+  "setting": "on land, grass and oak woodland",
+  "window": [
+   -123.829,
+   38.862,
+   -122.629,
+   39.862
+  ],
+  "heights": [
+   0,
+   1500
+  ],
+  "gmin": 0.35,
+  "far_km": 30,
+  "radius_km": 25,
+  "fringe_cm": 5,
+  "los_lim_cm": 10,
+  "profile_az": 0,
+  "views": {
+   "asc": {
+    "track": 135,
+    "frame": 21,
+    "direction": "A",
+    "co": {
+     "pair": "20260623_20260705",
+     "granule": "NISAR_L2_PR_GUNW_023_135_A_021_024_4000_SH_20260623T131753_20260623T131828_20260705T131752_20260705T131827_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260611_20260623",
+     "granule": "NISAR_L2_PR_GUNW_022_135_A_021_023_4000_SH_20260611T131754_20260611T131829_20260623T131753_20260623T131828_P05023_N_F_J_001"
+    },
+    "label": "ascending"
+   }
+  },
+  "verdict": "not detected",
+  "verdict_reason": "one broad +5 cm area 40 km wide (atmosphere-sized, control has 7 cm p2p of the same size); nothing compact at the epicentre"
+ },
+ {
+  "id": "huancayo-m55-2026",
+  "usgs_id": "us7000t1q7",
+  "title": "M5.5 Peru (Huancayo) earthquake, 19 Jul 2026",
+  "time": "2026-07-19T02:24:35Z",
+  "lat": -12.091,
+  "lon": -75.2687,
+  "depth_km": 11.5,
+  "mag": 5.5,
+  "place": "2 km WSW of Huamancaca Chico, Peru",
+  "mechanism": "thrust (nodal planes 142/34/71 and 345/58/102)",
+  "setting": "on land, Andean valley",
+  "window": [
+   -75.869,
+   -12.591,
+   -74.669,
+   -11.591
+  ],
+  "heights": [
+   2500,
+   5000
+  ],
+  "gmin": 0.35,
+  "far_km": 30,
+  "radius_km": 25,
+  "fringe_cm": 5,
+  "los_lim_cm": 10,
+  "profile_az": 0,
+  "views": {
+   "asc": {
+    "track": 75,
+    "frame": 171,
+    "direction": "A",
+    "co": {
+     "pair": "20260713_20260725",
+     "granule": "NISAR_L2_PR_GUNW_025_075_A_171_026_2000_SH_20260713T105009_20260713T105044_20260725T105008_20260725T105043_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260701_20260713",
+     "granule": "NISAR_L2_PR_GUNW_024_075_A_171_025_2000_SH_20260701T105010_20260701T105044_20260713T105009_20260713T105044_P05023_N_F_J_001"
+    },
+    "label": "ascending"
+   },
+   "desc155": {
+    "track": 155,
+    "frame": 94,
+    "direction": "D",
+    "co": {
+     "pair": "20260718_20260811",
+     "granule": "NISAR_L2_PR_GUNW_025_155_D_094_027_2000_SH_20260718T231701_20260718T231736_20260811T231700_20260811T231734_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260706_20260718",
+     "granule": "NISAR_L2_PR_GUNW_024_155_D_094_025_2000_SH_20260706T231702_20260706T231737_20260718T231701_20260718T231736_P05023_N_F_J_001"
+    },
+    "label": "descending"
+   }
+  },
+  "verdict": "marginal",
+  "verdict_reason": "compact patch (mean +8 cm within 3 km, 95th percentile 20+ cm) about 9 km south of the USGS epicentre in the ascending pair, control flat (2.3 cm p2p); one look direction only (the descending frame ends 3 km before the patch); not confirmed, not exported"
+ },
+ {
+  "id": "turangi-m57-2026",
+  "usgs_id": "us7000t34g",
+  "title": "M5.7 New Zealand (west of Turangi) earthquake, 24 Jul 2026",
+  "time": "2026-07-24T16:51:37Z",
+  "lat": -38.9691,
+  "lon": 175.2489,
+  "depth_km": 23.5,
+  "mag": 5.7,
+  "place": "48 km W of Turangi, New Zealand",
+  "mechanism": "normal/oblique (nodal planes 113/45/-41 and 235/62/-127)",
+  "setting": "on land, forest and pasture, North Island",
+  "window": [
+   174.649,
+   -39.469,
+   175.849,
+   -38.469
+  ],
+  "heights": [
+   0,
+   1500
+  ],
+  "gmin": 0.35,
+  "far_km": 30,
+  "radius_km": 25,
+  "fringe_cm": 5,
+  "los_lim_cm": 10,
+  "profile_az": 0,
+  "views": {
+   "asc": {
+    "track": 94,
+    "frame": 158,
+    "direction": "A",
+    "co": {
+     "pair": "20260714_20260726",
+     "granule": "NISAR_L2_PR_GUNW_025_094_A_158_026_2000_SH_20260714T182040_20260714T182115_20260726T182039_20260726T182114_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260702_20260714",
+     "granule": "NISAR_L2_PR_GUNW_024_094_A_158_025_2000_SH_20260702T182040_20260702T182115_20260714T182040_20260714T182115_P05023_F_F_J_001"
+    },
+    "label": "ascending"
+   }
+  },
+  "verdict": "not detected",
+  "verdict_reason": "4.0 cm p2p within 25 km vs 3.2 cm control; depth 23.5 km; nothing at the epicentre; descending pair not processed"
+ },
+ {
+  "id": "qaidam-m53-2026",
+  "usgs_id": "us6000t9bg",
+  "title": "M5.3 Qaidam, China earthquake, 30 Jun 2026",
+  "time": "2026-06-30T23:44:54Z",
+  "lat": 37.7819,
+  "lon": 95.4116,
+  "depth_km": 10,
+  "mag": 5.3,
+  "place": "272 km SSE of Dunhuang, China",
+  "mechanism": "no moment tensor listed by USGS",
+  "setting": "on land, arid Qaidam basin margin",
+  "window": [
+   94.812,
+   37.282,
+   96.012,
+   38.282
+  ],
+  "heights": [
+   2500,
+   4800
+  ],
+  "gmin": 0.35,
+  "far_km": 30,
+  "radius_km": 25,
+  "fringe_cm": 5,
+  "los_lim_cm": 10,
+  "profile_az": 0,
+  "views": {
+   "asc83": {
+    "track": 83,
+    "frame": 21,
+    "direction": "A",
+    "co": {
+     "pair": "20260619_20260701",
+     "granule": "NISAR_L2_PR_GUNW_023_083_A_021_024_2000_SH_20260619T224354_20260619T224429_20260701T224353_20260701T224428_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260701_20260713",
+     "granule": "NISAR_L2_PR_GUNW_024_083_A_021_025_2000_SH_20260701T224353_20260701T224428_20260713T224352_20260713T224427_P05023_N_F_J_001"
+    },
+    "label": "ascending"
+   }
+  },
+  "verdict": "not detected",
+  "verdict_reason": "smooth atmosphere-sized gradients (7 cm p2p), nothing compact at the epicentre; the control pair has unwrapping errors (13 cm far-field std); M5.3 with no moment tensor"
  }
 ]

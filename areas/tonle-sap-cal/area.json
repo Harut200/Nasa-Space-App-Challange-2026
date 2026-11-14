@@ -12,5 +12,6 @@
   "direction": "ascending",
   "pixel_m": 80,
   "extra_layers": [],
-  "export_max_side": 1600
+  "export_max_side": 1600,
+  "category": "flood"
 }

@@ -1,0 +1,162 @@
+{
+  "id": "qaidam-m56-2026",
+  "name": "Qaidam, China earthquake, M5.6, 18 Aug 2026",
+  "bounds": [
+    95.14999999999999,
+    37.54994456603277,
+    95.94993358199663,
+    38.149999999999984
+  ],
+  "dates": [],
+  "gaps": [],
+  "layers": [
+    {
+      "id": "los_asc_cm",
+      "label": "Ground motion along the line of sight, ascending pass (cm)",
+      "dates": null,
+      "legend": {
+        "type": "diverging",
+        "unit": "cm",
+        "min": -10.0,
+        "max": 10.0,
+        "colors": [
+          "#67001f",
+          "#f7f7f7",
+          "#053061"
+        ],
+        "labels": [
+          "red: ground moved away from the satellite",
+          "blue: ground moved toward the satellite (sign convention not confirmed by the product guide)"
+        ]
+      }
+    },
+    {
+      "id": "los_desc_cm",
+      "label": "Ground motion along the line of sight, descending pass (cm)",
+      "dates": null,
+      "legend": {
+        "type": "diverging",
+        "unit": "cm",
+        "min": -10.0,
+        "max": 10.0,
+        "colors": [
+          "#67001f",
+          "#f7f7f7",
+          "#053061"
+        ],
+        "labels": [
+          "red: ground moved away from the satellite",
+          "blue: ground moved toward the satellite (sign convention not confirmed by the product guide)"
+        ]
+      }
+    },
+    {
+      "id": "fringes",
+      "label": "Fringes (one colour cycle = 5 cm)",
+      "dates": null,
+      "legend": {
+        "type": "ramp",
+        "unit": "one colour cycle = 5 cm of line-of-sight change",
+        "min": 0,
+        "max": 5.0,
+        "colors": [
+          "#e2d9e2",
+          "#95b5c7",
+          "#6276ba",
+          "#592a8f",
+          "#2f1436",
+          "#741e4f",
+          "#b25652",
+          "#cca389",
+          "#e2d9e2"
+        ]
+      }
+    },
+    {
+      "id": "coherence",
+      "label": "Radar coherence (how comparable the two passes are)",
+      "dates": null,
+      "legend": {
+        "type": "ramp",
+        "unit": "coherence 0-1",
+        "min": 0,
+        "max": 1,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    }
+  ],
+  "story": {
+    "see": "On 18 August 2026 USGS lists a magnitude 5.6 earthquake in the Qaidam region of China, 269 km south-southeast of Dunhuang (37.84 N, 95.54 E, depth about 6 km). The map shows how far the ground moved along the radar's line of sight between two NISAR passes, 25 July and 18 August from the ascending track, with a second layer from a descending track (26 July to 19 August). Blue is ground that moved toward the satellite, red away from it. The scale is small here: one colour cycle in the fringe layer is 5 cm. Grey speckle is where the two passes could not be compared. Most of the map shows only slow, smooth variations of a few centimetres.",
+    "physics": "The US Geological Survey's moment tensor shows thrust faulting, in which one block is pushed up and over another. About 5 km east-southeast of the USGS epicentre, which is within the usual location uncertainty for an earthquake this size, all three NISAR pairs we processed show the same small patch, about 3 to 4 km across, that moved toward the satellite: more than 5 cm over roughly 10 square kilometres, and up to 20 cm or more in its steepest part, where the pixels around it could not be compared. The steepest values are the least reliable. A single-sign patch is what a shallow thrust earthquake of this size can produce, but one patch alone does not tell us which fault plane moved.",
+    "lband": "NISAR's L-band radar has a wavelength of about 24 cm, so one full colour cycle means about 12 cm of ground movement along the line of sight (we show 5 cm cycles). The same tracks before the earthquake (13 to 25 July, ascending) show no patch at this place and variations of only a few centimetres; the same patch appears in a second ascending track (13 to 25 August) and in a descending track. This earthquake is small, so the signal is a few centimetres over a few kilometres and sits close to what atmosphere and processing can produce elsewhere in the map. The products are PROVISIONAL, and the sign convention (blue = toward the satellite) follows the interferogram definition we assumed, not a statement in the product guide.",
+    "people": "This is a measurement of ground movement, not of damage. We did not look at reports of damage or casualties. Maps like this show where the ground moved and by how much, which feeds hazard models. The pairs span 12 to 24 days, so they include any aftershock movement. From the views we processed we do not separate vertical from horizontal motion."
+  },
+  "spots": [
+    {
+      "id": "epicentre",
+      "label": "USGS epicentre",
+      "lngLat": [
+        95.5446,
+        37.8363
+      ]
+    },
+    {
+      "id": "toward-lobe",
+      "label": "Strongest movement toward the satellite (blue)",
+      "lngLat": [
+        95.6049,
+        37.8233
+      ]
+    }
+  ],
+  "credits": "NISAR data: NASA/JPL-Caltech and ISRO, distributed by ASF DAAC. PROVISIONAL calibration.",
+  "source": null,
+  "kind": "event",
+  "event": {
+    "type": "earthquake",
+    "magnitude": 5.6,
+    "time": "2026-08-18T21:36:27Z",
+    "depth_km": 6,
+    "lngLat": [
+      95.5446,
+      37.8363
+    ],
+    "place": "269 km SSE of Dunhuang, China",
+    "mechanism": "thrust (nodal planes 120/68/101 and 273/25/66)",
+    "usgs_id": "us6000tlrj",
+    "radius_km": 25,
+    "views": [
+      {
+        "id": "asc83",
+        "label": "ascending",
+        "track": 83,
+        "before": "2026-07-25",
+        "after": "2026-08-18",
+        "p2p_cm": 11,
+        "control_p2p_cm": 4
+      },
+      {
+        "id": "asc11",
+        "label": "ascending",
+        "track": 11,
+        "before": "2026-08-13",
+        "after": "2026-08-25",
+        "p2p_cm": 16,
+        "control_p2p_cm": 9
+      },
+      {
+        "id": "desc91",
+        "label": "descending",
+        "track": 91,
+        "before": "2026-07-26",
+        "after": "2026-08-19",
+        "p2p_cm": 9,
+        "control_p2p_cm": 6
+      }
+    ]
+  },
+  "category": "earthquake"
+}

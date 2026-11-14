@@ -1,0 +1,28 @@
+{
+  "story": {
+    "see": "On 18 August 2026 USGS lists a magnitude 5.6 earthquake in the Qaidam region of China, 269 km south-southeast of Dunhuang (37.84 N, 95.54 E, depth about 6 km). The map shows how far the ground moved along the radar's line of sight between two NISAR passes, 25 July and 18 August from the ascending track, with a second layer from a descending track (26 July to 19 August). Blue is ground that moved toward the satellite, red away from it. The scale is small here: one colour cycle in the fringe layer is 5 cm. Grey speckle is where the two passes could not be compared. Most of the map shows only slow, smooth variations of a few centimetres.",
+    "physics": "The US Geological Survey's moment tensor shows thrust faulting, in which one block is pushed up and over another. About 5 km east-southeast of the USGS epicentre, which is within the usual location uncertainty for an earthquake this size, all three NISAR pairs we processed show the same small patch, about 3 to 4 km across, that moved toward the satellite: more than 5 cm over roughly 10 square kilometres, and up to 20 cm or more in its steepest part, where the pixels around it could not be compared. The steepest values are the least reliable. A single-sign patch is what a shallow thrust earthquake of this size can produce, but one patch alone does not tell us which fault plane moved.",
+    "lband": "NISAR's L-band radar has a wavelength of about 24 cm, so one full colour cycle means about 12 cm of ground movement along the line of sight (we show 5 cm cycles). The same tracks before the earthquake (13 to 25 July, ascending) show no patch at this place and variations of only a few centimetres; the same patch appears in a second ascending track (13 to 25 August) and in a descending track. This earthquake is small, so the signal is a few centimetres over a few kilometres and sits close to what atmosphere and processing can produce elsewhere in the map. The products are PROVISIONAL, and the sign convention (blue = toward the satellite) follows the interferogram definition we assumed, not a statement in the product guide.",
+    "people": "This is a measurement of ground movement, not of damage. We did not look at reports of damage or casualties. Maps like this show where the ground moved and by how much, which feeds hazard models. The pairs span 12 to 24 days, so they include any aftershock movement. From the views we processed we do not separate vertical from horizontal motion."
+  },
+  "spots": [
+    {
+      "id": "epicentre",
+      "label": "USGS epicentre",
+      "lngLat": [
+        95.5446,
+        37.8363
+      ],
+      "radius_m": 3000
+    },
+    {
+      "id": "toward-lobe",
+      "label": "Strongest movement toward the satellite (blue)",
+      "lngLat": [
+        95.6049,
+        37.8233
+      ],
+      "radius_m": 3000
+    }
+  ]
+}

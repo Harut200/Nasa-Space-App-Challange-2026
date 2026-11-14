@@ -288,5 +288,6 @@
     }
   ],
   "credits": "Calibrated NISAR L2 GCOV (gamma-naught backscatter, 80 m): NASA/JPL-Caltech and ISRO, distributed by ASF DAAC. PROVISIONAL calibration.",
-  "source": "gamma0"
+  "source": "gamma0",
+  "category": "flood"
 }
