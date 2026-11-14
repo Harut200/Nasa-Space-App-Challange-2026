@@ -26,6 +26,70 @@
   ],
   "layers": [
     {
+      "id": "burn_before",
+      "label": "Before the fire (HH, median of passes 17 Jun\u201311 Jul)",
+      "dates": null,
+      "legend": {
+        "type": "ramp",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": 0,
+        "max": 95,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    },
+    {
+      "id": "burn_after",
+      "label": "After the fire (HH, median of passes 23 Jul\u201315 Oct)",
+      "dates": null,
+      "legend": {
+        "type": "ramp",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": 0,
+        "max": 95,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    },
+    {
+      "id": "burn_diff",
+      "label": "Radar echo change after the fire (HH)",
+      "dates": null,
+      "legend": {
+        "type": "diverging",
+        "unit": "change in echo brightness (0\u20131 preview scale), after minus before",
+        "min": -0.212,
+        "max": 0.212,
+        "colors": [
+          "#2166ac",
+          "#00000000",
+          "#b2182b"
+        ],
+        "labels": [
+          "darker after the fire",
+          "brighter after the fire"
+        ]
+      }
+    },
+    {
+      "id": "burn_scar",
+      "label": "Where the radar echo changed after the fire",
+      "dates": null,
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#ff5a1f",
+            "label": "Where the radar echo changed after the fire"
+          }
+        ]
+      }
+    },
+    {
       "id": "hh",
       "label": "HH brightness (preview)",
       "dates": [
@@ -225,7 +289,7 @@
   "story": {
     "see": "Switch between 11 July and 23 July over northwestern Ontario. A large patch of the HH radar layer turns brighter around the fire's published position and stays that way through September and into October. Nothing like it appears between 17 June and 11 July.",
     "physics": "Thunder Bay 36 started on 12 July 2026 when the Dryden 13 fire merged with nearby fires in Wabakimi Provincial Park, in the boreal forest north of Thunder Bay. It reached about 314,000 hectares by 29 and 30 July, the largest wildfire recorded in Ontario's history, against 196,974 hectares for the 2025 Red Lake 12 fire. Published peak figures run up to about 320,000 hectares.",
-    "lband": "Here the HH echo rose in the burned area, by about 0.12 on the preview's 0 to 1 scale where unburned forest nearby moved by 0.01 to 0.05. The cross-polarised HV echo changed only weakly, so we do not see a plain HV drop. A bright patch of about 2,000 square kilometres is smaller than the published burnt area and depends on the threshold, so treat it as the scar's strongest core, not an area estimate. These are 180 metre uncalibrated preview images.",
+    "lband": "Here the HH echo rose in the burned area, by about 0.12 on the preview's 0 to 1 scale where unburned forest nearby moved by 0.01 to 0.05. The cross-polarised HV echo changed only weakly, so we do not see a plain HV drop. The bright patch the layers outline covers about 1,900 square kilometres at our noise-based threshold (about 5,300 at half of it), smaller than the published burnt area and dependent on the threshold, so treat it as the scar's strongest core, not an area estimate. These are 180 metre uncalibrated preview images.",
     "people": "Remote communities including Whitesand and Namaygoosisagagun First Nations were evacuated in July. The radar cannot see people. It shows a scar about 50 kilometres across that is still readable three months later."
   },
   "spots": [
@@ -282,8 +346,190 @@
       ]
     }
   },
-  "defaultLayer": "change",
+  "defaultLayer": "burn_diff",
   "headline": "none",
-  "headlineNote": "Radar echo brighter where the fire burned",
-  "category": "fire"
+  "headlineNote": "Co-polarised (HH) radar echo about 0.12 higher (0\u20131 brightness) inside a patch of changed echo of about 1,875 km\u00b2 after the fire",
+  "category": "fire",
+  "burn": {
+    "kind": "burn",
+    "channel": "hh",
+    "sign": 1,
+    "before_dates": [
+      "2026-06-17",
+      "2026-06-29",
+      "2026-07-11"
+    ],
+    "after_dates": [
+      "2026-07-23",
+      "2026-08-16",
+      "2026-09-09",
+      "2026-10-03",
+      "2026-10-15"
+    ],
+    "excluded_dates": [
+      "2026-09-21"
+    ],
+    "ignition": "2026-07-12",
+    "ignition_between": null,
+    "control_dates": [
+      "2026-06-17",
+      "2026-06-29",
+      "2026-07-11"
+    ],
+    "area_km2": 1875,
+    "area_label": "area of changed radar echo, not a burnt-area measurement",
+    "mean_change": 0.1206,
+    "mean_change_db_like": 3.62,
+    "control_mean": -0.0025,
+    "control_frac_above": 0.076,
+    "rank_percentile": 0.0,
+    "rank_n_discs": 129267,
+    "disc_radius_km": 24.4,
+    "threshold": 0.085,
+    "threshold_db_like": 2.55,
+    "sensitivity": {
+      "0.5": {
+        "threshold": 0.0425,
+        "area_km2": 5346
+      },
+      "1.0": {
+        "threshold": 0.085,
+        "area_km2": 1875
+      },
+      "2.0": {
+        "threshold": 0.1699,
+        "area_km2": 0
+      }
+    },
+    "persistence": {
+      "2026-07-23": {
+        "patch_change": 0.0956,
+        "above_threshold": true
+      },
+      "2026-08-16": {
+        "patch_change": 0.0569,
+        "above_threshold": false
+      },
+      "2026-09-09": {
+        "patch_change": 0.135,
+        "above_threshold": true
+      },
+      "2026-10-03": {
+        "patch_change": 0.1165,
+        "above_threshold": true
+      },
+      "2026-10-15": {
+        "patch_change": 0.1138,
+        "above_threshold": true
+      }
+    },
+    "unit_note": "brightness units are the preview's 0-1 display scale; dB-like = 30 x brightness assumes a ~30 dB stretch (unverified)",
+    "published": {
+      "burnt_km2": 3139.3,
+      "text": "about 314,000 ha by 29-30 Jul (Wikipedia, Fort Frances Times)"
+    },
+    "distance_to_ref_km": 3.7,
+    "mask_exported": true,
+    "method_note": "Preview brightness (uncalibrated, ~180 m), 3x3 boxcar + per-date gain normalisation; AFTER minus BEFORE (medians), 9x9 boxcar; threshold = median + 3.09 robust sigma of the same-signed change in a control built from two halves of a quiet interval (a Gaussian 99.9 % level that heavy tails do not inflate); connected patches of at least 50 km\u00b2 kept, the one nearest the reference position (else the largest) reported. The area is the area of changed radar echo, not a burnt-area measurement."
+  },
+  "evidence": {
+    "kind": "burn",
+    "before": "burn_before",
+    "after": "burn_after",
+    "diff": "burn_diff",
+    "mask": "burn_scar",
+    "series": [
+      "Radar echo inside the burn",
+      "Radar echo outside the burn"
+    ],
+    "steps": [
+      "1. Radar image before the fire, 17 Jun\u201311 Jul (median of 3 passes, HH channel).",
+      "2. Radar image after, 23 Jul\u201315 Oct (median of 5 passes).",
+      "3. The difference: the echo rose by about 0.12 (0\u20131 brightness scale) inside a patch of about 1,875 km\u00b2 of changed echo at the published fire position.",
+      "4. A check: between 17 Jun\u201311 Jul, before the fire, the same pixels change by -0.00 on average, and 8 % of them cross the threshold, so the control is not clean.",
+      "5. On later passes the patch is above the threshold on 4 of 5; not on 16 Aug."
+    ],
+    "stats": {
+      "kind": "burn",
+      "channel": "hh",
+      "sign": 1,
+      "before_dates": [
+        "2026-06-17",
+        "2026-06-29",
+        "2026-07-11"
+      ],
+      "after_dates": [
+        "2026-07-23",
+        "2026-08-16",
+        "2026-09-09",
+        "2026-10-03",
+        "2026-10-15"
+      ],
+      "excluded_dates": [
+        "2026-09-21"
+      ],
+      "ignition": "2026-07-12",
+      "ignition_between": null,
+      "control_dates": [
+        "2026-06-17",
+        "2026-06-29",
+        "2026-07-11"
+      ],
+      "area_km2": 1875,
+      "area_label": "area of changed radar echo, not a burnt-area measurement",
+      "mean_change": 0.1206,
+      "mean_change_db_like": 3.62,
+      "control_mean": -0.0025,
+      "control_frac_above": 0.076,
+      "rank_percentile": 0.0,
+      "rank_n_discs": 129267,
+      "disc_radius_km": 24.4,
+      "threshold": 0.085,
+      "threshold_db_like": 2.55,
+      "sensitivity": {
+        "0.5": {
+          "threshold": 0.0425,
+          "area_km2": 5346
+        },
+        "1.0": {
+          "threshold": 0.085,
+          "area_km2": 1875
+        },
+        "2.0": {
+          "threshold": 0.1699,
+          "area_km2": 0
+        }
+      },
+      "persistence": {
+        "2026-07-23": {
+          "patch_change": 0.0956,
+          "above_threshold": true
+        },
+        "2026-08-16": {
+          "patch_change": 0.0569,
+          "above_threshold": false
+        },
+        "2026-09-09": {
+          "patch_change": 0.135,
+          "above_threshold": true
+        },
+        "2026-10-03": {
+          "patch_change": 0.1165,
+          "above_threshold": true
+        },
+        "2026-10-15": {
+          "patch_change": 0.1138,
+          "above_threshold": true
+        }
+      },
+      "unit_note": "brightness units are the preview's 0-1 display scale; dB-like = 30 x brightness assumes a ~30 dB stretch (unverified)",
+      "published": {
+        "burnt_km2": 3139.3,
+        "text": "about 314,000 ha by 29-30 Jul (Wikipedia, Fort Frances Times)"
+      },
+      "distance_to_ref_km": 3.7,
+      "mask_exported": true,
+      "method_note": "Preview brightness (uncalibrated, ~180 m), 3x3 boxcar + per-date gain normalisation; AFTER minus BEFORE (medians), 9x9 boxcar; threshold = median + 3.09 robust sigma of the same-signed change in a control built from two halves of a quiet interval (a Gaussian 99.9 % level that heavy tails do not inflate); connected patches of at least 50 km\u00b2 kept, the one nearest the reference position (else the largest) reported. The area is the area of changed radar echo, not a burnt-area measurement."
+    }
+  }
 }

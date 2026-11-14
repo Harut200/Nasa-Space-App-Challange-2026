@@ -24,5 +24,7 @@
     "2026-10-18"
   ],
   "water_source": "fusion2",
-  "category": "lake"
+  "category": "lake",
+  "default_layer": "classes",
+  "caution": "Our water map disagrees with NASA's OPERA water product here: east of the lake we call wet, salty lake bed water where it sees land. Read the area as an overestimate."
 }

@@ -39,7 +39,7 @@
       ],
       "legend": {
         "type": "ramp",
-        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "unit": "relative brightness (0–100, uncalibrated)",
         "min": 0,
         "max": 100,
         "colors": [
@@ -165,7 +165,7 @@
       ],
       "legend": {
         "type": "diverging",
-        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "unit": "relative brightness (0–100, uncalibrated)",
         "min": -35,
         "max": 35,
         "colors": [
@@ -203,7 +203,7 @@
       ],
       "legend": {
         "type": "ramp",
-        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "unit": "relative brightness (0–100, uncalibrated)",
         "min": 0,
         "max": 100,
         "colors": [
@@ -214,15 +214,15 @@
     }
   ],
   "story": {
-    "see": "Our box covers the south-western edge of the Pantanal, around the Paraguay River and the lakes on the Bolivian border. Across eight passes from 17 July to 21 October the mapped open water stays at about 265 to 270 km\u00b2, easing down slightly. This is the dry season, so the picture is a wetland holding steady, not a flood. The small patches of possible water under vegetation are only a few km\u00b2.",
-    "physics": "The Pantanal fills slowly. Rain falls mostly from November to March, but the water drains out through the Paraguay River, and at Corumb\u00e1 the river peak comes months after the peak of the rains. By July to October the plain is usually drying, and lakes and channels hold the water that remains. Narrow channels are too small for our roughly 180 m preview to see.",
+    "see": "Our box covers the south-western edge of the Pantanal, around the Paraguay River and the lakes on the Bolivian border. Across eight passes from 17 July to 21 October the mapped open water stays at about 265 to 270 km², easing down slightly. This is the dry season, so the picture is a wetland holding steady, not a flood. The small patches of possible water under vegetation are only a few km².",
+    "physics": "The Pantanal fills slowly. Rain falls mostly from November to March, but the water drains out through the Paraguay River, and at Corumbá the river peak comes months after the peak of the rains. By July to October the plain is usually drying, and lakes and channels hold the water that remains. Narrow channels are too small for our roughly 180 m preview to see.",
     "lband": "Calm open water reflects the radar away and looks dark, while grass and shrubs on drying ground send more signal back, so lakes stand out clearly in this scene. Our detector picks them out well, but the numbers are approximate. The 'possible water under vegetation' layer is a flag that we have not validated.",
     "people": "The Pantanal is often called the world's largest tropical wetland, and part of it is a UNESCO World Heritage site. Most of the land is private ranch land, and fishing is also important. Watching how much water remains in the dry months shows how much is left before the next rains."
   },
   "spots": [
     {
       "id": "lake-mandiore",
-      "label": "Lake Mandior\u00e9 (Brazil-Bolivia border)",
+      "label": "Lake Mandioré (Brazil-Bolivia border)",
       "lngLat": [
         -57.55,
         -18.133
@@ -230,7 +230,7 @@
     },
     {
       "id": "lake-caceres",
-      "label": "C\u00e1ceres lagoon (Bolivian border)",
+      "label": "Cáceres lagoon (Bolivian border)",
       "lngLat": [
         -57.8,
         -18.933
@@ -262,5 +262,7 @@
       ]
     }
   },
-  "category": "wetland"
+  "category": "wetland",
+  "defaultLayer": "classes",
+  "headlineNote": "Steady through the dry season: the wetland classes hardly change between June and October"
 }

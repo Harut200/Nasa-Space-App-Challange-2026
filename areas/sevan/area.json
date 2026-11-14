@@ -12,5 +12,6 @@
   "direction": "ascending",
   "pixel_m": 30,
   "water_source": "fusion2",
-  "category": "lake"
+  "category": "lake",
+  "headline_note": "The steady lake, our control: the water edge matches NASA's OPERA water product (overlap 0.97) and barely moves all season"
 }

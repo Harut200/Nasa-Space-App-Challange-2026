@@ -24,5 +24,9 @@
     "2026-10-12"
   ],
   "water_source": "fusion2",
-  "category": "wetland"
+  "category": "wetland",
+  "default_layer": "change",
+  "default_date": "2026-08-25",
+  "headline": "none",
+  "headline_note": "Fields across the delta change together: strongly changed pixels rise from about 10 % to about 28 % around 25 August, then fall back"
 }

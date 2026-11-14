@@ -117,10 +117,18 @@ def export(area, root=ROOT):
                                        for v in oe.get("views", []) if v.get("exported", True)]}
         if "before_after" in oe:  # layer pairs for a before/after compare (written by events.app_events)
             manifest["event"]["before_after"] = oe["before_after"]
-    for key, field in (("default_layer", "defaultLayer"), ("headline", "headline"), ("headline_note", "headlineNote")):
+    for key, field in (("default_layer", "defaultLayer"), ("default_date", "defaultDate"), ("headline", "headline"),
+                       ("headline_note", "headlineNote"), ("caution", "caution")):
         if cfg.get(key):  # optional: which layer opens first, and whether the open-water number is this place's headline
             manifest[field] = cfg[key]
     manifest["category"] = (manifest["event"]["type"] if manifest.get("kind") == "event" else cfg.get("category")) or "other"
+    ev = load(prod / "burn.json") or load(prod / "ev.json")  # written by scripts/detect/evidence.py (burn.py for fires)
+    if ev:  # "how we found it": before / after / difference layers, the control and the inside / outside curves
+        if ev.get("kind") == "burn":
+            manifest["burn"] = {k: v for k, v in ev.items() if k not in ("steps", "layers", "series")}
+        manifest["evidence"] = {"kind": ev.get("kind", "burn"), "before": ev["layers"]["before"], "after": ev["layers"]["after"],
+                                "diff": ev["layers"]["diff"], "mask": ev["layers"]["mask"], "series": ev["series"],
+                                "steps": ev["steps"], "stats": {k: v for k, v in ev.items() if k not in ("steps", "layers", "series")}}
     (pub / area / "manifest.json").write_text(json.dumps(manifest, indent=2))
     shutil.copy(prod / "timeseries.json", pub / area / "timeseries.json")
     idx = load(pub / "index.json", {"areas": []})

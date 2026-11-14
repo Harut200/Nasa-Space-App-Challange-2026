@@ -1,0 +1,137 @@
+{
+  "id": "la-mierla-coh-2026",
+  "name": "La Mierla fire, Guadalajara: forest and scrub surface changed, 14-26 July 2026",
+  "bounds": [
+    -3.45,
+    40.850114373902535,
+    -2.5498773529471794,
+    41.39999999999999
+  ],
+  "dates": [],
+  "gaps": [],
+  "layers": [
+    {
+      "id": "coherence",
+      "label": "Radar coherence (how comparable the two passes are)",
+      "dates": null,
+      "legend": {
+        "type": "ramp",
+        "unit": "coherence 0-1",
+        "min": 0,
+        "max": 1,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    },
+    {
+      "id": "coh_loss",
+      "label": "Where the radar picture changed completely between the passes",
+      "dates": null,
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#ff5a00",
+            "label": "was comparable before (control pair), not comparable in the event pair"
+          }
+        ]
+      }
+    },
+    {
+      "id": "coherence_before",
+      "label": "Before the event: radar coherence (2 Jul\u201314 Jul)",
+      "dates": null,
+      "legend": {
+        "type": "ramp",
+        "unit": "coherence 0-1",
+        "min": 0,
+        "max": 1,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    }
+  ],
+  "story": {
+    "see": "The La Mierla fire began on 16 July 2026 in the province of Guadalajara, north of Madrid. By 20 July it had burned over 32,000 hectares and was called the second biggest wildfire in Spain this century and the largest in the history of Castilla-La Mancha (The Local). The orange area is where the radar picture between NISAR's 14 and 26 July passes no longer matches the pair taken just before it (2 to 14 July). It is a long band running north-north-east from the village of La Mierla.",
+    "physics": "Burning removes leaves, twigs and scrub, and what is left reflects the radar differently, so the passes cannot be compared there. About 150 km2 in the map lost coherence (87 km2 within 12 km of the centre, 44 km2 in the largest connected patch). Equal circles placed elsewhere in the same map lose at most 14 km2 (95th percentile of 98), and only about 1 % of the comparable ground outside the site changes like this. We do not measure the burned area: the patch only counts ground that was coherent before.",
+    "lband": "NISAR's L-band radar has a wavelength of about 24 cm. Over this dry Mediterranean land the quiet pair before the fire is bright almost everywhere, so a burn stands out as a dark scar with a hard edge. In the pair of 31 August to 12 September the same ground is coherent again (nothing like this patch remains), so the map marks the change that happened inside 14 to 26 July. Dew or rain on the ground cannot be fully excluded from coherence alone; the shape, the place and the date are what we rely on.",
+    "people": "This map shows where the surface changed, not damage. We did not look at reports of damage, evacuations or casualties."
+  },
+  "spots": [
+    {
+      "id": "site",
+      "label": "La Mierla village (Wikipedia, 40.94 N 3.24 W)",
+      "lngLat": [
+        -3.15,
+        40.97
+      ]
+    },
+    {
+      "id": "patch",
+      "label": "Centre of the largest patch of lost coherence",
+      "lngLat": [
+        -3.1045,
+        41.0497
+      ]
+    },
+    {
+      "id": "reference",
+      "label": "Reference: stays coherent in both pairs",
+      "lngLat": [
+        -2.827,
+        41.005
+      ]
+    }
+  ],
+  "credits": "NISAR data: NASA/JPL-Caltech and ISRO, distributed by ASF DAAC. PROVISIONAL calibration.",
+  "source": null,
+  "kind": "event",
+  "event": {
+    "type": "fire",
+    "title": "La Mierla fire, Guadalajara: forest and scrub surface changed, 14-26 July 2026",
+    "time": "2026-07-16T00:00:00Z",
+    "time_note": "fire began 16 Jul (The Local); pair 14-26 Jul; the control pair ends the day of 14 Jul, before it",
+    "lngLat": [
+      -3.15,
+      40.97
+    ],
+    "place": "Sierra Norte de Guadalajara, Spain",
+    "summary": "\u2248 150 km\u00b2 of ground changed completely (largest connected patch 44 km\u00b2)",
+    "radius_km": 12,
+    "source_url": "https://www.thelocal.es/20260720/800-evacuated-as-spains-biggest-wildfire-of-the-year-rages-on",
+    "views": [
+      {
+        "id": "d_ign",
+        "label": "descending",
+        "track": 95,
+        "before": "2026-07-14",
+        "after": "2026-07-26",
+        "p2p_cm": null,
+        "control_p2p_cm": null,
+        "control_before": "2026-07-02",
+        "control_after": "2026-07-14"
+      }
+    ],
+    "before_after": [
+      {
+        "view": "d_ign",
+        "before": "coherence_before",
+        "after": "coherence",
+        "label": "Radar coherence",
+        "before_dates": [
+          "2026-07-02",
+          "2026-07-14"
+        ],
+        "after_dates": [
+          "2026-07-14",
+          "2026-07-26"
+        ]
+      }
+    ]
+  },
+  "category": "fire"
+}

@@ -1,0 +1,9563 @@
+{
+ "tonle-sap": {
+  "category": "flood",
+  "defaultLayer": "water",
+  "n_dates": 10,
+  "bounds": [
+   103.39999999999999,
+   11.800067946562462,
+   105.20007115475923,
+   13.599999999999994
+  ],
+  "layers": {
+   "hh": {
+    "type": "ramp",
+    "n_frames": 10,
+    "dates": [
+     "2026-06-19",
+     "2026-07-01",
+     "2026-07-13",
+     "2026-07-25",
+     "2026-08-18",
+     "2026-08-30",
+     "2026-09-11",
+     "2026-09-23",
+     "2026-10-05",
+     "2026-10-17"
+    ],
+    "first": {
+     "cover": 0.9262,
+     "mean": 59.075,
+     "p05": 0.39,
+     "p95": 94.12,
+     "std": 25.578
+    },
+    "last": {
+     "cover": 0.9262,
+     "mean": 55.468,
+     "p05": 2.75,
+     "p95": 92.55,
+     "std": 28.261
+    },
+    "first_last_change": 10.224,
+    "spots_change": {
+     "lake-core": 12.5846,
+     "prek-toal": 40.1557,
+     "chong-kneas": 11.4746,
+     "southeast-corridor": 16.3896,
+     "kampong-luong": 12.1009,
+     "upland-forest": 4.848
+    },
+    "hot_share": 0.2198,
+    "steps": [
+     [
+      "2026-07-01",
+      4.4
+     ],
+     [
+      "2026-07-13",
+      4.34
+     ],
+     [
+      "2026-07-25",
+      4.928
+     ],
+     [
+      "2026-08-18",
+      5.912
+     ],
+     [
+      "2026-08-30",
+      4.719
+     ],
+     [
+      "2026-09-11",
+      5.2
+     ],
+     [
+      "2026-09-23",
+      5.653
+     ],
+     [
+      "2026-10-05",
+      4.132
+     ],
+     [
+      "2026-10-17",
+      3.377
+     ]
+    ],
+    "cover_series": null
+   },
+   "water": {
+    "type": "classes",
+    "n_frames": 10,
+    "dates": [
+     "2026-06-19",
+     "2026-07-01",
+     "2026-07-13",
+     "2026-07-25",
+     "2026-08-18",
+     "2026-08-30",
+     "2026-09-11",
+     "2026-09-23",
+     "2026-10-05",
+     "2026-10-17"
+    ],
+    "first": {
+     "cover": 0.0587,
+     "classes": {
+      "Open water": 0.0586,
+      "Possible water under vegetation": 0.0,
+      "Going under: vegetation submerging, or p": 0.0,
+      "Usually water, not today (rain or wind?)": 0.0
+     }
+    },
+    "last": {
+     "cover": 0.1681,
+     "classes": {
+      "Open water": 0.1296,
+      "Possible water under vegetation": 0.0181,
+      "Going under: vegetation submerging, or p": 0.0204,
+      "Usually water, not today (rain or wind?)": 0.0
+     }
+    },
+    "first_last_change": 11.037,
+    "spots_change": {
+     "lake-core": 17.0322,
+     "prek-toal": 46.1504,
+     "chong-kneas": 26.753,
+     "southeast-corridor": 44.668,
+     "kampong-luong": 14.1163,
+     "upland-forest": 0.0
+    },
+    "hot_share": 0.1104,
+    "steps": [
+     [
+      "2026-07-01",
+      0.194
+     ],
+     [
+      "2026-07-13",
+      0.757
+     ],
+     [
+      "2026-07-25",
+      1.077
+     ],
+     [
+      "2026-08-18",
+      5.74
+     ],
+     [
+      "2026-08-30",
+      3.304
+     ],
+     [
+      "2026-09-11",
+      3.38
+     ],
+     [
+      "2026-09-23",
+      4.296
+     ],
+     [
+      "2026-10-05",
+      2.33
+     ],
+     [
+      "2026-10-17",
+      0.758
+     ]
+    ],
+    "cover_series": null
+   },
+   "when": {
+    "type": "classes",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.2303,
+     "classes": {
+      "1 Jul": 0.0053,
+      "13 Jul": 0.0055,
+      "25 Jul": 0.0155,
+      "18 Aug": 0.0516,
+      "30 Aug": 0.0335,
+      "11 Sep": 0.0413,
+      "23 Sep": 0.0681,
+      "5 Oct": 0.0081,
+      "17 Oct": 0.0015
+     }
+    },
+    "last": {
+     "cover": 0.2303,
+     "classes": {
+      "1 Jul": 0.0053,
+      "13 Jul": 0.0055,
+      "25 Jul": 0.0155,
+      "18 Aug": 0.0516,
+      "30 Aug": 0.0335,
+      "11 Sep": 0.0413,
+      "23 Sep": 0.0681,
+      "5 Oct": 0.0081,
+      "17 Oct": 0.0015
+     }
+    }
+   },
+   "sig": {
+    "type": "classes",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.1445,
+     "classes": {
+      "largest change by 1 Jul": 0.0015,
+      "largest change by 13 Jul": 0.0041,
+      "largest change by 25 Jul": 0.0102,
+      "largest change by 18 Aug": 0.0491,
+      "largest change by 30 Aug": 0.0204,
+      "largest change by 11 Sep": 0.0201,
+      "largest change by 23 Sep": 0.033,
+      "largest change by 5 Oct": 0.0042,
+      "largest change by 17 Oct": 0.0019
+     }
+    },
+    "last": {
+     "cover": 0.1445,
+     "classes": {
+      "largest change by 1 Jul": 0.0015,
+      "largest change by 13 Jul": 0.0041,
+      "largest change by 25 Jul": 0.0102,
+      "largest change by 18 Aug": 0.0491,
+      "largest change by 30 Aug": 0.0204,
+      "largest change by 11 Sep": 0.0201,
+      "largest change by 23 Sep": 0.033,
+      "largest change by 5 Oct": 0.0042,
+      "largest change by 17 Oct": 0.0019
+     }
+    }
+   },
+   "arrival": {
+    "type": "ramp",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.0482,
+     "mean": 0.702,
+     "p05": 0.24,
+     "p95": 0.97,
+     "std": 0.239
+    },
+    "last": {
+     "cover": 0.0482,
+     "mean": 0.702,
+     "p05": 0.24,
+     "p95": 0.97,
+     "std": 0.239
+    }
+   },
+   "classes": {
+    "type": "classes",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.3224,
+     "classes": {
+      "Permanent water": 0.0587,
+      "Seasonal open water": 0.0746,
+      "Flooded vegetation": 0.0735,
+      "Got darker, not open water (wetter groun": 0.069,
+      "Got brighter (growing crops and other ca": 0.0467
+     }
+    },
+    "last": {
+     "cover": 0.3224,
+     "classes": {
+      "Permanent water": 0.0587,
+      "Seasonal open water": 0.0746,
+      "Flooded vegetation": 0.0735,
+      "Got darker, not open water (wetter groun": 0.069,
+      "Got brighter (growing crops and other ca": 0.0467
+     }
+    }
+   },
+   "change": {
+    "type": "diverging",
+    "n_frames": 9,
+    "dates": [
+     "2026-07-01",
+     "2026-07-13",
+     "2026-07-25",
+     "2026-08-18",
+     "2026-08-30",
+     "2026-09-11",
+     "2026-09-23",
+     "2026-10-05",
+     "2026-10-17"
+    ],
+    "first": {
+     "cover": 0.0839,
+     "mean": -0.873,
+     "p05": -22.51,
+     "p95": 17.98,
+     "std": 15.32
+    },
+    "last": {
+     "cover": 0.324,
+     "mean": -9.522,
+     "p05": -35.0,
+     "p95": 23.33,
+     "std": 21.096
+    },
+    "first_last_change": 1.032,
+    "spots_change": {
+     "lake-core": 5.3658,
+     "prek-toal": 1.8146,
+     "chong-kneas": 0.66,
+     "southeast-corridor": 1.9579,
+     "kampong-luong": 0.5203,
+     "upland-forest": 0.0307
+    },
+    "hot_share": 0.0221,
+    "steps": [
+     [
+      "2026-07-13",
+      0.271
+     ],
+     [
+      "2026-07-25",
+      0.453
+     ],
+     [
+      "2026-08-18",
+      1.14
+     ],
+     [
+      "2026-08-30",
+      1.227
+     ],
+     [
+      "2026-09-11",
+      1.289
+     ],
+     [
+      "2026-09-23",
+      1.67
+     ],
+     [
+      "2026-10-05",
+      1.321
+     ],
+     [
+      "2026-10-17",
+      1.054
+     ]
+    ],
+    "cover_series": null
+   },
+   "hv": {
+    "type": "ramp",
+    "n_frames": 10,
+    "dates": [
+     "2026-06-19",
+     "2026-07-01",
+     "2026-07-13",
+     "2026-07-25",
+     "2026-08-18",
+     "2026-08-30",
+     "2026-09-11",
+     "2026-09-23",
+     "2026-10-05",
+     "2026-10-17"
+    ],
+    "first": {
+     "cover": 0.9262,
+     "mean": 49.267,
+     "p05": 0.39,
+     "p95": 96.47,
+     "std": 28.607
+    },
+    "last": {
+     "cover": 0.9262,
+     "mean": 46.551,
+     "p05": 1.18,
+     "p95": 94.51,
+     "std": 28.3
+    },
+    "first_last_change": 9.222,
+    "spots_change": {
+     "lake-core": 13.3765,
+     "prek-toal": 39.1232,
+     "chong-kneas": 13.9456,
+     "southeast-corridor": 9.0272,
+     "kampong-luong": 11.5623,
+     "upland-forest": 2.5997
+    },
+    "hot_share": 0.1916,
+    "steps": [
+     [
+      "2026-07-01",
+      3.147
+     ],
+     [
+      "2026-07-13",
+      3.147
+     ],
+     [
+      "2026-07-25",
+      3.539
+     ],
+     [
+      "2026-08-18",
+      4.468
+     ],
+     [
+      "2026-08-30",
+      3.334
+     ],
+     [
+      "2026-09-11",
+      3.952
+     ],
+     [
+      "2026-09-23",
+      4.498
+     ],
+     [
+      "2026-10-05",
+      2.815
+     ],
+     [
+      "2026-10-17",
+      2.583
+     ]
+    ],
+    "cover_series": null
+   }
+  }
+ },
+ "tonle-sap-cal": {
+  "category": "flood",
+  "defaultLayer": "water",
+  "n_dates": 10,
+  "bounds": [
+   103.36938143928181,
+   11.776750372305862,
+   105.22105213795561,
+   13.623428419117616
+  ],
+  "layers": {
+   "hh": {
+    "type": "ramp",
+    "n_frames": 10,
+    "dates": [
+     "2026-06-19",
+     "2026-07-01",
+     "2026-07-13",
+     "2026-07-25",
+     "2026-08-18",
+     "2026-08-30",
+     "2026-09-11",
+     "2026-09-23",
+     "2026-10-05",
+     "2026-10-17"
+    ],
+    "first": {
+     "cover": 0.9018,
+     "mean": -9.473,
+     "p05": -18.79,
+     "p95": -4.64,
+     "std": 4.041
+    },
+    "last": {
+     "cover": 0.9018,
+     "mean": -9.61,
+     "p05": -20.0,
+     "p95": -3.52,
+     "std": 5.358
+    },
+    "first_last_change": 9.388,
+    "spots_change": {
+     "lake-core": 16.1111,
+     "prek-toal": 30.1147,
+     "chong-kneas": 10.9781,
+     "southeast-corridor": 20.1241,
+     "kampong-luong": 9.6218,
+     "upland-forest": 3.7438
+    },
+    "hot_share": 0.1866,
+    "steps": [
+     [
+      "2026-07-01",
+      3.941
+     ],
+     [
+      "2026-07-13",
+      3.994
+     ],
+     [
+      "2026-07-25",
+      4.035
+     ],
+     [
+      "2026-08-18",
+      5.187
+     ],
+     [
+      "2026-08-30",
+      4.198
+     ],
+     [
+      "2026-09-11",
+      4.85
+     ],
+     [
+      "2026-09-23",
+      5.409
+     ],
+     [
+      "2026-10-05",
+      4.542
+     ],
+     [
+      "2026-10-17",
+      3.933
+     ]
+    ],
+    "cover_series": null
+   },
+   "water": {
+    "type": "classes",
+    "n_frames": 10,
+    "dates": [
+     "2026-06-19",
+     "2026-07-01",
+     "2026-07-13",
+     "2026-07-25",
+     "2026-08-18",
+     "2026-08-30",
+     "2026-09-11",
+     "2026-09-23",
+     "2026-10-05",
+     "2026-10-17"
+    ],
+    "first": {
+     "cover": 0.057,
+     "classes": {
+      "Open water": 0.057,
+      "Possible water under vegetation": 0.0,
+      "Going under: vegetation submerging, or p": 0.0,
+      "Usually water, not today (rain or wind?)": 0.0
+     }
+    },
+    "last": {
+     "cover": 0.1714,
+     "classes": {
+      "Open water": 0.138,
+      "Possible water under vegetation": 0.02,
+      "Going under: vegetation submerging, or p": 0.0135,
+      "Usually water, not today (rain or wind?)": 0.0
+     }
+    },
+    "first_last_change": 11.605,
+    "spots_change": {
+     "lake-core": 19.7286,
+     "prek-toal": 47.2016,
+     "chong-kneas": 28.5366,
+     "southeast-corridor": 56.2248,
+     "kampong-luong": 20.0445,
+     "upland-forest": 0.0
+    },
+    "hot_share": 0.1161,
+    "steps": [
+     [
+      "2026-07-01",
+      0.328
+     ],
+     [
+      "2026-07-13",
+      1.126
+     ],
+     [
+      "2026-07-25",
+      1.227
+     ],
+     [
+      "2026-08-18",
+      6.058
+     ],
+     [
+      "2026-08-30",
+      4.749
+     ],
+     [
+      "2026-09-11",
+      4.41
+     ],
+     [
+      "2026-09-23",
+      6.852
+     ],
+     [
+      "2026-10-05",
+      5.892
+     ],
+     [
+      "2026-10-17",
+      3.88
+     ]
+    ],
+    "cover_series": null
+   },
+   "when": {
+    "type": "classes",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.18,
+     "classes": {
+      "1 Jul": 0.0021,
+      "13 Jul": 0.0021,
+      "25 Jul": 0.0127,
+      "18 Aug": 0.0389,
+      "30 Aug": 0.0284,
+      "11 Sep": 0.0338,
+      "23 Sep": 0.0504,
+      "5 Oct": 0.0079,
+      "17 Oct": 0.0035
+     }
+    },
+    "last": {
+     "cover": 0.18,
+     "classes": {
+      "1 Jul": 0.0021,
+      "13 Jul": 0.0021,
+      "25 Jul": 0.0127,
+      "18 Aug": 0.0389,
+      "30 Aug": 0.0284,
+      "11 Sep": 0.0338,
+      "23 Sep": 0.0504,
+      "5 Oct": 0.0079,
+      "17 Oct": 0.0035
+     }
+    }
+   },
+   "classes": {
+    "type": "classes",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.2903,
+     "classes": {
+      "Permanent water": 0.0548,
+      "Seasonal open water": 0.0881,
+      "Flooded vegetation": 0.0734,
+      "Got darker, not open water (wetter groun": 0.0368,
+      "Got brighter (growing crops and other ca": 0.0372
+     }
+    },
+    "last": {
+     "cover": 0.2903,
+     "classes": {
+      "Permanent water": 0.0548,
+      "Seasonal open water": 0.0881,
+      "Flooded vegetation": 0.0734,
+      "Got darker, not open water (wetter groun": 0.0368,
+      "Got brighter (growing crops and other ca": 0.0372
+     }
+    }
+   },
+   "change": {
+    "type": "diverging",
+    "n_frames": 9,
+    "dates": [
+     "2026-07-01",
+     "2026-07-13",
+     "2026-07-25",
+     "2026-08-18",
+     "2026-08-30",
+     "2026-09-11",
+     "2026-09-23",
+     "2026-10-05",
+     "2026-10-17"
+    ],
+    "first": {
+     "cover": 0.1195,
+     "mean": 0.259,
+     "p05": -4.31,
+     "p95": 3.55,
+     "std": 2.916
+    },
+    "last": {
+     "cover": 0.4462,
+     "mean": -0.271,
+     "p05": -6.0,
+     "p95": 4.4,
+     "std": 3.802
+    },
+    "first_last_change": 1.997,
+    "spots_change": {
+     "lake-core": 5.9539,
+     "prek-toal": 1.4296,
+     "chong-kneas": 2.5561,
+     "southeast-corridor": 7.8672,
+     "kampong-luong": 3.7298,
+     "upland-forest": 0.0878
+    },
+    "hot_share": 0.0408,
+    "steps": [
+     [
+      "2026-07-13",
+      0.449
+     ],
+     [
+      "2026-07-25",
+      0.611
+     ],
+     [
+      "2026-08-18",
+      1.515
+     ],
+     [
+      "2026-08-30",
+      1.513
+     ],
+     [
+      "2026-09-11",
+      1.755
+     ],
+     [
+      "2026-09-23",
+      2.761
+     ],
+     [
+      "2026-10-05",
+      2.156
+     ],
+     [
+      "2026-10-17",
+      1.728
+     ]
+    ],
+    "cover_series": null
+   },
+   "hv": {
+    "type": "ramp",
+    "n_frames": 10,
+    "dates": [
+     "2026-06-19",
+     "2026-07-01",
+     "2026-07-13",
+     "2026-07-25",
+     "2026-08-18",
+     "2026-08-30",
+     "2026-09-11",
+     "2026-09-23",
+     "2026-10-05",
+     "2026-10-17"
+    ],
+    "first": {
+     "cover": 0.9018,
+     "mean": -16.635,
+     "p05": -25.34,
+     "p95": -9.81,
+     "std": 4.882
+    },
+    "last": {
+     "cover": 0.9018,
+     "mean": -16.903,
+     "p05": -26.46,
+     "p95": -9.38,
+     "std": 5.485
+    },
+    "first_last_change": 8.555,
+    "spots_change": {
+     "lake-core": 14.627,
+     "prek-toal": 33.0553,
+     "chong-kneas": 10.925,
+     "southeast-corridor": 12.2938,
+     "kampong-luong": 9.1173,
+     "upland-forest": 3.6488
+    },
+    "hot_share": 0.1719,
+    "steps": [
+     [
+      "2026-07-01",
+      3.153
+     ],
+     [
+      "2026-07-13",
+      3.25
+     ],
+     [
+      "2026-07-25",
+      3.478
+     ],
+     [
+      "2026-08-18",
+      4.289
+     ],
+     [
+      "2026-08-30",
+      3.425
+     ],
+     [
+      "2026-09-11",
+      3.934
+     ],
+     [
+      "2026-09-23",
+      4.498
+     ],
+     [
+      "2026-10-05",
+      3.302
+     ],
+     [
+      "2026-10-17",
+      3.088
+     ]
+    ],
+    "cover_series": null
+   }
+  }
+ },
+ "inner-niger": {
+  "category": "flood",
+  "defaultLayer": "water",
+  "n_dates": 8,
+  "bounds": [
+   -5.0,
+   14.020785294086165,
+   -3.7394371801992152,
+   15.579999999999998
+  ],
+  "layers": {
+   "hh": {
+    "type": "ramp",
+    "n_frames": 8,
+    "dates": [
+     "2026-06-24",
+     "2026-07-18",
+     "2026-08-11",
+     "2026-08-23",
+     "2026-09-04",
+     "2026-09-16",
+     "2026-09-28",
+     "2026-10-10"
+    ],
+    "first": {
+     "cover": 1.0,
+     "mean": 48.616,
+     "p05": 14.51,
+     "p95": 91.76,
+     "std": 22.324
+    },
+    "last": {
+     "cover": 1.0,
+     "mean": 43.024,
+     "p05": 3.92,
+     "p95": 89.41,
+     "std": 24.899
+    },
+    "first_last_change": 10.882,
+    "spots_change": {
+     "open-water": 8.838,
+     "western-floodplain": 28.0883,
+     "northern-floodplain": 26.0391,
+     "east-bank": 12.5985,
+     "dry-reference": 5.6978
+    },
+    "hot_share": 0.2347,
+    "steps": [
+     [
+      "2026-07-18",
+      5.682
+     ],
+     [
+      "2026-08-11",
+      6.077
+     ],
+     [
+      "2026-08-23",
+      5.393
+     ],
+     [
+      "2026-09-04",
+      6.215
+     ],
+     [
+      "2026-09-16",
+      5.437
+     ],
+     [
+      "2026-09-28",
+      6.404
+     ],
+     [
+      "2026-10-10",
+      7.379
+     ]
+    ],
+    "cover_series": null
+   },
+   "water": {
+    "type": "classes",
+    "n_frames": 8,
+    "dates": [
+     "2026-06-24",
+     "2026-07-18",
+     "2026-08-11",
+     "2026-08-23",
+     "2026-09-04",
+     "2026-09-16",
+     "2026-09-28",
+     "2026-10-10"
+    ],
+    "first": {
+     "cover": 0.0541,
+     "classes": {
+      "Open water": 0.0532,
+      "Possible water under vegetation": 0.0009,
+      "Going under: vegetation submerging, or p": 0.0,
+      "Usually water, not today (rain or wind?)": 0.0
+     }
+    },
+    "last": {
+     "cover": 0.1364,
+     "classes": {
+      "Open water": 0.1329,
+      "Possible water under vegetation": 0.0034,
+      "Going under: vegetation submerging, or p": 0.0,
+      "Usually water, not today (rain or wind?)": 0.0
+     }
+    },
+    "first_last_change": 10.998,
+    "spots_change": {
+     "open-water": 33.0705,
+     "western-floodplain": 66.5891,
+     "northern-floodplain": 58.2484,
+     "east-bank": 0.0,
+     "dry-reference": 0.0
+    },
+    "hot_share": 0.11,
+    "steps": [
+     [
+      "2026-07-18",
+      1.612
+     ],
+     [
+      "2026-08-11",
+      4.935
+     ],
+     [
+      "2026-08-23",
+      2.283
+     ],
+     [
+      "2026-09-04",
+      2.482
+     ],
+     [
+      "2026-09-16",
+      3.488
+     ],
+     [
+      "2026-09-28",
+      2.789
+     ],
+     [
+      "2026-10-10",
+      2.891
+     ]
+    ],
+    "cover_series": null
+   },
+   "when": {
+    "type": "classes",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.1563,
+     "classes": {
+      "18 Jul": 0.0038,
+      "11 Aug": 0.0166,
+      "23 Aug": 0.0123,
+      "4 Sep": 0.0124,
+      "16 Sep": 0.0496,
+      "28 Sep": 0.0239,
+      "10 Oct": 0.0378
+     }
+    },
+    "last": {
+     "cover": 0.1563,
+     "classes": {
+      "18 Jul": 0.0038,
+      "11 Aug": 0.0166,
+      "23 Aug": 0.0123,
+      "4 Sep": 0.0124,
+      "16 Sep": 0.0496,
+      "28 Sep": 0.0239,
+      "10 Oct": 0.0378
+     }
+    }
+   },
+   "classes": {
+    "type": "classes",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.2639,
+     "classes": {
+      "Permanent water": 0.0346,
+      "Seasonal open water": 0.1152,
+      "Flooded vegetation": 0.0081,
+      "Got darker, not open water (wetter groun": 0.0882,
+      "Got brighter (growing crops and other ca": 0.0177
+     }
+    },
+    "last": {
+     "cover": 0.2639,
+     "classes": {
+      "Permanent water": 0.0346,
+      "Seasonal open water": 0.1152,
+      "Flooded vegetation": 0.0081,
+      "Got darker, not open water (wetter groun": 0.0882,
+      "Got brighter (growing crops and other ca": 0.0177
+     }
+    }
+   },
+   "change": {
+    "type": "diverging",
+    "n_frames": 7,
+    "dates": [
+     "2026-07-18",
+     "2026-08-11",
+     "2026-08-23",
+     "2026-09-04",
+     "2026-09-16",
+     "2026-09-28",
+     "2026-10-10"
+    ],
+    "first": {
+     "cover": 0.1372,
+     "mean": -10.474,
+     "p05": -27.31,
+     "p95": 15.78,
+     "std": 12.989
+    },
+    "last": {
+     "cover": 0.3503,
+     "mean": -12.403,
+     "p05": -35.0,
+     "p95": 23.33,
+     "std": 19.234
+    },
+    "first_last_change": 1.359,
+    "spots_change": {
+     "open-water": 0.1301,
+     "western-floodplain": 2.0891,
+     "northern-floodplain": 0.0,
+     "east-bank": 0.1253,
+     "dry-reference": 0.0
+    },
+    "hot_share": 0.0297,
+    "steps": [
+     [
+      "2026-08-11",
+      0.584
+     ],
+     [
+      "2026-08-23",
+      1.132
+     ],
+     [
+      "2026-09-04",
+      1.268
+     ],
+     [
+      "2026-09-16",
+      1.091
+     ],
+     [
+      "2026-09-28",
+      1.511
+     ],
+     [
+      "2026-10-10",
+      2.272
+     ]
+    ],
+    "cover_series": null
+   },
+   "hv": {
+    "type": "ramp",
+    "n_frames": 8,
+    "dates": [
+     "2026-06-24",
+     "2026-07-18",
+     "2026-08-11",
+     "2026-08-23",
+     "2026-09-04",
+     "2026-09-16",
+     "2026-09-28",
+     "2026-10-10"
+    ],
+    "first": {
+     "cover": 1.0,
+     "mean": 36.332,
+     "p05": 3.53,
+     "p95": 85.49,
+     "std": 25.297
+    },
+    "last": {
+     "cover": 1.0,
+     "mean": 28.659,
+     "p05": 2.75,
+     "p95": 66.27,
+     "std": 19.541
+    },
+    "first_last_change": 10.448,
+    "spots_change": {
+     "open-water": 4.14,
+     "western-floodplain": 9.7644,
+     "northern-floodplain": 5.0769,
+     "east-bank": 11.0494,
+     "dry-reference": 11.8133
+    },
+    "hot_share": 0.2285,
+    "steps": [
+     [
+      "2026-07-18",
+      6.611
+     ],
+     [
+      "2026-08-11",
+      4.677
+     ],
+     [
+      "2026-08-23",
+      4.426
+     ],
+     [
+      "2026-09-04",
+      4.098
+     ],
+     [
+      "2026-09-16",
+      7.357
+     ],
+     [
+      "2026-09-28",
+      9.626
+     ],
+     [
+      "2026-10-10",
+      8.088
+     ]
+    ],
+    "cover_series": null
+   }
+  }
+ },
+ "poyang": {
+  "category": "lake",
+  "defaultLayer": "water",
+  "n_dates": 7,
+  "bounds": [
+   115.7,
+   28.5004552634027,
+   117.00056393852124,
+   29.66
+  ],
+  "layers": {
+   "hh": {
+    "type": "ramp",
+    "n_frames": 7,
+    "dates": [
+     "2026-07-05",
+     "2026-07-17",
+     "2026-08-10",
+     "2026-09-03",
+     "2026-09-15",
+     "2026-09-27",
+     "2026-10-09"
+    ],
+    "first": {
+     "cover": 1.0,
+     "mean": 50.238,
+     "p05": 0.39,
+     "p95": 87.06,
+     "std": 27.55
+    },
+    "last": {
+     "cover": 1.0,
+     "mean": 52.637,
+     "p05": 0.78,
+     "p95": 87.84,
+     "std": 25.529
+    },
+    "first_last_change": 6.926,
+    "spots_change": {
+     "open-lake": 4.1594,
+     "western-lake-bed": 11.8359,
+     "southern-floodplain": 15.9175,
+     "eastern-fields": 13.6416,
+     "nanchang": 1.5416
+    },
+    "hot_share": 0.122,
+    "steps": [
+     [
+      "2026-07-17",
+      3.583
+     ],
+     [
+      "2026-08-10",
+      4.578
+     ],
+     [
+      "2026-09-03",
+      5.179
+     ],
+     [
+      "2026-09-15",
+      3.537
+     ],
+     [
+      "2026-09-27",
+      3.825
+     ],
+     [
+      "2026-10-09",
+      3.286
+     ]
+    ],
+    "cover_series": null
+   },
+   "water": {
+    "type": "classes",
+    "n_frames": 7,
+    "dates": [
+     "2026-07-05",
+     "2026-07-17",
+     "2026-08-10",
+     "2026-09-03",
+     "2026-09-15",
+     "2026-09-27",
+     "2026-10-09"
+    ],
+    "first": {
+     "cover": 0.2042,
+     "classes": {
+      "Open water": 0.2036,
+      "Possible water under vegetation": 0.0005,
+      "Going under: vegetation submerging, or p": 0.0,
+      "Usually water, not today (rain or wind?)": 0.0
+     }
+    },
+    "last": {
+     "cover": 0.2232,
+     "classes": {
+      "Open water": 0.198,
+      "Possible water under vegetation": 0.0251,
+      "Going under: vegetation submerging, or p": 0.0001,
+      "Usually water, not today (rain or wind?)": 0.0
+     }
+    },
+    "first_last_change": 3.707,
+    "spots_change": {
+     "open-lake": 0.1083,
+     "western-lake-bed": 7.5176,
+     "southern-floodplain": 25.9339,
+     "eastern-fields": 38.6746,
+     "nanchang": 0.5959
+    },
+    "hot_share": 0.0371,
+    "steps": [
+     [
+      "2026-07-17",
+      0.298
+     ],
+     [
+      "2026-08-10",
+      1.56
+     ],
+     [
+      "2026-09-03",
+      1.645
+     ],
+     [
+      "2026-09-15",
+      1.229
+     ],
+     [
+      "2026-09-27",
+      0.44
+     ],
+     [
+      "2026-10-09",
+      0.937
+     ]
+    ],
+    "cover_series": null
+   },
+   "when": {
+    "type": "classes",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.1195,
+     "classes": {
+      "17 Jul": 0.0058,
+      "10 Aug": 0.0313,
+      "3 Sep": 0.0656,
+      "15 Sep": 0.0081,
+      "27 Sep": 0.008,
+      "9 Oct": 0.0007
+     }
+    },
+    "last": {
+     "cover": 0.1195,
+     "classes": {
+      "17 Jul": 0.0058,
+      "10 Aug": 0.0313,
+      "3 Sep": 0.0656,
+      "15 Sep": 0.0081,
+      "27 Sep": 0.008,
+      "9 Oct": 0.0007
+     }
+    }
+   },
+   "classes": {
+    "type": "classes",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.3043,
+     "classes": {
+      "Permanent water": 0.1929,
+      "Seasonal open water": 0.0126,
+      "Flooded vegetation": 0.0333,
+      "Got darker, not open water (wetter groun": 0.0167,
+      "Got brighter (growing crops and other ca": 0.0488
+     }
+    },
+    "last": {
+     "cover": 0.3043,
+     "classes": {
+      "Permanent water": 0.1929,
+      "Seasonal open water": 0.0126,
+      "Flooded vegetation": 0.0333,
+      "Got darker, not open water (wetter groun": 0.0167,
+      "Got brighter (growing crops and other ca": 0.0488
+     }
+    }
+   },
+   "change": {
+    "type": "diverging",
+    "n_frames": 6,
+    "dates": [
+     "2026-07-17",
+     "2026-08-10",
+     "2026-09-03",
+     "2026-09-15",
+     "2026-09-27",
+     "2026-10-09"
+    ],
+    "first": {
+     "cover": 0.0317,
+     "mean": 5.849,
+     "p05": -15.65,
+     "p95": 30.2,
+     "std": 16.472
+    },
+    "last": {
+     "cover": 0.1946,
+     "mean": 14.169,
+     "p05": -16.33,
+     "p95": 35.0,
+     "std": 14.995
+    },
+    "first_last_change": 0.348,
+    "spots_change": {
+     "open-lake": 0.0124,
+     "western-lake-bed": 2.285,
+     "southern-floodplain": 3.3363,
+     "eastern-fields": 1.4716,
+     "nanchang": 0.0
+    },
+    "hot_share": 0.0086,
+    "steps": [
+     [
+      "2026-08-10",
+      0.295
+     ],
+     [
+      "2026-09-03",
+      0.796
+     ],
+     [
+      "2026-09-15",
+      0.805
+     ],
+     [
+      "2026-09-27",
+      0.628
+     ],
+     [
+      "2026-10-09",
+      0.695
+     ]
+    ],
+    "cover_series": null
+   },
+   "hv": {
+    "type": "ramp",
+    "n_frames": 7,
+    "dates": [
+     "2026-07-05",
+     "2026-07-17",
+     "2026-08-10",
+     "2026-09-03",
+     "2026-09-15",
+     "2026-09-27",
+     "2026-10-09"
+    ],
+    "first": {
+     "cover": 1.0,
+     "mean": 47.699,
+     "p05": 0.39,
+     "p95": 91.37,
+     "std": 29.472
+    },
+    "last": {
+     "cover": 1.0,
+     "mean": 47.794,
+     "p05": 0.78,
+     "p95": 90.59,
+     "std": 27.283
+    },
+    "first_last_change": 5.121,
+    "spots_change": {
+     "open-lake": 2.9072,
+     "western-lake-bed": 10.5798,
+     "southern-floodplain": 13.5247,
+     "eastern-fields": 6.1076,
+     "nanchang": 2.0128
+    },
+    "hot_share": 0.0496,
+    "steps": [
+     [
+      "2026-07-17",
+      3.648
+     ],
+     [
+      "2026-08-10",
+      3.629
+     ],
+     [
+      "2026-09-03",
+      4.143
+     ],
+     [
+      "2026-09-15",
+      3.053
+     ],
+     [
+      "2026-09-27",
+      3.644
+     ],
+     [
+      "2026-10-09",
+      3.208
+     ]
+    ],
+    "cover_series": null
+   }
+  }
+ },
+ "sevan": {
+  "category": "lake",
+  "defaultLayer": "water",
+  "n_dates": 10,
+  "bounds": [
+   44.89999999999999,
+   40.09952951029495,
+   45.69939376605442,
+   40.70000000000001
+  ],
+  "layers": {
+   "hh": {
+    "type": "ramp",
+    "n_frames": 10,
+    "dates": [
+     "2026-06-20",
+     "2026-07-02",
+     "2026-07-14",
+     "2026-07-26",
+     "2026-08-19",
+     "2026-08-31",
+     "2026-09-12",
+     "2026-09-24",
+     "2026-10-06",
+     "2026-10-18"
+    ],
+    "first": {
+     "cover": 1.0,
+     "mean": 35.311,
+     "p05": 0.39,
+     "p95": 87.06,
+     "std": 27.902
+    },
+    "last": {
+     "cover": 1.0,
+     "mean": 33.481,
+     "p05": 0.39,
+     "p95": 87.06,
+     "std": 28.202
+    },
+    "first_last_change": 3.854,
+    "spots_change": {
+     "mid-lake": 0.0935,
+     "gavar-shore": 1.351,
+     "martuni-shore": 2.3216,
+     "sevan-town": 3.8349,
+     "north-lake": 1.7272
+    },
+    "hot_share": 0.0236,
+    "steps": [
+     [
+      "2026-07-02",
+      2.375
+     ],
+     [
+      "2026-07-14",
+      2.379
+     ],
+     [
+      "2026-07-26",
+      2.831
+     ],
+     [
+      "2026-08-19",
+      3.14
+     ],
+     [
+      "2026-08-31",
+      5.203
+     ],
+     [
+      "2026-09-12",
+      5.556
+     ],
+     [
+      "2026-09-24",
+      2.949
+     ],
+     [
+      "2026-10-06",
+      3.448
+     ],
+     [
+      "2026-10-18",
+      2.928
+     ]
+    ],
+    "cover_series": null
+   },
+   "water": {
+    "type": "classes",
+    "n_frames": 10,
+    "dates": [
+     "2026-06-20",
+     "2026-07-02",
+     "2026-07-14",
+     "2026-07-26",
+     "2026-08-19",
+     "2026-08-31",
+     "2026-09-12",
+     "2026-09-24",
+     "2026-10-06",
+     "2026-10-18"
+    ],
+    "first": {
+     "cover": 0.2755,
+     "classes": {
+      "Open water": 0.2755,
+      "Possible water under vegetation": 0.0,
+      "Going under: vegetation submerging, or p": 0.0,
+      "Usually water, not today (rain or wind?)": 0.0
+     }
+    },
+    "last": {
+     "cover": 0.2756,
+     "classes": {
+      "Open water": 0.2755,
+      "Possible water under vegetation": 0.0001,
+      "Going under: vegetation submerging, or p": 0.0,
+      "Usually water, not today (rain or wind?)": 0.0
+     }
+    },
+    "first_last_change": 0.019,
+    "spots_change": {
+     "mid-lake": 0.0,
+     "gavar-shore": 0.0,
+     "martuni-shore": 0.0,
+     "sevan-town": 0.0,
+     "north-lake": 0.0
+    },
+    "hot_share": 0.0002,
+    "steps": [
+     [
+      "2026-07-02",
+      0.0
+     ],
+     [
+      "2026-07-14",
+      0.002
+     ],
+     [
+      "2026-07-26",
+      0.011
+     ],
+     [
+      "2026-08-19",
+      0.014
+     ],
+     [
+      "2026-08-31",
+      0.009
+     ],
+     [
+      "2026-09-12",
+      0.013
+     ],
+     [
+      "2026-09-24",
+      0.002
+     ],
+     [
+      "2026-10-06",
+      0.001
+     ],
+     [
+      "2026-10-18",
+      0.002
+     ]
+    ],
+    "cover_series": null
+   },
+   "when": {
+    "type": "classes",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.0072,
+     "classes": {
+      "2 Jul": 0.0014,
+      "14 Jul": 0.0024,
+      "26 Jul": 0.0008,
+      "19 Aug": 0.0005,
+      "31 Aug": 0.0002,
+      "12 Sep": 0.0006,
+      "24 Sep": 0.0008,
+      "6 Oct": 0.0006,
+      "18 Oct": 0.0
+     }
+    },
+    "last": {
+     "cover": 0.0072,
+     "classes": {
+      "2 Jul": 0.0014,
+      "14 Jul": 0.0024,
+      "26 Jul": 0.0008,
+      "19 Aug": 0.0005,
+      "31 Aug": 0.0002,
+      "12 Sep": 0.0006,
+      "24 Sep": 0.0008,
+      "6 Oct": 0.0006,
+      "18 Oct": 0.0
+     }
+    }
+   },
+   "sig": {
+    "type": "classes",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.0009,
+     "classes": {
+      "largest change by 2 Jul": 0.0,
+      "largest change by 14 Jul": 0.0001,
+      "largest change by 26 Jul": 0.0001,
+      "largest change by 19 Aug": 0.0002,
+      "largest change by 31 Aug": 0.0002,
+      "largest change by 12 Sep": 0.0001,
+      "largest change by 24 Sep": 0.0001,
+      "largest change by 6 Oct": 0.0001,
+      "largest change by 18 Oct": 0.0001
+     }
+    },
+    "last": {
+     "cover": 0.0009,
+     "classes": {
+      "largest change by 2 Jul": 0.0,
+      "largest change by 14 Jul": 0.0001,
+      "largest change by 26 Jul": 0.0001,
+      "largest change by 19 Aug": 0.0002,
+      "largest change by 31 Aug": 0.0002,
+      "largest change by 12 Sep": 0.0001,
+      "largest change by 24 Sep": 0.0001,
+      "largest change by 6 Oct": 0.0001,
+      "largest change by 18 Oct": 0.0001
+     }
+    }
+   },
+   "classes": {
+    "type": "classes",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.2827,
+     "classes": {
+      "Permanent water": 0.2754,
+      "Seasonal open water": 0.0001,
+      "Flooded vegetation": 0.0002,
+      "Got darker, not open water (wetter groun": 0.0028,
+      "Got brighter (growing crops and other ca": 0.0041
+     }
+    },
+    "last": {
+     "cover": 0.2827,
+     "classes": {
+      "Permanent water": 0.2754,
+      "Seasonal open water": 0.0001,
+      "Flooded vegetation": 0.0002,
+      "Got darker, not open water (wetter groun": 0.0028,
+      "Got brighter (growing crops and other ca": 0.0041
+     }
+    }
+   },
+   "change": {
+    "type": "diverging",
+    "n_frames": 9,
+    "dates": [
+     "2026-07-02",
+     "2026-07-14",
+     "2026-07-26",
+     "2026-08-19",
+     "2026-08-31",
+     "2026-09-12",
+     "2026-09-24",
+     "2026-10-06",
+     "2026-10-18"
+    ],
+    "first": {
+     "cover": 0.0066,
+     "mean": 5.315,
+     "p05": -22.53,
+     "p95": 25.14,
+     "std": 18.67
+    },
+    "last": {
+     "cover": 0.0655,
+     "mean": -6.924,
+     "p05": -17.84,
+     "p95": 22.78,
+     "std": 13.482
+    },
+    "first_last_change": 0.039,
+    "spots_change": {
+     "mid-lake": 0.0,
+     "gavar-shore": 0.0,
+     "martuni-shore": 0.0,
+     "sevan-town": 0.0,
+     "north-lake": 0.0
+    },
+    "hot_share": 0.0005,
+    "steps": [
+     [
+      "2026-07-14",
+      0.024
+     ],
+     [
+      "2026-07-26",
+      0.039
+     ],
+     [
+      "2026-08-19",
+      0.052
+     ],
+     [
+      "2026-08-31",
+      0.138
+     ],
+     [
+      "2026-09-12",
+      0.234
+     ],
+     [
+      "2026-09-24",
+      0.092
+     ],
+     [
+      "2026-10-06",
+      0.114
+     ],
+     [
+      "2026-10-18",
+      0.121
+     ]
+    ],
+    "cover_series": null
+   },
+   "hv": {
+    "type": "ramp",
+    "n_frames": 10,
+    "dates": [
+     "2026-06-20",
+     "2026-07-02",
+     "2026-07-14",
+     "2026-07-26",
+     "2026-08-19",
+     "2026-08-31",
+     "2026-09-12",
+     "2026-09-24",
+     "2026-10-06",
+     "2026-10-18"
+    ],
+    "first": {
+     "cover": 1.0,
+     "mean": 30.823,
+     "p05": 1.18,
+     "p95": 78.82,
+     "std": 23.733
+    },
+    "last": {
+     "cover": 1.0,
+     "mean": 32.395,
+     "p05": 3.14,
+     "p95": 78.04,
+     "std": 22.331
+    },
+    "first_last_change": 4.116,
+    "spots_change": {
+     "mid-lake": 7.7421,
+     "gavar-shore": 4.9373,
+     "martuni-shore": 1.7762,
+     "sevan-town": 2.891,
+     "north-lake": 3.7496
+    },
+    "hot_share": 0.006,
+    "steps": [
+     [
+      "2026-07-02",
+      2.025
+     ],
+     [
+      "2026-07-14",
+      2.245
+     ],
+     [
+      "2026-07-26",
+      2.411
+     ],
+     [
+      "2026-08-19",
+      2.712
+     ],
+     [
+      "2026-08-31",
+      3.723
+     ],
+     [
+      "2026-09-12",
+      4.617
+     ],
+     [
+      "2026-09-24",
+      2.247
+     ],
+     [
+      "2026-10-06",
+      4.757
+     ],
+     [
+      "2026-10-18",
+      5.075
+     ]
+    ],
+    "cover_series": null
+   }
+  }
+ },
+ "bangladesh-haor": {
+  "category": "flood",
+  "defaultLayer": "water",
+  "n_dates": 10,
+  "bounds": [
+   90.6,
+   24.1998190148284,
+   91.49973776460733,
+   25.279999999999994
+  ],
+  "layers": {
+   "hh": {
+    "type": "ramp",
+    "n_frames": 10,
+    "dates": [
+     "2026-06-18",
+     "2026-06-30",
+     "2026-07-12",
+     "2026-07-24",
+     "2026-08-17",
+     "2026-08-29",
+     "2026-09-10",
+     "2026-09-22",
+     "2026-10-04",
+     "2026-10-16"
+    ],
+    "first": {
+     "cover": 1.0,
+     "mean": 36.567,
+     "p05": 0.78,
+     "p95": 79.61,
+     "std": 27.287
+    },
+    "last": {
+     "cover": 1.0,
+     "mean": 44.07,
+     "p05": 0.78,
+     "p95": 89.02,
+     "std": 29.205
+    },
+    "first_last_change": 9.95,
+    "spots_change": {
+     "central-haor": 1.0875,
+     "haor-edge": 4.6181,
+     "western-margin": 17.171,
+     "sunamganj": 8.4046,
+     "northern-border": 4.194
+    },
+    "hot_share": 0.229,
+    "steps": [
+     [
+      "2026-06-30",
+      6.034
+     ],
+     [
+      "2026-07-12",
+      6.934
+     ],
+     [
+      "2026-07-24",
+      3.667
+     ],
+     [
+      "2026-08-17",
+      3.797
+     ],
+     [
+      "2026-08-29",
+      3.403
+     ],
+     [
+      "2026-09-10",
+      3.54
+     ],
+     [
+      "2026-09-22",
+      3.983
+     ],
+     [
+      "2026-10-04",
+      5.197
+     ],
+     [
+      "2026-10-16",
+      3.553
+     ]
+    ],
+    "cover_series": null
+   },
+   "water": {
+    "type": "classes",
+    "n_frames": 10,
+    "dates": [
+     "2026-06-18",
+     "2026-06-30",
+     "2026-07-12",
+     "2026-07-24",
+     "2026-08-17",
+     "2026-08-29",
+     "2026-09-10",
+     "2026-09-22",
+     "2026-10-04",
+     "2026-10-16"
+    ],
+    "first": {
+     "cover": 0.35,
+     "classes": {
+      "Open water": 0.3482,
+      "Possible water under vegetation": 0.0018,
+      "Going under: vegetation submerging, or p": 0.0,
+      "Usually water, not today (rain or wind?)": 0.0
+     }
+    },
+    "last": {
+     "cover": 0.325,
+     "classes": {
+      "Open water": 0.3129,
+      "Possible water under vegetation": 0.0118,
+      "Going under: vegetation submerging, or p": 0.0002,
+      "Usually water, not today (rain or wind?)": 0.0
+     }
+    },
+    "first_last_change": 6.139,
+    "spots_change": {
+     "central-haor": 0.0944,
+     "haor-edge": 5.5713,
+     "western-margin": 0.0,
+     "sunamganj": 1.8904,
+     "northern-border": 0.0
+    },
+    "hot_share": 0.0614,
+    "steps": [
+     [
+      "2026-06-30",
+      0.19
+     ],
+     [
+      "2026-07-12",
+      2.153
+     ],
+     [
+      "2026-07-24",
+      0.75
+     ],
+     [
+      "2026-08-17",
+      2.975
+     ],
+     [
+      "2026-08-29",
+      1.379
+     ],
+     [
+      "2026-09-10",
+      1.207
+     ],
+     [
+      "2026-09-22",
+      1.621
+     ],
+     [
+      "2026-10-04",
+      1.841
+     ],
+     [
+      "2026-10-16",
+      0.404
+     ]
+    ],
+    "cover_series": null
+   },
+   "when": {
+    "type": "classes",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.1879,
+     "classes": {
+      "30 Jun": 0.0002,
+      "12 Jul": 0.0038,
+      "24 Jul": 0.0006,
+      "17 Aug": 0.0057,
+      "29 Aug": 0.0052,
+      "10 Sep": 0.0121,
+      "22 Sep": 0.0642,
+      "4 Oct": 0.0954,
+      "16 Oct": 0.0006
+     }
+    },
+    "last": {
+     "cover": 0.1879,
+     "classes": {
+      "30 Jun": 0.0002,
+      "12 Jul": 0.0038,
+      "24 Jul": 0.0006,
+      "17 Aug": 0.0057,
+      "29 Aug": 0.0052,
+      "10 Sep": 0.0121,
+      "22 Sep": 0.0642,
+      "4 Oct": 0.0954,
+      "16 Oct": 0.0006
+     }
+    }
+   },
+   "classes": {
+    "type": "classes",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.5468,
+     "classes": {
+      "Permanent water": 0.306,
+      "Seasonal open water": 0.0624,
+      "Flooded vegetation": 0.0217,
+      "Got darker, not open water (wetter groun": 0.0095,
+      "Got brighter (growing crops and other ca": 0.1472
+     }
+    },
+    "last": {
+     "cover": 0.5468,
+     "classes": {
+      "Permanent water": 0.306,
+      "Seasonal open water": 0.0624,
+      "Flooded vegetation": 0.0217,
+      "Got darker, not open water (wetter groun": 0.0095,
+      "Got brighter (growing crops and other ca": 0.1472
+     }
+    }
+   },
+   "change": {
+    "type": "diverging",
+    "n_frames": 9,
+    "dates": [
+     "2026-06-30",
+     "2026-07-12",
+     "2026-07-24",
+     "2026-08-17",
+     "2026-08-29",
+     "2026-09-10",
+     "2026-09-22",
+     "2026-10-04",
+     "2026-10-16"
+    ],
+    "first": {
+     "cover": 0.1826,
+     "mean": 13.591,
+     "p05": 11.53,
+     "p95": 19.76,
+     "std": 4.768
+    },
+    "last": {
+     "cover": 0.3562,
+     "mean": 19.033,
+     "p05": 11.67,
+     "p95": 35.0,
+     "std": 8.836
+    },
+    "first_last_change": 0.665,
+    "spots_change": {
+     "central-haor": 0.0,
+     "haor-edge": 0.1859,
+     "western-margin": 2.2999,
+     "sunamganj": 0.0324,
+     "northern-border": 0.0
+    },
+    "hot_share": 0.0186,
+    "steps": [
+     [
+      "2026-07-12",
+      0.274
+     ],
+     [
+      "2026-07-24",
+      0.205
+     ],
+     [
+      "2026-08-17",
+      0.261
+     ],
+     [
+      "2026-08-29",
+      0.218
+     ],
+     [
+      "2026-09-10",
+      0.198
+     ],
+     [
+      "2026-09-22",
+      0.372
+     ],
+     [
+      "2026-10-04",
+      1.182
+     ],
+     [
+      "2026-10-16",
+      1.358
+     ]
+    ],
+    "cover_series": null
+   },
+   "hv": {
+    "type": "ramp",
+    "n_frames": 10,
+    "dates": [
+     "2026-06-18",
+     "2026-06-30",
+     "2026-07-12",
+     "2026-07-24",
+     "2026-08-17",
+     "2026-08-29",
+     "2026-09-10",
+     "2026-09-22",
+     "2026-10-04",
+     "2026-10-16"
+    ],
+    "first": {
+     "cover": 1.0,
+     "mean": 38.305,
+     "p05": 0.39,
+     "p95": 94.12,
+     "std": 31.267
+    },
+    "last": {
+     "cover": 1.0,
+     "mean": 42.195,
+     "p05": 0.39,
+     "p95": 92.16,
+     "std": 30.622
+    },
+    "first_last_change": 5.658,
+    "spots_change": {
+     "central-haor": 0.1939,
+     "haor-edge": 3.6015,
+     "western-margin": 6.571,
+     "sunamganj": 4.6258,
+     "northern-border": 1.9821
+    },
+    "hot_share": 0.0789,
+    "steps": [
+     [
+      "2026-06-30",
+      7.069
+     ],
+     [
+      "2026-07-12",
+      8.133
+     ],
+     [
+      "2026-07-24",
+      2.816
+     ],
+     [
+      "2026-08-17",
+      3.34
+     ],
+     [
+      "2026-08-29",
+      2.708
+     ],
+     [
+      "2026-09-10",
+      2.474
+     ],
+     [
+      "2026-09-22",
+      2.506
+     ],
+     [
+      "2026-10-04",
+      4.08
+     ],
+     [
+      "2026-10-16",
+      2.809
+     ]
+    ],
+    "cover_series": null
+   }
+  }
+ },
+ "okavango": {
+  "category": "wetland",
+  "defaultLayer": "water",
+  "n_dates": 9,
+  "bounds": [
+   22.479999999999997,
+   -19.999850078420668,
+   23.80017927198529,
+   -18.6
+  ],
+  "layers": {
+   "hh": {
+    "type": "ramp",
+    "n_frames": 9,
+    "dates": [
+     "2026-06-26",
+     "2026-07-08",
+     "2026-07-20",
+     "2026-08-13",
+     "2026-08-25",
+     "2026-09-06",
+     "2026-09-18",
+     "2026-09-30",
+     "2026-10-12"
+    ],
+    "first": {
+     "cover": 1.0,
+     "mean": 63.246,
+     "p05": 25.49,
+     "p95": 96.08,
+     "std": 21.606
+    },
+    "last": {
+     "cover": 1.0,
+     "mean": 66.58,
+     "p05": 32.55,
+     "p95": 95.29,
+     "std": 18.897
+    },
+    "first_last_change": 7.785,
+    "spots_change": {
+     "papyrus-channel": 7.236,
+     "upper-floodplain": 12.1907,
+     "eastern-floodplain": 14.0572,
+     "southern-floodplain": 4.2801,
+     "sandveld": 7.1391
+    },
+    "hot_share": 0.1481,
+    "steps": [
+     [
+      "2026-07-08",
+      3.259
+     ],
+     [
+      "2026-07-20",
+      2.881
+     ],
+     [
+      "2026-08-13",
+      2.572
+     ],
+     [
+      "2026-08-25",
+      2.382
+     ],
+     [
+      "2026-09-06",
+      2.376
+     ],
+     [
+      "2026-09-18",
+      2.47
+     ],
+     [
+      "2026-09-30",
+      5.783
+     ],
+     [
+      "2026-10-12",
+      6.163
+     ]
+    ],
+    "cover_series": null
+   },
+   "water": {
+    "type": "classes",
+    "n_frames": 9,
+    "dates": [
+     "2026-06-26",
+     "2026-07-08",
+     "2026-07-20",
+     "2026-08-13",
+     "2026-08-25",
+     "2026-09-06",
+     "2026-09-18",
+     "2026-09-30",
+     "2026-10-12"
+    ],
+    "first": {
+     "cover": 0.0,
+     "classes": {
+      "Open water": 0.0,
+      "Possible water under vegetation": 0.0,
+      "Going under: vegetation submerging, or p": 0.0,
+      "Usually water, not today (rain or wind?)": 0.0
+     }
+    },
+    "last": {
+     "cover": 0.0,
+     "classes": {
+      "Open water": 0.0,
+      "Possible water under vegetation": 0.0,
+      "Going under: vegetation submerging, or p": 0.0,
+      "Usually water, not today (rain or wind?)": 0.0
+     }
+    },
+    "first_last_change": 0.0,
+    "spots_change": {
+     "papyrus-channel": 0.0,
+     "upper-floodplain": 0.0,
+     "eastern-floodplain": 0.0,
+     "southern-floodplain": 0.0,
+     "sandveld": 0.0
+    },
+    "hot_share": 0.0,
+    "steps": [
+     [
+      "2026-07-08",
+      0.0
+     ],
+     [
+      "2026-07-20",
+      0.0
+     ],
+     [
+      "2026-08-13",
+      0.0
+     ],
+     [
+      "2026-08-25",
+      0.0
+     ],
+     [
+      "2026-09-06",
+      0.0
+     ],
+     [
+      "2026-09-18",
+      0.0
+     ],
+     [
+      "2026-09-30",
+      0.0
+     ],
+     [
+      "2026-10-12",
+      0.0
+     ]
+    ],
+    "cover_series": null
+   },
+   "when": {
+    "type": "classes",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.1361,
+     "classes": {
+      "8 Jul": 0.0124,
+      "20 Jul": 0.031,
+      "13 Aug": 0.0314,
+      "25 Aug": 0.0172,
+      "6 Sep": 0.0189,
+      "18 Sep": 0.01,
+      "30 Sep": 0.0017,
+      "12 Oct": 0.0136
+     }
+    },
+    "last": {
+     "cover": 0.1361,
+     "classes": {
+      "8 Jul": 0.0124,
+      "20 Jul": 0.031,
+      "13 Aug": 0.0314,
+      "25 Aug": 0.0172,
+      "6 Sep": 0.0189,
+      "18 Sep": 0.01,
+      "30 Sep": 0.0017,
+      "12 Oct": 0.0136
+     }
+    }
+   },
+   "classes": {
+    "type": "classes",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.1361,
+     "classes": {
+      "Permanent water": 0.0,
+      "Seasonal open water": 0.0,
+      "Flooded vegetation": 0.0,
+      "Got darker, not open water (wetter groun": 0.0139,
+      "Got brighter (growing crops and other ca": 0.1222
+     }
+    },
+    "last": {
+     "cover": 0.1361,
+     "classes": {
+      "Permanent water": 0.0,
+      "Seasonal open water": 0.0,
+      "Flooded vegetation": 0.0,
+      "Got darker, not open water (wetter groun": 0.0139,
+      "Got brighter (growing crops and other ca": 0.1222
+     }
+    }
+   },
+   "change": {
+    "type": "diverging",
+    "n_frames": 8,
+    "dates": [
+     "2026-07-08",
+     "2026-07-20",
+     "2026-08-13",
+     "2026-08-25",
+     "2026-09-06",
+     "2026-09-18",
+     "2026-09-30",
+     "2026-10-12"
+    ],
+    "first": {
+     "cover": 0.0234,
+     "mean": -7.745,
+     "p05": -17.85,
+     "p95": 19.75,
+     "std": 14.061
+    },
+    "last": {
+     "cover": 0.2174,
+     "mean": 17.379,
+     "p05": -14.0,
+     "p95": 35.0,
+     "std": 14.521
+    },
+    "first_last_change": 0.128,
+    "spots_change": {
+     "papyrus-channel": 1.2043,
+     "upper-floodplain": 0.1107,
+     "eastern-floodplain": 0.0,
+     "southern-floodplain": 0.0,
+     "sandveld": 0.1201
+    },
+    "hot_share": 0.0024,
+    "steps": [
+     [
+      "2026-07-20",
+      0.129
+     ],
+     [
+      "2026-08-13",
+      0.354
+     ],
+     [
+      "2026-08-25",
+      0.363
+     ],
+     [
+      "2026-09-06",
+      0.508
+     ],
+     [
+      "2026-09-18",
+      0.59
+     ],
+     [
+      "2026-09-30",
+      0.707
+     ],
+     [
+      "2026-10-12",
+      0.801
+     ]
+    ],
+    "cover_series": null
+   },
+   "hv": {
+    "type": "ramp",
+    "n_frames": 9,
+    "dates": [
+     "2026-06-26",
+     "2026-07-08",
+     "2026-07-20",
+     "2026-08-13",
+     "2026-08-25",
+     "2026-09-06",
+     "2026-09-18",
+     "2026-09-30",
+     "2026-10-12"
+    ],
+    "first": {
+     "cover": 1.0,
+     "mean": 60.565,
+     "p05": 23.92,
+     "p95": 92.16,
+     "std": 21.689
+    },
+    "last": {
+     "cover": 1.0,
+     "mean": 64.846,
+     "p05": 32.55,
+     "p95": 92.55,
+     "std": 18.484
+    },
+    "first_last_change": 6.848,
+    "spots_change": {
+     "papyrus-channel": 8.4409,
+     "upper-floodplain": 13.4287,
+     "eastern-floodplain": 13.5541,
+     "southern-floodplain": 4.0032,
+     "sandveld": 2.2268
+    },
+    "hot_share": 0.1401,
+    "steps": [
+     [
+      "2026-07-08",
+      2.427
+     ],
+     [
+      "2026-07-20",
+      2.755
+     ],
+     [
+      "2026-08-13",
+      2.708
+     ],
+     [
+      "2026-08-25",
+      2.298
+     ],
+     [
+      "2026-09-06",
+      2.283
+     ],
+     [
+      "2026-09-18",
+      2.436
+     ],
+     [
+      "2026-09-30",
+      2.898
+     ],
+     [
+      "2026-10-12",
+      3.187
+     ]
+    ],
+    "cover_series": null
+   }
+  }
+ },
+ "ararat": {
+  "category": "land",
+  "defaultLayer": "water",
+  "n_dates": 10,
+  "bounds": [
+   44.0,
+   39.799318784086104,
+   44.799665048324854,
+   40.29999999999999
+  ],
+  "layers": {
+   "hh": {
+    "type": "ramp",
+    "n_frames": 10,
+    "dates": [
+     "2026-06-20",
+     "2026-07-02",
+     "2026-07-14",
+     "2026-07-26",
+     "2026-08-19",
+     "2026-08-31",
+     "2026-09-12",
+     "2026-09-24",
+     "2026-10-06",
+     "2026-10-18"
+    ],
+    "first": {
+     "cover": 1.0,
+     "mean": 48.737,
+     "p05": 21.96,
+     "p95": 94.51,
+     "std": 20.831
+    },
+    "last": {
+     "cover": 1.0,
+     "mean": 49.122,
+     "p05": 21.18,
+     "p95": 94.51,
+     "std": 20.982
+    },
+    "first_last_change": 2.927,
+    "spots_change": {
+     "masis-fields": 2.9832,
+     "fish-ponds": 3.3724,
+     "vedi-vineyards": 2.4874,
+     "aknalich": 3.6546,
+     "yerevan": 1.2944
+    },
+    "hot_share": 0.0034,
+    "steps": [
+     [
+      "2026-07-02",
+      2.4
+     ],
+     [
+      "2026-07-14",
+      2.366
+     ],
+     [
+      "2026-07-26",
+      2.309
+     ],
+     [
+      "2026-08-19",
+      2.316
+     ],
+     [
+      "2026-08-31",
+      4.29
+     ],
+     [
+      "2026-09-12",
+      4.304
+     ],
+     [
+      "2026-09-24",
+      2.181
+     ],
+     [
+      "2026-10-06",
+      2.843
+     ],
+     [
+      "2026-10-18",
+      2.666
+     ]
+    ],
+    "cover_series": null
+   },
+   "water": {
+    "type": "classes",
+    "n_frames": 10,
+    "dates": [
+     "2026-06-20",
+     "2026-07-02",
+     "2026-07-14",
+     "2026-07-26",
+     "2026-08-19",
+     "2026-08-31",
+     "2026-09-12",
+     "2026-09-24",
+     "2026-10-06",
+     "2026-10-18"
+    ],
+    "first": {
+     "cover": 0.0001,
+     "classes": {
+      "Open water": 0.0001,
+      "Possible water under vegetation": 0.0,
+      "Going under: vegetation submerging, or p": 0.0,
+      "Usually water, not today (rain or wind?)": 0.0
+     }
+    },
+    "last": {
+     "cover": 0.0001,
+     "classes": {
+      "Open water": 0.0001,
+      "Possible water under vegetation": 0.0,
+      "Going under: vegetation submerging, or p": 0.0,
+      "Usually water, not today (rain or wind?)": 0.0
+     }
+    },
+    "first_last_change": 0.001,
+    "spots_change": {
+     "masis-fields": 0.0,
+     "fish-ponds": 0.0,
+     "vedi-vineyards": 0.1923,
+     "aknalich": 0.0,
+     "yerevan": 0.0
+    },
+    "hot_share": 0.0,
+    "steps": [
+     [
+      "2026-07-02",
+      0.001
+     ],
+     [
+      "2026-07-14",
+      0.0
+     ],
+     [
+      "2026-07-26",
+      0.0
+     ],
+     [
+      "2026-08-19",
+      0.0
+     ],
+     [
+      "2026-08-31",
+      0.0
+     ],
+     [
+      "2026-09-12",
+      0.0
+     ],
+     [
+      "2026-09-24",
+      0.0
+     ],
+     [
+      "2026-10-06",
+      0.0
+     ],
+     [
+      "2026-10-18",
+      0.0
+     ]
+    ],
+    "cover_series": null
+   },
+   "when": {
+    "type": "classes",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.0039,
+     "classes": {
+      "2 Jul": 0.0002,
+      "14 Jul": 0.0006,
+      "26 Jul": 0.0016,
+      "19 Aug": 0.0008,
+      "31 Aug": 0.0,
+      "12 Sep": 0.0005,
+      "24 Sep": 0.0001,
+      "6 Oct": 0.0002,
+      "18 Oct": 0.0
+     }
+    },
+    "last": {
+     "cover": 0.0039,
+     "classes": {
+      "2 Jul": 0.0002,
+      "14 Jul": 0.0006,
+      "26 Jul": 0.0016,
+      "19 Aug": 0.0008,
+      "31 Aug": 0.0,
+      "12 Sep": 0.0005,
+      "24 Sep": 0.0001,
+      "6 Oct": 0.0002,
+      "18 Oct": 0.0
+     }
+    }
+   },
+   "sig": {
+    "type": "classes",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.0001,
+     "classes": {
+      "largest change by 2 Jul": 0.0,
+      "largest change by 14 Jul": 0.0,
+      "largest change by 26 Jul": 0.0,
+      "largest change by 19 Aug": 0.0,
+      "largest change by 31 Aug": 0.0,
+      "largest change by 12 Sep": 0.0,
+      "largest change by 24 Sep": 0.0,
+      "largest change by 6 Oct": 0.0,
+      "largest change by 18 Oct": 0.0
+     }
+    },
+    "last": {
+     "cover": 0.0001,
+     "classes": {
+      "largest change by 2 Jul": 0.0,
+      "largest change by 14 Jul": 0.0,
+      "largest change by 26 Jul": 0.0,
+      "largest change by 19 Aug": 0.0,
+      "largest change by 31 Aug": 0.0,
+      "largest change by 12 Sep": 0.0,
+      "largest change by 24 Sep": 0.0,
+      "largest change by 6 Oct": 0.0,
+      "largest change by 18 Oct": 0.0
+     }
+    }
+   },
+   "classes": {
+    "type": "classes",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.004,
+     "classes": {
+      "Permanent water": 0.0001,
+      "Seasonal open water": 0.0,
+      "Flooded vegetation": 0.0,
+      "Got darker, not open water (wetter groun": 0.002,
+      "Got brighter (growing crops and other ca": 0.0019
+     }
+    },
+    "last": {
+     "cover": 0.004,
+     "classes": {
+      "Permanent water": 0.0001,
+      "Seasonal open water": 0.0,
+      "Flooded vegetation": 0.0,
+      "Got darker, not open water (wetter groun": 0.002,
+      "Got brighter (growing crops and other ca": 0.0019
+     }
+    }
+   },
+   "change": {
+    "type": "diverging",
+    "n_frames": 9,
+    "dates": [
+     "2026-07-02",
+     "2026-07-14",
+     "2026-07-26",
+     "2026-08-19",
+     "2026-08-31",
+     "2026-09-12",
+     "2026-09-24",
+     "2026-10-06",
+     "2026-10-18"
+    ],
+    "first": {
+     "cover": 0.0019,
+     "mean": -1.228,
+     "p05": -27.38,
+     "p95": 29.92,
+     "std": 24.525
+    },
+    "last": {
+     "cover": 0.0123,
+     "mean": 2.426,
+     "p05": -17.98,
+     "p95": 17.98,
+     "std": 13.826
+    },
+    "first_last_change": 0.006,
+    "spots_change": {
+     "masis-fields": 0.0,
+     "fish-ponds": 0.0,
+     "vedi-vineyards": 0.0,
+     "aknalich": 0.0,
+     "yerevan": 0.0
+    },
+    "hot_share": 0.0002,
+    "steps": [
+     [
+      "2026-07-14",
+      0.005
+     ],
+     [
+      "2026-07-26",
+      0.026
+     ],
+     [
+      "2026-08-19",
+      0.054
+     ],
+     [
+      "2026-08-31",
+      0.063
+     ],
+     [
+      "2026-09-12",
+      0.042
+     ],
+     [
+      "2026-09-24",
+      0.025
+     ],
+     [
+      "2026-10-06",
+      0.038
+     ],
+     [
+      "2026-10-18",
+      0.032
+     ]
+    ],
+    "cover_series": null
+   },
+   "coh": {
+    "type": "ramp",
+    "n_frames": 9,
+    "dates": [
+     "2026-07-02",
+     "2026-07-14",
+     "2026-07-26",
+     "2026-08-19",
+     "2026-08-31",
+     "2026-09-12",
+     "2026-09-24",
+     "2026-10-06",
+     "2026-10-18"
+    ],
+    "first": {
+     "cover": 1.0,
+     "mean": 0.448,
+     "p05": 0.2,
+     "p95": 0.75,
+     "std": 0.174
+    },
+    "last": {
+     "cover": 1.0,
+     "mean": 0.505,
+     "p05": 0.24,
+     "p95": 0.78,
+     "std": 0.17
+    },
+    "first_last_change": 8.949,
+    "spots_change": {
+     "masis-fields": 8.8796,
+     "fish-ponds": 13.9049,
+     "vedi-vineyards": 8.9676,
+     "aknalich": 7.2481,
+     "yerevan": 5.6945
+    },
+    "hot_share": 0.1787,
+    "steps": [
+     [
+      "2026-07-14",
+      4.46
+     ],
+     [
+      "2026-07-26",
+      4.706
+     ],
+     [
+      "2026-08-19",
+      5.469
+     ],
+     [
+      "2026-08-31",
+      6.502
+     ],
+     [
+      "2026-09-12",
+      4.576
+     ],
+     [
+      "2026-09-24",
+      8.077
+     ],
+     [
+      "2026-10-06",
+      6.231
+     ],
+     [
+      "2026-10-18",
+      5.032
+     ]
+    ],
+    "cover_series": null
+   },
+   "coh_change": {
+    "type": "diverging",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.4262,
+     "mean": -0.149,
+     "p05": -0.4,
+     "p95": -0.03,
+     "std": 0.115
+    },
+    "last": {
+     "cover": 0.4262,
+     "mean": -0.149,
+     "p05": -0.4,
+     "p95": -0.03,
+     "std": 0.115
+    }
+   },
+   "hv": {
+    "type": "ramp",
+    "n_frames": 10,
+    "dates": [
+     "2026-06-20",
+     "2026-07-02",
+     "2026-07-14",
+     "2026-07-26",
+     "2026-08-19",
+     "2026-08-31",
+     "2026-09-12",
+     "2026-09-24",
+     "2026-10-06",
+     "2026-10-18"
+    ],
+    "first": {
+     "cover": 1.0,
+     "mean": 56.847,
+     "p05": 33.73,
+     "p95": 88.24,
+     "std": 16.213
+    },
+    "last": {
+     "cover": 1.0,
+     "mean": 57.388,
+     "p05": 34.51,
+     "p95": 87.06,
+     "std": 15.584
+    },
+    "first_last_change": 2.29,
+    "spots_change": {
+     "masis-fields": 1.8283,
+     "fish-ponds": 2.4842,
+     "vedi-vineyards": 2.2262,
+     "aknalich": 3.0529,
+     "yerevan": 1.7209
+    },
+    "hot_share": 0.0002,
+    "steps": [
+     [
+      "2026-07-02",
+      1.783
+     ],
+     [
+      "2026-07-14",
+      2.019
+     ],
+     [
+      "2026-07-26",
+      2.028
+     ],
+     [
+      "2026-08-19",
+      1.838
+     ],
+     [
+      "2026-08-31",
+      2.123
+     ],
+     [
+      "2026-09-12",
+      2.328
+     ],
+     [
+      "2026-09-24",
+      1.723
+     ],
+     [
+      "2026-10-06",
+      7.096
+     ],
+     [
+      "2026-10-18",
+      7.309
+     ]
+    ],
+    "cover_series": null
+   }
+  }
+ },
+ "urmia": {
+  "category": "lake",
+  "defaultLayer": "water",
+  "n_dates": 9,
+  "bounds": [
+   45.0,
+   37.49931207979482,
+   45.98103535386079,
+   38.29999999999999
+  ],
+  "layers": {
+   "hh": {
+    "type": "ramp",
+    "n_frames": 9,
+    "dates": [
+     "2026-06-20",
+     "2026-07-02",
+     "2026-07-14",
+     "2026-07-26",
+     "2026-08-19",
+     "2026-08-31",
+     "2026-09-12",
+     "2026-10-06",
+     "2026-10-18"
+    ],
+    "first": {
+     "cover": 1.0,
+     "mean": 26.351,
+     "p05": 0.39,
+     "p95": 82.75,
+     "std": 26.726
+    },
+    "last": {
+     "cover": 1.0,
+     "mean": 28.226,
+     "p05": 0.39,
+     "p95": 85.1,
+     "std": 27.01
+    },
+    "first_last_change": 3.883,
+    "spots_change": {
+     "open-lake": 3.0361,
+     "west-shore": 7.9153,
+     "south-of-causeway": 12.4697,
+     "eslami-island": 2.5784
+    },
+    "hot_share": 0.01,
+    "steps": [
+     [
+      "2026-07-02",
+      2.838
+     ],
+     [
+      "2026-07-14",
+      3.06
+     ],
+     [
+      "2026-07-26",
+      2.57
+     ],
+     [
+      "2026-08-19",
+      3.056
+     ],
+     [
+      "2026-08-31",
+      3.406
+     ],
+     [
+      "2026-09-12",
+      3.189
+     ],
+     [
+      "2026-10-06",
+      2.532
+     ],
+     [
+      "2026-10-18",
+      4.45
+     ]
+    ],
+    "cover_series": null
+   },
+   "water": {
+    "type": "classes",
+    "n_frames": 9,
+    "dates": [
+     "2026-06-20",
+     "2026-07-02",
+     "2026-07-14",
+     "2026-07-26",
+     "2026-08-19",
+     "2026-08-31",
+     "2026-09-12",
+     "2026-10-06",
+     "2026-10-18"
+    ],
+    "first": {
+     "cover": 0.4048,
+     "classes": {
+      "Open water": 0.4048,
+      "Possible water under vegetation": 0.0,
+      "Going under: vegetation submerging, or p": 0.0,
+      "Usually water, not today (rain or wind?)": 0.0
+     }
+    },
+    "last": {
+     "cover": 0.3469,
+     "classes": {
+      "Open water": 0.3469,
+      "Possible water under vegetation": 0.0,
+      "Going under: vegetation submerging, or p": 0.0,
+      "Usually water, not today (rain or wind?)": 0.0
+     }
+    },
+    "first_last_change": 9.063,
+    "spots_change": {
+     "open-lake": 14.4578,
+     "west-shore": 44.9398,
+     "south-of-causeway": 22.9665,
+     "eslami-island": 0.0
+    },
+    "hot_share": 0.0906,
+    "steps": [
+     [
+      "2026-07-02",
+      0.15
+     ],
+     [
+      "2026-07-14",
+      0.997
+     ],
+     [
+      "2026-07-26",
+      1.276
+     ],
+     [
+      "2026-08-19",
+      2.681
+     ],
+     [
+      "2026-08-31",
+      1.132
+     ],
+     [
+      "2026-09-12",
+      1.863
+     ],
+     [
+      "2026-10-06",
+      2.649
+     ],
+     [
+      "2026-10-18",
+      1.526
+     ]
+    ],
+    "cover_series": null
+   },
+   "when": {
+    "type": "classes",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.0408,
+     "classes": {
+      "2 Jul": 0.0,
+      "14 Jul": 0.0004,
+      "26 Jul": 0.002,
+      "19 Aug": 0.008,
+      "31 Aug": 0.0043,
+      "12 Sep": 0.009,
+      "6 Oct": 0.0022,
+      "18 Oct": 0.0148
+     }
+    },
+    "last": {
+     "cover": 0.0408,
+     "classes": {
+      "2 Jul": 0.0,
+      "14 Jul": 0.0004,
+      "26 Jul": 0.002,
+      "19 Aug": 0.008,
+      "31 Aug": 0.0043,
+      "12 Sep": 0.009,
+      "6 Oct": 0.0022,
+      "18 Oct": 0.0148
+     }
+    }
+   },
+   "classes": {
+    "type": "classes",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.4205,
+     "classes": {
+      "Permanent water": 0.3174,
+      "Seasonal open water": 0.0967,
+      "Flooded vegetation": 0.0,
+      "Got darker, not open water (wetter groun": 0.0027,
+      "Got brighter (growing crops and other ca": 0.0037
+     }
+    },
+    "last": {
+     "cover": 0.4205,
+     "classes": {
+      "Permanent water": 0.3174,
+      "Seasonal open water": 0.0967,
+      "Flooded vegetation": 0.0,
+      "Got darker, not open water (wetter groun": 0.0027,
+      "Got brighter (growing crops and other ca": 0.0037
+     }
+    }
+   },
+   "change": {
+    "type": "diverging",
+    "n_frames": 8,
+    "dates": [
+     "2026-07-02",
+     "2026-07-14",
+     "2026-07-26",
+     "2026-08-19",
+     "2026-08-31",
+     "2026-09-12",
+     "2026-10-06",
+     "2026-10-18"
+    ],
+    "first": {
+     "cover": 0.0031,
+     "mean": -15.711,
+     "p05": -31.99,
+     "p95": 25.7,
+     "std": 21.034
+    },
+    "last": {
+     "cover": 0.0636,
+     "mean": 9.233,
+     "p05": -13.31,
+     "p95": 17.84,
+     "std": 9.626
+    },
+    "first_last_change": 0.042,
+    "spots_change": {
+     "open-lake": 0.0,
+     "west-shore": 0.0,
+     "south-of-causeway": 0.0,
+     "eslami-island": 0.0
+    },
+    "hot_share": 0.0017,
+    "steps": [
+     [
+      "2026-07-14",
+      0.001
+     ],
+     [
+      "2026-07-26",
+      0.11
+     ],
+     [
+      "2026-08-19",
+      0.304
+     ],
+     [
+      "2026-08-31",
+      0.055
+     ],
+     [
+      "2026-09-12",
+      0.077
+     ],
+     [
+      "2026-10-06",
+      0.145
+     ],
+     [
+      "2026-10-18",
+      0.184
+     ]
+    ],
+    "cover_series": null
+   },
+   "hv": {
+    "type": "ramp",
+    "n_frames": 9,
+    "dates": [
+     "2026-06-20",
+     "2026-07-02",
+     "2026-07-14",
+     "2026-07-26",
+     "2026-08-19",
+     "2026-08-31",
+     "2026-09-12",
+     "2026-10-06",
+     "2026-10-18"
+    ],
+    "first": {
+     "cover": 1.0,
+     "mean": 37.955,
+     "p05": 17.65,
+     "p95": 97.25,
+     "std": 22.535
+    },
+    "last": {
+     "cover": 1.0,
+     "mean": 40.633,
+     "p05": 21.57,
+     "p95": 94.12,
+     "std": 20.265
+    },
+    "first_last_change": 4.832,
+    "spots_change": {
+     "open-lake": 3.0409,
+     "west-shore": 6.2701,
+     "south-of-causeway": 11.7405,
+     "eslami-island": 3.6997
+    },
+    "hot_share": 0.0057,
+    "steps": [
+     [
+      "2026-07-02",
+      2.455
+     ],
+     [
+      "2026-07-14",
+      10.206
+     ],
+     [
+      "2026-07-26",
+      2.777
+     ],
+     [
+      "2026-08-19",
+      7.784
+     ],
+     [
+      "2026-08-31",
+      3.947
+     ],
+     [
+      "2026-09-12",
+      4.225
+     ],
+     [
+      "2026-10-06",
+      6.724
+     ],
+     [
+      "2026-10-18",
+      3.368
+     ]
+    ],
+    "cover_series": null
+   }
+  }
+ },
+ "sindh-indus": {
+  "category": "land",
+  "defaultLayer": "water",
+  "n_dates": 10,
+  "bounds": [
+   67.91999999999999,
+   26.000460381993992,
+   69.00080698872952,
+   27.519999999999992
+  ],
+  "layers": {
+   "hh": {
+    "type": "ramp",
+    "n_frames": 10,
+    "dates": [
+     "2026-06-17",
+     "2026-06-29",
+     "2026-07-11",
+     "2026-07-23",
+     "2026-08-16",
+     "2026-08-28",
+     "2026-09-09",
+     "2026-09-21",
+     "2026-10-03",
+     "2026-10-15"
+    ],
+    "first": {
+     "cover": 1.0,
+     "mean": 55.62,
+     "p05": 21.96,
+     "p95": 86.67,
+     "std": 20.426
+    },
+    "last": {
+     "cover": 1.0,
+     "mean": 53.92,
+     "p05": 19.22,
+     "p95": 95.29,
+     "std": 22.768
+    },
+    "first_last_change": 7.663,
+    "spots_change": {
+     "rice-west": 27.1488,
+     "rice-north": 34.7091,
+     "stable-land": 7.1813,
+     "sand-desert": 4.618
+    },
+    "hot_share": 0.1038,
+    "steps": [
+     [
+      "2026-06-29",
+      2.69
+     ],
+     [
+      "2026-07-11",
+      2.79
+     ],
+     [
+      "2026-07-23",
+      4.139
+     ],
+     [
+      "2026-08-16",
+      5.771
+     ],
+     [
+      "2026-08-28",
+      3.126
+     ],
+     [
+      "2026-09-09",
+      3.75
+     ],
+     [
+      "2026-09-21",
+      3.805
+     ],
+     [
+      "2026-10-03",
+      3.067
+     ],
+     [
+      "2026-10-15",
+      2.849
+     ]
+    ],
+    "cover_series": null
+   },
+   "water": {
+    "type": "classes",
+    "n_frames": 10,
+    "dates": [
+     "2026-06-17",
+     "2026-06-29",
+     "2026-07-11",
+     "2026-07-23",
+     "2026-08-16",
+     "2026-08-28",
+     "2026-09-09",
+     "2026-09-21",
+     "2026-10-03",
+     "2026-10-15"
+    ],
+    "first": {
+     "cover": 0.0,
+     "classes": {
+      "Open water": 0.0,
+      "Possible water under vegetation": 0.0,
+      "Going under: vegetation submerging, or p": 0.0,
+      "Usually water, not today (rain or wind?)": 0.0
+     }
+    },
+    "last": {
+     "cover": 0.0,
+     "classes": {
+      "Open water": 0.0,
+      "Possible water under vegetation": 0.0,
+      "Going under: vegetation submerging, or p": 0.0,
+      "Usually water, not today (rain or wind?)": 0.0
+     }
+    },
+    "first_last_change": 0.0,
+    "spots_change": {
+     "rice-west": 0.0,
+     "rice-north": 0.0,
+     "stable-land": 0.0,
+     "sand-desert": 0.0
+    },
+    "hot_share": 0.0,
+    "steps": [
+     [
+      "2026-06-29",
+      0.0
+     ],
+     [
+      "2026-07-11",
+      0.0
+     ],
+     [
+      "2026-07-23",
+      0.0
+     ],
+     [
+      "2026-08-16",
+      0.0
+     ],
+     [
+      "2026-08-28",
+      0.0
+     ],
+     [
+      "2026-09-09",
+      0.0
+     ],
+     [
+      "2026-09-21",
+      0.0
+     ],
+     [
+      "2026-10-03",
+      0.0
+     ],
+     [
+      "2026-10-15",
+      0.0
+     ]
+    ],
+    "cover_series": null
+   },
+   "when": {
+    "type": "classes",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.1245,
+     "classes": {
+      "29 Jun": 0.0025,
+      "11 Jul": 0.003,
+      "23 Jul": 0.005,
+      "16 Aug": 0.0272,
+      "28 Aug": 0.013,
+      "9 Sep": 0.0225,
+      "21 Sep": 0.0382,
+      "3 Oct": 0.0102,
+      "15 Oct": 0.003
+     }
+    },
+    "last": {
+     "cover": 0.1245,
+     "classes": {
+      "29 Jun": 0.0025,
+      "11 Jul": 0.003,
+      "23 Jul": 0.005,
+      "16 Aug": 0.0272,
+      "28 Aug": 0.013,
+      "9 Sep": 0.0225,
+      "21 Sep": 0.0382,
+      "3 Oct": 0.0102,
+      "15 Oct": 0.003
+     }
+    }
+   },
+   "classes": {
+    "type": "classes",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.1245,
+     "classes": {
+      "Permanent water": 0.0,
+      "Seasonal open water": 0.0,
+      "Flooded vegetation": 0.0,
+      "Got darker, not open water (wetter groun": 0.0451,
+      "Got brighter (growing crops and other ca": 0.0794
+     }
+    },
+    "last": {
+     "cover": 0.1245,
+     "classes": {
+      "Permanent water": 0.0,
+      "Seasonal open water": 0.0,
+      "Flooded vegetation": 0.0,
+      "Got darker, not open water (wetter groun": 0.0451,
+      "Got brighter (growing crops and other ca": 0.0794
+     }
+    }
+   },
+   "change": {
+    "type": "diverging",
+    "n_frames": 9,
+    "dates": [
+     "2026-06-29",
+     "2026-07-11",
+     "2026-07-23",
+     "2026-08-16",
+     "2026-08-28",
+     "2026-09-09",
+     "2026-09-21",
+     "2026-10-03",
+     "2026-10-15"
+    ],
+    "first": {
+     "cover": 0.0125,
+     "mean": 8.971,
+     "p05": -15.94,
+     "p95": 22.5,
+     "std": 13.081
+    },
+    "last": {
+     "cover": 0.202,
+     "mean": 2.822,
+     "p05": -20.45,
+     "p95": 35.0,
+     "std": 20.728
+    },
+    "first_last_change": 0.113,
+    "spots_change": {
+     "rice-west": 0.356,
+     "rice-north": 0.8309,
+     "stable-land": 0.0,
+     "sand-desert": 0.0
+    },
+    "hot_share": 0.0027,
+    "steps": [
+     [
+      "2026-07-11",
+      0.04
+     ],
+     [
+      "2026-07-23",
+      0.203
+     ],
+     [
+      "2026-08-16",
+      0.774
+     ],
+     [
+      "2026-08-28",
+      0.594
+     ],
+     [
+      "2026-09-09",
+      0.713
+     ],
+     [
+      "2026-09-21",
+      0.982
+     ],
+     [
+      "2026-10-03",
+      0.617
+     ],
+     [
+      "2026-10-15",
+      0.559
+     ]
+    ],
+    "cover_series": null
+   },
+   "hv": {
+    "type": "ramp",
+    "n_frames": 10,
+    "dates": [
+     "2026-06-17",
+     "2026-06-29",
+     "2026-07-11",
+     "2026-07-23",
+     "2026-08-16",
+     "2026-08-28",
+     "2026-09-09",
+     "2026-09-21",
+     "2026-10-03",
+     "2026-10-15"
+    ],
+    "first": {
+     "cover": 1.0,
+     "mean": 60.174,
+     "p05": 33.73,
+     "p95": 91.37,
+     "std": 17.618
+    },
+    "last": {
+     "cover": 1.0,
+     "mean": 59.583,
+     "p05": 30.59,
+     "p95": 96.47,
+     "std": 20.599
+    },
+    "first_last_change": 6.707,
+    "spots_change": {
+     "rice-west": 11.3025,
+     "rice-north": 17.4013,
+     "stable-land": 5.2917,
+     "sand-desert": 5.7989
+    },
+    "hot_share": 0.0808,
+    "steps": [
+     [
+      "2026-06-29",
+      2.891
+     ],
+     [
+      "2026-07-11",
+      2.796
+     ],
+     [
+      "2026-07-23",
+      3.552
+     ],
+     [
+      "2026-08-16",
+      4.612
+     ],
+     [
+      "2026-08-28",
+      2.583
+     ],
+     [
+      "2026-09-09",
+      2.657
+     ],
+     [
+      "2026-09-21",
+      3.023
+     ],
+     [
+      "2026-10-03",
+      2.84
+     ],
+     [
+      "2026-10-15",
+      3.69
+     ]
+    ],
+    "cover_series": null
+   }
+  }
+ },
+ "mekong-delta": {
+  "category": "flood",
+  "defaultLayer": "water",
+  "n_dates": 10,
+  "bounds": [
+   105.3,
+   10.199850462381947,
+   106.19977649224691,
+   11.499999999999996
+  ],
+  "layers": {
+   "hh": {
+    "type": "ramp",
+    "n_frames": 10,
+    "dates": [
+     "2026-06-17",
+     "2026-06-29",
+     "2026-07-11",
+     "2026-07-23",
+     "2026-08-16",
+     "2026-08-28",
+     "2026-09-09",
+     "2026-09-21",
+     "2026-10-03",
+     "2026-10-15"
+    ],
+    "first": {
+     "cover": 1.0,
+     "mean": 43.951,
+     "p05": 20.0,
+     "p95": 79.61,
+     "std": 18.442
+    },
+    "last": {
+     "cover": 1.0,
+     "mean": 40.934,
+     "p05": 11.37,
+     "p95": 80.78,
+     "std": 22.166
+    },
+    "first_last_change": 7.225,
+    "spots_change": {
+     "plain-of-reeds": 6.1082,
+     "flooded-fields": 11.1662,
+     "cambodia-side": 17.138,
+     "rice-cycle": 3.741,
+     "orchards": 1.941
+    },
+    "hot_share": 0.1205,
+    "steps": [
+     [
+      "2026-06-29",
+      5.205
+     ],
+     [
+      "2026-07-11",
+      4.555
+     ],
+     [
+      "2026-07-23",
+      4.396
+     ],
+     [
+      "2026-08-16",
+      6.083
+     ],
+     [
+      "2026-08-28",
+      4.881
+     ],
+     [
+      "2026-09-09",
+      4.276
+     ],
+     [
+      "2026-09-21",
+      4.856
+     ],
+     [
+      "2026-10-03",
+      4.523
+     ],
+     [
+      "2026-10-15",
+      3.849
+     ]
+    ],
+    "cover_series": null
+   },
+   "water": {
+    "type": "classes",
+    "n_frames": 10,
+    "dates": [
+     "2026-06-17",
+     "2026-06-29",
+     "2026-07-11",
+     "2026-07-23",
+     "2026-08-16",
+     "2026-08-28",
+     "2026-09-09",
+     "2026-09-21",
+     "2026-10-03",
+     "2026-10-15"
+    ],
+    "first": {
+     "cover": 0.0105,
+     "classes": {
+      "Open water": 0.0104,
+      "Possible water under vegetation": 0.0001,
+      "Going under: vegetation submerging, or p": 0.0,
+      "Usually water, not today (rain or wind?)": 0.0
+     }
+    },
+    "last": {
+     "cover": 0.1602,
+     "classes": {
+      "Open water": 0.1427,
+      "Possible water under vegetation": 0.0114,
+      "Going under: vegetation submerging, or p": 0.006,
+      "Usually water, not today (rain or wind?)": 0.0
+     }
+    },
+    "first_last_change": 15.541,
+    "spots_change": {
+     "plain-of-reeds": 19.6386,
+     "flooded-fields": 58.1377,
+     "cambodia-side": 42.8796,
+     "rice-cycle": 8.805,
+     "orchards": 0.0
+    },
+    "hot_share": 0.1554,
+    "steps": [
+     [
+      "2026-06-29",
+      0.29
+     ],
+     [
+      "2026-07-11",
+      0.659
+     ],
+     [
+      "2026-07-23",
+      0.967
+     ],
+     [
+      "2026-08-16",
+      4.359
+     ],
+     [
+      "2026-08-28",
+      3.694
+     ],
+     [
+      "2026-09-09",
+      4.085
+     ],
+     [
+      "2026-09-21",
+      3.028
+     ],
+     [
+      "2026-10-03",
+      4.356
+     ],
+     [
+      "2026-10-15",
+      1.922
+     ]
+    ],
+    "cover_series": null
+   },
+   "when": {
+    "type": "classes",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.1615,
+     "classes": {
+      "29 Jun": 0.0043,
+      "11 Jul": 0.0066,
+      "23 Jul": 0.0057,
+      "16 Aug": 0.0502,
+      "28 Aug": 0.0387,
+      "9 Sep": 0.0186,
+      "21 Sep": 0.0229,
+      "3 Oct": 0.0133,
+      "15 Oct": 0.0011
+     }
+    },
+    "last": {
+     "cover": 0.1615,
+     "classes": {
+      "29 Jun": 0.0043,
+      "11 Jul": 0.0066,
+      "23 Jul": 0.0057,
+      "16 Aug": 0.0502,
+      "28 Aug": 0.0387,
+      "9 Sep": 0.0186,
+      "21 Sep": 0.0229,
+      "3 Oct": 0.0133,
+      "15 Oct": 0.0011
+     }
+    }
+   },
+   "classes": {
+    "type": "classes",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.2468,
+     "classes": {
+      "Permanent water": 0.0055,
+      "Seasonal open water": 0.1372,
+      "Flooded vegetation": 0.0335,
+      "Got darker, not open water (wetter groun": 0.0651,
+      "Got brighter (growing crops and other ca": 0.0055
+     }
+    },
+    "last": {
+     "cover": 0.2468,
+     "classes": {
+      "Permanent water": 0.0055,
+      "Seasonal open water": 0.1372,
+      "Flooded vegetation": 0.0335,
+      "Got darker, not open water (wetter groun": 0.0651,
+      "Got brighter (growing crops and other ca": 0.0055
+     }
+    }
+   },
+   "change": {
+    "type": "diverging",
+    "n_frames": 9,
+    "dates": [
+     "2026-06-29",
+     "2026-07-11",
+     "2026-07-23",
+     "2026-08-16",
+     "2026-08-28",
+     "2026-09-09",
+     "2026-09-21",
+     "2026-10-03",
+     "2026-10-15"
+    ],
+    "first": {
+     "cover": 0.1164,
+     "mean": 11.535,
+     "p05": -13.45,
+     "p95": 20.18,
+     "std": 8.582
+    },
+    "last": {
+     "cover": 0.2383,
+     "mean": -10.19,
+     "p05": -27.59,
+     "p95": 18.25,
+     "std": 14.719
+    },
+    "first_last_change": 0.9,
+    "spots_change": {
+     "plain-of-reeds": 1.2342,
+     "flooded-fields": 3.0799,
+     "cambodia-side": 1.8081,
+     "rice-cycle": 0.3707,
+     "orchards": 0.0
+    },
+    "hot_share": 0.0201,
+    "steps": [
+     [
+      "2026-07-11",
+      0.184
+     ],
+     [
+      "2026-07-23",
+      0.565
+     ],
+     [
+      "2026-08-16",
+      0.93
+     ],
+     [
+      "2026-08-28",
+      0.994
+     ],
+     [
+      "2026-09-09",
+      1.009
+     ],
+     [
+      "2026-09-21",
+      0.857
+     ],
+     [
+      "2026-10-03",
+      0.796
+     ],
+     [
+      "2026-10-15",
+      0.773
+     ]
+    ],
+    "cover_series": null
+   },
+   "hv": {
+    "type": "ramp",
+    "n_frames": 10,
+    "dates": [
+     "2026-06-17",
+     "2026-06-29",
+     "2026-07-11",
+     "2026-07-23",
+     "2026-08-16",
+     "2026-08-28",
+     "2026-09-09",
+     "2026-09-21",
+     "2026-10-03",
+     "2026-10-15"
+    ],
+    "first": {
+     "cover": 1.0,
+     "mean": 36.002,
+     "p05": 5.88,
+     "p95": 77.65,
+     "std": 22.614
+    },
+    "last": {
+     "cover": 1.0,
+     "mean": 34.668,
+     "p05": 2.75,
+     "p95": 77.65,
+     "std": 24.28
+    },
+    "first_last_change": 5.267,
+    "spots_change": {
+     "plain-of-reeds": 4.0993,
+     "flooded-fields": 4.7197,
+     "cambodia-side": 15.998,
+     "rice-cycle": 3.1398,
+     "orchards": 2.1772
+    },
+    "hot_share": 0.0516,
+    "steps": [
+     [
+      "2026-06-29",
+      4.32
+     ],
+     [
+      "2026-07-11",
+      4.062
+     ],
+     [
+      "2026-07-23",
+      3.863
+     ],
+     [
+      "2026-08-16",
+      5.568
+     ],
+     [
+      "2026-08-28",
+      4.566
+     ],
+     [
+      "2026-09-09",
+      3.938
+     ],
+     [
+      "2026-09-21",
+      4.423
+     ],
+     [
+      "2026-10-03",
+      3.937
+     ],
+     [
+      "2026-10-15",
+      3.146
+     ]
+    ],
+    "cover_series": null
+   }
+  }
+ },
+ "rondonia": {
+  "category": "land",
+  "defaultLayer": "water",
+  "n_dates": 6,
+  "bounds": [
+   -62.8,
+   -10.060263882526822,
+   -61.420371868306134,
+   -8.799999999999999
+  ],
+  "layers": {
+   "hh": {
+    "type": "ramp",
+    "n_frames": 6,
+    "dates": [
+     "2026-06-30",
+     "2026-08-17",
+     "2026-08-29",
+     "2026-09-10",
+     "2026-10-04",
+     "2026-10-16"
+    ],
+    "first": {
+     "cover": 1.0,
+     "mean": 77.334,
+     "p05": 47.84,
+     "p95": 96.47,
+     "std": 16.912
+    },
+    "last": {
+     "cover": 1.0,
+     "mean": 76.864,
+     "p05": 41.18,
+     "p95": 97.25,
+     "std": 19.891
+    },
+    "first_last_change": 5.008,
+    "spots_change": {
+     "new-clearing-west": 6.5222,
+     "new-clearing-north": 4.4158,
+     "new-clearing-east": 4.8491,
+     "settlement-plots": 11.3835,
+     "intact-forest": 1.9513
+    },
+    "hot_share": 0.0439,
+    "steps": [
+     [
+      "2026-08-17",
+      4.791
+     ],
+     [
+      "2026-08-29",
+      2.557
+     ],
+     [
+      "2026-09-10",
+      2.652
+     ],
+     [
+      "2026-10-04",
+      2.51
+     ],
+     [
+      "2026-10-16",
+      3.236
+     ]
+    ],
+    "cover_series": null
+   },
+   "water": {
+    "type": "classes",
+    "n_frames": 6,
+    "dates": [
+     "2026-06-30",
+     "2026-08-17",
+     "2026-08-29",
+     "2026-09-10",
+     "2026-10-04",
+     "2026-10-16"
+    ],
+    "first": {
+     "cover": 0.0022,
+     "classes": {
+      "Open water": 0.0022,
+      "Possible water under vegetation": 0.0,
+      "Going under: vegetation submerging, or p": 0.0,
+      "Usually water, not today (rain or wind?)": 0.0
+     }
+    },
+    "last": {
+     "cover": 0.0032,
+     "classes": {
+      "Open water": 0.0031,
+      "Possible water under vegetation": 0.0,
+      "Going under: vegetation submerging, or p": 0.0001,
+      "Usually water, not today (rain or wind?)": 0.0
+     }
+    },
+    "first_last_change": 0.126,
+    "spots_change": {
+     "new-clearing-west": 0.0,
+     "new-clearing-north": 0.0,
+     "new-clearing-east": 0.0,
+     "settlement-plots": 0.2224,
+     "intact-forest": 0.0
+    },
+    "hot_share": 0.0013,
+    "steps": [
+     [
+      "2026-08-17",
+      0.101
+     ],
+     [
+      "2026-08-29",
+      0.028
+     ],
+     [
+      "2026-09-10",
+      0.006
+     ],
+     [
+      "2026-10-04",
+      0.019
+     ],
+     [
+      "2026-10-16",
+      0.034
+     ]
+    ],
+    "cover_series": null
+   },
+   "when": {
+    "type": "classes",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.0951,
+     "classes": {
+      "17 Aug": 0.0842,
+      "29 Aug": 0.0005,
+      "10 Sep": 0.0002,
+      "4 Oct": 0.0026,
+      "16 Oct": 0.0075
+     }
+    },
+    "last": {
+     "cover": 0.0951,
+     "classes": {
+      "17 Aug": 0.0842,
+      "29 Aug": 0.0005,
+      "10 Sep": 0.0002,
+      "4 Oct": 0.0026,
+      "16 Oct": 0.0075
+     }
+    }
+   },
+   "classes": {
+    "type": "classes",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.0977,
+     "classes": {
+      "Permanent water": 0.0021,
+      "Seasonal open water": 0.0014,
+      "Flooded vegetation": 0.0001,
+      "Got darker, not open water (wetter groun": 0.0712,
+      "Got brighter (growing crops and other ca": 0.0228
+     }
+    },
+    "last": {
+     "cover": 0.0977,
+     "classes": {
+      "Permanent water": 0.0021,
+      "Seasonal open water": 0.0014,
+      "Flooded vegetation": 0.0001,
+      "Got darker, not open water (wetter groun": 0.0712,
+      "Got brighter (growing crops and other ca": 0.0228
+     }
+    }
+   },
+   "change": {
+    "type": "diverging",
+    "n_frames": 5,
+    "dates": [
+     "2026-08-17",
+     "2026-08-29",
+     "2026-09-10",
+     "2026-10-04",
+     "2026-10-16"
+    ],
+    "first": {
+     "cover": 0.102,
+     "mean": -11.096,
+     "p05": -20.18,
+     "p95": 11.39,
+     "std": 8.92
+    },
+    "last": {
+     "cover": 0.1129,
+     "mean": -7.544,
+     "p05": -20.18,
+     "p95": 15.65,
+     "std": 12.707
+    },
+    "first_last_change": 0.18,
+    "spots_change": {
+     "new-clearing-west": 0.2468,
+     "new-clearing-north": 0.7895,
+     "new-clearing-east": 0.0389,
+     "settlement-plots": 0.7177,
+     "intact-forest": 0.0
+    },
+    "hot_share": 0.0008,
+    "steps": [
+     [
+      "2026-08-29",
+      0.119
+     ],
+     [
+      "2026-09-10",
+      0.14
+     ],
+     [
+      "2026-10-04",
+      0.145
+     ],
+     [
+      "2026-10-16",
+      0.179
+     ]
+    ],
+    "cover_series": null
+   },
+   "hv": {
+    "type": "ramp",
+    "n_frames": 6,
+    "dates": [
+     "2026-06-30",
+     "2026-08-17",
+     "2026-08-29",
+     "2026-09-10",
+     "2026-10-04",
+     "2026-10-16"
+    ],
+    "first": {
+     "cover": 1.0,
+     "mean": 72.684,
+     "p05": 39.22,
+     "p95": 96.08,
+     "std": 20.364
+    },
+    "last": {
+     "cover": 1.0,
+     "mean": 72.008,
+     "p05": 32.03,
+     "p95": 97.25,
+     "std": 23.815
+    },
+    "first_last_change": 5.034,
+    "spots_change": {
+     "new-clearing-west": 6.415,
+     "new-clearing-north": 4.5717,
+     "new-clearing-east": 5.7872,
+     "settlement-plots": 9.6883,
+     "intact-forest": 1.7011
+    },
+    "hot_share": 0.0401,
+    "steps": [
+     [
+      "2026-08-17",
+      4.792
+     ],
+     [
+      "2026-08-29",
+      2.147
+     ],
+     [
+      "2026-09-10",
+      2.255
+     ],
+     [
+      "2026-10-04",
+      2.204
+     ],
+     [
+      "2026-10-16",
+      2.609
+     ]
+    ],
+    "cover_series": null
+   }
+  }
+ },
+ "nile-delta": {
+  "category": "wetland",
+  "defaultLayer": "water",
+  "n_dates": 9,
+  "bounds": [
+   30.299999999999997,
+   30.39975274632225,
+   31.8808264786967,
+   31.52
+  ],
+  "layers": {
+   "hh": {
+    "type": "ramp",
+    "n_frames": 9,
+    "dates": [
+     "2026-06-26",
+     "2026-07-08",
+     "2026-07-20",
+     "2026-08-13",
+     "2026-08-25",
+     "2026-09-06",
+     "2026-09-18",
+     "2026-09-30",
+     "2026-10-12"
+    ],
+    "first": {
+     "cover": 1.0,
+     "mean": 58.259,
+     "p05": 37.25,
+     "p95": 89.41,
+     "std": 15.493
+    },
+    "last": {
+     "cover": 1.0,
+     "mean": 58.634,
+     "p05": 33.73,
+     "p95": 88.63,
+     "std": 15.327
+    },
+    "first_last_change": 6.719,
+    "spots_change": {
+     "north-fields": 5.886,
+     "north-fields-east": 8.7702,
+     "south-fields": 8.8926,
+     "burullus": 7.7905,
+     "west-reference": 4.8333
+    },
+    "hot_share": 0.0904,
+    "steps": [
+     [
+      "2026-07-08",
+      7.466
+     ],
+     [
+      "2026-07-20",
+      6.885
+     ],
+     [
+      "2026-08-13",
+      6.187
+     ],
+     [
+      "2026-08-25",
+      3.857
+     ],
+     [
+      "2026-09-06",
+      6.855
+     ],
+     [
+      "2026-09-18",
+      4.067
+     ],
+     [
+      "2026-09-30",
+      7.678
+     ],
+     [
+      "2026-10-12",
+      4.38
+     ]
+    ],
+    "cover_series": null
+   },
+   "water": {
+    "type": "classes",
+    "n_frames": 9,
+    "dates": [
+     "2026-06-26",
+     "2026-07-08",
+     "2026-07-20",
+     "2026-08-13",
+     "2026-08-25",
+     "2026-09-06",
+     "2026-09-18",
+     "2026-09-30",
+     "2026-10-12"
+    ],
+    "first": {
+     "cover": 0.0112,
+     "classes": {
+      "Open water": 0.0112,
+      "Possible water under vegetation": 0.0,
+      "Going under: vegetation submerging, or p": 0.0,
+      "Usually water, not today (rain or wind?)": 0.0
+     }
+    },
+    "last": {
+     "cover": 0.0118,
+     "classes": {
+      "Open water": 0.0113,
+      "Possible water under vegetation": 0.0001,
+      "Going under: vegetation submerging, or p": 0.0004,
+      "Usually water, not today (rain or wind?)": 0.0
+     }
+    },
+    "first_last_change": 0.06,
+    "spots_change": {
+     "north-fields": 0.0,
+     "north-fields-east": 0.0,
+     "south-fields": 0.0,
+     "burullus": 0.0,
+     "west-reference": 0.0
+    },
+    "hot_share": 0.0006,
+    "steps": [
+     [
+      "2026-07-08",
+      0.005
+     ],
+     [
+      "2026-07-20",
+      0.018
+     ],
+     [
+      "2026-08-13",
+      0.054
+     ],
+     [
+      "2026-08-25",
+      0.015
+     ],
+     [
+      "2026-09-06",
+      0.066
+     ],
+     [
+      "2026-09-18",
+      0.003
+     ],
+     [
+      "2026-09-30",
+      0.065
+     ],
+     [
+      "2026-10-12",
+      0.002
+     ]
+    ],
+    "cover_series": null
+   },
+   "when": {
+    "type": "classes",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.0622,
+     "classes": {
+      "8 Jul": 0.0015,
+      "20 Jul": 0.0048,
+      "13 Aug": 0.0167,
+      "25 Aug": 0.0159,
+      "6 Sep": 0.0128,
+      "18 Sep": 0.0029,
+      "30 Sep": 0.0075,
+      "12 Oct": 0.0001
+     }
+    },
+    "last": {
+     "cover": 0.0622,
+     "classes": {
+      "8 Jul": 0.0015,
+      "20 Jul": 0.0048,
+      "13 Aug": 0.0167,
+      "25 Aug": 0.0159,
+      "6 Sep": 0.0128,
+      "18 Sep": 0.0029,
+      "30 Sep": 0.0075,
+      "12 Oct": 0.0001
+     }
+    }
+   },
+   "classes": {
+    "type": "classes",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.0743,
+     "classes": {
+      "Permanent water": 0.0112,
+      "Seasonal open water": 0.0002,
+      "Flooded vegetation": 0.0008,
+      "Got darker, not open water (wetter groun": 0.0308,
+      "Got brighter (growing crops and other ca": 0.0314
+     }
+    },
+    "last": {
+     "cover": 0.0743,
+     "classes": {
+      "Permanent water": 0.0112,
+      "Seasonal open water": 0.0002,
+      "Flooded vegetation": 0.0008,
+      "Got darker, not open water (wetter groun": 0.0308,
+      "Got brighter (growing crops and other ca": 0.0314
+     }
+    }
+   },
+   "change": {
+    "type": "diverging",
+    "n_frames": 8,
+    "dates": [
+     "2026-07-08",
+     "2026-07-20",
+     "2026-08-13",
+     "2026-08-25",
+     "2026-09-06",
+     "2026-09-18",
+     "2026-09-30",
+     "2026-10-12"
+    ],
+    "first": {
+     "cover": 0.2469,
+     "mean": 1.095,
+     "p05": -27.73,
+     "p95": 27.73,
+     "std": 18.861
+    },
+    "last": {
+     "cover": 0.1993,
+     "mean": -0.237,
+     "p05": -25.12,
+     "p95": 22.78,
+     "std": 17.22
+    },
+    "first_last_change": 1.124,
+    "spots_change": {
+     "north-fields": 0.6892,
+     "north-fields-east": 4.7456,
+     "south-fields": 1.8939,
+     "burullus": 1.1457,
+     "west-reference": 0.1728
+    },
+    "hot_share": 0.0212,
+    "steps": [
+     [
+      "2026-07-20",
+      1.08
+     ],
+     [
+      "2026-08-13",
+      2.286
+     ],
+     [
+      "2026-08-25",
+      2.017
+     ],
+     [
+      "2026-09-06",
+      2.136
+     ],
+     [
+      "2026-09-18",
+      1.573
+     ],
+     [
+      "2026-09-30",
+      1.419
+     ],
+     [
+      "2026-10-12",
+      0.923
+     ]
+    ],
+    "cover_series": null
+   },
+   "hv": {
+    "type": "ramp",
+    "n_frames": 9,
+    "dates": [
+     "2026-06-26",
+     "2026-07-08",
+     "2026-07-20",
+     "2026-08-13",
+     "2026-08-25",
+     "2026-09-06",
+     "2026-09-18",
+     "2026-09-30",
+     "2026-10-12"
+    ],
+    "first": {
+     "cover": 1.0,
+     "mean": 61.666,
+     "p05": 39.22,
+     "p95": 92.16,
+     "std": 15.753
+    },
+    "last": {
+     "cover": 1.0,
+     "mean": 62.838,
+     "p05": 36.86,
+     "p95": 92.55,
+     "std": 15.456
+    },
+    "first_last_change": 7.899,
+    "spots_change": {
+     "north-fields": 11.0877,
+     "north-fields-east": 10.532,
+     "south-fields": 11.1171,
+     "burullus": 7.3961,
+     "west-reference": 4.9312
+    },
+    "hot_share": 0.136,
+    "steps": [
+     [
+      "2026-07-08",
+      7.358
+     ],
+     [
+      "2026-07-20",
+      6.231
+     ],
+     [
+      "2026-08-13",
+      4.574
+     ],
+     [
+      "2026-08-25",
+      4.382
+     ],
+     [
+      "2026-09-06",
+      6.883
+     ],
+     [
+      "2026-09-18",
+      3.583
+     ],
+     [
+      "2026-09-30",
+      7.159
+     ],
+     [
+      "2026-10-12",
+      4.403
+     ]
+    ],
+    "cover_series": null
+   }
+  }
+ },
+ "sudd": {
+  "category": "wetland",
+  "defaultLayer": "water",
+  "n_dates": 8,
+  "bounds": [
+   29.999999999999996,
+   6.500576027106293,
+   31.420526474851787,
+   7.779999999999999
+  ],
+  "layers": {
+   "hh": {
+    "type": "ramp",
+    "n_frames": 8,
+    "dates": [
+     "2026-06-20",
+     "2026-07-02",
+     "2026-07-14",
+     "2026-07-26",
+     "2026-08-19",
+     "2026-08-31",
+     "2026-09-12",
+     "2026-10-18"
+    ],
+    "first": {
+     "cover": 1.0,
+     "mean": 56.136,
+     "p05": 5.1,
+     "p95": 96.47,
+     "std": 25.655
+    },
+    "last": {
+     "cover": 1.0,
+     "mean": 54.896,
+     "p05": 5.49,
+     "p95": 98.69,
+     "std": 26.098
+    },
+    "first_last_change": 9.146,
+    "spots_change": {
+     "swamp-lake": 4.0722,
+     "floodplain-pools": 22.2215,
+     "swamp-vegetation": 5.8504,
+     "western-plain": 11.0568
+    },
+    "hot_share": 0.1804,
+    "steps": [
+     [
+      "2026-07-02",
+      7.57
+     ],
+     [
+      "2026-07-14",
+      5.23
+     ],
+     [
+      "2026-07-26",
+      6.902
+     ],
+     [
+      "2026-08-19",
+      7.063
+     ],
+     [
+      "2026-08-31",
+      9.252
+     ],
+     [
+      "2026-09-12",
+      5.794
+     ],
+     [
+      "2026-10-18",
+      6.281
+     ]
+    ],
+    "cover_series": null
+   },
+   "water": {
+    "type": "classes",
+    "n_frames": 8,
+    "dates": [
+     "2026-06-20",
+     "2026-07-02",
+     "2026-07-14",
+     "2026-07-26",
+     "2026-08-19",
+     "2026-08-31",
+     "2026-09-12",
+     "2026-10-18"
+    ],
+    "first": {
+     "cover": 0.0846,
+     "classes": {
+      "Open water": 0.0846,
+      "Possible water under vegetation": 0.0,
+      "Going under: vegetation submerging, or p": 0.0,
+      "Usually water, not today (rain or wind?)": 0.0
+     }
+    },
+    "last": {
+     "cover": 0.0894,
+     "classes": {
+      "Open water": 0.0849,
+      "Possible water under vegetation": 0.0024,
+      "Going under: vegetation submerging, or p": 0.002,
+      "Usually water, not today (rain or wind?)": 0.0
+     }
+    },
+    "first_last_change": 3.481,
+    "spots_change": {
+     "swamp-lake": 2.0069,
+     "floodplain-pools": 24.8094,
+     "swamp-vegetation": 0.0,
+     "western-plain": 0.0
+    },
+    "hot_share": 0.0348,
+    "steps": [
+     [
+      "2026-07-02",
+      0.333
+     ],
+     [
+      "2026-07-14",
+      0.399
+     ],
+     [
+      "2026-07-26",
+      0.38
+     ],
+     [
+      "2026-08-19",
+      1.039
+     ],
+     [
+      "2026-08-31",
+      1.261
+     ],
+     [
+      "2026-09-12",
+      0.579
+     ],
+     [
+      "2026-10-18",
+      1.324
+     ]
+    ],
+    "cover_series": null
+   },
+   "when": {
+    "type": "classes",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.0756,
+     "classes": {
+      "2 Jul": 0.0025,
+      "14 Jul": 0.0048,
+      "26 Jul": 0.0065,
+      "19 Aug": 0.0161,
+      "31 Aug": 0.0194,
+      "12 Sep": 0.01,
+      "18 Oct": 0.0162
+     }
+    },
+    "last": {
+     "cover": 0.0756,
+     "classes": {
+      "2 Jul": 0.0025,
+      "14 Jul": 0.0048,
+      "26 Jul": 0.0065,
+      "19 Aug": 0.0161,
+      "31 Aug": 0.0194,
+      "12 Sep": 0.01,
+      "18 Oct": 0.0162
+     }
+    }
+   },
+   "classes": {
+    "type": "classes",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.1635,
+     "classes": {
+      "Permanent water": 0.0685,
+      "Seasonal open water": 0.0316,
+      "Flooded vegetation": 0.0072,
+      "Got darker, not open water (wetter groun": 0.0291,
+      "Got brighter (growing crops and other ca": 0.027
+     }
+    },
+    "last": {
+     "cover": 0.1635,
+     "classes": {
+      "Permanent water": 0.0685,
+      "Seasonal open water": 0.0316,
+      "Flooded vegetation": 0.0072,
+      "Got darker, not open water (wetter groun": 0.0291,
+      "Got brighter (growing crops and other ca": 0.027
+     }
+    }
+   },
+   "change": {
+    "type": "diverging",
+    "n_frames": 7,
+    "dates": [
+     "2026-07-02",
+     "2026-07-14",
+     "2026-07-26",
+     "2026-08-19",
+     "2026-08-31",
+     "2026-09-12",
+     "2026-10-18"
+    ],
+    "first": {
+     "cover": 0.1956,
+     "mean": 15.382,
+     "p05": -16.2,
+     "p95": 35.0,
+     "std": 17.144
+    },
+    "last": {
+     "cover": 0.3386,
+     "mean": -2.131,
+     "p05": -30.2,
+     "p95": 27.73,
+     "std": 18.984
+    },
+    "first_last_change": 1.899,
+    "spots_change": {
+     "swamp-lake": 0.0,
+     "floodplain-pools": 2.6352,
+     "swamp-vegetation": 0.3423,
+     "western-plain": 7.4886
+    },
+    "hot_share": 0.0435,
+    "steps": [
+     [
+      "2026-07-14",
+      0.906
+     ],
+     [
+      "2026-07-26",
+      1.355
+     ],
+     [
+      "2026-08-19",
+      1.416
+     ],
+     [
+      "2026-08-31",
+      1.499
+     ],
+     [
+      "2026-09-12",
+      1.004
+     ],
+     [
+      "2026-10-18",
+      1.52
+     ]
+    ],
+    "cover_series": null
+   },
+   "hv": {
+    "type": "ramp",
+    "n_frames": 8,
+    "dates": [
+     "2026-06-20",
+     "2026-07-02",
+     "2026-07-14",
+     "2026-07-26",
+     "2026-08-19",
+     "2026-08-31",
+     "2026-09-12",
+     "2026-10-18"
+    ],
+    "first": {
+     "cover": 1.0,
+     "mean": 51.821,
+     "p05": 5.1,
+     "p95": 92.16,
+     "std": 25.37
+    },
+    "last": {
+     "cover": 1.0,
+     "mean": 53.659,
+     "p05": 6.27,
+     "p95": 89.8,
+     "std": 24.063
+    },
+    "first_last_change": 9.794,
+    "spots_change": {
+     "swamp-lake": 7.9554,
+     "floodplain-pools": 24.0044,
+     "swamp-vegetation": 6.2233,
+     "western-plain": 10.5889
+    },
+    "hot_share": 0.2013,
+    "steps": [
+     [
+      "2026-07-02",
+      7.509
+     ],
+     [
+      "2026-07-14",
+      5.511
+     ],
+     [
+      "2026-07-26",
+      6.233
+     ],
+     [
+      "2026-08-19",
+      7.928
+     ],
+     [
+      "2026-08-31",
+      8.284
+     ],
+     [
+      "2026-09-12",
+      4.871
+     ],
+     [
+      "2026-10-18",
+      6.861
+     ]
+    ],
+    "cover_series": null
+   }
+  }
+ },
+ "pantanal": {
+  "category": "wetland",
+  "defaultLayer": "water",
+  "n_dates": 8,
+  "bounds": [
+   -58.00000000000001,
+   -18.99993659795255,
+   -56.65942496850873,
+   -18.120000000000005
+  ],
+  "layers": {
+   "hh": {
+    "type": "ramp",
+    "n_frames": 8,
+    "dates": [
+     "2026-07-17",
+     "2026-08-10",
+     "2026-08-22",
+     "2026-09-03",
+     "2026-09-15",
+     "2026-09-27",
+     "2026-10-09",
+     "2026-10-21"
+    ],
+    "first": {
+     "cover": 1.0,
+     "mean": 65.927,
+     "p05": 28.24,
+     "p95": 97.25,
+     "std": 21.376
+    },
+    "last": {
+     "cover": 1.0,
+     "mean": 67.959,
+     "p05": 33.33,
+     "p95": 94.51,
+     "std": 19.143
+    },
+    "first_last_change": 5.816,
+    "spots_change": {
+     "lake-mandiore": 4.3169,
+     "lake-caceres": 22.8697
+    },
+    "hot_share": 0.0589,
+    "steps": [
+     [
+      "2026-08-10",
+      4.539
+     ],
+     [
+      "2026-08-22",
+      3.958
+     ],
+     [
+      "2026-09-03",
+      2.273
+     ],
+     [
+      "2026-09-15",
+      7.364
+     ],
+     [
+      "2026-09-27",
+      6.28
+     ],
+     [
+      "2026-10-09",
+      5.425
+     ],
+     [
+      "2026-10-21",
+      2.623
+     ]
+    ],
+    "cover_series": null
+   },
+   "water": {
+    "type": "classes",
+    "n_frames": 8,
+    "dates": [
+     "2026-07-17",
+     "2026-08-10",
+     "2026-08-22",
+     "2026-09-03",
+     "2026-09-15",
+     "2026-09-27",
+     "2026-10-09",
+     "2026-10-21"
+    ],
+    "first": {
+     "cover": 0.0196,
+     "classes": {
+      "Open water": 0.0195,
+      "Possible water under vegetation": 0.0,
+      "Going under: vegetation submerging, or p": 0.0,
+      "Usually water, not today (rain or wind?)": 0.0
+     }
+    },
+    "last": {
+     "cover": 0.0195,
+     "classes": {
+      "Open water": 0.0191,
+      "Possible water under vegetation": 0.0004,
+      "Going under: vegetation submerging, or p": 0.0,
+      "Usually water, not today (rain or wind?)": 0.0
+     }
+    },
+    "first_last_change": 0.129,
+    "spots_change": {
+     "lake-mandiore": 0.2475,
+     "lake-caceres": 0.0
+    },
+    "hot_share": 0.0013,
+    "steps": [
+     [
+      "2026-08-10",
+      0.024
+     ],
+     [
+      "2026-08-22",
+      0.026
+     ],
+     [
+      "2026-09-03",
+      0.027
+     ],
+     [
+      "2026-09-15",
+      0.004
+     ],
+     [
+      "2026-09-27",
+      0.061
+     ],
+     [
+      "2026-10-09",
+      0.006
+     ],
+     [
+      "2026-10-21",
+      0.011
+     ]
+    ],
+    "cover_series": null
+   },
+   "when": {
+    "type": "classes",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.0333,
+     "classes": {
+      "10 Aug": 0.0044,
+      "22 Aug": 0.0146,
+      "3 Sep": 0.0023,
+      "15 Sep": 0.0051,
+      "27 Sep": 0.0003,
+      "9 Oct": 0.0063,
+      "21 Oct": 0.0003
+     }
+    },
+    "last": {
+     "cover": 0.0333,
+     "classes": {
+      "10 Aug": 0.0044,
+      "22 Aug": 0.0146,
+      "3 Sep": 0.0023,
+      "15 Sep": 0.0051,
+      "27 Sep": 0.0003,
+      "9 Oct": 0.0063,
+      "21 Oct": 0.0003
+     }
+    }
+   },
+   "classes": {
+    "type": "classes",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.0522,
+     "classes": {
+      "Permanent water": 0.0188,
+      "Seasonal open water": 0.001,
+      "Flooded vegetation": 0.0003,
+      "Got darker, not open water (wetter groun": 0.0078,
+      "Got brighter (growing crops and other ca": 0.0243
+     }
+    },
+    "last": {
+     "cover": 0.0522,
+     "classes": {
+      "Permanent water": 0.0188,
+      "Seasonal open water": 0.001,
+      "Flooded vegetation": 0.0003,
+      "Got darker, not open water (wetter groun": 0.0078,
+      "Got brighter (growing crops and other ca": 0.0243
+     }
+    }
+   },
+   "change": {
+    "type": "diverging",
+    "n_frames": 7,
+    "dates": [
+     "2026-08-10",
+     "2026-08-22",
+     "2026-09-03",
+     "2026-09-15",
+     "2026-09-27",
+     "2026-10-09",
+     "2026-10-21"
+    ],
+    "first": {
+     "cover": 0.0715,
+     "mean": 10.853,
+     "p05": -13.59,
+     "p95": 27.31,
+     "std": 13.176
+    },
+    "last": {
+     "cover": 0.1194,
+     "mean": 12.174,
+     "p05": -15.78,
+     "p95": 35.0,
+     "std": 14.674
+    },
+    "first_last_change": 0.428,
+    "spots_change": {
+     "lake-mandiore": 0.0204,
+     "lake-caceres": 4.6771
+    },
+    "hot_share": 0.0129,
+    "steps": [
+     [
+      "2026-08-22",
+      0.407
+     ],
+     [
+      "2026-09-03",
+      0.385
+     ],
+     [
+      "2026-09-15",
+      0.356
+     ],
+     [
+      "2026-09-27",
+      0.33
+     ],
+     [
+      "2026-10-09",
+      0.344
+     ],
+     [
+      "2026-10-21",
+      0.338
+     ]
+    ],
+    "cover_series": null
+   },
+   "hv": {
+    "type": "ramp",
+    "n_frames": 8,
+    "dates": [
+     "2026-07-17",
+     "2026-08-10",
+     "2026-08-22",
+     "2026-09-03",
+     "2026-09-15",
+     "2026-09-27",
+     "2026-10-09",
+     "2026-10-21"
+    ],
+    "first": {
+     "cover": 1.0,
+     "mean": 59.74,
+     "p05": 22.35,
+     "p95": 96.47,
+     "std": 22.87
+    },
+    "last": {
+     "cover": 1.0,
+     "mean": 62.014,
+     "p05": 27.84,
+     "p95": 94.12,
+     "std": 20.689
+    },
+    "first_last_change": 4.891,
+    "spots_change": {
+     "lake-mandiore": 9.7678,
+     "lake-caceres": 19.8629
+    },
+    "hot_share": 0.0495,
+    "steps": [
+     [
+      "2026-08-10",
+      3.996
+     ],
+     [
+      "2026-08-22",
+      3.39
+     ],
+     [
+      "2026-09-03",
+      2.246
+     ],
+     [
+      "2026-09-15",
+      4.402
+     ],
+     [
+      "2026-09-27",
+      3.73
+     ],
+     [
+      "2026-10-09",
+      3.46
+     ],
+     [
+      "2026-10-21",
+      2.295
+     ]
+    ],
+    "cover_series": null
+   }
+  }
+ },
+ "lake-chad": {
+  "category": "lake",
+  "defaultLayer": "water",
+  "n_dates": 10,
+  "bounds": [
+   13.46,
+   12.599458506242081,
+   14.900728975241961,
+   13.599999999999994
+  ],
+  "layers": {
+   "hh": {
+    "type": "ramp",
+    "n_frames": 10,
+    "dates": [
+     "2026-06-21",
+     "2026-07-03",
+     "2026-07-15",
+     "2026-07-27",
+     "2026-08-20",
+     "2026-09-01",
+     "2026-09-13",
+     "2026-09-25",
+     "2026-10-07",
+     "2026-10-19"
+    ],
+    "first": {
+     "cover": 1.0,
+     "mean": 51.798,
+     "p05": 20.0,
+     "p95": 97.25,
+     "std": 26.162
+    },
+    "last": {
+     "cover": 1.0,
+     "mean": 53.499,
+     "p05": 18.43,
+     "p95": 99.22,
+     "std": 26.542
+    },
+    "first_last_change": 7.35,
+    "spots_change": {
+     "chari-mouth": 8.5881,
+     "baga-sola": 4.9233,
+     "bol": 7.0634,
+     "baga-nigeria": 7.9083
+    },
+    "hot_share": 0.1194,
+    "steps": [
+     [
+      "2026-07-03",
+      2.78
+     ],
+     [
+      "2026-07-15",
+      2.817
+     ],
+     [
+      "2026-07-27",
+      9.505
+     ],
+     [
+      "2026-08-20",
+      13.387
+     ],
+     [
+      "2026-09-01",
+      6.51
+     ],
+     [
+      "2026-09-13",
+      4.82
+     ],
+     [
+      "2026-09-25",
+      4.943
+     ],
+     [
+      "2026-10-07",
+      3.893
+     ],
+     [
+      "2026-10-19",
+      4.015
+     ]
+    ],
+    "cover_series": null
+   },
+   "water": {
+    "type": "classes",
+    "n_frames": 10,
+    "dates": [
+     "2026-06-21",
+     "2026-07-03",
+     "2026-07-15",
+     "2026-07-27",
+     "2026-08-20",
+     "2026-09-01",
+     "2026-09-13",
+     "2026-09-25",
+     "2026-10-07",
+     "2026-10-19"
+    ],
+    "first": {
+     "cover": 0.0833,
+     "classes": {
+      "Open water": 0.0833,
+      "Possible water under vegetation": 0.0,
+      "Going under: vegetation submerging, or p": 0.0,
+      "Usually water, not today (rain or wind?)": 0.0
+     }
+    },
+    "last": {
+     "cover": 0.0887,
+     "classes": {
+      "Open water": 0.0863,
+      "Possible water under vegetation": 0.0022,
+      "Going under: vegetation submerging, or p": 0.0002,
+      "Usually water, not today (rain or wind?)": 0.0
+     }
+    },
+    "first_last_change": 0.625,
+    "spots_change": {
+     "chari-mouth": 2.0542,
+     "baga-sola": 0.0,
+     "bol": 2.2763,
+     "baga-nigeria": 0.0
+    },
+    "hot_share": 0.0063,
+    "steps": [
+     [
+      "2026-07-03",
+      0.014
+     ],
+     [
+      "2026-07-15",
+      0.058
+     ],
+     [
+      "2026-07-27",
+      0.093
+     ],
+     [
+      "2026-08-20",
+      0.15
+     ],
+     [
+      "2026-09-01",
+      0.171
+     ],
+     [
+      "2026-09-13",
+      0.122
+     ],
+     [
+      "2026-09-25",
+      0.278
+     ],
+     [
+      "2026-10-07",
+      0.117
+     ],
+     [
+      "2026-10-19",
+      0.097
+     ]
+    ],
+    "cover_series": null
+   },
+   "when": {
+    "type": "classes",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.1333,
+     "classes": {
+      "3 Jul": 0.0002,
+      "15 Jul": 0.001,
+      "27 Jul": 0.0244,
+      "20 Aug": 0.054,
+      "1 Sep": 0.0123,
+      "13 Sep": 0.0206,
+      "25 Sep": 0.0109,
+      "7 Oct": 0.0065,
+      "19 Oct": 0.0034
+     }
+    },
+    "last": {
+     "cover": 0.1333,
+     "classes": {
+      "3 Jul": 0.0002,
+      "15 Jul": 0.001,
+      "27 Jul": 0.0244,
+      "20 Aug": 0.054,
+      "1 Sep": 0.0123,
+      "13 Sep": 0.0206,
+      "25 Sep": 0.0109,
+      "7 Oct": 0.0065,
+      "19 Oct": 0.0034
+     }
+    }
+   },
+   "classes": {
+    "type": "classes",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.2227,
+     "classes": {
+      "Permanent water": 0.083,
+      "Seasonal open water": 0.004,
+      "Flooded vegetation": 0.0039,
+      "Got darker, not open water (wetter groun": 0.0328,
+      "Got brighter (growing crops and other ca": 0.099
+     }
+    },
+    "last": {
+     "cover": 0.2227,
+     "classes": {
+      "Permanent water": 0.083,
+      "Seasonal open water": 0.004,
+      "Flooded vegetation": 0.0039,
+      "Got darker, not open water (wetter groun": 0.0328,
+      "Got brighter (growing crops and other ca": 0.099
+     }
+    }
+   },
+   "change": {
+    "type": "diverging",
+    "n_frames": 9,
+    "dates": [
+     "2026-07-03",
+     "2026-07-15",
+     "2026-07-27",
+     "2026-08-20",
+     "2026-09-01",
+     "2026-09-13",
+     "2026-09-25",
+     "2026-10-07",
+     "2026-10-19"
+    ],
+    "first": {
+     "cover": 0.0094,
+     "mean": -9.662,
+     "p05": -22.65,
+     "p95": 15.51,
+     "std": 11.712
+    },
+    "last": {
+     "cover": 0.1982,
+     "mean": 7.674,
+     "p05": -25.67,
+     "p95": 35.0,
+     "std": 20.205
+    },
+    "first_last_change": 0.14,
+    "spots_change": {
+     "chari-mouth": 0.0857,
+     "baga-sola": 0.0001,
+     "bol": 0.0673,
+     "baga-nigeria": 0.0318
+    },
+    "hot_share": 0.003,
+    "steps": [
+     [
+      "2026-07-15",
+      0.029
+     ],
+     [
+      "2026-07-27",
+      0.254
+     ],
+     [
+      "2026-08-20",
+      2.527
+     ],
+     [
+      "2026-09-01",
+      1.112
+     ],
+     [
+      "2026-09-13",
+      1.147
+     ],
+     [
+      "2026-09-25",
+      1.346
+     ],
+     [
+      "2026-10-07",
+      1.032
+     ],
+     [
+      "2026-10-19",
+      0.87
+     ]
+    ],
+    "cover_series": null
+   },
+   "hv": {
+    "type": "ramp",
+    "n_frames": 10,
+    "dates": [
+     "2026-06-21",
+     "2026-07-03",
+     "2026-07-15",
+     "2026-07-27",
+     "2026-08-20",
+     "2026-09-01",
+     "2026-09-13",
+     "2026-09-25",
+     "2026-10-07",
+     "2026-10-19"
+    ],
+    "first": {
+     "cover": 1.0,
+     "mean": 51.663,
+     "p05": 14.51,
+     "p95": 97.65,
+     "std": 26.541
+    },
+    "last": {
+     "cover": 1.0,
+     "mean": 54.652,
+     "p05": 12.16,
+     "p95": 99.22,
+     "std": 26.421
+    },
+    "first_last_change": 7.588,
+    "spots_change": {
+     "chari-mouth": 7.6106,
+     "baga-sola": 3.9541,
+     "bol": 7.776,
+     "baga-nigeria": 7.1306
+    },
+    "hot_share": 0.1257,
+    "steps": [
+     [
+      "2026-07-03",
+      2.259
+     ],
+     [
+      "2026-07-15",
+      2.154
+     ],
+     [
+      "2026-07-27",
+      9.317
+     ],
+     [
+      "2026-08-20",
+      11.454
+     ],
+     [
+      "2026-09-01",
+      3.661
+     ],
+     [
+      "2026-09-13",
+      3.472
+     ],
+     [
+      "2026-09-25",
+      3.412
+     ],
+     [
+      "2026-10-07",
+      3.36
+     ],
+     [
+      "2026-10-19",
+      3.656
+     ]
+    ],
+    "cover_series": null
+   }
+  }
+ },
+ "tibet-m70-2026": {
+  "category": "earthquake",
+  "defaultLayer": "fringes",
+  "n_dates": 0,
+  "bounds": [
+   93.0,
+   31.69986477735695,
+   94.59984712099434,
+   32.99999999999999
+  ],
+  "layers": {
+   "los_cm": {
+    "type": "diverging",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.6892,
+     "mean": -0.774,
+     "p05": -9.88,
+     "p95": 5.49,
+     "std": 7.23
+    },
+    "last": {
+     "cover": 0.6892,
+     "mean": -0.774,
+     "p05": -9.88,
+     "p95": 5.49,
+     "std": 7.23
+    }
+   },
+   "fringes": {
+    "type": "ramp",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.6892,
+     "mean": 5.688,
+     "p05": 0.27,
+     "p95": 9.84,
+     "std": 3.447
+    },
+    "last": {
+     "cover": 0.6892,
+     "mean": 5.688,
+     "p05": 0.27,
+     "p95": 9.84,
+     "std": 3.447
+    }
+   },
+   "coherence": {
+    "type": "ramp",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 1.0,
+     "mean": 0.583,
+     "p05": 0.21,
+     "p95": 0.83,
+     "std": 0.186
+    },
+    "last": {
+     "cover": 1.0,
+     "mean": 0.583,
+     "p05": 0.21,
+     "p95": 0.83,
+     "std": 0.186
+    }
+   },
+   "fringes_before": {
+    "type": "ramp",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.6908,
+     "mean": 4.656,
+     "p05": 0.04,
+     "p95": 9.92,
+     "std": 4.49
+    },
+    "last": {
+     "cover": 0.6908,
+     "mean": 4.656,
+     "p05": 0.04,
+     "p95": 9.92,
+     "std": 4.49
+    }
+   },
+   "los_before_cm": {
+    "type": "diverging",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.6908,
+     "mean": -0.163,
+     "p05": -0.78,
+     "p95": 0.78,
+     "std": 0.485
+    },
+    "last": {
+     "cover": 0.6908,
+     "mean": -0.163,
+     "p05": -0.78,
+     "p95": 0.78,
+     "std": 0.485
+    }
+   }
+  },
+  "before_after": [
+   {
+    "label": "Fringes",
+    "before": "fringes_before",
+    "after": "fringes",
+    "before_stats": {
+     "cover": 0.6908,
+     "mean": 4.656,
+     "p05": 0.04,
+     "p95": 9.92,
+     "std": 4.49
+    },
+    "after_stats": {
+     "cover": 0.6892,
+     "mean": 5.688,
+     "p05": 0.27,
+     "p95": 9.84,
+     "std": 3.447
+    }
+   },
+   {
+    "label": "Ground motion (cm)",
+    "before": "los_before_cm",
+    "after": "los_cm",
+    "before_stats": {
+     "cover": 0.6908,
+     "mean": -0.163,
+     "p05": -0.78,
+     "p95": 0.78,
+     "std": 0.485
+    },
+    "after_stats": {
+     "cover": 0.6892,
+     "mean": -0.774,
+     "p05": -9.88,
+     "p95": 5.49,
+     "std": 7.23
+    }
+   }
+  ],
+  "event_views": [
+   {
+    "id": "asc",
+    "p2p_cm": 127,
+    "control_p2p_cm": 5,
+    "before": "2026-10-19",
+    "after": "2026-10-31"
+   }
+  ],
+  "event_lngLat": [
+   93.7837,
+   32.3376
+  ]
+ },
+ "venezuela-m72-2026": {
+  "category": "earthquake",
+  "defaultLayer": "fringes",
+  "n_dates": 0,
+  "bounds": [
+   -69.3,
+   9.89919059451312,
+   -66.70033754197685,
+   10.949999999999994
+  ],
+  "layers": {
+   "los_asc_cm": {
+    "type": "diverging",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.4384,
+     "mean": -1.976,
+     "p05": -24.31,
+     "p95": 8.94,
+     "std": 9.35
+    },
+    "last": {
+     "cover": 0.4384,
+     "mean": -1.976,
+     "p05": -24.31,
+     "p95": 8.94,
+     "std": 9.35
+    }
+   },
+   "los_desc_cm": {
+    "type": "diverging",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.361,
+     "mean": 0.103,
+     "p05": -8.63,
+     "p95": 11.45,
+     "std": 8.228
+    },
+    "last": {
+     "cover": 0.361,
+     "mean": 0.103,
+     "p05": -8.63,
+     "p95": 11.45,
+     "std": 8.228
+    }
+   },
+   "fringes": {
+    "type": "ramp",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.4384,
+     "mean": 5.37,
+     "p05": 0.39,
+     "p95": 9.65,
+     "std": 2.943
+    },
+    "last": {
+     "cover": 0.4384,
+     "mean": 5.37,
+     "p05": 0.39,
+     "p95": 9.65,
+     "std": 2.943
+    }
+   },
+   "coherence": {
+    "type": "ramp",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.8754,
+     "mean": 0.356,
+     "p05": 0.05,
+     "p95": 0.75,
+     "std": 0.227
+    },
+    "last": {
+     "cover": 0.8754,
+     "mean": 0.356,
+     "p05": 0.05,
+     "p95": 0.75,
+     "std": 0.227
+    }
+   },
+   "east_cm": {
+    "type": "diverging",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.2663,
+     "mean": -0.823,
+     "p05": -19.29,
+     "p95": 23.69,
+     "std": 12.458
+    },
+    "last": {
+     "cover": 0.2663,
+     "mean": -0.823,
+     "p05": -19.29,
+     "p95": 23.69,
+     "std": 12.458
+    }
+   },
+   "up_cm": {
+    "type": "diverging",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.2663,
+     "mean": -0.37,
+     "p05": -2.04,
+     "p95": 2.04,
+     "std": 1.472
+    },
+    "last": {
+     "cover": 0.2663,
+     "mean": -0.37,
+     "p05": -2.04,
+     "p95": 2.04,
+     "std": 1.472
+    }
+   },
+   "fringes_before": {
+    "type": "ramp",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.4801,
+     "mean": 5.183,
+     "p05": 0.27,
+     "p95": 9.73,
+     "std": 3.188
+    },
+    "last": {
+     "cover": 0.4801,
+     "mean": 5.183,
+     "p05": 0.27,
+     "p95": 9.73,
+     "std": 3.188
+    }
+   },
+   "los_before_cm": {
+    "type": "diverging",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.4801,
+     "mean": 0.226,
+     "p05": -2.98,
+     "p95": 3.61,
+     "std": 2.091
+    },
+    "last": {
+     "cover": 0.4801,
+     "mean": 0.226,
+     "p05": -2.98,
+     "p95": 3.61,
+     "std": 2.091
+    }
+   }
+  },
+  "before_after": [
+   {
+    "label": "Fringes",
+    "before": "fringes_before",
+    "after": "fringes",
+    "before_stats": {
+     "cover": 0.4801,
+     "mean": 5.183,
+     "p05": 0.27,
+     "p95": 9.73,
+     "std": 3.188
+    },
+    "after_stats": {
+     "cover": 0.4384,
+     "mean": 5.37,
+     "p05": 0.39,
+     "p95": 9.65,
+     "std": 2.943
+    }
+   },
+   {
+    "label": "Ground motion (cm)",
+    "before": "los_before_cm",
+    "after": "los_asc_cm",
+    "before_stats": {
+     "cover": 0.4801,
+     "mean": 0.226,
+     "p05": -2.98,
+     "p95": 3.61,
+     "std": 2.091
+    },
+    "after_stats": {
+     "cover": 0.4384,
+     "mean": -1.976,
+     "p05": -24.31,
+     "p95": 8.94,
+     "std": 9.35
+    }
+   }
+  ],
+  "event_views": [
+   {
+    "id": "asc",
+    "p2p_cm": 51,
+    "control_p2p_cm": 12,
+    "before": "2026-06-13",
+    "after": "2026-06-25"
+   },
+   {
+    "id": "desc",
+    "p2p_cm": 55,
+    "control_p2p_cm": 10,
+    "before": "2026-06-17",
+    "after": "2026-06-29"
+   }
+  ],
+  "event_lngLat": [
+   -68.5564,
+   10.3713
+  ]
+ },
+ "kumamoto-m68-2026": {
+  "category": "earthquake",
+  "defaultLayer": "fringes",
+  "n_dates": 0,
+  "bounds": [
+   129.99999999999997,
+   31.99986906307621,
+   131.29983080010317,
+   33.199999999999996
+  ],
+  "layers": {
+   "los_cm": {
+    "type": "diverging",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.5627,
+     "mean": -0.658,
+     "p05": -3.65,
+     "p95": 1.76,
+     "std": 3.575
+    },
+    "last": {
+     "cover": 0.5627,
+     "mean": -0.658,
+     "p05": -3.65,
+     "p95": 1.76,
+     "std": 3.575
+    }
+   },
+   "fringes": {
+    "type": "ramp",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.5627,
+     "mean": 5.482,
+     "p05": 0.2,
+     "p95": 9.8,
+     "std": 3.579
+    },
+    "last": {
+     "cover": 0.5627,
+     "mean": 5.482,
+     "p05": 0.2,
+     "p95": 9.8,
+     "std": 3.579
+    }
+   },
+   "coherence": {
+    "type": "ramp",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.8782,
+     "mean": 0.437,
+     "p05": 0.07,
+     "p95": 0.76,
+     "std": 0.222
+    },
+    "last": {
+     "cover": 0.8782,
+     "mean": 0.437,
+     "p05": 0.07,
+     "p95": 0.76,
+     "std": 0.222
+    }
+   },
+   "fringes_before": {
+    "type": "ramp",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.6576,
+     "mean": 4.685,
+     "p05": 0.12,
+     "p95": 9.84,
+     "std": 4.076
+    },
+    "last": {
+     "cover": 0.6576,
+     "mean": 4.685,
+     "p05": 0.12,
+     "p95": 9.84,
+     "std": 4.076
+    }
+   },
+   "los_before_cm": {
+    "type": "diverging",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.6576,
+     "mean": -0.032,
+     "p05": -1.29,
+     "p95": 1.29,
+     "std": 1.045
+    },
+    "last": {
+     "cover": 0.6576,
+     "mean": -0.032,
+     "p05": -1.29,
+     "p95": 1.29,
+     "std": 1.045
+    }
+   }
+  },
+  "before_after": [
+   {
+    "label": "Fringes",
+    "before": "fringes_before",
+    "after": "fringes",
+    "before_stats": {
+     "cover": 0.6576,
+     "mean": 4.685,
+     "p05": 0.12,
+     "p95": 9.84,
+     "std": 4.076
+    },
+    "after_stats": {
+     "cover": 0.5627,
+     "mean": 5.482,
+     "p05": 0.2,
+     "p95": 9.8,
+     "std": 3.579
+    }
+   },
+   {
+    "label": "Ground motion (cm)",
+    "before": "los_before_cm",
+    "after": "los_cm",
+    "before_stats": {
+     "cover": 0.6576,
+     "mean": -0.032,
+     "p05": -1.29,
+     "p95": 1.29,
+     "std": 1.045
+    },
+    "after_stats": {
+     "cover": 0.5627,
+     "mean": -0.658,
+     "p05": -3.65,
+     "p95": 1.76,
+     "std": 3.575
+    }
+   }
+  ],
+  "event_views": [
+   {
+    "id": "asc24",
+    "p2p_cm": 38,
+    "control_p2p_cm": 6,
+    "before": "2026-07-21",
+    "after": "2026-08-14"
+   },
+   {
+    "id": "asc125",
+    "p2p_cm": 25,
+    "control_p2p_cm": 9,
+    "before": "2026-07-16",
+    "after": "2026-08-21"
+   }
+  ],
+  "event_lngLat": [
+   130.6601,
+   32.6177
+  ]
+ },
+ "panama-m77-2026": {
+  "category": "earthquake",
+  "defaultLayer": "fringes",
+  "n_dates": 0,
+  "bounds": [
+   -81.9,
+   6.999492852077442,
+   -80.10034376817954,
+   8.2
+  ],
+  "layers": {
+   "los_asc_cm": {
+    "type": "diverging",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.1057,
+     "mean": -8.397,
+     "p05": -31.76,
+     "p95": 6.82,
+     "std": 12.913
+    },
+    "last": {
+     "cover": 0.1057,
+     "mean": -8.397,
+     "p05": -31.76,
+     "p95": 6.82,
+     "std": 12.913
+    }
+   },
+   "los_desc_cm": {
+    "type": "diverging",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.1377,
+     "mean": 11.956,
+     "p05": -4.47,
+     "p95": 60.0,
+     "std": 21.729
+    },
+    "last": {
+     "cover": 0.1377,
+     "mean": 11.956,
+     "p05": -4.47,
+     "p95": 60.0,
+     "std": 21.729
+    }
+   },
+   "fringes": {
+    "type": "ramp",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.1377,
+     "mean": 5.081,
+     "p05": 0.27,
+     "p95": 9.76,
+     "std": 3.189
+    },
+    "last": {
+     "cover": 0.1377,
+     "mean": 5.081,
+     "p05": 0.27,
+     "p95": 9.76,
+     "std": 3.189
+    }
+   },
+   "coherence": {
+    "type": "ramp",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.3758,
+     "mean": 0.324,
+     "p05": 0.04,
+     "p95": 0.73,
+     "std": 0.242
+    },
+    "last": {
+     "cover": 0.3758,
+     "mean": 0.324,
+     "p05": 0.04,
+     "p95": 0.73,
+     "std": 0.242
+    }
+   },
+   "fringes_before": {
+    "type": "ramp",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.143,
+     "mean": 5.173,
+     "p05": 0.27,
+     "p95": 9.57,
+     "std": 2.795
+    },
+    "last": {
+     "cover": 0.143,
+     "mean": 5.173,
+     "p05": 0.27,
+     "p95": 9.57,
+     "std": 2.795
+    }
+   },
+   "los_before_cm": {
+    "type": "diverging",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.143,
+     "mean": -4.045,
+     "p05": -10.12,
+     "p95": -0.24,
+     "std": 3.249
+    },
+    "last": {
+     "cover": 0.143,
+     "mean": -4.045,
+     "p05": -10.12,
+     "p95": -0.24,
+     "std": 3.249
+    }
+   }
+  },
+  "before_after": [
+   {
+    "label": "Fringes",
+    "before": "fringes_before",
+    "after": "fringes",
+    "before_stats": {
+     "cover": 0.143,
+     "mean": 5.173,
+     "p05": 0.27,
+     "p95": 9.57,
+     "std": 2.795
+    },
+    "after_stats": {
+     "cover": 0.1377,
+     "mean": 5.081,
+     "p05": 0.27,
+     "p95": 9.76,
+     "std": 3.189
+    }
+   },
+   {
+    "label": "Ground motion (cm)",
+    "before": "los_before_cm",
+    "after": "los_desc_cm",
+    "before_stats": {
+     "cover": 0.143,
+     "mean": -4.045,
+     "p05": -10.12,
+     "p95": -0.24,
+     "std": 3.249
+    },
+    "after_stats": {
+     "cover": 0.1377,
+     "mean": 11.956,
+     "p05": -4.47,
+     "p95": 60.0,
+     "std": 21.729
+    }
+   }
+  ],
+  "event_views": [
+   {
+    "id": "desc40",
+    "p2p_cm": 133,
+    "control_p2p_cm": 21,
+    "before": "2026-10-02",
+    "after": "2026-10-14"
+   },
+   {
+    "id": "asc",
+    "p2p_cm": 85,
+    "control_p2p_cm": 15,
+    "before": "2026-10-05",
+    "after": "2026-10-17"
+   },
+   {
+    "id": "asc76n",
+    "p2p_cm": null,
+    "control_p2p_cm": null,
+    "before": "2026-10-05",
+    "after": "2026-10-17"
+   },
+   {
+    "id": "desc141n",
+    "p2p_cm": 100,
+    "control_p2p_cm": 40,
+    "before": "2026-09-27",
+    "after": "2026-10-09"
+   },
+   {
+    "id": "asc4w",
+    "p2p_cm": 69,
+    "control_p2p_cm": 14,
+    "before": "2026-09-30",
+    "after": "2026-10-12"
+   }
+  ],
+  "event_lngLat": [
+   -80.7566,
+   7.6069
+  ]
+ },
+ "chao-phraya-2026": {
+  "category": "flood",
+  "defaultLayer": "water",
+  "n_dates": 9,
+  "bounds": [
+   100.07999999999998,
+   14.06057195414242,
+   101.29922387510531,
+   15.69999999999999
+  ],
+  "layers": {
+   "hh": {
+    "type": "ramp",
+    "n_frames": 9,
+    "dates": [
+     "2026-06-26",
+     "2026-07-08",
+     "2026-07-20",
+     "2026-08-13",
+     "2026-08-25",
+     "2026-09-06",
+     "2026-09-18",
+     "2026-09-30",
+     "2026-10-12"
+    ],
+    "first": {
+     "cover": 1.0,
+     "mean": 49.718,
+     "p05": 14.12,
+     "p95": 85.49,
+     "std": 21.301
+    },
+    "last": {
+     "cover": 1.0,
+     "mean": 52.866,
+     "p05": 10.59,
+     "p95": 84.31,
+     "std": 21.468
+    },
+    "first_last_change": 9.057,
+    "spots_change": {
+     "pasak-reservoir": 3.5577,
+     "sena-phak-hai": 10.1171,
+     "sena": 6.4949,
+     "north-of-ayutthaya": 8.3715,
+     "chai-nat-singburi": 9.2873
+    },
+    "hot_share": 0.1987,
+    "steps": [
+     [
+      "2026-07-08",
+      6.281
+     ],
+     [
+      "2026-07-20",
+      7.138
+     ],
+     [
+      "2026-08-13",
+      6.362
+     ],
+     [
+      "2026-08-25",
+      4.838
+     ],
+     [
+      "2026-09-06",
+      5.45
+     ],
+     [
+      "2026-09-18",
+      6.868
+     ],
+     [
+      "2026-09-30",
+      5.66
+     ],
+     [
+      "2026-10-12",
+      4.727
+     ]
+    ],
+    "cover_series": null
+   },
+   "water": {
+    "type": "classes",
+    "n_frames": 9,
+    "dates": [
+     "2026-06-26",
+     "2026-07-08",
+     "2026-07-20",
+     "2026-08-13",
+     "2026-08-25",
+     "2026-09-06",
+     "2026-09-18",
+     "2026-09-30",
+     "2026-10-12"
+    ],
+    "first": {
+     "cover": 0.0374,
+     "classes": {
+      "Open water": 0.0366,
+      "Possible water under vegetation": 0.0008,
+      "Going under: vegetation submerging, or p": 0.0,
+      "Usually water, not today (rain or wind?)": 0.0
+     }
+    },
+    "last": {
+     "cover": 0.095,
+     "classes": {
+      "Open water": 0.076,
+      "Possible water under vegetation": 0.0128,
+      "Going under: vegetation submerging, or p": 0.0062,
+      "Usually water, not today (rain or wind?)": 0.0
+     }
+    },
+    "first_last_change": 8.234,
+    "spots_change": {
+     "pasak-reservoir": 0.9782,
+     "sena-phak-hai": 47.5322,
+     "sena": 20.6236,
+     "north-of-ayutthaya": 45.5234,
+     "chai-nat-singburi": 53.9146
+    },
+    "hot_share": 0.0823,
+    "steps": [
+     [
+      "2026-07-08",
+      0.734
+     ],
+     [
+      "2026-07-20",
+      3.248
+     ],
+     [
+      "2026-08-13",
+      4.299
+     ],
+     [
+      "2026-08-25",
+      3.042
+     ],
+     [
+      "2026-09-06",
+      3.85
+     ],
+     [
+      "2026-09-18",
+      3.857
+     ],
+     [
+      "2026-09-30",
+      6.073
+     ],
+     [
+      "2026-10-12",
+      2.069
+     ]
+    ],
+    "cover_series": null
+   },
+   "when": {
+    "type": "classes",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.1449,
+     "classes": {
+      "8 Jul": 0.0023,
+      "20 Jul": 0.0043,
+      "13 Aug": 0.0301,
+      "25 Aug": 0.0275,
+      "6 Sep": 0.0227,
+      "18 Sep": 0.042,
+      "30 Sep": 0.0136,
+      "12 Oct": 0.0023
+     }
+    },
+    "last": {
+     "cover": 0.1449,
+     "classes": {
+      "8 Jul": 0.0023,
+      "20 Jul": 0.0043,
+      "13 Aug": 0.0301,
+      "25 Aug": 0.0275,
+      "6 Sep": 0.0227,
+      "18 Sep": 0.042,
+      "30 Sep": 0.0136,
+      "12 Oct": 0.0023
+     }
+    }
+   },
+   "classes": {
+    "type": "classes",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.2712,
+     "classes": {
+      "Permanent water": 0.0102,
+      "Seasonal open water": 0.0915,
+      "Flooded vegetation": 0.0572,
+      "Got darker, not open water (wetter groun": 0.0202,
+      "Got brighter (growing crops and other ca": 0.0921
+     }
+    },
+    "last": {
+     "cover": 0.2712,
+     "classes": {
+      "Permanent water": 0.0102,
+      "Seasonal open water": 0.0915,
+      "Flooded vegetation": 0.0572,
+      "Got darker, not open water (wetter groun": 0.0202,
+      "Got brighter (growing crops and other ca": 0.0921
+     }
+    }
+   },
+   "change": {
+    "type": "diverging",
+    "n_frames": 8,
+    "dates": [
+     "2026-07-08",
+     "2026-07-20",
+     "2026-08-13",
+     "2026-08-25",
+     "2026-09-06",
+     "2026-09-18",
+     "2026-09-30",
+     "2026-10-12"
+    ],
+    "first": {
+     "cover": 0.1639,
+     "mean": 10.45,
+     "p05": -15.92,
+     "p95": 32.67,
+     "std": 15.237
+    },
+    "last": {
+     "cover": 0.3173,
+     "mean": 9.387,
+     "p05": -23.06,
+     "p95": 32.39,
+     "std": 17.693
+    },
+    "first_last_change": 1.511,
+    "spots_change": {
+     "pasak-reservoir": 0.7943,
+     "sena-phak-hai": 3.1975,
+     "sena": 0.0,
+     "north-of-ayutthaya": 2.325,
+     "chai-nat-singburi": 4.1464
+    },
+    "hot_share": 0.0333,
+    "steps": [
+     [
+      "2026-07-20",
+      0.844
+     ],
+     [
+      "2026-08-13",
+      1.179
+     ],
+     [
+      "2026-08-25",
+      1.271
+     ],
+     [
+      "2026-09-06",
+      1.58
+     ],
+     [
+      "2026-09-18",
+      2.048
+     ],
+     [
+      "2026-09-30",
+      1.906
+     ],
+     [
+      "2026-10-12",
+      1.527
+     ]
+    ],
+    "cover_series": null
+   },
+   "hv": {
+    "type": "ramp",
+    "n_frames": 9,
+    "dates": [
+     "2026-06-26",
+     "2026-07-08",
+     "2026-07-20",
+     "2026-08-13",
+     "2026-08-25",
+     "2026-09-06",
+     "2026-09-18",
+     "2026-09-30",
+     "2026-10-12"
+    ],
+    "first": {
+     "cover": 1.0,
+     "mean": 45.08,
+     "p05": 8.63,
+     "p95": 90.59,
+     "std": 23.707
+    },
+    "last": {
+     "cover": 1.0,
+     "mean": 49.106,
+     "p05": 7.84,
+     "p95": 89.8,
+     "std": 23.817
+    },
+    "first_last_change": 8.05,
+    "spots_change": {
+     "pasak-reservoir": 3.5237,
+     "sena-phak-hai": 3.5596,
+     "sena": 4.8733,
+     "north-of-ayutthaya": 3.4874,
+     "chai-nat-singburi": 5.3384
+    },
+    "hot_share": 0.1698,
+    "steps": [
+     [
+      "2026-07-08",
+      4.747
+     ],
+     [
+      "2026-07-20",
+      5.149
+     ],
+     [
+      "2026-08-13",
+      5.475
+     ],
+     [
+      "2026-08-25",
+      3.838
+     ],
+     [
+      "2026-09-06",
+      5.04
+     ],
+     [
+      "2026-09-18",
+      5.818
+     ],
+     [
+      "2026-09-30",
+      5.004
+     ],
+     [
+      "2026-10-12",
+      4.063
+     ]
+    ],
+    "cover_series": null
+   }
+  }
+ },
+ "langtang-collapse-2026": {
+  "category": "landslide",
+  "defaultLayer": "coh_loss",
+  "n_dates": 0,
+  "bounds": [
+   85.1,
+   28.050032197677044,
+   85.85003039190231,
+   28.6
+  ],
+  "layers": {
+   "coherence": {
+    "type": "ramp",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 1.0,
+     "mean": 0.581,
+     "p05": 0.09,
+     "p95": 0.94,
+     "std": 0.269
+    },
+    "last": {
+     "cover": 1.0,
+     "mean": 0.581,
+     "p05": 0.09,
+     "p95": 0.94,
+     "std": 0.269
+    }
+   },
+   "coh_loss": {
+    "type": "classes",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.0038,
+     "classes": {
+      "was comparable before (control pair), no": 0.0038
+     }
+    },
+    "last": {
+     "cover": 0.0038,
+     "classes": {
+      "was comparable before (control pair), no": 0.0038
+     }
+    }
+   },
+   "coherence_before": {
+    "type": "ramp",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 1.0,
+     "mean": 0.572,
+     "p05": 0.09,
+     "p95": 0.93,
+     "std": 0.265
+    },
+    "last": {
+     "cover": 1.0,
+     "mean": 0.572,
+     "p05": 0.09,
+     "p95": 0.93,
+     "std": 0.265
+    }
+   }
+  },
+  "before_after": [
+   {
+    "label": "Radar coherence",
+    "before": "coherence_before",
+    "after": "coherence",
+    "before_stats": {
+     "cover": 1.0,
+     "mean": 0.572,
+     "p05": 0.09,
+     "p95": 0.93,
+     "std": 0.265
+    },
+    "after_stats": {
+     "cover": 1.0,
+     "mean": 0.581,
+     "p05": 0.09,
+     "p95": 0.94,
+     "std": 0.269
+    }
+   }
+  ],
+  "event_views": [
+   {
+    "id": "asc",
+    "p2p_cm": null,
+    "control_p2p_cm": null,
+    "before": "2026-08-19",
+    "after": "2026-08-31"
+   }
+  ],
+  "event_lngLat": [
+   85.477,
+   28.322
+  ]
+ },
+ "kilauea-ep55-2026": {
+  "category": "volcano",
+  "defaultLayer": "coh_loss",
+  "n_dates": 0,
+  "bounds": [
+   -155.42,
+   19.30000971243801,
+   -155.13999142746843,
+   19.519999999999996
+  ],
+  "layers": {
+   "coherence": {
+    "type": "ramp",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 1.0,
+     "mean": 0.672,
+     "p05": 0.33,
+     "p95": 0.88,
+     "std": 0.164
+    },
+    "last": {
+     "cover": 1.0,
+     "mean": 0.672,
+     "p05": 0.33,
+     "p95": 0.88,
+     "std": 0.164
+    }
+   },
+   "coh_loss": {
+    "type": "classes",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.0182,
+     "classes": {
+      "was comparable before (control pair), no": 0.0182
+     }
+    },
+    "last": {
+     "cover": 0.0182,
+     "classes": {
+      "was comparable before (control pair), no": 0.0182
+     }
+    }
+   },
+   "coherence_before": {
+    "type": "ramp",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 1.0,
+     "mean": 0.684,
+     "p05": 0.41,
+     "p95": 0.89,
+     "std": 0.152
+    },
+    "last": {
+     "cover": 1.0,
+     "mean": 0.684,
+     "p05": 0.41,
+     "p95": 0.89,
+     "std": 0.152
+    }
+   }
+  },
+  "before_after": [
+   {
+    "label": "Radar coherence",
+    "before": "coherence_before",
+    "after": "coherence",
+    "before_stats": {
+     "cover": 1.0,
+     "mean": 0.684,
+     "p05": 0.41,
+     "p95": 0.89,
+     "std": 0.152
+    },
+    "after_stats": {
+     "cover": 1.0,
+     "mean": 0.672,
+     "p05": 0.33,
+     "p95": 0.88,
+     "std": 0.164
+    }
+   }
+  ],
+  "event_views": [
+   {
+    "id": "asc",
+    "p2p_cm": null,
+    "control_p2p_cm": null,
+    "before": "2026-10-10",
+    "after": "2026-10-22"
+   }
+  ],
+  "event_lngLat": [
+   -155.281,
+   19.407
+  ]
+ },
+ "etna-valle-del-bove-2026": {
+  "category": "volcano",
+  "defaultLayer": "coh_loss",
+  "n_dates": 0,
+  "bounds": [
+   14.819999999999997,
+   37.549960462346085,
+   15.279945149500566,
+   37.949999999999996
+  ],
+  "layers": {
+   "coherence": {
+    "type": "ramp",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 1.0,
+     "mean": 0.576,
+     "p05": 0.1,
+     "p95": 0.85,
+     "std": 0.219
+    },
+    "last": {
+     "cover": 1.0,
+     "mean": 0.576,
+     "p05": 0.1,
+     "p95": 0.85,
+     "std": 0.219
+    }
+   },
+   "coh_loss": {
+    "type": "classes",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.0016,
+     "classes": {
+      "was comparable before (control pair), no": 0.0016
+     }
+    },
+    "last": {
+     "cover": 0.0016,
+     "classes": {
+      "was comparable before (control pair), no": 0.0016
+     }
+    }
+   },
+   "coherence_before": {
+    "type": "ramp",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.9848,
+     "mean": 0.583,
+     "p05": 0.11,
+     "p95": 0.85,
+     "std": 0.209
+    },
+    "last": {
+     "cover": 0.9848,
+     "mean": 0.583,
+     "p05": 0.11,
+     "p95": 0.85,
+     "std": 0.209
+    }
+   }
+  },
+  "before_after": [
+   {
+    "label": "Radar coherence",
+    "before": "coherence_before",
+    "after": "coherence",
+    "before_stats": {
+     "cover": 0.9848,
+     "mean": 0.583,
+     "p05": 0.11,
+     "p95": 0.85,
+     "std": 0.209
+    },
+    "after_stats": {
+     "cover": 1.0,
+     "mean": 0.576,
+     "p05": 0.1,
+     "p95": 0.85,
+     "std": 0.219
+    }
+   }
+  ],
+  "event_views": [
+   {
+    "id": "asc",
+    "p2p_cm": null,
+    "control_p2p_cm": null,
+    "before": "2026-07-23",
+    "after": "2026-08-16"
+   }
+  ],
+  "event_lngLat": [
+   15.0286,
+   37.7505
+  ]
+ },
+ "venezuela-m75-2026": {
+  "category": "earthquake",
+  "defaultLayer": "fringes",
+  "n_dates": 0,
+  "bounds": [
+   -68.1,
+   9.949397444525339,
+   -66.30038036830366,
+   11.049999999999999
+  ],
+  "layers": {
+   "los_desc_cm": {
+    "type": "diverging",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.2972,
+     "mean": 2.099,
+     "p05": -4.55,
+     "p95": 18.04,
+     "std": 6.853
+    },
+    "last": {
+     "cover": 0.2972,
+     "mean": 2.099,
+     "p05": -4.55,
+     "p95": 18.04,
+     "std": 6.853
+    }
+   },
+   "los_asc_cm": {
+    "type": "diverging",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.1026,
+     "mean": -4.74,
+     "p05": -31.84,
+     "p95": 1.73,
+     "std": 9.553
+    },
+    "last": {
+     "cover": 0.1026,
+     "mean": -4.74,
+     "p05": -31.84,
+     "p95": 1.73,
+     "std": 9.553
+    }
+   },
+   "fringes": {
+    "type": "ramp",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.2972,
+     "mean": 4.812,
+     "p05": 0.24,
+     "p95": 9.76,
+     "std": 3.383
+    },
+    "last": {
+     "cover": 0.2972,
+     "mean": 4.812,
+     "p05": 0.24,
+     "p95": 9.76,
+     "std": 3.383
+    }
+   },
+   "coherence": {
+    "type": "ramp",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.7545,
+     "mean": 0.3,
+     "p05": 0.04,
+     "p95": 0.75,
+     "std": 0.24
+    },
+    "last": {
+     "cover": 0.7545,
+     "mean": 0.3,
+     "p05": 0.04,
+     "p95": 0.75,
+     "std": 0.24
+    }
+   },
+   "fringes_before": {
+    "type": "ramp",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.278,
+     "mean": 5.921,
+     "p05": 0.2,
+     "p95": 9.84,
+     "std": 3.744
+    },
+    "last": {
+     "cover": 0.278,
+     "mean": 5.921,
+     "p05": 0.2,
+     "p95": 9.84,
+     "std": 3.744
+    }
+   },
+   "los_before_cm": {
+    "type": "diverging",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.278,
+     "mean": -0.505,
+     "p05": -2.04,
+     "p95": 1.41,
+     "std": 1.141
+    },
+    "last": {
+     "cover": 0.278,
+     "mean": -0.505,
+     "p05": -2.04,
+     "p95": 1.41,
+     "std": 1.141
+    }
+   }
+  },
+  "before_after": [
+   {
+    "label": "Fringes",
+    "before": "fringes_before",
+    "after": "fringes",
+    "before_stats": {
+     "cover": 0.278,
+     "mean": 5.921,
+     "p05": 0.2,
+     "p95": 9.84,
+     "std": 3.744
+    },
+    "after_stats": {
+     "cover": 0.2972,
+     "mean": 4.812,
+     "p05": 0.24,
+     "p95": 9.76,
+     "std": 3.383
+    }
+   },
+   {
+    "label": "Ground motion (cm)",
+    "before": "los_before_cm",
+    "after": "los_desc_cm",
+    "before_stats": {
+     "cover": 0.278,
+     "mean": -0.505,
+     "p05": -2.04,
+     "p95": 1.41,
+     "std": 1.141
+    },
+    "after_stats": {
+     "cover": 0.2972,
+     "mean": 2.099,
+     "p05": -4.55,
+     "p95": 18.04,
+     "std": 6.853
+    }
+   }
+  ],
+  "event_views": [
+   {
+    "id": "desc126",
+    "p2p_cm": 48,
+    "control_p2p_cm": 11,
+    "before": "2026-06-22",
+    "after": "2026-07-04"
+   },
+   {
+    "id": "asc61",
+    "p2p_cm": 66,
+    "control_p2p_cm": 64,
+    "before": "2026-06-18",
+    "after": "2026-06-30"
+   }
+  ],
+  "event_lngLat": [
+   -67.2205,
+   10.5955
+  ]
+ },
+ "qaidam-m56-2026": {
+  "category": "earthquake",
+  "defaultLayer": "fringes",
+  "n_dates": 0,
+  "bounds": [
+   95.14999999999999,
+   37.54994456603277,
+   95.94993358199663,
+   38.149999999999984
+  ],
+  "layers": {
+   "los_asc_cm": {
+    "type": "diverging",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.9233,
+     "mean": -0.317,
+     "p05": -2.08,
+     "p95": 1.06,
+     "std": 1.034
+    },
+    "last": {
+     "cover": 0.9233,
+     "mean": -0.317,
+     "p05": -2.08,
+     "p95": 1.06,
+     "std": 1.034
+    }
+   },
+   "los_desc_cm": {
+    "type": "diverging",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.8342,
+     "mean": 0.164,
+     "p05": -1.53,
+     "p95": 1.69,
+     "std": 1.125
+    },
+    "last": {
+     "cover": 0.8342,
+     "mean": 0.164,
+     "p05": -1.53,
+     "p95": 1.69,
+     "std": 1.125
+    }
+   },
+   "fringes": {
+    "type": "ramp",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.9233,
+     "mean": 2.644,
+     "p05": 0.08,
+     "p95": 4.9,
+     "std": 1.655
+    },
+    "last": {
+     "cover": 0.9233,
+     "mean": 2.644,
+     "p05": 0.08,
+     "p95": 4.9,
+     "std": 1.655
+    }
+   },
+   "coherence": {
+    "type": "ramp",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 1.0,
+     "mean": 0.649,
+     "p05": 0.3,
+     "p95": 0.94,
+     "std": 0.199
+    },
+    "last": {
+     "cover": 1.0,
+     "mean": 0.649,
+     "p05": 0.3,
+     "p95": 0.94,
+     "std": 0.199
+    }
+   },
+   "fringes_before": {
+    "type": "ramp",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.8605,
+     "mean": 2.542,
+     "p05": 0.08,
+     "p95": 4.9,
+     "std": 1.877
+    },
+    "last": {
+     "cover": 0.8605,
+     "mean": 2.542,
+     "p05": 0.08,
+     "p95": 4.9,
+     "std": 1.877
+    }
+   },
+   "los_before_cm": {
+    "type": "diverging",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.8605,
+     "mean": -0.077,
+     "p05": -0.9,
+     "p95": 0.75,
+     "std": 0.518
+    },
+    "last": {
+     "cover": 0.8605,
+     "mean": -0.077,
+     "p05": -0.9,
+     "p95": 0.75,
+     "std": 0.518
+    }
+   }
+  },
+  "before_after": [
+   {
+    "label": "Fringes",
+    "before": "fringes_before",
+    "after": "fringes",
+    "before_stats": {
+     "cover": 0.8605,
+     "mean": 2.542,
+     "p05": 0.08,
+     "p95": 4.9,
+     "std": 1.877
+    },
+    "after_stats": {
+     "cover": 0.9233,
+     "mean": 2.644,
+     "p05": 0.08,
+     "p95": 4.9,
+     "std": 1.655
+    }
+   },
+   {
+    "label": "Ground motion (cm)",
+    "before": "los_before_cm",
+    "after": "los_asc_cm",
+    "before_stats": {
+     "cover": 0.8605,
+     "mean": -0.077,
+     "p05": -0.9,
+     "p95": 0.75,
+     "std": 0.518
+    },
+    "after_stats": {
+     "cover": 0.9233,
+     "mean": -0.317,
+     "p05": -2.08,
+     "p95": 1.06,
+     "std": 1.034
+    }
+   }
+  ],
+  "event_views": [
+   {
+    "id": "asc83",
+    "p2p_cm": 11,
+    "control_p2p_cm": 4,
+    "before": "2026-07-25",
+    "after": "2026-08-18"
+   },
+   {
+    "id": "asc11",
+    "p2p_cm": 16,
+    "control_p2p_cm": 9,
+    "before": "2026-08-13",
+    "after": "2026-08-25"
+   },
+   {
+    "id": "desc91",
+    "p2p_cm": 9,
+    "control_p2p_cm": 6,
+    "before": "2026-07-26",
+    "after": "2026-08-19"
+   }
+  ],
+  "event_lngLat": [
+   95.5446,
+   37.8363
+  ]
+ },
+ "mahanadi-delta-2026": {
+  "category": "flood",
+  "defaultLayer": "water",
+  "n_dates": 6,
+  "bounds": [
+   85.19999999999999,
+   20.0200826242998,
+   86.50039122922729,
+   20.999999999999993
+  ],
+  "layers": {
+   "hh": {
+    "type": "ramp",
+    "n_frames": 6,
+    "dates": [
+     "2026-06-27",
+     "2026-08-14",
+     "2026-08-26",
+     "2026-09-19",
+     "2026-10-01",
+     "2026-10-13"
+    ],
+    "first": {
+     "cover": 1.0,
+     "mean": 58.535,
+     "p05": 28.63,
+     "p95": 87.84,
+     "std": 18.445
+    },
+    "last": {
+     "cover": 1.0,
+     "mean": 72.88,
+     "p05": 36.08,
+     "p95": 96.86,
+     "std": 18.139
+    },
+    "first_last_change": 17.192,
+    "spots_change": {
+     "southwest-pools": 21.375,
+     "eastern-delta": 20.2757,
+     "northeast-plain": 11.7812,
+     "northern-plain": 10.0227,
+     "coastal-lagoon": 5.9643
+    },
+    "hot_share": 0.4426,
+    "steps": [
+     [
+      "2026-08-14",
+      8.137
+     ],
+     [
+      "2026-08-26",
+      3.418
+     ],
+     [
+      "2026-09-19",
+      8.084
+     ],
+     [
+      "2026-10-01",
+      7.095
+     ],
+     [
+      "2026-10-13",
+      8.079
+     ]
+    ],
+    "cover_series": null
+   },
+   "water": {
+    "type": "classes",
+    "n_frames": 6,
+    "dates": [
+     "2026-06-27",
+     "2026-08-14",
+     "2026-08-26",
+     "2026-09-19",
+     "2026-10-01",
+     "2026-10-13"
+    ],
+    "first": {
+     "cover": 0.0095,
+     "classes": {
+      "Open water": 0.0094,
+      "Possible water under vegetation": 0.0001,
+      "Going under: vegetation submerging, or p": 0.0,
+      "Usually water, not today (rain or wind?)": 0.0
+     }
+    },
+    "last": {
+     "cover": 0.0563,
+     "classes": {
+      "Open water": 0.0162,
+      "Possible water under vegetation": 0.0402,
+      "Going under: vegetation submerging, or p": 0.0,
+      "Usually water, not today (rain or wind?)": 0.0
+     }
+    },
+    "first_last_change": 4.768,
+    "spots_change": {
+     "southwest-pools": 14.2081,
+     "eastern-delta": 13.1381,
+     "northeast-plain": 11.5918,
+     "northern-plain": 15.3814,
+     "coastal-lagoon": 1.1477
+    },
+    "hot_share": 0.0477,
+    "steps": [
+     [
+      "2026-08-14",
+      1.854
+     ],
+     [
+      "2026-08-26",
+      0.631
+     ],
+     [
+      "2026-09-19",
+      4.308
+     ],
+     [
+      "2026-10-01",
+      1.59
+     ],
+     [
+      "2026-10-13",
+      1.372
+     ]
+    ],
+    "cover_series": null
+   },
+   "when": {
+    "type": "classes",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.1301,
+     "classes": {
+      "14 Aug": 0.0221,
+      "26 Aug": 0.0012,
+      "19 Sep": 0.0605,
+      "1 Oct": 0.0337,
+      "13 Oct": 0.0128
+     }
+    },
+    "last": {
+     "cover": 0.1301,
+     "classes": {
+      "14 Aug": 0.0221,
+      "26 Aug": 0.0012,
+      "19 Sep": 0.0605,
+      "1 Oct": 0.0337,
+      "13 Oct": 0.0128
+     }
+    }
+   },
+   "classes": {
+    "type": "classes",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.193,
+     "classes": {
+      "Permanent water": 0.0089,
+      "Seasonal open water": 0.0198,
+      "Flooded vegetation": 0.0459,
+      "Got darker, not open water (wetter groun": 0.0033,
+      "Got brighter (growing crops and other ca": 0.115
+     }
+    },
+    "last": {
+     "cover": 0.193,
+     "classes": {
+      "Permanent water": 0.0089,
+      "Seasonal open water": 0.0198,
+      "Flooded vegetation": 0.0459,
+      "Got darker, not open water (wetter groun": 0.0033,
+      "Got brighter (growing crops and other ca": 0.115
+     }
+    }
+   },
+   "change": {
+    "type": "diverging",
+    "n_frames": 5,
+    "dates": [
+     "2026-08-14",
+     "2026-08-26",
+     "2026-09-19",
+     "2026-10-01",
+     "2026-10-13"
+    ],
+    "first": {
+     "cover": 0.2588,
+     "mean": -12.494,
+     "p05": -35.0,
+     "p95": 16.33,
+     "std": 15.391
+    },
+    "last": {
+     "cover": 0.5577,
+     "mean": 23.035,
+     "p05": -11.67,
+     "p95": 35.0,
+     "std": 12.665
+    },
+    "first_last_change": 10.249,
+    "spots_change": {
+     "southwest-pools": 10.4987,
+     "eastern-delta": 26.0823,
+     "northeast-plain": 22.0244,
+     "northern-plain": 8.4996,
+     "coastal-lagoon": 0.2229
+    },
+    "hot_share": 0.1596,
+    "steps": [
+     [
+      "2026-08-26",
+      0.872
+     ],
+     [
+      "2026-09-19",
+      1.532
+     ],
+     [
+      "2026-10-01",
+      3.286
+     ],
+     [
+      "2026-10-13",
+      4.099
+     ]
+    ],
+    "cover_series": null
+   },
+   "hv": {
+    "type": "ramp",
+    "n_frames": 6,
+    "dates": [
+     "2026-06-27",
+     "2026-08-14",
+     "2026-08-26",
+     "2026-09-19",
+     "2026-10-01",
+     "2026-10-13"
+    ],
+    "first": {
+     "cover": 1.0,
+     "mean": 47.742,
+     "p05": 17.25,
+     "p95": 88.24,
+     "std": 21.517
+    },
+    "last": {
+     "cover": 1.0,
+     "mean": 53.527,
+     "p05": 22.35,
+     "p95": 89.8,
+     "std": 20.328
+    },
+    "first_last_change": 7.129,
+    "spots_change": {
+     "southwest-pools": 10.2664,
+     "eastern-delta": 7.9348,
+     "northeast-plain": 5.2681,
+     "northern-plain": 4.1077,
+     "coastal-lagoon": 1.3566
+    },
+    "hot_share": 0.0947,
+    "steps": [
+     [
+      "2026-08-14",
+      4.807
+     ],
+     [
+      "2026-08-26",
+      2.428
+     ],
+     [
+      "2026-09-19",
+      3.473
+     ],
+     [
+      "2026-10-01",
+      3.352
+     ],
+     [
+      "2026-10-13",
+      4.394
+     ]
+    ],
+    "cover_series": null
+   }
+  }
+ },
+ "up-terai-2026": {
+  "category": "flood",
+  "defaultLayer": "water",
+  "n_dates": 6,
+  "bounds": [
+   82.38000000000001,
+   26.499324794480415,
+   83.5991571590196,
+   27.499999999999993
+  ],
+  "layers": {
+   "hh": {
+    "type": "ramp",
+    "n_frames": 6,
+    "dates": [
+     "2026-06-27",
+     "2026-08-14",
+     "2026-08-26",
+     "2026-09-19",
+     "2026-10-01",
+     "2026-10-13"
+    ],
+    "first": {
+     "cover": 1.0,
+     "mean": 49.371,
+     "p05": 22.75,
+     "p95": 76.86,
+     "std": 16.894
+    },
+    "last": {
+     "cover": 1.0,
+     "mean": 65.603,
+     "p05": 30.59,
+     "p95": 94.12,
+     "std": 18.681
+    },
+    "first_last_change": 22.508,
+    "spots_change": {
+     "south-of-gorakhpur": 30.2346,
+     "rapti-gorakhpur": 26.7174,
+     "northern-plain": 19.8241,
+     "terai-edge": 29.4772,
+     "gorakhpur-city": 18.1259
+    },
+    "hot_share": 0.5547,
+    "steps": [
+     [
+      "2026-08-14",
+      13.753
+     ],
+     [
+      "2026-08-26",
+      5.038
+     ],
+     [
+      "2026-09-19",
+      7.777
+     ],
+     [
+      "2026-10-01",
+      6.088
+     ],
+     [
+      "2026-10-13",
+      6.458
+     ]
+    ],
+    "cover_series": null
+   },
+   "water": {
+    "type": "classes",
+    "n_frames": 6,
+    "dates": [
+     "2026-06-27",
+     "2026-08-14",
+     "2026-08-26",
+     "2026-09-19",
+     "2026-10-01",
+     "2026-10-13"
+    ],
+    "first": {
+     "cover": 0.0,
+     "classes": {
+      "Open water": 0.0,
+      "Possible water under vegetation": 0.0,
+      "Going under: vegetation submerging, or p": 0.0,
+      "Usually water, not today (rain or wind?)": 0.0
+     }
+    },
+    "last": {
+     "cover": 0.0136,
+     "classes": {
+      "Open water": 0.0099,
+      "Possible water under vegetation": 0.0,
+      "Going under: vegetation submerging, or p": 0.0036,
+      "Usually water, not today (rain or wind?)": 0.0
+     }
+    },
+    "first_last_change": 1.362,
+    "spots_change": {
+     "south-of-gorakhpur": 58.6269,
+     "rapti-gorakhpur": 23.5259,
+     "northern-plain": 22.6134,
+     "terai-edge": 0.0,
+     "gorakhpur-city": 0.0
+    },
+    "hot_share": 0.0136,
+    "steps": [
+     [
+      "2026-08-14",
+      0.025
+     ],
+     [
+      "2026-08-26",
+      0.186
+     ],
+     [
+      "2026-09-19",
+      0.14
+     ],
+     [
+      "2026-10-01",
+      1.584
+     ],
+     [
+      "2026-10-13",
+      0.617
+     ]
+    ],
+    "cover_series": null
+   },
+   "when": {
+    "type": "classes",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.2778,
+     "classes": {
+      "14 Aug": 0.1458,
+      "26 Aug": 0.0135,
+      "19 Sep": 0.0956,
+      "1 Oct": 0.0215,
+      "13 Oct": 0.0014
+     }
+    },
+    "last": {
+     "cover": 0.2778,
+     "classes": {
+      "14 Aug": 0.1458,
+      "26 Aug": 0.0135,
+      "19 Sep": 0.0956,
+      "1 Oct": 0.0215,
+      "13 Oct": 0.0014
+     }
+    }
+   },
+   "classes": {
+    "type": "classes",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.2859,
+     "classes": {
+      "Permanent water": 0.0,
+      "Seasonal open water": 0.0091,
+      "Flooded vegetation": 0.004,
+      "Got darker, not open water (wetter groun": 0.0309,
+      "Got brighter (growing crops and other ca": 0.2418
+     }
+    },
+    "last": {
+     "cover": 0.2859,
+     "classes": {
+      "Permanent water": 0.0,
+      "Seasonal open water": 0.0091,
+      "Flooded vegetation": 0.004,
+      "Got darker, not open water (wetter groun": 0.0309,
+      "Got brighter (growing crops and other ca": 0.2418
+     }
+    }
+   },
+   "change": {
+    "type": "diverging",
+    "n_frames": 5,
+    "dates": [
+     "2026-08-14",
+     "2026-08-26",
+     "2026-09-19",
+     "2026-10-01",
+     "2026-10-13"
+    ],
+    "first": {
+     "cover": 0.4668,
+     "mean": 19.137,
+     "p05": -14.0,
+     "p95": 35.0,
+     "std": 13.876
+    },
+    "last": {
+     "cover": 0.6845,
+     "mean": 18.47,
+     "p05": -23.33,
+     "p95": 35.0,
+     "std": 19.573
+    },
+    "first_last_change": 5.22,
+    "spots_change": {
+     "south-of-gorakhpur": 7.8488,
+     "rapti-gorakhpur": 6.752,
+     "northern-plain": 7.5278,
+     "terai-edge": 13.2043,
+     "gorakhpur-city": 3.4943
+    },
+    "hot_share": 0.1447,
+    "steps": [
+     [
+      "2026-08-26",
+      2.079
+     ],
+     [
+      "2026-09-19",
+      3.597
+     ],
+     [
+      "2026-10-01",
+      2.904
+     ],
+     [
+      "2026-10-13",
+      3.046
+     ]
+    ],
+    "cover_series": null
+   },
+   "hv": {
+    "type": "ramp",
+    "n_frames": 6,
+    "dates": [
+     "2026-06-27",
+     "2026-08-14",
+     "2026-08-26",
+     "2026-09-19",
+     "2026-10-01",
+     "2026-10-13"
+    ],
+    "first": {
+     "cover": 1.0,
+     "mean": 42.596,
+     "p05": 17.25,
+     "p95": 69.8,
+     "std": 16.598
+    },
+    "last": {
+     "cover": 1.0,
+     "mean": 52.691,
+     "p05": 27.84,
+     "p95": 79.61,
+     "std": 15.806
+    },
+    "first_last_change": 12.384,
+    "spots_change": {
+     "south-of-gorakhpur": 19.0072,
+     "rapti-gorakhpur": 14.6807,
+     "northern-plain": 10.2993,
+     "terai-edge": 17.916,
+     "gorakhpur-city": 4.7045
+    },
+    "hot_share": 0.3608,
+    "steps": [
+     [
+      "2026-08-14",
+      7.537
+     ],
+     [
+      "2026-08-26",
+      3.136
+     ],
+     [
+      "2026-09-19",
+      4.472
+     ],
+     [
+      "2026-10-01",
+      4.755
+     ],
+     [
+      "2026-10-13",
+      5.189
+     ]
+    ],
+    "cover_series": null
+   }
+  }
+ },
+ "thunder-bay-36-2026": {
+  "category": "fire",
+  "defaultLayer": "change",
+  "n_dates": 9,
+  "bounds": [
+   -90.74,
+   49.89986883298348,
+   -88.19913241703534,
+   51.18
+  ],
+  "layers": {
+   "hh": {
+    "type": "ramp",
+    "n_frames": 9,
+    "dates": [
+     "2026-06-17",
+     "2026-06-29",
+     "2026-07-11",
+     "2026-07-23",
+     "2026-08-16",
+     "2026-09-09",
+     "2026-09-21",
+     "2026-10-03",
+     "2026-10-15"
+    ],
+    "first": {
+     "cover": 1.0,
+     "mean": 69.74,
+     "p05": 8.24,
+     "p95": 94.51,
+     "std": 24.533
+    },
+    "last": {
+     "cover": 1.0,
+     "mean": 72.409,
+     "p05": 8.24,
+     "p95": 97.25,
+     "std": 25.703
+    },
+    "first_last_change": 4.481,
+    "spots_change": {
+     "scar-core": 9.4116,
+     "scar-north": 8.1693,
+     "published-fire": 10.7447,
+     "unburned-reference": 3.1979
+    },
+    "hot_share": 0.031,
+    "steps": [
+     [
+      "2026-06-29",
+      2.706
+     ],
+     [
+      "2026-07-11",
+      3.583
+     ],
+     [
+      "2026-07-23",
+      4.663
+     ],
+     [
+      "2026-08-16",
+      5.706
+     ],
+     [
+      "2026-09-09",
+      5.101
+     ],
+     [
+      "2026-09-21",
+      3.773
+     ],
+     [
+      "2026-10-03",
+      2.931
+     ],
+     [
+      "2026-10-15",
+      2.235
+     ]
+    ],
+    "cover_series": null
+   },
+   "water": {
+    "type": "classes",
+    "n_frames": 9,
+    "dates": [
+     "2026-06-17",
+     "2026-06-29",
+     "2026-07-11",
+     "2026-07-23",
+     "2026-08-16",
+     "2026-09-09",
+     "2026-09-21",
+     "2026-10-03",
+     "2026-10-15"
+    ],
+    "first": {
+     "cover": 0.1062,
+     "classes": {
+      "Open water": 0.1062,
+      "Possible water under vegetation": 0.0001,
+      "Going under: vegetation submerging, or p": 0.0,
+      "Usually water, not today (rain or wind?)": 0.0
+     }
+    },
+    "last": {
+     "cover": 0.1626,
+     "classes": {
+      "Open water": 0.1104,
+      "Possible water under vegetation": 0.0522,
+      "Going under: vegetation submerging, or p": 0.0,
+      "Usually water, not today (rain or wind?)": 0.0
+     }
+    },
+    "first_last_change": 5.693,
+    "spots_change": {
+     "scar-core": 40.9415,
+     "scar-north": 44.966,
+     "published-fire": 40.2654,
+     "unburned-reference": 0.2471
+    },
+    "hot_share": 0.0569,
+    "steps": [
+     [
+      "2026-06-29",
+      0.011
+     ],
+     [
+      "2026-07-11",
+      0.175
+     ],
+     [
+      "2026-07-23",
+      0.611
+     ],
+     [
+      "2026-08-16",
+      1.319
+     ],
+     [
+      "2026-09-09",
+      2.504
+     ],
+     [
+      "2026-09-21",
+      0.981
+     ],
+     [
+      "2026-10-03",
+      0.464
+     ],
+     [
+      "2026-10-15",
+      0.216
+     ]
+    ],
+    "cover_series": null
+   },
+   "when": {
+    "type": "classes",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.0298,
+     "classes": {
+      "29 Jun": 0.0001,
+      "11 Jul": 0.0013,
+      "23 Jul": 0.0173,
+      "16 Aug": 0.0064,
+      "9 Sep": 0.0028,
+      "21 Sep": 0.0018,
+      "3 Oct": 0.0,
+      "15 Oct": 0.0
+     }
+    },
+    "last": {
+     "cover": 0.0298,
+     "classes": {
+      "29 Jun": 0.0001,
+      "11 Jul": 0.0013,
+      "23 Jul": 0.0173,
+      "16 Aug": 0.0064,
+      "9 Sep": 0.0028,
+      "21 Sep": 0.0018,
+      "3 Oct": 0.0,
+      "15 Oct": 0.0
+     }
+    }
+   },
+   "classes": {
+    "type": "classes",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.1827,
+     "classes": {
+      "Permanent water": 0.106,
+      "Seasonal open water": 0.0047,
+      "Flooded vegetation": 0.0549,
+      "Got darker, not open water (wetter groun": 0.0035,
+      "Got brighter (growing crops and other ca": 0.0136
+     }
+    },
+    "last": {
+     "cover": 0.1827,
+     "classes": {
+      "Permanent water": 0.106,
+      "Seasonal open water": 0.0047,
+      "Flooded vegetation": 0.0549,
+      "Got darker, not open water (wetter groun": 0.0035,
+      "Got brighter (growing crops and other ca": 0.0136
+     }
+    }
+   },
+   "change": {
+    "type": "diverging",
+    "n_frames": 8,
+    "dates": [
+     "2026-06-29",
+     "2026-07-11",
+     "2026-07-23",
+     "2026-08-16",
+     "2026-09-09",
+     "2026-09-21",
+     "2026-10-03",
+     "2026-10-15"
+    ],
+    "first": {
+     "cover": 0.0114,
+     "mean": 6.541,
+     "p05": -15.37,
+     "p95": 17.43,
+     "std": 11.852
+    },
+    "last": {
+     "cover": 0.0963,
+     "mean": 13.746,
+     "p05": 11.53,
+     "p95": 19.9,
+     "std": 4.106
+    },
+    "first_last_change": 0.015,
+    "spots_change": {
+     "scar-core": 0.0,
+     "scar-north": 0.0,
+     "published-fire": 0.0,
+     "unburned-reference": 0.0
+    },
+    "hot_share": 0.0003,
+    "steps": [
+     [
+      "2026-07-11",
+      0.013
+     ],
+     [
+      "2026-07-23",
+      0.058
+     ],
+     [
+      "2026-08-16",
+      0.235
+     ],
+     [
+      "2026-09-09",
+      0.21
+     ],
+     [
+      "2026-09-21",
+      0.111
+     ],
+     [
+      "2026-10-03",
+      0.093
+     ],
+     [
+      "2026-10-15",
+      0.101
+     ]
+    ],
+    "cover_series": null
+   },
+   "hv": {
+    "type": "ramp",
+    "n_frames": 9,
+    "dates": [
+     "2026-06-17",
+     "2026-06-29",
+     "2026-07-11",
+     "2026-07-23",
+     "2026-08-16",
+     "2026-09-09",
+     "2026-09-21",
+     "2026-10-03",
+     "2026-10-15"
+    ],
+    "first": {
+     "cover": 1.0,
+     "mean": 66.553,
+     "p05": 7.45,
+     "p95": 94.12,
+     "std": 24.819
+    },
+    "last": {
+     "cover": 1.0,
+     "mean": 67.145,
+     "p05": 7.45,
+     "p95": 94.51,
+     "std": 25.03
+    },
+    "first_last_change": 3.152,
+    "spots_change": {
+     "scar-core": 5.0418,
+     "scar-north": 4.3254,
+     "published-fire": 4.1947,
+     "unburned-reference": 2.6719
+    },
+    "hot_share": 0.0043,
+    "steps": [
+     [
+      "2026-06-29",
+      2.367
+     ],
+     [
+      "2026-07-11",
+      3.046
+     ],
+     [
+      "2026-07-23",
+      3.559
+     ],
+     [
+      "2026-08-16",
+      5.259
+     ],
+     [
+      "2026-09-09",
+      4.611
+     ],
+     [
+      "2026-09-21",
+      3.807
+     ],
+     [
+      "2026-10-03",
+      2.66
+     ],
+     [
+      "2026-10-15",
+      2.213
+     ]
+    ],
+    "cover_series": null
+   }
+  }
+ },
+ "la-mierla-fire-2026": {
+  "category": "fire",
+  "defaultLayer": "hv",
+  "n_dates": 10,
+  "bounds": [
+   -3.6,
+   40.399906990593365,
+   -1.9990713766569885,
+   41.39999999999999
+  ],
+  "layers": {
+   "hh": {
+    "type": "ramp",
+    "n_frames": 10,
+    "dates": [
+     "2026-06-20",
+     "2026-07-02",
+     "2026-07-14",
+     "2026-07-26",
+     "2026-08-19",
+     "2026-08-31",
+     "2026-09-12",
+     "2026-09-24",
+     "2026-10-06",
+     "2026-10-18"
+    ],
+    "first": {
+     "cover": 1.0,
+     "mean": 53.939,
+     "p05": 17.25,
+     "p95": 94.9,
+     "std": 24.205
+    },
+    "last": {
+     "cover": 1.0,
+     "mean": 55.422,
+     "p05": 16.86,
+     "p95": 94.51,
+     "std": 23.869
+    },
+    "first_last_change": 6.252,
+    "spots_change": {
+     "scar-core": 8.3425,
+     "scar-southwest": 7.3734,
+     "riofrio": 4.5244,
+     "unburned-ridge": 4.961,
+     "lowland-reference": 10.4977
+    },
+    "hot_share": 0.0712,
+    "steps": [
+     [
+      "2026-07-02",
+      3.819
+     ],
+     [
+      "2026-07-14",
+      4.885
+     ],
+     [
+      "2026-07-26",
+      5.08
+     ],
+     [
+      "2026-08-19",
+      2.223
+     ],
+     [
+      "2026-08-31",
+      2.15
+     ],
+     [
+      "2026-09-12",
+      2.161
+     ],
+     [
+      "2026-09-24",
+      2.304
+     ],
+     [
+      "2026-10-06",
+      7.0
+     ],
+     [
+      "2026-10-18",
+      4.806
+     ]
+    ],
+    "cover_series": null
+   },
+   "water": {
+    "type": "classes",
+    "n_frames": 10,
+    "dates": [
+     "2026-06-20",
+     "2026-07-02",
+     "2026-07-14",
+     "2026-07-26",
+     "2026-08-19",
+     "2026-08-31",
+     "2026-09-12",
+     "2026-09-24",
+     "2026-10-06",
+     "2026-10-18"
+    ],
+    "first": {
+     "cover": 0.0,
+     "classes": {
+      "Open water": 0.0,
+      "Possible water under vegetation": 0.0,
+      "Going under: vegetation submerging, or p": 0.0,
+      "Usually water, not today (rain or wind?)": 0.0
+     }
+    },
+    "last": {
+     "cover": 0.0,
+     "classes": {
+      "Open water": 0.0,
+      "Possible water under vegetation": 0.0,
+      "Going under: vegetation submerging, or p": 0.0,
+      "Usually water, not today (rain or wind?)": 0.0
+     }
+    },
+    "first_last_change": 0.0,
+    "spots_change": {
+     "scar-core": 0.0,
+     "scar-southwest": 0.0,
+     "riofrio": 0.0,
+     "unburned-ridge": 0.0,
+     "lowland-reference": 0.0
+    },
+    "hot_share": 0.0,
+    "steps": [
+     [
+      "2026-07-02",
+      0.0
+     ],
+     [
+      "2026-07-14",
+      0.0
+     ],
+     [
+      "2026-07-26",
+      0.0
+     ],
+     [
+      "2026-08-19",
+      0.0
+     ],
+     [
+      "2026-08-31",
+      0.0
+     ],
+     [
+      "2026-09-12",
+      0.0
+     ],
+     [
+      "2026-09-24",
+      0.0
+     ],
+     [
+      "2026-10-06",
+      0.0
+     ],
+     [
+      "2026-10-18",
+      0.0
+     ]
+    ],
+    "cover_series": null
+   },
+   "when": {
+    "type": "classes",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.1189,
+     "classes": {
+      "2 Jul": 0.0112,
+      "14 Jul": 0.0007,
+      "26 Jul": 0.0032,
+      "19 Aug": 0.0005,
+      "31 Aug": 0.0002,
+      "12 Sep": 0.0003,
+      "24 Sep": 0.0007,
+      "6 Oct": 0.0945,
+      "18 Oct": 0.0076
+     }
+    },
+    "last": {
+     "cover": 0.1189,
+     "classes": {
+      "2 Jul": 0.0112,
+      "14 Jul": 0.0007,
+      "26 Jul": 0.0032,
+      "19 Aug": 0.0005,
+      "31 Aug": 0.0002,
+      "12 Sep": 0.0003,
+      "24 Sep": 0.0007,
+      "6 Oct": 0.0945,
+      "18 Oct": 0.0076
+     }
+    }
+   },
+   "classes": {
+    "type": "classes",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.1189,
+     "classes": {
+      "Permanent water": 0.0,
+      "Seasonal open water": 0.0,
+      "Flooded vegetation": 0.0,
+      "Got darker, not open water (wetter groun": 0.0165,
+      "Got brighter (growing crops and other ca": 0.1024
+     }
+    },
+    "last": {
+     "cover": 0.1189,
+     "classes": {
+      "Permanent water": 0.0,
+      "Seasonal open water": 0.0,
+      "Flooded vegetation": 0.0,
+      "Got darker, not open water (wetter groun": 0.0165,
+      "Got brighter (growing crops and other ca": 0.1024
+     }
+    }
+   },
+   "change": {
+    "type": "diverging",
+    "n_frames": 9,
+    "dates": [
+     "2026-07-02",
+     "2026-07-14",
+     "2026-07-26",
+     "2026-08-19",
+     "2026-08-31",
+     "2026-09-12",
+     "2026-09-24",
+     "2026-10-06",
+     "2026-10-18"
+    ],
+    "first": {
+     "cover": 0.0441,
+     "mean": -9.686,
+     "p05": -20.18,
+     "p95": 13.45,
+     "std": 10.239
+    },
+    "last": {
+     "cover": 0.177,
+     "mean": 6.719,
+     "p05": -17.98,
+     "p95": 22.51,
+     "std": 14.151
+    },
+    "first_last_change": 0.137,
+    "spots_change": {
+     "scar-core": 0.0,
+     "scar-southwest": 0.0,
+     "riofrio": 0.0624,
+     "unburned-ridge": 0.0999,
+     "lowland-reference": 0.0
+    },
+    "hot_share": 0.0017,
+    "steps": [
+     [
+      "2026-07-14",
+      0.361
+     ],
+     [
+      "2026-07-26",
+      0.551
+     ],
+     [
+      "2026-08-19",
+      0.157
+     ],
+     [
+      "2026-08-31",
+      0.127
+     ],
+     [
+      "2026-09-12",
+      0.124
+     ],
+     [
+      "2026-09-24",
+      0.145
+     ],
+     [
+      "2026-10-06",
+      0.292
+     ],
+     [
+      "2026-10-18",
+      0.495
+     ]
+    ],
+    "cover_series": null
+   },
+   "hv": {
+    "type": "ramp",
+    "n_frames": 10,
+    "dates": [
+     "2026-06-20",
+     "2026-07-02",
+     "2026-07-14",
+     "2026-07-26",
+     "2026-08-19",
+     "2026-08-31",
+     "2026-09-12",
+     "2026-09-24",
+     "2026-10-06",
+     "2026-10-18"
+    ],
+    "first": {
+     "cover": 1.0,
+     "mean": 50.9,
+     "p05": 12.16,
+     "p95": 96.47,
+     "std": 26.32
+    },
+    "last": {
+     "cover": 1.0,
+     "mean": 50.851,
+     "p05": 11.76,
+     "p95": 96.08,
+     "std": 26.19
+    },
+    "first_last_change": 5.038,
+    "spots_change": {
+     "scar-core": 14.2838,
+     "scar-southwest": 14.7818,
+     "riofrio": 3.6378,
+     "unburned-ridge": 3.9429,
+     "lowland-reference": 7.529
+    },
+    "hot_share": 0.0357,
+    "steps": [
+     [
+      "2026-07-02",
+      3.195
+     ],
+     [
+      "2026-07-14",
+      4.704
+     ],
+     [
+      "2026-07-26",
+      5.127
+     ],
+     [
+      "2026-08-19",
+      2.021
+     ],
+     [
+      "2026-08-31",
+      1.959
+     ],
+     [
+      "2026-09-12",
+      1.942
+     ],
+     [
+      "2026-09-24",
+      1.998
+     ],
+     [
+      "2026-10-06",
+      5.612
+     ],
+     [
+      "2026-10-18",
+      4.714
+     ]
+    ],
+    "cover_series": null
+   }
+  }
+ },
+ "avila-burgohondo-fire-2026": {
+  "category": "fire",
+  "defaultLayer": "hv",
+  "n_dates": 7,
+  "bounds": [
+   -5.599999999999999,
+   39.80073977763686,
+   -4.000887697815902,
+   40.899999999999984
+  ],
+  "layers": {
+   "hh": {
+    "type": "ramp",
+    "n_frames": 7,
+    "dates": [
+     "2026-06-27",
+     "2026-07-09",
+     "2026-07-21",
+     "2026-08-26",
+     "2026-09-19",
+     "2026-10-01",
+     "2026-10-13"
+    ],
+    "first": {
+     "cover": 0.0
+    },
+    "last": {
+     "cover": 0.0
+    },
+    "first_last_change": 0.0,
+    "spots_change": {
+     "scar-east-of-navaluenga": 0.0,
+     "scar-further-east": 0.0,
+     "navaluenga": 0.0,
+     "unburned-reference": 0.0
+    },
+    "hot_share": 0.0,
+    "steps": [
+     [
+      "2026-07-09",
+      0.0
+     ],
+     [
+      "2026-07-21",
+      0.0
+     ],
+     [
+      "2026-08-26",
+      0.0
+     ],
+     [
+      "2026-09-19",
+      0.0
+     ],
+     [
+      "2026-10-01",
+      0.0
+     ],
+     [
+      "2026-10-13",
+      0.0
+     ]
+    ],
+    "cover_series": null
+   },
+   "water": {
+    "type": "classes",
+    "n_frames": 7,
+    "dates": [
+     "2026-06-27",
+     "2026-07-09",
+     "2026-07-21",
+     "2026-08-26",
+     "2026-09-19",
+     "2026-10-01",
+     "2026-10-13"
+    ],
+    "first": {
+     "cover": 0.0,
+     "classes": {
+      "Open water": 0.0,
+      "Possible water under vegetation": 0.0,
+      "Going under: vegetation submerging, or p": 0.0,
+      "Usually water, not today (rain or wind?)": 0.0
+     }
+    },
+    "last": {
+     "cover": 0.0,
+     "classes": {
+      "Open water": 0.0,
+      "Possible water under vegetation": 0.0,
+      "Going under: vegetation submerging, or p": 0.0,
+      "Usually water, not today (rain or wind?)": 0.0
+     }
+    },
+    "first_last_change": 0.0,
+    "spots_change": {
+     "scar-east-of-navaluenga": 0.0,
+     "scar-further-east": 0.0,
+     "navaluenga": 0.0,
+     "unburned-reference": 0.0
+    },
+    "hot_share": 0.0,
+    "steps": [
+     [
+      "2026-07-09",
+      0.0
+     ],
+     [
+      "2026-07-21",
+      0.0
+     ],
+     [
+      "2026-08-26",
+      0.0
+     ],
+     [
+      "2026-09-19",
+      0.0
+     ],
+     [
+      "2026-10-01",
+      0.0
+     ],
+     [
+      "2026-10-13",
+      0.0
+     ]
+    ],
+    "cover_series": null
+   },
+   "when": {
+    "type": "classes",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.0,
+     "classes": {
+      "9 Jul": 0.0,
+      "21 Jul": 0.0,
+      "26 Aug": 0.0,
+      "19 Sep": 0.0,
+      "1 Oct": 0.0,
+      "13 Oct": 0.0
+     }
+    },
+    "last": {
+     "cover": 0.0,
+     "classes": {
+      "9 Jul": 0.0,
+      "21 Jul": 0.0,
+      "26 Aug": 0.0,
+      "19 Sep": 0.0,
+      "1 Oct": 0.0,
+      "13 Oct": 0.0
+     }
+    }
+   },
+   "classes": {
+    "type": "classes",
+    "n_frames": 1,
+    "dates": [
+     null
+    ],
+    "first": {
+     "cover": 0.0,
+     "classes": {
+      "Permanent water": 0.0,
+      "Seasonal open water": 0.0,
+      "Flooded vegetation": 0.0,
+      "Got darker, not open water (wetter groun": 0.0,
+      "Got brighter (growing crops and other ca": 0.0
+     }
+    },
+    "last": {
+     "cover": 0.0,
+     "classes": {
+      "Permanent water": 0.0,
+      "Seasonal open water": 0.0,
+      "Flooded vegetation": 0.0,
+      "Got darker, not open water (wetter groun": 0.0,
+      "Got brighter (growing crops and other ca": 0.0
+     }
+    }
+   },
+   "change": {
+    "type": "diverging",
+    "n_frames": 6,
+    "dates": [
+     "2026-07-09",
+     "2026-07-21",
+     "2026-08-26",
+     "2026-09-19",
+     "2026-10-01",
+     "2026-10-13"
+    ],
+    "first": {
+     "cover": 0.0
+    },
+    "last": {
+     "cover": 0.0
+    },
+    "first_last_change": 0.0,
+    "spots_change": {
+     "scar-east-of-navaluenga": 0.0,
+     "scar-further-east": 0.0,
+     "navaluenga": 0.0,
+     "unburned-reference": 0.0
+    },
+    "hot_share": 0.0,
+    "steps": [
+     [
+      "2026-07-21",
+      0.0
+     ],
+     [
+      "2026-08-26",
+      0.0
+     ],
+     [
+      "2026-09-19",
+      0.0
+     ],
+     [
+      "2026-10-01",
+      0.0
+     ],
+     [
+      "2026-10-13",
+      0.0
+     ]
+    ],
+    "cover_series": null
+   },
+   "hv": {
+    "type": "ramp",
+    "n_frames": 7,
+    "dates": [
+     "2026-06-27",
+     "2026-07-09",
+     "2026-07-21",
+     "2026-08-26",
+     "2026-09-19",
+     "2026-10-01",
+     "2026-10-13"
+    ],
+    "first": {
+     "cover": 0.0
+    },
+    "last": {
+     "cover": 0.0
+    },
+    "first_last_change": 0.0,
+    "spots_change": {
+     "scar-east-of-navaluenga": 0.0,
+     "scar-further-east": 0.0,
+     "navaluenga": 0.0,
+     "unburned-reference": 0.0
+    },
+    "hot_share": 0.0,
+    "steps": [
+     [
+      "2026-07-09",
+      0.0
+     ],
+     [
+      "2026-07-21",
+      0.0
+     ],
+     [
+      "2026-08-26",
+      0.0
+     ],
+     [
+      "2026-09-19",
+      0.0
+     ],
+     [
+      "2026-10-01",
+      0.0
+     ],
+     [
+      "2026-10-13",
+      0.0
+     ]
+    ],
+    "cover_series": null
+   }
+  }
+ }
+}
