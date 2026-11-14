@@ -1,0 +1,14 @@
+{
+  "id": "panama-m77-2026",
+  "name": "Panama earthquake, M7.7, 9 Oct 2026",
+  "bbox": [
+    -81.9,
+    7.0,
+    -80.1,
+    8.2
+  ],
+  "track": 40,
+  "frame": 85,
+  "direction": "ascending and descending",
+  "pixel_m": 80
+}

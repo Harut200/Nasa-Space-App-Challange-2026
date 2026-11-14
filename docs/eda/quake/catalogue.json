@@ -36,7 +36,16 @@
     "granule": "NISAR_L2_PR_GUNW_027_168_A_173_028_4000_SH_20260812T214030_20260812T214104_20260824T214029_20260824T214104_P05023_N_F_J_001",
     "span_days": 12
    }
-  ]
+  ],
+  "quake_study": {
+   "event_id": "flores-m78-2026",
+   "verdict": "not detected",
+   "reason": "epicentre in the sea; only the north coast of Flores (20-60 km south) is usable; smooth gradients of about 10 cm in both look directions are the size of the atmosphere signal in the control pairs and have no pattern tied to the epicentre",
+   "views_used": [
+    "asc",
+    "desc"
+   ]
+  }
  },
  {
   "id": "us6000u18k",
@@ -156,7 +165,16 @@
     "granule": "NISAR_L2_PR_GUNW_031_141_D_085_032_4000_SH_20260927T235335_20260927T235344_20261009T235335_20261009T235345_P05023_N_P_J_001",
     "span_days": 12
    }
-  ]
+  ],
+  "quake_study": {
+   "event_id": "panama-m77-2026",
+   "verdict": "clear",
+   "reason": "about a dozen concentric fringes in the descending pair, 133 cm p2p within 60 km vs 21 cm in the control; ascending pair 85 cm vs 15 cm; frames cover only the east and south of the epicentre",
+   "views_used": [
+    "asc",
+    "desc40"
+   ]
+  }
  },
  {
   "id": "us6000t7zp",
@@ -195,7 +213,12 @@
     "granule": "NISAR_L2_PR_GUNW_022_162_A_007_023_4000_SH_20260613T100656_20260613T100731_20260625T100655_20260625T100730_P05023_N_F_J_001",
     "span_days": 12
    }
-  ]
+  ],
+  "quake_study": {
+   "event_id": "venezuela-m72-2026",
+   "verdict": null,
+   "reason": "M7.5 about 40 s after the M7.2, inside the same pairs; not separable from it"
+  }
  },
  {
   "id": "us7000t1bu",
@@ -234,7 +257,16 @@
     "granule": "NISAR_L2_PR_GUNW_025_055_D_081_026_4000_SH_20260712T004120_20260712T004150_20260724T004119_20260724T004150_P05023_N_F_J_001",
     "span_days": 12
    }
-  ]
+  ],
+  "quake_study": {
+   "event_id": "mexico-m73-2026",
+   "verdict": "not detected",
+   "reason": "epicentre 60 km offshore; the coast is about 55 km away and only 1 percent of the pixels within 60 km of the epicentre are valid; ascending map is within +/-3 cm on land, below the control's noise",
+   "views_used": [
+    "asc",
+    "desc"
+   ]
+  }
  },
  {
   "id": "us6000t7zc",
@@ -264,7 +296,16 @@
     "granule": "NISAR_L2_PR_GUNW_022_162_A_007_023_4000_SH_20260613T100656_20260613T100731_20260625T100655_20260625T100730_P05023_N_F_J_001",
     "span_days": 12
    }
-  ]
+  ],
+  "quake_study": {
+   "event_id": "venezuela-m72-2026",
+   "verdict": "clear",
+   "reason": "strike-slip sign-flip pattern in both look directions, about 50 cm p2p within 60 km vs 10-12 cm control (atmosphere ramp); two look directions; the M7.5 40 s later is inside the pair",
+   "views_used": [
+    "asc",
+    "desc"
+   ]
+  }
  },
  {
   "id": "us6000u43g",
@@ -285,7 +326,15 @@
     "granule": "NISAR_L2_UR_GUNW_033_112_A_018_034_2000_SH_20261019T225848_20261019T225923_20261031T225848_20261031T225923_P05023_F_F_J_001",
     "span_days": 12
    }
-  ]
+  ],
+  "quake_study": {
+   "event_id": "tibet-m70-2026",
+   "verdict": "clear",
+   "reason": null,
+   "views_used": [
+    "asc"
+   ]
+  }
  },
  {
   "id": "us6000t7zq",
@@ -315,7 +364,16 @@
     "granule": "NISAR_L2_PR_GUNW_023_110_A_022_024_4000_SH_20260621T194120_20260621T194155_20260703T194120_20260703T194154_P05023_N_F_J_001",
     "span_days": 12
    }
-  ]
+  ],
+  "quake_study": {
+   "event_id": "sanriku-m69-2026",
+   "verdict": "not detected",
+   "reason": "epicentre 35 km offshore and 34-45 km deep; coast forest is decorrelated (1.4 percent valid pixels within 50 km); LOS within +/-10 cm and not above the control",
+   "views_used": [
+    "asc",
+    "desc"
+   ]
+  }
  },
  {
   "id": "us6000tgb9",
@@ -363,7 +421,16 @@
     "granule": "NISAR_L2_PR_GUNW_025_003_D_072_028_4000_SH_20260708T100219_20260708T100253_20260813T100217_20260813T100251_P05023_N_F_J_001",
     "span_days": 36
    }
-  ]
+  ],
+  "quake_study": {
+   "event_id": "kumamoto-m68-2026",
+   "verdict": "clear",
+   "reason": "two-lobe pattern at the epicentre, 38 cm p2p within 30 km vs 5.8 cm in the control; one look direction",
+   "views_used": [
+    "asc24",
+    "asc125"
+   ]
+  }
  },
  {
   "id": "us6000txpi",
@@ -402,7 +469,12 @@
     "granule": "NISAR_L2_PR_GUNW_030_001_D_099_032_2000_SH_20260906T065747_20260906T065809_20260930T065748_20260930T065810_P05023_N_P_J_001",
     "span_days": 24
    }
-  ]
+  ],
+  "quake_study": {
+   "event_id": null,
+   "verdict": "not processed",
+   "reason": "epicentre offshore, remote, deep or on a small island: no on-land ground deformation expected within about 50 km (judged from the USGS place name and depth, not computed)"
+  }
  },
  {
   "id": "us6000u19w",
@@ -504,7 +576,12 @@
     "granule": "NISAR_L2_PR_GUNW_031_141_D_085_032_4000_SH_20260927T235335_20260927T235344_20261009T235335_20261009T235345_P05023_N_P_J_001",
     "span_days": 12
    }
-  ]
+  ],
+  "quake_study": {
+   "event_id": "panama-m77-2026",
+   "verdict": null,
+   "reason": "aftershock inside the Panama pairs; not separable"
+  }
  },
  {
   "id": "us7000sui3",
@@ -515,7 +592,12 @@
   "depth": 14,
   "place": "141 km ESE of Petropavlovsk-Kamchatsky, Russia",
   "n_gunw_total": 18,
-  "spanning_pairs": []
+  "spanning_pairs": [],
+  "quake_study": {
+   "event_id": null,
+   "verdict": "not processed",
+   "reason": "epicentre offshore, remote, deep or on a small island: no on-land ground deformation expected within about 50 km (judged from the USGS place name and depth, not computed)"
+  }
  },
  {
   "id": "us7000t1cc",
@@ -545,7 +627,12 @@
     "granule": "NISAR_L2_PR_GUNW_025_055_D_081_026_4000_SH_20260712T004120_20260712T004150_20260724T004119_20260724T004150_P05023_N_F_J_001",
     "span_days": 12
    }
-  ]
+  ],
+  "quake_study": {
+   "event_id": "mexico-m73-2026",
+   "verdict": null,
+   "reason": "M6.4 96 km offshore, same pairs; not separable"
+  }
  },
  {
   "id": "us7000szzy",
@@ -584,7 +671,12 @@
     "granule": "NISAR_L2_PR_GUNW_024_074_D_090_025_2000_SH_20260701T082410_20260701T082444_20260713T082409_20260713T082446_P05023_N_F_J_001",
     "span_days": 12
    }
-  ]
+  ],
+  "quake_study": {
+   "event_id": null,
+   "verdict": "not processed",
+   "reason": "epicentre offshore, remote, deep or on a small island: no on-land ground deformation expected within about 50 km (judged from the USGS place name and depth, not computed)"
+  }
  },
  {
   "id": "us6000u3jl",
@@ -605,7 +697,12 @@
     "granule": "NISAR_L2_PR_GUNW_030_123_A_171_033_2000_SH_20260914T184434_20260914T184452_20261020T184434_20261020T184453_P05023_N_P_J_001",
     "span_days": 36
    }
-  ]
+  ],
+  "quake_study": {
+   "event_id": null,
+   "verdict": "not processed",
+   "reason": "epicentre offshore, remote, deep or on a small island: no on-land ground deformation expected within about 50 km (judged from the USGS place name and depth, not computed)"
+  }
  },
  {
   "id": "us6000u0xi",
@@ -635,7 +732,12 @@
     "granule": "NISAR_L2_PR_GUNW_032_022_A_170_033_2000_SH_20261001T183541_20261001T183616_20261013T183541_20261013T183616_P05023_N_F_J_001",
     "span_days": 12
    }
-  ]
+  ],
+  "quake_study": {
+   "event_id": null,
+   "verdict": "not processed",
+   "reason": "epicentre offshore, remote, deep or on a small island: no on-land ground deformation expected within about 50 km (judged from the USGS place name and depth, not computed)"
+  }
  },
  {
   "id": "us7000tdvt",
@@ -656,7 +758,12 @@
     "granule": "NISAR_L2_PR_GUNW_029_001_D_062_030_2000_SH_20260825T063650_20260825T063712_20260906T063650_20260906T063712_P05023_F_P_J_001",
     "span_days": 12
    }
-  ]
+  ],
+  "quake_study": {
+   "event_id": null,
+   "verdict": "not processed",
+   "reason": "epicentre offshore, remote, deep or on a small island: no on-land ground deformation expected within about 50 km (judged from the USGS place name and depth, not computed)"
+  }
  },
  {
   "id": "us6000ti6x",
@@ -704,7 +811,12 @@
     "granule": "NISAR_L2_PR_GUNW_026_039_A_004_028_2000_SH_20260722T211926_20260722T212001_20260815T211925_20260815T211959_P05023_N_F_J_001",
     "span_days": 24
    }
-  ]
+  ],
+  "quake_study": {
+   "event_id": null,
+   "verdict": "not processed",
+   "reason": "epicentre offshore, remote, deep or on a small island: no on-land ground deformation expected within about 50 km (judged from the USGS place name and depth, not computed)"
+  }
  },
  {
   "id": "us7000t01n",
@@ -715,7 +827,12 @@
   "depth": 16,
   "place": "southeast of the Loyalty Islands",
   "n_gunw_total": 0,
-  "spanning_pairs": []
+  "spanning_pairs": [],
+  "quake_study": {
+   "event_id": null,
+   "verdict": "not processed",
+   "reason": "epicentre offshore, remote, deep or on a small island: no on-land ground deformation expected within about 50 km (judged from the USGS place name and depth, not computed)"
+  }
  },
  {
   "id": "us6000u1kv",
@@ -745,7 +862,12 @@
     "granule": "NISAR_L2_PR_GUNW_032_008_A_174_033_2000_SH_20260930T191932_20260930T192007_20261012T191932_20261012T192007_P05023_N_F_J_001",
     "span_days": 12
    }
-  ]
+  ],
+  "quake_study": {
+   "event_id": null,
+   "verdict": "not processed",
+   "reason": "epicentre offshore, remote, deep or on a small island: no on-land ground deformation expected within about 50 km (judged from the USGS place name and depth, not computed)"
+  }
  },
  {
   "id": "us6000u1wn",
@@ -829,7 +951,12 @@
     "granule": "NISAR_L2_UR_GUNW_033_004_A_005_035_4000_SH_20261012T110420_20261012T110436_20261105T110421_20261105T110436_P05023_F_P_J_001",
     "span_days": 24
    }
-  ]
+  ],
+  "quake_study": {
+   "event_id": "panama-m77-2026",
+   "verdict": null,
+   "reason": "aftershock inside the Panama pairs; not separable"
+  }
  },
  {
   "id": "us6000tkuc",
@@ -868,7 +995,12 @@
     "granule": "NISAR_L2_PR_GUNW_027_168_A_173_028_4000_SH_20260812T214030_20260812T214104_20260824T214029_20260824T214104_P05023_N_F_J_001",
     "span_days": 12
    }
-  ]
+  ],
+  "quake_study": {
+   "event_id": "flores-m78-2026",
+   "verdict": null,
+   "reason": "aftershock inside the Flores pairs; not separable"
+  }
  },
  {
   "id": "us6000t9sj",
@@ -879,7 +1011,12 @@
   "depth": 10,
   "place": "147 km NNE of Hirara, Japan",
   "n_gunw_total": 0,
-  "spanning_pairs": []
+  "spanning_pairs": [],
+  "quake_study": {
+   "event_id": null,
+   "verdict": "not processed",
+   "reason": "epicentre offshore, remote, deep or on a small island: no on-land ground deformation expected within about 50 km (judged from the USGS place name and depth, not computed)"
+  }
  },
  {
   "id": "us6000u3bc",
@@ -900,7 +1037,12 @@
     "granule": "NISAR_L2_PR_GUNW_030_123_A_171_033_2000_SH_20260914T184434_20260914T184452_20261020T184434_20261020T184453_P05023_N_P_J_001",
     "span_days": 36
    }
-  ]
+  ],
+  "quake_study": {
+   "event_id": null,
+   "verdict": "not processed",
+   "reason": "epicentre offshore, remote, deep or on a small island: no on-land ground deformation expected within about 50 km (judged from the USGS place name and depth, not computed)"
+  }
  },
  {
   "id": "us6000u24c",
@@ -930,7 +1072,12 @@
     "granule": "NISAR_L2_PR_GUNW_032_037_A_175_033_2000_SH_20261002T193648_20261002T193719_20261014T193648_20261014T193719_P05023_N_F_J_001",
     "span_days": 12
    }
-  ]
+  ],
+  "quake_study": {
+   "event_id": null,
+   "verdict": "not processed",
+   "reason": "epicentre offshore, remote, deep or on a small island: no on-land ground deformation expected within about 50 km (judged from the USGS place name and depth, not computed)"
+  }
  },
  {
   "id": "us6000u1cf",
@@ -978,7 +1125,12 @@
     "granule": "NISAR_L2_PR_GUNW_032_040_D_085_033_4000_SH_20261002T234516_20261002T234533_20261014T234516_20261014T234533_P05023_N_P_J_001",
     "span_days": 12
    }
-  ]
+  ],
+  "quake_study": {
+   "event_id": "panama-m77-2026",
+   "verdict": null,
+   "reason": "aftershock inside the Panama pairs; not separable"
+  }
  },
  {
   "id": "us6000tn41",
@@ -1017,7 +1169,12 @@
     "granule": "NISAR_L2_PR_GUNW_028_038_A_174_029_4000_SH_20260815T211604_20260815T211628_20260827T211604_20260827T211628_P05023_N_P_J_001",
     "span_days": 12
    }
-  ]
+  ],
+  "quake_study": {
+   "event_id": null,
+   "verdict": "not processed",
+   "reason": "epicentre offshore, remote, deep or on a small island: no on-land ground deformation expected within about 50 km (judged from the USGS place name and depth, not computed)"
+  }
  },
  {
   "id": "us7000t37a",
@@ -1083,7 +1240,12 @@
     "granule": "NISAR_L2_PR_GUNW_023_102_D_095_029_2000_SH_20260621T070407_20260621T070418_20260901T070403_20260901T070415_P05023_N_P_J_001",
     "span_days": 72
    }
-  ]
+  ],
+  "quake_study": {
+   "event_id": null,
+   "verdict": "not processed",
+   "reason": "epicentre offshore, remote, deep or on a small island: no on-land ground deformation expected within about 50 km (judged from the USGS place name and depth, not computed)"
+  }
  },
  {
   "id": "us6000t9ej",
@@ -1122,7 +1284,12 @@
     "granule": "NISAR_L2_PR_GUNW_023_110_A_022_024_4000_SH_20260621T194120_20260621T194155_20260703T194120_20260703T194154_P05023_N_F_J_001",
     "span_days": 12
    }
-  ]
+  ],
+  "quake_study": {
+   "event_id": "sanriku-m69-2026",
+   "verdict": null,
+   "reason": "aftershock offshore, inside the Sanriku pairs; not separable"
+  }
  },
  {
   "id": "us6000t99j",
@@ -1152,7 +1319,12 @@
     "granule": "NISAR_L2_PR_GUNW_023_077_A_014_024_4000_SH_20260619T124040_20260619T124114_20260701T124039_20260701T124114_P05023_N_F_J_001",
     "span_days": 12
    }
-  ]
+  ],
+  "quake_study": {
+   "event_id": null,
+   "verdict": "not processed",
+   "reason": "epicentre offshore, remote, deep or on a small island: no on-land ground deformation expected within about 50 km (judged from the USGS place name and depth, not computed)"
+  }
  },
  {
   "id": "us6000u164",
@@ -1163,7 +1335,12 @@
   "depth": 10,
   "place": "west of Macquarie Island",
   "n_gunw_total": 0,
-  "spanning_pairs": []
+  "spanning_pairs": [],
+  "quake_study": {
+   "event_id": null,
+   "verdict": "not processed",
+   "reason": "epicentre offshore, remote, deep or on a small island: no on-land ground deformation expected within about 50 km (judged from the USGS place name and depth, not computed)"
+  }
  },
  {
   "id": "us7000tcf3",
@@ -1193,7 +1370,12 @@
     "granule": "NISAR_L2_PR_GUNW_029_006_D_082_031_2000_SH_20260825T150731_20260825T150806_20260918T150731_20260918T150806_P05023_F_F_J_001",
     "span_days": 24
    }
-  ]
+  ],
+  "quake_study": {
+   "event_id": null,
+   "verdict": "not processed",
+   "reason": "epicentre offshore, remote, deep or on a small island: no on-land ground deformation expected within about 50 km (judged from the USGS place name and depth, not computed)"
+  }
  },
  {
   "id": "us6000tkta",
@@ -1250,7 +1432,12 @@
     "granule": "NISAR_L2_PR_GUNW_026_096_A_173_028_4000_SH_20260726T214850_20260726T214924_20260819T214848_20260819T214923_P05023_N_F_J_001",
     "span_days": 24
    }
-  ]
+  ],
+  "quake_study": {
+   "event_id": "flores-m78-2026",
+   "verdict": null,
+   "reason": "aftershock inside the Flores pairs; not separable"
+  }
  },
  {
   "id": "us6000th1h",
@@ -1261,7 +1448,12 @@
   "depth": 18,
   "place": "244 km NNE of Colonia, Micronesia",
   "n_gunw_total": 0,
-  "spanning_pairs": []
+  "spanning_pairs": [],
+  "quake_study": {
+   "event_id": null,
+   "verdict": "not processed",
+   "reason": "epicentre offshore, remote, deep or on a small island: no on-land ground deformation expected within about 50 km (judged from the USGS place name and depth, not computed)"
+  }
  },
  {
   "id": "us6000tguf",
@@ -1272,7 +1464,12 @@
   "depth": 14,
   "place": "Kermadec Islands region",
   "n_gunw_total": 0,
-  "spanning_pairs": []
+  "spanning_pairs": [],
+  "quake_study": {
+   "event_id": null,
+   "verdict": "not processed",
+   "reason": "epicentre offshore, remote, deep or on a small island: no on-land ground deformation expected within about 50 km (judged from the USGS place name and depth, not computed)"
+  }
  },
  {
   "id": "us6000tgau",
@@ -1302,7 +1499,12 @@
     "granule": "NISAR_L2_PR_GUNW_026_055_D_081_028_4000_SH_20260724T004119_20260724T004150_20260817T004118_20260817T004149_P05023_N_F_J_001",
     "span_days": 24
    }
-  ]
+  ],
+  "quake_study": {
+   "event_id": "mexico-m73-2026",
+   "verdict": null,
+   "reason": "M5.9 54 km offshore, 12-24 Jul/24 Jul-17 Aug pairs; not tried separately"
+  }
  },
  {
   "id": "us6000tadc",
@@ -1341,7 +1543,12 @@
     "granule": "NISAR_L2_PR_GUNW_024_039_A_004_025_2000_SH_20260628T211928_20260628T212002_20260710T211927_20260710T212001_P05023_N_F_J_001",
     "span_days": 12
    }
-  ]
+  ],
+  "quake_study": {
+   "event_id": null,
+   "verdict": "not processed",
+   "reason": "epicentre offshore, remote, deep or on a small island: no on-land ground deformation expected within about 50 km (judged from the USGS place name and depth, not computed)"
+  }
  },
  {
   "id": "us6000t9tf",
@@ -1380,7 +1587,12 @@
     "granule": "NISAR_L2_PR_GUNW_023_161_D_064_024_2000_SH_20260625T085932_20260625T090008_20260707T085932_20260707T090007_P05023_N_F_J_001",
     "span_days": 12
    }
-  ]
+  ],
+  "quake_study": {
+   "event_id": null,
+   "verdict": "not processed",
+   "reason": "epicentre offshore, remote, deep or on a small island: no on-land ground deformation expected within about 50 km (judged from the USGS place name and depth, not computed)"
+  }
  },
  {
   "id": "us6000u18x",
@@ -1428,7 +1640,12 @@
     "granule": "NISAR_L2_PR_GUNW_032_040_D_085_033_4000_SH_20261002T234516_20261002T234533_20261014T234516_20261014T234533_P05023_N_P_J_001",
     "span_days": 12
    }
-  ]
+  ],
+  "quake_study": {
+   "event_id": "panama-m77-2026",
+   "verdict": null,
+   "reason": "aftershock inside the Panama pairs; not separable"
+  }
  },
  {
   "id": "us6000u0hy",
@@ -1458,7 +1675,12 @@
     "granule": "NISAR_L2_PR_GUNW_031_167_A_026_032_2000_SH_20260929T183700_20260929T183729_20261011T183700_20261011T183729_P05023_N_F_J_001",
     "span_days": 12
    }
-  ]
+  ],
+  "quake_study": {
+   "event_id": null,
+   "verdict": "not processed",
+   "reason": "epicentre offshore, remote, deep or on a small island: no on-land ground deformation expected within about 50 km (judged from the USGS place name and depth, not computed)"
+  }
  },
  {
   "id": "us6000tlwi",
@@ -1497,7 +1719,12 @@
     "granule": "NISAR_L2_PR_GUNW_027_168_A_173_028_4000_SH_20260812T214030_20260812T214104_20260824T214029_20260824T214104_P05023_N_F_J_001",
     "span_days": 12
    }
-  ]
+  ],
+  "quake_study": {
+   "event_id": "flores-m78-2026",
+   "verdict": null,
+   "reason": "aftershock inside the Flores pairs; not separable"
+  }
  },
  {
   "id": "us6000tlkl",
@@ -1518,7 +1745,12 @@
     "granule": "NISAR_L2_PR_GUNW_028_055_D_081_029_4000_SH_20260817T004118_20260817T004149_20260829T004118_20260829T004148_P05023_N_F_J_001",
     "span_days": 12
    }
-  ]
+  ],
+  "quake_study": {
+   "event_id": null,
+   "verdict": "not processed",
+   "reason": "epicentre offshore, remote, deep or on a small island: no on-land ground deformation expected within about 50 km (judged from the USGS place name and depth, not computed)"
+  }
  },
  {
   "id": "us6000tgvz",
@@ -1529,7 +1761,12 @@
   "depth": 14,
   "place": "Kermadec Islands region",
   "n_gunw_total": 0,
-  "spanning_pairs": []
+  "spanning_pairs": [],
+  "quake_study": {
+   "event_id": null,
+   "verdict": "not processed",
+   "reason": "epicentre offshore, remote, deep or on a small island: no on-land ground deformation expected within about 50 km (judged from the USGS place name and depth, not computed)"
+  }
  },
  {
   "id": "us6000tgae",
@@ -1559,7 +1796,12 @@
     "granule": "NISAR_L2_PR_GUNW_026_031_D_060_028_2000_SH_20260722T083225_20260722T083250_20260815T083224_20260815T083249_P05023_N_P_J_001",
     "span_days": 24
    }
-  ]
+  ],
+  "quake_study": {
+   "event_id": null,
+   "verdict": "not processed",
+   "reason": "epicentre offshore, remote, deep or on a small island: no on-land ground deformation expected within about 50 km (judged from the USGS place name and depth, not computed)"
+  }
  },
  {
   "id": "us6000tga9",
@@ -1589,7 +1831,16 @@
     "granule": "NISAR_L2_PR_GUNW_025_155_A_019_027_2000_SH_20260718T223425_20260718T223500_20260811T223424_20260811T223459_P05023_N_F_J_001",
     "span_days": 24
    }
-  ]
+  ],
+  "quake_study": {
+   "event_id": "qinghai-m58-2026",
+   "verdict": "not detected",
+   "reason": "M5.8 expected to move the ground by at most a few cm; ascending 24-day pair fully decorrelated; descending 24-day pair shows only smooth atmosphere-sized gradients (about +/-5 cm, control +/-5 cm) with no pattern at the epicentre",
+   "views_used": [
+    "asc",
+    "desc"
+   ]
+  }
  },
  {
   "id": "us7000t3fm",
@@ -1610,7 +1861,12 @@
     "granule": "NISAR_L2_PR_GUNW_026_030_D_062_028_2000_SH_20260722T065341_20260722T065402_20260815T065340_20260815T065401_P05023_N_P_J_001",
     "span_days": 24
    }
-  ]
+  ],
+  "quake_study": {
+   "event_id": null,
+   "verdict": "not processed",
+   "reason": "epicentre offshore, remote, deep or on a small island: no on-land ground deformation expected within about 50 km (judged from the USGS place name and depth, not computed)"
+  }
  },
  {
   "id": "us7000t1n5",
@@ -1649,7 +1905,12 @@
     "granule": "NISAR_L2_PR_GUNW_025_055_D_081_026_4000_SH_20260712T004120_20260712T004150_20260724T004119_20260724T004150_P05023_N_F_J_001",
     "span_days": 12
    }
-  ]
+  ],
+  "quake_study": {
+   "event_id": null,
+   "verdict": "not processed",
+   "reason": "epicentre offshore, remote, deep or on a small island: no on-land ground deformation expected within about 50 km (judged from the USGS place name and depth, not computed)"
+  }
  },
  {
   "id": "us6000tawe",
@@ -1670,7 +1931,12 @@
     "granule": "NISAR_L2_PR_GUNW_025_001_D_099_029_2000_SH_20260708T065737_20260708T065812_20260825T065736_20260825T065810_P05023_N_F_J_001",
     "span_days": 48
    }
-  ]
+  ],
+  "quake_study": {
+   "event_id": null,
+   "verdict": "not processed",
+   "reason": "epicentre offshore, remote, deep or on a small island: no on-land ground deformation expected within about 50 km (judged from the USGS place name and depth, not computed)"
+  }
  },
  {
   "id": "us6000t8qd",
@@ -1709,7 +1975,12 @@
     "granule": "NISAR_L2_PR_GUNW_023_110_A_022_024_4000_SH_20260621T194120_20260621T194155_20260703T194120_20260703T194154_P05023_N_F_J_001",
     "span_days": 12
    }
-  ]
+  ],
+  "quake_study": {
+   "event_id": "sanriku-m69-2026",
+   "verdict": null,
+   "reason": "aftershock offshore, inside the Sanriku pairs; not separable"
+  }
  },
  {
   "id": "us7000susb",
@@ -1720,7 +1991,12 @@
   "depth": 10,
   "place": "156 km ESE of Petropavlovsk-Kamchatsky, Russia",
   "n_gunw_total": 18,
-  "spanning_pairs": []
+  "spanning_pairs": [],
+  "quake_study": {
+   "event_id": null,
+   "verdict": "not processed",
+   "reason": "epicentre offshore, remote, deep or on a small island: no on-land ground deformation expected within about 50 km (judged from the USGS place name and depth, not computed)"
+  }
  },
  {
   "id": "us7000suii",
@@ -1731,6 +2007,59 @@
   "depth": 10,
   "place": "164 km E of Petropavlovsk-Kamchatsky, Russia",
   "n_gunw_total": 18,
-  "spanning_pairs": []
+  "spanning_pairs": [],
+  "quake_study": {
+   "event_id": null,
+   "verdict": "not processed",
+   "reason": "epicentre offshore, remote, deep or on a small island: no on-land ground deformation expected within about 50 km (judged from the USGS place name and depth, not computed)"
+  }
+ },
+ {
+  "id": "us6000u4ty",
+  "mag": 5.9,
+  "time": "2026-10-25T11:25:57.101000+00:00",
+  "lat": 32.4625,
+  "lon": 94.0534,
+  "depth": 7,
+  "place": "218 km ENE of Nagqu, China",
+  "n_gunw_total": null,
+  "quake_study": {
+   "event_id": "tibet-m70-2026",
+   "verdict": null,
+   "reason": "M5.9 aftershock about 30 km from the mainshock, inside the 19-31 Oct pair; not separable"
+  },
+  "added": "2026-11-14 check of 23 Oct - 14 Nov"
+ },
+ {
+  "id": "us6000u4j2",
+  "mag": 6.8,
+  "time": "2026-10-24T02:31:28.880000+00:00",
+  "lat": -13.9369,
+  "lon": 165.5629,
+  "depth": 16,
+  "place": "203 km NW of Port-Olry, Vanuatu",
+  "n_gunw_total": 0,
+  "quake_study": {
+   "event_id": null,
+   "verdict": "not processed",
+   "reason": "open sea 200 km from the nearest islands; no NISAR GUNW pair found after 20 Oct"
+  },
+  "added": "2026-11-14 check of 23 Oct - 14 Nov"
+ },
+ {
+  "id": "us7000tx16",
+  "mag": 6.4,
+  "time": "2026-11-09T03:34:59.466000+00:00",
+  "lat": -10.8669,
+  "lon": 165.5616,
+  "depth": 17,
+  "place": "30 km WSW of Lata, Solomon Islands",
+  "n_gunw_total": 0,
+  "quake_study": {
+   "event_id": null,
+   "verdict": "not processed",
+   "reason": "no NISAR GUNW found at the epicentre after 24 Oct (ASF query 14 Nov)"
+  },
+  "added": "2026-11-14 check of 23 Oct - 14 Nov"
  }
 ]

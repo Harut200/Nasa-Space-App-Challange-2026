@@ -1,0 +1,588 @@
+[
+ {
+  "id": "tibet-m70-2026",
+  "usgs_id": "us6000u43g",
+  "title": "M7.0 Tibet earthquake, 22 Oct 2026",
+  "time": "2026-10-22T14:33:40Z",
+  "lat": 32.3376,
+  "lon": 93.7837,
+  "depth_km": 17.2,
+  "mag": 7.0,
+  "place": "189 km ENE of Nagqu, China",
+  "mechanism": "normal faulting with some strike slip (nodal planes 175/57/-119 and 40/43/-54)",
+  "setting": "on land, arid Tibetan Plateau",
+  "window": [
+   93.0,
+   31.7,
+   94.6,
+   33.0
+  ],
+  "heights": [
+   4000,
+   6000
+  ],
+  "gmin": 0.35,
+  "far_km": 60,
+  "radius_km": 45,
+  "component": 1,
+  "stripe": true,
+  "fringe_cm": 10,
+  "los_lim_cm": 40,
+  "profile_az": 130,
+  "app_bbox": [
+   93.0,
+   31.7,
+   94.6,
+   33.0
+  ],
+  "legacy_flat": true,
+  "views": {
+   "asc": {
+    "track": 112,
+    "frame": 18,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20261019_20261031",
+     "granule": "NISAR_L2_UR_GUNW_033_112_A_018_034_2000_SH_20261019T225848_20261019T225923_20261031T225848_20261031T225923_P05023_F_F_J_001"
+    },
+    "control": {
+     "pair": "20261007_20261019",
+     "granule": "NISAR_L2_PR_GUNW_032_112_A_018_033_2000_SH_20261007T225848_20261007T225922_20261019T225848_20261019T225923_P05023_N_F_J_001"
+    }
+   }
+  },
+  "frozen": true,
+  "verdict": "clear"
+ },
+ {
+  "id": "venezuela-m72-2026",
+  "usgs_id": "us6000t7zc",
+  "title": "M7.2 Venezuela earthquake, 24 Jun 2026",
+  "time": "2026-06-24T22:04:33Z",
+  "lat": 10.3713,
+  "lon": -68.5564,
+  "depth_km": 11.5,
+  "mag": 7.2,
+  "place": "20 km E of San Felipe, Venezuela",
+  "mechanism": "strike slip (nodal planes 177/79/-16 and 270/74/-169)",
+  "setting": "on land, humid, vegetated",
+  "sources": [
+   {
+    "usgs_id": "us6000t7zp",
+    "lat": 10.5955,
+    "lon": -67.2205,
+    "mag": 7.5,
+    "note": "M7.5 strike-slip 38 s later, 20 km W of Catia La Mar, depth 23.5 km"
+   }
+  ],
+  "window": [
+   -69.3,
+   9.9,
+   -66.7,
+   10.95
+  ],
+  "heights": [
+   0,
+   1500
+  ],
+  "gmin": 0.35,
+  "far_km": 45,
+  "radius_km": 60,
+  "fringe_cm": 10,
+  "los_lim_cm": 40,
+  "profile_az": 0,
+  "views": {
+   "asc": {
+    "track": 162,
+    "frame": 7,
+    "direction": "A",
+    "co": {
+     "pair": "20260613_20260625",
+     "granule": "NISAR_L2_PR_GUNW_022_162_A_007_023_4000_SH_20260613T100656_20260613T100731_20260625T100655_20260625T100730_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260601_20260613",
+     "granule": "NISAR_L2_PR_GUNW_021_162_A_007_022_4000_SH_20260601T100657_20260601T100731_20260613T100656_20260613T100731_P05023_N_F_J_001"
+    },
+    "label": "ascending"
+   },
+   "desc": {
+    "track": 54,
+    "frame": 83,
+    "direction": "D",
+    "co": {
+     "pair": "20260617_20260629",
+     "granule": "NISAR_L2_PR_GUNW_023_054_D_083_024_4000_SH_20260617T230235_20260617T230310_20260629T230235_20260629T230309_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260605_20260617",
+     "granule": "NISAR_L2_PR_GUNW_022_054_D_083_023_4000_SH_20260605T230236_20260605T230310_20260617T230235_20260617T230310_P05023_N_F_J_001"
+    },
+    "label": "descending"
+   }
+  },
+  "verdict": "clear",
+  "decompose": [
+   "asc",
+   "desc"
+  ],
+  "export_decomposition": true,
+  "primary_view": "asc",
+  "decomp_lim_cm": 40,
+  "area_name": "Venezuela earthquake, M7.2, 24 Jun 2026",
+  "story": {
+   "see": "On 24 June 2026 a magnitude 7.2 earthquake struck 20 km east of San Felipe, Venezuela (USGS: 10.37 N, 68.56 W, depth about 12 km). USGS also lists a magnitude 7.5 earthquake about 40 seconds later, 146 km to the east (10.60 N, 67.22 W, depth about 24 km); both fall inside the pairs we used, so the eastern part of the map can contain both. The map shows how far the ground moved along the radar's line of sight between two NISAR passes, 13 and 25 June, from the ascending track. A second layer shows the descending track (17 to 29 June). Blue is ground that moved toward the satellite, red away from it. In the fringe layer, one colour cycle is 10 cm. Grey speckle is where the two passes could not be compared (vegetation, water).",
+   "physics": "The US Geological Survey's moment tensor for the M7.2 shows strike-slip faulting, in which the two sides of a near-vertical fault slide past each other horizontally. Within 60 km of the epicentre the line-of-sight change spans about 50 cm from the most red to the most blue pixels (0.5th to 99.5th percentile) in each look direction. The pattern changes sign across a line running roughly east-west, and it is mirrored between the ascending and descending views, which is what mostly horizontal east-west motion looks like from opposite sides. Combining the two views gives, only approximately, east-west motion of up to about 40 cm either way and vertical motion within about 8 cm (north-south motion is neglected). Fault position and mechanism come from USGS; our map alone does not tell which fault plane moved.",
+   "lband": "NISAR's L-band radar has a wavelength of about 24 cm, so one full colour cycle means about 12 cm of ground movement along the line of sight (we show 10 cm cycles). The same tracks one pair earlier (1 to 13 June ascending, 5 to 17 June descending) show only smooth gradients of about 10 cm across the whole scene, from the atmosphere, with far-field noise of 2 to 3 cm and no line where the sign flips. The products are PROVISIONAL, and the sign convention (blue = toward the satellite) follows the interferogram definition we assumed, not a statement in the product guide.",
+   "people": "This is a measurement of ground movement, not of damage. We did not look at reports of damage or casualties. Maps like this show where the ground moved and by how much, which feeds hazard models. Two look directions let us separate east-west from vertical motion only approximately, and the pairs span several days after the shaking, so they include any aftershock movement."
+  },
+  "verdict_reason": "strike-slip sign-flip pattern in both look directions, about 50 cm p2p within 60 km vs 10-12 cm control (atmosphere ramp); two look directions; the M7.5 40 s later is inside the pair"
+ },
+ {
+  "id": "panama-m77-2026",
+  "usgs_id": "us6000u18k",
+  "title": "M7.7 Panama earthquake, 9 Oct 2026",
+  "time": "2026-10-09T17:56:05Z",
+  "lat": 7.6069,
+  "lon": -80.7566,
+  "depth_km": 13.5,
+  "mag": 7.7,
+  "place": "10 km WSW of Pitaloza Arriba, Panama",
+  "mechanism": "strike slip (nodal planes 25/75/-155 and 288/66/-17); USGS finite-fault Mw 7.66",
+  "setting": "Pacific coast, Azuero peninsula",
+  "sources": [
+   {
+    "usgs_id": "us6000u19w",
+    "lat": 7.676,
+    "lon": -81.4515,
+    "mag": 6.6,
+    "note": "M6.6 aftershock 2.5 h later"
+   }
+  ],
+  "window": [
+   -81.9,
+   7.0,
+   -80.1,
+   8.2
+  ],
+  "heights": [
+   0,
+   1500
+  ],
+  "gmin": 0.35,
+  "far_km": 60,
+  "radius_km": 60,
+  "fringe_cm": 10,
+  "los_lim_cm": 60,
+  "profile_az": 0,
+  "views": {
+   "asc": {
+    "track": 76,
+    "frame": 5,
+    "direction": "A",
+    "co": {
+     "pair": "20261005_20261017",
+     "granule": "NISAR_L2_PR_GUNW_032_076_A_005_033_4000_SH_20261005T105604_20261005T105616_20261017T105604_20261017T105616_P05023_N_P_J_001"
+    },
+    "control": {
+     "pair": "20260830_20260911",
+     "granule": "NISAR_L2_PR_GUNW_029_076_A_005_030_4000_SH_20260830T105604_20260830T105616_20260911T105603_20260911T105616_P05023_N_P_J_001"
+    },
+    "label": "ascending"
+   },
+   "desc40": {
+    "track": 40,
+    "frame": 85,
+    "direction": "D",
+    "co": {
+     "pair": "20261002_20261014",
+     "granule": "NISAR_L2_PR_GUNW_032_040_D_085_033_4000_SH_20261002T234516_20261002T234533_20261014T234516_20261014T234533_P05023_N_P_J_001"
+    },
+    "control": {
+     "pair": "20260920_20261002",
+     "granule": "NISAR_L2_PR_GUNW_031_040_D_085_032_4000_SH_20260920T234516_20260920T234532_20261002T234516_20261002T234533_P05023_N_P_J_001"
+    },
+    "label": "descending",
+    "mask_boxes": [
+     [
+      -82.0,
+      6.9,
+      -80.8,
+      8.3
+     ],
+     [
+      -80.82,
+      7.45,
+      -80.7,
+      8.3
+     ]
+    ]
+   }
+  },
+  "verdict": "clear",
+  "export_decomposition": false,
+  "primary_view": "desc40",
+  "decomp_lim_cm": 60,
+  "views_rejected": {
+   "desc141": {
+    "track": 141,
+    "frame": 85,
+    "direction": "D",
+    "co": {
+     "pair": "20260927_20261009",
+     "granule": "NISAR_L2_PR_GUNW_031_141_D_085_032_4000_SH_20260927T235335_20260927T235344_20261009T235335_20261009T235345_P05023_N_P_J_001"
+    },
+    "control": {
+     "pair": "20260915_20260927",
+     "granule": "NISAR_L2_PR_GUNW_030_141_D_085_031_4000_SH_20260915T235335_20260915T235344_20260927T235335_20260927T235344_P05023_N_P_J_001"
+    },
+    "label": "descending",
+    "rejected": "decorrelated: mean coherence 0.20, 8.5% of the window >= 0.35, four small disconnected unwrapping components, no usable phase around the epicentre"
+   }
+  },
+  "area_name": "Panama earthquake, M7.7, 9 Oct 2026",
+  "story": {
+   "see": "On 9 October 2026 a magnitude 7.7 earthquake struck 10 km west-south-west of Pitaloza Arriba, Panama (USGS: 7.61 N, 80.76 W, depth about 14 km). USGS lists a magnitude 6.6 aftershock about 2.5 hours later 75 km to the west, and the pairs below also include later aftershocks. The map shows how far the ground moved along the radar's line of sight between two NISAR passes of the descending track, 2 and 14 October. A second layer shows the ascending track (5 to 17 October). Blue is ground that moved toward the satellite, red away from it. In the fringe layer, one colour cycle is 10 cm; about a dozen fringes surround the epicentre. Grey speckle and black are where the passes could not be compared (vegetation, water, steep fault zone) or where the data frame ends.",
+   "physics": "The US Geological Survey's moment tensor shows strike-slip faulting, and its finite-fault model has a peak slip of about 11 m. Within 60 km of the epicentre the line-of-sight change spans about 130 cm in the descending view (0.5th to 99.5th percentile) and about 85 cm in the ascending view. The two look directions see opposite signs (red on the ascending track, blue on the descending one), which is what mostly horizontal motion looks like from opposite sides, but the two frames cover different areas and the far field is short, so we do not separate east-west from vertical motion. Fault position and mechanism come from USGS; our map alone does not tell which fault plane moved.",
+   "lband": "NISAR's L-band radar has a wavelength of about 24 cm, so one full colour cycle means about 12 cm of ground movement along the line of sight (we show 10 cm cycles). The same tracks two to four weeks earlier (descending 20 Sep to 2 Oct, ascending 30 Aug to 11 Sep) show only a smooth gradient of about 10 to 20 cm across the scene, from the atmosphere, and no fringes. The products are PROVISIONAL, and the sign convention (blue = toward the satellite) follows the interferogram definition we assumed, not a statement in the product guide.",
+   "people": "This is a measurement of ground movement, not of damage. We did not look at reports of damage or casualties. Maps like this show where the ground moved and by how much, which feeds hazard models. The pairs span several days after the shaking, so they include aftershock movement, and the data frames cover only the part of the area east and south of the epicentre."
+  },
+  "verdict_reason": "about a dozen concentric fringes in the descending pair, 133 cm p2p within 60 km vs 21 cm in the control; ascending pair 85 cm vs 15 cm; frames cover only the east and south of the epicentre"
+ },
+ {
+  "id": "kumamoto-m68-2026",
+  "usgs_id": "us6000tgb9",
+  "title": "M6.8 Kumamoto, Japan earthquake, 28 Jul 2026",
+  "time": "2026-07-28T07:27:15Z",
+  "lat": 32.6177,
+  "lon": 130.6601,
+  "depth_km": 11.5,
+  "mag": 6.8,
+  "place": "Kumamoto Region, Japan",
+  "mechanism": "strike slip (nodal planes 212/75/-164 and 118/74/-16)",
+  "setting": "on land, vegetated",
+  "window": [
+   130.0,
+   32.0,
+   131.3,
+   33.2
+  ],
+  "heights": [
+   0,
+   1500
+  ],
+  "gmin": 0.35,
+  "far_km": 35,
+  "radius_km": 30,
+  "fringe_cm": 10,
+  "los_lim_cm": 30,
+  "profile_az": 0,
+  "views": {
+   "asc24": {
+    "track": 24,
+    "frame": 18,
+    "direction": "A",
+    "co": {
+     "pair": "20260721_20260814",
+     "granule": "NISAR_L2_PR_GUNW_026_024_A_018_028_4000_SH_20260721T202900_20260721T202934_20260814T202858_20260814T202933_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260709_20260721",
+     "granule": "NISAR_L2_PR_GUNW_025_024_A_018_026_4000_SH_20260709T202900_20260709T202935_20260721T202900_20260721T202934_P05023_N_F_J_001"
+    },
+    "label": "ascending"
+   },
+   "asc125": {
+    "track": 125,
+    "frame": 18,
+    "direction": "A",
+    "label": "ascending",
+    "note": "second ascending track (different geometry), 36-day pair",
+    "co": {
+     "pair": "20260716_20260821",
+     "granule": "NISAR_L2_PR_GUNW_025_125_A_018_028_4000_SH_20260716T203720_20260716T203755_20260821T203718_20260821T203753_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260622_20260704",
+     "granule": "NISAR_L2_PR_GUNW_023_125_A_018_024_4000_SH_20260622T203721_20260622T203756_20260704T203720_20260704T203755_P05023_N_F_J_001"
+    }
+   }
+  },
+  "views_rejected": {
+   "desc3": {
+    "track": 3,
+    "frame": 72,
+    "direction": "D",
+    "co": {
+     "pair": "20260708_20260813",
+     "granule": "NISAR_L2_PR_GUNW_025_003_D_072_028_4000_SH_20260708T100219_20260708T100253_20260813T100217_20260813T100251_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260626_20260708",
+     "granule": "NISAR_L2_PR_GUNW_024_003_D_072_025_4000_SH_20260626T100219_20260626T100254_20260708T100219_20260708T100253_P05023_N_F_J_001"
+    },
+    "label": "descending",
+    "rejected": "decorrelated: 36-day pair across the instrument outage over vegetation, no pixel with usable phase in the window"
+   }
+  },
+  "area_name": "Kumamoto earthquake, M6.8, 28 Jul 2026",
+  "story": {
+   "see": "On 28 July 2026 a magnitude 6.8 earthquake struck the Kumamoto region of Japan (USGS: 32.62 N, 130.66 E, depth about 12 km). The map shows how far the ground moved along the radar's line of sight between two NISAR passes of the ascending track, 21 July and 14 August. That pair is 24 days long and bridges a pause in NISAR's acquisitions, so it also contains any aftershock and slow movement of those weeks. Blue is ground that moved toward the satellite, red away from it. In the fringe layer, one colour cycle is 10 cm. Grey speckle and black are where the passes could not be compared (dense vegetation, water, the ground next to the rupture).",
+   "physics": "The US Geological Survey's moment tensor shows strike-slip faulting on a shallow fault. Within 30 km of the epicentre the line-of-sight change spans about 38 cm from the most red to the most blue pixels (0.5th to 99.5th percentile), mostly as a red lobe east and north-east of the epicentre of up to about 26 cm of movement away from the satellite, with a smaller blue lobe of about 11 cm on the other side. Strike-slip faulting of this size is expected to move the ground by tens of centimetres near the fault. Fault position and mechanism come from USGS; our map does not by itself tell which fault plane moved.",
+   "lband": "NISAR's L-band radar has a wavelength of about 24 cm, so one full colour cycle means about 12 cm of ground movement along the line of sight (we show 10 cm cycles). L-band keeps coherence over vegetation better than shorter wavelengths, and here about 58 per cent of the window stays usable over 24 days. A pair of the same track and frame before the event (9 to 21 July) shows no such lobes: its far-field noise is about 2 cm. The products are PROVISIONAL, from one look direction only, and the sign convention (blue = toward the satellite) follows the interferogram definition we assumed, not a statement in the product guide.",
+   "people": "This is a measurement of ground movement, not of damage. We did not look at reports of damage or casualties. Maps like this show where the ground moved and by how much, which feeds hazard models. From one look direction we see only one component of the motion, so uplift and sideways movement are mixed together; the descending track's pair was too decorrelated to use."
+  },
+  "verdict": "clear",
+  "verdict_reason": "two-lobe pattern at the epicentre, 38 cm p2p within 30 km vs 5.8 cm in the control; one look direction",
+  "export_views": [
+   "asc24"
+  ],
+  "primary_view": "asc24"
+ },
+ {
+  "id": "flores-m78-2026",
+  "usgs_id": "us6000tkt2",
+  "title": "M7.8 Flores Sea earthquake, 14 Aug 2026",
+  "time": "2026-08-14T21:58:21Z",
+  "lat": -8.3358,
+  "lon": 121.3446,
+  "depth_km": 23.5,
+  "mag": 7.8,
+  "place": "66 km NNW of Ende, Indonesia",
+  "mechanism": "thrust (nodal planes 90/32/90 and 269/58/90)",
+  "setting": "sea north of Flores; Flores coast about 20-40 km away",
+  "window": [
+   120.5,
+   -9.2,
+   122.1,
+   -7.8
+  ],
+  "heights": [
+   0,
+   2500
+  ],
+  "gmin": 0.35,
+  "far_km": 60,
+  "radius_km": 60,
+  "fringe_cm": 10,
+  "los_lim_cm": 40,
+  "profile_az": 0,
+  "views": {
+   "asc": {
+    "track": 168,
+    "frame": 173,
+    "direction": "A",
+    "co": {
+     "pair": "20260812_20260824",
+     "granule": "NISAR_L2_PR_GUNW_027_168_A_173_028_4000_SH_20260812T214030_20260812T214104_20260824T214029_20260824T214104_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260917_20260929",
+     "granule": "NISAR_L2_PR_GUNW_030_168_A_173_031_4000_SH_20260917T214029_20260917T214103_20260929T214029_20260929T214103_P05023_N_F_J_001"
+    },
+    "label": "ascending"
+   },
+   "desc": {
+    "track": 3,
+    "frame": 93,
+    "direction": "D",
+    "co": {
+     "pair": "20260813_20260825",
+     "granule": "NISAR_L2_PR_GUNW_028_003_D_093_029_4000_SH_20260813T101400_20260813T101435_20260825T101400_20260825T101435_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260906_20260918",
+     "granule": "NISAR_L2_PR_GUNW_030_003_D_093_031_4000_SH_20260906T101400_20260906T101434_20260918T101400_20260918T101434_P05023_F_F_J_001"
+    },
+    "label": "descending"
+   }
+  },
+  "verdict": "not detected",
+  "verdict_reason": "epicentre in the sea; only the north coast of Flores (20-60 km south) is usable; smooth gradients of about 10 cm in both look directions are the size of the atmosphere signal in the control pairs and have no pattern tied to the epicentre"
+ },
+ {
+  "id": "qinghai-m58-2026",
+  "usgs_id": "us6000tga9",
+  "title": "M5.8 Qinghai, China earthquake, 28 Jul 2026",
+  "time": "2026-07-28T03:34:05Z",
+  "lat": 35.4257,
+  "lon": 99.5723,
+  "depth_km": 11.5,
+  "mag": 5.8,
+  "place": "193 km NW of Oula Xiuma, China",
+  "mechanism": "strike slip (nodal planes 259/86/-19 and 350/71/-176)",
+  "setting": "on land, arid plateau",
+  "window": [
+   98.9,
+   34.9,
+   100.3,
+   35.9
+  ],
+  "heights": [
+   3000,
+   5000
+  ],
+  "gmin": 0.35,
+  "far_km": 30,
+  "radius_km": 25,
+  "fringe_cm": 5,
+  "los_lim_cm": 10,
+  "profile_az": 0,
+  "views": {
+   "asc": {
+    "track": 155,
+    "frame": 19,
+    "direction": "A",
+    "co": {
+     "pair": "20260718_20260811",
+     "granule": "NISAR_L2_PR_GUNW_025_155_A_019_027_2000_SH_20260718T223425_20260718T223500_20260811T223424_20260811T223459_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260811_20260823",
+     "granule": "NISAR_L2_PR_GUNW_027_155_A_019_028_2000_SH_20260811T223424_20260811T223459_20260823T223423_20260823T223458_P05023_N_F_J_001"
+    },
+    "label": "ascending",
+    "rejected": "fully decorrelated (no usable phase in the window)"
+   },
+   "desc": {
+    "track": 62,
+    "frame": 71,
+    "direction": "D",
+    "co": {
+     "pair": "20260724_20260817",
+     "granule": "NISAR_L2_PR_GUNW_026_062_D_071_028_2000_SH_20260724T121455_20260724T121529_20260817T121454_20260817T121528_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260712_20260724",
+     "granule": "NISAR_L2_PR_GUNW_025_062_D_071_026_2000_SH_20260712T121455_20260712T121530_20260724T121455_20260724T121529_P05023_N_F_J_001"
+    },
+    "label": "descending"
+   }
+  },
+  "verdict": "not detected",
+  "verdict_reason": "M5.8 expected to move the ground by at most a few cm; ascending 24-day pair fully decorrelated; descending 24-day pair shows only smooth atmosphere-sized gradients (about +/-5 cm, control +/-5 cm) with no pattern at the epicentre"
+ },
+ {
+  "id": "mexico-m73-2026",
+  "usgs_id": "us7000t1bu",
+  "title": "M7.3 offshore Chiapas, Mexico earthquake, 17 Jul 2026",
+  "time": "2026-07-17T14:48:42Z",
+  "lat": 14.571,
+  "lon": -92.9624,
+  "depth_km": 15.5,
+  "mag": 7.3,
+  "place": "60 km WSW of Puerto Madero, Mexico",
+  "mechanism": "thrust (nodal planes 123/64/98 and 286/27/75)",
+  "setting": "offshore; coast about 50 km",
+  "window": [
+   -93.6,
+   14.2,
+   -92.0,
+   15.4
+  ],
+  "heights": [
+   0,
+   2500
+  ],
+  "gmin": 0.35,
+  "far_km": 60,
+  "radius_km": 60,
+  "fringe_cm": 10,
+  "los_lim_cm": 20,
+  "profile_az": 45,
+  "views": {
+   "asc": {
+    "track": 62,
+    "frame": 9,
+    "direction": "A",
+    "co": {
+     "pair": "20260712_20260724",
+     "granule": "NISAR_L2_PR_GUNW_025_062_A_009_026_4000_SH_20260712T113935_20260712T114009_20260724T113934_20260724T114008_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260724_20260817",
+     "granule": "NISAR_L2_PR_GUNW_026_062_A_009_028_4000_SH_20260724T113934_20260724T114008_20260817T113933_20260817T114007_P05023_N_F_J_001"
+    },
+    "label": "ascending"
+   },
+   "desc": {
+    "track": 55,
+    "frame": 81,
+    "direction": "D",
+    "co": {
+     "pair": "20260712_20260724",
+     "granule": "NISAR_L2_PR_GUNW_025_055_D_081_026_4000_SH_20260712T004120_20260712T004150_20260724T004119_20260724T004150_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260724_20260817",
+     "granule": "NISAR_L2_PR_GUNW_026_055_D_081_028_4000_SH_20260724T004119_20260724T004150_20260817T004118_20260817T004149_P05023_N_F_J_001"
+    },
+    "label": "descending"
+   }
+  },
+  "verdict": "not detected",
+  "verdict_reason": "epicentre 60 km offshore; coast about 55 km away and under 1 percent of pixels within 60 km are valid; land LOS within about +/-3 cm (asc) and no coherent pattern (desc, control as large as the signal)"
+ },
+ {
+  "id": "sanriku-m69-2026",
+  "usgs_id": "us6000t7zq",
+  "title": "M6.9 off Sanriku, Japan earthquake, 24 Jun 2026",
+  "time": "2026-06-24T22:30:00Z",
+  "lat": 40.2563,
+  "lon": 142.1794,
+  "depth_km": 34,
+  "mag": 6.9,
+  "place": "35 km ENE of Noda, Japan",
+  "mechanism": "thrust (nodal planes 32/63/107 and 177/32/60); USGS moment-tensor depth 45 km",
+  "setting": "offshore, coast about 35 km west",
+  "window": [
+   141.3,
+   39.6,
+   142.7,
+   40.9
+  ],
+  "heights": [
+   0,
+   1500
+  ],
+  "gmin": 0.35,
+  "far_km": 50,
+  "radius_km": 50,
+  "fringe_cm": 10,
+  "los_lim_cm": 15,
+  "profile_az": 270,
+  "views": {
+   "asc": {
+    "track": 110,
+    "frame": 22,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260621_20260703",
+     "granule": "NISAR_L2_PR_GUNW_023_110_A_022_024_4000_SH_20260621T194120_20260621T194155_20260703T194120_20260703T194154_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260703_20260715",
+     "granule": "NISAR_L2_PR_GUNW_024_110_A_022_025_4000_SH_20260703T194120_20260703T194154_20260715T194119_20260715T194154_P05023_N_F_J_001"
+    }
+   },
+   "desc": {
+    "track": 118,
+    "frame": 68,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260622_20260704",
+     "granule": "NISAR_L2_PR_GUNW_023_118_D_068_024_4000_SH_20260622T092647_20260622T092722_20260704T092646_20260704T092721_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260704_20260716",
+     "granule": "NISAR_L2_PR_GUNW_024_118_D_068_025_4000_SH_20260704T092646_20260704T092721_20260716T092646_20260716T092720_P05023_N_F_J_001"
+    }
+   }
+  },
+  "verdict": "not detected",
+  "verdict_reason": "epicentre 35 km offshore and 34-45 km deep; coast forest is decorrelated (1.4 percent valid pixels within 50 km); LOS within +/-10 cm and not above the control"
+ }
+]

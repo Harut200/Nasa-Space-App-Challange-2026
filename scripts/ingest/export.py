@@ -83,6 +83,23 @@ def export(area, root=ROOT):
         manifest["quality"] = {p["date"]: {"quality": p["verdict"], "quality_note": p["reason"],
                                            "channels": p["fail_channels"] or p["warn_channels"]}
                                for p in qc["passes"] if p["date"] in all_dates and p["verdict"] != "ok"}
+    events = load(root / "docs/eda/quake/events.json") or []  # written by scripts/detect/quake.py
+    ev = next((e for e in events if e.get("id") == area), None)
+    if ev:  # a single before/after pair, not a season: the app shows it as an event
+        res = (load(root / "docs/eda/quake/results.json") or {}).get(area, {})
+        views = []
+        for key, v in ev.get("views", {}).items():
+            a, b = v["co"]["pair"].split("_")
+            num = res.get("views", {}).get(key, {}).get("variants", {})
+            num = next(iter(num.values()), {}) if num else {}
+            views.append({"id": key, "label": v.get("label", key), "track": v.get("track"),
+                          "before": f"{a[:4]}-{a[4:6]}-{a[6:]}", "after": f"{b[:4]}-{b[4:6]}-{b[6:]}",
+                          "p2p_cm": round(num["p2p_cm_0.5_99.5pct"]) if "p2p_cm_0.5_99.5pct" in num else None,
+                          "control_p2p_cm": round(num["control_p2p_cm_0.5_99.5pct"]) if "control_p2p_cm_0.5_99.5pct" in num else None})
+        manifest["kind"] = "event"
+        manifest["event"] = {"type": "earthquake", "magnitude": ev["mag"], "time": ev["time"], "depth_km": ev["depth_km"],
+                             "lngLat": [ev["lon"], ev["lat"]], "place": ev.get("place"), "mechanism": ev.get("mechanism"),
+                             "usgs_id": ev.get("usgs_id"), "radius_km": ev.get("radius_km"), "views": views}
     (pub / area / "manifest.json").write_text(json.dumps(manifest, indent=2))
     shutil.copy(prod / "timeseries.json", pub / area / "timeseries.json")
     idx = load(pub / "index.json", {"areas": []})
