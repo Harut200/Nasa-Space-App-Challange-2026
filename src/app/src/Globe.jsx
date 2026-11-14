@@ -25,8 +25,11 @@ function styleFor(p) {
       'horizon-fog-blend': 0.5, 'fog-ground-blend': 0.9, 'atmosphere-blend': ['interpolate', ['linear'], ['zoom'], 0, 0.9, 5, 0.4, 7, 0] },
   }
   if (p.tiles) return { ...base,
-    sources: { img: { type: 'raster', tiles: [p.tiles], tileSize: 256, maxzoom: p.maxzoom, attribution: p.credit } },
+    // `lo` is one whole-planet tile (prefetched below): it paints at once, blurry, and `img` sharpens over it as tiles arrive.
+    sources: { lo: { type: 'raster', tiles: [p.tiles], tileSize: 256, maxzoom: 0 },
+      img: { type: 'raster', tiles: [p.tiles], tileSize: 256, maxzoom: p.maxzoom, attribution: p.credit } },
     layers: [{ id: 'bg', type: 'background', paint: { 'background-color': '#000' } },
+      { id: 'lo', type: 'raster', source: 'lo', paint: { 'raster-saturation': -0.15, 'raster-fade-duration': 0 } },
       { id: 'img', type: 'raster', source: 'img', paint: { 'raster-saturation': -0.15, 'raster-fade-duration': 200 } }] }
   const c = (id, layer, extra) => ({ id, source: 'ofm', 'source-layer': layer, ...extra })
   return { ...base,
@@ -81,6 +84,8 @@ function Globe({ planet = 'earth', regions = [], selectedId = null, onSelect, pa
     map.current = m
     m.setPadding(live.current.pad)
     m.jumpTo({ zoom: idleZoom() })
+    // Once Earth is drawn, warm the HTTP cache with each planet's whole-planet tile (the server takes 1-4 s per tile).
+    m.once('idle', () => PLANETS.forEach((x) => x.tiles && fetch(x.tiles.replace('{z}/{x}/{y}', '0/0/0')).catch(() => {})))
 
     // Scroll-zoom only after the globe is clicked/focused; leaving it gives page scroll back.
     m.getCanvas().tabIndex = 0

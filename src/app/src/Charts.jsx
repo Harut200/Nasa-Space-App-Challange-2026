@@ -24,7 +24,7 @@ const Tick = memo(function Tick({ d, i, px, on, onPick }) {
   return (
     <g onClick={() => onPick(i)} style={{ cursor: 'pointer' }}>
       <line x1={px} x2={px} y1="0" y2="30" stroke="transparent" strokeWidth="14"><title>{d}</title></line>
-      <line x1={px} x2={px} y1={on ? 12 : 18} y2="30" stroke={on ? 'var(--cyan)' : 'currentColor'}
+      <line x1={px} x2={px} y1={on ? 12 : 18} y2="30" stroke={on ? 'var(--text)' : 'currentColor'}
         strokeWidth={on ? 3 : 1.5} />
     </g>
   )
@@ -81,7 +81,7 @@ export const Chart = memo(function Chart({ ts, pol, gaps, index, onPick, colors,
       </figcaption>
       <svg className="chart" viewBox={`0 0 ${W} ${H}`} role="img" aria-label="Backscatter over time">
         {m.gapEls}
-        <line x1={m.xs[index]} x2={m.xs[index]} y1="0" y2={H} stroke="var(--cyan)" strokeDasharray="2 4" />
+        <line x1={m.xs[index]} x2={m.xs[index]} y1="0" y2={H} stroke="var(--text)" strokeDasharray="2 4" />
         {m.lines}
       </svg>
     </figure>

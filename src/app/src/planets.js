@@ -4,7 +4,7 @@ const OPM = 'https://cartocdn-gusc.global.ssl.fastly.net/opmbuilder/api/v1/map/n
 const opm = (n) => `${OPM}/opm-${n}-basemap-v0-1/all/{z}/{x}/{y}.png`
 
 export const PLANETS = [
-  { id: 'earth', name: 'Earth', tint: '#00e0ff', credit: '© OpenFreeMap © OpenMapTiles Data from OpenStreetMap' },
+  { id: 'earth', name: 'Earth', tint: '#7aa7c7', credit: '© OpenFreeMap © OpenMapTiles Data from OpenStreetMap' },
   { id: 'moon', name: 'Moon', tint: '#bdbdbd', tiles: opm('moon'), maxzoom: 7,
     credit: 'Moon: LRO/LOLA imagery via OpenPlanetaryMap (NASA, public domain)' },
   { id: 'mars', name: 'Mars', tint: '#ff6a3d', tiles: opm('mars'), maxzoom: 7,

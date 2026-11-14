@@ -6,7 +6,7 @@ import { frame } from './data.js'
 
 const DATA = import.meta.env.BASE_URL + 'data/'
 const REPO = 'https://github.com/Harut200/Nasa-Space-App-Challange-2026'
-const COLORS = ['#00e0ff', '#ff2a1f', '#ededed', '#8b8b8b', '#2a8fa0']
+const COLORS = ['#e9a23b', '#6aa6d6', '#ecebe6', '#7fb77e', '#c9798f'] // chart series; red stays reserved for severe
 const STORY = [['see', 'What you see'], ['physics', 'What is happening'], ['lband', 'Why radar shows it'], ['people', 'Why it matters']]
 const NONE = []
 const GEOCODE = 'https://geocoding-api.open-meteo.com/v1/search?count=1&name=' // free, no key
@@ -22,7 +22,6 @@ const short = fmt({ day: 'numeric', month: 'short' })
 const coord = ([lng, lat]) => `${Math.abs(lat).toFixed(2)}° ${lat < 0 ? 'S' : 'N'}  ${Math.abs(lng).toFixed(2)}° ${lng < 0 ? 'W' : 'E'}`
 const worst = (r) => (r.events.some((e) => e.severity === 'high') ? 'high' : r.events.length ? 'low' : null)
 const GLOBE_REGIONS = REGIONS.map((r) => ({ ...r, severity: worst(r) }))
-const ALERTS = REGIONS.filter((r) => worst(r) === 'high').length
 
 const getJson = (path) => fetch(DATA + path).then((r) => (r.ok ? r.json() : Promise.reject(new Error(`${path}: ${r.status}`))))
 const words = fmt({ day: 'numeric', month: 'long', year: 'numeric' })
@@ -217,9 +216,7 @@ export default function App() {
               {!region.events.length && <p className="empty">No forecast for this place yet.</p>}
               <ul className="events">{region.events.map((e) => <Event key={e.type + e.from} e={e} />)}</ul>
             </aside>
-          ) : earth && (
-            <p className="hint"><span className="dot-num">{ALERTS}</span> <span className="label">active alerts<br />Select a region or tap a point</span></p>
-          )}
+          ) : null}
 
           <div className="foot">
             <div className="seg" role="group" aria-label="Planet">
