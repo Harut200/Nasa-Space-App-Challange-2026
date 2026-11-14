@@ -1,0 +1,40 @@
+{
+  "story": {
+    "see": "Compare the Mahanadi delta on 27 June with 14 August. Mapped open water is about 140 square kilometres before the flood and about 400 on 14 August, the first usable pass after the peak. It is still about 420 on 26 August and only falls to about 290 by 19 September and about 240 by 13 October.",
+    "physics": "A deep depression over the Bay of Bengal brought heavy rain to Odisha in late July. Upstream, Hirakud dam opened 22 gates and Chhattisgarh opened 64 of the 66 gates of the Kalama barrage. Officials expected more than 9.5 lakh cubic feet per second to pass Mundali near Cuttack. The peak fell on 31 July, inside the satellite's 27 July to 10 August outage.",
+    "lband": "The flood peak itself was not imaged, and two July previews are damaged and left out. What the radar sees is standing water afterwards: new dark pools on farmland, mostly in the floodplain south-west, east and north of Cuttack. About two thirds of the new water lies inside the largest extent the JRC long-term water record has ever shown here. Wet rice fields also look dark in the monsoon, so some of this is normal season.",
+    "people": "Officials reported embankment breaches that submerged farmland at Jodum in Cuttack district and seven breaches in Jajpur district. Floods were reported across 20 of Odisha's 30 districts. The radar cannot count harm. It shows how long water stayed on the delta plain after the river fell."
+  },
+  "spots": [
+    {
+      "id": "southwest-pools",
+      "label": "Floodplain pools south-west of Cuttack",
+      "lngLat": [85.552, 20.312],
+      "radius_m": 3000
+    },
+    {
+      "id": "eastern-delta",
+      "label": "Eastern delta floodplain",
+      "lngLat": [86.425, 20.541],
+      "radius_m": 3000
+    },
+    {
+      "id": "northeast-plain",
+      "label": "North-eastern floodplain",
+      "lngLat": [86.27, 20.86],
+      "radius_m": 3000
+    },
+    {
+      "id": "northern-plain",
+      "label": "Northern floodplain",
+      "lngLat": [85.633, 20.811],
+      "radius_m": 3000
+    },
+    {
+      "id": "coastal-lagoon",
+      "label": "Coastal water (stays water)",
+      "lngLat": [86.47, 20.056],
+      "radius_m": 3000
+    }
+  ]
+}

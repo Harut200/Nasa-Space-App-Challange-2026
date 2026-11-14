@@ -110,6 +110,9 @@ def export(area, root=ROOT):
                              "radius_km": oe.get("radius_km"), "source_url": oe.get("source_url"),
                              "views": [{k: v.get(k) for k in ("id", "label", "track", "before", "after", "p2p_cm", "control_p2p_cm")}
                                        for v in oe.get("views", []) if v.get("exported", True)]}
+    for key, field in (("default_layer", "defaultLayer"), ("headline", "headline"), ("headline_note", "headlineNote")):
+        if cfg.get(key):  # optional: which layer opens first, and whether the open-water number is this place's headline
+            manifest[field] = cfg[key]
     manifest["category"] = (manifest["event"]["type"] if manifest.get("kind") == "event" else cfg.get("category")) or "other"
     (pub / area / "manifest.json").write_text(json.dumps(manifest, indent=2))
     shutil.copy(prod / "timeseries.json", pub / area / "timeseries.json")

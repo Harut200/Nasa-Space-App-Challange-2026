@@ -1,0 +1,62 @@
+{
+ "area": "up-terai-2026",
+ "dates": [
+  "2026-06-27",
+  "2026-08-14",
+  "2026-08-26",
+  "2026-09-19",
+  "2026-10-01",
+  "2026-10-13"
+ ],
+ "baseline": "2026-09-19",
+ "event": "2026-10-01",
+ "domain_km2": 13380,
+ "water_km2": [
+  0,
+  3,
+  6,
+  9,
+  172,
+  133
+ ],
+ "jrc_occ90_km2": 0,
+ "jrc_maxextent_km2": 846,
+ "baseline_vs_occ90": {
+  "tp_km2": 0.0,
+  "fp_km2": 8.8,
+  "fn_km2": 0.4,
+  "tn_km2": 13370.6,
+  "ours_km2": 8.8,
+  "ref_km2": 0.4,
+  "iou": 0.0,
+  "precision": 0.0,
+  "recall": 0.0
+ },
+ "baseline_vs_maxext": {
+  "tp_km2": 7.2,
+  "fp_km2": 1.6,
+  "fn_km2": 838.4,
+  "tn_km2": 12532.7,
+  "ours_km2": 8.8,
+  "ref_km2": 845.6,
+  "iou": 0.0085,
+  "precision": 0.8182,
+  "recall": 0.0085
+ },
+ "event_vs_maxext": {
+  "tp_km2": 137.7,
+  "fp_km2": 34.0,
+  "fn_km2": 707.9,
+  "tn_km2": 12500.3,
+  "ours_km2": 171.7,
+  "ref_km2": 845.6,
+  "iou": 0.1566,
+  "precision": 0.8021,
+  "recall": 0.1629
+ },
+ "new_km2": 163,
+ "lost_km2": 0,
+ "new_inside_jrc_maxextent_share": 0.801,
+ "new_on_jrc_occ_gt0_share": 0.913,
+ "first_to_baseline_change_km2": 9
+}

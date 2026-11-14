@@ -1,0 +1,289 @@
+{
+  "id": "thunder-bay-36-2026",
+  "name": "Thunder Bay 36 fire, Wabakimi, Ontario",
+  "bounds": [
+    -90.74,
+    49.89986883298348,
+    -88.19913241703534,
+    51.18
+  ],
+  "dates": [
+    "2026-06-17",
+    "2026-06-29",
+    "2026-07-11",
+    "2026-07-23",
+    "2026-08-16",
+    "2026-09-09",
+    "2026-09-21",
+    "2026-10-03",
+    "2026-10-15"
+  ],
+  "gaps": [
+    [
+      "2026-07-27",
+      "2026-08-10"
+    ]
+  ],
+  "layers": [
+    {
+      "id": "hh",
+      "label": "HH brightness (preview)",
+      "dates": [
+        "2026-06-17",
+        "2026-06-29",
+        "2026-07-11",
+        "2026-07-23",
+        "2026-08-16",
+        "2026-09-09",
+        "2026-09-21",
+        "2026-10-03",
+        "2026-10-15"
+      ],
+      "legend": {
+        "type": "ramp",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": 0,
+        "max": 100,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    },
+    {
+      "id": "water",
+      "label": "Water and flooded vegetation",
+      "dates": [
+        "2026-06-17",
+        "2026-06-29",
+        "2026-07-11",
+        "2026-07-23",
+        "2026-08-16",
+        "2026-09-09",
+        "2026-09-21",
+        "2026-10-03",
+        "2026-10-15"
+      ],
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#2f6fde",
+            "label": "Open water"
+          },
+          {
+            "color": "#35b04a",
+            "label": "Possible water under vegetation"
+          },
+          {
+            "color": "#7fd3c4",
+            "label": "Going under: vegetation submerging, or part open water"
+          },
+          {
+            "color": "#f28e2b",
+            "label": "Usually water, not today (rain or wind?)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "when",
+      "label": "When it changed for good",
+      "dates": null,
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#440154",
+            "label": "29 Jun"
+          },
+          {
+            "color": "#46327e",
+            "label": "11 Jul"
+          },
+          {
+            "color": "#365c8d",
+            "label": "23 Jul"
+          },
+          {
+            "color": "#277f8e",
+            "label": "16 Aug"
+          },
+          {
+            "color": "#1fa187",
+            "label": "9 Sep"
+          },
+          {
+            "color": "#4ac16d",
+            "label": "21 Sep"
+          },
+          {
+            "color": "#a0da39",
+            "label": "3 Oct"
+          },
+          {
+            "color": "#fde725",
+            "label": "15 Oct"
+          }
+        ]
+      }
+    },
+    {
+      "id": "classes",
+      "label": "Season classes",
+      "dates": null,
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#08306b",
+            "label": "Permanent water"
+          },
+          {
+            "color": "#4292c6",
+            "label": "Seasonal open water"
+          },
+          {
+            "color": "#41ab5d",
+            "label": "Flooded vegetation"
+          },
+          {
+            "color": "#9ecae1",
+            "label": "Got darker, not open water (wetter ground, shallow or partial flooding)"
+          },
+          {
+            "color": "#c994c7",
+            "label": "Got brighter (growing crops and other causes)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "change",
+      "label": "Change since first pass (HH)",
+      "dates": [
+        "2026-06-29",
+        "2026-07-11",
+        "2026-07-23",
+        "2026-08-16",
+        "2026-09-09",
+        "2026-09-21",
+        "2026-10-03",
+        "2026-10-15"
+      ],
+      "legend": {
+        "type": "diverging",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": -35,
+        "max": 35,
+        "colors": [
+          "#2166ac",
+          "#00000000",
+          "#b2182b"
+        ],
+        "labels": [
+          "darker: new water, cleared forest",
+          "brighter: flooded vegetation, growth"
+        ]
+      }
+    },
+    {
+      "id": "rgb",
+      "label": "Three-date composite",
+      "dates": null,
+      "legend": {
+        "type": "text",
+        "text": "HH: red = 17 Jun, green = 16 Aug, blue = 15 Oct. Grey = no change."
+      }
+    },
+    {
+      "id": "hv",
+      "label": "HV brightness (preview)",
+      "dates": [
+        "2026-06-17",
+        "2026-06-29",
+        "2026-07-11",
+        "2026-07-23",
+        "2026-08-16",
+        "2026-09-09",
+        "2026-09-21",
+        "2026-10-03",
+        "2026-10-15"
+      ],
+      "legend": {
+        "type": "ramp",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": 0,
+        "max": 100,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    }
+  ],
+  "story": {
+    "see": "Switch between 11 July and 23 July over northwestern Ontario. A large patch of the HH radar layer turns brighter around the fire's published position and stays that way through September and into October. Nothing like it appears between 17 June and 11 July.",
+    "physics": "Thunder Bay 36 started on 12 July 2026 when the Dryden 13 fire merged with nearby fires in Wabakimi Provincial Park, in the boreal forest north of Thunder Bay. It reached about 314,000 hectares by 29 and 30 July, the largest wildfire recorded in Ontario's history, against 196,974 hectares for the 2025 Red Lake 12 fire. Published peak figures run up to about 320,000 hectares.",
+    "lband": "Here the HH echo rose in the burned area, by about 0.12 on the preview's 0 to 1 scale where unburned forest nearby moved by 0.01 to 0.05. The cross-polarised HV echo changed only weakly, so we do not see a plain HV drop. A bright patch of about 2,000 square kilometres is smaller than the published burnt area and depends on the threshold, so treat it as the scar's strongest core, not an area estimate. These are 180 metre uncalibrated preview images.",
+    "people": "Remote communities including Whitesand and Namaygoosisagagun First Nations were evacuated in July. The radar cannot see people. It shows a scar about 50 kilometres across that is still readable three months later."
+  },
+  "spots": [
+    {
+      "id": "scar-core",
+      "label": "Burn scar core",
+      "lngLat": [
+        -89.41,
+        50.7
+      ]
+    },
+    {
+      "id": "scar-north",
+      "label": "Burn scar, northern part",
+      "lngLat": [
+        -89.44,
+        50.84
+      ]
+    },
+    {
+      "id": "published-fire",
+      "label": "Published fire position",
+      "lngLat": [
+        -89.48,
+        50.68
+      ]
+    },
+    {
+      "id": "unburned-reference",
+      "label": "Unburned forest (reference)",
+      "lngLat": [
+        -90.4,
+        50.2
+      ]
+    }
+  ],
+  "credits": "NISAR GCOV preview images: NASA/JPL-Caltech and ISRO, distributed by ASF DAAC. Uncalibrated previews at about 180 m; values are display brightness, not backscatter.",
+  "source": "preview",
+  "quality": {
+    "2026-08-16": {
+      "quality": "warn",
+      "quality_note": "HH channel 3.3x more different from the other dates than usual (widespread across the frame); HV channel 3.4x more different from the other dates than usual (widespread across the frame)",
+      "channels": [
+        "HH",
+        "HV"
+      ]
+    },
+    "2026-09-09": {
+      "quality": "warn",
+      "quality_note": "1 pass(es) missing, not explained by the outage or the area config (2026-08-28); HV brightness change across the swath +0.107 vs usual +0.157",
+      "channels": [
+        "HH",
+        "HV"
+      ]
+    }
+  },
+  "defaultLayer": "change",
+  "headline": "none",
+  "headlineNote": "Radar echo brighter where the fire burned",
+  "category": "fire"
+}

@@ -1,0 +1,40 @@
+{
+  "story": {
+    "see": "Switch between 14 July and 26 July over the Sierra Norte de Guadalajara, north-east of Madrid. A patch of the cross-polarised HV radar layer turns darker and stays dark through August and October. Nothing like it appears between 20 June and 14 July.",
+    "physics": "The La Mierla fire started on 16 July 2026 and burned about 32,000 hectares in the following week, which Spanish reports called the second-largest wildfire in Spain this century. SEO/BirdLife put it at nearly 33,000 hectares, 95 percent of it inside the Sierra Norte de Guadalajara natural park. The fire was described as stabilised on 23 July.",
+    "lband": "HV echoes come from branches and leaves, so burned woodland tends to return less of it. On 26 July the burned area is about 0.05 darker on the preview's 0 to 1 scale than before the fire, then about 0.08 by 31 August and about 0.09 by 18 October, while unburned ground just north of the patch stays within 0.01. The patch is one of the darkest 0.2 percent of equal-sized circles in the frame. It is roughly 15 to 20 kilometres across, the right size for 32,000 hectares, but the mountain terrain is speckled, so we show it as a patch and give no area of our own.",
+    "people": "Villages such as Riofrío del Llano and Angón were among those evacuated and began to return after 21 July. Satellite images before and after the fire, from Copernicus, show a landscape of woodland, crops and pasture that the fire changed within a week. Radar shows the scar through cloud, smoke and darkness."
+  },
+  "spots": [
+    {
+      "id": "scar-core",
+      "label": "Burn scar core",
+      "lngLat": [-3.0, 41.16],
+      "radius_m": 3000
+    },
+    {
+      "id": "scar-southwest",
+      "label": "Burn scar, south-west part",
+      "lngLat": [-3.055, 41.116],
+      "radius_m": 3000
+    },
+    {
+      "id": "riofrio",
+      "label": "Riofrío del Llano",
+      "lngLat": [-2.825, 41.138],
+      "radius_m": 2500
+    },
+    {
+      "id": "unburned-ridge",
+      "label": "Nearby unburned ground (reference)",
+      "lngLat": [-2.9, 41.25],
+      "radius_m": 3000
+    },
+    {
+      "id": "lowland-reference",
+      "label": "Lowland (reference)",
+      "lngLat": [-2.6, 40.75],
+      "radius_m": 3000
+    }
+  ]
+}

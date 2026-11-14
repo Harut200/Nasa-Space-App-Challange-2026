@@ -1,0 +1,11 @@
+{
+ "area": "la-mierla-fire-2026",
+ "method": "mean change in preview HV brightness (8-bit stretch /255) inside a 9 km disc at (-3.0, 41.16), rank among all 9 km discs in the frame; disc found from the data, then checked against published places",
+ "dates": ["2026-06-20","2026-07-02","2026-07-14","2026-07-26","2026-08-19","2026-08-31","2026-09-12","2026-09-24","2026-10-06","2026-10-18"],
+ "published": {"start": "2026-07-16", "burnt_ha_approx": 32000, "riofrio_del_llano_lonlat": [-2.825, 41.138], "angon_lonlat": [-2.85, 41.07]},
+ "HV_change_from_14_Jul_disc9km": {"26_Jul": -0.0473, "31_Aug": -0.0814, "18_Oct": -0.0933},
+ "outside_disc_mean": {"26_Jul": 0.0014, "31_Aug": -0.0039, "18_Oct": 0.0113},
+ "percentile_among_all_discs": {"26_Jul": 0.2, "31_Aug": 0.21, "18_Oct": 1.04},
+ "control_disc": {"2_Jul_from_20_Jun": -0.0044, "14_Jul_from_20_Jun": -0.0075},
+ "note": "Open-water layer is all zero (no water here). Patch location was found in the data; independent check is only that it lies 15 to 25 km west of the published villages in the fire area. No area estimate is made."
+}

@@ -258,18 +258,20 @@ From [RESULTS.md](RESULTS.md) (section "What independent data corrected"), [vali
 
 ## 6. Disagreements between summaries and sources
 
-Found while reading. In each case the source file is right, or newer, and the summary is out of date. None changes a result; they change counts and wording. Not edited here (only two one-line links were allowed).
+Found while reading. In each case the source file is right, or newer, and the summary is out of date. None changes a result; they change counts and wording. Not edited here (only two one-line links were allowed). **Update 15 November 2026, 00:50: the summaries below were corrected in README.md, RESULTS.md, DETECTION.md, ARCHITECTURE.md, pitch/FACTS.md, pitch/demo-script.md and HANDOFF.md (status per row in the last column). Two later contradictions between sources are listed under the table.**
 
-| Summary says | Source says | Where |
+| Summary says | Source says (and where) | Status |
 |---|---|---|
-| "four of eight earthquakes tried" (RESULTS.md:27, README.md:56, pitch/FACTS.md:20, DETECTION.md:1267) | six clear of fifteen tried: Tibet, Venezuela M7.2 and M7.5, Panama, Kumamoto, Qaidam M5.6 (eda/quake.md:1 and verdict tables from line 18) |
-| "19 places: 15 of water, 4 of earthquakes" (RESULTS.md:9, README.md:3, ARCHITECTURE.md:256); water places "in Asia, Africa and South America" (RESULTS.md:28, ARCHITECTURE.md:213) | 26 places in src/app/public/data/index.json: also Chao Phraya, tonle-sap-cal, two more earthquakes, three ground events; Europe (Etna) and North America (Panama, Kilauea) appear |
-| Calibrated Tonle Sap "not in the app" (RESULTS.md:25 and :52, README.md:51) | index.json line 4 lists `tonle-sap-cal`; commit 17fcaf9 (14 Nov 22:27) added it |
-| "99.98 % and 99.89 % for the fused map" (RESULTS.md:17) | These are the fusion v1 figures; the shipped fusion v2 gives 99.97 % and 99.92 % (eda/fusion2.md:169-170) |
-| "28 test files, 186 test functions" (DETECTION.md:1222, ARCHITECTURE.md:134) | 33 test files, 216 test functions, 223 test cases in a full run (evidence/pytest-full.txt) |
-| Summary of eda-findings.md: biggest Tonle Sap jump 11-23 September; Sevan shrinkage on 31 August and 12 September is wind (eda/eda-findings.md:11) | Contradicted or undecided by the 2026 data (eda/validation-2026.md:13-14); already corrected in RESULTS.md |
-| ARCHITECTURE.md:213: a full pytest run re-creates the `demo` place; remove it again | tests/conftest.py now removes it; confirmed after the run |
-| RESULTS.md headline table: Tonle Sap range "4,196-6,051" | Present in eda/fusion2/results.json (p_band 4196.4 and 6051.4), not in the prose of eda/fusion2.md, which quotes only the independent range 4,198-7,222. Not a disagreement of value |
+| "four of eight earthquakes tried" (RESULTS.md:27, README.md:56, pitch/FACTS.md:20, DETECTION.md:1267) | six clear of fifteen tried: Tibet, Venezuela M7.2 and M7.5, Panama, Kumamoto, Qaidam M5.6 (eda/quake.md:1 and verdict tables from line 18) | **Fixed 15 Nov**: six clear of fifteen, with the numbers and caveats of quake.md; also in FACTS.md and demo-script.md |
+| "19 places: 15 of water, 4 of earthquakes" (RESULTS.md:9, README.md:3, ARCHITECTURE.md:256); water places "in Asia, Africa and South America" (RESULTS.md:28, ARCHITECTURE.md:213) | 26 places in src/app/public/data/index.json: also Chao Phraya, tonle-sap-cal, two more earthquakes, three ground events; Europe (Etna) and North America (Panama, Kilauea) appear | **Fixed 15 Nov**: 26 places by class from summary.json; continents listed by name |
+| Calibrated Tonle Sap "not in the app" (RESULTS.md:25 and :52, README.md:51) | index.json line 4 lists `tonle-sap-cal`; commit 17fcaf9 (14 Nov 22:27) added it | **Fixed 15 Nov**: in the app; about 5,660 km² on the app window against 5,625 in the study |
+| "99.98 % and 99.89 % for the fused map" (RESULTS.md:17) | These are the fusion v1 figures; the shipped fusion v2 gives 99.97 % and 99.92 % (eda/fusion2.md:169-170) | **Fixed 15 Nov**: fusion v2 values (99.97 / 99.92 %), stated as measured on certain pixels only |
+| "28 test files, 186 test functions" (DETECTION.md:1222, ARCHITECTURE.md:134) | 33 test files, 216 test functions, 223 test cases in a full run (evidence/pytest-full.txt) | **Fixed 15 Nov**: 223 passed in 33 files (README.md, RESULTS.md, ARCHITECTURE.md, DETECTION.md, HANDOFF.md, FACTS.md) |
+| Summary of eda-findings.md: biggest Tonle Sap jump 11-23 September; Sevan shrinkage on 31 August and 12 September is wind (eda/eda-findings.md:11) | Contradicted or undecided by the 2026 data (eda/validation-2026.md:13-14); already corrected in RESULTS.md | **Fixed 15 Nov**: one-line note added at the top of eda-findings.md |
+| ARCHITECTURE.md:213: a full pytest run re-creates the `demo` place; remove it again | tests/conftest.py now removes it; confirmed after the run | **Fixed 15 Nov**: now says conftest removes it (also HANDOFF.md) |
+| RESULTS.md headline table: Tonle Sap range "4,196-6,051" | Present in eda/fusion2/results.json (p_band 4196.4 and 6051.4), not in the prose of eda/fusion2.md, which quotes only the independent range 4,198-7,222. Not a disagreement of value | Unchanged (not a disagreement) |
+
+Added 15 November 2026 (found while correcting): (a) the correction brief said only Chao Phraya is clear among the preview disaster events, but the cumulative summary in research/events-2026.md (state at 00:50) lists six clear (Chao Phraya, Mahanadi, Terai, Thunder Bay, La Mierla, Avila); only Chao Phraya is in the app index. (b) opera.md says 97.5 % agreement and IoU 0.84 for 20 place-dates at Sevan and Tonle Sap; its Bottom line gives per-place values (Sevan 99 %, IoU 0.97; Tonle Sap 96 %, IoU 0.70), which average to the same figures. (c) fusion2.md says "13 other places"; DETECTION.md notes already record this. (d) DETECTION.md lines on fusion v2 "shipped for all 15 places" predate the 17 water places in the app; not changed.
 
 ## 7. How to reproduce
 

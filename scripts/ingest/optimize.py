@@ -233,7 +233,7 @@ def _series_headline(ts):
     return water, "peak"
 
 
-CATEGORIES = [("flood", "Floods"), ("lake", "Lakes"), ("wetland", "Wetlands and deltas"), ("land", "Farmland and forest"),
+CATEGORIES = [("flood", "Floods"), ("lake", "Lakes"), ("wetland", "Wetlands and deltas"), ("land", "Farmland and forest"), ("fire", "Wildfires"),
               ("earthquake", "Earthquakes"), ("volcano", "Volcanoes"), ("landslide", "Landslides")]
 CAT_LABEL = dict(CATEGORIES)
 
@@ -270,8 +270,11 @@ def summarise(place, m, ts):
     else:
         d = m["dates"]
         out["dates"] = {"count": len(d), "first": d[0] if d else None, "last": d[-1] if d else None}
-        out["defaultLayer"] = "water" if "water" in ids else ids[0]
-        fh = _series_headline(ts)
+        want = m.get("defaultLayer")
+        out["defaultLayer"] = want if want in ids else ("water" if "water" in ids else ids[0])
+        # a place whose story is not about water (a burn scar) must not be summarised by its open-water area
+        fh = None if m.get("headline") == "none" else _series_headline(ts)
+        out["note"] = m.get("headlineNote")
         out["headline"], out["spark"], out["change"] = None, None, None
         if fh:
             f, mode = fh
