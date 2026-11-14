@@ -1,0 +1,27 @@
+{
+  "id": "arauca-apure-2026",
+  "name": "Arauca River floodplain, Apure, Venezuela",
+  "bbox": [
+    -72.2,
+    6.6,
+    -70.8,
+    7.6
+  ],
+  "track": 18,
+  "frame": 5,
+  "direction": "ascending",
+  "pixel_m": 100,
+  "mode": "20+5",
+  "dates": [
+    "2026-06-27",
+    "2026-07-09",
+    "2026-07-21",
+    "2026-08-14",
+    "2026-08-26",
+    "2026-09-07",
+    "2026-09-19",
+    "2026-10-01",
+    "2026-10-13"
+  ],
+  "water_source": "fusion2"
+}
