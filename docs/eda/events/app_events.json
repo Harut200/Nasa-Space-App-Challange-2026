@@ -18,6 +18,9 @@
     "after": "2026-08-31",
     "p2p_cm": null,
     "control_p2p_cm": null,
+    "control_before": "2026-07-14",
+    "control_after": "2026-07-26",
+    "control_is_before": true,
     "exported": true
    },
    {
@@ -28,10 +31,29 @@
     "after": "2026-08-28",
     "p2p_cm": null,
     "control_p2p_cm": null,
+    "control_before": "2026-07-11",
+    "control_after": "2026-07-23",
+    "control_is_before": true,
     "exported": false
    }
   ],
-  "source_url": "https://en.wikipedia.org/wiki/2026_Nepal%E2%80%93Tibet_floods"
+  "source_url": "https://en.wikipedia.org/wiki/2026_Nepal%E2%80%93Tibet_floods",
+  "before_after": [
+   {
+    "view": "asc",
+    "before": "coherence_before",
+    "after": "coherence",
+    "label": "Radar coherence",
+    "before_dates": [
+     "2026-07-14",
+     "2026-07-26"
+    ],
+    "after_dates": [
+     "2026-08-19",
+     "2026-08-31"
+    ]
+   }
+  ]
  },
  {
   "id": "kilauea-ep55-2026",
@@ -52,6 +74,9 @@
     "after": "2026-10-22",
     "p2p_cm": null,
     "control_p2p_cm": null,
+    "control_before": "2026-09-28",
+    "control_after": "2026-10-10",
+    "control_is_before": true,
     "exported": true
    },
    {
@@ -62,10 +87,29 @@
     "after": "2026-10-29",
     "p2p_cm": null,
     "control_p2p_cm": null,
+    "control_before": "2026-10-05",
+    "control_after": "2026-10-17",
+    "control_is_before": true,
     "exported": false
    }
   ],
-  "source_url": "https://www.usgs.gov/volcanoes/kilauea/recent-eruption"
+  "source_url": "https://www.usgs.gov/volcanoes/kilauea/recent-eruption",
+  "before_after": [
+   {
+    "view": "asc",
+    "before": "coherence_before",
+    "after": "coherence",
+    "label": "Radar coherence",
+    "before_dates": [
+     "2026-09-28",
+     "2026-10-10"
+    ],
+    "after_dates": [
+     "2026-10-10",
+     "2026-10-22"
+    ]
+   }
+  ]
  },
  {
   "id": "etna-valle-del-bove-2026",
@@ -86,6 +130,9 @@
     "after": "2026-08-16",
     "p2p_cm": null,
     "control_p2p_cm": null,
+    "control_before": "2026-06-29",
+    "control_after": "2026-07-23",
+    "control_is_before": true,
     "exported": true
    },
    {
@@ -96,10 +143,29 @@
     "after": "2026-08-16",
     "p2p_cm": null,
     "control_p2p_cm": null,
+    "control_before": "2026-07-11",
+    "control_after": "2026-07-23",
+    "control_is_before": true,
     "exported": false
    }
   ],
   "source_url": "https://www.euronews.com/2026/08/13/etna-eruption-enters-seventh-day-in-phenomenon-unseen-since-the-1970s",
+  "before_after": [
+   {
+    "view": "asc",
+    "before": "coherence_before",
+    "after": "coherence",
+    "label": "Radar coherence",
+    "before_dates": [
+     "2026-06-29",
+     "2026-07-23"
+    ],
+    "after_dates": [
+     "2026-07-23",
+     "2026-08-16"
+    ]
+   }
+  ],
   "time_note": "start of the August eruption inferred from 'seventh day' on 13 Aug (Euronews); the 24-day pair also holds the 30 Jul paroxysm"
  }
 ]

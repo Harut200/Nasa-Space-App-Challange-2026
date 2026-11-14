@@ -38,6 +38,21 @@
           }
         ]
       }
+    },
+    {
+      "id": "coherence_before",
+      "label": "Before the event: radar coherence (29 Jun\u201323 Jul)",
+      "dates": null,
+      "legend": {
+        "type": "ramp",
+        "unit": "coherence 0-1",
+        "min": 0,
+        "max": 1,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
     }
   ],
   "story": {
@@ -88,7 +103,25 @@
         "before": "2026-07-23",
         "after": "2026-08-16",
         "p2p_cm": null,
-        "control_p2p_cm": null
+        "control_p2p_cm": null,
+        "control_before": "2026-06-29",
+        "control_after": "2026-07-23"
+      }
+    ],
+    "before_after": [
+      {
+        "view": "asc",
+        "before": "coherence_before",
+        "after": "coherence",
+        "label": "Radar coherence",
+        "before_dates": [
+          "2026-06-29",
+          "2026-07-23"
+        ],
+        "after_dates": [
+          "2026-07-23",
+          "2026-08-16"
+        ]
       }
     ]
   },

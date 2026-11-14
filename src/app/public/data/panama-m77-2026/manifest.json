@@ -86,6 +86,48 @@
           "#ffffff"
         ]
       }
+    },
+    {
+      "id": "fringes_before",
+      "label": "Before the earthquake: fringes (12 days, 20 Sep\u20132 Oct) (noisy)",
+      "dates": null,
+      "legend": {
+        "type": "ramp",
+        "unit": "one colour cycle = 10 cm of line-of-sight change",
+        "min": 0,
+        "max": 10.0,
+        "colors": [
+          "#e2d9e2",
+          "#95b5c7",
+          "#6276ba",
+          "#592a8f",
+          "#2f1436",
+          "#741e4f",
+          "#b25652",
+          "#cca389",
+          "#e2d9e2"
+        ]
+      }
+    },
+    {
+      "id": "los_before_cm",
+      "label": "Before the earthquake: ground motion (cm)",
+      "dates": null,
+      "legend": {
+        "type": "diverging",
+        "unit": "cm",
+        "min": -60.0,
+        "max": 60.0,
+        "colors": [
+          "#67001f",
+          "#f7f7f7",
+          "#053061"
+        ],
+        "labels": [
+          "red: ground moved away from the satellite",
+          "blue: ground moved toward the satellite (sign convention not confirmed by the product guide)"
+        ]
+      }
     }
   ],
   "story": {
@@ -152,7 +194,9 @@
         "before": "2026-10-02",
         "after": "2026-10-14",
         "p2p_cm": 133,
-        "control_p2p_cm": 21
+        "control_p2p_cm": 21,
+        "control_before": "2026-09-20",
+        "control_after": "2026-10-02"
       },
       {
         "id": "asc",
@@ -161,7 +205,72 @@
         "before": "2026-10-05",
         "after": "2026-10-17",
         "p2p_cm": 85,
-        "control_p2p_cm": 15
+        "control_p2p_cm": 15,
+        "control_before": "2026-08-30",
+        "control_after": "2026-09-11"
+      },
+      {
+        "id": "asc76n",
+        "label": "ascending",
+        "track": 76,
+        "before": "2026-10-05",
+        "after": "2026-10-17",
+        "p2p_cm": null,
+        "control_p2p_cm": null,
+        "control_before": "2026-09-23",
+        "control_after": "2026-10-05"
+      },
+      {
+        "id": "desc141n",
+        "label": "descending",
+        "track": 141,
+        "before": "2026-09-27",
+        "after": "2026-10-09",
+        "p2p_cm": 100,
+        "control_p2p_cm": 40,
+        "control_before": "2026-09-15",
+        "control_after": "2026-09-27"
+      },
+      {
+        "id": "asc4w",
+        "label": "ascending",
+        "track": 4,
+        "before": "2026-09-30",
+        "after": "2026-10-12",
+        "p2p_cm": 69,
+        "control_p2p_cm": 14,
+        "control_before": "2026-09-18",
+        "control_after": "2026-09-30"
+      }
+    ],
+    "before_after": [
+      {
+        "view": "desc40",
+        "before": "fringes_before",
+        "after": "fringes",
+        "label": "Fringes",
+        "before_dates": [
+          "2026-09-20",
+          "2026-10-02"
+        ],
+        "after_dates": [
+          "2026-10-02",
+          "2026-10-14"
+        ]
+      },
+      {
+        "view": "desc40",
+        "before": "los_before_cm",
+        "after": "los_desc_cm",
+        "label": "Ground motion (cm)",
+        "before_dates": [
+          "2026-09-20",
+          "2026-10-02"
+        ],
+        "after_dates": [
+          "2026-10-02",
+          "2026-10-14"
+        ]
       }
     ]
   },

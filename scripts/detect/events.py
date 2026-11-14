@@ -452,6 +452,45 @@ def export_products(ev):
                "product": "NISAR_L2 GUNW (PROVISIONAL / urgent response)", "script": "scripts/detect/events.py"},
               open(os.path.join(app, "source.json"), "w"), indent=2)
     print("exported", app)
+    export_before(ev)
+
+
+def before_pairing(ev, views=None):
+    """Pairing block for the manifest: coherence_before vs coherence (primary view), or [] if the control is not a true before."""
+    views = views or ev.get("export_views", list(ev["views"]))
+    prim = ev.get("primary_view", views[0])
+    if not Q.control_is_before(ev, prim):
+        return []
+    v = ev["views"][prim]
+    c1, c2 = v["control"]["pair"].split("_"); e1, e2 = v["co"]["pair"].split("_")
+    return [{"view": prim, "before": "coherence_before", "after": "coherence", "label": "Radar coherence",
+             "before_dates": [Q._iso(c1), Q._iso(c2)], "after_dates": [Q._iso(e1), Q._iso(e2)]}]
+
+
+def export_before(ev):
+    """coherence_before: the CONTROL pair's coherence on the same grid with the same grey ramp and legend as `coherence`.
+    Nothing is exported if the control pair is flagged control_after_event or is not before the event. Safe to re-run."""
+    views = ev.get("export_views", list(ev["views"]))
+    prim = ev.get("primary_view", views[0])
+    app = app_dir(ev)
+    if not before_pairing(ev, views):
+        print(f"{ev['id']}: {prim}: no before layer (control pair is not before the event)")
+        Q.append_layers(app, [])
+        return
+    z = np.load(os.path.join(view_dir(ev, prim), "products_cm.npz"))
+    import matplotlib
+    cm = matplotlib.colormaps
+    g = to_grid(ev, z["coh_ctl"], z["x"], z["y"], int(z["epsg"]))
+    c = (cm["gray"](np.clip(np.nan_to_num(g), 0, 1)) * 255).astype(np.uint8)
+    c[..., 3] = np.where(np.isfinite(g), 255, 0)
+    Q.write_rgba_tifs({"app_bbox": ev.get("app_bbox", ev["window"]), "window": ev["window"]}, app, {"coherence_before": c})
+    d1, d2 = ev["views"][prim]["control"]["pair"].split("_")
+    L = {x["id"]: x for x in json.load(open(os.path.join(app, "layers.json")))}
+    import copy
+    tag = " (noisy)" if ev.get("before_noisy", {}).get(prim) else ""
+    Q.append_layers(app, [{"id": "coherence_before", "dated": False, "legend": copy.deepcopy(L["coherence"]["legend"]),
+                           "label": f"Before the event: radar coherence ({Q._short(d1)}\u2013{Q._short(d2)}){tag}"}])
+    print("before layer", ev["id"], prim, d1, d2)
 
 
 def write_area(ev):
@@ -523,10 +562,13 @@ def app_events():
             vs.append({"id": k, "label": v["label"], "track": v["track"], "before": iso(d1), "after": iso(d2),
                        "p2p_cm": vr.get("p2p_cm_0.5_99.5pct") if ev.get("export_deformation", True) else None,
                        "control_p2p_cm": vr.get("control_p2p_cm_0.5_99.5pct") if ev.get("export_deformation", True) else None,
+                       "control_before": iso(v["control"]["pair"].split("_")[0]), "control_after": iso(v["control"]["pair"].split("_")[1]),
+                       "control_is_before": bool(Q.control_is_before(ev, k)),
                        "exported": k in views})
         out.append({"id": ev["id"], "type": ev["type"].split(" (")[0].split(" +")[0], "title": ev["title"], "time": ev["time"],
                     "lat": ev["lat"], "lon": ev["lon"], "place": ev["place"], "summary_number": summary,
                     "radius_km": ev.get("radius_km"), "views": vs, "source_url": ev["source_url"],
+                    "before_after": before_pairing(ev, views),
                     **({"time_note": ev["time_note"]} if ev.get("time_note") else {})})
     json.dump(out, open(os.path.join(DOCS, "app_events.json"), "w"), indent=1, ensure_ascii=False)
     print("wrote app_events.json", [o["id"] for o in out])
@@ -547,6 +589,8 @@ def main(argv):
         run(get_event(argv[2]), argv[3] if len(argv) > 3 else None)
     elif cmd == "export":
         ev = get_event(argv[2]); export_products(ev); write_area(ev)
+    elif cmd == "before":  # only the before layer; existing layers and areas/ are not touched
+        export_before(get_event(argv[2]))
     elif cmd == "overview":
         overview()
     elif cmd == "app_events":

@@ -138,6 +138,14 @@ App layers: `data/processed/etna-valle-del-bove-2026/products/`, `areas/etna-val
 **May say:** about 2.5 km2 east of Etna's summit craters changed completely between 23 July and 16 August, seen from two look directions.
 **Do not claim:** lava area (steep slopes hide parts; thin flows may keep coherence), date or sequence of flows, volume, damage.
 
+## Before layer (15 Nov 2026)
+
+Each clear event also exports `coherence_before`, the control pair's coherence ("Before the event: radar coherence (d1-d2)"), on the same grid with the same grey ramp and legend as `coherence`
+(`events.export_before`; `python -m scripts.detect.events before EVENT` adds it without touching the other layers). It is exported only if the control pair is not flagged `control_after_event` and ends before the event
+(kilauea-ep54 would not get one). What it shows: Langtang and Etna have an intact, textured surface in the control that the event pair loses along the outline of the collapse and the lava field; at Kilauea the crater floor
+is already partly dark in the control (28 Sep-10 Oct; cause not examined) and the event pair adds the larger dark patch. Nothing needed a "noisy" label. `app_events.json` carries the pairing
+(`before_after`) and each view's `control_before` / `control_after`; figures: `docs/eda/events/<id>/before_after.png` (Kilauea, Langtang).
+
 ## Marginal and not detected
 
 * **Brits tailings failure, 13 Aug (marginal).** Failure point published as 25.652 S 27.852 E ("appears to have been", Landslide Blog); Daily

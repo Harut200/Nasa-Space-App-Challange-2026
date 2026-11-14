@@ -652,6 +652,131 @@ def export_products(ev):
                                  "control_pair": ev["views"][k]["control"]["pair"]} for k in views},
                    "product": "NISAR_L2 GUNW (PROVISIONAL, some urgent response)", "script": "scripts/detect/quake.py"}, f, indent=2)
     print("exported", app)
+    export_before(ev)
+
+
+# ============================================================ BEFORE layers (control pair, same processing as the event pair)
+MON3 = ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+
+
+def _iso(a):
+    return f"{a[:4]}-{a[4:6]}-{a[6:]}"
+
+
+def _short(a):
+    return f"{int(a[6:])} {MON3[int(a[4:6])]}"
+
+
+def _days(d1, d2):
+    import datetime as dt
+    f = lambda a: dt.date(int(a[:4]), int(a[4:6]), int(a[6:]))
+    return (f(d2) - f(d1)).days
+
+
+def control_is_before(ev, view):
+    """True only if the control pair is a real BEFORE: not flagged control_after_event, ends no later than the event pair
+    starts and no later than the event date."""
+    v = ev["views"][view]
+    if v.get("control_after_event") or ev.get("control_after_event"):
+        return False
+    c1, c2 = v["control"]["pair"].split("_")
+    e1, _ = v["co"]["pair"].split("_")
+    return c2 <= e1 and c2 <= ev["time"][:10].replace("-", "")
+
+
+def before_pairing(ev, views=None):
+    """The machine-readable compare block for the primary view (no arrays needed): (before_after list, skipped {view: reason}).
+    `after` ids are the event-pair layer ids as export_products names them."""
+    views = views or ev.get("export_views", list(ev["views"]))
+    prim = ev.get("primary_view", views[0])
+    v = ev["views"][prim]
+    skipped = {k: "control pair is not before the event" for k in views if not control_is_before(ev, k)}
+    if prim in skipped:
+        return [], skipped
+    c1, c2 = v["control"]["pair"].split("_"); e1, e2 = v["co"]["pair"].split("_")
+    los = "los_cm" if len(views) == 1 else "los_%s_cm" % ("asc" if v["direction"] == "A" else "desc")
+    bd, ad = [_iso(c1), _iso(c2)], [_iso(e1), _iso(e2)]
+    return [{"view": prim, "before": "fringes_before", "after": "fringes", "label": "Fringes", "before_dates": bd, "after_dates": ad},
+            {"view": prim, "before": "los_before_cm", "after": los, "label": "Ground motion (cm)", "before_dates": bd, "after_dates": ad}], skipped
+
+
+def before_layers(ev, G, lim, fcm):
+    """RGBA arrays for the before layers from the control map G on the app grid, built exactly like the event-pair ones."""
+    import matplotlib
+    cm = matplotlib.colormaps
+
+    def rgba(v, cmap, vmin, vmax, finite):
+        t = np.clip((v - vmin) / (vmax - vmin), 0, 1)
+        c = (cm[cmap](np.nan_to_num(t)) * 255).astype(np.uint8)
+        c[..., 3] = np.where(finite, 255, 0)
+        return c
+    fin = np.isfinite(G)
+    return {"los_before_cm": rgba(G, "RdBu", -lim, lim, fin),
+            "fringes_before": rgba(rewrap(np.nan_to_num(G), fcm), "twilight", 0, 1, fin)}
+
+
+def append_layers(app, new):
+    """Add/replace the *_before entries at the end of layers.json; every other entry is left byte-for-byte as it was."""
+    p = os.path.join(app, "layers.json")
+    L = [x for x in json.load(open(p)) if not x["id"].endswith("_before") and not x["id"].endswith("_before_cm")]
+    L += new
+    with open(p, "w") as f:
+        json.dump(L, f, indent=2)
+
+
+def write_rgba_tifs(ev, app, layers):
+    import rasterio
+    from rasterio.transform import from_bounds
+    (W, S, E, N), w, h = _grid(ev)
+    tr = from_bounds(W, S, E, N, w, h)
+    for name, arr in layers.items():
+        with rasterio.open(os.path.join(app, name + ".tif"), "w", driver="GTiff", height=h, width=w, count=4,
+                           dtype="uint8", crs="EPSG:4326", transform=tr, compress="deflate",
+                           photometric="RGB", alpha="YES") as f:
+            f.write(np.moveaxis(arr, -1, 0))
+        print("wrote", name, os.path.getsize(os.path.join(app, name + ".tif")) // 1024, "KB")
+
+
+def before_noise(ev, view, lim, fcm):
+    """(fringes noisy, ground motion noisy): the control pair's own far-field std (results.json, same processing) is large against
+    the colour scale: > 25% of one fringe cycle, > 15% of the +-lim scale. Honest label, nothing is hidden."""
+    try:
+        r = json.load(open(os.path.join(DOCS, "results.json")))[ev["id"]]["views"][view]["variants"]
+        std = next(v for k, v in r.items() if k.startswith("main"))["control_far_std_cm"]
+    except Exception:
+        return False, False
+    return std > 0.25 * fcm, std > 0.15 * lim
+
+
+def export_before(ev):
+    """fringes_before + los_before_cm for the primary view from the CONTROL pair (same masks, ramp removal, grid, colour scale,
+    legend as fringes / los..._cm). Nothing is exported if the control pair is not a true before. Safe on frozen events."""
+    views = ev.get("export_views", list(ev["views"]))
+    prim = ev.get("primary_view", views[0])
+    app = app_dir(ev)
+    ba, skipped = before_pairing(ev, views)
+    for k, why in skipped.items():
+        print(f"{ev['id']}: {k}: no before layer ({why})")
+    if not ba:
+        json.dump({"before_after": [], "skipped": skipped}, open(os.path.join(app, "before_after.json"), "w"), indent=1)
+        append_layers(app, [])
+        return
+    lim, fcm = float(ev.get("los_lim_cm", 40)), float(ev.get("fringe_cm", 10))
+    z = np.load(os.path.join(view_dir(ev, prim), "products_cm.npz"))
+    G = to_app_grid(ev, z["ctl_cm"], z["ctl_x"], z["ctl_y"], int(z["epsg"]))
+    arrs = before_layers(ev, G, lim, fcm)
+    write_rgba_tifs(ev, app, arrs)
+    L = {x["id"]: x for x in json.load(open(os.path.join(app, "layers.json")))}
+    d1, d2 = ev["views"][prim]["control"]["pair"].split("_")
+    span = f"{_days(d1, d2)} days, {_short(d1)}–{_short(d2)}"
+    nf, nl = before_noise(ev, prim, lim, fcm)
+    import copy
+    fr, los = copy.deepcopy(L["fringes"]), copy.deepcopy(L[ba[1]["after"]])
+    new = [{"id": "fringes_before", "label": f"Before the earthquake: fringes ({span}){' (noisy)' if nf else ''}", "dated": False, "legend": fr["legend"]},
+           {"id": "los_before_cm", "label": f"Before the earthquake: ground motion (cm){' (noisy)' if nl else ''}", "dated": False, "legend": los["legend"]}]
+    append_layers(app, new)
+    json.dump({"before_after": ba, "skipped": skipped}, open(os.path.join(app, "before_after.json"), "w"), indent=1)
+    print("before layers", ev["id"], prim, span)
 
 
 # ============================================================ app area + story (facts: USGS + our measured numbers only)
@@ -766,6 +891,8 @@ def main(argv):
         ev = get_event(argv[2])
         export_products(ev)
         write_area(ev, json.load(open(os.path.join(DOCS, "results.json")))[ev["id"]])
+    elif cmd == "before":  # only the before layers (also for frozen events); existing layers are not touched
+        export_before(get_event(argv[2]))
     elif cmd == "overview":
         overview()
     else:

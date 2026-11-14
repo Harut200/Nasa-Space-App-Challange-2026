@@ -1,4 +1,4 @@
-<p align="center"><img src="assets/logos/team/lockup-constilation-dark-tile.png" alt="Constellation" width="420"></p>
+<p align="center"><img src="assets/logos/team/constellation-lockup-dark-tile.png" alt="Constellation" width="420"></p>
 
 # Dancing with the SARs
 
