@@ -25,7 +25,7 @@ def search(area):
         "dataMaturity": "PROVISIONAL",
         "relativeOrbit": area["track"],
         "frame": area["frame"],
-        "flightDirection": area["direction"],
+        "flightDirection": area["direction"].upper(),
         "intersectsWith": f"POLYGON(({w} {s},{e} {s},{e} {n},{w} {n},{w} {s}))",
         "start": "2026-06-17T00:00:00Z",
         "end": "2026-10-24T00:00:00Z",

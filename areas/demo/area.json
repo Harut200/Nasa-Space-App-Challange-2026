@@ -1,0 +1,14 @@
+{
+  "id": "demo",
+  "name": "Demo (synthetic)",
+  "bbox": [
+    105.0,
+    12.6642,
+    105.4613,
+    13.1159
+  ],
+  "track": null,
+  "frame": null,
+  "direction": null,
+  "pixel_m": 100
+}
