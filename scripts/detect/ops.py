@@ -451,8 +451,11 @@ def nodata_margin(x, valid, floor):
 
 
 # ------------------------------- pipeline -----------------------------------
-def run_pipeline(x, valid, source, kn=None, dev=None, normalise=None):
-    """Full chain. x [T,2,H,W] linear-like (brightness or linear power). Returns dict of tensors."""
+def run_pipeline(x, valid, source, kn=None, dev=None, normalise=None, water_ok=None):
+    """Full chain. x [T,2,H,W] linear-like (brightness or linear power). Returns dict of tensors.
+
+    water_ok [H,W] bool, optional: where open water is physically possible (terrain mask).
+    """
     kn = dict(kn or KNOBS[source])
     dev = dev or x.device
     x, valid = clean_input(x.to(dev), valid.to(dev))
@@ -472,6 +475,8 @@ def run_pipeline(x, valid, source, kn=None, dev=None, normalise=None):
         med_hh = torch.where(valid, L[:, 0], torch.full_like(L[:, 0], float("nan"))).nanmedian(0).values
         L, gains, offs = normalise_dates(L, valid, kn["stable_frac"], mode=kn["norm_mode"], exclude=~(med_hh >= kn["water_hh_weak"]))
     water = water_masks(L, valid, kn)
+    if water_ok is not None:
+        water = water & water_ok.to(water.device)
     prior = permanent_water_prior(L, valid, kn)
     fv = flooded_veg_masks(L, valid, water, prior, kn)
     cdate, cstep, cstep_all = cusum_changepoint(L, valid, kn["change_step_min"], kn["persist_frac"],

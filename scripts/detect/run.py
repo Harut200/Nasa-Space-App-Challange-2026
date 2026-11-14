@@ -167,7 +167,10 @@ def run(area, source="auto", dev=None):
         source = "gamma0" if any((ROOT / "data/processed" / area / "gamma0/hh").glob("*.tif")) else "preview"
     dates, x, valid_in, grid, km2 = load_gamma0(area) if source == "gamma0" else load_preview(area)
     dev = dev or device()
-    out = ops.run_pipeline(x, valid_in, source, dev=dev)
+    from scripts.detect.terrain import cached_water_possible
+    water_ok = cached_water_possible(area, tuple(x.shape[-2:]))
+    print("  terrain mask:", "applied" if water_ok is not None else "not built for this area")
+    out = ops.run_pipeline(x, valid_in, source, dev=dev, water_ok=water_ok)
     o = {k: (v.cpu() if torch.is_tensor(v) else v) for k, v in out.items()}
     L, valid, T = o["L"], o["valid"], len(dates)
     H, W = grid.h, grid.w
