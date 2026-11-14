@@ -1,145 +1,103 @@
 # Project Plan — "Dancing with the SARs"
 
-NASA Space Apps Challenge 2026 · hackathon window **14–15 November 2026** (two days; judging starts 16 November).
+NASA Space Apps Challenge 2026 · **deadline Sunday 15 November, 23:59 local time** · updated Saturday 14 November, 10:45 (Yerevan).
 
 **What we ship:** a public, open-source web app where anyone can scrub through a season of NISAR L-band radar images and watch one piece of Earth's surface change, with the physics explained in plain language next to the map.
 
-Facts in this plan were checked against the ASF NISAR Data User Guide on 14 November 2026. Items we could not check are marked **(verify)**.
+**Step-by-step work plan, split into three branches (frontend, backend, detection) plus pitch and repository:** [plan/](plan/README.md). Where the two differ, `plan/` is newer.
+
+This file holds what `plan/` does not: the decisions still open, and the facts verified on 14 November that fill the blanks `plan/` left. Background material:
+
+- [docs/research/data-sources.md](docs/research/data-sources.md) — coverage, search queries, file layout, access code
+- [docs/research/science-brief.md](docs/research/science-brief.md) — per place: what changes, what radar shows, 2026 figures, sources
+- [docs/research/submission-rules.md](docs/research/submission-rules.md) — deadline, demo format, required fields, judging
 
 ---
 
-## 1. Three decisions that shape everything
+## 1. Who owns which branch
 
-1. **Seasonal rhythms, not news events.** We pick places where change is guaranteed every year between June and October (flood pulse, dry-season forest clearing, crop cycle). No dependence on a disaster happening to fall inside the data window.
-2. **One consistent data stack.** NISAR data comes in three calibration tiers that should not be mixed (see section 3). We use the PROVISIONAL tier, 17 June – 23 October 2026: about ten passes per track at the 12-day repeat, enough for a real time series.
-3. **No backend, no tile server.** Python turns each radar pass into one small image per study area. The app is static files on GitHub Pages. Nothing can go down during judging.
-
-## 2. Study areas
-
-Finish the first one end to end before starting the second.
-
-| Order | Area | What dances | Why radar sees it |
-|---|---|---|---|
-| 1 (must) | **Tonle Sap, Cambodia** — or Bangladesh haor wetlands as substitute | Lake and flooded forest expand several-fold from June to October | Open water is smooth and returns almost nothing (dark). Flooded forest is the opposite: L-band passes through the canopy and bounces between water and trunks (very bright in HH) |
-| 2 (should) | **Amazon deforestation frontier** (Rondônia or southern Pará) | New clearings appear through the July–October dry season | HV measures scattering from branches and trunks. Remove the forest and HV drops sharply |
-| 3 (should, short) | **Ararat Valley and Lake Sevan, Armenia** | Fields green up and are harvested; Sevan shoreline shifts | Crop structure and soil moisture change HV and HH field by field. Our home ground — the personal story the challenge asks for |
-| Stretch | Ground deformation from a GUNW interferogram | Subsidence or an earthquake | Phase difference between two passes measures centimetre-scale motion |
-
-**Coverage gate (first hour):** an area stays only if ASF Vertex shows at least six PROVISIONAL GCOV passes on the same track and frame, in the same acquisition mode. If area 1 fails the gate, swap to its substitute; do not spend more than 30 minutes deciding.
-
-## 3. Data — what exists today
-
-Full notes and links: [docs/research/data-sources.md](docs/research/data-sources.md).
-
-| Tier | Acquired | Use for us |
+| Branch in `plan/` | Owner | Plan file |
 |---|---|---|
-| VALIDATED | from 21 Oct 2026 (released 6 Nov) | Only two or three passes so far. Skip, or use as a final "latest" frame with a caveat |
-| **PROVISIONAL** | **17 Jun – 23 Oct 2026** | **Our stack.** Calibrated, validated at limited sites |
-| BETA | 17 Oct 2025 – 20 Jan 2026, up to 8 passes per track | Not calibrated. Avoid; never difference against other tiers |
+| `frontend` — the web app | Arameh | [plan/01-frontend.md](plan/01-frontend.md) |
+| `backend` — NISAR data in, web images out | Harutyun | [plan/02-backend.md](plan/02-backend.md) |
+| `detection` — radar numbers to pictures, findings and story | Abel | [plan/03-detection.md](plan/03-detection.md) |
 
-- **Hole in the record:** no data at all from 27 July to 10 August 2026 (instrument gap). The timeline in the app must show this as a gap, not interpolate across it.
-- **Product:** Level-2 **GCOV** — terrain-corrected backscatter, already on a map grid, HDF5 format, 10/20/80 m pixel spacing depending on mode. Polarizations typically HH and HV over land.
-- **Optional extras:** GUNW (80 m unwrapped interferogram) for the stretch goal; SME2 soil moisture (200 m, provisional) as a context layer for Armenia.
-- **Access:** free NASA Earthdata Login, then the `asf_search` Python package or ASF Vertex. Every team member creates the login in the first ten minutes.
-- **Declared fallback:** if NISAR passes are too few somewhere, add Sentinel-1 (C-band) and present the L-band versus C-band difference as a finding. The challenge explicitly invites other sensors.
+Write these names into the Owner column of [plan/README.md](plan/README.md). Note that `detection` includes Python (filtering, colouring, time series) as well as the story text; if Abel wants to stay on science and writing, Harutyun takes `scripts/detect/` and Abel keeps `areas/*/story.json`, the sanity checks and the deck.
 
-## 4. What the app does
+## 2. Decisions still open
 
-| # | Feature | Level |
+**Order of places.** `plan/` runs Tonle Sap → Rondônia → Armenia. All three passed the coverage gate (section 3), so the order is now a choice, not a constraint.
+
+Suggested change: **Tonle Sap → Armenia → Rondônia.** Keep Tonle Sap first: its files are a quarter the size (1.9 GB against 7.5 GB) and its signal is the strongest, which protects the hour-10 checkpoint. Move Armenia ahead of Rondônia: it is the story only this team can tell, one satellite frame covers both the Ararat Valley and Lake Sevan, and it fits the Local Impact and Best Storytelling awards. Because Armenia's files are large, start fetching them in the background as soon as the pipeline works on Tonle Sap.
+
+**Event.** No 2026 local event in Armenia was found. If that is right, the team is in the Universal Event: deadline in the team owner's time zone, at least two members, all three joined to the same team on the site. Confirm on the Space Apps locations page.
+
+**Repository name typo and project name** — as listed in [plan/README.md](plan/README.md), hour 0.
+
+## 3. Coverage gate — passed
+
+Checked against the ASF catalogue on 14 November. Every place has ten calibrated (PROVISIONAL) passes on one track and frame. Step B3 in [plan/02-backend.md](plan/02-backend.md) can be skipped; fill `area.json` from this table.
+
+| Area id | Track | Frame | Direction | Dates (2026) | Channels | File size | Box inside frame |
+|---|---|---|---|---|---|---|---|
+| `tonle-sap` | 83 | 8 | ascending | 06-19, 07-01, 07-13, 07-25, 08-18, 08-30, 09-11, 09-23, 10-05, 10-17 | HH+HV | 1.9 GB | Yes — the box in `plan/00-contracts.md` fits |
+| `ararat` (valley and Sevan) | 85 | 22 | ascending | 06-20, 07-02, 07-14, 07-26, 08-19, 08-31, 09-12, 09-24, 10-06, 10-18 | HH+HV | 7.5 GB | Yes — valley (44.0–44.8°E, 39.8–40.3°N) and Sevan (44.9–45.7°E, 40.1–40.7°N) both fit |
+| `rondonia` | 60 | 173 | ascending | ten dates 06-18 … 10-16 | HH+HV except 09-22 | 1.9 GB | Box not chosen. Frame spans about 63.2–60.4°W, 10.4–7.8°S |
+
+Things the search showed that `plan/` could not know:
+
+- **Tonle Sap has two files per date** on this track and frame: "Full" coverage and "Partial" coverage in a different mode. Keep only Full (`frameCoverage` field).
+- **Field names in search results** (B3 marks them unconfirmed): `path` is the track, `frame`, `flightDirection`, `startTime`, `wkt` is the footprint; under `nisar`: `mainBandPolarization`, `rangeBandwidth`, `frameCoverage`, `crid`. Search filters: `relativeOrbit`, `frame`, `flightDirection`, `dataMaturity`.
+- Add `productionConfiguration=["PR"]` to the search; without it urgent-response duplicates can appear.
+- Sevan in two areas or one: the valley and the lake are about 150 km apart corner to corner. Two area ids from the same files (`ararat`, `sevan`) keep each image within the 3,000-pixel limit at a useful resolution.
+- Other tracks tested for Armenia and Rondônia do not contain the boxes fully. Stay on the ones above.
+
+## 4. Other blanks in `plan/`, now answered
+
+| Where | Question | Answer |
 |---|---|---|
-| 1 | Map with study-area buttons that fly to each place | Must |
-| 2 | Timeline scrubber plus play button stepping through the passes, with the July–August gap drawn | Must |
-| 3 | Before/after swipe between any two dates | Must |
-| 4 | Change layer: what got brighter, what got darker between two dates | Must |
-| 5 | Story panel per area: what you see → what is physically happening → why L-band shows it → why it matters to people | Must |
-| 6 | HH / HV / colour-composite toggle | Should |
-| 7 | Chart of average backscatter over time for a few named spots (lake, forest, field) | Should |
-| 8 | Optical satellite basemap toggle for orientation | Should |
-| 9 | Link that restores area, date and layer | Could |
+| plan/04 §1 | Deadline | Sunday 15 November, 23:59, local time of the event (Universal Event: team owner's time zone). Resubmission allowed; last one counts |
+| plan/04 §1 | Demo format | Video of 30 seconds or less, or deck of 7 slides or fewer. Public link, no login. Over the limit = no global judging |
+| plan/04 §1 | Language | English; other-language video needs English subtitles |
+| plan/04 §1 | Fields | Name, summary, demo link, final project link, detailed description, AI use, NASA data, partner data and references. Length limits not found |
+| plan/04 §1 | AI rules | Allowed as an aid, not to come up with the solution idea. Must be disclosed; AI-made images and video watermarked; no NASA logos in AI-made content |
+| plan/04 | Licence | Open-source licence file required in the repository; otherwise NASA applies Apache 2.0. Every source cited |
+| plan/02 B1 | Python 3.14 | All listed libraries have ready-made builds for macOS on Apple silicon. Do not install the `GDAL` package; `rasterio` covers it |
+| plan/02 B4 | File layout | Matches what B4 expects. Projection is an EPSG code; values are linear power with NaN for no data; `yCoordinates` runs north to south. Meaning of `mask` values still unknown |
+| plan/02 B4 | Login method | `~/.netrc` works; a bearer token from the Earthdata profile page also works |
+| plan/02 B5 | If streaming is slow | Besides downloading: NASA Harmony returns a cut-out as GeoTIFF (needs login, untested) |
+| plan/03 D12 | Bad scenes | ASF's own example dropped two faulty provisional scenes. Look at every date |
 
-Not building: user-drawn areas, live processing, accounts, global coverage, our own interferometry.
+These came through a mirror of the official site and are paraphrase. One person should read the submission guide in a browser and confirm; details in [submission-rules.md](docs/research/submission-rules.md).
 
-## 5. Pipeline (Python, run once per area)
+**Shortcut for the hour-1 and hour-3 checkpoints.** Every pass has a ready-made preview picture that downloads with no login (`browse` field in the search results; about 4 MB, already in latitude and longitude). Real radar imagery can be in the app before any file has been opened. Not calibrated — pictures only, no charts or change maps.
 
-```
-scripts/
-  01_search.py      # asf_search → list of GCOV passes for one area; writes manifest draft
-  02_extract.py     # open each HDF5, cut the area, HH + HV → dB GeoTIFF on a common grid
-  03_products.py    # speckle filter, log-ratio change, 3-date RGB composite, HH/HV composite
-  04_export.py      # reproject to Web Mercator, colour, write WebP + bounds per date
-  05_timeseries.py  # mean dB per named polygon per date → JSON
-```
+## 5. Clock times for the checkpoints
 
-- Layout inside a GCOV file is expected to be `/science/LSAR/GCOV/grids/frequencyA/HHHH` and `.../HVHV`, with x/y coordinates and a projection dataset alongside **(verify on the first real file with `h5py` before writing anything else)**.
-- Prefer cutting the area out while streaming (xarray + fsspec over HTTPS) so we never store whole granules. If streaming is slow from our network, download two files, time it, then decide.
-- Backscatter display: convert power to decibels with `10·log10`, show roughly −25 to −5 dB in grey.
-- Change between two dates: difference of the dB images. Blue for darker (new water, cleared forest), red for brighter (flooded vegetation, growth), transparent near zero. Smooth before differencing — speckle otherwise fills the map with false change.
-- Three-date composite: earliest pass in red, middle in green, latest in blue. Grey means nothing changed; colour tells you when it changed.
-- Output is one image per date per layer (about 2,000–3,000 pixels wide), placed on the map by its four corners. Must be exported in Web Mercator or it will not line up.
-- Libraries: `asf_search`, `h5py`, `xarray`, `rioxarray`, `numpy`, `scipy`, `Pillow`. Work in `notebooks/` until a step works once, then move it to `scripts/`.
+`plan/` counts hours from the start. With a start at 10:45 Saturday and the deadline confirmed:
 
-**Contract between pipeline and app** — agree in the first hour, then both sides work independently:
-
-```
-src/app/public/data/{area}/manifest.json
-  { name, bounds, dates: [...], gaps: [[from, to]], layers: ["hh","hv","rgb","change"],
-    story: {...}, spots: [{ id, label, lngLat }] }
-src/app/public/data/{area}/{layer}/{YYYY-MM-DD}.webp
-src/app/public/data/{area}/timeseries.json
-```
-
-## 6. App stack
-
-Vite + React + MapLibre GL JS in `src/app/`. Each date is an image source; animation is cross-fading opacity between preloaded images. Swipe uses two synced maps. One small chart library. Dark interface so the radar images carry the page. Deploy by GitHub Actions to GitHub Pages on every push to `main`.
-
-## 7. Schedule
-
-Hours are from the moment hacking starts. The submission deadline is normally end of day Sunday local time **(verify with the local event lead and work back from it)**.
-
-**Day 1**
-
-| Hours | Data person(s) | App person(s) | Story person |
-|---|---|---|---|
-| 0–1 | Earthdata logins. Coverage gate for area 1 in Vertex | Vite app with a map, deployed live to Pages | Read NISAR white papers and StoryMaps for area 1 |
-| 1–3 | Open one GCOV file, confirm layout, produce one dB image for area 1 | Load a manifest with placeholder images; fly-to; one overlay | Draft story for area 1 |
-| 3–7 | Full date stack for area 1, all passes on a common grid | Timeline scrubber, play, gap marker | Pick named spots for the chart; find optical context |
-| 7–10 | Change layer and RGB composite for area 1 | Swipe compare; layer toggle | Story text into manifest |
-| **10** | **Checkpoint: area 1 works on the live URL with real data. If not, everyone fixes this before anything else.** | | |
-| 10–12 | Coverage gate and first images for area 2 | Story panel layout, legend, colour scales | Draft story for area 2 |
-
-**Day 2**
-
-| Hours | Data | App | Story |
-|---|---|---|---|
-| 0–3 | Area 2 complete; time-series JSON for both | Chart; mobile and projector check | Armenia story, personal context |
-| 3–5 | Area 3 (small extent, fewer layers is fine) | Polish, loading states, credits footer | Slides or video script |
-| **5** | **Feature freeze. Nothing new after this.** | | |
-| 5–8 | README, licence, data credits, how to reproduce | Bug fixes only; record backup screen capture | Record demo, finish slides, write project page |
-| 8–9 | Submit with an hour to spare. Whole team reads the project page once before sending. | | |
-
-Stretch work (deformation layer, shareable links) happens only if the hour-10 checkpoint on day 1 was met early.
-
-## 8. Risks
-
-| Risk | What we do |
+| Checkpoint in `plan/` | Clock time (Yerevan) |
 |---|---|
-| Too few same-track passes over an area | Coverage gate in hour one; named substitute; Sentinel-1 as declared supplement |
-| GCOV files are large or slow to stream | Time one file first. Cut to the study area immediately. Keep extents near 100 km |
-| File layout differs from what we expect | First task after login is opening one file and printing its tree |
-| Passes in different modes or resolutions | Filter the search to one mode; resample everything to one grid in step 02 |
-| Speckle makes the change layer noisy | Filter before differencing; mask small differences |
-| Venue network fails during demo | App also runs from a laptop; backup recording made at feature freeze |
-| Scope creep | The Must / Should / Could column decides. Area 1 complete beats three areas half done |
+| Hour 0 — decisions, logins, owners | Sat 10:45–11:30 |
+| Hour 1 — demo area on `main`, empty map live | Sat 12:30 |
+| Hour 3 — one real date on the live URL | Sat 14:30 |
+| Hour 7 — all dates of area 1 | Sat 18:30 |
+| **Hour 10 — area 1 complete** | **Sat 21:30** |
+| Hour 12 — area 2 started | Sat 23:30 |
+| Day 2, hour 0 | Sun 09:00 |
+| Day 2, hour 3 — area 2 complete | Sun 12:00 |
+| **Day 2, hour 5 — feature freeze** | **Sun 14:00** |
+| Submit | Sun 21:00, leaving three hours in reserve |
 
-## 9. Submission checklist
+## 6. Science notes that change the stories
 
-- [ ] Read the official guide first thing: https://www.spaceappschallenge.org/resources/project-submission-guide/ — exact demo format, length limits and deadline **(verify; we could not load it while planning)**
-- [ ] Team registered, all members joined the team and this challenge (team size limit reported as six — verify)
-- [ ] Project page: summary, live demo link, public repository link
-- [ ] Demo (slides or short video in the format the guide requires)
-- [ ] List of NASA data and resources used; partner-agency data listed separately with its terms
-- [ ] Any use of AI tools disclosed if the guide asks for it **(verify)**
-- [ ] `LICENSE` (MIT) in the repository; README with screenshots and steps to reproduce
-- [ ] Credits in the app footer: NASA/JPL-Caltech, ISRO, ASF DAAC
+From [science-brief.md](docs/research/science-brief.md); single-source items are marked there.
 
-Judged on impact, creativity, validity, relevance and presentation. Our answers: floods, forests and food are things people depend on; the "dance" timeline is the creative hook; calibrated data from a single tier with the gap shown honestly is the validity; NISAR is the challenge's own dataset; the live URL and story panel are the presentation.
+- **Armenia 2026 was a wet year.** Spring rain about 131 % of normal; Sevan rose 59 cm from January to mid-July, reported as the second-highest level on record. The story is a lake that rose and the valley it waters, not drought. Sevan readings for August–October still need finding.
+- **Radar cannot see algal blooms**, and a shoreline shift from a half-metre rise may be smaller than a pixel. Showing what radar does not see is part of the answer the challenge asks for.
+- **Tonle Sap 2026**: flood reported late and weak in August, rising in October. Evidence is mixed; get gauge readings before describing it.
+- **Amazon 2026**: clearing alerts at the lowest level in a decade while fires rose sharply in September and October.
+
+## 7. AI use
+
+Space Apps allows AI tools as an aid and requires disclosure. Research for this file and the three documents under `docs/research/` was gathered with Claude. The choice of concept and places is the team's. Record AI assistance as the work goes, so the disclosure on the project page is accurate.
