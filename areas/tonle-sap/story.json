@@ -1,0 +1,64 @@
+{
+  "story": {
+    "see": "Open water barely grew from mid-June to late July, then spread steadily. The biggest jump came between 11 and 23 September. The flood moved like a wave: the river plain towards Phnom Penh went under first, the ring around the lake followed, the far north-west last. The flood arrived late in our images.",
+    "physics": "Calm water is a mirror for radar: it bounces the signal away, so it looks dark. Trees standing in water do the opposite. The signal bounces off the water, then the trunk, and straight back, so flooded forest glows. The lake grows from about 2,500 km² to 10,000–16,000 km² (Hydrology and Earth System Sciences, 2022).",
+    "lband": "NISAR's L-band radar has a 24 cm wavelength, long enough to slip between leaves and reach the water below. Shorter-wave radar stops at the treetops and misses flooding under trees. Our images show the forest ring on the west and north-west shore peaking around the end of August, then turning to open water as it deepens.",
+    "people": "More than a million people depend on this lake. Fish and other aquatic foods average about 63 kg per person each year, second only to rice (FAO). A smaller flood means less flooded forest, the nursery of the fishery. No radar passes exist from 27 July to 10 August, so the flood's first days are hidden."
+  },
+  "spots": [
+    {
+      "id": "lake-core",
+      "label": "Open lake (stays water)",
+      "lngLat": [
+        104.1,
+        12.8
+      ],
+      "radius_m": 1500
+    },
+    {
+      "id": "prek-toal",
+      "label": "Prek Toal flooded forest",
+      "lngLat": [
+        103.7,
+        13.1
+      ],
+      "radius_m": 1200
+    },
+    {
+      "id": "chong-kneas",
+      "label": "Chong Kneas floating village",
+      "lngLat": [
+        103.84,
+        13.27
+      ],
+      "radius_m": 1000
+    },
+    {
+      "id": "southeast-corridor",
+      "label": "South-east flood corridor",
+      "lngLat": [
+        104.85,
+        12.0
+      ],
+      "radius_m": 1200
+    },
+    {
+      "id": "kampong-luong",
+      "label": "Kampong Luong shore",
+      "lngLat": [
+        104.2,
+        12.25
+      ],
+      "radius_m": 1000
+    },
+    {
+      "id": "upland-forest",
+      "label": "Upland forest (dry reference)",
+      "lngLat": [
+        104.01,
+        12.04
+      ],
+      "radius_m": 1000
+    }
+  ]
+}

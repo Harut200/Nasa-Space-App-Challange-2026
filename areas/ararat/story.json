@@ -1,0 +1,15 @@
+{
+  "story": {
+    "see": "At this preview detail almost nothing changes in the Ararat Valley. Fields here are smaller than one pixel, about 180 m wide, so their changes blur together. That is a finding, not a failure: this is where full-resolution, calibrated NISAR data, planned next, is needed.",
+    "physics": "Radar brightness follows plant material and water. At full resolution a wheat field should turn darker after the June–July harvest, irrigated plots should flicker brighter after watering, and fish ponds should show as dark rectangles with bright banks. These are expectations we have not yet tested.",
+    "lband": "NISAR's L-band radar has a 24 cm wavelength and passes through cloud, so a field can be watched every 12 days all season. Orchards and vineyards should stay steady, which makes them useful reference points. Our spots mark where to look once the sharper data arrives.",
+    "people": "Pressure in the valley's artesian aquifer has fallen by about two-thirds since the early 1980s (International Association of Hydrogeologists). More than 200 fish farms draw on it (Yale E360). Spotting dried-up ponds and watering patterns from space could help guard a shrinking water source."
+  },
+  "spots": [
+    {"id": "masis-fields", "label": "Masis fields", "lngLat": [44.43, 40.07], "radius_m": 1200},
+    {"id": "fish-ponds", "label": "Ararat-Vedi fish ponds", "lngLat": [44.6, 39.9], "radius_m": 1200},
+    {"id": "vedi-vineyards", "label": "Vedi vineyards", "lngLat": [44.73, 39.91], "radius_m": 1000},
+    {"id": "aknalich", "label": "Aknalich lake area", "lngLat": [44.18, 40.07], "radius_m": 1000},
+    {"id": "yerevan", "label": "Yerevan (stable city)", "lngLat": [44.51, 40.18], "radius_m": 1500}
+  ]
+}
