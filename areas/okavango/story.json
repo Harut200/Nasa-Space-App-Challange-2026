@@ -1,8 +1,8 @@
 {
   "story": {
-    "see": "In late June the delta's channels and floodplains are dark grey. From July the upper delta in the north-west starts to brighten, and the brightening moves down the fans to the east and south through August and September: the 'when' layer runs purple to green across the delta. Our water layer finds only scattered pools.",
+    "see": "In late June the delta's channels and floodplains are dark grey. From July the upper delta in the north-west starts to brighten, and the brightening moves down the fans to the east and south through August and September: the 'when' layer runs purple to green across the delta. Our water layer finds no open water here.",
     "physics": "Summer rain in the Angolan highlands feeds the Okavango River, which spreads out into the Kalahari instead of reaching the sea. The flood takes months to travel and spread through the delta, then the water sinks in and evaporates. Floodplains dry out and grasses grow as the water pulls back.",
-    "lband": "Shallow water among grasses and reeds is grey, not black, to L-band radar, so the detector rarely calls it open water. As water leaves a floodplain, the wet soil and plants scatter more signal back and HH brightens. The papyrus-lined channels stay bright all season. Uncalibrated previews cannot fully separate drying from plant growth.",
+    "lband": "Shallow water among grasses and reeds is grey, not black, to L-band radar, so the detector does not call it open water. As water leaves a floodplain, the wet soil and plants scatter more signal back and HH brightens. The papyrus-lined channels stay bright all season. Uncalibrated previews cannot fully separate drying from plant growth.",
     "people": "The delta became the 1,000th site on the UNESCO World Heritage List in 2014. Its peoples traditionally combined fishing, hunting and farming, and plant crops on land left moist by the retreating flood. The yearly flood also sustains wildlife and the tourism that depends on it."
   },
   "spots": [
