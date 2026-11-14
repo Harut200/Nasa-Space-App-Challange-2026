@@ -214,9 +214,9 @@
     }
   ],
   "story": {
-    "see": "On 24 June the floodplain is mostly bright, dry ground. Dark water spreads through August and September; the biggest jump comes between 28 September and 10 October, our last image, when the western floodplain turns dark. The flood is still rising when our record ends. Dark sand dunes in the north-west are wrongly marked as water on some dates.",
+    "see": "On 24 June the floodplain is mostly bright, dry ground. Dark water spreads through the season: mapped open water grows from about 1,200 km\u00b2 on 24 June to about 3,100 km\u00b2 on 10 October, our last image, when the western floodplain turns dark. The flood is still rising when our record ends. Dark sand dunes in the north-west are wrongly marked as water on some dates.",
     "physics": "Rain falling far upstream in Guinea swells the Niger in the wet season. The river spills across a flat inland delta in central Mali, filling lakes and channels; the western and southern edges are often not flooded until early to mid-October. In the dry season the water shrinks back to a network of lakes and channels.",
-    "lband": "Open water is a mirror for L-band radar and turns black in HH, so the spreading flood is easy to follow. Grasses and rice standing in shallow water glow instead, from a water-to-stem double bounce: our water layer marks patches on the eastern side green as flooded vegetation in October. One corrupt preview (6 July) was removed.",
+    "lband": "Open water is a mirror for L-band radar and turns black in HH, so the spreading flood is easy to follow. Grasses and rice standing in shallow water glow instead, from a water-to-stem double bounce: our water layer marks patches on the eastern side green as possible water under vegetation in October. One corrupt preview (6 July) was removed.",
     "people": "Wetlands International says the delta's ecosystem sustains two million people, and at its peak the flood covers an area the size of Belgium. Fishers, herders and rice farmers time their year to this flood. Dams and irrigation upstream would make it smaller, so measuring the flood each year matters."
   },
   "spots": [

@@ -232,9 +232,9 @@
     }
   ],
   "story": {
-    "see": "The central haor basin is a dark sheet of open water on our first image, 18 June, and stays dark all season. On 30 June wind roughens it (orange). From late September the western margins turn bright as water drains and fields green up; the 'when' layer dates most of that change to late September and October.",
+    "see": "The central haor basin is a dark sheet of open water on our first image, 18 June, and stays dark all season. On 30 June the surface looks rougher (orange), possibly from wind. From late September the western margins turn bright as water drains and fields green up; the 'when' layer dates most of that change to late September and October.",
     "physics": "Haors are bowl-shaped backswamps in north-eastern Bangladesh. Monsoon rivers spill into them and they stay flooded for months, from about July to November. As the water recedes the exposed mud is planted with boro rice in the dry season, and the open water shrinks back to the deepest beels.",
-    "lband": "Calm open water reflects L-band (24 cm) radar away, so it looks black in HH. As water drains and plants grow, the signal scatters back and the ground brightens. Where shallow water still stands under young plants, the signal bounces water-to-stem and back; our water layer marks such margins green as flooded vegetation in October.",
+    "lband": "Calm open water reflects L-band (24 cm) radar away, so it looks black in HH. As water drains and plants grow, the signal scatters back and the ground brightens. Where shallow water still stands under young plants, the signal bounces water-to-stem and back; our water layer marks such margins green as possible water under vegetation in October.",
     "people": "The haors support major fisheries and the boro rice crop, which early flash floods often damage. On 13 July 2026 Bangladesh's flood warning centre said the Kushiyara was above danger level at Markuli in Sunamganj and flooding could worsen. NISAR passed on 12 and 24 July; no passes exist from 27 July to 10 August."
   },
   "spots": [

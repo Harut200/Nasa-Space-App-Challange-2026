@@ -93,7 +93,7 @@ export function Chart({ ts, pol, gaps, index, onPick, colors, spots }) {
             <g key={s.spot}>
               {runs.map((r, k) => <polyline key={k} points={r.join(' ')} fill="none" stroke={c} strokeWidth="2.5" strokeLinejoin="round" />)}
               {vals.map((v, j) => v != null && (
-                <circle key={j} cx={x(ts.dates[j])} cy={y(v)} r={j === index ? 6 : 4} fill={c} stroke="#0f1115" strokeWidth="1.5"
+                <circle key={j} cx={x(ts.dates[j])} cy={y(v)} r={j === index ? 6 : 4} fill={c}
                   className="chart-dot" onClick={() => onPick(j)}>
                   <title>{label(s.spot)}, {short(ts.dates[j])}: {v} {unit}</title>
                 </circle>

@@ -223,7 +223,7 @@
     }
   ],
   "story": {
-    "see": "The northern half of the delta brightens steadily from late June, peaks around 13\u201325 August, then falls back in mid-to-late September to where it started. The southern delta changes much less. Our open-water layer is empty: the coastal lagoons and the sea look grey, not black, in these images, so the detector does not call them water.",
+    "see": "The northern half of the delta brightens steadily from late June, peaks around 13\u201325 August, then falls back in mid-to-late September to where it started. The southern delta changes much less. Our open-water layer shows only about 210 km\u00b2, unchanged on every date: the coastal lagoons and the sea look grey, not black, in these images, and narrow canals are smaller than a pixel, so most water here is missed.",
     "physics": "The delta is a patchwork of small irrigated fields fed by canals from the Nile. Egypt's rice crop is grown in the Nile Delta, and rice is typically harvested from late August to mid-September. The summer crop grows from bare, flooded fields to dense green canopy, then is cut.",
     "lband": "As rice and other summer crops grow, L-band radar bounces between the water or wet soil and the plant stems and returns to the satellite, so HH brightens; after harvest the fields go dark again. Rough water on windy days and reeds in shallow lagoons send some signal back too, which hides open water from a simple brightness threshold.",
     "people": "The delta is Egypt's farming heartland. Most of its rice is irrigated with agricultural drainage water, reusing the Nile's water before it reaches the Mediterranean. Mapping when fields green up and are harvested, field by field and across the whole delta, helps track crops and water use."
