@@ -1,0 +1,28 @@
+{
+  "story": {
+    "see": "The Bald Range fire was first reported on the evening of 7 August 2026 in the South Okanagan of British Columbia and grew explosively: about 10,341 hectares by 9 August, when the province had declared a state of emergency (Watchers, citing BC Wildfire Service). The orange area is where the radar picture between NISAR's 25 July and 18 August passes no longer matches the pair taken just before it (13 to 25 July). It is one compact patch of mountain forest west of Summerland.",
+    "physics": "Burning strips the trees and undergrowth that gave the slope a repeatable radar echo. About 137 km2 in the map lost coherence, almost all of it in one connected patch (134 km2). Equal circles placed elsewhere in the same map lose less than 1 km2, and only a quarter of one percent of the comparable ground outside the site changes like this. We do not measure the burned area: only ground that was coherent before is counted.",
+    "lband": "NISAR's L-band radar has a wavelength of about 24 cm. The pair is 24 days long against a 12-day control, which lowers coherence everywhere a little, but the control is bright across the mountains and the patch is dark with hard edges. Smoke does not matter to the radar. Rain or soil moisture cannot be fully excluded from coherence alone; the shape, the place and the date are what we rely on.",
+    "people": "This map shows where the surface changed, not damage. We did not look at reports of damage, evacuations or casualties."
+  },
+  "spots": [
+    {
+      "id": "site",
+      "label": "Centre of the lost-coherence patch west of Summerland",
+      "lngLat": [
+        -119.82,
+        49.62
+      ],
+      "radius_m": 3000
+    },
+    {
+      "id": "reference",
+      "label": "Reference: stays coherent in both pairs",
+      "lngLat": [
+        -119.95,
+        49.8
+      ],
+      "radius_m": 4000
+    }
+  ]
+}

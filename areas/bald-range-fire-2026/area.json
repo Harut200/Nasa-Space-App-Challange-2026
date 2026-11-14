@@ -1,0 +1,14 @@
+{
+  "id": "bald-range-fire-2026",
+  "name": "Bald Range fire, British Columbia: forest surface changed, 25 Jul-18 Aug 2026",
+  "bbox": [
+    -120.1,
+    49.4,
+    -119.5,
+    49.9
+  ],
+  "track": 77,
+  "frame": 27,
+  "direction": "ascending",
+  "pixel_m": 80
+}

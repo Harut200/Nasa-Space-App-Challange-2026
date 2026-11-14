@@ -1,0 +1,129 @@
+{
+  "id": "bald-range-fire-2026",
+  "name": "Bald Range fire, British Columbia: forest surface changed, 25 Jul-18 Aug 2026",
+  "bounds": [
+    -120.09999999999998,
+    49.400015575755226,
+    -119.4999691954216,
+    49.899999999999984
+  ],
+  "dates": [],
+  "gaps": [],
+  "layers": [
+    {
+      "id": "coherence",
+      "label": "Radar coherence (how comparable the two passes are)",
+      "dates": null,
+      "legend": {
+        "type": "ramp",
+        "unit": "coherence 0-1",
+        "min": 0,
+        "max": 1,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    },
+    {
+      "id": "coh_loss",
+      "label": "Where the radar picture changed completely between the passes",
+      "dates": null,
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#ff5a00",
+            "label": "was comparable before (control pair), not comparable in the event pair"
+          }
+        ]
+      }
+    },
+    {
+      "id": "coherence_before",
+      "label": "Before the event: radar coherence (13 Jul\u201325 Jul)",
+      "dates": null,
+      "legend": {
+        "type": "ramp",
+        "unit": "coherence 0-1",
+        "min": 0,
+        "max": 1,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    }
+  ],
+  "story": {
+    "see": "The Bald Range fire was first reported on the evening of 7 August 2026 in the South Okanagan of British Columbia and grew explosively: about 10,341 hectares by 9 August, when the province had declared a state of emergency (Watchers, citing BC Wildfire Service). The orange area is where the radar picture between NISAR's 25 July and 18 August passes no longer matches the pair taken just before it (13 to 25 July). It is one compact patch of mountain forest west of Summerland.",
+    "physics": "Burning strips the trees and undergrowth that gave the slope a repeatable radar echo. About 137 km2 in the map lost coherence, almost all of it in one connected patch (134 km2). Equal circles placed elsewhere in the same map lose less than 1 km2, and only a quarter of one percent of the comparable ground outside the site changes like this. We do not measure the burned area: only ground that was coherent before is counted.",
+    "lband": "NISAR's L-band radar has a wavelength of about 24 cm. The pair is 24 days long against a 12-day control, which lowers coherence everywhere a little, but the control is bright across the mountains and the patch is dark with hard edges. Smoke does not matter to the radar. Rain or soil moisture cannot be fully excluded from coherence alone; the shape, the place and the date are what we rely on.",
+    "people": "This map shows where the surface changed, not damage. We did not look at reports of damage, evacuations or casualties."
+  },
+  "spots": [
+    {
+      "id": "site",
+      "label": "Centre of the lost-coherence patch west of Summerland",
+      "lngLat": [
+        -119.82,
+        49.62
+      ]
+    },
+    {
+      "id": "reference",
+      "label": "Reference: stays coherent in both pairs",
+      "lngLat": [
+        -119.95,
+        49.8
+      ]
+    }
+  ],
+  "credits": "NISAR data: NASA/JPL-Caltech and ISRO, distributed by ASF DAAC. PROVISIONAL calibration.",
+  "source": null,
+  "kind": "event",
+  "event": {
+    "type": "fire",
+    "title": "Bald Range fire, British Columbia: forest surface changed, 25 Jul-18 Aug 2026",
+    "time": "2026-08-07T00:00:00Z",
+    "time_note": "first reported on the evening of 7 Aug (Watchers); pair 25 Jul-18 Aug (24 days); the control pair ends 25 Jul",
+    "lngLat": [
+      -119.82,
+      49.62
+    ],
+    "place": "Summerland, South Okanagan, British Columbia, Canada",
+    "summary": "\u2248 137 km\u00b2 of ground changed completely (one connected patch of 134 km\u00b2)",
+    "radius_km": 12,
+    "source_url": "https://watchers.news/2026/08/09/b-c-declares-provincial-emergency-as-out-of-control-bald-range-wildfire-grows-to-over-10-000-ha-25-000-acres/",
+    "views": [
+      {
+        "id": "a_ign",
+        "label": "ascending",
+        "track": 77,
+        "before": "2026-07-25",
+        "after": "2026-08-18",
+        "p2p_cm": null,
+        "control_p2p_cm": null,
+        "control_before": "2026-07-13",
+        "control_after": "2026-07-25"
+      }
+    ],
+    "before_after": [
+      {
+        "view": "a_ign",
+        "before": "coherence_before",
+        "after": "coherence",
+        "label": "Radar coherence",
+        "before_dates": [
+          "2026-07-13",
+          "2026-07-25"
+        ],
+        "after_dates": [
+          "2026-07-25",
+          "2026-08-18"
+        ]
+      }
+    ]
+  },
+  "category": "fire"
+}
