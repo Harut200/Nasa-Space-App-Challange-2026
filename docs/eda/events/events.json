@@ -2232,12 +2232,13 @@
   ],
   "export_deformation": false,
   "app_views": [
-   "a_ign"
+   "a_ign",
+   "d_ign"
   ],
   "zoom_km": 15,
   "summary_number": "\u2248 137 km\u00b2 of ground changed completely (one connected patch of 134 km\u00b2)",
   "site_label": "Centre of the lost-coherence patch west of Summerland",
-  "verdict_reason": "131 km2 of lost coherence within 12 km, one connected patch of 133.6 km2 at 49.617 N 119.815 W (137 km2 in the window) vs 95th percentile of 0.66 km2 in 16 equal random discs and 0.25 % of comparable ground outside; control 0.78 -> 0.25. Caveat: 24-day event pair against a 12-day control",
+  "verdict_reason": "131 km2 of lost coherence within 12 km, one connected patch of 133.6 km2 at 49.617 N 119.815 W (137 km2 in the window) vs 95th percentile of 0.66 km2 in 16 equal random discs and 0.25 % of comparable ground outside; control 0.78 -> 0.25. Caveat: 24-day event pair against a 12-day control; descending 20 Jul-13 Aug vs 8-20 Jul: 45 km2 patch at 49.621 N 119.784 W, outside fraction 0.0",
   "extra_spots": [
    {
     "id": "reference",
@@ -2251,7 +2252,7 @@
   ],
   "story": {
    "see": "The Bald Range fire was first reported on the evening of 7 August 2026 in the South Okanagan of British Columbia and grew explosively: about 10,341 hectares by 9 August, when the province had declared a state of emergency (Watchers, citing BC Wildfire Service). The orange area is where the radar picture between NISAR's 25 July and 18 August passes no longer matches the pair taken just before it (13 to 25 July). It is one compact patch of mountain forest west of Summerland.",
-   "physics": "Burning strips the trees and undergrowth that gave the slope a repeatable radar echo. About 137 km2 in the map lost coherence, almost all of it in one connected patch (134 km2). Equal circles placed elsewhere in the same map lose less than 1 km2, and only a quarter of one percent of the comparable ground outside the site changes like this. We do not measure the burned area: only ground that was coherent before is counted.",
+   "physics": "Burning strips the trees and undergrowth that gave the slope a repeatable radar echo. About 137 km2 in the map lost coherence, almost all of it in one connected patch (134 km2). Equal circles placed elsewhere in the same map lose less than 1 km2, and only a quarter of one percent of the comparable ground outside the site changes like this. We do not measure the burned area: only ground that was coherent before is counted. The descending pass (20 July to 13 August, control 8 to 20 July) shows the same patch at the same place: 45 km2 within 12 km and nothing else above 3 km2 in the map; its pair ends on 13 August, while the ascending one runs to 18 August.",
    "lband": "NISAR's L-band radar has a wavelength of about 24 cm. The pair is 24 days long against a 12-day control, which lowers coherence everywhere a little, but the control is bright across the mountains and the patch is dark with hard edges. Smoke does not matter to the radar. Rain or soil moisture cannot be fully excluded from coherence alone; the shape, the place and the date are what we rely on.",
    "people": "This map shows where the surface changed, not damage. We did not look at reports of damage, evacuations or casualties."
   }
@@ -2315,5 +2316,261 @@
   "loss_lo": 0.45,
   "loss_drop": 0.3,
   "min_px": 30
+ },
+ {
+  "id": "atacama-snow-2026",
+  "type": "storm",
+  "title": "Rare snow and flash floods in the Atacama Desert, Chile, August 2026",
+  "time": "2026-08-10T00:00:00Z",
+  "lat": -23.3,
+  "lon": -68.69,
+  "place": "Atacama Desert, Antofagasta region, Chile",
+  "window": [
+   -69.1,
+   -23.85,
+   -68.2,
+   -23.0
+  ],
+  "heights": [
+   2000,
+   5500
+  ],
+  "radius_km": 40,
+  "far_km": 120,
+  "gmin": 0.35,
+  "source_url": "https://science.nasa.gov/earth/earth-observatory/rare-widespread-snow-in-the-atacama-desert/",
+  "views": {
+   "d_both": {
+    "track": 97,
+    "frame": 100,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260726_20260819",
+     "granule": "NISAR_L2_PR_GUNW_026_097_D_100_028_2000_SH_20260726T224704_20260726T224739_20260819T224703_20260819T224737_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260702_20260714",
+     "granule": "NISAR_L2_PR_GUNW_024_097_D_100_025_2000_SH_20260702T224705_20260702T224740_20260714T224705_20260714T224739_P05023_F_F_J_001"
+    }
+   },
+   "d_after": {
+    "track": 97,
+    "frame": 100,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260819_20260831",
+     "granule": "NISAR_L2_PR_GUNW_028_097_D_100_029_2000_SH_20260819T224703_20260819T224737_20260831T224703_20260831T224737_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260702_20260714",
+     "granule": "NISAR_L2_PR_GUNW_024_097_D_100_025_2000_SH_20260702T224705_20260702T224740_20260714T224705_20260714T224739_P05023_F_F_J_001"
+    },
+    "data_view": "d_both"
+   },
+   "a_early": {
+    "track": 46,
+    "frame": 166,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260723_20260816",
+     "granule": "NISAR_L2_PR_GUNW_026_046_A_166_028_2000_SH_20260723T103042_20260723T103116_20260816T103041_20260816T103115_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260711_20260723",
+     "granule": "NISAR_L2_PR_GUNW_025_046_A_166_026_2000_SH_20260711T103043_20260711T103117_20260723T103042_20260723T103116_P05023_N_F_J_001"
+    }
+   },
+   "a_late": {
+    "track": 46,
+    "frame": 166,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260816_20260828",
+     "granule": "NISAR_L2_PR_GUNW_028_046_A_166_029_2000_SH_20260816T103041_20260816T103115_20260828T103040_20260828T103115_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260711_20260723",
+     "granule": "NISAR_L2_PR_GUNW_025_046_A_166_026_2000_SH_20260711T103043_20260711T103117_20260723T103042_20260723T103116_P05023_N_F_J_001"
+    },
+    "data_view": "a_early"
+   }
+  },
+  "verdict": null,
+  "deformation": false,
+  "loss_hi": 0.45,
+  "loss_lo": 0.35,
+  "loss_drop": 0.25,
+  "min_px": 30,
+  "time_note": "back-to-back storms in early August and a second storm in the second half of August (NASA Earth Observatory)"
+ },
+ {
+  "id": "fuego-2026",
+  "type": "volcano",
+  "title": "Fuego pyroclastic density currents, Guatemala, 3-5 Aug 2026",
+  "time": "2026-08-04T00:00:00Z",
+  "lat": 14.4748,
+  "lon": -90.8806,
+  "place": "Volcan de Fuego, Guatemala",
+  "window": [
+   -91.0,
+   14.35,
+   -90.75,
+   14.6
+  ],
+  "heights": [
+   0,
+   3800
+  ],
+  "radius_km": 6,
+  "far_km": 18,
+  "gmin": 0.35,
+  "source_url": "https://watchers.news/2026/08/15/the-weekly-volcanic-activity-report-august-6-12-2026/",
+  "views": {
+   "asc": {
+    "track": 62,
+    "frame": 9,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260724_20260817",
+     "granule": "NISAR_L2_PR_GUNW_026_062_A_009_028_4000_SH_20260724T113934_20260724T114008_20260817T113933_20260817T114007_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260712_20260724",
+     "granule": "NISAR_L2_PR_GUNW_025_062_A_009_026_4000_SH_20260712T113935_20260712T114009_20260724T113934_20260724T114008_P05023_N_F_J_001"
+    }
+   },
+   "asc2": {
+    "track": 134,
+    "frame": 9,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260717_20260810",
+     "granule": "NISAR_L2_PR_GUNW_025_134_A_009_027_4000_SH_20260717T113115_20260717T113150_20260810T113114_20260810T113148_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260705_20260717",
+     "granule": "NISAR_L2_PR_GUNW_024_134_A_009_025_4000_SH_20260705T113116_20260705T113150_20260717T113115_20260717T113150_P05023_N_F_J_001"
+    }
+   }
+  },
+  "verdict": null,
+  "deformation": false,
+  "time_note": "stronger phase 3-5 Aug (Watchers, 6-12 Aug report)",
+  "loss_hi": 0.45,
+  "loss_lo": 0.35,
+  "loss_drop": 0.25,
+  "min_px": 12
+ },
+ {
+  "id": "sakurajima-2026",
+  "type": "volcano",
+  "title": "Sakurajima (Aira) pyroclastic flows, Japan, 3-10 Aug 2026",
+  "time": "2026-08-06T00:00:00Z",
+  "lat": 31.5772,
+  "lon": 130.6589,
+  "place": "Sakurajima, Kagoshima, Japan",
+  "window": [
+   130.5,
+   31.45,
+   130.8,
+   31.7
+  ],
+  "heights": [
+   0,
+   1200
+  ],
+  "radius_km": 5,
+  "far_km": 15,
+  "gmin": 0.35,
+  "source_url": "https://watchers.news/2026/08/15/the-weekly-volcanic-activity-report-august-6-12-2026/",
+  "views": {
+   "asc": {
+    "track": 24,
+    "frame": 18,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260721_20260814",
+     "granule": "NISAR_L2_PR_GUNW_026_024_A_018_028_4000_SH_20260721T202900_20260721T202934_20260814T202858_20260814T202933_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260709_20260721",
+     "granule": "NISAR_L2_PR_GUNW_025_024_A_018_026_4000_SH_20260709T202900_20260709T202935_20260721T202900_20260721T202934_P05023_N_F_J_001"
+    }
+   }
+  },
+  "verdict": null,
+  "deformation": false,
+  "time_note": "pyroclastic flows with Minamidake eruptions 3-10 Aug (Watchers)",
+  "loss_hi": 0.45,
+  "loss_lo": 0.35,
+  "loss_drop": 0.25,
+  "min_px": 12
+ },
+ {
+  "id": "hanjia-landslide-2026",
+  "type": "landslide",
+  "title": "Hanjia rock-slope failure on the Wujiang River, Chongqing, 17 Jul 2026",
+  "time": "2026-07-17T01:08:00Z",
+  "lat": 29.2776,
+  "lon": 108.16604,
+  "place": "Hanjia, Pengshui, Chongqing, China",
+  "window": [
+   108.0,
+   29.15,
+   108.35,
+   29.4
+  ],
+  "heights": [
+   200,
+   1500
+  ],
+  "radius_km": 5,
+  "far_km": 15,
+  "gmin": 0.35,
+  "source_url": "https://eos.org/thelandslideblog/17-july-2026-landslide-at-hanjia-1",
+  "views": {
+   "asc": {
+    "track": 25,
+    "frame": 16,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260709_20260721",
+     "granule": "NISAR_L2_PR_GUNW_025_025_A_016_026_2000_SH_20260709T220746_20260709T220821_20260721T220745_20260721T220820_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260627_20260709",
+     "granule": "NISAR_L2_PR_GUNW_024_025_A_016_025_2000_SH_20260627T220747_20260627T220821_20260709T220746_20260709T220821_P05023_N_F_J_001"
+    }
+   },
+   "desc": {
+    "track": 76,
+    "frame": 74,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260713_20260725",
+     "granule": "NISAR_L2_PR_GUNW_025_076_D_074_026_2000_SH_20260713T113459_20260713T113534_20260725T113459_20260725T113533_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260701_20260713",
+     "granule": "NISAR_L2_PR_GUNW_024_076_D_074_025_2000_SH_20260701T113500_20260701T113535_20260713T113459_20260713T113534_P05023_N_F_J_001"
+    }
+   }
+  },
+  "verdict": null,
+  "deformation": false,
+  "loss_hi": 0.45,
+  "loss_lo": 0.35,
+  "loss_drop": 0.25,
+  "min_px": 8,
+  "time_note": "09:08 local on 17 Jul (Landslide Blog)"
  }
 ]

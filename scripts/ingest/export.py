@@ -43,6 +43,9 @@ def export(area, root=ROOT):
     prod = root / "data/processed" / area / "products"
     pub = root / "src/app/public/data"
     cfg = json.loads((root / "areas" / area / "area.json").read_text())
+    if cfg.get("in_app") is False:  # a tried place kept as a record but not shown (area.json says why)
+        print(f"{area}: in_app is false, not exported")
+        return
     story = load(root / "areas" / area / "story.json", {})
     layers_in = json.loads((prod / "layers.json").read_text())
 

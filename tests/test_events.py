@@ -142,3 +142,28 @@ def test_export_before_same_grid_ramp_and_legend(tmp_path, monkeypatch):
     e2 = _ev_syn(); e2["views"]["asc"]["control_after_event"] = True
     E.export_before(e2)
     assert not (app / "coherence_before.tif").exists() and json.loads((app / "layers.json").read_text()) == ev_layers
+
+
+def test_views_sharing_a_data_folder_download_each_pair_once():
+    mk = lambda p, g: {"pair": p, "granule": g}
+    ev = {"id": "y-2026", "window": [1, 2, 3, 4], "heights": [0, 100],
+          "views": {"a": {"co": mk("20260201_20260213", "NISAR_L2_PR_GUNW_1"), "control": mk("20260120_20260201", "NISAR_L2_PR_GUNW_0")},
+                    "b": {"data_view": "a", "co": mk("20260301_20260313", "NISAR_L2_PR_GUNW_2"), "control": mk("20260120_20260201", "NISAR_L2_PR_GUNW_0")},
+                    "c": {"co": mk("20260401_20260413", "NISAR_L2_PR_GUNW_3"), "control": mk("20260320_20260401", "NISAR_L2_PR_GUNW_4")}}}
+    ids = [p["id"] for p in E.job_for(ev, "a")["products"]]
+    assert ids == ["20260201_20260213", "20260120_20260201", "20260301_20260313"]
+    assert [p["id"] for p in E.job_for(ev, "c")["products"]] == ["20260401_20260413", "20260320_20260401"]
+    assert E.view_dir(ev, "b") == E.view_dir(ev, "a") and E.pcm_path(ev, "b") != E.pcm_path(ev, "a")
+
+
+def test_fire_rule_is_wider_than_default_and_catches_a_partial_drop():
+    X, Y = _grid()
+    ctl = np.full(X.shape, 0.75)
+    ev = ctl.copy()
+    ev[60:140, 60:140] = 0.32                      # a burn scar: coherence falls to about 0.3, not to zero
+    pix = 0.08 * 0.08
+    cx, cy = X[100, 100], Y[100, 100]
+    st_default, _, _ = E.loss_stats(ev, ctl, X, Y, (cx, cy), 8000.0, pix)
+    st_fire, _, _ = E.loss_stats(ev, ctl, X, Y, (cx, cy), 8000.0, pix, hi=0.5, lo=0.45, drop=0.3, min_px=30)
+    assert st_default["loss_area_km2"] == 0.0
+    assert abs(st_fire["loss_area_km2"] - 80 * 80 * pix) < 0.02 * 80 * 80 * pix

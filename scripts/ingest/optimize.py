@@ -233,7 +233,7 @@ def _series_headline(ts):
     return water, "peak"
 
 
-CATEGORIES = [("flood", "Floods"), ("lake", "Lakes"), ("wetland", "Wetlands and deltas"), ("land", "Farmland and forest"), ("fire", "Wildfires"),
+CATEGORIES = [("flood", "Floods"), ("lake", "Lakes"), ("wetland", "Wetlands and deltas"), ("land", "Farmland"), ("fire", "Wildfires"),
               ("earthquake", "Earthquakes"), ("volcano", "Volcanoes"), ("landslide", "Landslides")]
 CAT_LABEL = dict(CATEGORIES)
 
