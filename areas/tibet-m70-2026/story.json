@@ -1,0 +1,14 @@
+{
+  "story": {
+    "see": "On 22 October 2026 a magnitude 7.0 earthquake struck the Tibetan Plateau, about 189 km east-north-east of Nagqu (USGS: 32.34 N, 93.78 E, depth about 18 km). The map shows how far the ground moved along the radar's line of sight between two NISAR passes, 19 and 31 October. Blue is ground that moved toward the satellite, red away from it. In the fringe layer, one colour cycle is 10 cm. The speckled grey patch next to the epicentre is where the ground changed too much for the two passes to be compared.",
+    "physics": "The US Geological Survey's moment tensor shows normal faulting: the crust is pulled apart and one side drops. Seen from one direction, that gives two lobes of opposite sign on either side of the fault, which is what the map shows. Within 45 km of the epicentre the line-of-sight change spans about 1.3 m from the most red to the most blue pixels. Fault position and mechanism come from USGS; our map does not by itself tell which of its two possible fault planes moved.",
+    "lband": "NISAR's L-band radar has a wavelength of about 24 cm, so one full colour cycle means about 12 cm of ground movement along the line of sight (we show 10 cm cycles). The same track and frame, 7 to 19 October, before the quake, shows no such pattern: its far-field noise is about 0.7 cm. The products are PROVISIONAL, and the sign convention (blue = toward the satellite) follows the interferogram definition we assumed, not a statement in the product guide.",
+    "people": "This is a measurement of ground movement, not of damage. We did not look at reports of damage or casualties. Maps like this show where a fault moved and by how much, which feeds hazard models. From one look direction we see only one component of the motion, so uplift and sideways movement are mixed together."
+  },
+  "spots": [
+    { "id": "epicentre", "label": "USGS epicentre", "lngLat": [93.7837, 32.3376], "radius_m": 3000 },
+    { "id": "toward-lobe", "label": "Lobe moving toward the satellite (blue)", "lngLat": [93.964, 32.374], "radius_m": 3000 },
+    { "id": "away-lobe", "label": "Lobe moving away from the satellite (red)", "lngLat": [93.78, 32.38], "radius_m": 3000 },
+    { "id": "rupture-zone", "label": "Grey patch: lost coherence", "lngLat": [93.91, 32.41], "radius_m": 3000 }
+  ]
+}

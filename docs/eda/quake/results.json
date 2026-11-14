@@ -1,0 +1,148 @@
+{
+ "event": "USGS us6000u43g M7.0 22 Oct 2026 14:33:40 UTC, 32.338N 93.784E, depth 17-18 km",
+ "coseismic_pair": "20261019_20261031",
+ "control_pair": "20261007_20261019",
+ "wavelength_m": 0.24393202441008952,
+ "stripe_line": {
+  "intercept_m": 3354340.698798667,
+  "slope": 0.29651270082501024
+ },
+ "variants": {
+  "main_noiono_R60": {
+   "p2p_cm_0.5_99.5pct": 126.57375987830527,
+   "min_cm": -140.72532846612233,
+   "max_cm": 58.53598007266734,
+   "p0.5_cm": -86.66758386686615,
+   "p99.5_cm": 39.906176011439115,
+   "far_std_cm": 1.2755737572585226,
+   "control_far_std_cm": 0.6758333231170557,
+   "control_p2p_cm_0.5_99.5pct": 4.68589993366148,
+   "control_max_abs_cm": 6.826062415390531,
+   "far_pixels": 1143227
+  },
+  "iono_R60": {
+   "p2p_cm_0.5_99.5pct": 138.39552939784454,
+   "min_cm": -153.95575040881943,
+   "max_cm": 68.09266349176823,
+   "p0.5_cm": -93.09381785221734,
+   "p99.5_cm": 45.30171154562719,
+   "far_std_cm": 1.3472080094904137,
+   "control_far_std_cm": 0.678425329262617,
+   "control_p2p_cm_0.5_99.5pct": 4.760461589073828,
+   "control_max_abs_cm": 6.689616110184838,
+   "far_pixels": 1143227
+  },
+  "noiono_R45": {
+   "p2p_cm_0.5_99.5pct": 126.41706341920055,
+   "min_cm": -141.02861555852516,
+   "max_cm": 58.1360255632829,
+   "p0.5_cm": -86.94585429468589,
+   "p99.5_cm": 39.47120912451466,
+   "far_std_cm": 1.685400259868215,
+   "control_far_std_cm": 0.7060805141640388,
+   "control_p2p_cm_0.5_99.5pct": 4.612090317000796,
+   "control_max_abs_cm": 6.7862416049205265,
+   "far_pixels": 1684102
+  },
+  "noiono_R75": {
+   "p2p_cm_0.5_99.5pct": 126.76160991179506,
+   "min_cm": -140.6317052858442,
+   "max_cm": 58.742287626700204,
+   "p0.5_cm": -86.61038831878994,
+   "p99.5_cm": 40.151221593005125,
+   "far_std_cm": 1.1160522709697542,
+   "control_far_std_cm": 0.5634387625764475,
+   "control_p2p_cm_0.5_99.5pct": 4.856796907539993,
+   "control_max_abs_cm": 6.9777860928700655,
+   "far_pixels": 536485
+  },
+  "noiono_quadric_R60": {
+   "p2p_cm_0.5_99.5pct": 126.2280004678345,
+   "min_cm": -140.58902345228063,
+   "max_cm": 58.41962015968679,
+   "p0.5_cm": -86.48498346482114,
+   "p99.5_cm": 39.743017003013364,
+   "far_std_cm": 0.849308574762196,
+   "control_far_std_cm": 0.588338076608241,
+   "control_p2p_cm_0.5_99.5pct": 4.284320328809711,
+   "control_max_abs_cm": 7.074323670879558,
+   "far_pixels": 1143227
+  },
+  "noiono_coh05_R60": {
+   "p2p_cm_0.5_99.5pct": 118.74085180746684,
+   "min_cm": -139.8403663546872,
+   "max_cm": 58.3868719396462,
+   "p0.5_cm": -81.05404774628113,
+   "p99.5_cm": 37.68680406118571,
+   "far_std_cm": 1.2712845478178325,
+   "control_far_std_cm": 0.630549015082635,
+   "control_p2p_cm_0.5_99.5pct": 4.25510940487994,
+   "control_max_abs_cm": 6.813831700149087,
+   "far_pixels": 1007350
+  }
+ },
+ "snr_peak_over_control_std": 128.2381038377049,
+ "local_noise_std_cm_coseismic_far": 0.4778207926711482,
+ "local_noise_std_cm_control_far": 0.5045558284601683,
+ "control_with_iono_far_std_cm": 0.678425329262617,
+ "control_without_iono_far_std_cm": 0.6758333231170557,
+ "deformed_area_km2_absLOS_gt_2.0cm": 7135.8784,
+ "extent_gt5cm_km_EW_NS": [
+  154.08,
+  115.36
+ ],
+ "masked_fraction_within_15km_of_epicentre": 0.27249268880096333,
+ "north_fraction_of_window": 0.7266251712764756,
+ "iono_screen_coseismic_rad_range_within30km": [
+  -19.07258415222168,
+  -4.94173002243042
+ ],
+ "iono_screen_coseismic_rad_std_outside60km": 1.473526954650879,
+ "iono_screen_control_rad_range_within30km": [
+  5.522841930389404,
+  7.03518533706665
+ ],
+ "iono_screen_control_rad_std_outside60km": 0.9155154824256897,
+ "los_unit_vector_EN_mean": [
+  0.6562291979789734,
+  0.17808276414871216
+ ],
+ "incidence_deg_mean": 42.8901481628418,
+ "profile_azimuth_deg": 130.0,
+ "profile_coseismic_cm": {
+  "km": [
+   -70.0,
+   -60.0,
+   -50.0,
+   -40.0,
+   -30.0,
+   -20.0,
+   -10.0,
+   0.0,
+   10.0,
+   20.0,
+   30.0,
+   40.0,
+   50.0,
+   60.0,
+   70.0
+  ],
+  "cm": [
+   -0.7,
+   -0.8,
+   -2.7,
+   -4.7,
+   -8.2,
+   -13.3,
+   -25.1,
+   -36.5,
+   -10.9,
+   10.1,
+   5.9,
+   4.2,
+   null,
+   null,
+   null
+  ]
+ }
+}
