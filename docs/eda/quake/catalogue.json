@@ -173,7 +173,8 @@
    "views_used": [
     "asc",
     "desc40"
-   ]
+   ],
+   "round2": "north frames 6/84 and west frame (track 4) processed: nothing above noise / unstable; no new layer"
   }
  },
  {
@@ -215,9 +216,13 @@
    }
   ],
   "quake_study": {
-   "event_id": "venezuela-m72-2026",
-   "verdict": null,
-   "reason": "M7.5 about 40 s after the M7.2, inside the same pairs; not separable from it"
+   "event_id": "venezuela-m75-2026",
+   "verdict": "clear",
+   "reason": "desc: 48 cm p2p within 60 km vs 10.8 cm control, fringes along the coast east of the epicentre; asc (only 9 % valid pixels, epicentre on the frame edge) mirrors the sign, about 66 cm; M7.2 38 s earlier is in the same pairs (USGS finite-fault of the M7.5 solution is about 170 km long and starts at the M7.2 hypocentre, so the two are probably one sequence)",
+   "views_used": [
+    "desc126",
+    "asc61"
+   ]
   }
  },
  {
@@ -2061,5 +2066,356 @@
    "reason": "no NISAR GUNW found at the epicentre after 24 Oct (ASF query 14 Nov)"
   },
   "added": "2026-11-14 check of 23 Oct - 14 Nov"
+ },
+ {
+  "id": "us6000u2y1",
+  "mag": 5.7,
+  "time": "2026-10-17T05:06:57Z",
+  "lat": 28.0196,
+  "lon": 66.1855,
+  "depth": 11.5,
+  "place": "47 km WNW of Khuzdar, Pakistan",
+  "n_gunw_total": null,
+  "spanning_pairs": [
+   {
+    "ref": "20261006",
+    "sec": "20261018",
+    "track": 92,
+    "frame": 74,
+    "dir": "D",
+    "granule": "NISAR_L2_PR_GUNW_032_092_D_074_033_2000_SH_20261006T141306_20261006T141341_20261018T141306_20261018T141341_P05023_N_F_J_001",
+    "span_days": 12
+   },
+   {
+    "ref": "20261006",
+    "sec": "20261018",
+    "track": 92,
+    "frame": 75,
+    "dir": "D",
+    "granule": "NISAR_L2_PR_GUNW_032_092_D_075_033_2000_SH_20261006T141340_20261006T141415_20261018T141340_20261018T141415_P05023_N_F_J_001",
+    "span_days": 12
+   }
+  ],
+  "added": "2026-11-14 second round: M 5.3-5.8, depth <= 15 km, on land",
+  "quake_study": {
+   "event_id": "khuzdar-m57-2026",
+   "verdict": "not detected",
+   "reason": "epicentre 5 km from a swath edge; smooth gradients of 5-10 cm of the size of the atmosphere; control pair has unwrapping errors (far-field std 25 cm); nothing compact at the epicentre",
+   "views_used": [
+    "desc"
+   ]
+  }
+ },
+ {
+  "id": "us6000tlrj",
+  "mag": 5.6,
+  "time": "2026-08-18T21:36:27Z",
+  "lat": 37.8363,
+  "lon": 95.5446,
+  "depth": 6,
+  "place": "269 km SSE of Dunhuang, China",
+  "n_gunw_total": null,
+  "spanning_pairs": [
+   {
+    "ref": "20260813",
+    "sec": "20260825",
+    "track": 11,
+    "frame": 20,
+    "dir": "A",
+    "granule": "NISAR_L2_PR_GUNW_028_011_A_020_029_2000_SH_20260813T225136_20260813T225211_20260825T225136_20260825T225211_P05023_N_F_J_001",
+    "span_days": 12
+   },
+   {
+    "ref": "20260725",
+    "sec": "20260818",
+    "track": 83,
+    "frame": 21,
+    "dir": "A",
+    "granule": "NISAR_L2_PR_GUNW_026_083_A_021_028_2000_SH_20260725T224352_20260725T224426_20260818T224350_20260818T224425_P05023_N_F_J_001",
+    "span_days": 24
+   },
+   {
+    "ref": "20260818",
+    "sec": "20260830",
+    "track": 83,
+    "frame": 21,
+    "dir": "A",
+    "granule": "NISAR_L2_PR_GUNW_028_083_A_021_029_2000_SH_20260818T224350_20260818T224425_20260830T224350_20260830T224425_P05023_N_F_J_001",
+    "span_days": 12
+   },
+   {
+    "ref": "20260726",
+    "sec": "20260819",
+    "track": 91,
+    "frame": 69,
+    "dir": "D",
+    "granule": "NISAR_L2_PR_GUNW_026_091_D_069_028_2000_SH_20260726T123026_20260726T123101_20260819T123025_20260819T123100_P05023_N_F_J_001",
+    "span_days": 24
+   }
+  ],
+  "added": "2026-11-14 second round: M 5.3-5.8, depth <= 15 km, on land",
+  "quake_study": {
+   "event_id": "qaidam-m56-2026",
+   "verdict": "clear",
+   "reason": "compact patch about 5 km ESE of the USGS epicentre, seen in three independent pairs (two ascending tracks, one descending), absent in every pre-event control; small event, patch only a few km wide, peak values unreliable (steep gradient, decorrelated rim)",
+   "views_used": [
+    "asc83",
+    "asc11",
+    "desc91"
+   ]
+  }
+ },
+ {
+  "id": "nc75382936",
+  "mag": 5.6,
+  "time": "2026-06-24T15:10:40Z",
+  "lat": 39.3623,
+  "lon": -123.2288,
+  "depth": 8.85,
+  "place": "11 km N of Redwood Valley, CA",
+  "n_gunw_total": null,
+  "spanning_pairs": [
+   {
+    "ref": "20260619",
+    "sec": "20260701",
+    "track": 71,
+    "frame": 68,
+    "dir": "D",
+    "granule": "NISAR_L2_PR_GUNW_023_071_D_068_024_4000_SH_20260619T031213_20260619T031248_20260701T031212_20260701T031247_P05023_N_F_J_001",
+    "span_days": 12
+   },
+   {
+    "ref": "20260619",
+    "sec": "20260701",
+    "track": 71,
+    "frame": 69,
+    "dir": "D",
+    "granule": "NISAR_L2_PR_GUNW_023_071_D_069_024_4000_SH_20260619T031247_20260619T031312_20260701T031246_20260701T031311_P05023_N_P_J_001",
+    "span_days": 12
+   },
+   {
+    "ref": "20260623",
+    "sec": "20260705",
+    "track": 135,
+    "frame": 21,
+    "dir": "A",
+    "granule": "NISAR_L2_PR_GUNW_023_135_A_021_024_4000_SH_20260623T131753_20260623T131828_20260705T131752_20260705T131827_P05023_N_F_J_001",
+    "span_days": 12
+   },
+   {
+    "ref": "20260531",
+    "sec": "20260624",
+    "track": 143,
+    "frame": 69,
+    "dir": "D",
+    "granule": "NISAR_L2_PR_GUNW_021_143_D_069_023_4000_SH_20260531T030429_20260531T030504_20260624T030428_20260624T030502_P05023_N_F_J_001",
+    "span_days": 24
+   },
+   {
+    "ref": "20260624",
+    "sec": "20260706",
+    "track": 143,
+    "frame": 69,
+    "dir": "D",
+    "granule": "NISAR_L2_PR_GUNW_023_143_D_069_024_4000_SH_20260624T030428_20260624T030502_20260706T030427_20260706T030502_P05023_N_F_J_001",
+    "span_days": 12
+   }
+  ],
+  "added": "2026-11-14 second round: M 5.3-5.8, depth <= 15 km, on land",
+  "quake_study": {
+   "event_id": "redwood-valley-m56-2026",
+   "verdict": "not detected",
+   "reason": "one broad +5 cm area 40 km wide (atmosphere-sized, control has 7 cm p2p of the same size); nothing compact at the epicentre",
+   "views_used": [
+    "asc"
+   ]
+  }
+ },
+ {
+  "id": "us7000t1q7",
+  "mag": 5.5,
+  "time": "2026-07-19T02:24:35Z",
+  "lat": -12.091,
+  "lon": -75.2687,
+  "depth": 11.5,
+  "place": "2 km WSW of Huamancaca Chico, Peru",
+  "n_gunw_total": null,
+  "spanning_pairs": [
+   {
+    "ref": "20260713",
+    "sec": "20260725",
+    "track": 75,
+    "frame": 171,
+    "dir": "A",
+    "granule": "NISAR_L2_PR_GUNW_025_075_A_171_026_2000_SH_20260713T105009_20260713T105044_20260725T105008_20260725T105043_P05023_N_F_J_001",
+    "span_days": 12
+   },
+   {
+    "ref": "20260718",
+    "sec": "20260811",
+    "track": 155,
+    "frame": 94,
+    "dir": "D",
+    "granule": "NISAR_L2_PR_GUNW_025_155_D_094_027_2000_SH_20260718T231701_20260718T231736_20260811T231700_20260811T231734_P05023_N_F_J_001",
+    "span_days": 24
+   },
+   {
+    "ref": "20260718",
+    "sec": "20260811",
+    "track": 155,
+    "frame": 95,
+    "dir": "D",
+    "granule": "NISAR_L2_PR_GUNW_025_155_D_095_027_2000_SH_20260718T231735_20260718T231809_20260811T231733_20260811T231808_P05023_N_F_J_001",
+    "span_days": 24
+   }
+  ],
+  "added": "2026-11-14 second round: M 5.3-5.8, depth <= 15 km, on land",
+  "quake_study": {
+   "event_id": "huancayo-m55-2026",
+   "verdict": "marginal",
+   "reason": "compact patch (mean +8 cm within 3 km, 95th percentile 20+ cm) about 9 km south of the USGS epicentre in the ascending pair, control flat (2.3 cm p2p); one look direction only (the descending frame ends 3 km before the patch); not confirmed, not exported",
+   "views_used": [
+    "asc",
+    "desc155"
+   ]
+  }
+ },
+ {
+  "id": "us7000t34g",
+  "mag": 5.7,
+  "time": "2026-07-24T16:51:37Z",
+  "lat": -38.9691,
+  "lon": 175.2489,
+  "depth": 23.5,
+  "place": "48 km W of Turangi, New Zealand",
+  "n_gunw_total": null,
+  "spanning_pairs": [
+   {
+    "ref": "20260721",
+    "sec": "20260814",
+    "track": 15,
+    "frame": 108,
+    "dir": "D",
+    "granule": "NISAR_L2_PR_GUNW_026_015_D_108_028_2000_SH_20260721T062103_20260721T062137_20260814T062101_20260814T062136_P05023_N_F_J_001",
+    "span_days": 24
+   },
+   {
+    "ref": "20260714",
+    "sec": "20260726",
+    "track": 94,
+    "frame": 158,
+    "dir": "A",
+    "granule": "NISAR_L2_PR_GUNW_025_094_A_158_026_2000_SH_20260714T182040_20260714T182115_20260726T182039_20260726T182114_P05023_N_F_J_001",
+    "span_days": 12
+   }
+  ],
+  "added": "2026-11-14 second round: M 5.3-5.8, depth <= 15 km, on land",
+  "quake_study": {
+   "event_id": "turangi-m57-2026",
+   "verdict": "not detected",
+   "reason": "4.0 cm p2p within 25 km vs 3.2 cm control; depth 23.5 km; nothing at the epicentre; descending pair not processed",
+   "views_used": [
+    "asc"
+   ]
+  }
+ },
+ {
+  "id": "us6000t9bg",
+  "mag": 5.3,
+  "time": "2026-06-30T23:44:54Z",
+  "lat": 37.7819,
+  "lon": 95.4116,
+  "depth": 10,
+  "place": "272 km SSE of Dunhuang, China",
+  "n_gunw_total": null,
+  "spanning_pairs": [
+   {
+    "ref": "20260619",
+    "sec": "20260701",
+    "track": 83,
+    "frame": 21,
+    "dir": "A",
+    "granule": "NISAR_L2_PR_GUNW_023_083_A_021_024_2000_SH_20260619T224354_20260619T224429_20260701T224353_20260701T224428_P05023_N_F_J_001",
+    "span_days": 12
+   },
+   {
+    "ref": "20260620",
+    "sec": "20260702",
+    "track": 91,
+    "frame": 69,
+    "dir": "D",
+    "granule": "NISAR_L2_PR_GUNW_023_091_D_069_024_2000_SH_20260620T123028_20260620T123103_20260702T123027_20260702T123102_P05023_N_F_J_001",
+    "span_days": 12
+   }
+  ],
+  "added": "2026-11-14 second round: M 5.3-5.8, depth <= 15 km, on land",
+  "quake_study": {
+   "event_id": "qaidam-m53-2026",
+   "verdict": "not detected",
+   "reason": "smooth atmosphere-sized gradients (7 cm p2p), nothing compact at the epicentre; the control pair has unwrapping errors (13 cm far-field std); M5.3 with no moment tensor",
+   "views_used": [
+    "asc83"
+   ]
+  }
+ },
+ {
+  "id": "aka2026ukynnb",
+  "added": "2026-11-14 second round: M 5.3-5.8, depth <= 15 km, on land",
+  "spanning_pairs": [],
+  "quake_study": {
+   "event_id": null,
+   "verdict": "not processed",
+   "reason": "Lake Minchumina M5.6 (15 Oct): USGS moment 4.3e16 N m (Mw 5.0), expected signal below the noise; not processed"
+  }
+ },
+ {
+  "id": "aka2026powmkf",
+  "added": "2026-11-14 second round: M 5.3-5.8, depth <= 15 km, on land",
+  "spanning_pairs": [],
+  "quake_study": {
+   "event_id": null,
+   "verdict": "not processed",
+   "reason": "Skwentna M5.6 ml (8 Aug): moment 6.9e16 N m (Mw 5.1); not processed"
+  }
+ },
+ {
+  "id": "us7000tiq2",
+  "added": "2026-11-14 second round: M 5.3-5.8, depth <= 15 km, on land",
+  "spanning_pairs": [],
+  "quake_study": {
+   "event_id": null,
+   "verdict": "not processed",
+   "reason": "Cafayate M5.3 (20 Sep): moment 1.1e17 N m, derived depth 17.5 km; expected under 2 cm; not processed"
+  }
+ },
+ {
+  "id": "us6000t8le",
+  "added": "2026-11-14 second round: M 5.3-5.8, depth <= 15 km, on land",
+  "spanning_pairs": [],
+  "quake_study": {
+   "event_id": null,
+   "verdict": "not processed",
+   "reason": "Barkhan M5.3 (27 Jun): no pre-event 12-day pair exists on either track (first pair spans the event); not processed"
+  }
+ },
+ {
+  "id": "us7000tdw6",
+  "added": "2026-11-14 second round: M 5.3-5.8, depth <= 15 km, on land",
+  "spanning_pairs": [],
+  "quake_study": {
+   "event_id": null,
+   "verdict": "not processed",
+   "reason": "Jiangyou M5.5 mb (3 Sep): forested Sichuan mountains, no moment tensor; not processed (time)"
+  }
+ },
+ {
+  "id": "us6000tip9",
+  "added": "2026-11-14 second round: M 5.3-5.8, depth <= 15 km, on land",
+  "spanning_pairs": [],
+  "quake_study": {
+   "event_id": null,
+   "verdict": "not processed",
+   "reason": "Peru M5.3 (6 Aug): its pre-event pair contains the M5.5 of 19 Jul; not processed"
+  }
  }
 ]

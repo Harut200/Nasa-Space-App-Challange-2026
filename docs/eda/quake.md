@@ -1,4 +1,4 @@
-# Did NISAR capture earthquakes? Yes, four of eight tried: Tibet M7.0, Venezuela M7.2, Panama M7.7, Kumamoto M6.8
+# Did NISAR capture earthquakes? Yes, six clear of fifteen tried: Tibet M7.0, Venezuela M7.2 and M7.5, Panama M7.7, Kumamoto M6.8, Qaidam M5.6
 
     export SERVER=user@host SSH_KEY=~/.ssh/key                     # only for the server steps, never stored in the repo
     .venv/bin/python -m scripts.detect.quake list                   # events in docs/eda/quake/events.json
@@ -7,10 +7,10 @@
     .venv/bin/python -m scripts.detect.quake run    EVENT [VIEW]    # numbers + figures (docs/eda/quake/EVENT/), results.json
     .venv/bin/python -m scripts.detect.quake export EVENT           # app layers + areas/EVENT (clear events only; Tibet is frozen)
     .venv/bin/python -m scripts.detect.quake overview               # docs/eda/quake/overview.png
-    .venv/bin/python -m pytest -q tests/test_quake.py               # 8 tests (maths, event config, two-look decomposition)
+    .venv/bin/python -m pytest -q tests/test_quake.py               # 8 tests; `queue [batch=N] EVENT:VIEW ...` runs two server lanes, N must be unique per call (maths, event config, two-look decomposition)
 
 An event is one record in `docs/eda/quake/events.json` (USGS facts, window, one entry per look direction with its
-co-seismic and control GUNW granule, radius, far-field radius, mask hints, verdict). Numbers: `docs/eda/quake/results.json`
+co-seismic and control GUNW granule, radius, far-field radius, mask hints, verdict; a view may carry its own `window`, `heights`, `radius_km`, `far_km`). Numbers: `docs/eda/quake/results.json`
 (keyed by event id, then look direction). Candidates: `docs/eda/quake/catalogue.json` (now with a `quake_study` field per
 event). Data (git-ignored): `data/processed/<event>-insar/<view>/`. Overview of the clear events at one fringe interval:
 `docs/eda/quake/overview.png`.
@@ -32,6 +32,21 @@ the USGS epicentre; control = the same statistic for a quiet pair on the same tr
 | Qinghai M5.8, 28 Jul (us6000tga9) | desc 24 Jul-17 Aug, 62/71; asc 18 Jul-11 Aug, 155/19 | **not detected** | 6.8 cm within 25 km (5.2 cm) | 4.5 cm (1.8) | expected few cm at most; ascending pair fully decorrelated; descending shows only atmosphere-sized gradients |
 | Mexico M7.3 offshore Chiapas, 17 Jul (us7000t1bu) | asc 12-24 Jul, 62/9; desc 12-24 Jul, 55/81 | **not detected** | 5.8 / 12.8 cm within 60 km, under 1 % valid pixels (9.3 / 12.2 cm) | 1.7 / 3.4 cm (2.3 / 3.2) | epicentre 60 km offshore, coast about 55 km away, land within +/-3 cm (asc); desc no coherent pattern |
 | Sanriku, Japan M6.9, 24 Jun (us6000t7zq) | asc 21 Jun-3 Jul, 110/22; desc 22 Jun-4 Jul, 118/68 | **not detected** | 20 / 5 cm within 50 km, 1.4 % valid pixels (8.3 / 6.0 cm) | 1.5 / 0.6 cm (2.2 / 2.4) | epicentre 35 km offshore and 34-45 km deep; coastal forest decorrelated; nothing above the control |
+
+Second round (14 Nov 2026, evening). Same rules; the small events use a 25 km radius, 30 km far field, +/-10 cm scale and 5 cm fringes.
+
+| Event (USGS id) | Look directions used (pair, track/frame) | Verdict | Numbers | Reason |
+|---|---|---|---|---|
+| Venezuela M7.5, 24 Jun (us6000t7zp) | desc 22 Jun-4 Jul, 126/83; asc 18-30 Jun, 61/7 | **clear** (desc strong; asc partial: 9 % valid) | desc 48 cm p2p within 60 km (control 10.8), 1,062 km2 above 10 cm (control 8); asc 66 cm (control p2p 64 from isolated pixels, areas above 10 cm 443 vs 12 km2) | fringes along the coast east of the epicentre, sign mirrored in asc; same pairs as the M7.2 (38 s earlier), not separable in time |
+| Qaidam, China M5.6, 18 Aug (us6000tlrj) | asc 25 Jul-18 Aug, 83/21; asc 13-25 Aug, 11/20; desc 26 Jul-19 Aug, 91/69 | **clear** (small, one compact patch, three pairs) | patch 3-4 km across, 5 km ESE of the epicentre: mean +6 / +10 / +6 cm within 3 km, 95th percentile 23 / 30 / 20 cm, about 10 km2 above 5 cm (controls: 0) | same patch in three independent pairs, two tracks and both directions; absent in the pre-event control; flat elsewhere |
+| Huancayo, Peru M5.5, 19 Jul (us7000t1q7) | asc 13-25 Jul, 75/171; desc 18 Jul-11 Aug, 155/94 (frame ends 3 km short of the patch) | **marginal** | patch mean +8 cm within 3 km, 95th percentile 25 cm, 19 km2 above 5 cm; p2p 13.6 cm within 25 km vs control 2.3 cm | compact patch 9 km south of the epicentre, clean control, but only one look direction |
+| Khuzdar, Pakistan M5.7, 17 Oct (us6000u2y1) | desc 6-18 Oct, 92/74 | **not detected** | 9.7 cm p2p (control 84 cm: unwrapping errors) | epicentre 5 km from a swath edge, smooth atmosphere-sized gradients |
+| Redwood Valley, California M5.6, 24 Jun (nc75382936) | asc 23 Jun-5 Jul, 135/21 | **not detected** | 7.3 cm (control 6.8) | one broad +5 cm area 40 km wide, same as control |
+| Turangi, New Zealand M5.7, 24 Jul (us7000t34g) | asc 14-26 Jul, 94/158 | **not detected** | 4.0 cm (control 3.2) | depth 23.5 km, nothing |
+| Qaidam M5.3, 30 Jun (us6000t9bg) | asc 19 Jun-1 Jul, 83/21 | **not detected** | 7.0 cm (control 13 cm, unwrapping errors) | atmosphere-sized gradients only |
+| Panama M7.7, other half | north frames asc 76/6 and desc 141/84, west frame asc 4/5 | no new layer | north views start 40-100 km north: nothing above noise; west view: far field too small, unstable (25 to 390 cm across variants) | see the Panama section below |
+| Kumamoto second view | asc 125/18 (36 d) | **marginal**, not exported | 24 cm p2p within 30 km (control 8.6) | epicentre on the frame edge, patchy coherence, no pattern across it; no new descending pair |
+| Tibet second view | none | unchanged | | ASF check 14 Nov (evening): no descending pair after 18 Oct, no ascending pair after 31 Oct |
 
 Not usable look directions (documented, not exported): Panama descending track 141 (27 Sep-9 Oct; mean coherence 0.20, four
 small disconnected unwrapping components), Kumamoto descending track 3 (36 days across the instrument outage, no usable
@@ -161,7 +176,60 @@ USGS us6000tgb9: Mww 6.8, 07:27:15 UTC, 32.618 N 130.660 E, depth 8 km (location
   descending track 3 pair (8 Jul-13 Aug, 36 days across the outage) has no usable pixels: vegetation decorrelation.
 * Figures: `docs/eda/quake/kumamoto-m68-2026/fig_*_asc24.png` and `_asc125.png`. App: `data/processed/kumamoto-m68-2026/products/`, `areas/kumamoto-m68-2026/`.
 
-## Not detected
+## Round 2 (14 Nov 2026, evening)
+
+### Venezuela M7.5, 24 June 2026 (its own event)
+
+USGS us6000t7zp: Mww 7.5, 22:05:12 UTC (38 s after the M7.2), 10.596 N 67.221 W, 20 km W of Catia La Mar, depth 23.5 km (derived; location depth fixed at 10), M0 2.1e20 N m,
+strike slip (nodal planes 355/86/-16 and 86/74/-176). **Caveat for any claim:** the USGS finite-fault product of the M7.5 solution starts at the M7.2 hypocentre (10.436 N 68.528 W, 22:04:33) and
+is about 170 km long (two segments, strike 81-86, peak slip 1.8 m): the "two events" may be one rupture sequence that USGS lists twice. Every pair contains both, so this event is the
+eastern part of the same signal (window 68.1-66.3 W, 9.95-11.05 N; the M7.2 epicentre is outside it).
+
+* Descending track 126 frame 83: 22 Jun-4 Jul, control 10-22 Jun. Ascending track 61 frame 7: 18-30 Jun, control 6-18 Jun. The epicentre is on the Caribbean coast; the north is sea, the asc frame has the epicentre
+  on its west edge, so only the south and east are seen. Valid pixels within 60 km: 36 % (desc), 9 % (asc; Caracas mountains, forest).
+* Desc: LOS -8 to +40 cm (48 cm p2p, variants 36-51), control 10.8 cm; far-field std 4.8 vs 1.8 cm; area above 5 / 10 / 20 cm 2,254 / 1,062 / 355 km2 (control 93 / 8 / 2). Fringes run east-west along the coast
+  (`fig_a_fringes_desc126.png`). Asc: -65 to +2 cm (variants 57-68), only a coastal strip east of the epicentre; the control's p2p (64 cm) comes from isolated pixels, its area above 10 cm is 12 km2 vs 443 km2.
+* Sign: the asc strip is red where the desc band is blue: mirrored, as for the M7.2, the signature of mostly horizontal motion. **No east/up split is exported** (asc covers 9 % of the pixels).
+* Physics: M0 2.1e20 N m on a shallow strike-slip fault gives metre-scale slip and LOS changes of tens of cm near the fault: same order as ours. Not claimed: plane, slip, rupture length.
+* Figures `docs/eda/quake/venezuela-m75-2026/`; app `data/processed/venezuela-m75-2026/products/` (`los_desc_cm`, `los_asc_cm`, `fringes` and `coherence` of desc), `areas/venezuela-m75-2026/`.
+
+### Qaidam, China M5.6, 18 August 2026 (the small clear event)
+
+USGS us6000tlrj: Mww 5.6, 21:36:27 UTC, 37.836 N 95.545 E, depth 6 km (derived 11.5), M0 3.0e17 N m, thrust (nodal planes 120/68/101 and 273/25/66); arid basin margin at 3,000-4,000 m, coherence 0.65-0.72.
+
+* Pairs: asc track 83 frame 21, 25 Jul-18 Aug (24 d; the second acquisition is 70 min after the event; control 13-25 Jul); asc track 11 frame 20, 13-25 Aug (12 d; control 25 Aug-6 Sep, **post-event**, includes aftershocks if any);
+  desc track 91 frame 69, 26 Jul-19 Aug (24 d; control 14-26 Jul).
+* All three show the same compact patch toward the satellite at **5 km east and 1-2 km south of the USGS epicentre** (offset within usual location error for M5.6): mean +5.9 / +10.1 / +5.8 cm within 3 km, 95th percentile
+  23 / 30 / 20 cm, a decorrelated rim around it (steep gradient: the highest pixel values, 28-36 cm, are not results), about 10 km2 above 5 cm within 10 km of the epicentre (asc 83 and desc 91; asc 11: 62 km2 including the frame-edge ramp); the controls have none (area 0, max 2-4 cm).
+  Elsewhere the maps are smooth within about +/-5 cm (atmosphere): p2p within 25 km 10.6 / 15.7 / 9.4 cm vs controls 3.7 / 8.8 / 6.0, far-field std 1.9 / 1.3 / 1.4 cm.
+* The same sign in an ascending and a descending view means the motion is mostly vertical-like in the line of sight; with only one patch and no sound simultaneous split we **do not state up or east**.
+* Physics: a shallow Mw 5.6 thrust (M0 3e17 N m, a few km of rupture with 0.1-0.3 m of slip) is expected to give up to 10-20 cm in the line of sight over a few km: ours is of that order and size. We cannot say which plane.
+* Honest limits: one compact patch, sign convention unconfirmed, steepest pixels decorrelated, 12-24 day pairs. The asc 11 control is post-event. Verdict clear because the same patch appears in three independent pairs and in no control.
+* Figures `docs/eda/quake/qaidam-m56-2026/fig_*_{asc83,asc11,desc91}.png`; app `data/processed/qaidam-m56-2026/products/` (`los_asc_cm`, `los_desc_cm`, `fringes`, `coherence`; asc 83 + desc 91; asc 11 not exported: same layer name; app bbox 95.15-95.95 E, 37.55-38.15 N; +/-10 cm scale, 5 cm fringes), `areas/qaidam-m56-2026/`.
+
+### Panama, the missing half
+
+ASF re-check (14 Nov): there are now co-seismic pairs on neighbouring frames: asc track 76 frame 6 (5-17 Oct), desc track 141 frame 84 (27 Sep-9 Oct; the frame-85 pair of the same dates was the decorrelated one), asc track 4 frame 5 (30 Sep-12 Oct, west). Post-event only: asc track 4
+12-24 Oct (not yet listed), desc 141/85 9-21 Oct (contains M6.0 and M6.1 aftershocks but no mainshock; not processed, the frame was decorrelated for the mainshock pair). Processed:
+
+* asc 76/6 and desc 141/84 (windows 81.9-79.7 W, 8.0-9.3 N): the frames start 40 to 100 km north of the epicentre. Smooth gradients, a few cm, controls the same size (desc: p2p of the 50-60 km strip is meaningless: 100 cm, control 40 cm, edge pixels). Nothing above the atmosphere: **no
+  northern lobe is visible 45 km and further north of the epicentre**; no layer.
+* asc 4/5 (west, windows 82.6-80.6 W, 7.0-8.2 N): mostly sea, the swath ends at the epicentre longitude; the plane fitted on the tiny far field gives 25 to 390 cm across variants: **unstable, not used**. The M6.6 (7.68 N 81.45 W) falls in sea/coast.
+* So no two sound look directions overlap in a new place and **no new east/up split** is attempted. The pattern remains the one-sided (east and south) one of the first round.
+
+### Kumamoto second view, Tibet
+
+* ASF (14 Nov): Kumamoto has asc track 24 frame 18 (used), asc 125/18 (36 d, partial: the epicentre is on its east edge, patchy coherence, 24 cm p2p vs control 8.6, no pattern across the epicentre: **marginal**, not exported) and desc 3/72 (decorrelated); no new pairs. 
+* Tibet: only tracks 91 (desc, last pair 6-18 Oct) and 112 (asc, last pair used) cover it; nothing new since yesterday.
+
+### Lower bar (M 5.3-5.8, depth <= 15 km, on land, 17 Jun-14 Nov)
+
+USGS query (234 events M >= 5.3, depth <= 15 km); on land with a pair spanning the event and a usable pre-event control: Qaidam M5.6, Huancayo M5.5, Khuzdar M5.7, Redwood Valley M5.6, Turangi M5.7, Qaidam M5.3 (processed, table above). Not processed
+(reason in `catalogue.json`): Lake Minchumina M5.6 (Mw 5.0 from the moment tensor), Skwentna M5.6 (Mw 5.1), Cafayate M5.3 (M0 1.1e17, expected under 2 cm), Barkhan M5.3 (no pre-event pair), Jiangyou M5.5 (forested mountains, no moment tensor, no time), Peru M5.3 of 6 Aug (control holds the M5.5);
+all others offshore or on islands or ice. **Why most are not detected:** M5.3-5.7 shallow events give a few cm over a few km, the same size as the atmosphere of a 12-day pair; only a compact patch repeated in independent pairs is accepted. M >= 5.8 since 22 Oct: nothing on land except the Tibet aftershocks
+(inside the mainshock pair; aftershocks of the other clear events also lie inside their mainshock pairs, no separate pair exists yet: Panama M6.1 of 12 Oct needs the 12-24 Oct pair on track 4 or 40, not listed).
+
+## Not detected (round 1)
 
 **Flores Sea M7.8, 14 Aug 2026** (us6000tkt2, 21:58 UTC, 8.336 S 121.345 E, 66 km NNW of Ende, depth 23.5 km, M0 5.5e20, thrust, nodal planes 90/32/90 and
 269/58/90, finite-fault peak slip 7 m). Pairs asc 12-24 Aug (168/173), desc 13-25 Aug (3/93); controls are post-event 17-29 Sep and 6-18 Sep (no
@@ -229,6 +297,8 @@ aftershocks of 27 Jun and 1 Jul (35 km deep). Under 1.5 % of the pixels within 5
 * No independent cross-check (Sentinel-1/ALOS-2 interferogram, GNSS, USGS finite-fault forward model to LOS) was done for any event.
 * Frames can end at the epicentre (Panama): the pattern is then only partly seen.
 * Area figures are clipped by the window and the masks, so they are minimums.
+* Small events (M5.3-5.7): signal and atmosphere are the same size, so only compact repeated patches count; USGS locations of such events (fixed depth 10 km) are uncertain by 5-10 km, which is why a patch 5-9 km from the epicentre is accepted only with repeats (Qaidam) and is marginal without (Huancayo). Several control pairs contain unwrapping errors (Khuzdar, Qaidam M5.3) and some controls are post-event (Qaidam asc 11, Kumamoto, Flores).
+* The Venezuela M7.2 and M7.5 may be one rupture sequence (USGS finite-fault geometry); the two app places show overlapping signals of the same pairs.
 
 ## What may and may not be claimed
 
@@ -240,7 +310,9 @@ aftershocks of 27 Jun and 1 Jul (35 km deep). Under 1.5 % of the pixels within 5
 * **Say:** "These are provisional measurements; where we looked at earthquakes in the sea (Flores M7.8, Mexico M7.3) or too small to see (Qinghai M5.8) we report that
   nothing was detected."
 * **Say (Venezuela only, with 'approximately'):** "Combining the two views gives roughly 40 cm of east-west motion and under 10 cm vertical."
-* **Do not say:** that NISAR measured vertical or horizontal displacement for Tibet, Kumamoto or Panama (one view or no sound decomposition), or that the Venezuela
+* **Say (Venezuela M7.5):** "NISAR's descending pair of 22 June-4 July shows fringes along the coast east of the epicentre of the M7.5 (24 June), 48 cm of line-of-sight change within 60 km against 11 cm before; the ascending pass sees the opposite sign. The M7.2 forty seconds earlier is in the same pairs and the two cannot be separated."
+* **Say (Qaidam M5.6):** "Even a magnitude 5.6 earthquake left a mark: in three NISAR pairs (two tracks, both directions) the same patch a few km wide, about 5 km from the USGS epicentre, moved toward the satellite by more than 5 cm (up to about 20 cm in its steepest part); the same tracks before the event show nothing there. This is a small signal; atmosphere makes cm-size patterns elsewhere in the map."
+* **Do not say:** that Huancayo (M5.5) or any other marginal / not detected small event was detected; that the Qaidam patch is vertical uplift (no sound split); that NISAR "sees M5 earthquakes" in general (of 7 events M5.3-5.8 tried, 5 showed nothing, 1 is marginal and only 1 is clear); fault plane, slip or rupture length; that the M7.2 and M7.5 Venezuela events are two separate ruptures (USGS finite-fault suggests one sequence); **do not say:** that NISAR measured vertical or horizontal displacement for Tibet, Kumamoto or Panama (one view or no sound decomposition), or that the Venezuela
   split is precise; the fault plane, slip or rupture length of any event; damage, casualties or any impact on people; that our maps are validated against GNSS,
   Sentinel-1 or any other data; that the sign (blue = toward satellite) is confirmed; extreme pixel values as results; forecasts or precursors; that the M7.5 and M7.2
   Venezuela signals are separated; that the Panama pattern is complete (frames end at the epicentre); that NISAR "failed" at Flores or Mexico (the ground there
@@ -258,6 +330,8 @@ Same format as Tibet for every clear event: `data/processed/<event>/products/`: 
 | Venezuela M7.2 | `data/processed/venezuela-m72-2026/products/`, `areas/venezuela-m72-2026/` | `los_asc_cm`, `los_desc_cm`, `fringes` (asc), `coherence` (asc), `east_cm`, `up_cm` (approximate) |
 | Panama M7.7 | `data/processed/panama-m77-2026/products/`, `areas/panama-m77-2026/` | `los_asc_cm`, `los_desc_cm`, `fringes` (desc), `coherence` (desc) |
 | Kumamoto M6.8 | `data/processed/kumamoto-m68-2026/products/`, `areas/kumamoto-m68-2026/` | `los_cm`, `fringes`, `coherence` |
+| Venezuela M7.5 (round 2) | `data/processed/venezuela-m75-2026/products/`, `areas/venezuela-m75-2026/` | `los_desc_cm` (primary), `los_asc_cm`, `fringes` (desc), `coherence` (desc) |
+| Qaidam M5.6 (round 2) | `data/processed/qaidam-m56-2026/products/`, `areas/qaidam-m56-2026/` | `los_asc_cm`, `los_desc_cm` (+/-10 cm), `fringes` (5 cm cycle, asc), `coherence` (asc); map 70 km wide |
 
 Things the lead must do or decide:
 
@@ -269,7 +343,7 @@ Things the lead must do or decide:
 
 ## Server leftovers
 
-`~/work2/job_quake*.json`, `~/work2/queue_quake.sh`, `~/work2/logs/quake_*.log`, `~/work2/out/quake/<event>/<view>/win/` (full-resolution `.npz`, 0.2-0.5 GB per
+`~/work2/job_quake*.json`, `~/work2/queue_quake*.sh`, `~/work2/logs/quake_*.log`, `~/work2/out/quake/<event>/<view>/win/` (full-resolution `.npz`, 0.2-0.5 GB per
 look direction pair set including `small2/`), the Tibet files from before. No process running when this was written (see the final report). Nothing outside `~/work2/`.
 
 *Data credit: NISAR L2 GUNW (UR and PROVISIONAL V1), NASA/JPL-Caltech and ISRO, distributed by the ASF DAAC. Earthquake

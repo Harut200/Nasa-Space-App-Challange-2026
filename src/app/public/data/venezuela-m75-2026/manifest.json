@@ -1,0 +1,161 @@
+{
+  "id": "venezuela-m75-2026",
+  "name": "Venezuela earthquake, M7.5, 24 Jun 2026",
+  "bounds": [
+    -68.1,
+    9.949397444525339,
+    -66.30038036830366,
+    11.049999999999999
+  ],
+  "dates": [],
+  "gaps": [],
+  "layers": [
+    {
+      "id": "los_desc_cm",
+      "label": "Ground motion along the line of sight, descending pass (cm)",
+      "dates": null,
+      "legend": {
+        "type": "diverging",
+        "unit": "cm",
+        "min": -40.0,
+        "max": 40.0,
+        "colors": [
+          "#67001f",
+          "#f7f7f7",
+          "#053061"
+        ],
+        "labels": [
+          "red: ground moved away from the satellite",
+          "blue: ground moved toward the satellite (sign convention not confirmed by the product guide)"
+        ]
+      }
+    },
+    {
+      "id": "los_asc_cm",
+      "label": "Ground motion along the line of sight, ascending pass (cm)",
+      "dates": null,
+      "legend": {
+        "type": "diverging",
+        "unit": "cm",
+        "min": -40.0,
+        "max": 40.0,
+        "colors": [
+          "#67001f",
+          "#f7f7f7",
+          "#053061"
+        ],
+        "labels": [
+          "red: ground moved away from the satellite",
+          "blue: ground moved toward the satellite (sign convention not confirmed by the product guide)"
+        ]
+      }
+    },
+    {
+      "id": "fringes",
+      "label": "Fringes (one colour cycle = 10 cm)",
+      "dates": null,
+      "legend": {
+        "type": "ramp",
+        "unit": "one colour cycle = 10 cm of line-of-sight change",
+        "min": 0,
+        "max": 10.0,
+        "colors": [
+          "#e2d9e2",
+          "#95b5c7",
+          "#6276ba",
+          "#592a8f",
+          "#2f1436",
+          "#741e4f",
+          "#b25652",
+          "#cca389",
+          "#e2d9e2"
+        ]
+      }
+    },
+    {
+      "id": "coherence",
+      "label": "Radar coherence (how comparable the two passes are)",
+      "dates": null,
+      "legend": {
+        "type": "ramp",
+        "unit": "coherence 0-1",
+        "min": 0,
+        "max": 1,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    }
+  ],
+  "story": {
+    "see": "On 24 June 2026 USGS lists a magnitude 7.5 earthquake 20 km west of Catia La Mar, Venezuela (10.60 N, 67.22 W, depth about 24 km), 38 seconds after a magnitude 7.2 about 146 km to the west. Both fall inside every NISAR pair we could use, so this map shows the combined movement of the sequence in the east. The map shows how far the ground moved along the radar's line of sight between two passes, 22 June and 4 July from the descending track, with a second layer from the ascending track (18 to 30 June). Blue is ground that moved toward the satellite, red away from it. In the fringe layer, one colour cycle is 10 cm. Grey speckle is where the passes could not be compared (forest, mountains, water).",
+    "physics": "The US Geological Survey's moment tensor for the M7.5 shows strike-slip faulting, in which the two sides of a near-vertical fault slide past each other horizontally. Within 60 km of the epicentre the descending map spans about 48 cm of line-of-sight change from the most red to the most blue pixels (0.5th to 99.5th percentile), in bands of fringes that run east to west along the coast. The ascending pass sees the opposite sign (mostly red along the coast, up to about 65 cm), which is what mostly horizontal motion looks like from opposite sides. The north of the epicentre is sea and the ascending frame only covers the east, so we see only part of the pattern. Fault position and mechanism come from USGS; our map does not by itself tell which fault plane moved.",
+    "lband": "NISAR's L-band radar has a wavelength of about 24 cm, so one full colour cycle means about 12 cm of ground movement along the line of sight (we show 10 cm cycles). The same tracks one pair earlier (10 to 22 June descending, 6 to 18 June ascending), with no event in them, show only smooth variations of about 10 cm (descending) with far-field noise of about 2 cm. Only 36 percent (descending) and 9 percent (ascending) of the pixels within 60 km are usable because of vegetation and steep terrain. The products are PROVISIONAL and the sign convention (blue = toward the satellite) follows the interferogram definition we assumed, not a statement in the product guide.",
+    "people": "This is a measurement of ground movement, not of damage. We did not look at reports of damage or casualties. Maps like this show where the ground moved and by how much, which feeds hazard models. The pairs span several days after the shaking, so they include any aftershock movement, and the M7.2 and M7.5 signals cannot be separated here."
+  },
+  "spots": [
+    {
+      "id": "epicentre",
+      "label": "USGS epicentre",
+      "lngLat": [
+        -67.2205,
+        10.5955
+      ]
+    },
+    {
+      "id": "toward-lobe",
+      "label": "Strongest movement toward the satellite (blue)",
+      "lngLat": [
+        -66.8544,
+        10.6011
+      ]
+    },
+    {
+      "id": "away-lobe",
+      "label": "Strongest movement away from the satellite (red)",
+      "lngLat": [
+        -67.6177,
+        10.2263
+      ]
+    }
+  ],
+  "credits": "NISAR data: NASA/JPL-Caltech and ISRO, distributed by ASF DAAC. PROVISIONAL calibration.",
+  "source": null,
+  "kind": "event",
+  "event": {
+    "type": "earthquake",
+    "magnitude": 7.5,
+    "time": "2026-06-24T22:05:12Z",
+    "depth_km": 23.5,
+    "lngLat": [
+      -67.2205,
+      10.5955
+    ],
+    "place": "20 km W of Catia La Mar, Venezuela",
+    "mechanism": "strike slip (nodal planes 355/86/-16 and 86/74/-176)",
+    "usgs_id": "us6000t7zp",
+    "radius_km": 60,
+    "views": [
+      {
+        "id": "desc126",
+        "label": "descending",
+        "track": 126,
+        "before": "2026-06-22",
+        "after": "2026-07-04",
+        "p2p_cm": 48,
+        "control_p2p_cm": 11
+      },
+      {
+        "id": "asc61",
+        "label": "ascending",
+        "track": 61,
+        "before": "2026-06-18",
+        "after": "2026-06-30",
+        "p2p_cm": 66,
+        "control_p2p_cm": 64
+      }
+    ]
+  },
+  "category": "earthquake"
+}

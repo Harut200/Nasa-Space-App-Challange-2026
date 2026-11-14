@@ -165,8 +165,8 @@ def granule_url(g):
 def job_for(ev, view):
     v = ev["views"][view]
     return {"out": f"~/work2/out/quake/{ev['id']}/{view}",
-            "windows": [{"id": "win", "bbox": ev["window"], "fine": False}],
-            "gunw_fine": False, "cache_mb": 12, "hmin": ev["heights"][0], "hmax": ev["heights"][1],
+            "windows": [{"id": "win", "bbox": v.get("window", ev["window"]), "fine": False}],
+            "gunw_fine": False, "cache_mb": 12, "hmin": v.get("heights", ev["heights"])[0], "hmax": v.get("heights", ev["heights"])[1],
             "layers": ["unwrappedPhase", "coherenceMagnitude", "connectedComponents"] if not ev.get("legacy_flat")
             else ["unwrappedPhase", "coherenceMagnitude", "connectedComponents", "ionospherePhaseScreen",
                   "ionospherePhaseScreenUncertainty"],
@@ -194,24 +194,27 @@ def launch(ev, view):
     print(ev["id"], view, r.stdout.strip()[-40:], r.returncode)
 
 
-def queue(items, max_jobs=3):
-    """Upload the job files of items [(event, view), ...] and start one detached server queue that runs them in order,
-    never more than max_jobs extractions at once (the server has 2 CPUs and 0.5 GB)."""
+def queue(items, lanes=2, batch=0):
+    """Upload the job files of items [(event, view), ...] and start detached server lanes (default two) that each run their
+    share one extraction at a time, waiting until at least 100 MB of memory is available before each start
+    (the server has 2 CPUs and 0.5 GB and is shared)."""
     srv, opts = _ssh_base()
     names = []
     for ev, view in items:
         name = f"job_quake_{ev['id']}_{view}.json"
-        r = subprocess.run(["ssh"] + opts + [srv, f"cat > ~/work2/{name}"], input=json.dumps(job_for(ev, view)), text=True, capture_output=True)
+        subprocess.run(["ssh"] + opts + [srv, f"cat > ~/work2/{name}"], input=json.dumps(job_for(ev, view)), text=True, capture_output=True)
         names.append((name, f"{ev['id']}_{view}"))
-    lines = ["cd ~/work2; mkdir -p logs"]
-    for name, tag in names:
-        lines.append("while [ $(ps aux | grep -c '[r]emote_products.py extract') -ge %d ]; do sleep 10; done" % max_jobs)
-        lines.append(f"(setsid nohup ~/work/venv/bin/python remote_products.py extract ~/work2/{name} >> ~/work2/logs/quake_{tag}.log 2>&1 < /dev/null &)")
-        lines.append("sleep 25")
-    script = "\n".join(lines) + "\n"
-    r = subprocess.run(["ssh"] + opts + [srv, "cat > ~/work2/queue_quake.sh; (setsid nohup bash ~/work2/queue_quake.sh > ~/work2/logs/queue_quake.log 2>&1 < /dev/null &); echo queued"],
-                       input=script, text=True, capture_output=True)
-    print(r.stdout.strip()[-30:], [t for _, t in names])
+    for lane in range(lanes):
+        lines = ["cd ~/work2; mkdir -p logs"]
+        if batch:  # wait for the lanes of all earlier batches (numbered lower) so that never more than `lanes` extractions run
+            lines.append("while ps aux | grep '[b]ash /home/opc/work2/queue_quake_b' | grep -o 'queue_quake_b[0-9]*' | tr -d 'a-z_' | awk '{if ($1+0 < %d) f=1} END{exit !f}'; do sleep 20; done" % batch)
+        for name, tag in names[lane::lanes]:
+            lines.append("while [ $(free -m | awk '/Mem:/{print $7}') -lt 100 ]; do sleep 15; done")
+            lines.append(f"~/work/venv/bin/python remote_products.py extract ~/work2/{name} >> ~/work2/logs/quake_{tag}.log 2>&1 < /dev/null")
+        script = "\n".join(lines) + "\n"
+        r = subprocess.run(["ssh"] + opts + [srv, f"cat > ~/work2/queue_quake_b{batch}_{lane}.sh; (setsid nohup bash ~/work2/queue_quake_b{batch}_{lane}.sh > ~/work2/logs/queue_quake_b{batch}_{lane}.log 2>&1 < /dev/null &); echo queued"],
+                           input=script, text=True, capture_output=True)
+        print("lane", lane, r.stdout.strip()[-30:], [t for _, t in names[lane::lanes]])
 
 
 def fetch(ev, view):
@@ -350,8 +353,8 @@ def analyse_view(ev, view):
            "coseismic_pair": v["co"]["pair"], "control_pair": v["control"]["pair"], "wavelength_m": Pc["wavelength"]}
     if ev.get("stripe"):
         keep_c, keep_t, out["stripe_line"] = tibet_north_masks(Pc, Pt, ex, ey)
-    comp, gmin, radius = ev.get("component"), ev.get("gmin", 0.35), ev.get("radius_km", 45)
-    R = ev.get("far_km", 60)
+    comp, gmin, radius = ev.get("component"), v.get("gmin", ev.get("gmin", 0.35)), v.get("radius_km", ev.get("radius_km", 45))
+    R = v.get("far_km", ev.get("far_km", 60))
     var = {}
     variants = {"main_noiono_R%d" % R: {}}
     if "ionospherePhaseScreen" in Pc:
@@ -694,9 +697,13 @@ def write_area(ev, res):
             if two else "one look direction only (provisional)")
     spots = [{"id": "epicentre", "label": "USGS epicentre", "lngLat": [ev["lon"], ev["lat"]], "radius_m": 3000}]
     ls = _lobe_spots(ev, prim)
-    spots += [{"id": "toward-lobe", "label": "Strongest movement toward the satellite (blue)", "lngLat": ls["toward"], "radius_m": 3000},
-              {"id": "away-lobe", "label": "Strongest movement away from the satellite (red)", "lngLat": ls["away"], "radius_m": 3000}]
+    spots.append({"id": "toward-lobe", "label": "Strongest movement toward the satellite (blue)", "lngLat": ls["toward"], "radius_m": 3000})
+    if not ev.get("toward_spot_only"):  # small events: the red extreme is only atmosphere, so no spot for it
+        spots.append({"id": "away-lobe", "label": "Strongest movement away from the satellite (red)", "lngLat": ls["away"], "radius_m": 3000})
+    W_, S_, E_, N_ = ev.get("app_bbox", ev["window"])
     for s_ in ev.get("sources", []):
+        if not (W_ <= s_["lon"] <= E_ and S_ <= s_["lat"] <= N_):
+            continue  # a second epicentre outside the map is not a spot
         spots.append({"id": "usgs-" + s_["usgs_id"], "label": f"USGS epicentre of the M{s_['mag']} event", "lngLat": [s_["lon"], s_["lat"]], "radius_m": 3000})
     extra = ev.get("story_extra", {})
     sees = (f"On {evdate} a magnitude {ev['mag']} earthquake struck {ev['place']} (USGS: {abs(ev['lat']):.2f} {'N' if ev['lat'] >= 0 else 'S'}, "
@@ -747,7 +754,10 @@ def main(argv):
             else:
                 (launch if cmd == "launch" else fetch)(ev, k)
     elif cmd == "queue":  # queue EVENT:VIEW ...
-        queue([(get_event(a.split(":")[0]), a.split(":")[1]) for a in argv[2:]])
+        b = 0
+        if argv[2].startswith("batch="):
+            b, argv = int(argv[2][6:]), argv[:2] + argv[3:]
+        queue([(get_event(a.split(":")[0]), a.split(":")[1]) for a in argv[2:]], batch=b)
     elif cmd == "run":
         run(get_event(argv[2]), argv[3] if len(argv) > 3 else None)
     elif cmd == "decompose":
@@ -779,7 +789,7 @@ def overview():
         ax.set_title(f"M{ev['mag']} {ev['id'].split('-')[0].title()}, {ev['time'][:10]}\n{ev['views'][k]['label']}, pair {ev['views'][k]['co']['pair']}", fontsize=8)
         ax.set_xlabel("km east of epicentre", fontsize=8)
     fig.suptitle("NISAR LOS displacement, one colour cycle = 10 cm in every panel", fontsize=10)
-    _save({"id": "", "legacy_flat": True}, fig, "overview.png", dpi=70)
+    _save({"id": "", "legacy_flat": True}, fig, "overview.png", dpi=58)
 
 
 if __name__ == "__main__":
