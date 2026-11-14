@@ -1933,6 +1933,198 @@
      "max": 1.4528
     },
     "incidence_deg_mean": 40.63505172729492
+   },
+   "d_late": {
+    "event": "Burgohondo fire scar by coherence, Avila, from late Jul 2026",
+    "view": "d_late",
+    "track": 23,
+    "frame": 68,
+    "direction": "D",
+    "event_pair": "20260907_20260919",
+    "control_pair": "20260709_20260721",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 15,
+    "far_km": 45,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.09229179471731186,
+    "mean_coh_control_within_radius": 0.8241461515426636,
+    "mean_coh_event_whole_window": 0.12132344394922256,
+    "mean_coh_control_whole_window": 0.7921207547187805,
+    "coherence_loss": {
+     "loss_area_km2": 694.7264,
+     "comparable_area_km2": 694.7648,
+     "loss_fraction_inside": 0.9999447294969463,
+     "loss_fraction_outside": 0.9580143468892344,
+     "comparable_px_inside": 108557,
+     "loss_area_km2_whole_window": 6314.515200000001,
+     "mean_coh_control_at_loss_px": 0.8336176872253418,
+     "mean_coh_event_at_loss_px": 0.09215984493494034
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 6313.9776,
+      "lon": -4.6191,
+      "lat": 40.3871,
+      "max_side_km": 92.0
+     },
+     {
+      "area_km2": 0.3136,
+      "lon": -4.4023,
+      "lat": 40.6904,
+      "max_side_km": 1.36
+     },
+     {
+      "area_km2": 0.224,
+      "lon": -4.4879,
+      "lat": 40.7344,
+      "max_side_km": 0.8
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 63,
+     "median": 605.0112,
+     "p95": 695.6441599999999,
+     "max": 699.4816000000001
+    },
+    "incidence_deg_mean": 43.06723403930664
+   },
+   "a_ign": {
+    "event": "Burgohondo fire scar by coherence, Avila, from late Jul 2026",
+    "view": "a_ign",
+    "track": 87,
+    "frame": 22,
+    "direction": "A",
+    "event_pair": "20260714_20260726",
+    "control_pair": "20260702_20260714",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 15,
+    "far_km": 45,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.6491654515266418,
+    "mean_coh_control_within_radius": 0.7901261448860168,
+    "mean_coh_event_whole_window": 0.762229323387146,
+    "mean_coh_control_whole_window": 0.7674123048782349,
+    "coherence_loss": {
+     "loss_area_km2": 137.0752,
+     "comparable_area_km2": 686.6496000000001,
+     "loss_fraction_inside": 0.1996290393236958,
+     "loss_fraction_outside": 0.013491031915989557,
+     "comparable_px_inside": 107289,
+     "loss_area_km2_whole_window": 215.85920000000002,
+     "mean_coh_control_at_loss_px": 0.8114098310470581,
+     "mean_coh_event_at_loss_px": 0.2616134285926819
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 98.784,
+      "lon": -4.5986,
+      "lat": 40.3717,
+      "max_side_km": 20.8
+     },
+     {
+      "area_km2": 39.1616,
+      "lon": -4.3026,
+      "lat": 40.3629,
+      "max_side_km": 14.8
+     },
+     {
+      "area_km2": 29.4208,
+      "lon": -4.7669,
+      "lat": 40.3114,
+      "max_side_km": 11.040000000000001
+     },
+     {
+      "area_km2": 10.5024,
+      "lon": -4.4067,
+      "lat": 40.4577,
+      "max_side_km": 6.08
+     },
+     {
+      "area_km2": 2.5728,
+      "lon": -4.7385,
+      "lat": 40.3652,
+      "max_side_km": 2.64
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 63,
+     "median": 1.76,
+     "p95": 49.6,
+     "max": 54.048
+    },
+    "incidence_deg_mean": 40.640411376953125
+   }
+  },
+  "verdict": null
+ },
+ "gironde-coh-2026": {
+  "event_id": "gironde-coh-2026",
+  "views": {
+   "a_late": {
+    "event": "Gironde megafire scar by coherence, France, from about 22 Jul 2026",
+    "view": "a_late",
+    "track": 130,
+    "frame": 24,
+    "direction": "A",
+    "event_pair": "20260822_20260903",
+    "control_pair": "20260705_20260717",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 12,
+    "far_km": 36,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.6507105231285095,
+    "mean_coh_control_within_radius": 0.5684378147125244,
+    "mean_coh_event_whole_window": 0.45745405554771423,
+    "mean_coh_control_whole_window": 0.39021560549736023,
+    "coherence_loss": {
+     "loss_area_km2": 2.2208,
+     "comparable_area_km2": 347.6288,
+     "loss_fraction_inside": 0.006388423513817037,
+     "loss_fraction_outside": 0.005769369369369369,
+     "comparable_px_inside": 54317,
+     "loss_area_km2_whole_window": 12.4672,
+     "mean_coh_control_at_loss_px": 0.6638616919517517,
+     "mean_coh_event_at_loss_px": 0.19995389878749847
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 3.1104000000000003,
+      "lon": -1.1876,
+      "lat": 44.5452,
+      "max_side_km": 3.36
+     },
+     {
+      "area_km2": 1.472,
+      "lon": -0.9397,
+      "lat": 45.1007,
+      "max_side_km": 2.32
+     },
+     {
+      "area_km2": 1.1648,
+      "lon": -0.7934,
+      "lat": 44.9377,
+      "max_side_km": 2.48
+     },
+     {
+      "area_km2": 0.9344,
+      "lon": -1.0632,
+      "lat": 45.0564,
+      "max_side_km": 1.2
+     },
+     {
+      "area_km2": 0.7296,
+      "lon": -0.7884,
+      "lat": 44.6988,
+      "max_side_km": 1.2
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 26,
+     "median": 1.6032000000000002,
+     "p95": 3.1104000000000003,
+     "max": 3.2448
+    },
+    "incidence_deg_mean": 43.08988952636719
    }
   },
   "verdict": null

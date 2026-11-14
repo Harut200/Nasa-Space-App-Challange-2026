@@ -1169,7 +1169,7 @@
  {
   "id": "burgohondo-coh-2026",
   "type": "fire",
-  "title": "Burgohondo fire scar by coherence, Avila, from late Jul 2026",
+  "title": "Burgohondo fire, Avila: forest and scrub surface changed, 14-26 July 2026",
   "time": "2026-07-22T00:00:00Z",
   "lat": 40.38,
   "lon": -4.65,
@@ -1185,7 +1185,7 @@
    2300
   ],
   "radius_km": 15,
-  "far_km": 45,
+  "far_km": 30,
   "gmin": 0.35,
   "source_url": "https://www.elespanol.com/castilla-y-leon/region/avila/20260726/incendio-burgohondo-hectareas-quemadas-mayor-historia-espana/1003744334616_0.html",
   "views": {
@@ -1248,21 +1248,68 @@
     }
    }
   },
-  "verdict": null,
+  "verdict": "clear",
   "deformation": false,
   "loss_hi": 0.5,
   "loss_lo": 0.45,
   "loss_drop": 0.3,
   "min_px": 30,
-  "time_note": "fire originated 22 Jul (AP via search summary)"
+  "time_note": "fire declared 22 Jul (eldiario.es); pair 14-26 Jul; the control pair ends 14 Jul",
+  "primary_view": "a_ign",
+  "export_views": [
+   "a_ign"
+  ],
+  "export_deformation": false,
+  "app_views": [
+   "a_ign"
+  ],
+  "zoom_km": 22,
+  "summary_number": "\u2248 216 km\u00b2 of ground changed completely (largest connected patch 99 km\u00b2)",
+  "site_label": "Navaluenga (Wikipedia, 40.41 N 4.71 W)",
+  "verdict_reason": "137 km2 of lost coherence within 15 km (largest patch 98.8 km2, 216 km2 in the window) vs a 95th percentile of 49.6 km2 in 63 equal random discs and 1.4 % of comparable ground outside; control 0.81 -> 0.26; the pair 19-31 Aug (after the fire, same control) shows nothing (the scar is coherent again)",
+  "extra_spots": [
+   {
+    "id": "patch",
+    "label": "Centre of the largest patch of lost coherence",
+    "lngLat": [
+     -4.5986,
+     40.3717
+    ],
+    "radius_m": 6000
+   },
+   {
+    "id": "east",
+    "label": "Second patch, 30 km further east",
+    "lngLat": [
+     -4.3026,
+     40.3629
+    ],
+    "radius_m": 5000
+   },
+   {
+    "id": "reference",
+    "label": "Reference: stays coherent in both pairs",
+    "lngLat": [
+     -4.95,
+     40.55
+    ],
+    "radius_m": 4000
+   }
+  ],
+  "story": {
+   "see": "The Burgohondo fire was declared on Wednesday 22 July 2026 in Burgohondo, province of Avila (eldiario.es). By 26 July Spain's environment minister put it at about 50,000 hectares and called it the largest forest fire in recent Spanish history; it was managed together with connected fronts in Madrid and Toledo (El Espanol). The orange area is where the radar picture between NISAR's 14 and 26 July passes no longer matches the pair taken just before it (2 to 14 July). It stretches east from Navaluenga.",
+   "physics": "Burning removes the leaves, twigs and scrub that gave the ground a repeatable radar echo, and what is left looks different to the radar, so the two passes cannot be compared there. About 216 km2 in the map lost coherence (137 km2 within 15 km of the centre, 99 km2 in the largest connected patch). Equal circles placed elsewhere in the same map lose at most 50 km2 (95th percentile of 63), and about 1 % of the comparable ground outside the site changes like this. We do not measure the burned area: only ground that was coherent before is counted, and the fire continued east beyond this map.",
+   "lband": "NISAR's L-band radar has a wavelength of about 24 cm. Over this dry land the quiet pair before the fire is bright almost everywhere, so a burn shows as a dark scar with hard edges. In the pair of 19 to 31 August, after the fire, the same ground is coherent again, so the map marks the change that happened inside 14 to 26 July. Dew or rain on the ground cannot be fully excluded from coherence alone; the shape, the place and the date are what we rely on.",
+   "people": "This map shows where the surface changed, not damage. We did not look at reports of damage, evacuations or casualties."
+  }
  },
  {
   "id": "gironde-coh-2026",
   "type": "fire",
   "title": "Gironde megafire scar by coherence, France, from about 22 Jul 2026",
   "time": "2026-07-22T00:00:00Z",
-  "lat": 44.85,
-  "lon": -1.02,
+  "lat": 44.87,
+  "lon": -1.09,
   "place": "Landes de Gascogne, Gironde, France",
   "window": [
    -1.45,
@@ -1293,20 +1340,34 @@
      "granule": "NISAR_L2_PR_GUNW_024_130_A_024_025_2000_SH_20260705T050009_20260705T050044_20260717T050008_20260717T050043_P05023_N_F_J_001"
     }
    },
-   "a_late2": {
+   "a_ign": {
     "track": 130,
     "frame": 24,
     "direction": "A",
     "label": "ascending",
+    "data_view": "a_late",
     "co": {
-     "pair": "20260915_20260927",
-     "granule": "NISAR_L2_PR_GUNW_030_130_A_024_031_2000_SH_20260915T050006_20260915T050041_20260927T050006_20260927T050041_P05023_N_F_J_001"
+     "pair": "20260717_20260810",
+     "granule": "NISAR_L2_PR_GUNW_025_130_A_024_027_2000_SH_20260717T050008_20260717T050043_20260810T050007_20260810T050042_P05023_N_F_J_001"
     },
     "control": {
      "pair": "20260705_20260717",
      "granule": "NISAR_L2_PR_GUNW_024_130_A_024_025_2000_SH_20260705T050009_20260705T050044_20260717T050008_20260717T050043_P05023_N_F_J_001"
+    }
+   },
+   "d_ign": {
+    "track": 95,
+    "frame": 66,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260714_20260726",
+     "granule": "NISAR_L2_PR_GUNW_025_095_D_066_026_2000_SH_20260714T190817_20260714T190852_20260726T190816_20260726T190851_P05023_N_F_J_001"
     },
-    "data_view": "a_late"
+    "control": {
+     "pair": "20260702_20260714",
+     "granule": "NISAR_L2_PR_GUNW_024_095_D_066_025_2000_SH_20260702T190818_20260702T190853_20260714T190817_20260714T190852_P05023_F_F_J_001"
+    }
    }
   },
   "verdict": null,
@@ -1972,5 +2033,65 @@
   "loss_drop": 0.25,
   "min_px": 12,
   "time_note": "dome growth continuous through the window"
+ },
+ {
+  "id": "hautes-fagnes-fire-2026",
+  "type": "fire",
+  "title": "Hautes Fagnes (High Fens) fire, Belgium, from 14 Aug 2026",
+  "time": "2026-08-14T12:00:00Z",
+  "lat": 50.53,
+  "lon": 6.1,
+  "place": "Hautes Fagnes plateau, Belgium, near the German border",
+  "window": [
+   5.85,
+   50.35,
+   6.35,
+   50.7
+  ],
+  "heights": [
+   300,
+   700
+  ],
+  "radius_km": 10,
+  "far_km": 30,
+  "gmin": 0.35,
+  "source_url": "https://www.parismatch.be/actualites/environnement/2026/08/16/incendie-dans-les-fagnes-3000-hectares-ravages-bart-de-wever-salue-le-travail-remarquable-des-equipes-mobilisees-FWOBHOF3UVHH3PAEPEF3SCHGEU/",
+  "views": {
+   "a_ign": {
+    "track": 144,
+    "frame": 27,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260811_20260823",
+     "granule": "NISAR_L2_PR_GUNW_027_144_A_027_028_2000_SH_20260811T042012_20260811T042047_20260823T042011_20260823T042047_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260706_20260718",
+     "granule": "NISAR_L2_PR_GUNW_024_144_A_027_025_2000_SH_20260706T042014_20260706T042049_20260718T042013_20260718T042049_P05023_N_F_J_001"
+    }
+   },
+   "d_ign": {
+    "track": 66,
+    "frame": 63,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260724_20260817",
+     "granule": "NISAR_L2_PR_GUNW_026_066_D_063_028_2000_SH_20260724T184955_20260724T185030_20260817T184954_20260817T185029_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260712_20260724",
+     "granule": "NISAR_L2_PR_GUNW_025_066_D_063_026_2000_SH_20260712T184956_20260712T185031_20260724T184955_20260724T185030_P05023_N_F_J_001"
+    }
+   }
+  },
+  "verdict": null,
+  "deformation": false,
+  "loss_hi": 0.5,
+  "loss_lo": 0.45,
+  "loss_drop": 0.3,
+  "min_px": 30,
+  "time_note": "start time not given; reported from 14 Aug"
  }
 ]

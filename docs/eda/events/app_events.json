@@ -268,5 +268,49 @@
    }
   ],
   "time_note": "fire began 16 Jul (The Local); pair 14-26 Jul; the control pair ends the day of 14 Jul, before it"
+ },
+ {
+  "id": "burgohondo-coh-2026",
+  "type": "fire",
+  "title": "Burgohondo fire, Avila: forest and scrub surface changed, 14-26 July 2026",
+  "time": "2026-07-22T00:00:00Z",
+  "lat": 40.38,
+  "lon": -4.65,
+  "place": "Valle del Alberche, Avila, Spain",
+  "summary_number": "≈ 216 km² of ground changed completely (largest connected patch 99 km²)",
+  "radius_km": 15,
+  "views": [
+   {
+    "id": "a_ign",
+    "label": "ascending",
+    "track": 87,
+    "before": "2026-07-14",
+    "after": "2026-07-26",
+    "p2p_cm": null,
+    "control_p2p_cm": null,
+    "control_before": "2026-07-02",
+    "control_after": "2026-07-14",
+    "control_is_before": true,
+    "exported": true
+   }
+  ],
+  "source_url": "https://www.elespanol.com/castilla-y-leon/region/avila/20260726/incendio-burgohondo-hectareas-quemadas-mayor-historia-espana/1003744334616_0.html",
+  "before_after": [
+   {
+    "view": "a_ign",
+    "before": "coherence_before",
+    "after": "coherence",
+    "label": "Radar coherence",
+    "before_dates": [
+     "2026-07-02",
+     "2026-07-14"
+    ],
+    "after_dates": [
+     "2026-07-14",
+     "2026-07-26"
+    ]
+   }
+  ],
+  "time_note": "fire declared 22 Jul (eldiario.es); pair 14-26 Jul; the control pair ends 14 Jul"
  }
 ]
