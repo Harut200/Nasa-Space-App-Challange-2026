@@ -16,15 +16,15 @@ def load(p, default=None):
     return json.loads(p.read_text()) if p.exists() else default
 
 
-def target_grid(src):
-    """One 3857 grid from the source grid; longer side capped at MAX_SIDE."""
+def target_grid(src, max_side=MAX_SIDE):
+    """One 3857 grid from the source grid; longer side capped at max_side."""
     t, w, h = calculate_default_transform(src.crs, "EPSG:3857", src.width, src.height, *src.bounds)
-    if max(w, h) > MAX_SIDE:
-        s = max(w, h) / MAX_SIDE
+    if max(w, h) > max_side:
+        s = max(w, h) / max_side
         t, w, h = calculate_default_transform(
             src.crs, "EPSG:3857", src.width, src.height, *src.bounds,
             resolution=(t.a * s, -t.e * s))
-        w, h = min(w, MAX_SIDE), min(h, MAX_SIDE)
+        w, h = min(w, max_side), min(h, max_side)
     return t, w, h
 
 
@@ -48,7 +48,7 @@ def export(area, root=ROOT):
 
     first = next(prod.glob("*/*.tif"), None) or next(prod.glob("*.tif"))
     with rasterio.open(first) as src:
-        grid = target_grid(src)
+        grid = target_grid(src, cfg.get("export_max_side", MAX_SIDE))  # area.json may cap the webp size (analysis unaffected)
     t, w, h = grid
     # degrees of the grid's outer pixel edges (not centres)
     (west, east), (south, north) = [
@@ -105,7 +105,9 @@ def export(area, root=ROOT):
     shutil.copy(prod / "timeseries.json", pub / area / "timeseries.json")
     idx = load(pub / "index.json", {"areas": []})
     if area not in idx["areas"]:
-        idx["areas"].append(area)
+        base = area.removesuffix("-cal")  # a calibrated place sits right after its preview place
+        at = idx["areas"].index(base) + 1 if area != base and base in idx["areas"] else len(idx["areas"])
+        idx["areas"].insert(at, area)
     (pub / "index.json").write_text(json.dumps(idx, indent=2))
 
 

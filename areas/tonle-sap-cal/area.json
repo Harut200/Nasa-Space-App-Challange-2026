@@ -1,0 +1,16 @@
+{
+  "id": "tonle-sap-cal",
+  "name": "Tonle Sap, calibrated 80 m",
+  "bbox": [
+    103.4,
+    11.8,
+    105.2,
+    13.6
+  ],
+  "track": 83,
+  "frame": 8,
+  "direction": "ascending",
+  "pixel_m": 80,
+  "extra_layers": [],
+  "export_max_side": 1600
+}

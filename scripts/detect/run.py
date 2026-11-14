@@ -37,7 +37,8 @@ from scripts.detect.stack import device, load_area, load_preview_stack  # noqa: 
 # ----------------------------------------------------------------------------
 DISPLAY = {
     "preview": {"change": {"thr": 0.10, "full": 0.35}, "grey": {"hh": (0.0, 1.0), "hv": (0.0, 1.0)}},
-    "gamma0": {"change": {"thr": 3.0, "full": 8.0}, "grey": {"hh": (-25.0, -5.0), "hv": (-30.0, -10.0)}},
+    # calibrated (docs/eda/calibrated.md s11): forest is -5 / -9.7 dB; pixel noise +-0.5 dB at ENL 80
+    "gamma0": {"change": {"thr": 1.5, "full": 6.0}, "grey": {"hh": (-25.0, -3.0), "hv": (-30.0, -8.0)}},
 }
 CHANGE_MIN_ALPHA = 0.3   # opacity just above the threshold (rises linearly to 1 at "full")
 
@@ -57,7 +58,8 @@ PREVIEW_UNIT = "relative brightness (0–100, uncalibrated)"
 CREDITS = {
     "preview": ("NISAR GCOV preview images: NASA/JPL-Caltech and ISRO, distributed by ASF DAAC. "
                 "Uncalibrated previews at about 180 m; values are display brightness, not backscatter."),
-    "gamma0": "NISAR data: NASA/JPL-Caltech and ISRO, distributed by ASF DAAC. PROVISIONAL calibration.",
+    "gamma0": ("Calibrated NISAR L2 GCOV (gamma-naught backscatter, 80 m): NASA/JPL-Caltech and ISRO, distributed by "
+               "ASF DAAC. PROVISIONAL calibration."),
 }
 
 
@@ -195,6 +197,31 @@ def fused_range(area, T, valid, km2):
     return {"lo": area_at(0.75), "hi": area_at(0.25)}
 
 
+def gamma0_range(x, o, wok, km2, weaks=(-17.5, -15.5)):
+    """Open-water km2 per date over the physical interval of the weak threshold (calibrated.md s3/s5;
+    strong = weak - 3 dB; everything else as shipped: dB hysteresis, HV guard, specks, shoreline refinement).
+    Returns lo/hi = min/max over the interval and the shipped series."""
+    from scripts.detect import calibrated as cal
+    kn, L, v = o["knobs"], o["L"], o["valid"]
+    T = L.shape[0]
+    v2 = v.all(0)
+    raw = torch.stack([cal.db(torch.nan_to_num(x[t, 0], nan=1e-10)) for t in range(T)]) if kn.get("refine_px") else None
+    wok = wok.cpu() if wok is not None else None
+    runs = []
+    for weak in weaks:
+        k = dict(kn, water_hh_weak=weak, water_hh_strong=weak - 3.0)
+        w = cal.water_db(L, v2, k, wok)
+        if raw is not None:
+            w = cal.refine_shore(w, raw, v2, weak, kn["refine_px"]) & v
+            if wok is not None:
+                w = w & wok[None]
+        runs.append([float((w[t] & v[t]).sum()) * km2 for t in range(T)])
+    shipped = [float((o["water"][t] & v[t]).sum()) * km2 for t in range(T)]
+    lo = [round(min(a, b, s)) for a, b, s in zip(*runs, shipped)]
+    hi = [round(max(a, b, s)) for a, b, s in zip(*runs, shipped)]
+    return {"lo": lo, "hi": hi}
+
+
 def extra_layers(area, prod, grid, dates, valid, when_cols, cls_legend):
     """Whole-season layers built by the analysis modules; each is added only if its product exists."""
     H, W, T = grid.h, grid.w, len(dates)
@@ -238,17 +265,25 @@ def run(area, source="auto", dev=None):
     dates, x, valid_in, grid, km2 = load_gamma0(area) if source == "gamma0" else load_preview(area)
     dev = dev or device()
     cfg = load_area(area)
+    base = area.removesuffix("-cal")  # a calibrated area ("<x>-cal") borrows terrain from the preview area "<x>"
     from scripts.detect.qc import apply_qc, load_qc
     x_obs = x  # as observed, for the image layers
     x, valid_det, qc_done = apply_qc(x, valid_in, dates, load_qc(area))
     if qc_done:
         print("  quality control: left out of detection:", qc_done)
-    from scripts.detect.terrain import cached_water_possible
-    water_ok = cached_water_possible(area, tuple(x.shape[-2:]))
+    if source == "gamma0":
+        from scripts.detect import calibrated as cal
+        water_ok = cal.terrain_on_grid(base, grid)  # preview terrain mask resampled to this grid (None if none)
+    else:
+        from scripts.detect.terrain import cached_water_possible
+        water_ok = cached_water_possible(area, tuple(x.shape[-2:]))
     print("  terrain mask:", "applied" if water_ok is not None else "not built for this area")
-    out = ops.run_pipeline(x, valid_det, source, dev=dev, water_ok=water_ok)
+    if source == "gamma0":  # dB water rule + shoreline refinement + flooded vegetation in dB; CPU (memory)
+        out = cal.run_pipeline_gamma0(x, valid_det, abs(grid.transform.a), water_ok=water_ok, dev=torch.device("cpu"))
+    else:
+        out = ops.run_pipeline(x, valid_det, source, dev=dev, water_ok=water_ok)
     water_src = "math"
-    src = cfg.get("water_source")
+    src = cfg.get("water_source") if source == "preview" else None  # fusion products are on the preview grid
     if src in ("fusion", "fusion2"):  # fused, time-smoothed water map (fusion2: also handles floodplains)
         fp = ROOT / "data/processed" / area / src / "products.pt"
         fz = torch.load(fp, map_location="cpu", weights_only=False) if fp.exists() else None
@@ -335,7 +370,7 @@ def run(area, source="auto", dev=None):
 
     # layers.json
     if source == "gamma0":
-        hh_leg, hv_leg = ramp("dB", -25, -5), ramp("dB", -30, -10)
+        hh_leg, hv_leg = ramp("dB", *disp["grey"]["hh"]), ramp("dB", *disp["grey"]["hv"])
         ch_unit, ch_lim, kind = "dB", full, "backscatter"
     else:
         hh_leg, hv_leg = ramp(PREVIEW_UNIT, 0, 100), ramp(PREVIEW_UNIT, 0, 100)
@@ -388,14 +423,21 @@ def run(area, source="auto", dev=None):
             row[name] = vals
         series.append(row)
     km = lambda m: [round(float((m[t] & valid[t]).sum()) * km2, 1) for t in range(T)]
+    rng = (gamma0_range(x, o, water_ok, km2) if source == "gamma0" else
+           area_range(area, T) if water_src == "math" else fused_range(area, T, valid, km2) if water_src == "fusion2" else {})
     ts = {"dates": dates, "unit": "dB" if source == "gamma0" else PREVIEW_UNIT, "series": series,
-          "facts": [dict({"label": "Open water", "unit": "km²", "values": km(o["water"])},
-                         **(area_range(area, T) if water_src == "math" else fused_range(area, T, valid, km2) if water_src == "fusion2" else {})),
+          "facts": [dict({"label": "Open water", "unit": "km²", "values": km(o["water"])}, **rng),
                     {"label": "Flooded vegetation", "unit": "km²", "values": km(o["flooded_veg"])}]
                    + ([{"label": "of which going under", "unit": "km²", "values": km(o["flooded_veg"] & (o["fv_state"] == 2))}]
                       if "fv_state" in o else [])}
     (prod / "timeseries.json").write_text(json.dumps(ts, indent=2, ensure_ascii=False))
     (prod / "source.json").write_text(json.dumps({"source": source, "credits": CREDITS[source]}, indent=2))
+    if (ROOT / "data/processed" / f"{area}-insar").exists():  # coherence layers from the interferometry study
+        from scripts.detect.insar_layers import add_to_products
+        try:
+            add_to_products(area)
+        except Exception as err:  # the season products stay usable without them
+            print("  coherence layers not added:", err)
     print(f"{area}: source={source} grid={H}x{W} dates={T} spots={len(spots)} change_pol={pol_name}")
     print("  open water km2:", ts["facts"][0]["values"])
     print("  flooded veg km2:", ts["facts"][1]["values"])

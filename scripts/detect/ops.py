@@ -16,8 +16,8 @@ import torch.nn.functional as F
 
 # ----------------------------------------------------------------------------
 # Knobs. "preview" values were chosen by looking at the preview data itself
-# (see docs/eda/math-detection.md). "gamma0" values are literature-typical
-# L-band starting points in dB and are UNTESTED.
+# (see docs/eda/math-detection.md). "gamma0" values are the calibrated
+# Tonle Sap tuning in dB (docs/eda/calibrated.md).
 # ----------------------------------------------------------------------------
 KNOBS = {
     "preview": {
@@ -46,31 +46,31 @@ KNOBS = {
         "open_k": 0,              # morphological opening kernel (0 = off)
         "untested": False,
     },
-    "gamma0": {
-        "box": 7,                 # ~7x7 at 30-80 m
+    "gamma0": {                   # calibrated NISAR GCOV, tuned on Tonle Sap (docs/eda/calibrated.md s4, gamma0_knobs.json)
+        "box": 3,                 # 3x3 at 80 m; the data already average ~16 x 9.5 looks
         "quegan": True,
-        "normalise": False,       # calibrated data should not need it
+        "normalise": False,       # calibrated data do not need it
         "norm_mode": "offset",    # in dB a drift is additive
         "stable_frac": 0.2,
-        "water_hh_strong": -20.0,  # dB, calm open water at L-band HH
-        "water_hh_weak": -16.0,
-        "water_hv_max": -24.0,
+        "water_hh_strong": -20.15,  # dB, seed ~1 dB below calm-lake median
+        "water_hh_weak": -15.66,    # dB, growth limit inside the physical interval [-17.7, -15.0]
+        "water_hv_max": -24.0,      # HV of the lake sits at the noise floor (-25.8 dB)
         "perm_frac": 0.9,
         "seasonal_min_dates": 2,
         "n_ref": 2,
-        "fv_hh_rise": 3.0,        # dB, double bounce
+        "fv_hh_rise": 3.0,        # dB, simple rule only; run.py uses calibrated.fv_db
         "fv_hv_rise_max": 1.5,    # dB
         "fv_min_dates": 2,
         "change_step_min": 3.0,   # dB
         "persist_frac": 0.8,
         "change_t_min": 5.0,
-        "min_blob_px": 20,
+        "min_blob_px": 9,         # 0.06 km2 at 80 m
         "wind_frac": 0.7,
         "nodata_floor": None,     # gamma0 has NaN no-data instead
-        "edge_erode_px": 1,
+        "edge_erode_px": 2,
         "common_footprint": True,
-        "open_k": 3,
-        "untested": True,          # literature-typical starting values, NOT tuned
+        "open_k": 0,              # an opening of 3 deletes every channel narrower than 240 m
+        "untested": False,        # tuned on Tonle Sap in 20+5 MHz mode; NOT valid for the 40+5 MHz mode (Lake Sevan)
     },
 }
 

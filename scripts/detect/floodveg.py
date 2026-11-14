@@ -82,9 +82,13 @@ def robust_stats(x: torch.Tensor, null: torch.Tensor, sub: int = 4):
     return torch.stack(med), torch.stack(sig)
 
 
-def cond_quantile(df: torch.Tensor, hv: torch.Tensor, null: torch.Tensor, q: float, nb: int = 20, sub: int = 4):
-    """Per date, the q-quantile of DF among null land in each HV bin (width 1/nb); returns the map
-    Q_t(HV_t(pixel)) [T,H,W]. Bins with < 30 null pixels inherit the global null quantile."""
+def cond_quantile(df: torch.Tensor, hv: torch.Tensor, null: torch.Tensor, q: float, nb: int = 20, sub: int = 4,
+                  lo: float = 0.0, hi: float = 1.0):
+    """Per date, the q-quantile of DF among null land in each HV bin (nb bins over [lo, hi]: previews 0..1
+    brightness, calibrated dB e.g. -36..-6); returns the map Q_t(HV_t(pixel)) [T,H,W]. Bins with < 30 null
+    pixels inherit the global null quantile."""
+    if (lo, hi) != (0.0, 1.0):
+        hv = ((hv - lo) / (hi - lo)).clamp(0, 0.999999)
     out = torch.empty_like(df)
     for t in range(df.shape[0]):
         d, h = df[t][null[t]][::sub], hv[t][null[t]][::sub]
