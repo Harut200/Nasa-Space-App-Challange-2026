@@ -1,6 +1,6 @@
 # Detection architecture
 
-Updated 14 November 2026, about 22:00 (Armenia time); first drafted the same day at 11:50, before most of the modules had results, and revised at 14:00 and in the evening (fusion v2 as the shipped water detector, 15 water places, the calibrated-data path) and at 22:00 (the earthquake path, four event places, two app designs: section 8). This is the design that ties the separate detection modules into one system, and what happened when each module was built and measured. A part entered the fused system only if it passed an admission rule (section 5). Parts marked *evaluated only* were built and measured but are not in the app.
+Updated 15 November 2026, 00:50 (Armenia time), for the corrections of the evidence audit (counts of places, earthquakes and tests, the calibrated Tonle Sap place, the OPERA comparison); earlier: 14 November, about 22:00; first drafted the same day at 11:50, before most of the modules had results, and revised at 14:00 and in the evening (fusion v2 as the shipped water detector, 15 water places, the calibrated-data path) and at 22:00 (the earthquake path, four event places, two app designs: section 8). This is the design that ties the separate detection modules into one system, and what happened when each module was built and measured. A part entered the fused system only if it passed an admission rule (section 5). Parts marked *evaluated only* were built and measured but are not in the app.
 
 Formulas and every number in detail: [DETECTION.md](DETECTION.md). One-page summary: [RESULTS.md](RESULTS.md).
 
@@ -37,7 +37,7 @@ flowchart TD
     FP["Floodplain zone<br/>flat, low, changing<br/>(no reference data)"] --> H
     H --> S["Space model<br/>3 x 3 smoothing"]
     S --> R["Water probability<br/>per pixel, per date"]
-    R --> O1["Water map and area range<br/>all 15 places (shipped)"]
+    R --> O1["Water map and area range<br/>all water places (shipped)"]
 
     E3 --> O2["Significant change map<br/>several changes per pixel"]
     E1 --> O4["Flood front<br/>arrival day, speed,<br/>through the outage"]
@@ -79,7 +79,7 @@ Each expert $k$ maps the conditioned data to a probability over states $s \in \{
 | Statistical change test | ratio of intensities between dates, empirical null from stable land | false-alarm rate on held-out stable land 0.02 % / 0 % / 0 % against 5.8 % / 0.08 % / 0.03 % for the change point; several changes per pixel | **its own app layer** (`sig`); as a water expert **rejected** |
 | Pixel graph | which pixels resemble each other | random walker: 0 km² of false water in Armenia with no elevation data, Sevan calm dates within 0.1 % of 1,242 km²; but the Tonle Sap flood grows only 1.2×; structure-consistency change exactly gain-invariant; spectral clustering follows geography, not water | random walker **rejected** (Tonle Sap accuracy −0.28 pp once time and terrain were in); spectral methods dropped |
 | Learned features | spatial context | U-Net v2 follows the physics rules within ±4 %; EfficientNet-B4 autoencoder did not beat a mixture on the raw two channels (water IoU 0.21 against 0.65); the only open L-band model (ALOS-2) reached 0.91 balanced accuracy at a never-seen Lake Sevan against 0.99 for the physics rules | U-Net and deep autoencoder **admitted** as fusion experts; pretrained models documented only |
-| Seeded (self-calibrating) detector | each date relative to the scene's own permanent-water seeds, no absolute brightness ([`crossscene.md`](eda/crossscene.md)) | Pantanal 0.500 → 0.994 and Lake Chad 0.503 → 0.976 balanced accuracy; 10 of 15 places work (fixed thresholds: 9); fails on the Nile delta, thin rivers (Mekong) and, held out, Rondônia | **admitted** as a fusion v2 expert (weight 0.37) and as the source of its per-scene switch |
+| Seeded (self-calibrating) detector | each date relative to the scene's own permanent-water seeds, no absolute brightness ([`crossscene.md`](eda/crossscene.md)) | Pantanal 0.500 → 0.994 and Lake Chad 0.503 → 0.976 balanced accuracy (on certain pixels only; against NASA's OPERA product Lake Chad is wrong and the Pantanal weak, [`opera.md`](eda/opera.md)); 10 of 15 places work (fixed thresholds: 9); fails on the Nile delta, thin rivers (Mekong) and, held out, Rondônia | **admitted** as a fusion v2 expert (weight 0.37) and as the source of its per-scene switch |
 | Sub-pixel water fraction | how dark a shoreline pixel is between pure water and nearby land | Sevan calm-date area 1,242.5 km² against the published 1,242 km² (hard mask −16 km²); shoreline placed to 52–63 m median from 180 m pixels | **admitted** (Sevan only) |
 
 ### Layer 2 — Priors (results)
@@ -119,7 +119,7 @@ Output: $\gamma_t(i)$, a water probability per pixel and date, in `data/processe
 
 | Product | Definition | Read from | Result |
 |---|---|---|---|
-| Water map per date, all 15 places | $\gamma_t > 0.5$ of fusion v2, with the band $\gamma > 0.75$ to $\gamma > 0.25$ | fusion v2 (`"water_source": "fusion2"` in every `areas/*/area.json`, applied in `run.py`) | Sevan largest body 1,233 km² on every date, far false water 6.0 km² (Ararat 0.31); Tonle Sap 2,281 → 5,046 km² (17 Oct range 4,196–6,051) against an independent 5,421 (4,198–7,222), inside it on 7 of 10 passes; only 76 % of the water lies inside the independent map |
+| Water map per date, all water places | $\gamma_t > 0.5$ of fusion v2, with the band $\gamma > 0.75$ to $\gamma > 0.25$ | fusion v2 (`"water_source": "fusion2"` in every `areas/*/area.json`, applied in `run.py`) | Sevan largest body 1,233 km² on every date, far false water 6.0 km² (Ararat 0.31); Tonle Sap 2,281 → 5,046 km² (17 Oct range 4,196–6,051) against an independent 5,421 (4,198–7,222), inside it on 7 of 10 passes; only 76 % of the water lies inside the independent map |
 | Water map, strict detector (reference only) | physics rules with terrain mask | physics expert | Tonle Sap 2,234 → 3,837 km², a lower bound |
 | Area with uncertainty | Monte Carlo over threshold, shoreline and speckle | statistical study | For the strict detector: Tonle Sap 17 October about 3,500 km² (5–95 %: 2,000–4,800); the tuning study: 3,800–5,900 km² plausible. The app range comes from fusion v2 instead (4,196–6,051 km²) |
 | Change dates | the change point (one per pixel) and the significant-change map (any number per pixel, FDR 1 %) | physics rules; statistical test | flood wave dated: south-east plain 18 August, outer ring 23 September |
@@ -131,7 +131,7 @@ Output: $\gamma_t(i)$, a water probability per pixel and date, in `data/processe
 
 | Check | Independent of the detector? | Result |
 |---|---|---|
-| Synthetic scenes with known answers | yes | 28 test files, 186 test functions under [`tests/`](../tests/), counted by `grep` at 22:00 ([DETECTION.md, section 7.1](DETECTION.md)) |
+| Synthetic scenes with known answers | yes | 33 test files; the full run of 14 November has 223 tests passed ([`pytest-full.txt`](evidence/pytest-full.txt); [DETECTION.md, section 7.1](DETECTION.md)) |
 | Lake Sevan published area, 1,242 km² | partly: the water threshold was first tuned on it | sub-pixel 1,242.5 km²; HMM 1,235.3 km² every date |
 | 38 years of Landsat water maps | yes | permanent-water IoU 0.94 (Sevan), 0.84 (Tonle Sap); the source of every anchor below |
 | Tune on one strip, test on an untouched strip and another country | yes, but the TEST strip was looked at three times by the tuning | tuned thresholds rejected by the gate; old thresholds kept; transfer works from Sevan to Tonle Sap, not the other way |
@@ -203,20 +203,20 @@ Modules that failed stay in the repository as documented experiments. Reporting 
 | Scoreboard | every detector, same pixels, labels, split and intervals | used by the rule | – |
 | Fusion v1 | log-linear pooling, two-state Markov chain, 3 × 3 smoothing | best for lakes and mountains; lost 19 % of the Tonle Sap flood | replaced by v2 |
 | **Fusion v2** | darkening-aware time model, reference-free floodplain zone, relaxed threshold there, seeded detector as expert | Tonle Sap 17 Oct 5,046 km² against an independent 5,421; Sevan and Ararat at least as good as v1; floodplain location improves little | **yes**, the water source for all 15 places |
-| Seeded (self-calibrating) detector | per-scene seeds, scene-relative thresholds | rescues Pantanal and Lake Chad; fails on the Nile delta and thin rivers | as a fusion v2 expert |
+| Seeded (self-calibrating) detector | per-scene seeds, scene-relative thresholds | lifts Pantanal and Lake Chad on certain pixels only (OPERA comparison: Lake Chad wrong, Pantanal weak); fails on the Nile delta and thin rivers | as a fusion v2 expert |
 | Independent flood estimate | lake level and the Landsat record, no radar | Tonle Sap 17 Oct 5,421 km² (4,198–7,222) | reference only |
 | Flood front, height from order, choreography | isotonic first-flood date, shape-based interpolation, logistic step fits | no hidden surge; height ρ 0.45 (conservative 0.25) | **yes**: `arrival` and `choreo` layers for Tonle Sap |
 | U-Net v2, temporal autoencoder | trained on the physics labels; season embedding | copy the physics rules; U-Net admitted as an expert | through fusion v2 |
 | EfficientNet-B4 autoencoder, temporal transformer | large pretrained encoder; masked-date transformer | did not beat a mixture / a straight line in time | no |
 | Open pretrained radar models | survey; Microsoft ai4g flood network; ALOS-2 L-band model with a place hold-out | L-band pretraining transfers (0.91 vs 0.67 random) but stays below the physics rules (0.99) | no |
 | Independent 2026 validation | altimeter, gauges, reanalysis, weather stations | area follows level (ρ 0.98); two claims corrected | wording of the stories |
-| More places | `add_area.py`, one command | 15 places in the app, in Asia, Africa and South America (Armenia sits on the Europe–Asia boundary); Lake Chad and Pantanal, first dropped, returned after the seeded detector; the synthetic `demo` place is gone from the app data (a full `pytest` run re-creates it; remove it again) | **yes** |
+| More places | `add_area.py`, one command | 26 places in the app (floods 6, lakes 4, wetlands and deltas 4, farmland and forest 3, earthquakes 6, volcanoes 2, landslide 1), in Asia, Africa, South America, North America (Panama, Hawaii) and Europe (Etna); Armenia sits on the Europe–Asia boundary. Lake Chad and Pantanal, first dropped, returned after the seeded detector; the synthetic `demo` place is removed by `tests/conftest.py` after a full `pytest` run, so nothing needs removing by hand | **yes** |
 | Learned despeckling | three kinds of small network trained on the images themselves | no detection number improved beyond the ±0.003 test noise; current filter stays ([`despeckle.md`](eda/despeckle.md)) | no (evaluated only) |
 | Physics autoencoder | encoder plus a fixed radar-mixing decoder | does not beat the sub-pixel method ([`unmix.md`](eda/unmix.md)) | no (evaluated only) |
 | Network on independent labels | U-Net trained on the Landsat record, tested on unseen places | about equal to the math detector; below fusion v2 ([`supervised.md`](eda/supervised.md)) | no; cross-check only |
 | Interferometry | coherence, phase, soil moisture | coherence shows the Ararat farming season; no ground motion above ±15 mm; soil moisture not useful ([`insar.md`](eda/insar.md)) | no (a candidate coherence layer exists as a file) |
 | Calibrated data: extraction | a small remote server reads windows of the remote files; laptop writes GeoTIFFs | ten Tonle Sap dates (80 m) and eight each of the Sevan and Ararat dates (30 m) extracted | no |
-| Calibrated data: detector | dB water rule tuned on one strip, tested on another | Tonle Sap 17 Oct 5,625 km², 5.9 % mean deviation from the independent estimate, balanced accuracy 0.995; the same thresholds give 0 km² at Sevan (higher noise floor in the Armenian mode); PROVISIONAL calibration ([`calibrated.md`](eda/calibrated.md)) | **no**, not yet wired in |
+| Calibrated data: detector | dB water rule tuned on one strip, tested on another | Tonle Sap 17 Oct 5,625 km², 5.9 % mean deviation from the independent estimate, balanced accuracy 0.995; the same thresholds give 0 km² at Sevan (higher noise floor in the Armenian mode); PROVISIONAL calibration ([`calibrated.md`](eda/calibrated.md)) | **yes** for Tonle Sap only, as the place `tonle-sap-cal` (about 5,660 km² on 17 Oct on the app window; the study's 5,625 is within the preview footprint, so say about 5,600) |
 
 ## 7. What would make this worth a global stage
 
@@ -224,13 +224,13 @@ Judges score impact, creativity, validity, relevance and presentation. A longer 
 
 - **One original result people remember.** *Exists*: a map of the day the flood arrived at each place, including the 24 days the satellite was blind, with a measured skill (hiding real passes) and the finding that there was no hidden surge; and a relative height map of the floodplain read from the order of flooding alone, checked against an elevation model it never saw. The prior-art check is done ([`novel.md`](eda/novel.md)): the waterline idea is about 30 years old; the chain and the order-as-height reading are, to our knowledge, a new combination, never "first".
 - **Validity nobody else at the hackathon will have.** *Exists*: held-out testing with an adoption gate written in advance, one scoreboard for every detector, uncertainty bands on every area, independent 2026 checks against a NASA altimeter and river gauges, and a public list of our own errors — including the two claims the 2026 data corrected and the gap in our own admission rule.
-- **Real NISAR science.** *Partly*: water under vegetation, which L-band sees and optical sensors and C-band radar miss, is now a stable layer whose July rise matches the river gauge. Calibrated data are extracted and analysed for Tonle Sap (the area uncertainty at the flood peak narrows from a factor 2.4 to 1.25), but they are not in the app, the vegetation area is still unvalidated, and the same thresholds fail in Armenia. Coherence adds a second line of evidence in the Ararat Valley.
-- **A live app that works on a phone, with places on several continents.** *Partly*: 15 places in Asia, Africa and South America (Armenia on the Europe–Asia boundary) are exported for the app. **Deployment** and a phone check are not confirmed in any document we read.
+- **Real NISAR science.** *Partly*: water under vegetation, which L-band sees and optical sensors and C-band radar miss, is now a stable layer whose July rise matches the river gauge. Calibrated data are extracted and analysed for Tonle Sap (the area uncertainty at the flood peak narrows from a factor 2.4 to 1.25), but only Tonle Sap is in the app (`tonle-sap-cal`), the vegetation area is still unvalidated, and the same thresholds fail in Armenia. Coherence adds a second line of evidence in the Ararat Valley.
+- **A live app that works on a phone, with places on several continents.** *Partly*: 26 places in Asia, Africa, South America, North America and Europe (Armenia on the Europe–Asia boundary) are exported for the app. Against NASA's OPERA water product our maps agree at Sevan and Tonle Sap (97.5 % of pixels, IoU 0.84) but are wrong at Inner Niger, Lake Chad and Urmia ([`opera.md`](eda/opera.md)). **Deployment** and a phone check are not confirmed in any document we read.
 - **A clear story.** One sentence ("NISAR saw the Tonle Sap rise first under the trees, then on open water, and our area follows NASA's altimeter at 0.98"), one animation (the arrival-day map), one number.
 
-**Still missing**: the work is on the `eda` branch and not yet merged; the app is not yet deployed and its redesign is in progress; the demo video and project page are not started (a pitch deck file exists under `docs/pitch/`); the calibrated detector is not connected to the app and does not work in Armenia without its own thresholds. The largest remaining risk is not an algorithm.
+**Still missing**: the work is on the `eda` branch and not yet merged; the app is not yet deployed and its redesign is in progress; the demo video and project page are not started (a pitch deck file exists under `docs/pitch/`); the calibrated detector is connected to the app for Tonle Sap only and does not work in Armenia without its own thresholds. The largest remaining risk is not an algorithm.
 
-## 8. Earthquakes, and the two app designs (added about 22:00)
+## 8. Earthquakes, and the app designs (added about 22:00; counts corrected 15 November)
 
 ### 8.1 The event path
 
@@ -253,7 +253,7 @@ Manifests also carry, for water places, per-date `quality` flags from the qualit
 
 ### 8.2 Two app designs on the same data
 
-Both read `src/app/public/data/` (19 places: 15 of water, 4 of earthquakes). No design is chosen in this document; the brief for the choice is [`docs/pitch/app-choice.md`](pitch/app-choice.md). Neither is deployed; the deploy workflow builds `src/app`.
+Both read `src/app/public/data/` (26 places: 17 water, 6 earthquakes, 3 other ground events: floods 6, lakes 4, wetlands and deltas 4, farmland and forest 3, earthquakes 6, volcanoes 2, landslide 1). A third app, `src/app3/` (merged; branch `front_harut`; in progress), is not described here. No design is chosen in this document; the brief for the choice is [`docs/pitch/app-choice.md`](pitch/app-choice.md). Neither is deployed; the deploy workflow builds `src/app`.
 
 | | Design A: `src/app/` | Design B: `src/app2/` |
 |---|---|---|
@@ -266,11 +266,14 @@ Both read `src/app/public/data/` (19 places: 15 of water, 4 of earthquakes). No 
 
 | Part | Verdict | In the app |
 |---|---|---|
-| Earthquake interferometry, four clear events | control pairs flat (5–21 cm) against 38–133 cm; no independent check | **yes**, four event places |
-| Earthquake interferometry, four not detected | offshore, deep, small or decorrelated | no (documented in `quake.md`) |
+| Earthquake interferometry, six clear events of fifteen tried | control pairs flat (5–21 cm) against 38–133 cm for the large events; Qaidam M5.6 a compact patch in three pairs; Venezuela M7.2 and M7.5 not separable; no independent check | **yes**, six event places |
+| Earthquake interferometry, one marginal, eight not detected | offshore, deep, small or decorrelated | no (documented in `quake.md`) |
+| Other ground events (loss of coherence): Langtang, Kilauea ep. 55, Etna | three clear, three marginal, two not detected; no volume or motion claimed ([`events.md`](eda/events.md)) | **yes**, three event places |
+| Comparison with NASA OPERA DSWx-S1 | 97.5 % agreement at Sevan and Tonle Sap; mean IoU 0.38 over 101 place-dates; wrong at Inner Niger, Lake Chad, Urmia | evaluation only ([`opera.md`](eda/opera.md)) |
 | Two-look east/up split (Venezuela) | approximate; north neglected; pairs not simultaneous | **yes**, labelled approximate |
 | East/up split for Panama | computed as a check, not trustworthy | no |
 | Design A (`src/app/`) | finished, tested | yes, if chosen; the deploy workflow builds it today |
 | Design B (`src/app2/`) | finished, tested | yes, if chosen |
-| Calibrated Tonle Sap as its own place (`tonle-sap-cal`) | in progress at 22:00 | not yet |
+| Merged app (`src/app3/`, branch `front_harut`) | in progress | not decided; no live URL |
+| Calibrated Tonle Sap as its own place (`tonle-sap-cal`) | done (commit 17fcaf9) | yes, in the data |
 | Ararat coherence layers | in progress at 22:00 | not yet |
