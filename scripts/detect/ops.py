@@ -42,6 +42,7 @@ KNOBS = {
         "wind_frac": 0.7,         # "usually water" = water on first, last and >= 70 % of dates
         "nodata_floor": 0.01,     # preview no-data margins are drawn at ~1/255; cut them
         "edge_erode_px": 8,       # shrink the footprint by 8 px (EDA: edge ~8 px at half brightness)
+        "common_footprint": True, # keep only pixels valid on all dates
         "open_k": 0,              # morphological opening kernel (0 = off)
         "untested": False,
     },
@@ -67,6 +68,7 @@ KNOBS = {
         "wind_frac": 0.7,
         "nodata_floor": None,     # gamma0 has NaN no-data instead
         "edge_erode_px": 1,
+        "common_footprint": True,
         "open_k": 3,
         "untested": True,          # literature-typical starting values, NOT tuned
     },
@@ -456,6 +458,10 @@ def run_pipeline(x, valid, source, kn=None, dev=None, normalise=None):
     x, valid = clean_input(x.to(dev), valid.to(dev))
     if kn.get("nodata_floor") is not None:
         valid = valid & ~nodata_margin(x, valid, kn["nodata_floor"])
+    if kn.get("common_footprint", False):
+        # only pixels imaged on every date: per-date areas become comparable and the
+        # swath edge (which moves between dates) cannot fake a change
+        valid = valid & valid.all(0, keepdim=True)
     if kn.get("edge_erode_px", 0) > 0:
         valid = erode(valid, 2 * kn["edge_erode_px"] + 1)
     xf = quegan_filter(x, valid, kn["box"]) if kn["quegan"] else box_mean(x, valid, kn["box"])
