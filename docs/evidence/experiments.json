@@ -1,0 +1,972 @@
+{
+ "generated": "15 November 2026, 00:46 (Armenia time)",
+ "note": "All paths are relative to the repository root. landed = first commit that touched the write-up (day month hour:minute, Armenia time).",
+ "studies": [
+  {
+   "id": "D01",
+   "group": "Detection methods",
+   "question": "What do the preview images look like; do dates line up; does brightness drift?",
+   "method": "Per-date brightness, stable-pixel drift, alignment and quality checks on the preview stacks of the first three places.",
+   "result": "Dates in Armenia were off by up to 6.9 pixels (fixed in the loader to under 0.1 pixel); the 6 October HV channel is off; at Tonle Sap the open-water-like area went from about 4,770 km2 (19 June) to about 7,980 km2 (17 October) at the EDA threshold. The 'biggest jump 11-23 September' in this note was later contradicted (V02).",
+   "verdict": "shipped (conditioning in the shared loader); early area numbers superseded",
+   "writeup": "docs/eda/eda-findings.md",
+   "code": "scripts/detect/eda.py",
+   "test": null,
+   "results": "docs/eda/stats.json",
+   "figure": "docs/eda/figures/05_water_area.png",
+   "landed": "14 Nov 10:53"
+  },
+  {
+   "id": "D02",
+   "group": "Detection methods",
+   "question": "Can plain mathematics (no learning) map open water, water under vegetation and the date of change?",
+   "method": "Two-threshold hysteresis water rule, two-state flooded-vegetation rule, CUSUM change point, all in PyTorch.",
+   "result": "Tonle Sap open water 2,234 to 3,837 km2 (first to last date); balanced accuracy 99.57 % on held-out Landsat anchors (scoreboard row 'math + terrain').",
+   "verdict": "shipped (the baseline and a fusion expert); the strict detector is a lower bound for the floodplain",
+   "writeup": "docs/eda/math-detection.md",
+   "code": "scripts/detect/ops.py",
+   "test": "tests/test_detect.py",
+   "results": "docs/eda/fusion/results.json",
+   "figure": "docs/eda/math/tonle-sap_areas.png",
+   "landed": "14 Nov 10:54"
+  },
+  {
+   "id": "D03",
+   "group": "Detection methods",
+   "question": "Can the flooded-vegetation layer be made stable?",
+   "method": "Rebuilt rule: self-calibrated HH-HV rise, a going-under state and water-distance context; threshold sweeps; Armenia as a negative control.",
+   "result": "Peak area moves at most 1.53x when a threshold changes (old rule 7.8x); Armenia false alarms fell from 39 km2 to at most 1.4 km2; 77 % of the area lies inside the Landsat maximum extent (old rule 40 %). Area at the 30 August peak about 1,600-2,500 km2; not validated (no reference map).",
+   "verdict": "shipped (water-under-vegetation layer)",
+   "writeup": "docs/eda/floodveg.md",
+   "code": "scripts/detect/floodveg.py",
+   "test": "tests/test_floodveg.py",
+   "results": "docs/eda/floodveg/results.json",
+   "figure": "docs/eda/floodveg/03_old_vs_new_peak_tonle-sap.png",
+   "landed": "14 Nov 12:28"
+  },
+  {
+   "id": "D04",
+   "group": "Detection methods",
+   "question": "Can false 'water' on mountains be removed without any water reference?",
+   "method": "Mask from the Copernicus elevation model only: flat, low, and not in radar shadow. Landsat used only afterwards to measure.",
+   "result": "Sevan false water removed 70 % (150.7 to 45.3 km2) with 0.5 km2 of true lake lost (0.04 %); Ararat Valley 90 % removed; Tonle Sap nothing removed.",
+   "verdict": "shipped (hard mask in every area with a DEM)",
+   "writeup": "docs/eda/terrain.md",
+   "code": "scripts/detect/terrain.py",
+   "test": "tests/test_terrain.py",
+   "results": null,
+   "figure": "docs/eda/terrain/false_water_bars.png",
+   "landed": "14 Nov 12:08"
+  },
+  {
+   "id": "D05",
+   "group": "Detection methods",
+   "question": "Can a change map have a stated false-alarm rate?",
+   "method": "Omnibus gamma-speckle test with an empirical null from stable land and false-discovery-rate control at 1 %.",
+   "result": "False alarms on held-out stable land at Tonle Sap 0.02 % (change-point method 5.8 %); 0 % at Sevan and Ararat.",
+   "verdict": "shipped (own 'sig' layer and the area ranges); rejected as a water expert",
+   "writeup": "docs/eda/stats-change.md",
+   "code": "scripts/detect/stats_change.py",
+   "test": "tests/test_stats_change.py",
+   "results": null,
+   "figure": "docs/eda/stats/tonle-sap_water_area_bands.png",
+   "landed": "14 Nov 11:53"
+  },
+  {
+   "id": "D06",
+   "group": "Detection methods",
+   "question": "Do Gaussian mixtures plus a hidden Markov model (probabilistic detector) beat thresholds?",
+   "method": "EM-fitted mixtures per area as emissions of an HMM over the ten dates, Baum-Welch transitions, a phantom slot for the outage.",
+   "result": "Sevan 1,235.3 km2 largest body on every date (published 1,242); Ararat 0 km2 false water; but Tonle Sap 17 October only 3,326 km2 against 3,837 km2 for the math detector.",
+   "verdict": "evaluated only (per-date mixture rejected by the admission rule, Sevan accuracy -0.66 pp; the HMM mask is the lake fallback)",
+   "writeup": "docs/eda/gmm.md",
+   "code": "scripts/detect/gmm.py",
+   "test": "tests/test_gmm.py",
+   "results": "docs/eda/gmm/results.json",
+   "figure": "docs/eda/gmm/areas.png",
+   "landed": "14 Nov 12:37"
+  },
+  {
+   "id": "D07",
+   "group": "Detection methods",
+   "question": "Do graph and spectral methods help?",
+   "method": "Random walker, total-variation cut, structure-consistency change, Laplacian eigenvectors and spectral clusters on the pixel grid.",
+   "result": "0 km2 of false water in Armenia with no elevation data and Sevan calm dates within 0.1 % of 1,242 km2; but Tonle Sap flood grows only 1.2x (2,308 to 2,767 km2) and the normalised cut overlaps Sevan water with IoU 0.28.",
+   "verdict": "rejected as an expert (Tonle Sap accuracy -0.28 pp); spectral clustering dropped (follows geography)",
+   "writeup": "docs/eda/graph.md",
+   "code": "scripts/detect/graphdet.py",
+   "test": "tests/test_graphdet.py",
+   "results": "docs/eda/graph/results.json",
+   "figure": "docs/eda/graph/areas.png",
+   "landed": "14 Nov 12:50"
+  },
+  {
+   "id": "D08",
+   "group": "Detection methods",
+   "question": "Can shoreline pixels get a water fraction instead of yes/no?",
+   "method": "Power-domain linear mixing between pure water and nearby land; checked against 30 m Landsat water at Lake Sevan.",
+   "result": "Calm-date lake area error against the published 1,242 km2 from -16 km2 to +0.5 km2 (1,242.5 km2); median shoreline distance to the 30 m shoreline 52-63 m instead of 84-107 m; a single pixel's fraction is still poor (RMSE about 0.35).",
+   "verdict": "shipped as a fusion v2 expert (Sevan only)",
+   "writeup": "docs/eda/subpixel.md",
+   "code": "scripts/detect/subpixel.py",
+   "test": "tests/test_subpixel.py",
+   "results": "docs/eda/subpixel/results.json",
+   "figure": "docs/eda/subpixel/sevan_area.png",
+   "landed": "14 Nov 13:17"
+  },
+  {
+   "id": "D09",
+   "group": "Detection methods",
+   "question": "Do better thresholds exist, found against an independent reference?",
+   "method": "Tune on one strip of the map against Landsat water, validate on a second strip, adoption gate fixed before the TEST strip was read.",
+   "result": "Tuned candidate J_test 1.0875 against 1.0900 for the old thresholds; worse at Sevan and Ararat.",
+   "verdict": "rejected (old thresholds kept; the procedure is the result)",
+   "writeup": "docs/eda/tuning.md",
+   "code": "scripts/detect/tune.py",
+   "test": "tests/test_tune.py",
+   "results": "docs/eda/tuning/results.json",
+   "figure": "docs/eda/tuning/operating_curves.png",
+   "landed": "14 Nov 11:57"
+  },
+  {
+   "id": "D10",
+   "group": "Detection methods",
+   "question": "Can many detectors be compared on one table and fused, with a rule written in advance?",
+   "method": "Scoreboard (same pixels, labels, split, bootstrap intervals) and fusion v1: log-linear pooling, two-state Markov chain, 3x3 smoothing, admission rule.",
+   "result": "v1 admitted terrain, time, space, U-Net, deep autoencoder, sub-pixel; rejected GMM per date, graph, math score, stats confidence, flood-order mask, supervised network. Sevan dip 65.7 to 0.8 km2. But v1 lost about 700 km2 of the Tonle Sap flood (3,120 against 3,837 km2) because the rule never measured the floodplain.",
+   "verdict": "replaced by fusion v2 (v1 kept as documented experiment)",
+   "writeup": "docs/eda/fusion.md",
+   "code": "scripts/detect/fusion.py",
+   "test": "tests/test_fusion.py",
+   "results": "docs/eda/fusion/results.json",
+   "figure": "docs/eda/fusion/admission.png",
+   "landed": "14 Nov 13:17"
+  },
+  {
+   "id": "D11",
+   "group": "Detection methods",
+   "question": "Can one detector cover lakes, mountains and floodplains?",
+   "method": "Fusion v2: transition probability depends on observed darkening (0.3 % vs 65 %), reference-free floodplain zone with relaxed threshold, seeded detector as expert; rule 'RULE2' fixed before the TEST strip was read again.",
+   "result": "Tonle Sap 17 October 5,046 km2 (range 4,196-6,051; results.json) against an independent 5,421 km2 (4,198-7,222); inside the range on 7 of 10 passes (v1 and math: 1 of 10); mean area error 8.5 % (v1 25 %, math 20 %). Balanced accuracy 99.97 % Tonle Sap, 99.92 % Sevan. Only 76 % of the water lies inside the independent map; the floodplain threshold was fitted to the same estimate (in-sample).",
+   "verdict": "shipped (water source for every water place)",
+   "writeup": "docs/eda/fusion2.md",
+   "code": "scripts/detect/fusion2.py",
+   "test": "tests/test_fusion2.py",
+   "results": "docs/eda/fusion2/results.json",
+   "figure": "docs/eda/fusion2/admission.png",
+   "landed": "14 Nov 16:55"
+  },
+  {
+   "id": "D12",
+   "group": "Detection methods",
+   "question": "Can the detector work on previews whose brightness stretch differs in every scene?",
+   "method": "Seeded detector: finds the scene's own dark population, measures each date relative to it; no absolute brightness. Leave-one-scene-out settings.",
+   "result": "Pantanal balanced accuracy 0.500 to 1.000 (0.994 leave-one-out), Lake Chad 0.503 to 0.991 (0.976); Nile delta not rescued (AUC 0.86, best single threshold 0.87).",
+   "verdict": "shipped as a fusion v2 expert (weight 0.37) and the per-scene switch",
+   "writeup": "docs/eda/crossscene.md",
+   "code": "scripts/detect/crossscene.py",
+   "test": "tests/test_crossscene.py",
+   "results": "docs/eda/crossscene/results.json",
+   "figure": "docs/eda/crossscene/03_balanced_accuracy.png",
+   "landed": "14 Nov 14:46"
+  },
+  {
+   "id": "D13",
+   "group": "Detection methods",
+   "question": "Can bad passes be found automatically?",
+   "method": "More than twenty checks per pass and channel on stable land (gain, contrast, balance, slope, leave-one-out, misregistration, metadata); a failed channel is replaced by the median of the others.",
+   "result": "134 passes in 15 areas: 3 pass-channels fail, 19 warn, 112 ok. Armenia 6 October HV fails (4.6x usual departure, z = -12). No false alarm on Tonle Sap flood dates. Removing the bad HV pass halves HV temporal sd at Ararat (0.0250 to 0.0117).",
+   "verdict": "shipped (runs before detection; flags shown in the app)",
+   "writeup": "docs/eda/qc.md",
+   "code": "scripts/detect/qc.py",
+   "test": "tests/test_qc.py",
+   "results": "docs/eda/qc/results.json",
+   "figure": "docs/eda/qc/01_dashboard.png",
+   "landed": "14 Nov 13:17"
+  },
+  {
+   "id": "D14",
+   "group": "Detection methods",
+   "question": "Can the flood be dated pass by pass, also through the 24-day outage?",
+   "method": "Interpolated first-flood date between consecutive shorelines; leave-one-pass-out test; relative height from flood order checked against an elevation model; per-pixel logistic step ('choreography').",
+   "result": "309 km2 flooded across the outage at 12.9 km2/day (9.3 before, 13.6 after): no hidden surge; hidden-pass area error 82 km2 against 161 km2 ('nothing changed'). Flood-order height against the elevation model rank correlation 0.45 (0.25 without its flattened water), against Landsat frequency -0.47; step date agrees with change point (0.95).",
+   "verdict": "shipped (arrival and choreography layers for Tonle Sap)",
+   "writeup": "docs/eda/novel.md",
+   "code": "scripts/detect/novel.py",
+   "test": "tests/test_novel.py",
+   "results": "docs/eda/novel/tonle-sap_summary.json",
+   "figure": "docs/eda/novel/tonle-sap_arrival_time.png",
+   "landed": "14 Nov 12:43"
+  },
+  {
+   "id": "V01",
+   "group": "Validation against independent data",
+   "question": "Do our water maps agree with 38 years of Landsat water maps?",
+   "method": "Pixel agreement with JRC Global Surface Water (occurrence, extent, seasonality) on our windows.",
+   "result": "Permanent-water IoU 0.94 at Sevan and 0.84 at Tonle Sap (occurrence at least 75 %).",
+   "verdict": "evidence for the shipped detector (JRC ends in 2021)",
+   "writeup": "docs/eda/validation.md",
+   "code": "scripts/detect/validate.py",
+   "test": null,
+   "results": "docs/eda/validation/results.json",
+   "figure": "docs/eda/validation/occurrence_by_class.png",
+   "landed": "14 Nov 11:32"
+  },
+  {
+   "id": "V02",
+   "group": "Validation against independent data",
+   "question": "Are our 2026 claims right (wind at Sevan, rain in Armenia, flood timing at Tonle Sap)?",
+   "method": "Weather reanalysis and stations, river gauges and satellite altimetry against our area series; no radar images loaded.",
+   "result": "Tonle Sap open-water area follows NASA/USDA altimetry: Pearson 0.959, Spearman 0.976 (n = 10). Corrected: 'flood arrived late' contradicted (rise began early July, seen as water under vegetation; peak 24-29 September); Armenia 6 October HV not caused by rain (0-1 mm); Sevan wind claim undecided (31 August was a rain night, 29 mm).",
+   "verdict": "evidence; two claims corrected, wording changed in the stories",
+   "writeup": "docs/eda/validation-2026.md",
+   "code": "scripts/detect/validate_2026.py",
+   "test": null,
+   "results": "docs/eda/validation2026/results.json",
+   "figure": "docs/eda/validation2026/fig1_sevan_wind_per_pass.png",
+   "landed": "14 Nov 12:57"
+  },
+  {
+   "id": "V03",
+   "group": "Validation against independent data",
+   "question": "How big was the 2026 Tonle Sap flood, without any radar?",
+   "method": "Expected flooded area from the measured lake level and the 38-year Landsat occurrence record (level to exceedance to occurrence), calibrated floodplain threshold.",
+   "result": "17 October 5,421 km2 (plausible range 4,198-7,222) against 3,837 km2 for the strict detector (x1.41). A fitted threshold of 0.202 matches but gives 1,467 km2 at Sevan (should be 1,242 +/- 107): one threshold cannot serve both places. The estimate is a model; it shares its Landsat source with our labels.",
+   "verdict": "reference only; led to fusion v2",
+   "writeup": "docs/eda/hydro.md",
+   "code": "scripts/detect/hydro.py",
+   "test": "tests/test_hydro.py",
+   "results": "docs/eda/hydro/results.json",
+   "figure": "docs/eda/hydro/fig2_area_vs_level.png",
+   "landed": "14 Nov 14:09"
+  },
+  {
+   "id": "V04",
+   "group": "Validation against independent data",
+   "question": "Do our water maps agree with NASA's OPERA DSWx products?",
+   "method": "Compare with OPERA DSWx-S1 (C-band radar) and DSWx-HLS (optical) at 15 places; agreement between two products, not accuracy.",
+   "result": "Sevan IoU 0.97; Tonle Sap IoU 0.70 (preview) and 0.72 (calibrated), but 0.56-0.65 from mid-August when the flood enters the forest. Over 101 place-dates at 15 places: 93.8 % of pixels agree, balanced accuracy 0.72, mean IoU 0.38 (0.32-0.44). Weak at Inner Niger, Lake Chad, Urmia and others (see negative results). Tonle Sap 17 October: ours 5,046, OPERA S1 4,373 km2.",
+   "verdict": "evaluated; limits added to the record (no claim of being better)",
+   "writeup": "docs/eda/opera.md",
+   "code": "scripts/detect/opera.py",
+   "test": "tests/test_opera.py",
+   "results": "docs/eda/opera/results.json",
+   "figure": "docs/eda/opera/fig1_tonle_sap_agreement.png",
+   "landed": "14 Nov 23:32"
+  },
+  {
+   "id": "C01",
+   "group": "Calibrated data",
+   "question": "Can calibrated NISAR GCOV be used without downloading multi-GB files?",
+   "method": "A small remote server opens each remote HDF5 file by range requests, reads only the area window and returns a reduced file; the laptop writes GeoTIFFs.",
+   "result": "Ten Tonle Sap dates (80 m) and eight each of Sevan and Ararat (30 m) extracted; about 40 MB per date back for Tonle Sap. Data are PROVISIONAL (P05023).",
+   "verdict": "shipped as a data path (extraction code); Armenia calibrated data not in the app",
+   "writeup": "docs/research/calibrated-data.md",
+   "code": "scripts/ingest/remote_extract.py",
+   "test": "tests/test_remote_extract.py",
+   "results": null,
+   "figure": null,
+   "landed": "14 Nov 14:18"
+  },
+  {
+   "id": "C02",
+   "group": "Calibrated data",
+   "question": "Does calibration narrow the Tonle Sap flood-size uncertainty?",
+   "method": "dB water rule tuned on one strip, tested on another, on all ten dates at 80 m; same independent estimate and altimeter.",
+   "result": "Balanced accuracy 0.995; 17 October 5,625 km2; mean deviation from the independent estimate 5.9 % (preview math 20.1 %, fusion v2 8.5 %); inside the range on 7 of 10 dates; area moves by 1.25x over the justified threshold range at the peak (previews 2.39x). The same thresholds give 0 km2 at Sevan (noise floor 7-8 dB higher). Calibration PROVISIONAL.",
+   "verdict": "shipped as its own app place (tonle-sap-cal); summary docs still say 'not in the app' (see limits)",
+   "writeup": "docs/eda/calibrated.md",
+   "code": "scripts/detect/calibrated.py",
+   "test": "tests/test_calibrated.py",
+   "results": "docs/eda/calibrated_det/results.json",
+   "figure": "docs/eda/calibrated_det/tonle-sap-cal_area_curves.png",
+   "landed": "14 Nov 18:32"
+  },
+  {
+   "id": "I01",
+   "group": "Interferometry",
+   "question": "Does radar phase show what amplitude previews could not (Ararat Valley farming; ground motion; soil moisture; Tonle Sap onset)?",
+   "method": "NISAR GUNW coherence, phase and SME2 soil moisture at Ararat, Sevan and Tonle Sap; foothills, Yerevan and Sevan as controls.",
+   "result": "Coherence below 0.3 on 43-44 % of the valley floor in June-July, 22-25 % from mid-September (foothills 9-16 %). No ground motion above +/-15 mm (2 sigma) in 120 days. Soil moisture did not separate irrigated floor from foothills. Tonle Sap: newly flooded pixels have coherence 0.12-0.22 but dry land also loses coherence, so coherence confirms and cannot map alone.",
+   "verdict": "coherence shipped as Ararat layers; motion and soil moisture not detected / not useful",
+   "writeup": "docs/eda/insar.md",
+   "code": "scripts/detect/insar.py",
+   "test": "tests/test_insar.py",
+   "results": "docs/eda/insar/results.json",
+   "figure": "docs/eda/insar/fig2_ararat_coherence_maps.png",
+   "landed": "14 Nov 17:56"
+  },
+  {
+   "id": "I02",
+   "group": "Interferometry",
+   "question": "Can the Ararat coherence results be shown in the app?",
+   "method": "Export layers and a share-of-valley-floor series to the app data.",
+   "result": "Layers added to the Ararat place (commit 756746e); synthetic tests only for the exporter.",
+   "verdict": "shipped",
+   "writeup": "docs/eda/insar.md",
+   "code": "scripts/detect/insar_layers.py",
+   "test": "tests/test_insar_layers.py",
+   "results": null,
+   "figure": null,
+   "landed": "14 Nov 17:56"
+  },
+  {
+   "id": "Q01",
+   "group": "Earthquakes",
+   "question": "Did NISAR record the Tibet M7.0 earthquake (22 October)?",
+   "method": "L2 GUNW pair across the event and a control pair before it on the same track and frame; far-field ramp removed; peak to peak within a radius of the USGS epicentre.",
+   "result": "127 cm peak to peak within 45 km (control 4.7 cm); about ten fringes; far-field sd 1.3 cm (0.7); processing variants 119-138 cm.",
+   "verdict": "shipped (event place); not checked against GNSS",
+   "writeup": "docs/eda/quake.md",
+   "code": "scripts/detect/quake.py",
+   "test": "tests/test_quake.py",
+   "results": "docs/eda/quake/results.json",
+   "figure": "docs/eda/quake/fig_a_fringes.png",
+   "landed": "14 Nov 19:34"
+  },
+  {
+   "id": "Q02",
+   "group": "Earthquakes",
+   "question": "Venezuela M7.2 (24 June), two look directions?",
+   "method": "As Q01, ascending and descending pairs; an approximate east/up split.",
+   "result": "Ascending 50 cm, descending 55 cm within 60 km (controls 11.6 / 10.2 cm). The M7.5 40 s later is in the same pairs.",
+   "verdict": "shipped (east/up labelled approximate)",
+   "writeup": "docs/eda/quake.md",
+   "code": "scripts/detect/quake.py",
+   "test": "tests/test_quake.py",
+   "results": "docs/eda/quake/results.json",
+   "figure": "docs/eda/quake/venezuela-m72-2026/fig_a_fringes_asc.png",
+   "landed": "14 Nov 19:34"
+  },
+  {
+   "id": "Q03",
+   "group": "Earthquakes",
+   "question": "Panama M7.7 (9 October), two look directions?",
+   "method": "As Q01. Frames cover only east and south of the epicentre.",
+   "result": "Descending 133 cm, ascending 85 cm within 60 km (controls 21 / 15 cm); descending 107-165 cm across processing variants, least stable; 4 of 5 pixels near the epicentre lost.",
+   "verdict": "shipped (value uncertain; east/up split computed but not shown)",
+   "writeup": "docs/eda/quake.md",
+   "code": "scripts/detect/quake.py",
+   "test": "tests/test_quake.py",
+   "results": "docs/eda/quake/results.json",
+   "figure": "docs/eda/quake/panama-m77-2026/fig_a_fringes_asc.png",
+   "landed": "14 Nov 19:34"
+  },
+  {
+   "id": "Q04",
+   "group": "Earthquakes",
+   "question": "Kumamoto M6.8 (28 July), one look direction?",
+   "method": "As Q01, a 24-day pair (control 12 days).",
+   "result": "38 cm within 30 km (control 5.8 cm); variants 34-38 cm; descending 36-day pair fully decorrelated.",
+   "verdict": "shipped",
+   "writeup": "docs/eda/quake.md",
+   "code": "scripts/detect/quake.py",
+   "test": "tests/test_quake.py",
+   "results": "docs/eda/quake/results.json",
+   "figure": "docs/eda/quake/kumamoto-m68-2026/fig_a_fringes.png",
+   "landed": "14 Nov 19:34"
+  },
+  {
+   "id": "Q05",
+   "group": "Earthquakes",
+   "question": "Venezuela M7.5 and Qaidam M5.6, second round?",
+   "method": "Same rules; small events use a 25 km radius and 5 cm fringes.",
+   "result": "Venezuela M7.5: descending 48 cm (control 10.8), 1,062 km2 above 10 cm (control 8); ascending only 9 % valid pixels. Qaidam M5.6: one compact patch 3-4 km across in three independent pairs, about 10 km2 above 5 cm (controls 0).",
+   "verdict": "shipped (event places)",
+   "writeup": "docs/eda/quake.md",
+   "code": "scripts/detect/quake.py",
+   "test": "tests/test_quake.py",
+   "results": "docs/eda/quake/results.json",
+   "figure": "docs/eda/quake/qaidam-m56-2026/fig_a_fringes_asc83.png",
+   "landed": "14 Nov 19:34"
+  },
+  {
+   "id": "Q06",
+   "group": "Earthquakes",
+   "question": "Which of the other candidates were seen?",
+   "method": "Same rules on seven more events from a 50-event USGS catalogue (eight with a spanning pair near land).",
+   "result": "Not detected: Flores Sea M7.8, Mexico M7.3, Sanriku M6.9, Qinghai M5.8, Khuzdar M5.7, Redwood Valley M5.6, Turangi M5.7, Qaidam M5.3. Marginal: Huancayo M5.5. Reasons in the negative-results table.",
+   "verdict": "evaluated only; none shown in the app",
+   "writeup": "docs/eda/quake.md",
+   "code": "scripts/detect/quake.py",
+   "test": "tests/test_quake.py",
+   "results": "docs/eda/quake/results.json",
+   "figure": "docs/eda/quake/overview.png",
+   "landed": "14 Nov 19:34"
+  },
+  {
+   "id": "G01",
+   "group": "Other ground events",
+   "question": "Langtang rock-ice collapse (26 August) seen as loss of coherence?",
+   "method": "Coherence in event pair against a control pair, loss patch rule (control at least 0.45, event below 0.35, drop at least 0.25, patch at least 12 pixels at 80 m).",
+   "result": "8.5 km2 patch at the site (next largest 1.8 km2); control coherence 0.65 to 0.14 at those pixels; descending 5.0 km2. A -11 to +4 cm motion lead is not claimed.",
+   "verdict": "shipped (event place)",
+   "writeup": "docs/eda/events.md",
+   "code": "scripts/detect/events.py",
+   "test": "tests/test_events.py",
+   "results": "docs/eda/events/results.json",
+   "figure": "docs/eda/events/overview.png",
+   "landed": "14 Nov 23:35"
+  },
+  {
+   "id": "G02",
+   "group": "Other ground events",
+   "question": "Kilauea episode 55 (17 October)?",
+   "method": "As G01.",
+   "result": "10.2 km2 connected patch in and south-west of Halemaumau (ascending only); control 0.75 to 0.18; background 95th percentile for 4 km discs 0.44 km2.",
+   "verdict": "shipped (event place)",
+   "writeup": "docs/eda/events.md",
+   "code": "scripts/detect/events.py",
+   "test": "tests/test_events.py",
+   "results": "docs/eda/events/results.json",
+   "figure": "docs/eda/events/overview.png",
+   "landed": "14 Nov 23:35"
+  },
+  {
+   "id": "G03",
+   "group": "Other ground events",
+   "question": "Etna Valle del Bove lava field (from about 6 August)?",
+   "method": "As G01.",
+   "result": "2.5 km2 strip 5 km long (ascending), 1.2 + 1.0 km2 at the same place (descending); 0.02 % of comparable ground elsewhere.",
+   "verdict": "shipped (event place)",
+   "writeup": "docs/eda/events.md",
+   "code": "scripts/detect/events.py",
+   "test": "tests/test_events.py",
+   "results": "docs/eda/events/results.json",
+   "figure": "docs/eda/events/overview.png",
+   "landed": "14 Nov 23:35"
+  },
+  {
+   "id": "G04",
+   "group": "Other ground events",
+   "question": "Marginal and not-detected ground events (Brits tailings, Kilauea 54, Ambrym, Budhi Gandaki, Kali Gandaki; uplift sites)?",
+   "method": "As G01.",
+   "result": "Three marginal, two not detected, three uplift sites and one long-running eruption not attempted, one search found no event; numbers in the negative-results table.",
+   "verdict": "evaluated only; none shown",
+   "writeup": "docs/eda/events.md",
+   "code": "scripts/detect/events.py",
+   "test": "tests/test_events.py",
+   "results": "docs/eda/events/results.json",
+   "figure": null,
+   "landed": "14 Nov 23:35"
+  },
+  {
+   "id": "P01",
+   "group": "Disaster events from previews",
+   "question": "Can the preview-based pipeline pick up a named 2026 disaster (Chao Phraya river flood)?",
+   "method": "add_area, QC, terrain, seeded detector, fusion v2 'fresh' path; evidence rule: change well beyond the detector band at the source's dates, new water on land Landsat has ever shown as water.",
+   "result": "Open water about 990 km2 (6 September) to about 1,930 km2 (30 September); new water about 1,170 km2, 82 % inside the Landsat maximum extent.",
+   "verdict": "shipped (place with story)",
+   "writeup": "docs/research/events-2026.md",
+   "code": "scripts/ingest/add_area.py",
+   "test": "tests/test_add_area.py",
+   "results": "docs/eda/events2026/chao-phraya-2026.json",
+   "figure": "docs/eda/events2026/chao-phraya-2026.png",
+   "landed": "14 Nov 23:16"
+  },
+  {
+   "id": "P02",
+   "group": "Disaster events from previews",
+   "question": "Round 2: five more events (UP-Terai flood, Mahanadi flood, Thunder Bay 36 fire, La Mierla fire, Avila fire)?",
+   "method": "Same path; fires judged by HH or HV change in a sharp-edged patch against a control interval.",
+   "result": "Rated clear: UP-Terai (172 km2 on 1 October against 9 km2, 80 % inside Landsat extent), Mahanadi (404 against 138 km2, bands do not overlap), Thunder Bay 36 (HH +0.12 in the core against +0.01 to +0.05), La Mierla (HV darker by 0.05-0.09), Avila (HV -0.06 to -0.08). Patch areas are threshold dependent and not claimed.",
+   "verdict": "clear in the log; not in the app at the time of writing (folders under areas/ are not committed)",
+   "writeup": "docs/research/events-2026.md",
+   "code": "scripts/ingest/add_area.py",
+   "test": "tests/test_add_area.py",
+   "results": "docs/eda/events2026/mahanadi-delta-2026.json",
+   "figure": "docs/eda/events2026/thunder-bay-36-2026.png",
+   "landed": "uncommitted"
+  },
+  {
+   "id": "P03",
+   "group": "Disaster events from previews",
+   "question": "Events judged marginal, not detected or not tried (44 log rows in all)?",
+   "method": "Same path; verdict counts below are from the log tables.",
+   "result": "Counted from the log tables: 6 clear, 3 marginal, 26 not detected (plus 1 'not detected as an event'), 7 not tried, 1 not run (44 rows; one row is a re-check of an earlier one). See negative results.",
+   "verdict": "evaluated only",
+   "writeup": "docs/research/events-2026.md",
+   "code": "scripts/ingest/add_area.py",
+   "test": "tests/test_add_area.py",
+   "results": null,
+   "figure": null,
+   "landed": "14 Nov 23:16"
+  },
+  {
+   "id": "L01",
+   "group": "Learned models tried",
+   "question": "Can small networks reproduce the maths and add anything?",
+   "method": "Temporal autoencoder (19,546 parameters) and small U-Net; v1 on loose physics labels, v2 on math-detector labels with season channels.",
+   "result": "v1 copied its rules and over-called (Tonle Sap 10,149 km2 on 17 October against 3,837); v2 follows the physics rules within +/-4 %. No ground truth: agreement with another algorithm, not accuracy.",
+   "verdict": "U-Net v2 admitted as a fusion expert; adds a little (mountain false water 10.6 to 7.4 km2)",
+   "writeup": "docs/eda/dl-notes.md",
+   "code": "scripts/detect/train.py",
+   "test": null,
+   "results": "docs/eda/dl/robust_v2.md",
+   "figure": "docs/eda/dl/unet_rules_vs_net_tonle-sap.png",
+   "landed": "14 Nov 11:06"
+  },
+  {
+   "id": "L02",
+   "group": "Learned models tried",
+   "question": "Does a large ImageNet-pretrained network help?",
+   "method": "EfficientNet-B4 stages 0-3 as masked autoencoder, features clustered by a Gaussian mixture.",
+   "result": "Water agreement IoU 0.21 against 0.65 for a plain Gaussian mixture on the raw HH and HV; no better than its random twin; 316,805 parameters.",
+   "verdict": "rejected (documentation only)",
+   "writeup": "docs/eda/deep-ae.md",
+   "code": "scripts/detect/deep_ae.py",
+   "test": "tests/test_deep_ae.py",
+   "results": "docs/eda/deep_ae/results.json",
+   "figure": "docs/eda/deep_ae/anomaly_map.png",
+   "landed": "14 Nov 12:52"
+  },
+  {
+   "id": "L03",
+   "group": "Learned models tried",
+   "question": "Can a transformer fill the 24-day outage pass?",
+   "method": "Masked-date transformer over ten dates with day-of-year time encoding; hide a real pass, predict it, compare with linear interpolation.",
+   "result": "About 2 % better than a straight line in time on pixel values in the strict test (15 % in the looser one); shoreline slightly worse (IoU 0.40 against 0.42).",
+   "verdict": "rejected for the map; estimate only if labelled",
+   "writeup": "docs/eda/ttransformer.md",
+   "code": "scripts/detect/ttransformer.py",
+   "test": "tests/test_ttransformer.py",
+   "results": "docs/eda/ttransformer/loo_tonle-sap_ctx5res.json",
+   "figure": "docs/eda/ttransformer/area_curve_tonle-sap.png",
+   "landed": "14 Nov 13:06"
+  },
+  {
+   "id": "L04",
+   "group": "Learned models tried",
+   "question": "Do open pretrained radar models help (Microsoft ai4g Sentinel-1 flood net; ALOS-2 L-band)?",
+   "method": "Load, smoke test, short fine-tune; ALOS-2 with Lake Sevan held out.",
+   "result": "ai4g without retraining IoU 0.390 against 0.389 for its own threshold rule; ALOS-2 balanced accuracy 0.91 at Sevan (random weights 0.67) against 0.99 for the math detector.",
+   "verdict": "rejected (documented only)",
+   "writeup": "docs/research/hf-models.md",
+   "code": "scripts/detect/foundation.py",
+   "test": "tests/test_foundation.py",
+   "results": "docs/eda/foundation/alos2_finetune.json",
+   "figure": null,
+   "landed": "14 Nov 12:31"
+  },
+  {
+   "id": "L05",
+   "group": "Learned models tried",
+   "question": "Do learned speckle filters beat the current multi-temporal filter?",
+   "method": "Three small networks trained on the images themselves (noise-to-noise, blind spot, multi-temporal).",
+   "result": "Best learned filter balanced accuracy 0.9951 (Tonle Sap) and 0.9963 (Sevan) against 0.9957 and 0.9958; test noise +/-0.003; about three times more speckle-sized specks. Equivalent looks gained x1.1-1.5 against x2.5-3.1.",
+   "verdict": "rejected on previews (may pay off on calibrated 80 m and 20 m data)",
+   "writeup": "docs/eda/despeckle.md",
+   "code": "scripts/detect/despeckle.py",
+   "test": "tests/test_despeckle.py",
+   "results": "docs/eda/despeckle/results.json",
+   "figure": "docs/eda/despeckle/downstream.png",
+   "landed": "14 Nov 15:10"
+  },
+  {
+   "id": "L06",
+   "group": "Learned models tried",
+   "question": "Can a physics autoencoder unmix pixels into water, flooded vegetation and land?",
+   "method": "Encoder plus a fixed radar-mixing decoder with a terrain prior.",
+   "result": "Sevan shoreline RMSE 0.507 against 0.354 for the analytic sub-pixel method; Tonle Sap open water 9,757 km2 on 17 October, far above the independent range. Best on synthetic scenes (RMSE 0.110 against 0.158 hard mask).",
+   "verdict": "rejected for the app (a talk item)",
+   "writeup": "docs/eda/unmix.md",
+   "code": "scripts/detect/unmix.py",
+   "test": "tests/test_unmix.py",
+   "results": "docs/eda/unmix/results.json",
+   "figure": "docs/eda/unmix/03_sevan_shoreline.png",
+   "landed": "14 Nov 17:58"
+  },
+  {
+   "id": "L07",
+   "group": "Learned models tried",
+   "question": "Does a network trained on independent (Landsat) labels generalise to unseen places?",
+   "method": "U-Net trained on JRC-record labels at other places, tested on held-out places; compared with logistic regression.",
+   "result": "About equal to the math detector on unseen places (Sevan 0.994 against 0.989); below fusion v2 (0.9988; 6 against 99 km2 of false water on land); unseen Lake Chad 70 % of the lake against 99 % for fusion v2.",
+   "verdict": "evaluated only (cross-check)",
+   "writeup": "docs/eda/supervised.md",
+   "code": "scripts/detect/supervised.py",
+   "test": "tests/test_supervised.py",
+   "results": "docs/eda/supervised/results.json",
+   "figure": "docs/eda/supervised/loao_heatmap.png",
+   "landed": "14 Nov 18:02"
+  },
+  {
+   "id": "N01",
+   "group": "Data and app engineering",
+   "question": "Can a new place be added in one command?",
+   "method": "ASF search, pass choice, previews, terrain, detection, export.",
+   "result": "26 places in src/app/public/data/index.json at the time of writing. Selection logic tested on synthetic search results.",
+   "verdict": "shipped",
+   "writeup": "docs/research/areas.md",
+   "code": "scripts/ingest/add_area.py",
+   "test": "tests/test_add_area.py",
+   "results": null,
+   "figure": null,
+   "landed": "14 Nov 13:17"
+  },
+  {
+   "id": "N02",
+   "group": "Data and app engineering",
+   "question": "Do detector entry point and export produce valid app data?",
+   "method": "Synthetic NISAR-shaped files end to end; contract A to B to C; calibrated (gamma0) path.",
+   "result": "Tests pass (see pytest-full.txt). Contract C export keeps a predicted dark pixel within 1 pixel.",
+   "verdict": "shipped",
+   "writeup": "docs/DETECTION.md",
+   "code": "scripts/ingest/export.py",
+   "test": "tests/test_pipeline.py",
+   "results": null,
+   "figure": null,
+   "landed": "14 Nov 11:41"
+  },
+  {
+   "id": "N03",
+   "group": "Data and app engineering",
+   "question": "How big are the app data and can they be smaller?",
+   "method": "Lossless palette class maps, grey lossy images, thumbnails and a one-file summary; sizes measured before and after.",
+   "result": "Data folder 90.0 MB to 65.7 MB (-27 %); gallery 76 requests and 4.7 MB to 28 requests and 0.58 MB.",
+   "verdict": "shipped",
+   "writeup": "docs/eda/data-size.md",
+   "code": "scripts/ingest/optimize.py",
+   "test": "tests/test_optimize.py",
+   "results": null,
+   "figure": null,
+   "landed": "15 Nov 00:30"
+  },
+  {
+   "id": "N04",
+   "group": "Data and app engineering",
+   "question": "Does the web app's own data layer hold up?",
+   "method": "Node tests over the manifests and helpers in src/app (npm test).",
+   "result": "15 of 16 pass; one fails (see known limits).",
+   "verdict": "evaluated (one failing test)",
+   "writeup": "docs/evidence/app-tests.txt",
+   "code": null,
+   "test": "src/app/tests/app.test.js",
+   "results": "docs/evidence/app-tests.txt",
+   "figure": null,
+   "landed": "uncommitted"
+  },
+  {
+   "id": "N05",
+   "group": "Data and app engineering",
+   "question": "Are the story facts sourced?",
+   "method": "Table of every figure in the stories with a source and a confidence mark; stories drafted with AI assistance.",
+   "result": "Marks: sourced, single source, typical value, not found. Stories need human review (stated in the file).",
+   "verdict": "documented",
+   "writeup": "docs/research/story-sources.md",
+   "code": null,
+   "test": null,
+   "results": null,
+   "figure": null,
+   "landed": "14 Nov 11:16"
+  }
+ ],
+ "negative_results": [
+  {
+   "kind": "Learned model",
+   "what": "EfficientNet-B4 autoencoder",
+   "number": "Water IoU 0.21 against 0.65 for a Gaussian mixture",
+   "link": "docs/eda/deep-ae.md"
+  },
+  {
+   "kind": "Learned model",
+   "what": "Microsoft ai4g flood network, no retraining",
+   "number": "IoU 0.390 against 0.389 for its own threshold rule",
+   "link": "docs/research/hf-models.md"
+  },
+  {
+   "kind": "Learned model",
+   "what": "ALOS-2 L-band model, Sevan held out",
+   "number": "Balanced accuracy 0.91 (random weights 0.67) against 0.99 for the math detector",
+   "link": "docs/research/hf-models.md"
+  },
+  {
+   "kind": "Learned model",
+   "what": "Transformer for the outage pass",
+   "number": "IoU 0.40 against 0.42 for a straight line in time; about 2 % better on pixel values",
+   "link": "docs/eda/ttransformer.md"
+  },
+  {
+   "kind": "Learned model",
+   "what": "Learned speckle filters (three kinds)",
+   "number": "No detection number beyond +/-0.003; best 0.9951 and 0.9963 against 0.9957 and 0.9958",
+   "link": "docs/eda/despeckle.md"
+  },
+  {
+   "kind": "Learned model",
+   "what": "Physics autoencoder",
+   "number": "Sevan shoreline RMSE 0.507 against 0.354; Tonle Sap 9,757 km2",
+   "link": "docs/eda/unmix.md"
+  },
+  {
+   "kind": "Learned model",
+   "what": "Network trained on Landsat-record labels",
+   "number": "Sevan 0.994 against 0.989 (math); below fusion v2 0.9988; Lake Chad finds 70 % of the lake",
+   "link": "docs/eda/supervised.md"
+  },
+  {
+   "kind": "Learned model",
+   "what": "U-Net v1 on loose physics labels",
+   "number": "Tonle Sap 10,149 km2 on 17 October against 3,837 (copied its rules and over-called)",
+   "link": "docs/eda/dl-notes.md"
+  },
+  {
+   "kind": "Method",
+   "what": "Spectral clustering of the pixel graph",
+   "number": "Normalised cut overlaps Sevan water with IoU 0.28",
+   "link": "docs/eda/graph.md"
+  },
+  {
+   "kind": "Method",
+   "what": "Random walker as a fusion expert",
+   "number": "Tonle Sap accuracy -0.28 pp; flood grows only 1.2x",
+   "link": "docs/eda/graph.md"
+  },
+  {
+   "kind": "Method",
+   "what": "Per-date Gaussian mixture as a fusion expert",
+   "number": "Sevan accuracy -0.66 pp; Tonle Sap flood 3,326 against 3,837 km2",
+   "link": "docs/eda/gmm.md"
+  },
+  {
+   "kind": "Method",
+   "what": "Tuned thresholds against Landsat",
+   "number": "J_test 1.0875 against 1.0900; rejected by the gate",
+   "link": "docs/eda/tuning.md"
+  },
+  {
+   "kind": "Method",
+   "what": "Fusion v1 for floodplains",
+   "number": "Lost about 700 km2 of the Tonle Sap flood (3,120 against 3,837 km2); replaced by v2",
+   "link": "docs/eda/fusion.md"
+  },
+  {
+   "kind": "Method",
+   "what": "Supervised network as a fusion expert",
+   "number": "-0.98 km2 false water, below the 1 km2 bar",
+   "link": "docs/ARCHITECTURE.md"
+  },
+  {
+   "kind": "Method",
+   "what": "Soil moisture to separate irrigated land",
+   "number": "Floor reads drier than foothills on every date; rain step +0.012 m3/m3 no bigger than other steps",
+   "link": "docs/eda/insar.md"
+  },
+  {
+   "kind": "Method",
+   "what": "Ground subsidence at Ararat",
+   "number": "Not detected: limit +/-15 mm (2 sigma) over 120 days",
+   "link": "docs/eda/insar.md"
+  },
+  {
+   "kind": "Method",
+   "what": "Calibrated dB thresholds at Lake Sevan",
+   "number": "0 km2 of water; noise floor 7-8 dB higher in the Armenian product",
+   "link": "docs/eda/calibrated.md"
+  },
+  {
+   "kind": "Method",
+   "what": "Nile delta by the seeded detector",
+   "number": "AUC 0.86; best single threshold 0.87 balanced accuracy (Mekong delta 0.65, Nile 0.71 in fusion v2)",
+   "link": "docs/eda/crossscene.md"
+  },
+  {
+   "kind": "Earthquake",
+   "what": "Flores Sea M7.8",
+   "number": "12 / 11 cm against 4.2 / 10.7 cm control; epicentre in the sea",
+   "link": "docs/eda/quake.md"
+  },
+  {
+   "kind": "Earthquake",
+   "what": "Mexico M7.3 (offshore Chiapas)",
+   "number": "5.8 / 12.8 cm; under 1 % valid pixels; epicentre 60 km offshore",
+   "link": "docs/eda/quake.md"
+  },
+  {
+   "kind": "Earthquake",
+   "what": "Sanriku M6.9",
+   "number": "20 / 5 cm; 1.4 % valid pixels; 34-45 km deep, offshore",
+   "link": "docs/eda/quake.md"
+  },
+  {
+   "kind": "Earthquake",
+   "what": "Qinghai M5.8",
+   "number": "6.8 cm against 5.2 cm control; too small",
+   "link": "docs/eda/quake.md"
+  },
+  {
+   "kind": "Earthquake",
+   "what": "Khuzdar M5.7",
+   "number": "9.7 cm (control 84 cm: unwrapping errors); epicentre 5 km from a swath edge",
+   "link": "docs/eda/quake.md"
+  },
+  {
+   "kind": "Earthquake",
+   "what": "Redwood Valley M5.6",
+   "number": "7.3 cm against 6.8 cm control",
+   "link": "docs/eda/quake.md"
+  },
+  {
+   "kind": "Earthquake",
+   "what": "Turangi M5.7",
+   "number": "4.0 cm against 3.2 cm control",
+   "link": "docs/eda/quake.md"
+  },
+  {
+   "kind": "Earthquake",
+   "what": "Qaidam M5.3",
+   "number": "7.0 cm (control 13 cm: unwrapping errors)",
+   "link": "docs/eda/quake.md"
+  },
+  {
+   "kind": "Earthquake",
+   "what": "Huancayo M5.5 (marginal)",
+   "number": "Patch +8 cm, p2p 13.6 cm against 2.3 cm control, but one look direction only",
+   "link": "docs/eda/quake.md"
+  },
+  {
+   "kind": "Earthquake",
+   "what": "Kumamoto second view, 36-day pair (marginal)",
+   "number": "24 cm against 8.6 cm control; epicentre on the frame edge",
+   "link": "docs/eda/quake.md"
+  },
+  {
+   "kind": "Earthquake",
+   "what": "Panama west view and north views",
+   "number": "West view unstable (25 to 390 cm across variants); north views nothing above noise",
+   "link": "docs/eda/quake.md"
+  },
+  {
+   "kind": "Ground event",
+   "what": "Brits tailings dam failure (marginal)",
+   "number": "0.58 km2 patch; field-sized background patches of 0.3-0.5 km2 exist",
+   "link": "docs/eda/events.md"
+  },
+  {
+   "kind": "Ground event",
+   "what": "Kilauea episode 54 (marginal)",
+   "number": "0.3 km2 at the crater (background p95 0.1 km2); crater floor already dark in control",
+   "link": "docs/eda/events.md"
+  },
+  {
+   "kind": "Ground event",
+   "what": "Ambrym eruption (marginal)",
+   "number": "1.9 km2 caldera patch, similar fragments over the island",
+   "link": "docs/eda/events.md"
+  },
+  {
+   "kind": "Ground event",
+   "what": "Budhi Gandaki landslide",
+   "number": "Not detected: control coherence 0.24-0.30, no patch at the place",
+   "link": "docs/eda/events.md"
+  },
+  {
+   "kind": "Ground event",
+   "what": "Kali Gandaki landslide at Lete",
+   "number": "Not detected: 31-48 % of ground loses coherence everywhere",
+   "link": "docs/eda/events.md"
+  },
+  {
+   "kind": "Ground event",
+   "what": "Campi Flegrei, Svartsengi, Kupreanof uplift",
+   "number": "Not attempted: about 4 mm in 12 days, below single-pair noise",
+   "link": "docs/eda/events.md"
+  },
+  {
+   "kind": "Disaster event",
+   "what": "Assam floods (marginal)",
+   "number": "+5 % (1,305 to 1,365 km2), inside the detector band; 38 % of new water inside Landsat extent",
+   "link": "docs/research/events-2026.md"
+  },
+  {
+   "kind": "Disaster event",
+   "what": "Lake Eyre fill (marginal)",
+   "number": "Series 3,070; 5,730; 4,005 km2 inside the band; QC flags on three dates",
+   "link": "docs/research/events-2026.md"
+  },
+  {
+   "kind": "Disaster event",
+   "what": "Central Luzon floods (marginal)",
+   "number": "+85 km2 (+23 %), inside the band, never recedes (paddy)",
+   "link": "docs/research/events-2026.md"
+  },
+  {
+   "kind": "Disaster event",
+   "what": "Bago/Sittaung, Dongting, Big Grass Fire, Lake Powell, Louisiana (round 1)",
+   "number": "Not detected; reasons per row (shallow paddy, peak in the outage, low-cover rangeland, canyon lake, first pass after the rain)",
+   "link": "docs/research/events-2026.md"
+  },
+  {
+   "kind": "Disaster event",
+   "what": "20 further places tried in round 2 (plus one re-check)",
+   "number": "Not detected (or not an event, or not run); for example Great Salt Lake mapped water rises while the lake falls",
+   "link": "docs/research/events-2026.md"
+  },
+  {
+   "kind": "Disaster event",
+   "what": "7 events not tried",
+   "number": "Texas, Pakistan monsoon, Spain/EU fires, Ontario fire, Lake Koroneia, Jamuna, Nepal/Tibet flash flood",
+   "link": "docs/research/events-2026.md"
+  },
+  {
+   "kind": "Place dropped",
+   "what": "Pantanal and Lake Chad, first dropped",
+   "number": "Fixed thresholds reach 0 % and 0.2 % of permanent-water pixels; returned after the seeded detector",
+   "link": "docs/eda/crossscene.md"
+  },
+  {
+   "kind": "Place dropped",
+   "what": "Synthetic 'demo' place",
+   "number": "Removed from the app data; the test conftest now removes it after a full pytest run",
+   "link": "tests/conftest.py"
+  },
+  {
+   "kind": "OPERA",
+   "what": "Inner Niger delta: we call too much open water",
+   "number": "IoU 0.08; ours 2,533 km2 where OPERA S1 has 507 km2; 98 % of our-only cells dry in OPERA; 'do not quote as an open-water success'",
+   "link": "docs/eda/opera.md"
+  },
+  {
+   "kind": "OPERA",
+   "what": "Lake Chad: we miss about half of the water",
+   "number": "IoU 0.48, recall 0.48; 1,490 against 2,860 km2 on 19 October; HLS finds even more",
+   "link": "docs/eda/opera.md"
+  },
+  {
+   "kind": "OPERA",
+   "what": "Lake Urmia: dry lake bed called water",
+   "number": "IoU 0.63; the exposed salty lake bed east of the lake is our false water",
+   "link": "docs/eda/opera.md"
+  },
+  {
+   "kind": "OPERA",
+   "what": "Other places",
+   "number": "Mekong delta IoU 0.24, Nile delta 0.20, Pantanal 0.47, Sudd 0.25, Poyang 0.45, Haor 0.62; Okavango and Sindh-Indus: no open water in ours, 20-200 km2 in OPERA",
+   "link": "docs/eda/opera.md"
+  },
+  {
+   "kind": "OPERA",
+   "what": "Tonle Sap in the forest season",
+   "number": "IoU 0.83-0.89 in June-July falls to 0.56-0.65 from mid-August",
+   "link": "docs/eda/opera.md"
+  },
+  {
+   "kind": "Claim",
+   "what": "'The Tonle Sap flood arrived late'",
+   "number": "Contradicted by gauge and altimeter (rise from early July; peak 24-29 September)",
+   "link": "docs/eda/validation-2026.md"
+  },
+  {
+   "kind": "Claim",
+   "what": "'Wind' as the cause of Sevan's two rough dates",
+   "number": "Undecided: no source shows wind above about 3 m/s; 31 August was a rain night (29 mm)",
+   "link": "docs/eda/validation-2026.md"
+  },
+  {
+   "kind": "Claim",
+   "what": "'Rain caused the odd HV channel on 6 October'",
+   "number": "Contradicted: 0-1 mm in 48 h",
+   "link": "docs/eda/validation-2026.md"
+  }
+ ]
+}
