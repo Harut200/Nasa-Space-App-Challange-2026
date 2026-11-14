@@ -56,6 +56,24 @@ Also new, and not in your review:
 - **Height from the order of flooding.** "Flooded earlier means lower" agrees moderately with an elevation model it never saw (rank correlation 0.45; 0.25 on the stricter test) and with 38 years of Landsat water history (−0.47). Build on the "waterline method" (1996); do not call it invented. Suggested wording and a what-we-claim box are in `docs/eda/novel.md`.
 - **Your proposed check** — what share of the 30 August vegetation mask is open water by 23 September — has a relative now: 31 % of pixels that became open water were flagged as flooded vegetation on an earlier pass. The exact fraction you defined has not been computed; it is a good one to ask for.
 
+### Correction, 13:15 — independent 2026 data changed two of our claims
+
+Task 2 (the four facts) has been answered from weather stations, reanalysis, the Mekong River Commission gauge feed and satellite altimetry. Full write-up: `docs/eda/validation-2026.md`. Two things we had been saying are wrong or too strong, and the story text has been corrected to match. **Do not reintroduce the old wording when you edit.**
+
+| We said | The data says | Verdict |
+|---|---|---|
+| "The Tonle Sap flood arrived late; the biggest jump was 11–23 September" | The lake began rising in early July: the Prek Kdam gauge rose 2.76 m in 12 days from 5 July, the satellite altimeter +1.3 m from 2 to 12 July. Our open water barely moved then, but water under vegetation went from 1 to 462 km². The lake peaked about 29 September at a normal height. Level gains were largest in July and across the outage, small for 11→23 September | **Contradicted as worded.** Radar saw the early rise as water under vegetation, the later rise as open water |
+| "Wind roughened Lake Sevan on 31 August and 12 September" | No source shows more than about 3 m/s at pass time on either date. 31 August followed a night of rain: 29.1 mm at the Sevan shore station in the 48 hours before. 12 September was dry with a steady 2–4 m/s breeze overnight | **Undecided.** Say "roughened by rain and wind", not "wind" |
+| "6 October in Armenia: rain, or an instrument effect" | 0.0 mm at the Sevan and Gavar stations in the 48 hours before; at most 1 mm elsewhere | **Rain contradicted.** Instrument or processing effect remains the likely cause |
+
+One result went our way, and it is the strongest validation we have:
+
+- **Tonle Sap open-water area against the lake level from a NASA satellite altimeter: rank correlation 0.98 over the ten passes** (Pearson 0.96). Against the Prek Kdam river gauge: 0.72.
+
+Also answered: Lake Sevan fell 0.23 m from 18 July to 7 October (altimeter, agreeing with the Armenian gauge to about 2 cm). It did not rise during our pass window.
+
+Something only you can judge: the lake fell after late September while our open-water class kept growing to 17 October (+296 km²). Open water plus water under vegetation fell slightly over the same period. Is that vegetation drowning and becoming open water, or something else?
+
 ### Where your task list stands
 
 | Task | Status |
