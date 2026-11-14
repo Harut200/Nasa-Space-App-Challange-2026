@@ -9,6 +9,7 @@ const REPO = 'https://github.com/Harut200/Nasa-Space-App-Challange-2026'
 const COLORS = ['#00e0ff', '#ff2a1f', '#ededed', '#8b8b8b', '#2a8fa0']
 const STORY = [['see', 'What you see'], ['physics', 'What is happening'], ['lband', 'Why radar shows it'], ['people', 'Why it matters']]
 const NONE = []
+const GEOCODE = 'https://geocoding-api.open-meteo.com/v1/search?count=1&name=' // free, no key
 // maplibre-gl is ~1 MB: load it lazily so the shell paints first; both imports start now
 const globeImport = import('./Globe.jsx')
 const mapImport = import('./MapView.jsx')
@@ -84,7 +85,10 @@ export default function App() {
   const [regionId, setRegionId] = useState(null)
   const [wide, mid, vh] = useViewport()
   const about = useRef(null)
-  const tabs = useRef(null)
+  const where = useRef(null)
+  const [custom, setCustom] = useState(null) // a place the user asked for; has no forecast
+  const [findError, setFindError] = useState(null)
+  const [busy, setBusy] = useState(false)
 
   useEffect(() => {
     getJson('index.json')
@@ -142,17 +146,14 @@ export default function App() {
 
   const earth = planetId === PLANETS[0].id
   const planet = PLANETS.find((p) => p.id === planetId)
-  const region = earth ? REGIONS.find((r) => r.id === regionId) : null
+  const globeRegions = useMemo(() => (custom ? [...GLOBE_REGIONS, custom] : GLOBE_REGIONS), [custom])
+  const region = earth ? globeRegions.find((r) => r.id === regionId) : null
   const open = !!region
   // Pixels of the hero that the overlay covers, so the globe centres on the free area.
   const { top, right, bottom, left } = wide
     ? { top: 135, right: open ? 460 : 24, bottom: open || mid ? 96 : 24, left: 24 } // wide + idle: corner controls clear the globe
     : { top: 140, right: 16, bottom: open ? Math.round(vh * 0.46) + 16 : 80, left: 16 }
   const padding = useMemo(() => ({ top, right, bottom, left }), [top, right, bottom, left])
-
-  useEffect(() => {
-    tabs.current?.querySelector('[aria-pressed="true"]')?.scrollIntoView({ inline: 'center', block: 'nearest' })
-  }, [regionId])
 
   const now = m && frame(DATA, m.id, layer, date)
   const other = m && frame(DATA, m.id, layer, m.dates[otherIndex])
@@ -163,12 +164,32 @@ export default function App() {
   const clip = useMemo(() => ({ clipPath: `inset(0 0 0 ${split}%)` }), [split])
   const onPick = useCallback((j) => setDateIndex(Math.max(0, m.dates.indexOf(ts.dates[j]))), [m, ts])
   const pickArea = (id) => { setAreaId(id); setDateIndex(0); setOtherIndex(0); setPlaying(false) }
+  const random = () => { const rest = REGIONS.filter((r) => r.id !== regionId); setRegionId(rest[Math.floor(Math.random() * rest.length)].id) }
+  // Coordinates win over the city name; a city is a sample region if the name matches, else geocoded.
+  const locate = async (e) => {
+    e.preventDefault()
+    const form = e.target, f = new FormData(form), city = f.get('city').trim(), lat = f.get('lat'), lon = f.get('lon')
+    const done = (id) => { setRegionId(id); setFindError(null); form.reset(); where.current.close() }
+    let place
+    if (lat !== '' && lon !== '') place = { name: 'Custom point', lngLat: [+lon, +lat] }
+    else if (city) {
+      const known = REGIONS.find((r) => r.name.toLowerCase() === city.toLowerCase())
+      if (known) return done(known.id)
+      setBusy(true)
+      const hit = await fetch(GEOCODE + encodeURIComponent(city)).then((r) => r.json()).then((j) => j.results?.[0]).catch(() => null)
+      setBusy(false)
+      if (!hit) return setFindError(`Could not find “${city}”. Check the spelling or use coordinates.`)
+      place = { name: hit.name, lngLat: [hit.longitude, hit.latitude] }
+    } else return setFindError('Enter a city name, or both latitude and longitude.')
+    setCustom({ id: 'custom', events: [], severity: null, ...place })
+    done('custom')
+  }
   const pickPlanet = (id) => { setPlanetId(id); setRegionId(null) }
 
   return (
     <>
       <section className={`hero${open ? ' open' : ''}`} aria-label="Forecast globe">
-        <Suspense fallback={null}><Globe planet={planetId} regions={earth ? GLOBE_REGIONS : NONE} selectedId={region?.id ?? null} onSelect={onSelect} padding={padding} /></Suspense>
+        <Suspense fallback={null}><Globe planet={planetId} regions={earth ? globeRegions : NONE} selectedId={region?.id ?? null} onSelect={onSelect} padding={padding} /></Suspense>
         <div className="hero-ui">
           <header className="bar">
             <h1>Dancing with the <em>SARs</em></h1>
@@ -176,13 +197,9 @@ export default function App() {
           </header>
 
           {earth ? (
-            <nav className="tabs" aria-label="Regions" ref={tabs}>
-              <button className="pill" aria-pressed={!region} onClick={() => setRegionId(null)}>Globe</button>
-              {GLOBE_REGIONS.map((r) => (
-                <button key={r.id} className="pill" aria-pressed={r.id === regionId} onClick={() => setRegionId(r.id)}>
-                  {r.severity === 'high' && <i className="pip" aria-hidden="true" />}{r.name}
-                </button>
-              ))}
+            <nav className="tabs" aria-label="Choose a place">
+              <button className="pill" onClick={random}>Random</button>
+              <button className="pill" onClick={() => where.current.showModal()}>By location</button>
             </nav>
           ) : (
             <p className="soon">No forecast for {planet.name} — yet.</p>
@@ -197,6 +214,7 @@ export default function App() {
               <h2>{region.name}</h2>
               <p className="label">{coord(region.lngLat)}</p>
               <p className="label count">{region.events.length} predicted {region.events.length === 1 ? 'event' : 'events'}</p>
+              {!region.events.length && <p className="empty">No forecast for this place yet.</p>}
               <ul className="events">{region.events.map((e) => <Event key={e.type + e.from} e={e} />)}</ul>
             </aside>
           ) : earth && (
@@ -207,7 +225,6 @@ export default function App() {
             <div className="seg" role="group" aria-label="Planet">
               {PLANETS.map((p) => <button key={p.id} aria-pressed={p.id === planetId} onClick={() => pickPlanet(p.id)}>{p.name}</button>)}
             </div>
-            <a className="cue" href="#radar"><span className="label">Radar record</span><i aria-hidden="true" /></a>
           </div>
         </div>
       </section>
@@ -309,6 +326,20 @@ export default function App() {
         <p>This app shows how the Earth's surface changed between June and October 2026, seen by the NISAR radar satellite. Pick a place, press Play, and watch water, forest and fields change from one pass to the next. Radar sees through cloud and at night, so no pass is lost to weather.</p>
         <p>The forecast globe above shows sample data only. Data caveat: these are PROVISIONAL NISAR products. Calibration is not final.</p>
         <form method="dialog"><button className="pill">Close</button></form>
+      </dialog>
+
+      <dialog ref={where} onClick={(e) => e.target === where.current && where.current.close()}>
+        <p className="label">By location</p>
+        <form className="where" onSubmit={locate}>
+          <label className="label">City name<input name="city" type="text" autoComplete="off" placeholder="Yerevan" /></label>
+          <details>
+            <summary className="label">Advanced</summary>
+            <label className="label">Latitude<input name="lat" type="number" min="-90" max="90" step="any" placeholder="40.18" /></label>
+            <label className="label">Longitude<input name="lon" type="number" min="-180" max="180" step="any" placeholder="44.51" /></label>
+          </details>
+          {findError && <p className="note" role="alert">{findError}</p>}
+          <div className="row"><button className="pill" aria-pressed="true" disabled={busy}>{busy ? 'Finding…' : 'Go'}</button><button type="button" className="pill" onClick={() => where.current.close()}>Cancel</button></div>
+        </form>
       </dialog>
     </>
   )

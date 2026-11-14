@@ -76,7 +76,7 @@ function Globe({ planet = 'earth', regions = [], selectedId = null, onSelect, pa
     const p = PLANETS.find((x) => x.id === live.current.planet) ?? PLANETS[0]
     const m = new maplibregl.Map({
       container: mapEl.current, style: styleFor(p), center: [20, 15], zoom: 1, maxPitch: 0, dragRotate: false,
-      attributionControl: { compact: true }, scrollZoom: false, // ponytail: wheel zoom is opt-in, see below
+      attributionControl: { compact: true }, pixelRatio: Math.min(devicePixelRatio, 2), scrollZoom: false, // 3x screens: 2.25x fewer pixels, no visible loss // ponytail: wheel zoom is opt-in, see below
     })
     map.current = m
     m.setPadding(live.current.pad)
