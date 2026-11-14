@@ -12,15 +12,19 @@ export function parse(hash = location.hash) {
   let seg = path || ''
   try { seg = decodeURIComponent(seg) } catch { /* keep the raw text */ }
   const search = p.get('q') || ''
-  if (!seg) return { place: null, mode: 'open', q: search }
-  if (seg === 'globe') return { place: null, mode: 'globe', q: search }
-  if (seg === 'places') return { place: null, mode: 'places', q: search }
+  const cls = p.get('class') || ''
+  if (!seg) return { place: null, mode: 'open', q: search, cls: '' }
+  if (seg === 'globe') return { place: null, mode: 'globe', q: search, cls }
+  if (seg === 'places') return { place: null, mode: 'places', q: search, cls }
   const mode = p.get('mode') === 'explore' ? 'explore' : 'story'
   const from = ['home', 'globe', 'places'].includes(p.get('from')) ? p.get('from') : 'home'
-  return { place: seg, mode, scene: Math.max(1, parseInt(p.get('scene') || '1', 10) || 1), layer: p.get('layer') || null, date: p.get('date') || null, cmp: p.get('cmp') === '1', from, globe: p.get('globe') === '1', q: search }
+  return { place: seg, mode, scene: Math.max(1, parseInt(p.get('scene') || '1', 10) || 1), layer: p.get('layer') || null, date: p.get('date') || null, cmp: p.get('cmp') === '1', from, globe: p.get('globe') === '1', q: search, cls }
 }
 export function build(r) {
-  const qs = r.q ? `?${new URLSearchParams({ q: r.q })}` : ''
+  const qp = new URLSearchParams()
+  if (r.q) qp.set('q', r.q)
+  if (r.cls) qp.set('class', r.cls)
+  const qs = qp.toString() ? `?${qp}` : ''
   if (r.mode === 'globe') return `#/globe${qs}`
   if (r.mode === 'places') return `#/places${qs}`
   if (r.mode === 'open' || !r.place) return '#/'
@@ -31,6 +35,7 @@ export function build(r) {
   if (r.mode === 'explore' && r.cmp) p.set('cmp', '1')
   if (r.from && r.from !== 'home') p.set('from', r.from)
   if (r.globe) p.set('globe', '1')
+  if (r.cls) p.set('class', r.cls)
   return `#/${r.place}?${p}`
 }
 

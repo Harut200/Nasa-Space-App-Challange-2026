@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import * as maplibregl from 'maplibre-gl'
 import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?url'
 import 'maplibre-gl/dist/maplibre-gl.css'
-import { SEASON, centreOf, dotSize, eventType, headline, isEvent, placeColor, typeInfo } from './data.js'
+import { centreOf, classInfo, classOf, dotSize, headline, isEvent, placeColor } from './data.js'
 
 maplibregl.setWorkerUrl(workerUrl)
 
@@ -11,18 +11,19 @@ const EOX = 'https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/
 const STILL = new URLSearchParams(location.search).has('still') // ?still: no auto-rotation, and the map is reachable as window.__globe (screenshots, tests)
 const reduced = () => window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
 const FLY = (t) => t * t * (3 - 2 * t)
+const BIG = (m) => m === 'full' || m === 'landing'
 const HIT = 16 // px: how far from a dot's centre a click still counts
 const SAME = 6 // px: dots this close are the same spot on the globe; a click zooms in first so they come apart
 
 const style = () => ({
   version: 8, projection: { type: 'globe' },
-  sky: { 'sky-color': '#02050a', 'horizon-color': '#4f8fd6', 'fog-color': '#02050a', 'sky-horizon-blend': 0.7, 'horizon-fog-blend': 0.6, 'fog-ground-blend': 0.8, 'atmosphere-blend': ['interpolate', ['linear'], ['zoom'], 0, 1, 5, 0.5, 8, 0] },
+  sky: { 'sky-color': '#06080c', 'horizon-color': '#3a6fb0', 'fog-color': '#06080c', 'sky-horizon-blend': 0.7, 'horizon-fog-blend': 0.6, 'fog-ground-blend': 0.8, 'atmosphere-blend': ['interpolate', ['linear'], ['zoom'], 0, 1, 5, 0.5, 8, 0] },
   sources: {
     bm: { type: 'raster', tiles: [GIBS], tileSize: 256, maxzoom: 8, attribution: 'Imagery: NASA GIBS · Blue Marble' },
     s2: { type: 'raster', tiles: [EOX], tileSize: 256, maxzoom: 13, attribution: 'Sentinel-2 cloudless by EOX IT Services GmbH (Contains modified Copernicus Sentinel data 2020)' },
   },
   layers: [
-    { id: 'bg', type: 'background', paint: { 'background-color': '#0a1018' } },
+    { id: 'bg', type: 'background', paint: { 'background-color': '#06080c' } },
     { id: 'bm', type: 'raster', source: 'bm', paint: { 'raster-fade-duration': 300 } },
     { id: 's2', type: 'raster', source: 's2', minzoom: 4, paint: { 'raster-fade-duration': 300, 'raster-opacity': ['interpolate', ['linear'], ['zoom'], 4, 0, 6, 1] } },
   ],
@@ -52,21 +53,21 @@ function drawIcon(shape, color) {
 const features = (places, ids, currentId) => ({
   type: 'FeatureCollection',
   features: places.map((p) => {
-    const ev = isEvent(p), t = ev ? typeInfo(eventType(p)) : SEASON
+    const ev = isEvent(p), t = classInfo(classOf(p))
     return { type: 'Feature', properties: { id: p.id, kind: ev ? 'e' : 's', r: dotSize(p), s: dotSize(p) / 10.5, color: placeColor(p), icon: `ev-${t.shape}-${placeColor(p)}`, dim: ids && !ids.has(p.id) ? 1 : 0, cur: p.id === currentId ? 1 : 0 }, geometry: { type: 'Point', coordinates: centreOf(p.bounds) } }
   }),
 })
 
 // The live globe. 'mini': a small round globe in the corner, facing the current place, a click expands it.
 // 'full': the whole screen, every place a dot, hover and click. 'hidden': kept alive but out of sight.
-export default function GlobeMap({ mode, places, currentId, matchIds, paused, onOpen, onExpand, onSelect, selectedId }) {
+export default function GlobeMap({ mode, places, currentId, matchIds, paused, phase, faceLL, faceKey, onOpen, onDive, onDiveEnd, onExpand, onSelect, selectedId }) {
   const shell = useRef(null), el = useRef(null), map = useRef(null)
   const live = useRef({})
   const [tip, setTip] = useState(null)
   const [ready, setReady] = useState(0)
   const fit = useRef({ until: 0 })
   const prevMode = useRef('hidden')
-  live.current = { places, mode, currentId, matchIds, paused, onOpen, onSelect, tipOn: !!tip }
+  live.current = { places, mode, currentId, matchIds, paused, onOpen, onDive, onDiveEnd, onSelect, tipOn: !!tip }
 
   // In the full view the globe sits clear of the search panel (left on a desktop, top on a phone).
   const pads = () => {
@@ -94,8 +95,8 @@ export default function GlobeMap({ mode, places, currentId, matchIds, paused, on
       m.addSource('places', { type: 'geojson', data: features([], null, null) })
       const dim = ['case', ['==', ['get', 'dim'], 1], 0.14, 1]
       m.addLayer({ id: 'halo', type: 'circle', source: 'places', filter: ['==', ['get', 'kind'], 's'], paint: { 'circle-radius': ['+', 6, ['get', 'r']], 'circle-color': ['get', 'color'], 'circle-opacity': ['case', ['==', ['get', 'dim'], 1], 0, 0.24], 'circle-blur': 0.7 } })
-      m.addLayer({ id: 'season', type: 'circle', source: 'places', filter: ['==', ['get', 'kind'], 's'], paint: { 'circle-radius': ['get', 'r'], 'circle-color': ['get', 'color'], 'circle-opacity': dim, 'circle-stroke-color': '#fff', 'circle-stroke-width': 1.5, 'circle-stroke-opacity': dim } })
-      m.addLayer({ id: 'event', type: 'symbol', source: 'places', filter: ['==', ['get', 'kind'], 'e'], layout: { 'icon-image': ['get', 'icon'], 'icon-size': ['get', 's'], 'icon-allow-overlap': true, 'icon-ignore-placement': true }, paint: { 'icon-opacity': dim } })
+      m.addLayer({ id: 'season', type: 'circle', source: 'places', filter: ['==', ['get', 'kind'], 's'], paint: { 'circle-radius': ['get', 'r'], 'circle-color': ['get', 'color'], 'circle-opacity': dim, 'circle-opacity-transition': { duration: 150 }, 'circle-stroke-color': '#fff', 'circle-stroke-width': 1.5, 'circle-stroke-opacity': dim } })
+      m.addLayer({ id: 'event', type: 'symbol', source: 'places', filter: ['==', ['get', 'kind'], 'e'], layout: { 'icon-image': ['get', 'icon'], 'icon-size': ['get', 's'], 'icon-allow-overlap': true, 'icon-ignore-placement': true }, paint: { 'icon-opacity': dim, 'icon-opacity-transition': { duration: 150 } } })
       m.addLayer({ id: 'current', type: 'circle', source: 'places', filter: ['==', ['get', 'id'], ''], paint: { 'circle-radius': ['+', 6, ['get', 'r']], 'circle-color': 'rgba(0,0,0,0)', 'circle-stroke-color': '#ff6a3d', 'circle-stroke-width': 2.5 } })
       m.addLayer({ id: 'hover', type: 'circle', source: 'places', filter: ['==', ['get', 'id'], ''], paint: { 'circle-radius': ['+', 5, ['get', 'r']], 'circle-color': 'rgba(0,0,0,0)', 'circle-stroke-color': '#fff', 'circle-stroke-width': 2, 'circle-stroke-opacity': 0.95 } })
       setReady(1)
@@ -123,20 +124,30 @@ export default function GlobeMap({ mode, places, currentId, matchIds, paused, on
       return { id: hits[0].p.id, also }
     }
     const setRing = (layer, id) => m.getLayer(layer) && m.setFilter(layer, ['==', ['get', 'id'], id || ''])
+    const fade = (v) => { for (const [l, p] of [['season', 'circle-opacity'], ['event', 'icon-opacity'], ['halo', 'circle-opacity']]) if (m.getLayer(l)) m.setPaintProperty(l, p, v ? (l === 'halo' ? ['case', ['==', ['get', 'dim'], 1], 0, 0.24] : ['case', ['==', ['get', 'dim'], 1], 0.14, 1]) : 0)
+      if (v && m.getLayer('hover')) { m.setPaintProperty('hover', 'circle-radius-transition', { duration: 0 }); m.setPaintProperty('hover', 'circle-radius', ['+', 5, ['get', 'r']]); m.setPaintProperty('hover', 'circle-stroke-opacity-transition', { duration: 0 }); m.setPaintProperty('hover', 'circle-stroke-opacity', 0.95); m.setFilter('hover', ['==', ['get', 'id'], '']) }
+    }
+    // One continuous shot: the other dots fade, the clicked one pulses, the camera follows a great-circle flight, and half way the place opens underneath (it is already fitted when the globe dissolves).
     const fly = (id) => {
       const ll = placeLL(id)
       if (!ll) return
       live.current.diving = true
       let fired = false
-      const done = () => { if (fired) return; fired = true; live.current.diving = false; live.current.onOpen(id) }
-      if (reduced()) return done()
-      m.flyTo({ center: ll, zoom: Math.max(m.getZoom() + 2.6, 4.4), duration: 1100, curve: 1.4, easing: FLY, essential: true })
+      const done = () => { if (fired) return; fired = true; fade(true); live.current.diving = false; live.current.onDiveEnd?.(id) }
+      if (reduced()) { live.current.onDive?.(id); return done() }
+      const c = m.getCenter(), rad = Math.PI / 180
+      const dist = Math.acos(Math.min(1, Math.max(-1, Math.sin(c.lat * rad) * Math.sin(ll[1] * rad) + Math.cos(c.lat * rad) * Math.cos(ll[1] * rad) * Math.cos((c.lng - ll[0]) * rad)))) / rad
+      const dur = Math.round(Math.min(2200, Math.max(1100, 1000 + dist * 14)))
+      setTip(null); fade(false)
+      if (m.getLayer('hover')) { m.setFilter('hover', ['==', ['get', 'id'], id]); m.setPaintProperty('hover', 'circle-radius-transition', { duration: 500 }); m.setPaintProperty('hover', 'circle-radius', 26); m.setPaintProperty('hover', 'circle-stroke-opacity-transition', { duration: 500 }); m.setPaintProperty('hover', 'circle-stroke-opacity', 0) }
+      m.flyTo({ center: ll, zoom: Math.max(m.getZoom() + 2.6, 5.2), duration: dur, curve: 1.4, easing: (t) => (t < 0.5 ? 4 * t * t * t : 1 - ((-2 * t + 2) ** 3) / 2), essential: true })
+      setTimeout(() => { if (!fired) live.current.onDive?.(id) }, dur * 0.5)
       m.once('moveend', done)
-      setTimeout(done, 1500)
+      setTimeout(done, dur + 600)
     }
     let moveRaf = 0
     m.on('mousemove', (e) => {
-      if (live.current.mode !== 'full' || live.current.diving || moveRaf) return
+      if (!BIG(live.current.mode) || live.current.diving || moveRaf) return
       moveRaf = requestAnimationFrame(() => { moveRaf = 0 })
       const h = pick(e.point)
       m.getCanvas().style.cursor = h ? 'pointer' : ''
@@ -146,7 +157,7 @@ export default function GlobeMap({ mode, places, currentId, matchIds, paused, on
     })
     m.getCanvas().addEventListener('mouseleave', () => { live.current.hover = false; setRing('hover', ''); setTip(null) })
     m.on('click', (e) => {
-      if (live.current.mode !== 'full' || live.current.diving) return
+      if (!BIG(live.current.mode) || live.current.diving) return
       const h = pick(e.point)
       if (!h) return live.current.onSelect?.(null)
       if (matchMedia('(hover: none)').matches) return live.current.onSelect?.(h.id)
@@ -166,7 +177,7 @@ export default function GlobeMap({ mode, places, currentId, matchIds, paused, on
       const dt = Math.min(t - last, 100)
       last = t
       const L = live.current
-      if (!STILL && L.mode === 'full' && !reduced() && !L.hover && !L.diving && !L.paused && !document.hidden && t - touched > 4000 && !m.isMoving()) {
+      if (!STILL && BIG(L.mode) && !reduced() && !L.hover && !L.diving && !L.paused && !document.hidden && t - touched > 4000 && !m.isMoving()) {
         const c = m.getCenter()
         m.jumpTo({ center: [c.lng + dt * 0.0028, c.lat] })
       }
@@ -188,8 +199,8 @@ export default function GlobeMap({ mode, places, currentId, matchIds, paused, on
     const m = map.current
     if (!ready || !m) return
     for (const p of places) {
-      const t = isEvent(p) ? typeInfo(eventType(p)) : null
-      if (!t) continue
+      if (!isEvent(p)) continue
+      const t = classInfo(classOf(p))
       const name = `ev-${t.shape}-${placeColor(p)}`
       if (!m.hasImage(name)) m.addImage(name, drawIcon(t.shape, placeColor(p)), { pixelRatio: 2 })
     }
@@ -209,10 +220,15 @@ export default function GlobeMap({ mode, places, currentId, matchIds, paused, on
     const k = mini ? 0.42 : 1
     m.setPaintProperty('season', 'circle-radius', ['max', 1.8, ['*', ['get', 'r'], k]])
     m.setPaintProperty('halo', 'circle-radius', ['*', ['+', 6, ['get', 'r']], k])
-    m.setLayoutProperty('event', 'icon-size', ['*', ['get', 's'], mini ? 0.5 : 1])
-    m.setPaintProperty('current', 'circle-radius', mini ? 7 : ['+', 6, ['get', 'r']])
-    m.setPaintProperty('current', 'circle-stroke-width', mini ? 2 : 2.5)
-    for (const h of ['scrollZoom', 'dragPan', 'doubleClickZoom', 'touchZoomRotate', 'keyboard']) m[h][mini ? 'disable' : 'enable']()
+    m.setLayoutProperty('event', 'icon-size', ['*', ['get', 's'], mini ? 0.4 : 1])
+    m.setPaintProperty('current', 'circle-radius', mini ? 4.5 : ['+', 6, ['get', 'r']])
+    m.setPaintProperty('current', 'circle-color', mini ? '#ff6a3d' : 'rgba(0,0,0,0)')
+    m.setPaintProperty('current', 'circle-stroke-color', mini ? '#fff' : '#ff6a3d')
+    m.setPaintProperty('current', 'circle-stroke-width', mini ? 1.5 : 2.5)
+    if (mini) { m.setPaintProperty('season', 'circle-stroke-width', 0); m.setPaintProperty('halo', 'circle-opacity', 0) } else { m.setPaintProperty('season', 'circle-stroke-width', 1.5); m.setPaintProperty('halo', 'circle-opacity', ['case', ['==', ['get', 'dim'], 1], 0, 0.24]) }
+    const land = mode === 'landing'
+    for (const h of ['scrollZoom', 'doubleClickZoom', 'touchZoomRotate', 'keyboard']) m[h][mini || land ? 'disable' : 'enable']()
+    m.dragPan[mini ? 'disable' : 'enable']()
     m.getCanvas().style.cursor = mini ? 'pointer' : ''
     if (mini) setTip(null)
     fit.current.until = performance.now() + 900
@@ -224,6 +240,13 @@ export default function GlobeMap({ mode, places, currentId, matchIds, paused, on
     else m.jumpTo({ center: m.getCenter(), zoom: idleZoom() })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mode, ready])
+  // choosing a class turns the globe to face the densest group of it
+  useEffect(() => {
+    const m = map.current
+    if (!ready || !m || mode !== 'full' || !faceLL) return
+    m.easeTo({ center: faceLL, duration: reduced() ? 0 : 1300, easing: (t) => (t < 0.5 ? 4 * t * t * t : 1 - ((-2 * t + 2) ** 3) / 2) })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [faceKey, ready])
   // the mini globe turns to the place being shown
   useEffect(() => {
     const m = map.current
@@ -237,13 +260,13 @@ export default function GlobeMap({ mode, places, currentId, matchIds, paused, on
   const also = tip?.also?.map((id) => places.find((p) => p.id === id)?.name).filter(Boolean) || []
   const w = shell.current?.clientWidth || 0
   return (
-    <div ref={shell} className={`globe-shell ${mode}`} aria-hidden={mode === 'hidden' ? 'true' : undefined}>
+    <div ref={shell} className={`globe-shell ${mode} ${phase || ''}`} aria-hidden={mode === 'hidden' ? 'true' : undefined}>
       <div ref={el} className="globe-canvas" />
       {mode === 'mini' && <button className="globe-hit" onClick={onExpand} aria-label="Open the globe: where on Earth this place is" title="Open the globe (G)" />}
-      {mode === 'full' && tp && (
+      {BIG(mode) && tp && (
         <div className="globe-tip" style={{ left: Math.min(tip.x + 16, Math.max(8, w - 320)), top: tip.y }} role="tooltip">
           <strong>{tp.name}</strong>
-          <span>{headline(tp).long}</span>
+          <span>{headline(tp).short} <small>{headline(tp).tag}</small></span>
           {also.length > 0 && <em>Also here: {also.join(', ')}. Click to zoom in.</em>}
         </div>
       )}

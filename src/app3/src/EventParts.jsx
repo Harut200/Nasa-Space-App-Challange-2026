@@ -47,6 +47,7 @@ const HINT = {
 
 export function EventExplore({ place, layerId, layer, setLayer, opacity, setOpacity, cmp, setCmp, spotsOn, setSpotsOn, setActiveSpot, phone }) {
   const [more, setMore] = useState(false)
+  const [slider, setSlider] = useState(false)
   const modes = ORDER.filter((id) => place.layers.some((l) => l.id === id))
   const rest = place.layers.filter((l) => !ORDER.includes(l.id))
   const isMain = modes.includes(layerId)
@@ -65,12 +66,13 @@ export function EventExplore({ place, layerId, layer, setLayer, opacity, setOpac
             {rest.map((l) => <button key={l.id} role="option" aria-selected={layerId === l.id} className={layerId === l.id ? 'on' : ''} onClick={() => { setLayer(l.id); setMore(false) }}>{l.label}</button>)}
           </div>
         )}
-        <label className="slider"><span>Overlay</span>
+        {slider && (<label className="slider"><span>Overlay</span>
           <input type="range" min="0" max="100" value={Math.round(opacity * 100)} onChange={(e) => setOpacity(+e.target.value / 100)} onPointerUp={(e) => e.currentTarget.blur()} aria-label="Overlay opacity" />
-          <output>{Math.round(opacity * 100)}%</output></label>
-        <div className="toggles">
-          <button className={`chip ${cmp.on ? 'on' : ''}`} aria-pressed={cmp.on} onClick={() => setCmp((c) => ({ ...c, on: !c.on }))} title="Drag the handle: bare terrain | this layer (C)">{Icon.split}<span>Compare</span></button>
-          <button className={`chip ${spotsOn ? 'on' : ''}`} aria-pressed={spotsOn} onClick={() => { setSpotsOn((x) => !x); setActiveSpot(null) }}>{Icon.pin}<span>Spots</span></button>
+          <output>{Math.round(opacity * 100)}%</output></label>)}
+        <div className="toggles tools">
+          <button className={`chip ${slider ? 'on' : ''}`} aria-pressed={slider} onClick={() => setSlider((x) => !x)} title="Overlay strength" aria-label="Overlay strength">{Icon.layers}<span className="tl">Overlay</span></button>
+          <button className={`chip ${cmp.on ? 'on' : ''}`} aria-pressed={cmp.on} onClick={() => setCmp((c) => ({ ...c, on: !c.on }))} title="Drag the handle: bare terrain | this layer (C)">{Icon.split}<span className="tl">Compare</span></button>
+          <button className={`chip ${spotsOn ? 'on' : ''}`} aria-pressed={spotsOn} onClick={() => { setSpotsOn((x) => !x); setActiveSpot(null) }}>{Icon.pin}<span className="tl">Spots</span></button>
         </div>
       </aside>
       <Legend key={layer?.id} layer={layer} phone={phone} />

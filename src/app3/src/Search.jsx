@@ -1,33 +1,31 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { SEASON, eventType, headline, isEvent, kindLabel, matches, placeColor, typeInfo } from './data.js'
+import { classInfo, classOf, classesIn, headline, kindLabel, matches, placeColor } from './data.js'
 import { Icon } from './ui.jsx'
 
 // A little icon in the colour and shape of the place's dot on the globe.
 export function KindIcon({ place, shape: sh, color, size = 16 }) {
-  const t = place ? (isEvent(place) ? typeInfo(eventType(place)) : SEASON) : { shape: sh }
-  const c = color || placeColor(place)
+  const t = place ? classInfo(classOf(place)) : { shape: sh }
+  const c = color || (place ? placeColor(place) : '#fff')
   const s = size
   let shape
   if (t.shape === 'ring') shape = <><circle cx="12" cy="12" r="5.2" fill={c} stroke="#fff" strokeWidth="1.6" /><circle cx="12" cy="12" r="9.6" fill="none" stroke={c} strokeWidth="1.8" /></>
   else if (t.shape === 'triangle') shape = <path d="M12 3.5 21 20H3z" fill={c} stroke="#fff" strokeWidth="1.6" strokeLinejoin="round" />
   else if (t.shape === 'square') shape = <rect x="4.5" y="4.5" width="15" height="15" rx="2.5" fill={c} stroke="#fff" strokeWidth="1.6" />
   else if (t.shape === 'diamond') shape = <path d="M12 2.5 21.5 12 12 21.5 2.5 12z" fill={c} stroke="#fff" strokeWidth="1.6" strokeLinejoin="round" />
-  else if (t.shape === 'drop') shape = <path d="M12 3C8 9 5.5 12 5.5 15a6.5 6.5 0 0 0 13 0c0-3-2.5-6-6.5-12z" fill={c} stroke="#fff" strokeWidth="1.6" strokeLinejoin="round" />
   else shape = <circle cx="12" cy="12" r="7" fill={c} stroke="#fff" strokeWidth="1.6" />
   return <svg className="kind-icon" width={s} height={s} viewBox="0 0 24 24" aria-hidden="true">{shape}</svg>
 }
 
-// All · Seasons of water · one chip per event type that exists in the data.
+// All, then one chip per class present in the data (labels, order and counts from the data).
 export function chipsFor(places) {
-  const out = [{ key: 'all', label: 'All', n: places.length }]
-  const seasons = places.filter((p) => !isEvent(p)).length
-  if (seasons) out.push({ key: 's', label: SEASON.plural, n: seasons })
-  const types = new Map()
-  for (const p of places) if (isEvent(p)) types.set(eventType(p), (types.get(eventType(p)) || 0) + 1)
-  for (const [t, n] of [...types].sort((a, b) => (a[0] === 'earthquake' ? -1 : b[0] === 'earthquake' ? 1 : a[0].localeCompare(b[0])))) out.push({ key: `e:${t}`, label: typeInfo(t).plural, n })
-  return out
+  return [{ key: 'all', label: 'All', n: places.length }, ...classesIn(places).map((c) => ({ key: c.id, label: c.label, n: c.count, shape: c.shape, color: c.color, desc: c.desc }))]
 }
-export const filterPlaces = (places, q, kind) => places.filter((p) => matches(p, q, kind))
+export const filterPlaces = (places, q, kind) => {
+  const r = places.filter((p) => matches(p, q, kind))
+  if (!String(q || '').trim() || kind !== 'all') return r
+  const order = classesIn(places).map((c) => c.id) // searching groups the results by class, in display order
+  return [...r].sort((a, b) => order.indexOf(classOf(a)) - order.indexOf(classOf(b)))
+}
 
 export function Chips({ places, kind, setKind }) {
   const chips = useMemo(() => chipsFor(places), [places])
@@ -35,9 +33,10 @@ export function Chips({ places, kind, setKind }) {
     <div className="chips" role="group" aria-label="Filter places by kind">
       {chips.map((c) => (
         <button key={c.key} type="button" className={`fchip ${kind === c.key ? 'on' : ''}`} aria-pressed={kind === c.key} onClick={() => setKind(c.key)}>
-          {c.label} <span className="mono n">{c.n}</span>
+          {c.shape && <KindIcon shape={c.shape} color={c.color} size={12} />}{c.label} <span className="mono n">{c.n}</span>
         </button>
       ))}
+      {chips.find((c) => c.key === kind)?.desc && <p className="class-desc" role="status">{chips.find((c) => c.key === kind).desc}</p>}
     </div>
   )
 }
@@ -55,7 +54,7 @@ export function useSearchNav(results, onPick, deps, onEscape) {
   return { active, setActive, onKeyDown }
 }
 
-export function ResultList({ results, active, setActive, onPick, q, onClear, id = 'results' }) {
+export function ResultList({ results, active, setActive, onPick, q, onClear, id = 'results', grouped }) {
   const ref = useRef(null)
   useEffect(() => { ref.current?.querySelector('[aria-selected="true"]')?.scrollIntoView({ block: 'nearest' }) }, [active, results])
   if (!results.length) {
@@ -71,14 +70,16 @@ export function ResultList({ results, active, setActive, onPick, q, onClear, id 
     <ul className="results" role="listbox" aria-label="Places" id={id} ref={ref}>
       {results.map((p, i) => {
         const h = headline(p)
-        return (
+        const head = grouped && (i === 0 || classOf(results[i - 1]) !== classOf(p))
+        return [
+          head && <li key={'h' + classOf(p)} role="presentation" className="r-group mono">{classInfo(classOf(p)).label}</li>,
           <li key={p.id} role="option" aria-selected={i === active} className={i === active ? 'on' : ''} data-id={p.id}
             onMouseEnter={() => setActive(i)} onMouseDown={(e) => e.preventDefault()} onClick={() => onPick(p)}>
             <KindIcon place={p} />
             <span className="r-name"><b>{p.name}</b><small className="mono">{kindLabel(p)}</small></span>
             <span className="r-num mono">{h.short}<small>{h.tag}</small></span>
-          </li>
-        )
+          </li>,
+        ]
       })}
     </ul>
   )
@@ -109,7 +110,7 @@ export function SearchBar({ places, q, setQ, kind, setKind, onPick, inputRef, on
       {open && (
         <div className="search-pop panel-like" role="dialog" aria-label="Search results">
           <Chips places={places} kind={kind} setKind={setKind} />
-          <ResultList results={results} {...nav} onPick={(p) => { setOpen(false); inputRef.current?.blur(); onPick(p) }} q={q} onClear={() => { setQ(''); setKind('all') }} id="bar-results" />
+          <ResultList grouped={!!q.trim()} results={results} {...nav} onPick={(p) => { setOpen(false); inputRef.current?.blur(); onPick(p) }} q={q} onClear={() => { setQ(''); setKind('all') }} id="bar-results" />
         </div>
       )}
     </div>
@@ -117,17 +118,17 @@ export function SearchBar({ places, q, setQ, kind, setKind, onPick, inputRef, on
 }
 
 // The docked search of the globe (and the sheet on a phone).
-export function SearchPanel({ places, q, setQ, kind, setKind, onPick, inputRef, onEscape, autoFocus, compactList }) {
+export function SearchPanel({ places, q, setQ, kind, setKind, onPick, inputRef, onEscape, autoFocus, compactList, listOpen = true }) {
   const results = useMemo(() => filterPlaces(places, q, kind), [places, q, kind])
   const nav = useSearchNav(results, onPick, [q, kind], () => { if (q) setQ(''); else onEscape?.() })
   return (
     <div className="search-panel">
       <SearchInput q={q} setQ={setQ} inputRef={inputRef} nav={nav} expanded controls="panel-results" autoFocus={autoFocus} />
-      <Chips places={places} kind={kind} setKind={setKind} />
-      <div className={`panel-list ${compactList ? 'compact' : ''}`}>
+      {listOpen && <Chips places={places} kind={kind} setKind={setKind} />}
+      {listOpen && <div className={`panel-list ${compactList ? 'compact' : ''}`}>
         <p className="count mono" role="status">{results.length === places.length ? `${places.length} places` : `${results.length} of ${places.length} places`}</p>
-        <ResultList results={results} {...nav} onPick={onPick} q={q} onClear={() => { setQ(''); setKind('all') }} id="panel-results" />
-      </div>
+        <ResultList grouped={!!q.trim()} results={results} {...nav} onPick={onPick} q={q} onClear={() => { setQ(''); setKind('all') }} id="panel-results" />
+      </div>}
     </div>
   )
 }

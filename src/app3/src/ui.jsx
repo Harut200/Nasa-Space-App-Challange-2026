@@ -56,5 +56,6 @@ export const Icon = {
   locate: I(<><circle cx="12" cy="12" r="3.5" /><path d="M12 3v3M12 18v3M3 12h3M18 12h3" /></>),
   list: I(<><rect x="4" y="4" width="16" height="16" rx="2.5" /><path d="M8 9h8M8 12.5h8M8 16h5" /></>),
   about: I(<><circle cx="12" cy="12" r="9" /><path d="M9.5 9.5a2.6 2.6 0 1 1 3.6 2.4c-.8.4-1.1.9-1.1 1.8M12 16.6v.1" /></>),
+  layers: I(<><path d="M12 3.5 3.5 8 12 12.5 20.5 8z" /><path d="M3.5 12 12 16.5 20.5 12M3.5 16 12 20.5 20.5 16" opacity=".6" /></>),
   key: I(<><rect x="3" y="6" width="18" height="12" rx="2" /><path d="M7 10h.1M11 10h.1M15 10h.1M7 14h10" /></>),
 }

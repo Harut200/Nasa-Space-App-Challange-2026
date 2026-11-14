@@ -1,38 +1,30 @@
-import { useMemo } from 'react'
-import { SEASON_COLOR, eventType, headline, isEvent, typeInfo } from './data.js'
+import { useMemo, useState } from 'react'
+import { classesIn, headline } from './data.js'
 import { KindIcon, SearchPanel } from './Search.jsx'
 import { Icon } from './ui.jsx'
 
-// Everything on top of the full globe: search and filter chips, the dot legend, a hint, and the card for a tapped dot.
-export default function GlobeUI({ list, q, setQ, kind, setKind, selected, onSelect, onOpen, onRandom, onNear, near, inputRef, onEscape, phone, panelOpen, setPanelOpen }) {
-  const types = useMemo(() => [...new Set(list.filter(isEvent).map(eventType))].sort((a, b) => (a === 'earthquake' ? -1 : b === 'earthquake' ? 1 : a.localeCompare(b))), [list])
+// On top of the full globe: a search field (chips and the list appear when it is focused or used), a compact legend of the classes present, and the card for a tapped dot.
+export default function GlobeUI({ list, q, setQ, kind, setKind, selected, onSelect, onOpen, onRandom, onNear, near, inputRef, onEscape, phone }) {
+  const classes = useMemo(() => classesIn(list), [list])
   const sel = list.find((p) => p.id === selected)
+  const [focus, setFocus] = useState(false)
+  const expanded = focus || !!q || kind !== 'all'
   return (
     <div className="globe-ui">
-      <section className={`globe-panel panel ${phone && !panelOpen ? 'collapsed' : ''}`} aria-label="Find a place">
-        {phone && (
-          <button className="gp-toggle" onClick={() => setPanelOpen(!panelOpen)} aria-expanded={panelOpen}>{Icon.search}<span>{panelOpen ? 'Hide the list' : 'Search and list'}</span><span className="mono n">{list.length}</span></button>
+      <section className={`globe-panel ${expanded ? 'expanded' : ''}`} aria-label="Find a place"
+        onFocusCapture={() => setFocus(true)} onBlurCapture={(e) => { if (!e.currentTarget.contains(e.relatedTarget)) setFocus(false) }}>
+        <SearchPanel places={list} q={q} setQ={setQ} kind={kind} setKind={setKind} onPick={(p) => onOpen(p.id)} inputRef={inputRef} onEscape={onEscape} compactList={phone} listOpen={expanded} />
+        {expanded && (
+          <div className="gp-actions">
+            <button className="chip quiet" onClick={onRandom}>{Icon.dice}<span>Random</span></button>
+            <button className="chip quiet" onClick={onNear}>{Icon.locate}<span>Nearest to me</span></button>
+          </div>
         )}
-        {(!phone || panelOpen) && (
-          <>
-            <SearchPanel places={list} q={q} setQ={setQ} kind={kind} setKind={setKind} onPick={(p) => onOpen(p.id)} inputRef={inputRef} onEscape={onEscape} compactList={phone} />
-            <div className="gp-actions">
-              <button className="chip" onClick={onRandom}>{Icon.dice}<span>Random</span></button>
-              <button className="chip" onClick={onNear}>{Icon.locate}<span>Nearest to me</span></button>
-            </div>
-            {near && <p className="near" role="status">{near}</p>}
-          </>
-        )}
+        {near && <p className="near" role="status">{near}</p>}
       </section>
-      <div className="globe-legend glass-note" aria-label="Dot legend">
-        <p className="mono lg-h">Dots</p>
-        <span><i style={{ background: SEASON_COLOR.big }} />Season, over 1,000 km² open water at peak</span>
-        <span><i style={{ background: SEASON_COLOR.some }} />Season, some open water</span>
-        <span><i style={{ background: SEASON_COLOR.land }} />Season, no open water mapped</span>
-        {types.map((t) => <span key={t}><KindIcon shape={typeInfo(t).shape} color={typeInfo(t).color} size={14} />{typeInfo(t).label}: before and after</span>)}
-        <span className="faint">Bigger dot: more water, or a stronger event. Coral ring: where you are.</span>
+      <div className="globe-legend" aria-label="Dot legend">
+        {classes.map((c) => <span key={c.id}><KindIcon shape={c.shape} color={c.color} size={13} />{c.label}</span>)}
       </div>
-      {!phone && <p className="globe-hint mono">Drag to turn · scroll to zoom · click a dot to fly in · / search · Esc back</p>}
       {sel && (
         <div className="globe-sel panel" role="dialog" aria-label={sel.name}>
           <strong>{sel.name}</strong>

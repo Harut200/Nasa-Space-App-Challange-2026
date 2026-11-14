@@ -58,6 +58,7 @@ function SpotCard({ place, spotId, index, onClose }) {
 
 export default function Explore({ place, layerId, layer, setLayer, index, setIndex, playing, setPlaying, opacity, setOpacity, cmp, setCmp, cmpAvailable, spotsOn, setSpotsOn, activeSpot, setActiveSpot, missing, dated, phone, water }) {
   const [more, setMore] = useState(false)
+  const [slider, setSlider] = useState(false)
   const P = place.primary
   const v = P.values[index]
   const n = place.dates.length
@@ -84,17 +85,18 @@ export default function Explore({ place, layerId, layer, setLayer, index, setInd
             {rest.map((l) => <button key={l.id} role="option" aria-selected={layerId === l.id} className={layerId === l.id ? 'on' : ''} onClick={() => { setLayer(l.id); setMore(false) }}>{l.label}</button>)}
           </div>
         )}
-        <label className="slider"><span>Overlay</span>
+        {slider && (<label className="slider"><span>Overlay</span>
           <input type="range" min="0" max="100" value={Math.round(opacity * 100)} onChange={(e) => setOpacity(+e.target.value / 100)} onPointerUp={(e) => e.currentTarget.blur()} aria-label="Overlay opacity" />
-          <output>{Math.round(opacity * 100)}%</output></label>
-        <div className="toggles">
-          <button className={`chip ${cmp.on && cmpAvailable ? 'on' : ''}`} disabled={!cmpAvailable} aria-pressed={cmp.on && cmpAvailable} onClick={() => setCmp((c) => ({ ...c, on: !c.on }))} title={cmpAvailable ? 'Drag the handle: first pass | current pass (C)' : 'Compare needs a layer with several passes'}>{Icon.split}<span>Compare</span></button>
-          <button className={`chip ${spotsOn ? 'on' : ''}`} aria-pressed={spotsOn} onClick={() => { setSpotsOn((x) => !x); setActiveSpot(null) }}>{Icon.pin}<span>Spots</span></button>
+          <output>{Math.round(opacity * 100)}%</output></label>)}
+        <div className="toggles tools">
+          <button className={`chip ${slider ? 'on' : ''}`} aria-pressed={slider} onClick={() => setSlider((x) => !x)} title="Overlay strength" aria-label="Overlay strength">{Icon.layers}<span className="tl">Overlay</span></button>
+          <button className={`chip ${cmp.on && cmpAvailable ? 'on' : ''}`} disabled={!cmpAvailable} aria-pressed={cmp.on && cmpAvailable} onClick={() => setCmp((c) => ({ ...c, on: !c.on }))} title={cmpAvailable ? 'Drag the handle: first pass | current pass (C)' : 'Compare needs a layer with several passes'}>{Icon.split}<span className="tl">Compare</span></button>
+          <button className={`chip ${spotsOn ? 'on' : ''}`} aria-pressed={spotsOn} onClick={() => { setSpotsOn((x) => !x); setActiveSpot(null) }}>{Icon.pin}<span className="tl">Spots</span></button>
         </div>
       </aside>
 
       {activeSpot && <SpotCard place={place} spotId={activeSpot} index={index} onClose={() => setActiveSpot(null)} />}
-      <Legend key={layer?.id} layer={layer} phone={phone} only={water?.only} water={water ? { show: water.show, setShow: water.setShow } : null} />
+      <Legend key={layer?.id} layer={layer} phone={phone} only={water?.only} water={water} />
       {missing && <div className="pill note" role="status">{layerId === 'change' ? 'The first pass is the reference, so it has no change image.' : layerId === 'coh' ? 'The first pass has no earlier pass to pair with, so it has no coherence image.' : 'This layer has no image for this pass.'}</div>}
       {layer && !dated && <div className="pill note" role="status">This layer covers the whole season, so the timeline does not change it.</div>}
 

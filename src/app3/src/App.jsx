@@ -1,5 +1,5 @@
 import { Suspense, lazy, useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { FLAGSHIP, centreOf, defaultLayer, fmtDate, frameUrl, isDated, isEvent, loadIndex, loadPlace, startIndex } from './data.js'
+import { FLAGSHIP, centreOf, classInfo, classOf, defaultLayer, fmtDate, frameUrl, isDated, isEvent, loadIndex, loadPlace, loadSummary, startIndex, stubFromSummary } from './data.js'
 import { useRoute } from './route.js'
 import { buildScenes } from './scenes.js'
 import { hasWaterClasses, onlyClass, waterClasses } from './water.js'
@@ -18,7 +18,7 @@ import GalleryFilter from './GalleryFilter.jsx'
 import Sheet from './Sheet.jsx'
 import Legend from './Legend.jsx'
 import { SearchPanel, filterPlaces } from './Search.jsx'
-import { KeyHint, reducedMotion } from './ui.jsx'
+import { reducedMotion } from './ui.jsx'
 
 const useSize = () => {
   const [s, setS] = useState({ w: window.innerWidth, h: window.innerHeight })
@@ -57,7 +57,12 @@ export default function App() {
   const [info, setInfo] = useState(false)
   const [searchSheet, setSearchSheet] = useState(false)
   const [q, setQRaw] = useState(() => route.q || '')
-  const [kind, setKind] = useState('all')
+  const [kind, setKindRaw] = useState(() => route.cls || 'all')
+  const [diving, setDiving] = useState(false)
+  const [phase, setPhase] = useState('')
+  const [stubs, setStubs] = useState({})
+  const [diveKeep, setDiveKeep] = useState('full')
+  const diveRef = useRef(false)
   const [selected, setSelected] = useState(null)
   const [near, setNear] = useState(null)
   const [panelOpen, setPanelOpen] = useState(false)
@@ -69,6 +74,8 @@ export default function App() {
 
   // index and places: the one on show first, then the rest three at a time
   useEffect(() => { loadIndex().then(setIds).catch(() => setFailed(true)) }, [])
+  // summary.json: one small request that is enough for the landing globe, the class counts and the search; manifests load as places open
+  useEffect(() => { loadSummary().then((l) => setStubs(Object.fromEntries(l.map((s) => [s.id, stubFromSummary(s)])))) }, [])
   const ensure = useCallback((id) => loadPlace(id).then((p) => setPlaces((c) => (c[id] ? c : { ...c, [id]: p }))).catch(() => {}), [])
   useEffect(() => { ensure(route.place || FLAGSHIP) }, [route.place, ensure])
   useEffect(() => {
@@ -78,7 +85,7 @@ export default function App() {
     })()
     return () => { dead = true }
   }, [ids, ensure])
-  const list = useMemo(() => ids.map((id) => places[id]).filter(Boolean), [ids, places])
+  const list = useMemo(() => ids.map((id) => places[id] || stubs[id]).filter(Boolean), [ids, places, stubs])
 
   const placeId = route.place && ids.includes(route.place) ? route.place : route.place ? null : FLAGSHIP
   const place = placeId ? places[placeId] : null
@@ -104,6 +111,7 @@ export default function App() {
   // Reset the playhead when place / scene / mode changes
   const sceneKey = `${placeId}|${mode}|${mode === 'story' ? sceneN : ''}`
   const firstApply = useRef(true)
+  const scrub = useRef(0), playTimer = useRef(0), lastPlace = useRef(null), indexRef = useRef(0)
   const applying = useRef(null) // explore playhead index just applied from the URL / defaults; the URL sync waits for it
   useEffect(() => {
     if (!place) return
@@ -111,17 +119,30 @@ export default function App() {
     const keepCmp = firstApply.current && !!route.cmp
     if (mode === 'story' && scene) {
       const dated = route.date && place.dates.includes(route.date) && firstApply.current ? place.dates.indexOf(route.date) : null
-      setIndexRaw(dated ?? (scene.at ?? 0))
-      setPlaying(!!scene.play && !reducedMotion() && dated == null && !isEvent(place))
+      const target = dated ?? (scene.at ?? 0)
+      // a step that changes the date runs through the passes in between (a 400-600 ms scrub), then playback starts after a short beat
+      clearInterval(scrub.current)
+      const fromI = Math.min(indexRef.current, place.dates.length - 1)
+      if (!firstApply.current && lastPlace.current === placeId && !reducedMotion() && Math.abs(target - fromI) > 1 && Math.abs(target - fromI) < 12) {
+        const dir = target > fromI ? 1 : -1, steps = Math.abs(target - fromI), every = Math.max(45, Math.round(520 / steps))
+        let k = fromI
+        scrub.current = setInterval(() => { k += dir; setIndexRaw(k); if (k === target) clearInterval(scrub.current) }, every)
+      } else setIndexRaw(target)
+      lastPlace.current = placeId
+      const beat = !reducedMotion() && scene.play ? 320 + (Math.abs(target - fromI) > 1 ? 560 : 0) : 0
+      clearTimeout(playTimer.current)
+      setPlaying(false)
+      if (scene.play && !reducedMotion() && dated == null && !isEvent(place)) playTimer.current = setTimeout(() => setPlaying(true), beat)
       if (scene.compare) setCmp((c) => ({ ...c, on: true })); else setCmp((c) => ({ ...c, on: false }))
     } else if (mode === 'explore') {
+      clearInterval(scrub.current); clearTimeout(playTimer.current); lastPlace.current = placeId
       const di = route.date ? place.dates.indexOf(route.date) : -1
       applying.current = di >= 0 ? di : Math.max(0, place.dates.length - 1)
       setIndexRaw(applying.current)
       setPlaying(false)
       setCmp((c) => ({ ...c, on: keepCmp }))
     } else if (mode === 'open') {
-      setIndexRaw(0); setPlaying(!reducedMotion()); setCmp((c) => ({ ...c, on: false }))
+      setIndexRaw(0); setPlaying(false); setCmp((c) => ({ ...c, on: false }))
     } else { setPlaying(false); setCmp((c) => ({ ...c, on: false })) }
     firstApply.current = false
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -153,6 +174,7 @@ export default function App() {
     if (mode === 'explore' && place && !!route.cmp !== cmp.on) go({ cmp: cmp.on }, false)
   }, [cmp.on, mode, place]) // eslint-disable-next-line react-hooks/exhaustive-deps
 
+  indexRef.current = index
   const date = place?.dates[index]
   const rawUrl = place && layer ? frameUrl(place, layerId, date) : null
   const dated = place ? isDated(place, layerId) : false
@@ -186,22 +208,54 @@ export default function App() {
     ? (scene?.cmpTags || ['Bare terrain', layer?.label.split(/ \(|:/)[0] || 'Layer'])
     : [`${layer?.id === 'coh' ? 'First pair' : 'First pass'} · ${firstOfLayer ? fmtDate(firstOfLayer) : ''}`, date ? fmtDate(date) : '']
 
+  // A compare step: the divider slides in from the edge, rests at the centre, then drifts left and right once to show it can be dragged.
+  const cmpStep = mode === 'story' && cmpOn
+  useEffect(() => {
+    if (!cmpStep || reducedMotion()) return
+    let raf, stopped = false
+    const t0 = performance.now()
+    const K = [[0, 100], [650, 50], [950, 50], [1400, 38], [1850, 60], [2200, 50]]
+    const ease = (t) => 1 - (1 - t) ** 3
+    const tick = (t) => {
+      if (stopped) return
+      const e = t - t0
+      let i = K.findIndex((k) => e < k[0])
+      if (i < 0) { setCmp((c) => ({ ...c, split: 50 })); return }
+      if (i === 0) i = 1
+      const [a0, v0] = K[i - 1], [a1, v1] = K[i]
+      setCmp((c) => ({ ...c, split: v0 + (v1 - v0) * ease((e - a0) / (a1 - a0)) }))
+      raf = requestAnimationFrame(tick)
+    }
+    setCmp((c) => ({ ...c, split: 100 }))
+    raf = requestAnimationFrame(tick)
+    const stop = () => { stopped = true; cancelAnimationFrame(raf) }
+    window.addEventListener('pointerdown', stop, { once: true })
+    return () => { stop(); window.removeEventListener('pointerdown', stop) }
+  }, [cmpStep, sceneN, placeId])
+
   // Camera: the free area is what the panels, the timeline and the legend leave. Fit the whole radar footprint into it.
   const focusSpot = scene?.focus ? place?.spots.find((s) => s.id === scene.focus) : scene?.focusLL ? { id: 'epicentre', lngLat: scene.focusLL } : null
   const dockH = Math.min(290, Math.round(height * (height <= 800 ? 0.36 : 0.38)))
   const storyLegend = mode === 'story' && !!layer?.legend && (!ev || !!scene?.legend)
   const padding = mode === 'places' || mode === 'globe' ? { top: 60, bottom: 60, left: 40, right: 40 }
-    : mode === 'open' ? (phone ? { top: 150, bottom: 400, left: 20, right: 20 } : { top: 72, bottom: height <= 760 ? 350 : 385, left: Math.round(width * 0.46), right: 40 })
+    : mode === 'open' ? (phone ? { top: 150, bottom: 400, left: 20, right: 20 } : { top: 72, bottom: height <= 760 ? 240 : 272, left: Math.round(width * 0.46), right: 40 })
     : phone ? { top: mode === 'story' ? 116 : 250, left: 20, right: 20, bottom: mode === 'story' ? 380 : 300 }
-    : mode === 'story' ? { top: 74, bottom: storyLegend ? 198 : 70, left: 524, right: 44 }
-    : { top: 74, bottom: dockH + 44, left: 330, right: 360 }
-  const camera = { key: focusSpot ? focusSpot.id : 'fit', focus: focusSpot?.lngLat, zoomBoost: 1.25 }
+    : mode === 'story' ? { top: 74, bottom: storyLegend ? 126 : 70, left: 524, right: 44 }
+    : { top: 74, bottom: dockH + 84, left: 240, right: 40 }
+  const camera = { key: focusSpot ? focusSpot.id : 'fit', focus: focusSpot?.lngLat, zoomBoost: 1.25, duration: mode === 'story' ? 1000 : 1500 }
 
   // ---- navigation ----
   const origin = inPlace ? (route.globe ? 'globe' : route.from) : mode === 'globe' ? 'globe' : mode === 'places' ? 'places' : 'home'
-  const openPlace = useCallback((id, m = 'story', from = origin) => { setInfo(false); setSelected(null); go({ place: id, mode: m, scene: 1, layer: null, date: null, cmp: false, from, globe: false, q: '' }) }, [go, origin])
+  const fromList = (mode === 'globe' || mode === 'places' || (inPlace && route.globe)) && kind !== 'all'
+  const activeClass = inPlace ? route.cls : ''
+  const openPlace = useCallback((id, m = 'story', from = origin) => {
+    setInfo(false); setSelected(null)
+    const want = inPlace && !route.globe ? route.cls : fromList ? kind : ''
+    const cls = want && (places[id] || stubs[id]) && classOf(places[id] || stubs[id]) === want ? want : ''
+    go({ place: id, mode: m, scene: 1, layer: null, date: null, cmp: false, from, globe: false, q: '', cls })
+  }, [go, origin, inPlace, route.globe, route.cls, fromList, kind, places, stubs])
   const goHome = () => { setInfo(false); setSelected(null); go({ place: null, mode: 'open', q: '', globe: false }) }
-  const goPlaces = () => { setInfo(false); go({ place: null, mode: 'places', globe: false, q: '' }) }
+  const goPlaces = () => { setInfo(false); go({ place: null, mode: 'places', globe: false, q: '', cls: '' }) }
   const closeGlobe = useCallback(() => {
     setSelected(null)
     if (inPlace && route.globe) { if (history.state?.globe) history.back(); else go({ globe: false }, false) }
@@ -220,13 +274,15 @@ export default function App() {
     if (inPlace) return route.from === 'globe' ? go({ place: null, mode: 'globe', q: '' }) : route.from === 'places' ? go({ place: null, mode: 'places' }) : go({ place: null, mode: 'open' })
     if (history.state?.app > 0) history.back(); else goHome()
   }
+  const pool0 = useMemo(() => (activeClass ? ids.filter((id) => (places[id] || stubs[id]) && classOf(places[id] || stubs[id]) === activeClass) : ids), [ids, places, stubs, activeClass])
+  const poolIdx = pool0.indexOf(placeId)
   const hop = (d) => {
-    if (!ids.length) return
-    const i = ids.indexOf(placeId)
-    openPlace(ids[(i + d + ids.length) % ids.length], inPlace ? mode : 'story')
+    if (!pool0.length) return
+    const i = poolIdx < 0 ? 0 : poolIdx
+    openPlace(pool0[(i + d + pool0.length) % pool0.length], inPlace ? mode : 'story')
   }
   const random = () => {
-    const pool = ids.filter((id) => id !== (inPlace ? placeId : null))
+    const pool = pool0.filter((id) => id !== (inPlace ? placeId : null))
     if (pool.length) openPlace(pool[Math.floor(Math.random() * pool.length)], inPlace ? mode : 'story')
   }
   const nearMe = () => {
@@ -243,7 +299,8 @@ export default function App() {
   const setLayer = (l) => go({ layer: l }, false)
   const setMode = (m) => go(m === 'story' ? { mode: 'story', scene: 1, layer: null, date: null } : { mode: 'explore', layer: null, date: null })
   const setQ = useCallback((v) => { setQRaw(v); if (mode === 'globe' || mode === 'places') go({ q: v }, false) }, [mode, go])
-  useEffect(() => { if (mode === 'globe' || mode === 'places') setQRaw(route.q || '') }, [route.q, mode])
+  useEffect(() => { if (mode === 'globe' || mode === 'places') { setQRaw(route.q || ''); setKindRaw(route.cls || 'all') } }, [route.q, route.cls, mode])
+  const setKind = useCallback((v) => { setKindRaw(v); if (mode === 'globe' || mode === 'places') go({ cls: v === 'all' ? '' : v }, false) }, [mode, go])
   useEffect(() => { if (!globeFull) { setSelected(null); setNear(null) } }, [globeFull])
   const focusSearch = () => {
     if (globeFull) { if (panelInput.current) panelInput.current.focus(); else setPanelOpen(true) }
@@ -324,19 +381,33 @@ export default function App() {
   const quakeId = ids.find((id) => places[id] && isEvent(places[id]) && places[id].event.type === 'earthquake') || ids.find((id) => places[id] && isEvent(places[id])) || null
   const quakePick = ids.includes('tibet-m70-2026') ? 'tibet-m70-2026' : quakeId
 
-  const globeMode = globeFull ? 'full' : inPlace && !phone ? 'mini' : 'hidden'
+  const globeMode = diving ? diveKeep : globeFull ? 'full' : inPlace && !phone ? 'mini' : mode === 'open' ? 'landing' : 'hidden'
   useEffect(() => { if (globeMode !== 'hidden') setGMounted(true) }, [globeMode])
   const matchIds = useMemo(() => (globeFull && (q || kind !== 'all') ? new Set(filterPlaces(list, q, kind).map((p) => p.id)) : null), [globeFull, list, q, kind])
   const galShown = useMemo(() => (mode === 'places' ? filterPlaces(list, q, kind) : []), [mode, list, q, kind])
   const galIds = useMemo(() => (q || kind !== 'all' ? galShown.map((p) => p.id) : ids), [galShown, q, kind, ids])
+  const faceLL = useMemo(() => {
+    if (!globeFull || kind === 'all') return null
+    const ms = list.filter((p) => classOf(p) === kind).map((p) => centreOf(p.bounds))
+    if (!ms.length) return null
+    const r = Math.PI / 180, ang = (a, b) => Math.acos(Math.min(1, Math.max(-1, Math.sin(a[1] * r) * Math.sin(b[1] * r) + Math.cos(a[1] * r) * Math.cos(b[1] * r) * Math.cos((a[0] - b[0]) * r)))) / r
+    return ms.map((c) => [c, ms.filter((o) => ang(c, o) < 25).length]).sort((x, y) => y[1] - x[1])[0][0]
+  }, [globeFull, kind, list])
+  const onDive = (id) => { if (id === placeId && inPlace) { closeGlobe(); return } diveRef.current = true; setDiveKeep(mode === 'open' ? 'landing' : 'full'); setDiving(true); openPlace(id) }
+  const onDiveEnd = () => {
+    if (!diveRef.current) return
+    diveRef.current = false
+    setPhase('dissolve')
+    setTimeout(() => { setDiving(false); setPhase('snap'); setTimeout(() => { setPhase('pop'); setTimeout(() => setPhase(''), 800) }, 90) }, 460)
+  }
   const globeOpenPlace = (id) => { if (id === placeId && inPlace) closeGlobe(); else openPlace(id) }
 
   if (failed) return <div className="fatal"><h1>Data not available</h1><p>The place list could not be loaded.</p></div>
 
   return (
-    <div className={`app mode-${mode} ${phone ? 'phone' : ''} ${ev && inPlace ? 'ev' : ''} ${globeFull ? 'globe-on' : ''}`}>
+    <div className={`app mode-${mode} ${diving ? 'diving' : ''} ${phone ? 'phone' : ''} ${ev && inPlace ? 'ev' : ''} ${globeFull ? 'globe-on' : ''}`}>
       <Suspense fallback={null}><MapStage
-        bounds={bounds} url={mode === 'places' || mode === 'globe' ? null : url} opacity={opacity} padding={padding} camera={camera}
+        bounds={bounds} url={mode === 'places' || mode === 'globe' || mode === 'open' ? null : url} opacity={opacity} padding={padding} camera={camera}
         spots={(ev ? place.spots.filter((s) => s.id !== 'epicentre') : place?.spots) || []} showSpots={!!place && inPlace && spotsOn} activeSpot={activeSpot}
         onSpot={(id) => { if (inPlace) setActiveSpot((a) => (a === id ? null : id)) }}
         interactive={inPlace} star={ev && inPlace && Array.isArray(place.event.lngLat) ? place.event.lngLat : null}
@@ -344,39 +415,38 @@ export default function App() {
       /></Suspense>
       <div className={`veil ${heroPlace ? 'hero' : ''}`} aria-hidden="true" />
 
-      <TopBar view={globeFull ? 'globe' : inPlace ? 'place' : mode === 'places' ? 'places' : mode === 'open' ? 'open' : 'globe'} phone={phone} place={place} placeIndex={ids.indexOf(placeId)} count={ids.length}
+      <TopBar view={globeFull ? 'globe' : inPlace ? 'place' : mode === 'places' ? 'places' : mode === 'open' ? 'open' : 'globe'} phone={phone} place={place} placeIndex={Math.max(0, poolIdx)} count={pool0.length} prevName={(places[pool0[(poolIdx - 1 + pool0.length) % (pool0.length || 1)]] || stubs[pool0[(poolIdx - 1 + pool0.length) % (pool0.length || 1)]])?.name} nextName={(places[pool0[(poolIdx + 1) % (pool0.length || 1)]] || stubs[pool0[(poolIdx + 1) % (pool0.length || 1)]])?.name} classLabel={activeClass ? classInfo(activeClass).label : ''} onClearClass={() => go({ cls: '' }, false)}
         mode={mode} from={route.from} places={list} q={q} setQ={setQ} kind={kind} setKind={setKind} inputRef={barInput} globeOpen={globeFull} backText={globeFull && inPlace ? 'Place' : null}
         onHome={goHome} onBack={goBack} onPick={pickFromSearch} onPrev={() => hop(-1)} onNext={() => hop(1)} onRandom={random} onName={focusSearch} onMode={setMode}
-        onPlaces={goPlaces} onGlobe={openGlobe} onInfo={() => setInfo((x) => !x)} onSheet={() => setSheet(true)} onAbout={() => setAbout(true)} onSearchSheet={() => setSearchSheet(true)} infoOpen={info} />
+        onPlaces={goPlaces} onGlobe={openGlobe} onInfo={() => setInfo((x) => !x)} onSheet={() => setSheet(true)} onSearchSheet={() => setSearchSheet(true)} infoOpen={info} />
 
-      {mode === 'open' && <Home place={shownPlace} index={index} places={places} ids={ids} onWatch={() => openPlace(FLAGSHIP, 'story', 'home')} onChoose={goPlaces} onGlobe={openGlobe} onFeel={quakePick ? () => openPlace(quakePick, 'story', 'home') : null} onRandom={random} onPick={(id) => openPlace(id, 'story', 'home')} />}
+      {mode === 'open' && <Home place={shownPlace} index={index} list={list} onWatch={() => openPlace(FLAGSHIP, 'story', 'home')} onChoose={goPlaces} onFeel={quakePick ? () => openPlace(quakePick, 'story', 'home') : null} />}
       {mode === 'places' && <Gallery places={places} ids={galIds} total={ids.length} current={placeId} onPick={(id) => openPlace(id, 'story', 'places')} onClose={goBack}
         filter={<GalleryFilter places={list} shown={galShown} q={q} setQ={setQ} kind={kind} setKind={setKind} onPick={(p) => openPlace(p.id, 'story', 'places')} />} />}
-      {mode === 'story' && place && scene && (
+      {!diving && mode === 'story' && place && scene && (
         <Story place={place} scenes={scenes} n={sceneN} index={index} playing={playing} setPlaying={setPlaying} phone={phone}
           onScene={setScene} onIndex={(i) => { setPlaying(false); setIndex(i) }} onSheet={() => setSheet(true)}
           onExplore={() => setMode('explore')} missing={missing} />
       )}
-      {mode === 'explore' && place && ev && (
+      {!diving && mode === 'explore' && place && ev && (
         <EventExplore place={place} layerId={layerId} layer={layer} setLayer={setLayer} opacity={opacity} setOpacity={setOpacity} cmp={cmp} setCmp={setCmp}
           spotsOn={spotsOn} setSpotsOn={setSpotsOn} setActiveSpot={setActiveSpot} phone={phone} />
       )}
-      {mode === 'explore' && place && !ev && (
+      {!diving && mode === 'explore' && place && !ev && (
         <Explore place={place} layerId={layerId} layer={layer} setLayer={setLayer} index={index} setIndex={(i) => { setPlaying(false); setIndex(i) }}
           playing={playing} setPlaying={setPlaying} opacity={opacity} setOpacity={setOpacity} cmp={cmp} setCmp={setCmp} cmpAvailable={cmpAvailable}
           spotsOn={spotsOn} setSpotsOn={setSpotsOn} activeSpot={activeSpot} setActiveSpot={setActiveSpot} missing={missing} dated={dated} phone={phone}
-          water={wc ? { show: waterShow, setShow: setWaterShow, only } : null} />
+          water={wc ? { show: waterShow, setShow: setWaterShow, only, blue: wc.blue, green: wc.green } : null} />
       )}
-      {storyLegend && layer && <Legend key={layer.id} layer={layer} phone={phone} strip only={only} water={wc ? { show: waterShow, setShow: setWaterShow } : null} />}
+      {!diving && storyLegend && layer && <Legend key={layer.id} layer={layer} phone={phone} strip only={only} water={wc ? { show: waterShow, setShow: setWaterShow, blue: wc.blue, green: wc.green } : null} />}
       {!place && inPlace && <div className="loading" role="status">Loading…</div>}
       {info && inPlace && place && !globeFull && <InfoPanel place={place} onClose={() => setInfo(false)} onSheet={() => { setSheet(true) }} />}
-      <Sheet open={sheet} onClose={() => setSheet(false)} place={place || shownPlace} pass={pass} />
+      <Sheet open={sheet} onClose={() => setSheet(false)} place={place || shownPlace} pass={pass} onAbout={() => { setSheet(false); setAbout(true) }} />
       <About open={about} onClose={() => setAbout(false)} />
-      {inPlace && !phone && !globeFull && <KeyHint text={`${ev ? (mode === 'story' ? '← → scenes · M explore · P places · ? caveats' : 'C compare · M story · P places · ? caveats') : (mode === 'story' ? '← → scenes · Space play · M explore · P places · ? caveats' : '← → passes · Space play · C compare · M story · P places · ? caveats')} · [ ] other place · R random · G globe · / search`} />}
 
       {(gMounted || globeMode !== 'hidden') && (
-        <Suspense fallback={null}><GlobeMap mode={globeMode} places={list} currentId={inPlace ? placeId : null} matchIds={matchIds} paused={!!matchIds}
-          onOpen={globeOpenPlace} onExpand={openGlobe} onSelect={setSelected} selectedId={selected} /></Suspense>
+        <Suspense fallback={null}><GlobeMap mode={globeMode} places={list} currentId={inPlace ? placeId : null} matchIds={matchIds} paused={!!matchIds} phase={phase} faceLL={faceLL} faceKey={kind}
+          onDive={onDive} onDiveEnd={onDiveEnd} onOpen={globeOpenPlace} onExpand={openGlobe} onSelect={setSelected} selectedId={selected} /></Suspense>
       )}
       {globeFull && (
         <GlobeUI list={list} q={q} setQ={setQ} kind={kind} setKind={setKind} selected={selected} onSelect={setSelected} onOpen={globeOpenPlace} onRandom={random} onNear={nearMe} near={near}

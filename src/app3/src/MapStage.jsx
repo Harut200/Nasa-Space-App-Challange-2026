@@ -7,6 +7,7 @@ maplibregl.setWorkerUrl(workerUrl)
 
 const GIBS = 'https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/BlueMarble_ShadedRelief_Bathymetry/default/GoogleMapsCompatible_Level8/{z}/{y}/{x}.jpeg'
 const EOX = 'https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/g/{z}/{y}/{x}.jpg'
+const EASE = (t) => (t < 0.5 ? 4 * t * t * t : 1 - ((-2 * t + 2) ** 3) / 2) // between two resting states
 const reduced = () => window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
 
 // Works with no network: the radar images are our own sources on a plain dark background.
@@ -33,7 +34,7 @@ function addSlots(m, names, bounds) {
   names.forEach((n) => {
     if (m.getSource(n)) return
     m.addSource(n, { type: 'image', url: 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==', coordinates: quad(bounds) })
-    m.addLayer({ id: n, type: 'raster', source: n, paint: { 'raster-opacity': 0, 'raster-opacity-transition': { duration: reduced() ? 0 : 500 }, 'raster-fade-duration': 0, 'raster-resampling': 'linear' } })
+    m.addLayer({ id: n, type: 'raster', source: n, paint: { 'raster-opacity': 0, 'raster-opacity-transition': { duration: reduced() ? 0 : 320 }, 'raster-fade-duration': 0, 'raster-resampling': 'linear' } })
   })
 }
 
@@ -125,17 +126,26 @@ export default function MapStage({ bounds, url, opacity = 0.9, padding, camera, 
 
   // camera
   const ckey = `${bkey}|${camera?.key ?? ''}|${padding ? JSON.stringify(padding) : ''}`
+  const lastB = useRef(null)
   useEffect(() => {
     const m = map.current
     const go = () => {
       const dur = reduced() ? 0 : (camera?.duration ?? 1500)
       const pad = padding || 40
+      const placeChanged = lastB.current !== null && lastB.current !== bkey
+      lastB.current = bkey
+      const bb = [[bounds[0], bounds[1]], [bounds[2], bounds[3]]]
       if (camera?.focus) {
-        const cam = m.cameraForBounds([[bounds[0], bounds[1]], [bounds[2], bounds[3]]], { padding: pad })
+        const cam = m.cameraForBounds(bb, { padding: pad })
         const off = typeof pad === 'object' ? [((pad.left || 0) - (pad.right || 0)) / 2, ((pad.top || 0) - (pad.bottom || 0)) / 2] : [0, 0]
-        m.easeTo({ center: camera.focus, zoom: (cam?.zoom ?? 7) + (camera.zoomBoost ?? 1.3), duration: dur, offset: off })
+        m.easeTo({ center: camera.focus, zoom: (cam?.zoom ?? 7) + (camera.zoomBoost ?? 1.3), duration: dur, offset: off, easing: EASE })
+      } else if (placeChanged && !reduced()) {
+        // another place: a short hop along the great circle, out a little and back in
+        const cam = m.cameraForBounds(bb, { padding: pad })
+        if (cam) m.flyTo({ center: cam.center, zoom: Math.min(cam.zoom, 11), duration: Math.min(2000, dur + 400), curve: 1.4, easing: EASE, essential: true })
+        else m.fitBounds(bb, { padding: pad, duration: dur, maxZoom: 11, easing: EASE })
       } else {
-        m.fitBounds([[bounds[0], bounds[1]], [bounds[2], bounds[3]]], { padding: pad, duration: dur, maxZoom: 11 })
+        m.fitBounds(bb, { padding: pad, duration: dur, maxZoom: 11, easing: EASE })
       }
     }
     go()
@@ -180,6 +190,7 @@ export default function MapStage({ bounds, url, opacity = 0.9, padding, camera, 
     const m2 = new maplibregl.Map({ container: el2.current, style: styleFor(), attributionControl: false, center: c, zoom: m.getZoom(), interactive: false, fadeDuration: 0 })
     m2.on('error', () => {})
     map2.current = m2
+    if (new URLSearchParams(location.search).has('still')) window.__map2 = m2
     st.current.active2 = 'a'
     m2.on('load', () => {
       addSlots(m2, ['sar-a', 'sar-b'], latest.current.bounds, 1)

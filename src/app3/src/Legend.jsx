@@ -4,29 +4,42 @@ import { fmtKm } from './data.js'
 const num = (v) => (typeof v === 'number' ? fmtKm(v) : v)
 
 // Legend for the layer on show, from manifest.layers[].legend. Collapsible; a chip on a phone.
+const short = (t) => String(t).split(/[:,(]/)[0].trim()
+
+// Legend for the layer on show, from manifest.layers[].legend. One quiet line of dots and words; opens to the full text.
+// With `water`, clicking the blue or the green entry shows only that class; clicking it again shows both.
 export default function Legend({ layer, phone, strip, only, water }) {
-  const [open, setOpen] = useState(!phone)
+  const [open, setOpen] = useState(false)
   if (!layer) return null
   const L = layer.legend || {}
   const grad = L.colors ? `linear-gradient(90deg, ${L.colors.map((c) => (c === '#00000000' ? '#2a2f3a' : c)).join(',')})` : null
-  const title = layer.label
+  const iso = (c) => (water && c === water.blue ? 'blue' : water && c === water.green ? 'green' : null)
+  const pick = (c) => { const k = iso(c); if (k) water.setShow(water.show === k ? 'both' : k) }
+  const Item = ({ it, full }) => {
+    const k = iso(it.color), off = only && only !== it.color
+    const inner = <><i style={{ background: it.color }} />{full ? it.label : short(it.label)}{off ? <em> (hidden)</em> : null}</>
+    return k
+      ? <li className={`${off ? 'off' : ''} pick`}><button type="button" onClick={() => pick(it.color)} aria-pressed={water.show === k} title={`${it.label}. ${water.show === k ? 'Click to show both again' : 'Click to show only this'}`}>{inner}</button></li>
+      : <li className={off ? 'off' : ''} title={it.label}>{inner}</li>
+  }
+  if (!open && L.type === 'classes') {
+    return (
+      <div className={`legend line ${strip ? 'strip' : ''}`} role="group" aria-label={`Legend: ${layer.label}`}>
+        <ul>{L.items.map((it) => <Item key={it.label} it={it} />)}</ul>
+        <button className="legend-more" onClick={() => setOpen(true)} aria-expanded="false" aria-label="Show the full legend" title="Show the full legend">+</button>
+      </div>
+    )
+  }
   return (
     <div className={`legend ${open ? 'open' : 'shut'} ${strip ? 'strip' : ''}`} role="group" aria-label={`Legend: ${layer.label}`}>
       <button className="legend-title" onClick={() => setOpen((o) => !o)} aria-expanded={open} title={open ? 'Hide the legend' : 'Show the legend'}>
         {!open && grad && <i className="legend-sw" style={{ background: grad }} />}
-        <span>{open ? title : 'Legend'}</span>
+        <span>{open ? layer.label : 'Legend'}</span>
         <span className="legend-chev" aria-hidden="true">{open ? '–' : '+'}</span>
       </button>
-      {open && water && (
-        <div className="water-seg" role="group" aria-label="Which water to show">
-          {[['both', 'Both'], ['blue', 'Open water'], ['green', 'Under vegetation']].map(([k, t]) => (
-            <button key={k} type="button" className={`${k} ${water.show === k ? 'on' : ''}`} aria-pressed={water.show === k} onClick={() => water.setShow(k)} title={k === 'blue' ? 'Show only open water (blue)' : k === 'green' ? 'Show only possible water under vegetation (green)' : 'Show both'}>{k !== 'both' && <i />}{t}</button>
-          ))}
-        </div>
-      )}
       {open && L.type === 'classes' && (
         <ul className={L.items.length > 6 ? 'cols' : ''}>
-          {L.items.map((it) => <li key={it.label} className={only && only !== it.color ? 'off' : ''}><i style={{ background: it.color }} />{it.label}{only && only !== it.color ? <em> (hidden)</em> : null}</li>)}
+          {L.items.map((it) => <Item key={it.label} it={it} full />)}
         </ul>
       )}
       {open && (L.type === 'ramp' || L.type === 'diverging') && (

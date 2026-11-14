@@ -115,10 +115,11 @@ const finite = (v) => typeof v === 'number' && Number.isFinite(v)
 export const magOf = (e) => (finite(Number(e?.magnitude)) && e?.magnitude != null ? Number(e.magnitude) : null)
 const MONTHS_LONG = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 const dmy = (iso) => { const d = new Date(iso); return Number.isNaN(+d) ? '' : `${d.getUTCDate()} ${MONTHS_LONG[d.getUTCMonth()]} ${d.getUTCFullYear()}` }
-export const placeColor = (p) => (isEvent(p) ? typeInfo(eventType(p)).color : p.peak >= 1000 && p.primary.kind === 'water' ? SEASON_COLOR.big : p.primary.kind === 'water' && p.peak >= 1 ? SEASON_COLOR.some : SEASON_COLOR.land)
+export const placeColor = (p) => (isEvent(p) ? typeInfo(eventType(p)).color : classOf(p) !== 'season' ? classInfo(classOf(p)).color : p.peak >= 1000 && p.primary.kind === 'water' ? SEASON_COLOR.big : p.primary.kind === 'water' && p.peak >= 1 ? SEASON_COLOR.some : SEASON_COLOR.land)
 export const dotSize = (p) => (isEvent(p) ? 5 + 2.2 * Math.max(0, (magOf(p.event) ?? 6) - 5) : p.primary.kind === 'water' ? 4 + 2.4 * Math.log10(1 + (p.peak || 0)) : 4)
 // The real headline number of a place: short (for lists and cards) and long (for the globe tooltip).
 export function headline(p) {
+  if (p._h) return p._h
   if (isEvent(p)) {
     const e = p.event, m = magOf(e), v0 = e.views?.[0], cmv = finite(v0?.p2p_cm) ? v0.p2p_cm : null
     const t = typeInfo(eventType(p))
@@ -138,7 +139,8 @@ export function headline(p) {
 export const kindLabel = (p) => (isEvent(p) ? typeInfo(eventType(p)).label : p.calibrated ? 'Season of water, calibrated' : 'Season of water')
 // Everything a person might type to find a place: its name, the USGS place line, its kind, event type and a few plain words.
 export function searchText(p) {
-  const w = [p.name, p.id.replace(/-/g, ' ')]
+  const ci = classInfo(classOf(p))
+  const w = [p.name, p.id.replace(/-/g, ' '), ci.label, ci.id]
   if (isEvent(p)) {
     const t = typeInfo(eventType(p))
     w.push(t.label, t.plural, 'event', p.event.place || '', 'before after')
@@ -152,7 +154,7 @@ export function searchText(p) {
   return w.join(' ').toLowerCase()
 }
 export function matches(p, q, kind) {
-  if (kind && kind !== 'all' && kindKey(p) !== kind && !(kind === 'e' && isEvent(p))) return false
+  if (kind && kind !== 'all' && classOf(p) !== kind) return false
   const toks = String(q || '').toLowerCase().split(/[\s,]+/).filter(Boolean)
   if (!toks.length) return true
   const hay = p._hay || (p._hay = searchText(p))
@@ -160,3 +162,43 @@ export function matches(p, q, kind) {
 }
 export const coordText = (b) => { const [x, y] = centreOf(b); return `${Math.abs(y).toFixed(2)}° ${y < 0 ? 'S' : 'N'}, ${Math.abs(x).toFixed(2)}° ${x < 0 ? 'W' : 'E'}` }
 export const dmyDate = dmy
+
+// ---------- classes: the one way to choose a place (manifest.category; events fall back to event.type, seasons to "season") ----------
+const CLASS_LIST = [
+  { id: 'flood', label: 'Floods', color: '#4aa8ff', shape: 'dot', desc: 'Water spreading over land through the season' },
+  { id: 'lake', label: 'Lakes', color: '#35c7b8', shape: 'dot', desc: 'Water bodies that hold steady or shrink' },
+  { id: 'wetland', label: 'Wetlands and deltas', color: '#5fd6a4', shape: 'dot', desc: 'Marsh, channels and floodplains' },
+  { id: 'land', label: 'Farmland and forest', color: '#e3b54f', shape: 'dot', desc: 'Fields and forest edges changing' },
+  { id: 'season', label: 'Seasons of water', color: '#4aa8ff', shape: 'dot', desc: 'A season of radar passes over water and land' },
+  { id: 'earthquake', label: 'Earthquakes', color: '#ff4f8b', shape: 'ring', desc: 'The ground itself moved between two passes' },
+  { id: 'volcano', label: 'Volcanoes', color: '#ff8a3d', shape: 'triangle', desc: 'Fresh lava or ash changed the surface' },
+  { id: 'landslide', label: 'Landslides', color: '#b58cff', shape: 'square', desc: 'A slope failed and the surface changed' },
+]
+export const classOf = (p) => (isEvent(p) ? eventType(p) : String(p.category || 'season').toLowerCase())
+export const classInfo = (id) => CLASS_LIST.find((c) => c.id === id) || { id, label: cap(String(id).replace(/[-_]/g, ' ')) + (id.endsWith('s') ? '' : 's'), color: '#e6e0cf', shape: 'diamond', desc: '' }
+// the classes present in the data, in display order, with counts
+export function classesIn(places) {
+  const n = new Map()
+  for (const p of places) n.set(classOf(p), (n.get(classOf(p)) || 0) + 1)
+  const order = CLASS_LIST.map((c) => c.id)
+  return [...n].sort((a, b) => (order.indexOf(a[0]) < 0 ? 99 : order.indexOf(a[0])) - (order.indexOf(b[0]) < 0 ? 99 : order.indexOf(b[0])) || a[0].localeCompare(b[0])).map(([id, count]) => ({ id, count, ...classInfo(id) }))
+}
+export const classColor = (p) => classInfo(classOf(p)).color
+
+// ---------- summary.json: one small request that is enough for the landing globe, the class chips, the counts and the search ----------
+export const loadSummary = () => getJson(`${BASE}data/summary.json`).then((j) => j.places || []).catch(() => [])
+export function stubFromSummary(s) {
+  const h = s.headline || {}, ev = s.kind === 'event'
+  const v = Number.isFinite(h.value) ? h.value : null
+  const hl = ev
+    ? { short: Number.isFinite(h.p2p_cm) ? `≈ ${fmtKm(h.p2p_cm)} cm` : v != null ? `M ${v.toFixed(1)}` : 'event', tag: v != null ? `M ${v.toFixed(1)}` : 'event', long: [`${cap(s.eventType || 'event')}${v != null ? `, M ${v.toFixed(1)}` : ''}`, h.date ? dmy(h.date) : '', Number.isFinite(h.p2p_cm) ? `ground moved ≈ ${fmtKm(h.p2p_cm)} cm along the radar’s line of sight` : ''].filter(Boolean).join(' · ') }
+    : h.unit === 'km²' && v != null && v >= 1
+      ? { short: `${fmtKm(v)} km²`, tag: String(h.label || 'open water').toLowerCase(), long: `${fmtKm(v)} km² ${String(h.label || 'open water').toLowerCase()} at its peak${h.date ? ` (${fmtDate(h.date)})` : ''}` }
+      : h.unit === '%' && v != null ? { short: `${fmtKm(v)} %`, tag: 'changed', long: `Up to ${fmtKm(v)} % ${String(h.label || '').toLowerCase()}` }
+        : { short: 'no open water', tag: 'land surface', long: 'No open water mapped here: a land-surface story' }
+  const p = { id: s.id, name: s.name, kind: s.kind, category: s.category, bounds: s.bounds, source: s.source, calibrated: s.source === 'gamma0', _stub: true, _h: hl,
+    peak: v, dates: [], flood: null, primary: { kind: h.unit === 'km²' ? 'water' : h.unit === '%' ? 'pct' : 'hh', values: [], label: h.label || '' },
+    event: ev ? { type: s.eventType || 'event', magnitude: v, time: h.date, place: h.label, views: [{ p2p_cm: h.p2p_cm }] } : null }
+  p._hay = `${s.searchText || ''} ${s.name} ${classInfo(classOf(p)).label} ${classOf(p)}${p.calibrated ? ' calibrated' : ''}`.toLowerCase()
+  return p
+}

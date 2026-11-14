@@ -3,11 +3,11 @@ import { tidy, fmtDate, fmtDateLong, fmtKm, fmtVal, isEvent } from './data.js'
 import { Icon } from './ui.jsx'
 
 // "How sure are we?": always reachable, never in the way.
-export default function Sheet({ open, onClose, place, pass }) {
+export default function Sheet({ open, onClose, place, pass, onAbout }) {
   const ref = useRef(null)
   useEffect(() => { if (open) ref.current?.focus() }, [open])
   if (!open) return null
-  if (isEvent(place)) return <EventSheet onClose={onClose} place={place} sheetRef={ref} />
+  if (isEvent(place)) return <EventSheet onClose={onClose} place={place} sheetRef={ref} onAbout={onAbout} />
   const P = place?.primary
   const qs = place ? Object.entries(place.quality) : []
   const i = place && pass ? place.dates.indexOf(pass) : (place?.dates.length ?? 1) - 1
@@ -15,6 +15,7 @@ export default function Sheet({ open, onClose, place, pass }) {
     <div className="sheet-back" onClick={onClose}>
       <aside className="sheet" role="dialog" aria-modal="true" aria-label="How sure are we?" onClick={(e) => e.stopPropagation()} ref={ref} tabIndex={-1}>
         <div className="row"><h2>How sure are we?</h2><button className="icon-btn" onClick={onClose} aria-label="Close">{Icon.close}</button></div>
+        {onAbout && <p className="about-link"><button className="linkish" onClick={onAbout}>About this app, keys and credits</button></p>}
         <section>
           {place?.calibrated ? (
             <>
@@ -61,7 +62,7 @@ export default function Sheet({ open, onClose, place, pass }) {
   )
 }
 
-function EventSheet({ onClose, place, sheetRef }) {
+function EventSheet({ onClose, place, sheetRef, onAbout }) {
   const e = place.event
   const views = e.views || []
   const ctl = views.filter((v) => v.control_p2p_cm != null)
@@ -70,6 +71,7 @@ function EventSheet({ onClose, place, sheetRef }) {
     <div className="sheet-back" onClick={onClose}>
       <aside className="sheet" role="dialog" aria-modal="true" aria-label="How sure are we?" onClick={(ev) => ev.stopPropagation()} ref={sheetRef} tabIndex={-1}>
         <div className="row"><h2>How sure are we?</h2><button className="icon-btn" onClick={onClose} aria-label="Close">{Icon.close}</button></div>
+        {onAbout && <p className="about-link"><button className="linkish" onClick={onAbout}>About this app, keys and credits</button></p>}
         <section>
           <h3>Provisional data</h3>
           <p>These ground-motion maps come from NISAR L2 GUNW interferograms, a provisional product.</p>

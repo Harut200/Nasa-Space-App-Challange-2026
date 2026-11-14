@@ -3,7 +3,7 @@ import { dataNotice, fmtDate, fmtKm, numWord } from './data.js'
 // Said only of what the data shows: grew, shrank or held steady.
 const verb = (a, z) => (a == null || z == null ? null : Math.abs(z - a) < Math.max(0.5, a * 0.005) ? 'held steady' : z > a ? `grew from ${fmtKm(a)} to ${fmtKm(z)} km²` : `shrank from ${fmtKm(a)} to ${fmtKm(z)} km²`)
 
-export default function Opening({ place, index, onWatch, onFeel, onChoose, extra, legend }) {
+export default function Opening({ place, index, onWatch, onFeel, onChoose, extra, legend, bare }) {
   const P = place?.primary
   const v = P?.values[index]
   const d = place?.dates[index]
@@ -27,7 +27,7 @@ export default function Opening({ place, index, onWatch, onFeel, onChoose, extra
           {extra}
         </div>
       </div>
-      {place && P.kind === 'water' && (
+      {!bare && place && P.kind === 'water' && (
         <div className="opening-live" aria-hidden="true">
           <span className="mono live-date">{fmtDate(d)}</span>
           <strong>{fmtKm(v)}<small> km²</small></strong>
