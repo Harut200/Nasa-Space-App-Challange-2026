@@ -17,7 +17,7 @@ const styleFor = () => ({
   layers: [
     { id: 'bg', type: 'background', paint: { 'background-color': '#070a0f' } },
     { id: 'earth', type: 'raster', source: 'gibs',
-      paint: { 'raster-brightness-max': 0.62, 'raster-saturation': -0.25, 'raster-contrast': 0.1, 'raster-fade-duration': 600 } },
+      paint: { 'raster-opacity': ['interpolate', ['linear'], ['zoom'], 7, 1, 10, 0.4], 'raster-brightness-max': 0.62, 'raster-saturation': -0.25, 'raster-contrast': 0.1, 'raster-fade-duration': 600 } },
   ],
 })
 

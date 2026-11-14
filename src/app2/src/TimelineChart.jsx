@@ -102,7 +102,7 @@ export default function TimelineChart({ place, index, onScrub, showFlood = true 
             {q(i) && <path d={`M${p.x - 4},${h - M.b + 2}h8l-4,-7z`} fill={q(i).quality === 'fail' ? 'var(--bad)' : 'var(--warn)'} />}
           </g>
         ))}
-        {dates.map((d, i) => (i % every === 0 || i === index) && (
+        {dates.map((d, i) => ((i % every === 0 && Math.abs(i - index) >= every) || i === index) && (
           <text key={d} x={g.x(d)} y={h - 6} textAnchor="middle" className={`ax ${i === index ? 'now' : ''}`}>{fmtDate(d)}</text>
         ))}
         {/* playhead */}

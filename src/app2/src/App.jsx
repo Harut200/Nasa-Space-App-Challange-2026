@@ -21,7 +21,7 @@ export default function App() {
   const [ids, setIds] = useState([])
   const [places, setPlaces] = useState({}) // id -> built place
   const [failed, setFailed] = useState(false)
-  const [index, setIndexRaw] = useState(0)
+  const [indexState, setIndexRaw] = useState(0)
   const [playing, setPlaying] = useState(false)
   const [opacity, setOpacity] = useState(0.92)
   const [cmp, setCmp] = useState(() => ({ on: /[?&]cmp=1/.test(location.hash) && /mode=explore/.test(location.hash), split: 50 }))
@@ -52,6 +52,7 @@ export default function App() {
   const scene = mode === 'story' ? scenes[sceneN - 1] : null
 
   const nDates = place?.dates.length || 1
+  const index = Math.min(indexState, nDates - 1) // a new place can have fewer passes than the one just left
   const setIndex = useCallback((i) => setIndexRaw(Math.max(0, Math.min(nDates - 1, i))), [nDates])
 
   // Layer on show
@@ -61,6 +62,7 @@ export default function App() {
   // Reset the playhead when place / scene / mode changes
   const sceneKey = `${placeId}|${mode}|${mode === 'story' ? sceneN : ''}`
   const firstApply = useRef(true)
+  const applying = useRef(null) // explore playhead index just applied from the URL / defaults; the URL sync waits for it
   useEffect(() => {
     if (!place) return
     setActiveSpot(null)
@@ -72,7 +74,8 @@ export default function App() {
       if (scene.compare) setCmp((c) => ({ ...c, on: true })); else setCmp((c) => ({ ...c, on: false }))
     } else if (mode === 'explore') {
       const di = route.date ? place.dates.indexOf(route.date) : -1
-      setIndexRaw(di >= 0 ? di : place.dates.length - 1)
+      applying.current = di >= 0 ? di : place.dates.length - 1
+      setIndexRaw(applying.current)
       setPlaying(false)
       setCmp((c) => ({ ...c, on: keepCmp }))
     } else if (mode === 'open') {
@@ -96,6 +99,7 @@ export default function App() {
   // keep the URL in step with the explore date
   useEffect(() => {
     if (mode === 'explore' && place) {
+      if (applying.current != null) { if (index !== applying.current) return; applying.current = null }
       const d = place.dates[index]
       if (route.date !== d) go({ date: d }, false)
     }

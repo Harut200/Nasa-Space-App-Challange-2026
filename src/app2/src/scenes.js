@@ -16,6 +16,8 @@ export function buildScenes(p) {
     if (v == null) return passStat
     return { big: v, unit: P.unit === 'km²' ? 'km²' : '', label: P.label, sub: P.lo ? `plausible range ${fmtKm(P.lo[idx])}–${fmtKm(P.hi[idx])}` : (P.unit === 'km²' ? '' : 'uncalibrated display brightness') }
   }
+  // places with no visible open water show the radar itself instead of an empty water layer
+  const wl = P.kind === 'hh' || Math.max(...vals.filter((v) => v != null), 0) < 1 ? 'hh' : 'water'
   const scenes = []
   scenes.push({
     key: 'overture', kicker: 'Overture', title: nm, layer: 'hh', at: 0, compare: false,
@@ -23,7 +25,7 @@ export function buildScenes(p) {
     stat: () => passStat,
   })
   scenes.push({
-    key: 'see', kicker: 'What you see', title: 'The season plays', layer: 'water', at: 0, play: true, text: sentences(p.story.see, 3), full: p.story.see,
+    key: 'see', kicker: 'What you see', title: 'The season plays', layer: wl, at: 0, play: true, text: sentences(p.story.see, 3), full: p.story.see,
     stat: live,
   })
   const gained = vals[last] != null && vals[0] != null ? vals[last] - vals[0] : null
@@ -45,11 +47,11 @@ export function buildScenes(p) {
       : ts0 ? { big: ts0.hh[last], unit: '', label: `${focus?.label || 'spot'}: HH brightness, from ${ts0.hh[0]} on ${fmtDate(p.dates[0])}`, sub: 'uncalibrated display brightness, 0 to 100', dec: 1 } : passStat),
   })
   scenes.push({
-    key: 'people', kicker: 'Why it matters', title: 'People and place', layer: 'water', at: last, text: sentences(p.story.people, 3), full: p.story.people,
+    key: 'people', kicker: 'Why it matters', title: 'People and place', layer: wl, at: last, text: sentences(p.story.people, 3), full: p.story.people,
     stat: live,
   })
   scenes.push({
-    key: 'sure', kicker: 'Honestly', title: 'How sure are we?', layer: 'water', at: last, sheet: true,
+    key: 'sure', kicker: 'Honestly', title: 'How sure are we?', layer: wl, at: last, sheet: true,
     text: 'These are free preview images at about 180 m per pixel, and they are not calibrated. Timing and patterns are reliable; exact areas are not. Every number here comes with its range, and every caveat is one click away.',
     stat: () => (P.lo && P.hi ? { big: `${fmtKm(P.lo[last])}–${fmtKm(P.hi[last])}`, unit: 'km²', label: `plausible range for ${P.label.toLowerCase()} on ${fmtDate(p.dates[last])}`, sub: '', text: true } : passStat),
   })

@@ -57,7 +57,7 @@ export default function Explore({ place, layerId, layer, setLayer, index, setInd
           {MODES.filter((m) => avail(m.id)).map((m) => (
             <button key={m.id} role="radio" aria-checked={layerId === m.id} className={layerId === m.id ? 'on' : ''} onClick={() => { setLayer(m.id); setMore(false) }} title={m.hint}>{m.label}</button>
           ))}
-          {rest.length > 0 && <button className={!isMain ? 'on' : ''} aria-expanded={more} onClick={() => setMore((x) => !x)}>More{!isMain ? ': ' + (layer?.id) : ''} <span aria-hidden>▾</span></button>}
+          {rest.length > 0 && <button className={!isMain ? 'on' : ''} aria-expanded={more} onClick={() => setMore((x) => !x)}>More{!isMain && layer ? ': ' + layer.label.split(/ \(|:/)[0] : ''} <span aria-hidden>▾</span></button>}
         </div>
         {more && (
           <div className="more" role="listbox" aria-label="More layers">
@@ -65,7 +65,7 @@ export default function Explore({ place, layerId, layer, setLayer, index, setInd
           </div>
         )}
         <label className="slider"><span>Overlay</span>
-          <input type="range" min="0" max="100" value={Math.round(opacity * 100)} onChange={(e) => setOpacity(+e.target.value / 100)} aria-label="Overlay opacity" />
+          <input type="range" min="0" max="100" value={Math.round(opacity * 100)} onChange={(e) => setOpacity(+e.target.value / 100)} onPointerUp={(e) => e.currentTarget.blur()} aria-label="Overlay opacity" />
           <output>{Math.round(opacity * 100)}%</output></label>
         <div className="toggles">
           <button className={`chip ${cmp.on && cmpAvailable ? 'on' : ''}`} disabled={!cmpAvailable} aria-pressed={cmp.on && cmpAvailable} onClick={() => setCmp((c) => ({ ...c, on: !c.on }))} title={cmpAvailable ? 'Drag the handle: first pass | current pass (C)' : 'Compare needs a layer with several passes'}>{Icon.split}<span>Compare</span></button>
