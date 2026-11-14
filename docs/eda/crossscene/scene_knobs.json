@@ -1,0 +1,1508 @@
+{
+ "method": "seeded",
+ "integration": "crossscene.detect_water_adaptive(out['L'], out['valid'], water_ok=water_ok, method='seeded', kn=dict(scene_knobs['knobs'], seeds_only=scene_knobs['areas'][area]['seeds_only']))",
+ "note": "per_date thresholds are OUTPUTS (what the method chose), not inputs; the method recomputes them from the scene. hh_/hv_ values are brightness equivalents for reading only.",
+ "knobs": {
+  "eps_logit": 0.01,
+  "dead_level": 0.006,
+  "hist_bins": 160,
+  "hist_sigma": 2.0,
+  "valley_depth_max": 0.7,
+  "mode_min_px": 300,
+  "mode_max_frac": 0.4,
+  "seed_stable_frac": 0.7,
+  "seed_open_k": 3,
+  "seed_min_px": 30,
+  "seed_area_min_px": 100,
+  "s_strong": 0.447,
+  "s_weak": 0.635,
+  "land_q": 0.25,
+  "s_other_max": 0.936,
+  "s_seed_keep": 0.7,
+  "k_spread": 3.0,
+  "seeds_only": false,
+  "min_blob_px": 4,
+  "rel_z_strong": -2.223,
+  "rel_z_weak": -1.711,
+  "rel_z_hv": -0.935,
+  "gmm_k": 5,
+  "gmm_n": 60000,
+  "gmm_alpha": 0.35,
+  "gmm_sep_min": 3.0,
+  "gmm_p": 0.5
+ },
+ "areas": {
+  "tonle-sap": {
+   "mode": "flood",
+   "seeds_only": false,
+   "has_water": true,
+   "feature": "HH",
+   "valley": {
+    "pos": -1.99958,
+    "depth": 0.02117,
+    "n_left": 67755,
+    "frac_left": 0.06141,
+    "peak_left": -2.52904,
+    "prominence": 66320.64505,
+    "feature": "HH",
+    "w": [
+     1.0,
+     0.0
+    ]
+   },
+   "seed_px": 55801,
+   "recommended_water_source": "seeded",
+   "why": "seeded BA 0.996, false alarms 0.04 %",
+   "verdict_seeded": "works",
+   "verdict_lake_mode": "works",
+   "verdict_fixed": "works",
+   "per_date": {
+    "2026-06-19": {
+     "a_seed": -2.52681,
+     "b_land": -0.29154,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.00337,
+     "hh_weak": 0.1498,
+     "hh_strong": 0.0706,
+     "hv_weak": 0.0675
+    },
+    "2026-07-01": {
+     "a_seed": -2.52863,
+     "b_land": -0.30169,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.00333,
+     "hh_weak": 0.1481,
+     "hh_strong": 0.0699,
+     "hv_weak": 0.0665
+    },
+    "2026-07-13": {
+     "a_seed": -2.52513,
+     "b_land": -0.35205,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.00355,
+     "hh_weak": 0.1407,
+     "hh_strong": 0.0671,
+     "hv_weak": 0.0622
+    },
+    "2026-07-25": {
+     "a_seed": -2.52617,
+     "b_land": -0.27797,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.00364,
+     "hh_weak": 0.152,
+     "hh_strong": 0.0715,
+     "hv_weak": 0.0689
+    },
+    "2026-08-18": {
+     "a_seed": -2.52381,
+     "b_land": -0.32102,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.00558,
+     "hh_weak": 0.1455,
+     "hh_strong": 0.0691,
+     "hv_weak": 0.065
+    },
+    "2026-08-30": {
+     "a_seed": -2.51815,
+     "b_land": -0.32332,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.00772,
+     "hh_weak": 0.1457,
+     "hh_strong": 0.0693,
+     "hv_weak": 0.0651
+    },
+    "2026-09-11": {
+     "a_seed": -2.51775,
+     "b_land": -0.2993,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.00843,
+     "hh_weak": 0.1494,
+     "hh_strong": 0.0708,
+     "hv_weak": 0.0673
+    },
+    "2026-09-23": {
+     "a_seed": -2.51193,
+     "b_land": -0.48437,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.01678,
+     "hh_weak": 0.1229,
+     "hh_strong": 0.0606,
+     "hv_weak": 0.0521
+    },
+    "2026-10-05": {
+     "a_seed": -2.51063,
+     "b_land": -0.40803,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.01792,
+     "hh_weak": 0.1337,
+     "hh_strong": 0.0649,
+     "hv_weak": 0.0582
+    },
+    "2026-10-17": {
+     "a_seed": -2.37258,
+     "b_land": -0.3926,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.11967,
+     "hh_weak": 0.1479,
+     "hh_strong": 0.0763,
+     "hv_weak": 0.0664
+    }
+   }
+  },
+  "sevan": {
+   "mode": "lake",
+   "seeds_only": true,
+   "has_water": true,
+   "feature": "HH",
+   "valley": {
+    "pos": -0.58536,
+    "depth": 0.07276,
+    "n_left": 34803,
+    "frac_left": 0.26196,
+    "peak_left": -1.10531,
+    "prominence": 32270.86919,
+    "feature": "HH",
+    "w": [
+     1.0,
+     0.0
+    ]
+   },
+   "seed_px": 33008,
+   "recommended_water_source": "seeded",
+   "why": "seeded BA 0.989, false alarms 0.00 %",
+   "verdict_seeded": "works",
+   "verdict_lake_mode": "works",
+   "verdict_fixed": "works",
+   "per_date": {
+    "2026-06-20": {
+     "a_seed": -1.09849,
+     "b_land": -0.01058,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.0051,
+     "hh_weak": 0.1057,
+     "hh_strong": 0.0532,
+     "hv_weak": 0.1369
+    },
+    "2026-07-02": {
+     "a_seed": -1.09843,
+     "b_land": -0.03719,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.00575,
+     "hh_weak": 0.1002,
+     "hh_strong": 0.0509,
+     "hv_weak": 0.1334
+    },
+    "2026-07-14": {
+     "a_seed": -1.09884,
+     "b_land": -0.01202,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.00453,
+     "hh_weak": 0.1053,
+     "hh_strong": 0.053,
+     "hv_weak": 0.1366
+    },
+    "2026-07-26": {
+     "a_seed": -1.09715,
+     "b_land": -0.06789,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.00497,
+     "hh_weak": 0.0943,
+     "hh_strong": 0.0486,
+     "hv_weak": 0.1297
+    },
+    "2026-08-19": {
+     "a_seed": -1.09974,
+     "b_land": -0.01718,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.00506,
+     "hh_weak": 0.1042,
+     "hh_strong": 0.0525,
+     "hv_weak": 0.1359
+    },
+    "2026-08-31": {
+     "a_seed": -0.91516,
+     "b_land": 0.03997,
+     "s_strong": 0.635,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.28478,
+     "hh_weak": 0.1428,
+     "hh_strong": 0.1428,
+     "hv_weak": 0.1582
+    },
+    "2026-09-12": {
+     "a_seed": -1.0948,
+     "b_land": -0.0527,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.01092,
+     "hh_weak": 0.0975,
+     "hh_strong": 0.05,
+     "hv_weak": 0.1318
+    },
+    "2026-09-24": {
+     "a_seed": -1.09624,
+     "b_land": -0.07664,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.005,
+     "hh_weak": 0.0927,
+     "hh_strong": 0.048,
+     "hv_weak": 0.1287
+    },
+    "2026-10-06": {
+     "a_seed": -1.09698,
+     "b_land": -0.04938,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.00479,
+     "hh_weak": 0.0979,
+     "hh_strong": 0.0501,
+     "hv_weak": 0.132
+    },
+    "2026-10-18": {
+     "a_seed": -1.09559,
+     "b_land": -0.07757,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.00521,
+     "hh_weak": 0.0926,
+     "hh_strong": 0.0479,
+     "hv_weak": 0.1286
+    }
+   }
+  },
+  "ararat": {
+   "mode": "flood",
+   "seeds_only": false,
+   "has_water": false,
+   "feature": null,
+   "valley": null,
+   "seed_px": null,
+   "recommended_water_source": "seeded",
+   "why": "no permanent-water anchors; false alarms 0.00 % on never-water",
+   "verdict_seeded": "works",
+   "verdict_lake_mode": "works",
+   "verdict_fixed": "works",
+   "per_date": {
+    "2026-06-20": null,
+    "2026-07-02": null,
+    "2026-07-14": null,
+    "2026-07-26": null,
+    "2026-08-19": null,
+    "2026-08-31": null,
+    "2026-09-12": null,
+    "2026-09-24": null,
+    "2026-10-06": null,
+    "2026-10-18": null
+   }
+  },
+  "inner-niger": {
+   "mode": "flood",
+   "seeds_only": false,
+   "has_water": true,
+   "feature": "HV",
+   "valley": {
+    "pos": -2.15341,
+    "depth": 0.44743,
+    "n_left": 13696,
+    "frac_left": 0.01914,
+    "peak_left": -2.51397,
+    "prominence": 7567.98756,
+    "feature": "HV",
+    "w": [
+     0.0,
+     1.0
+    ]
+   },
+   "seed_px": 3772,
+   "recommended_water_source": "none (caution)",
+   "why": "no method 'works' (BA >= 0.95 and false alarms <= 5 %): seeded BA 0.913 / 4.76 %, fixed BA 0.501 / 4.81 %; best single HH threshold (oracle) BA 0.897",
+   "verdict_seeded": "partial",
+   "verdict_lake_mode": "partial",
+   "verdict_fixed": "fails",
+   "per_date": {
+    "2026-06-24": {
+     "a_seed": -2.4306,
+     "b_land": -0.43515,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.07026,
+     "hh_weak": 0.1474,
+     "hh_strong": 0.0936,
+     "hv_weak": 0.0652
+    },
+    "2026-07-18": {
+     "a_seed": -2.52482,
+     "b_land": -0.45195,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.01044,
+     "hh_weak": 0.1399,
+     "hh_strong": 0.0867,
+     "hv_weak": 0.0612
+    },
+    "2026-08-11": {
+     "a_seed": -2.53848,
+     "b_land": -0.36169,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.0084,
+     "hh_weak": 0.1487,
+     "hh_strong": 0.0904,
+     "hv_weak": 0.0659
+    },
+    "2026-08-23": {
+     "a_seed": -2.55473,
+     "b_land": -0.31848,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.00581,
+     "hh_weak": 0.1524,
+     "hh_strong": 0.0916,
+     "hv_weak": 0.0679
+    },
+    "2026-09-04": {
+     "a_seed": -2.54663,
+     "b_land": -0.39083,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.00702,
+     "hh_weak": 0.145,
+     "hh_strong": 0.0884,
+     "hv_weak": 0.0639
+    },
+    "2026-09-16": {
+     "a_seed": -2.40437,
+     "b_land": -0.45002,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.01097,
+     "hh_weak": 0.1475,
+     "hh_strong": 0.0945,
+     "hv_weak": 0.0653
+    },
+    "2026-09-28": {
+     "a_seed": -2.11116,
+     "b_land": -0.56752,
+     "s_strong": 0.635,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.34087,
+     "hh_weak": 0.1531,
+     "hh_strong": 0.1531,
+     "hv_weak": 0.0683
+    },
+    "2026-10-10": {
+     "a_seed": -2.36235,
+     "b_land": -0.55701,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.0132,
+     "hh_weak": 0.1387,
+     "hh_strong": 0.0916,
+     "hv_weak": 0.0606
+    }
+   }
+  },
+  "poyang": {
+   "mode": "lake",
+   "seeds_only": true,
+   "has_water": true,
+   "feature": "HH",
+   "valley": {
+    "pos": -1.06511,
+    "depth": 0.22463,
+    "n_left": 102825,
+    "frac_left": 0.20986,
+    "peak_left": -3.80129,
+    "prominence": 79727.08404,
+    "feature": "HH",
+    "w": [
+     1.0,
+     0.0
+    ]
+   },
+   "seed_px": 88815,
+   "recommended_water_source": "seeded",
+   "why": "seeded BA 0.999, false alarms 0.03 %",
+   "verdict_seeded": "works",
+   "verdict_lake_mode": "works",
+   "verdict_fixed": "works",
+   "per_date": {
+    "2026-07-05": {
+     "a_seed": -3.46898,
+     "b_land": -0.12367,
+     "s_strong": 0.46648,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.15549,
+     "hh_weak": 0.212,
+     "hh_strong": 0.114,
+     "hv_weak": 0.072
+    },
+    "2026-07-17": {
+     "a_seed": -3.09563,
+     "b_land": -0.17679,
+     "s_strong": 0.635,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.34341,
+     "hh_weak": 0.2349,
+     "hh_strong": 0.2349,
+     "hv_weak": 0.0866
+    },
+    "2026-08-10": {
+     "a_seed": -2.84786,
+     "b_land": -0.14653,
+     "s_strong": 0.635,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.50744,
+     "hh_weak": 0.2611,
+     "hh_strong": 0.2611,
+     "hv_weak": 0.1049
+    },
+    "2026-09-03": {
+     "a_seed": -3.18717,
+     "b_land": -0.10637,
+     "s_strong": 0.635,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.28758,
+     "hh_weak": 0.2375,
+     "hh_strong": 0.2375,
+     "hv_weak": 0.0884
+    },
+    "2026-09-15": {
+     "a_seed": -2.90639,
+     "b_land": -0.08668,
+     "s_strong": 0.635,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.45492,
+     "hh_weak": 0.2652,
+     "hh_strong": 0.2652,
+     "hv_weak": 0.1079
+    },
+    "2026-09-27": {
+     "a_seed": -2.51246,
+     "b_land": -0.03718,
+     "s_strong": 0.635,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.6018,
+     "hh_weak": 0.3109,
+     "hh_strong": 0.3109,
+     "hv_weak": 0.144
+    },
+    "2026-10-09": {
+     "a_seed": -2.48826,
+     "b_land": -0.08196,
+     "s_strong": 0.635,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.63753,
+     "hh_weak": 0.3056,
+     "hh_strong": 0.3056,
+     "hv_weak": 0.1395
+    }
+   }
+  },
+  "bangladesh-haor": {
+   "mode": "flood",
+   "seeds_only": false,
+   "has_water": true,
+   "feature": "mean",
+   "valley": {
+    "pos": -0.55787,
+    "depth": 0.36269,
+    "n_left": 98351,
+    "frac_left": 0.26994,
+    "peak_left": -1.36215,
+    "prominence": 62679.89968,
+    "feature": "mean",
+    "w": [
+     0.5,
+     0.5
+    ]
+   },
+   "seed_px": 83593,
+   "recommended_water_source": "seeded",
+   "why": "no permanent-water anchors; false alarms 0.01 % on never-water",
+   "verdict_seeded": "works",
+   "verdict_lake_mode": "works",
+   "verdict_fixed": "works",
+   "per_date": {
+    "2026-06-18": {
+     "a_seed": -1.10865,
+     "b_land": 0.00855,
+     "s_strong": 0.635,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.22656,
+     "hh_weak": 0.1661,
+     "hh_strong": 0.1661,
+     "hv_weak": 0.139
+    },
+    "2026-06-30": {
+     "a_seed": -0.40755,
+     "b_land": 0.06567,
+     "s_strong": 0.61276,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.20425,
+     "hh_weak": 0.3031,
+     "hh_strong": 0.2972,
+     "hv_weak": 0.2803
+    },
+    "2026-07-12": {
+     "a_seed": -1.01448,
+     "b_land": -0.04,
+     "s_strong": 0.51817,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.17272,
+     "hh_weak": 0.1674,
+     "hh_strong": 0.1285,
+     "hv_weak": 0.1403
+    },
+    "2026-07-24": {
+     "a_seed": -1.06206,
+     "b_land": -0.02133,
+     "s_strong": 0.54274,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.18091,
+     "hh_weak": 0.1654,
+     "hh_strong": 0.1323,
+     "hv_weak": 0.1383
+    },
+    "2026-08-17": {
+     "a_seed": -1.12997,
+     "b_land": -0.00651,
+     "s_strong": 0.635,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.22258,
+     "hh_weak": 0.1597,
+     "hh_strong": 0.1597,
+     "hv_weak": 0.1328
+    },
+    "2026-08-29": {
+     "a_seed": -1.08592,
+     "b_land": -0.00419,
+     "s_strong": 0.59955,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.19985,
+     "hh_weak": 0.1662,
+     "hh_strong": 0.1522,
+     "hv_weak": 0.1391
+    },
+    "2026-09-10": {
+     "a_seed": -1.09596,
+     "b_land": 0.0191,
+     "s_strong": 0.635,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.21256,
+     "hh_weak": 0.1704,
+     "hh_strong": 0.1704,
+     "hv_weak": 0.1432
+    },
+    "2026-09-22": {
+     "a_seed": -1.11225,
+     "b_land": 0.05468,
+     "s_strong": 0.58606,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.19535,
+     "hh_weak": 0.1768,
+     "hh_strong": 0.1554,
+     "hv_weak": 0.1496
+    },
+    "2026-10-04": {
+     "a_seed": -1.08975,
+     "b_land": 0.16338,
+     "s_strong": 0.635,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.21602,
+     "hh_weak": 0.2091,
+     "hh_strong": 0.2091,
+     "hv_weak": 0.182
+    },
+    "2026-10-16": {
+     "a_seed": -1.07042,
+     "b_land": 0.20757,
+     "s_strong": 0.635,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.25874,
+     "hh_weak": 0.2251,
+     "hh_strong": 0.2251,
+     "hv_weak": 0.1983
+    }
+   }
+  },
+  "okavango": {
+   "mode": "flood",
+   "seeds_only": false,
+   "has_water": false,
+   "feature": "mean",
+   "valley": {
+    "pos": -2.15898,
+    "depth": 0.28968,
+    "n_left": 1247,
+    "frac_left": 0.00192,
+    "peak_left": -2.34125,
+    "prominence": 885.76499,
+    "feature": "mean",
+    "w": [
+     0.5,
+     0.5
+    ]
+   },
+   "seed_px": 0,
+   "recommended_water_source": "seeded",
+   "why": "no permanent-water anchors; false alarms 0.00 % on never-water",
+   "verdict_seeded": "works",
+   "verdict_lake_mode": "works",
+   "verdict_fixed": "works",
+   "per_date": {
+    "2026-06-26": null,
+    "2026-07-08": null,
+    "2026-07-20": null,
+    "2026-08-13": null,
+    "2026-08-25": null,
+    "2026-09-06": null,
+    "2026-09-18": null,
+    "2026-09-30": null,
+    "2026-10-12": null
+   }
+  },
+  "urmia": {
+   "mode": "lake",
+   "seeds_only": true,
+   "has_water": true,
+   "feature": "HH",
+   "valley": {
+    "pos": -0.56713,
+    "depth": 0.40778,
+    "n_left": 53532,
+    "frac_left": 0.23888,
+    "peak_left": -0.96448,
+    "prominence": 31702.69852,
+    "feature": "HH",
+    "w": [
+     1.0,
+     0.0
+    ]
+   },
+   "seed_px": 27506,
+   "recommended_water_source": "fixed",
+   "why": "fixed BA 0.957 > seeded 0.886",
+   "verdict_seeded": "partial",
+   "verdict_lake_mode": "partial",
+   "verdict_fixed": "works",
+   "per_date": {
+    "2026-06-20": {
+     "a_seed": -0.94796,
+     "b_land": -0.1001,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.03917,
+     "hh_weak": 0.0516,
+     "hh_strong": 0.0303,
+     "hv_weak": 0.2381
+    },
+    "2026-07-02": {
+     "a_seed": -0.77674,
+     "b_land": -0.14756,
+     "s_strong": 0.635,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.43148,
+     "hh_weak": 0.0571,
+     "hh_strong": 0.0571,
+     "hv_weak": 0.2432
+    },
+    "2026-07-14": {
+     "a_seed": -0.92555,
+     "b_land": -0.11609,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.08173,
+     "hh_weak": 0.0513,
+     "hh_strong": 0.0309,
+     "hv_weak": 0.2378
+    },
+    "2026-07-26": {
+     "a_seed": -0.95886,
+     "b_land": -0.07228,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.01715,
+     "hh_weak": 0.0539,
+     "hh_strong": 0.031,
+     "hv_weak": 0.2402
+    },
+    "2026-08-19": {
+     "a_seed": -0.96043,
+     "b_land": -0.04186,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.0121,
+     "hh_weak": 0.0571,
+     "hh_strong": 0.0324,
+     "hv_weak": 0.2432
+    },
+    "2026-08-31": {
+     "a_seed": -0.9514,
+     "b_land": -0.07754,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.02421,
+     "hh_weak": 0.0538,
+     "hh_strong": 0.0312,
+     "hv_weak": 0.2401
+    },
+    "2026-09-12": {
+     "a_seed": -0.95928,
+     "b_land": -0.04135,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.01277,
+     "hh_weak": 0.0572,
+     "hh_strong": 0.0325,
+     "hv_weak": 0.2433
+    },
+    "2026-10-06": {
+     "a_seed": -0.95238,
+     "b_land": -0.04044,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.01839,
+     "hh_weak": 0.0578,
+     "hh_strong": 0.033,
+     "hv_weak": 0.2438
+    },
+    "2026-10-18": {
+     "a_seed": -0.65767,
+     "b_land": -0.05426,
+     "s_strong": 0.635,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.73933,
+     "hh_weak": 0.0776,
+     "hh_strong": 0.0776,
+     "hv_weak": 0.26
+    }
+   }
+  },
+  "sindh-indus": {
+   "mode": "flood",
+   "seeds_only": false,
+   "has_water": false,
+   "feature": "HH",
+   "valley": {
+    "pos": -1.88402,
+    "depth": 0.23524,
+    "n_left": 1074,
+    "frac_left": 0.00176,
+    "peak_left": -2.03719,
+    "prominence": 821.35553,
+    "feature": "HH",
+    "w": [
+     1.0,
+     0.0
+    ]
+   },
+   "seed_px": 0,
+   "recommended_water_source": "seeded",
+   "why": "no permanent-water anchors; false alarms 0.00 % on never-water",
+   "verdict_seeded": "works",
+   "verdict_lake_mode": "works",
+   "verdict_fixed": "works",
+   "per_date": {
+    "2026-06-17": null,
+    "2026-06-29": null,
+    "2026-07-11": null,
+    "2026-07-23": null,
+    "2026-08-16": null,
+    "2026-08-28": null,
+    "2026-09-09": null,
+    "2026-09-21": null,
+    "2026-10-03": null,
+    "2026-10-15": null
+   }
+  },
+  "mekong-delta": {
+   "mode": "flood",
+   "seeds_only": false,
+   "has_water": true,
+   "feature": "HV",
+   "valley": {
+    "pos": -1.94108,
+    "depth": 0.38799,
+    "n_left": 3854,
+    "frac_left": 0.00792,
+    "peak_left": -2.12899,
+    "prominence": 2358.70486,
+    "feature": "HV",
+    "w": [
+     0.0,
+     1.0
+    ]
+   },
+   "seed_px": 246,
+   "recommended_water_source": "none (caution)",
+   "why": "no method 'works' (BA >= 0.95 and false alarms <= 5 %): seeded BA 0.649 / 0.45 %, fixed BA 0.513 / 0.05 %; best single HH threshold (oracle) BA 0.977",
+   "verdict_seeded": "fails",
+   "verdict_lake_mode": "fails",
+   "verdict_fixed": "fails",
+   "per_date": {
+    "2026-06-17": {
+     "a_seed": -2.14666,
+     "b_land": -0.41517,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.00774,
+     "hh_weak": 0.152,
+     "hh_strong": 0.107,
+     "hv_weak": 0.0666
+    },
+    "2026-06-29": {
+     "a_seed": -2.14232,
+     "b_land": -0.35209,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.00764,
+     "hh_weak": 0.1587,
+     "hh_strong": 0.1107,
+     "hv_weak": 0.0715
+    },
+    "2026-07-11": {
+     "a_seed": -2.13806,
+     "b_land": -0.37379,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.00777,
+     "hh_weak": 0.1567,
+     "hh_strong": 0.1098,
+     "hv_weak": 0.07
+    },
+    "2026-07-23": {
+     "a_seed": -2.1156,
+     "b_land": -0.29318,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.0253,
+     "hh_weak": 0.1665,
+     "hh_strong": 0.1159,
+     "hv_weak": 0.0774
+    },
+    "2026-08-16": {
+     "a_seed": -2.10487,
+     "b_land": -0.22481,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.0349,
+     "hh_weak": 0.1746,
+     "hh_strong": 0.1206,
+     "hv_weak": 0.0838
+    },
+    "2026-08-28": {
+     "a_seed": -2.1355,
+     "b_land": -0.25864,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.01383,
+     "hh_weak": 0.169,
+     "hh_strong": 0.1165,
+     "hv_weak": 0.0794
+    },
+    "2026-09-09": {
+     "a_seed": -2.13877,
+     "b_land": -0.3641,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.0066,
+     "hh_weak": 0.1576,
+     "hh_strong": 0.1103,
+     "hv_weak": 0.0707
+    },
+    "2026-09-21": {
+     "a_seed": -2.15069,
+     "b_land": -0.42628,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.00727,
+     "hh_weak": 0.1507,
+     "hh_strong": 0.1062,
+     "hv_weak": 0.0656
+    },
+    "2026-10-03": {
+     "a_seed": -2.15247,
+     "b_land": -0.53208,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.0074,
+     "hh_weak": 0.1403,
+     "hh_strong": 0.1005,
+     "hv_weak": 0.0583
+    },
+    "2026-10-15": {
+     "a_seed": -2.14449,
+     "b_land": -0.55627,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.02269,
+     "hh_weak": 0.1385,
+     "hh_strong": 0.0998,
+     "hv_weak": 0.057
+    }
+   }
+  },
+  "rondonia": {
+   "mode": "flood",
+   "seeds_only": false,
+   "has_water": true,
+   "feature": "HV",
+   "valley": {
+    "pos": -1.35365,
+    "depth": 0.05908,
+    "n_left": 822,
+    "frac_left": 0.00127,
+    "peak_left": -1.47209,
+    "prominence": 773.43381,
+    "feature": "HV",
+    "w": [
+     0.0,
+     1.0
+    ]
+   },
+   "seed_px": 635,
+   "recommended_water_source": "seeded",
+   "why": "no permanent-water anchors; false alarms 0.45 % on never-water",
+   "verdict_seeded": "works",
+   "verdict_lake_mode": "works",
+   "verdict_fixed": "works",
+   "per_date": {
+    "2026-06-30": {
+     "a_seed": -1.63342,
+     "b_land": -0.54577,
+     "s_strong": 0.635,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.36277,
+     "hh_weak": 0.4275,
+     "hh_strong": 0.4275,
+     "hv_weak": 0.3049
+    },
+    "2026-08-17": {
+     "a_seed": -1.80309,
+     "b_land": -0.6405,
+     "s_strong": 0.635,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.35822,
+     "hh_weak": 0.365,
+     "hh_strong": 0.365,
+     "hv_weak": 0.2445
+    },
+    "2026-08-29": {
+     "a_seed": -1.71705,
+     "b_land": -0.61955,
+     "s_strong": 0.635,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.32945,
+     "hh_weak": 0.3875,
+     "hh_strong": 0.3875,
+     "hv_weak": 0.2657
+    },
+    "2026-09-10": {
+     "a_seed": -1.78096,
+     "b_land": -0.62811,
+     "s_strong": 0.635,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.35264,
+     "hh_weak": 0.3729,
+     "hh_strong": 0.3729,
+     "hv_weak": 0.2519
+    },
+    "2026-10-04": {
+     "a_seed": -1.77306,
+     "b_land": -0.63313,
+     "s_strong": 0.635,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.34055,
+     "hh_weak": 0.3728,
+     "hh_strong": 0.3728,
+     "hv_weak": 0.2518
+    },
+    "2026-10-16": {
+     "a_seed": -1.7873,
+     "b_land": -0.61822,
+     "s_strong": 0.635,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.33066,
+     "hh_weak": 0.3749,
+     "hh_strong": 0.3749,
+     "hv_weak": 0.2538
+    }
+   }
+  },
+  "nile-delta": {
+   "mode": "lake",
+   "seeds_only": true,
+   "has_water": true,
+   "feature": "HV",
+   "valley": {
+    "pos": -3.23095,
+    "depth": 0.38627,
+    "n_left": 1617,
+    "frac_left": 0.00294,
+    "peak_left": -3.5605,
+    "prominence": 992.40587,
+    "feature": "HV",
+    "w": [
+     0.0,
+     1.0
+    ]
+   },
+   "seed_px": 1370,
+   "recommended_water_source": "none (caution)",
+   "why": "no method 'works' (BA >= 0.95 and false alarms <= 5 %): seeded BA 0.717 / 0.00 %, fixed BA 0.500 / 0.00 %; best single HH threshold (oracle) BA 0.865",
+   "verdict_seeded": "partial",
+   "verdict_lake_mode": "fails",
+   "verdict_fixed": "fails",
+   "per_date": {
+    "2026-06-26": {
+     "a_seed": -3.58164,
+     "b_land": -0.79076,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.07764,
+     "hh_weak": 0.2951,
+     "hh_strong": 0.2229,
+     "hv_weak": 0.3425
+    },
+    "2026-07-08": {
+     "a_seed": -3.39049,
+     "b_land": -0.73376,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.0475,
+     "hh_weak": 0.3112,
+     "hh_strong": 0.2397,
+     "hv_weak": 0.3592
+    },
+    "2026-07-20": {
+     "a_seed": -3.43707,
+     "b_land": -0.58613,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.059,
+     "hh_weak": 0.3231,
+     "hh_strong": 0.2451,
+     "hv_weak": 0.3714
+    },
+    "2026-08-13": {
+     "a_seed": -3.50573,
+     "b_land": -0.42409,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.04945,
+     "hh_weak": 0.3354,
+     "hh_strong": 0.2497,
+     "hv_weak": 0.384
+    },
+    "2026-08-25": {
+     "a_seed": -3.69289,
+     "b_land": -0.33231,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.05507,
+     "hh_weak": 0.3338,
+     "hh_strong": 0.2414,
+     "hv_weak": 0.3824
+    },
+    "2026-09-06": {
+     "a_seed": -3.49442,
+     "b_land": -0.27332,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.0555,
+     "hh_weak": 0.3515,
+     "hh_strong": 0.2598,
+     "hv_weak": 0.4004
+    },
+    "2026-09-18": {
+     "a_seed": -3.51206,
+     "b_land": -0.35123,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.04957,
+     "hh_weak": 0.3424,
+     "hh_strong": 0.2537,
+     "hv_weak": 0.3912
+    },
+    "2026-09-30": {
+     "a_seed": -3.74699,
+     "b_land": -0.50178,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.07377,
+     "hh_weak": 0.3138,
+     "hh_strong": 0.2276,
+     "hv_weak": 0.3619
+    },
+    "2026-10-12": {
+     "a_seed": -3.86308,
+     "b_land": -0.60298,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.06572,
+     "hh_weak": 0.2976,
+     "hh_strong": 0.214,
+     "hv_weak": 0.3451
+    }
+   }
+  },
+  "sudd": {
+   "mode": "flood",
+   "seeds_only": false,
+   "has_water": true,
+   "feature": "HH",
+   "valley": {
+    "pos": -2.8067,
+    "depth": 0.08188,
+    "n_left": 27022,
+    "frac_left": 0.0396,
+    "peak_left": -3.39185,
+    "prominence": 24809.35907,
+    "feature": "HH",
+    "w": [
+     1.0,
+     0.0
+    ]
+   },
+   "seed_px": 16560,
+   "recommended_water_source": "none (caution)",
+   "why": "no method 'works' (BA >= 0.95 and false alarms <= 5 %): seeded BA 0.966 / 6.40 %, fixed BA 0.966 / 5.73 %; best single HH threshold (oracle) BA 0.972",
+   "verdict_seeded": "fails",
+   "verdict_lake_mode": "works",
+   "verdict_fixed": "fails",
+   "per_date": {
+    "2026-06-20": {
+     "a_seed": -3.38639,
+     "b_land": -0.41475,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.00838,
+     "hh_weak": 0.1441,
+     "hh_strong": 0.0683,
+     "hv_weak": 0.1242
+    },
+    "2026-07-02": {
+     "a_seed": -3.37721,
+     "b_land": -0.33189,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.00683,
+     "hh_weak": 0.1543,
+     "hh_strong": 0.0725,
+     "hv_weak": 0.1337
+    },
+    "2026-07-14": {
+     "a_seed": -3.37863,
+     "b_land": -0.20762,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.00636,
+     "hh_weak": 0.1696,
+     "hh_strong": 0.0784,
+     "hv_weak": 0.1478
+    },
+    "2026-07-26": {
+     "a_seed": -3.38126,
+     "b_land": -0.37873,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.00645,
+     "hh_weak": 0.1485,
+     "hh_strong": 0.0702,
+     "hv_weak": 0.1283
+    },
+    "2026-08-19": {
+     "a_seed": -3.38001,
+     "b_land": -0.21384,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.0061,
+     "hh_weak": 0.1687,
+     "hh_strong": 0.078,
+     "hv_weak": 0.147
+    },
+    "2026-08-31": {
+     "a_seed": -3.38193,
+     "b_land": -0.5076,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.00799,
+     "hh_weak": 0.1341,
+     "hh_strong": 0.0645,
+     "hv_weak": 0.1151
+    },
+    "2026-09-12": {
+     "a_seed": -3.36742,
+     "b_land": -0.36729,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.01334,
+     "hh_weak": 0.1508,
+     "hh_strong": 0.0715,
+     "hv_weak": 0.1304
+    },
+    "2026-10-18": {
+     "a_seed": -3.28675,
+     "b_land": -0.49995,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.05612,
+     "hh_weak": 0.1409,
+     "hh_strong": 0.07,
+     "hv_weak": 0.1213
+    }
+   }
+  },
+  "lake-chad": {
+   "mode": "lake",
+   "seeds_only": true,
+   "has_water": true,
+   "feature": "HV",
+   "valley": {
+    "pos": -1.00544,
+    "depth": 0.59022,
+    "n_left": 35138,
+    "frac_left": 0.05921,
+    "peak_left": -1.19761,
+    "prominence": 14399.00302,
+    "feature": "HV",
+    "w": [
+     0.0,
+     1.0
+    ]
+   },
+   "seed_px": 28065,
+   "recommended_water_source": "seeded",
+   "why": "seeded BA 0.991, false alarms 0.00 %",
+   "verdict_seeded": "works",
+   "verdict_lake_mode": "works",
+   "verdict_fixed": "fails",
+   "per_date": {
+    "2026-06-21": {
+     "a_seed": -1.06091,
+     "b_land": -0.35873,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.10046,
+     "hh_weak": 0.2274,
+     "hh_strong": 0.1886,
+     "hv_weak": 0.2415
+    },
+    "2026-07-03": {
+     "a_seed": -1.13645,
+     "b_land": -0.35452,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.10433,
+     "hh_weak": 0.2197,
+     "hh_strong": 0.1778,
+     "hv_weak": 0.2338
+    },
+    "2026-07-15": {
+     "a_seed": -1.15363,
+     "b_land": -0.34535,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.10493,
+     "hh_weak": 0.2196,
+     "hh_strong": 0.1764,
+     "hv_weak": 0.2337
+    },
+    "2026-07-27": {
+     "a_seed": -1.09776,
+     "b_land": -0.28681,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.12769,
+     "hh_weak": 0.2377,
+     "hh_strong": 0.1918,
+     "hv_weak": 0.2517
+    },
+    "2026-08-20": {
+     "a_seed": -1.46567,
+     "b_land": -0.20308,
+     "s_strong": 0.6214,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.20713,
+     "hh_weak": 0.2124,
+     "hh_strong": 0.2073,
+     "hv_weak": 0.2266
+    },
+    "2026-09-01": {
+     "a_seed": -1.30852,
+     "b_land": -0.2288,
+     "s_strong": 0.44906,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.14969,
+     "hh_weak": 0.225,
+     "hh_strong": 0.1683,
+     "hv_weak": 0.2391
+    },
+    "2026-09-13": {
+     "a_seed": -1.32954,
+     "b_land": -0.18932,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.1348,
+     "hh_weak": 0.2304,
+     "hh_strong": 0.1693,
+     "hv_weak": 0.2445
+    },
+    "2026-09-25": {
+     "a_seed": -1.24182,
+     "b_land": -0.21829,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.12176,
+     "hh_weak": 0.2348,
+     "hh_strong": 0.1785,
+     "hv_weak": 0.2488
+    },
+    "2026-10-07": {
+     "a_seed": -1.28994,
+     "b_land": -0.17948,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.14306,
+     "hh_weak": 0.237,
+     "hh_strong": 0.1761,
+     "hv_weak": 0.2511
+    },
+    "2026-10-19": {
+     "a_seed": -1.28292,
+     "b_land": -0.22726,
+     "s_strong": 0.49907,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.16636,
+     "hh_weak": 0.2282,
+     "hh_strong": 0.1861,
+     "hv_weak": 0.2423
+    }
+   }
+  },
+  "pantanal": {
+   "mode": "lake",
+   "seeds_only": true,
+   "has_water": true,
+   "feature": "HV",
+   "valley": {
+    "pos": -1.23916,
+    "depth": 0.62762,
+    "n_left": 4504,
+    "frac_left": 0.01077,
+    "peak_left": -1.36694,
+    "prominence": 1677.20976,
+    "feature": "HV",
+    "w": [
+     0.0,
+     1.0
+    ]
+   },
+   "seed_px": 3365,
+   "recommended_water_source": "seeded",
+   "why": "seeded BA 1.000, false alarms 0.06 %",
+   "verdict_seeded": "works",
+   "verdict_lake_mode": "works",
+   "verdict_fixed": "fails",
+   "per_date": {
+    "2026-07-17": {
+     "a_seed": -1.87283,
+     "b_land": -0.45567,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.12688,
+     "hh_weak": 0.3128,
+     "hh_strong": 0.2315,
+     "hv_weak": 0.2638
+    },
+    "2026-08-10": {
+     "a_seed": -1.33462,
+     "b_land": -0.40069,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.04057,
+     "hh_weak": 0.394,
+     "hh_strong": 0.3316,
+     "hv_weak": 0.3357
+    },
+    "2026-08-22": {
+     "a_seed": -1.32218,
+     "b_land": -0.38039,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.04614,
+     "hh_weak": 0.4004,
+     "hh_strong": 0.3371,
+     "hv_weak": 0.3415
+    },
+    "2026-09-03": {
+     "a_seed": -1.33675,
+     "b_land": -0.38481,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.04126,
+     "hh_weak": 0.3974,
+     "hh_strong": 0.3337,
+     "hv_weak": 0.3388
+    },
+    "2026-09-15": {
+     "a_seed": -1.33351,
+     "b_land": -0.36769,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.04398,
+     "hh_weak": 0.4019,
+     "hh_strong": 0.3369,
+     "hv_weak": 0.3428
+    },
+    "2026-09-27": {
+     "a_seed": -1.31635,
+     "b_land": -0.42149,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.04821,
+     "hh_weak": 0.3916,
+     "hh_strong": 0.3319,
+     "hv_weak": 0.3336
+    },
+    "2026-10-09": {
+     "a_seed": -1.33197,
+     "b_land": -0.39515,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.04542,
+     "hh_weak": 0.3957,
+     "hh_strong": 0.333,
+     "hv_weak": 0.3372
+    },
+    "2026-10-21": {
+     "a_seed": -1.30879,
+     "b_land": -0.36657,
+     "s_strong": 0.447,
+     "s_weak": 0.635,
+     "seed_spread_s": 0.03787,
+     "hh_weak": 0.4055,
+     "hh_strong": 0.3418,
+     "hv_weak": 0.3461
+    }
+   }
+  }
+ }
+}

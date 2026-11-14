@@ -65,8 +65,17 @@ if [[ $MODE == all ]]; then
 fi
 
 if [[ $MODE == all || $MODE == fetch ]]; then
-  rm -rf "$STAGE/out"; mkdir -p "$STAGE/out"
-  scp -q -r "${OPTS[@]}" "$SERVER:work/out/$JOB/." "$STAGE/out/"
+  # Copy only files that are missing or changed in size; skip files written in the last minute
+  # (a date still being extracted). The link is slow, so never copy a finished date twice.
+  mkdir -p "$STAGE/out"
+  rsh "cd ~/work/out/$JOB && find . -type f -mmin +1 -printf '%s\t%P\n'" > "$STAGE/remote.lst"
+  while IFS=$'\t' read -r size path; do
+    loc="$STAGE/out/$path"
+    if [[ -f $loc && $(stat -f %z "$loc" 2>/dev/null || stat -c %s "$loc") == "$size" ]]; then continue; fi
+    mkdir -p "$(dirname "$loc")"
+    echo "  fetching $path ($((size / 1024)) KB)"
+    scp -q "${OPTS[@]}" "$SERVER:work/out/$JOB/$path" "$loc.part" < /dev/null && mv "$loc.part" "$loc"
+  done < "$STAGE/remote.lst"
   scp -q "${OPTS[@]}" "$SERVER:work/logs/$JOB.log" "$STAGE/" || true
   for d in "$STAGE"/out/*/; do
     w=$(basename "$d")
