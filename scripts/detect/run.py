@@ -333,7 +333,7 @@ def run(area, source="auto", dev=None):
         {"id": "water", "label": "Water and flooded vegetation", "dated": True,
          "legend": cls_legend([(WATER, "Open water"), (FLOODED_VEG, "Possible water under vegetation")]
                               + ([(GOING_UNDER, "Going under: vegetation submerging, or part open water")] if "fv_state" in o else [])
-                              + [(WIND, "Usually water, not today (wind?)")])},
+                              + [(WIND, "Usually water, not today (rain or wind?)")])},
         {"id": "when", "label": "When it changed for good", "dated": False,
          "legend": cls_legend([(when_cols[k - 1], day_label(dates[k])) for k in range(1, T)])},
         {"id": "classes", "label": "Season classes", "dated": False, "legend": cls_legend(CLASS_ITEMS)},

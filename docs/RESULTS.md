@@ -1,0 +1,46 @@
+# Results at a glance
+
+NASA Space Apps 2026, "Dancing with the SARs". State of 14 November 2026, about 14:00 (Armenia time). Full method: [DETECTION.md](DETECTION.md). Design: [ARCHITECTURE.md](ARCHITECTURE.md).
+
+## What the project shows
+
+From ten free preview images of the new NASA-ISRO NISAR L-band radar (June to October 2026), we map open water, water under vegetation and lasting change for thirteen places, and we follow the 2026 Tonle Sap flood pass by pass. Every headline number below was checked against data our detector never used: 38 years of Landsat water maps, a NASA satellite altimeter, river gauges, weather stations and an elevation model.
+
+## Headline results
+
+| Claim | Number | Checked against | Read more |
+|---|---|---|---|
+| Our Tonle Sap open-water area rises and falls with the real lake level | Rank correlation **0.98** (Pearson 0.96) over the ten passes | NASA/USDA G-REALM lake height from the Sentinel-6 altimeter | [validation-2026.md](eda/validation-2026.md), claim 3 |
+| The water detector is right where the answer is known | Balanced accuracy **99.6 %** at Tonle Sap and Lake Sevan (99.98 % and 99.89 % for the fused map); 0.005 % false alarms on never-water land at Tonle Sap | Pixels that Landsat shows as always water or never water (1984–2021), on a strip of the map held out from all tuning | [scoreboard.md](eda/scoreboard.md) |
+| Lake Sevan's area is measured, not guessed | **1,242.5 km²** (mean of the calm dates, sub-pixel water fraction) against the published 1,242 km²; **1,235 km²** on every one of the ten dates with the time model, including the two rough-surface dates | Published area; 30 m Landsat shoreline | [subpixel.md](eda/subpixel.md), [gmm.md](eda/gmm.md) |
+| False "water" on dry mountain land was removed | Sevan: **143 → 39 km²** (terrain mask) **→ 9 km²** (fused map); Ararat Valley: **32 → 2.6 → 0.4 km²**; the graph method alone leaves 0 km² in both | Landsat: land more than 540 m from any water seen in 38 years | [scoreboard.md](eda/scoreboard.md), [terrain.md](eda/terrain.md), [graph.md](eda/graph.md) |
+| Water under vegetation is now a stable signal | Peak area moves at most **1.5×** when a threshold is changed (old rule **7.8×**); false alarms in Armenia, where there is no flooded forest, fell from 39 km² to at most 1.4 km²; 77 % of it lies inside the Landsat maximum water extent (old rule 40 %) | Threshold sweeps; Armenia as a negative control; Landsat extent | [floodveg.md](eda/floodveg.md) |
+| The radar saw the July rise of the lake, as water under vegetation | Water under vegetation grew from **1 to 213 to 462 km²** in July while the river gauge rose **2.76 m in 12 days** from 5 July | Mekong River Commission gauge at Prek Kdam; altimeter (+1.3 m from 2 to 12 July) | [validation-2026.md](eda/validation-2026.md), claim 3 |
+| The change map has a stated, measured false-alarm rate | **0.02 %** of held-out stable land flagged at Tonle Sap, 0 % at Sevan and Ararat (the older change-point method: 5.8 % at Tonle Sap); false-discovery rate controlled at 1 % | Stable land that was not used to build the test | [stats-change.md](eda/stats-change.md) |
+| The flood front can be dated, also through the 24-day outage, and there was no hidden surge | 309 km² flooded between the passes of 25 July and 18 August, at 12.9 km²/day, between the rates before (9.3) and after (13.6); hiding a real pass and predicting it gives an area error of **82 km²** against 161 km² for "nothing changed" | Leave-one-pass-out test on our own passes | [novel.md](eda/novel.md), A2–A3 |
+| The order of flooding is a rough height map, and each pixel's "dance" is one colour image | Flood order against the Copernicus elevation model: rank correlation 0.45 (0.25 without the model's flattened water); against 38-year Landsat water frequency: −0.47. The choreography map's step date agrees with our change-point date (rank correlation 0.95) | Elevation model and Landsat record, neither used to build the map | [novel.md](eda/novel.md), A4 and B |
+| The method runs anywhere NISAR flies | **13 places** in the app, in Asia, Africa and South America (Armenia sits on the Europe–Asia boundary); 2 more were tried and dropped because the water layer would mislead | Every pass checked automatically (134 passes, 15 areas) | [areas.md](research/areas.md), [qc.md](eda/qc.md) |
+
+## What independent data corrected
+
+* **The Tonle Sap flood did not "arrive late".** We had said that open water barely grew until late July and that the biggest rise came between 11 and 23 September. The gauge and the altimeter show the lake rising sharply from early July and peaking on 24–29 September, on time or early. Our open-water layer kept growing until 17 October while the lake was already falling. The early rise is in our data, but as water under vegetation, not as open water.
+* **The two "windy" Sevan dates were not simply wind.** 31 August followed a rain night (29 mm in 48 hours at the shore station); 12 September was dry with a steady 2–4 m/s breeze. No source shows wind above about 3 m/s at pass time on either date. We now call these "rough-surface dates".
+* **Rain did not cause the odd HV channel on 6 October in Armenia** (at most 1 mm in the 48 hours before the pass). An instrument or processing effect is the more likely cause; our automatic quality control now flags that channel and leaves it out of change detection.
+
+## What we tried that did not help
+
+| Tried | Result |
+|---|---|
+| A large ImageNet-pretrained network (EfficientNet-B4) as an autoencoder | Water agreement IoU 0.21, against 0.65 for a plain Gaussian mixture on the two raw radar channels ([deep-ae.md](eda/deep-ae.md)) |
+| Microsoft's global Sentinel-1 flood network, without retraining | Same as its own threshold rule (IoU 0.390 vs 0.389) ([hf-models.md](research/hf-models.md)) |
+| The only open L-band pretrained model (ALOS-2), with Lake Sevan held out | Balanced accuracy 0.91 at Sevan, below the math detector's 0.99 (random weights: 0.67) ([hf-models.md](research/hf-models.md), §6b) |
+| A transformer to fill the missing outage pass | For a truly unseen pass, about 2 % better than a straight line in time on pixel values, slightly worse on the shoreline (IoU 0.40 vs 0.42) ([ttransformer.md](eda/ttransformer.md)) |
+| Spectral clustering of the pixel graph | Splits the image by geography, not water: the normalised cut overlaps Sevan's water with IoU 0.28 ([graph.md](eda/graph.md)) |
+
+## Limits
+
+* **Inputs are uncalibrated previews**: 8-bit display brightness at about 180 m per pixel, not calibrated backscatter. Calibrated data needs a NASA Earthdata login.
+* **The size of the Tonle Sap flood is uncertain.** On 17 October the detector maps 3,837 km² of open water, which is best read as a lower bound. Two studies bracket it differently. (1) Not knowing the right threshold: about **3,500 km², with a 5–95 % range of about 2,000–4,800 km²** ([stats-change.md](eda/stats-change.md)); this is the spread over every threshold that still fits Lake Sevan. (2) Tuning against the Landsat record: 3,837 km² is a **lower bound**, and **3,800–5,900 km²** is plausible ([tuning.md](eda/tuning.md)); looser thresholds stay inside the historical flood zone and rank the floodplain better. The fused map gives 3,120 km² because its time model resists late flooding. Quote a range, never one number.
+* **No 2026 ground truth for the floodplain.** Landsat shows where water has been (1984–2021), not where it was on a given day of 2026; the altimeter checks the timing, not the extent.
+* **Water under vegetation**: about 1,600–2,500 km² at the 30 August peak, depending on one context setting; not validated, because no reference map exists.
+* **One season** of one year, ten passes, with a 24-day outage (27 July – 10 August).
