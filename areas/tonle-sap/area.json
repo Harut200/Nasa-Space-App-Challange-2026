@@ -1,0 +1,9 @@
+{
+  "id": "tonle-sap",
+  "name": "Tonle Sap, Cambodia",
+  "bbox": [103.4, 11.8, 105.2, 13.6],
+  "track": 83,
+  "frame": 8,
+  "direction": "ASCENDING",
+  "pixel_m": 80
+}
