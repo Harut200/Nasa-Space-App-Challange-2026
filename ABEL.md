@@ -1,5 +1,49 @@
 # Abel — your tasks
 
+## Update, Saturday 14 Nov, 22:00 — what changed since midday, and what is asked of you now
+
+Deadline unchanged: **Sunday 15 November, 23:59**. Read this section first. Everything below it is history; the parts that no longer hold are listed here.
+
+### What is superseded in the sections below
+
+| Older section | Status |
+|---|---|
+| "Update, Saturday 12:50" (reply to your review, numbers for the demo) | History. The current numbers are in [docs/RESULTS.md](docs/RESULTS.md). The app now shows **fusion v2**: Tonle Sap 17 Oct 5,046 km² (range 4,196–6,051), not "about 3,500 km² (2,000–4,800)" |
+| "Where things stand", three lines of data | Out of date: there are 19 places now (15 water, 4 earthquakes), and Ararat's open water is about 0.3 km², not "0.5 to 3.8" |
+| Tasks 1 to 4 of Saturday | 1 and 4 done or taken over; 2 answered by [validation-2026.md](docs/eda/validation-2026.md); 3 (story text) is replaced by the review below |
+| Tasks 5 and 6 (demo, project page) | Still open; see "Asked of you now" |
+
+### What changed that matters to you
+
+1. **Story text was corrected against the current numbers** (commit "Correct story text that contradicted the current maps", 18:35). Please review each change; they are yours to overrule.
+
+| Place | What changed, and why |
+|---|---|
+| Ararat | Open water "about 0.5 to 3.8 km²" became "well under one square kilometre (about 0.3) on every pass" (the fused map, `src/app/public/data/ararat/timeseries.json`). The 6 October cross-polarised channel is now "probably an instrument or processing effect rather than rain" (rain was ruled out, [validation-2026.md](docs/eda/validation-2026.md)). Coherence is mentioned: 43–44 % of the valley floor incoherent in June–July against 22–25 % from mid-September ([insar.md](docs/eda/insar.md)); "not yet a layer in this app". The ponds are "mostly too small for our 180 m pixels" |
+| Bangladesh haor | "Wind roughens it" became "looks rougher, possibly from wind" (no wind data for that place). "Flooded vegetation" became "possible water under vegetation" |
+| Inner Niger | Added the mapped open-water growth (about 1,200 km² on 24 June to about 3,100 km² on 10 October) in place of "biggest jump between 28 September and 10 October"; "possible water under vegetation" |
+| Mekong delta | Added the mapped open water (about 150 km² in June to about 2,000 km² by 15 October); "part of the flood shows only as got darker" (was "most of") |
+| Nile delta | "Our open-water layer is empty" became "shows only about 210 km², unchanged on every date" |
+| Okavango | "Scattered pools" became "finds no open water here"; "rarely calls it open water" became "does not call it open water" |
+| Poyang | Added the mapped open-water area (about 3,300 km² in early July, about 3,200 km² in October); "possible water under vegetation" |
+| Sevan | "Roughly 1,235 km² … time-series model" became "about 1,240 km² of open water on all ten passes", the number the app shows (published 1,242) |
+| Sindh–Indus | Added that the thin Indus channel is not picked up at this resolution |
+| Sudd | Added the mapped open water (peak about 2,000 km² on 19 August, about 1,900 km² on 18 October) and "the weakest of our open-water maps" |
+
+2. **New stories to review: Pantanal and Lake Chad** (`areas/pantanal/story.json`, `areas/lake-chad/story.json`). They were first dropped and came back after the self-calibrating detector rescued them (balanced accuracy 50 % to 99 %, [crossscene.md](docs/eda/crossscene.md)). Check the plain-language wording and the one sourced number per paragraph.
+3. **Earthquake stories to review** (`areas/tibet-m70-2026`, `venezuela-m72-2026`, `panama-m77-2026`, `kumamoto-m68-2026`, `story.json` in each). Check them against the "do not claim" list in [docs/eda/quake.md](docs/eda/quake.md): no damage, casualties or effect on people; no fault plane, slip or rupture length; no vertical or horizontal motion except Venezuela's approximate east/up split; not validated against GNSS or other satellites; sign convention unconfirmed; products PROVISIONAL. Numbers: Tibet M7.0 127 cm, Panama M7.7 133 / 85 cm, Venezuela M7.2 51 / 55 cm, Kumamoto M6.8 38 cm. Four earthquakes not detected (Flores, Mexico, Sanriku, Qinghai) are reported as such.
+4. **Pitch material exists**: [docs/pitch/FACTS.md](docs/pitch/FACTS.md) (every claim with its source, say / do not say, twelve likely judge questions), [docs/pitch/deck-audit.md](docs/pitch/deck-audit.md) (the deck, slide by slide: correct, outdated, unsupported), [docs/pitch/demo-script.md](docs/pitch/demo-script.md) (30 s and 3 min shots, now with a Tibet shot). The deck predates fusion v2, the calibrated run and the earthquakes.
+5. **Two app designs** exist; the team is choosing one tonight ([docs/pitch/app-choice.md](docs/pitch/app-choice.md)). Story text appears differently in each (a side sheet in A, six scenes in B), so keep paragraphs short.
+
+### Asked of you now, in order
+
+1. Review the corrected stories (table above) and the Pantanal and Lake Chad stories. Edit `areas/*/story.json` directly and push, or send the text to Harutyun.
+2. Review the four earthquake stories against the do-not-claim list.
+3. Read `FACTS.md` and the deck audit; tell Harutyun which deck lines to change. Do not reintroduce "arrived late", "wind" for Sevan, or "four continents".
+4. Demo (30 s video or seven slides) and project-page text (summary, NASA data list including NISAR L2 GUNW for the earthquakes, other sources including the USGS Earthquake Hazards Program, AI-use statement) by tomorrow; see the older tasks 5 and 6 below.
+
+---
+
 Written Saturday 14 November, 11:20 (Yerevan). Deadline: **Sunday 15 November, 23:59**. We aim to submit by 21:00.
 
 You and Harutyun own detection: turning radar images into findings, and making sure what we say is true. Harutyun has the code side running. Your side is the science, the checking, and the words. No coding is needed for any task below.

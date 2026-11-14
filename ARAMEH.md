@@ -1,5 +1,61 @@
 # Arameh — app notes and requests
 
+## Update, Saturday 14 Nov, 22:00 — two finished app designs to review and choose from tonight
+
+Deadline unchanged: **Sunday 15 November, 23:59**. Read this section first. The notes below were written at 11:55 and many of them are overtaken; the list of what is superseded is here.
+
+### What is superseded in the sections below
+
+| Older section | Status |
+|---|---|
+| 1. "Review pull request 3" (`detection` → `main`, draft) | Still the route to `main`, but the app code in it has been rebuilt: see designs A and B below. Merge only after the choice |
+| "What was changed in your files" (`App.jsx`, `Charts.jsx`, `MapView.jsx`, `index.css`) | History. `src/app/` was rebuilt (globe, glass panels); `src/app2/` is a second design |
+| 2. "What the data folder holds" (`tonle-sap`, `sevan`, `ararat`, `demo`) | Out of date: 19 places; `demo` is gone. Note about `test_export.py` rewriting `demo` still applies in a different form: a full `pytest` run **re-creates the `demo` place** in `src/app/public/data`; remove it |
+| 3. Hand-test list | Redo it for the design that is chosen (keyboard, compare drag, offline, phone) |
+| 4.1 "Remove `demo`" | Done in the data; keep it out. About dialog with AI-use statement and credits: still must |
+| 4.2 Ranges, rounded numbers, chart over time | `lo`/`hi` exist in the data (see below); design B draws the chart with the range band; check the rounding in the chosen design |
+| 4.3 New layers, 4.4 More places | Done in part: 15 water places and 4 earthquake places are in `index.json` |
+| 5. "False water around Sevan and Ararat" | Fixed by the terrain mask and fusion v2 |
+
+### 1. Two finished designs: review and choose tonight
+
+Same data, 19 places (15 water, 4 earthquakes), both tested. The brief is [docs/pitch/app-choice.md](docs/pitch/app-choice.md) (it still says 15 places). The team chooses; no choice has been made in this note.
+
+```bash
+git fetch && git checkout eda && git pull
+cd src/app  && npm install && npm run dev -- --port 5173                       # A: natural map
+# second terminal:
+cd src/app2 && ln -s ../app/node_modules node_modules && npx vite --port 5174   # B: story mode
+```
+
+Open `http://localhost:5173/Nasa-Space-App-Challange-2026/` and `http://localhost:5174/Nasa-Space-App-Challange-2026/`. A localhost preview dies when the dev server restarts; start it again.
+
+- **A (`src/app/`)**: satellite-imagery globe, glass panels, headline number, drag-to-compare, before/after bar and reveal for earthquakes. Try `#/tonle-sap?layer=water&date=2026-10-17&compare&split=50` and `#/tibet-m70-2026?layer=fringes`.
+- **B (`src/app2/`)**: story mode, six scenes per place with arrow keys, chart timeline with the range band and the outage gap, gallery, "How sure are we?" sheet. Try `#/tonle-sap?mode=story&scene=1` and `#/tibet-m70-2026?mode=story&scene=2`. Keys: arrows, Space, `M`, `C`, `P`, `?`.
+- Please click through both and tell Harutyun what breaks. B was not tried by hand before this evening.
+
+### 2. New data fields in `manifest.json` and `timeseries.json`
+
+- `kind: "event"` marks an earthquake place. `event{type, magnitude, time, depth_km, lngLat, place, mechanism, usgs_id, radius_km, views[]}`; each view has `id`, `label`, `track`, `before`, `after`, `p2p_cm` and `control_p2p_cm`. Earthquake places have one date and `dated: false` layers (`los_cm` or `los_asc_cm` and `los_desc_cm`, `fringes`, `coherence`; Venezuela also `east_cm` and `up_cm`, approximate). Hide the series panel and date compare for them.
+- `quality`: per-date quality-control flags for water places, `{date: {quality: "warn"|"fail", quality_note, channels}}` (empty for Tibet).
+- Facts in `timeseries.json` now carry `lo` and `hi` arrays next to `values` (the range); render them where present.
+- `src/app/public/data/index.json` lists 19 ids under `areas`.
+
+### 3. Do not ship
+
+- The `frontend` branch's **invented weather events and planets switch** (`src/app/src/planets.js`, `regions.js` there). They are not our data.
+- Any live URL in text before the site exists: **nothing is deployed**. `.github/workflows/deploy.yml` currently builds **`src/app`** only; if design B is chosen, point the workflow at `src/app2` (and its own `package-lock.json`).
+- Earthquake wording beyond [docs/eda/quake.md](docs/eda/quake.md): no damage, casualties, fault plane or slip; products PROVISIONAL; sign unconfirmed.
+
+### 4. Asked of you now
+
+1. Click through A and B, decide with the team, tell Harutyun what breaks.
+2. In the chosen design: About dialog with the AI-use statement and credits (NISAR via ASF DAAC, USGS Earthquake Hazards Program, JRC Global Surface Water, Copernicus DEM, OpenFreeMap); phone layout at 390 px and a 1280 × 720 window.
+3. Repository Settings, Pages, Source: GitHub Actions, then merge `detection` into `main`, then check the live URL on a phone.
+4. In progress (Harutyun): the calibrated Tonle Sap result as its own place (`tonle-sap-cal`) and Ararat coherence layers. They will arrive as ordinary places and layers in the same format; nothing for you to do until they land.
+
+---
+
 Written Saturday 14 November, 11:55 (Yerevan). Deadline: **Sunday 15 November, 23:59**; we aim to submit by 21:00.
 
 This collects everything about the web app that came out of the detection work today: what was changed in your code, what the data now contains, what is coming, and what we recommend. Nothing here is merged to `main` yet — it is all in pull request 3.

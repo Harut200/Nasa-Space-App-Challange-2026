@@ -1,45 +1,48 @@
-# Handoff — 14 November 2026, about 18:50 (Armenia time)
+# Handoff — 14 November 2026, about 22:00 (Armenia time)
 
-Replaces the first-session handoff. Results: [docs/RESULTS.md](docs/RESULTS.md). Design: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md). Full method: [docs/DETECTION.md](docs/DETECTION.md). Contracts between stages: [plan/00-contracts.md](plan/00-contracts.md).
+Replaces the 18:50 handoff. Results: [docs/RESULTS.md](docs/RESULTS.md). Design: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md). Method: [docs/DETECTION.md](docs/DETECTION.md). Earthquakes: [docs/eda/quake.md](docs/eda/quake.md). File formats: [plan/00-contracts.md](plan/00-contracts.md).
 
-## Done
+## Current state
 
-- **Pipeline**: ingest, detect, export, web app, 15 places (`areas/*`, `src/app/public/data/index.json`). All 15 use `"water_source": "fusion2"`; `scripts/detect/run.py` reads `data/processed/<area>/fusion2/products.pt` and falls back to the math detector if it is missing.
-- **Fusion v2** (water source): Tonle Sap 17 Oct 5,046 km² (range 4,196–6,051) against an independent estimate of 5,421 km² (4,198–7,222); inside the range on 7 of 10 passes. Limits: threshold fitted to the same estimate; 76 % of its water inside the independent map. [fusion2.md](docs/eda/fusion2.md), [hydro.md](docs/eda/hydro.md).
-- **Evaluated, not shipped**: seeded detector (used inside fusion v2), learned despeckling, physics autoencoder, network on independent labels, interferometry. Verdicts in RESULTS.md.
-- **Calibrated data**: extraction through a small remote server (`scripts/ingest/remote_extract.py`, `remote_run.sh`, [calibrated-data.md](docs/research/calibrated-data.md)). Ten Tonle Sap dates (80 m) analysed; Sevan and Ararat have 8 of 10 dates (30 m). Detector done: 17 Oct 5,625 km², 5.9 % mean deviation from the independent estimate. Same thresholds give 0 km² at Sevan. Not in the app. [calibrated.md](docs/eda/calibrated.md).
-- **Docs** updated this evening: README, RESULTS, ARCHITECTURE, DETECTION.
-- **Pitch files** exist in `docs/pitch/` (deck as .pptx and .pdf, fact sheet, deck audit, demo script).
+- **Water**: 15 places, all `"water_source": "fusion2"`. Tonle Sap 17 Oct 5,046 km² (range 4,196–6,051) against an independent 5,421 km² (4,198–7,222); inside the range on 7 of 10 passes. Limits: threshold fitted to the same estimate; 76 % of its water inside the independent map ([fusion2.md](docs/eda/fusion2.md)).
+- **Earthquakes**: eight checked against NISAR L2 GUNW pairs; four clearly seen (Tibet M7.0 127 cm, Panama M7.7 133 / 85 cm, Venezuela M7.2 51 / 55 cm, Kumamoto M6.8 38 cm), four not detected (Flores, Mexico, Sanriku, Qinghai). No independent check; sign unconfirmed; PROVISIONAL products. Code `scripts/detect/quake.py`, tests `tests/test_quake.py`.
+- **App**: two finished, tested designs on the same data, 19 places (15 water, 4 earthquakes): `src/app/` (globe, compare, reveal) and `src/app2/` (story mode). Brief for choosing: [docs/pitch/app-choice.md](docs/pitch/app-choice.md) (it still says 15 places). The `demo` place is gone from the app data.
+- **Stories**: Pantanal and Lake Chad added; story text for ten places corrected against current numbers (Ararat open water is about 0.3 km²).
+- **Pitch files** in `docs/pitch/`: deck (.pptx, .pdf), `FACTS.md`, `deck-audit.md`, `demo-script.md`. The deck predates fusion v2, the calibrated run and the earthquakes.
+- **Server access**: scripts read `SERVER` and `SSH_KEY` from the environment; no defaults remain.
 
-## Running or in progress
+## In progress at 22:00
 
-- **App redesign** (`src/app/`, `src/app2/`): uncommitted work in the tree; the `demo` area is being removed (its files show as deleted).
-- Nothing heavy is meant to be running. Check with `ps` before starting a new heavy job; one at a time (see the concurrency note in the team memory: about four heavy agents at most).
+- Calibrated Tonle Sap as its own place in the app (`tonle-sap-cal`).
+- Ararat Valley coherence layers in the app.
+- Neither is finished; do not quote numbers for them beyond [calibrated.md](docs/eda/calibrated.md) and [insar.md](docs/eda/insar.md).
 
 ## Open, in order
 
-1. Finish and check the redesigned app at desktop and phone width; confirm every place loads and the range display shows.
-2. Commit the app work. Commit the doc updates.
-3. **Merge `eda` to `main`.** Local `main` is 14 commits behind `origin/main`; the app branches (`backend`, `frontend`) are on `origin` but not merged. Resolve by pull request, not by force.
-4. **GitHub Pages**: repository owner sets Settings, Pages, Source, GitHub Actions. `.github/workflows/deploy.yml` deploys on a push to `main`. Nothing is deployed today; no live URL exists.
-5. **Demo video and project page** not started. Deck draft in `docs/pitch/`; check its numbers against RESULTS.md (the deck was drafted before fusion v2 and the calibrated result).
-6. Wire the calibrated detector into `run.py` only if time allows. The code changes are in [calibrated.md](docs/eda/calibrated.md), section 11. Armenia needs its own thresholds first.
-7. Finish the Sevan and Ararat calibrated dates and check the 6 October HV anomaly there.
+1. **Choose the app design** tonight (A or B); then fix what a click-through finds. Design B has not been tried by hand.
+2. Commit the app, data and doc work. Several files are uncommitted.
+3. **Merge `detection` into `main`** by pull request, not by force. Local `main` is behind `origin/main`.
+4. **Turn on GitHub Pages** (Settings, Pages, Source: GitHub Actions). `.github/workflows/deploy.yml` builds `src/app` only; change it if design B is chosen. Nothing is deployed; no live URL exists.
+5. **Demo video** (30 s or less) and **project page** not started. Script: [docs/pitch/demo-script.md](docs/pitch/demo-script.md).
+6. Update the deck: add the earthquakes, the 19 places and the fusion-v2 numbers ([deck-audit.md](docs/pitch/deck-audit.md)).
+7. Submit before 23:59 on 15 Nov.
 
-## Know before you change anything
+## Traps
 
-- Every number in the docs comes from a file in the repo; keep it so. Do not say we beat NASA or any model we did not test.
-- Places: Asia, Africa and South America (Armenia is on the Europe–Asia boundary). Do not write "four continents".
-- Do not write a server host name, user name, key path or token into any document. `scripts/ingest/remote_run.sh` has defaults for them; set `SERVER` and `SSH_KEY` in the environment and consider removing the defaults before the repository is shown to anyone.
-- Previews are uncalibrated 180 m images; the calibration of the real files is PROVISIONAL.
+- A full `pytest` run re-creates the `demo` place in `src/app/public/data` (and its `index.json` entry). Remove it again before building.
+- Previews on localhost die when the dev server restarts; restart them and reload.
+- The `frontend` branch has invented weather events and a planets switch. They must not ship.
+- Do not write a host name, user name, IP address or key path in any document.
+- Every number in the docs comes from a file in the repo. Do not say we beat NASA or any model we did not test. Say "Asia, Africa and South America", not "four continents".
+- Earthquake claims: see the "do not claim" list in [quake.md](docs/eda/quake.md): no damage or casualties, no fault plane or slip, no vertical or horizontal motion except Venezuela's approximate split, no validation against other data.
 - No radar passes from 27 July to 10 August (instrument outage).
-- Contradictions found between notes are listed at the end of [DETECTION.md](docs/DETECTION.md) ("Notes on sources").
+- Contradictions between notes are listed at the end of [DETECTION.md](docs/DETECTION.md) ("Notes on sources").
 
 ## Run
 
 ```bash
-cd src/app && npm install && npm run dev                       # app, Node 20.19+
-.venv/bin/python -m pytest tests -q                            # checks (not run for this handoff)
-.venv/bin/python -m scripts.detect.fusion2 <area>              # rebuild one place's water source
-.venv/bin/python scripts/detect/run.py <area> && .venv/bin/python scripts/ingest/export.py <area>
+cd src/app  && npm install && npm run dev -- --port 5173                         # design A
+cd src/app2 && ln -s ../app/node_modules node_modules && npx vite --port 5174    # design B
+.venv/bin/python -m pytest tests -q                  # re-creates the demo place, see Traps
+.venv/bin/python -m scripts.detect.quake list        # earthquake events
 ```

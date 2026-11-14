@@ -15,7 +15,7 @@ Open `http://localhost:5173/Nasa-Space-App-Challange-2026/` and `http://localhos
 
 ## A — Natural map (`src/app`)
 
-Real satellite globe (NASA Blue Marble, Sentinel-2 detail). Dots are the 15 places. Click, fly in, press Play: the flood spreads over real terrain. Floating glass panels. Big number that follows the date. Drag-to-compare two dates.
+Real satellite globe (NASA Blue Marble, Sentinel-2 detail). Dots are the 19 places. Click, fly in, press Play: the flood spreads over real terrain. Floating glass panels. Big number that follows the date. Drag-to-compare two dates.
 
 - Strong: the first five seconds; anyone understands it without a word; compare view is the best single image we have.
 - Weak: story text is tucked in a side sheet; timeline is plain dots.

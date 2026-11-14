@@ -1,6 +1,6 @@
 # Detection architecture
 
-Updated 14 November 2026, about 18:50 (Armenia time); first drafted the same day at 11:50, before most of the modules had results, and revised at 14:00 and in the evening (fusion v2 as the shipped water detector, 15 places, the calibrated-data path). This is the design that ties the separate detection modules into one system, and what happened when each module was built and measured. A part entered the fused system only if it passed an admission rule (section 5). Parts marked *evaluated only* were built and measured but are not in the app.
+Updated 14 November 2026, about 22:00 (Armenia time); first drafted the same day at 11:50, before most of the modules had results, and revised at 14:00 and in the evening (fusion v2 as the shipped water detector, 15 water places, the calibrated-data path) and at 22:00 (the earthquake path, four event places, two app designs: section 8). This is the design that ties the separate detection modules into one system, and what happened when each module was built and measured. A part entered the fused system only if it passed an admission rule (section 5). Parts marked *evaluated only* were built and measured but are not in the app.
 
 Formulas and every number in detail: [DETECTION.md](DETECTION.md). One-page summary: [RESULTS.md](RESULTS.md).
 
@@ -131,7 +131,7 @@ Output: $\gamma_t(i)$, a water probability per pixel and date, in `data/processe
 
 | Check | Independent of the detector? | Result |
 |---|---|---|
-| Synthetic scenes with known answers | yes | 22 test files, 129 test functions under [`tests/`](../tests/) ([DETECTION.md, section 7.1](DETECTION.md)) |
+| Synthetic scenes with known answers | yes | 28 test files, 186 test functions under [`tests/`](../tests/), counted by `grep` at 22:00 ([DETECTION.md, section 7.1](DETECTION.md)) |
 | Lake Sevan published area, 1,242 km² | partly: the water threshold was first tuned on it | sub-pixel 1,242.5 km²; HMM 1,235.3 km² every date |
 | 38 years of Landsat water maps | yes | permanent-water IoU 0.94 (Sevan), 0.84 (Tonle Sap); the source of every anchor below |
 | Tune on one strip, test on an untouched strip and another country | yes, but the TEST strip was looked at three times by the tuning | tuned thresholds rejected by the gate; old thresholds kept; transfer works from Sevan to Tonle Sap, not the other way |
@@ -210,7 +210,7 @@ Modules that failed stay in the repository as documented experiments. Reporting 
 | EfficientNet-B4 autoencoder, temporal transformer | large pretrained encoder; masked-date transformer | did not beat a mixture / a straight line in time | no |
 | Open pretrained radar models | survey; Microsoft ai4g flood network; ALOS-2 L-band model with a place hold-out | L-band pretraining transfers (0.91 vs 0.67 random) but stays below the physics rules (0.99) | no |
 | Independent 2026 validation | altimeter, gauges, reanalysis, weather stations | area follows level (ρ 0.98); two claims corrected | wording of the stories |
-| More places | `add_area.py`, one command | 15 places in the app, in Asia, Africa and South America (Armenia sits on the Europe–Asia boundary); Lake Chad and Pantanal, first dropped, returned after the seeded detector; the synthetic `demo` area is being removed | **yes** |
+| More places | `add_area.py`, one command | 15 places in the app, in Asia, Africa and South America (Armenia sits on the Europe–Asia boundary); Lake Chad and Pantanal, first dropped, returned after the seeded detector; the synthetic `demo` place is gone from the app data (a full `pytest` run re-creates it; remove it again) | **yes** |
 | Learned despeckling | three kinds of small network trained on the images themselves | no detection number improved beyond the ±0.003 test noise; current filter stays ([`despeckle.md`](eda/despeckle.md)) | no (evaluated only) |
 | Physics autoencoder | encoder plus a fixed radar-mixing decoder | does not beat the sub-pixel method ([`unmix.md`](eda/unmix.md)) | no (evaluated only) |
 | Network on independent labels | U-Net trained on the Landsat record, tested on unseen places | about equal to the math detector; below fusion v2 ([`supervised.md`](eda/supervised.md)) | no; cross-check only |
@@ -229,3 +229,48 @@ Judges score impact, creativity, validity, relevance and presentation. A longer 
 - **A clear story.** One sentence ("NISAR saw the Tonle Sap rise first under the trees, then on open water, and our area follows NASA's altimeter at 0.98"), one animation (the arrival-day map), one number.
 
 **Still missing**: the work is on the `eda` branch and not yet merged; the app is not yet deployed and its redesign is in progress; the demo video and project page are not started (a pitch deck file exists under `docs/pitch/`); the calibrated detector is not connected to the app and does not work in Armenia without its own thresholds. The largest remaining risk is not an algorithm.
+
+## 8. Earthquakes, and the two app designs (added about 22:00)
+
+### 8.1 The event path
+
+A separate path, parallel to the water path, answers "did the ground move?" with interferometry (phase) instead of brightness. Method and formulas: [DETECTION.md, section 3.23](DETECTION.md). Every number: [`quake.md`](eda/quake.md).
+
+```
+USGS catalogue  →  ASF search for NISAR L2 GUNW pairs  →  remote window extraction  →  local processing  →  event place in the app
+(events.json)      (pair before and pair across        (small server reads a window   (scripts/detect/quake.py:      (manifest "kind": "event",
+                    the event, same track and frame)    of each remote file; 2-11 MB    LOS cm, far-field ramp         one static pair, dated: false)
+                                                        come back per pair)             removed, fringes, control)
+```
+
+1. **Catalogue**: USGS events (location, magnitude, mechanism), 50 candidates, of which eight are on land or within about 50 km of land with a spanning pair (`docs/eda/quake/catalogue.json`, `events.json`).
+2. **Pair search**: for each event, one pair across the event day and a control pair from before it on the same track and frame, per look direction.
+3. **Remote extraction**: the same small-server method as the calibrated water data: it opens the large remote GUNW file over the network, reads the window, and sends back a reduced file. Scripts read `SERVER` and `SSH_KEY` from the environment; the repository stores no address.
+4. **Processing on the laptop**: `quake.py run EVENT` writes the numbers (`results.json`) and figures; `quake.py export EVENT` writes the app layers.
+5. **App**: each clear event is one place with `"kind": "event"`, an `event{type, magnitude, time, depth_km, lngLat, place, mechanism, usgs_id, radius_km, views[]}` record in `manifest.json`, one date, and layers `los_cm` (or `los_asc_cm` and `los_desc_cm`), `fringes` and `coherence` (Venezuela also `east_cm` and `up_cm`, labelled approximate). Four events: Tibet, Venezuela, Panama, Kumamoto. The four not detected have no place.
+
+Manifests also carry, for water places, per-date `quality` flags from the quality-control step and `lo`/`hi` arrays next to the area values in `timeseries.json` (the range).
+
+### 8.2 Two app designs on the same data
+
+Both read `src/app/public/data/` (19 places: 15 of water, 4 of earthquakes). No design is chosen in this document; the brief for the choice is [`docs/pitch/app-choice.md`](pitch/app-choice.md). Neither is deployed; the deploy workflow builds `src/app`.
+
+| | Design A: `src/app/` | Design B: `src/app2/` |
+|---|---|---|
+| Idea | A real-imagery globe; click a place, fly in, press Play | Story mode: scenes walked with the arrow keys |
+| Main parts | Satellite-imagery globe, glass panels, headline number, drag-to-compare dates, reveal against satellite imagery for events, before/after bar | Opening with the flood playing, six scenes per place, chart timeline with the range and the outage as a gap, gallery with sparklines, "How sure are we?" sheet |
+| Deep link, water | `#/tonle-sap?layer=water&date=2026-10-17&compare&split=50` | `#/tonle-sap?mode=story&scene=1` |
+| Deep link, Tibet | `#/tibet-m70-2026?layer=fringes` | `#/tibet-m70-2026?mode=story&scene=2` |
+
+### 8.3 Shipped or only evaluated (earthquake and app additions)
+
+| Part | Verdict | In the app |
+|---|---|---|
+| Earthquake interferometry, four clear events | control pairs flat (5–21 cm) against 38–133 cm; no independent check | **yes**, four event places |
+| Earthquake interferometry, four not detected | offshore, deep, small or decorrelated | no (documented in `quake.md`) |
+| Two-look east/up split (Venezuela) | approximate; north neglected; pairs not simultaneous | **yes**, labelled approximate |
+| East/up split for Panama | computed as a check, not trustworthy | no |
+| Design A (`src/app/`) | finished, tested | yes, if chosen; the deploy workflow builds it today |
+| Design B (`src/app2/`) | finished, tested | yes, if chosen |
+| Calibrated Tonle Sap as its own place (`tonle-sap-cal`) | in progress at 22:00 | not yet |
+| Ararat coherence layers | in progress at 22:00 | not yet |

@@ -1,6 +1,6 @@
 # Radar change detection: design and results
 
-NASA Space Apps 2026, challenge "Dancing with the SARs". Status as of 14 November 2026, about 18:45 (Armenia time). The body was first written about 14:00; sections 3.18–3.22, 5.9–5.11 and the lines that name the shipped water detector were added or corrected in the evening. The one-page summary for judges is [RESULTS.md](RESULTS.md); the design that ties the modules together is [ARCHITECTURE.md](ARCHITECTURE.md).
+NASA Space Apps 2026, challenge "Dancing with the SARs". Status as of 14 November 2026, about 22:00 (Armenia time). The body was first written about 14:00; sections 3.18–3.22, 5.9–5.11 and the lines that name the shipped water detector were added or corrected in the evening; section 3.23 (earthquakes) was added at about 22:00. The one-page summary for judges is [RESULTS.md](RESULTS.md); the design that ties the modules together is [ARCHITECTURE.md](ARCHITECTURE.md).
 
 This document describes everything the detection side of the project does, from the downloaded radar images to the layers the web app shows, with every formula as the code computes it and every number taken from a file in this repository. Where a number comes from a file, the file is named. Where the code and older notes disagree, the code was followed; where two notes disagree, the more recent or more carefully measured one is used (both lists are at the end, in [Notes on sources](#notes-on-sources)).
 
@@ -8,7 +8,7 @@ This document describes everything the detection side of the project does, from 
 
 ## Summary (for judges)
 
-**What goes in.** Ten passes (June to October 2026) of NASA-ISRO NISAR L-band radar over three study areas: the Tonle Sap lake and floodplain (Cambodia), Lake Sevan (Armenia) and the Ararat Valley (Armenia); twelve more places use the same chain in the app, fifteen in all ([`areas.md`](research/areas.md)). Each pass has two polarisation channels, HH and HV. Today we use the **free preview images** of the provisional GCOV product: 8-bit display brightness at about 180 m per pixel, not calibrated backscatter, because the app was built on them first. Calibrated gamma-naught files at 80 m (Tonle Sap, all ten dates) and 30 m (most Armenia dates) have since been extracted through a small remote server and analysed with a separate detector (section 1.6, section 3.22); the app does not yet show them.
+**What goes in.** Ten passes (June to October 2026) of NASA-ISRO NISAR L-band radar over three study areas: the Tonle Sap lake and floodplain (Cambodia), Lake Sevan (Armenia) and the Ararat Valley (Armenia); twelve more places use the same chain in the app, fifteen in all ([`areas.md`](research/areas.md)); four earthquake places, analysed by interferometry (section 3.23), make 19 places in the app. Each pass has two polarisation channels, HH and HV. Today we use the **free preview images** of the provisional GCOV product: 8-bit display brightness at about 180 m per pixel, not calibrated backscatter, because the app was built on them first. Calibrated gamma-naught files at 80 m (Tonle Sap, all ten dates) and 30 m (most Armenia dates) have since been extracted through a small remote server and analysed with a separate detector (section 1.6, section 3.22); the app does not yet show them.
 
 **What comes out.** For every pass: an open-water mask (cut by a terrain mask built from an elevation model), a flooded-vegetation mask with two states (radar "double bounce" appearing; vegetation going under or a pixel partly open water), a "usually water, not today" rough-surface flag, and a change map against the first pass. For the whole season: the date on which each pixel changed for good, and a season class map. Around this physics detector (pure mathematics in PyTorch) sit the modules built on 14 November, in two groups. Shipped in the app: automatic quality control, the terrain mask, the rebuilt flooded-vegetation rule, the statistical change test, the flood-front and choreography layers, and **fusion v2** (section 3.20), which is the water source for all 15 places. Built and measured but not shipped (evaluated only): a Gaussian-mixture and hidden-Markov model, graph refinement, a stand-alone sub-pixel water fraction, a learned despeckling filter, a physics autoencoder, a network trained on independent labels, interferometry, and the calibrated-data detector. The full list of modules: automatic quality control of every pass, a statistical change test with a stated false-discovery rate, a Gaussian-mixture and hidden-Markov model, graph refinement, a sub-pixel water fraction, a fusion layer that combines them under a written admission rule, a flood-front model that dates the flood day by day, and a per-pixel "choreography" map. One scoreboard measures every detector the same way.
 
@@ -25,6 +25,8 @@ This document describes everything the detection side of the project does, from 
 7. **Fusion v2 sizes the flood** (section 3.20): 5,046 km² on 17 October (probability range 4,196–6,051), inside the independent range on 7 of 10 passes (the strict detector and fusion v1: 1 of 10), mean area error 8.5 % (v1 25 %, math 20 %). Limits: the floodplain threshold was fitted to the same independent estimate, and only 76 % of its water lies inside the independent map.
 8. **Calibrated data** (section 3.22): a dB water rule tuned on one strip and tested on another gives 2,340 → 5,625 km² over the ten Tonle Sap dates, a mean deviation of 5.9 % from the independent estimate, and a threshold sensitivity at the flood peak of ×1.25 against ×2.39 on previews. The same rule gives 0 km² at Lake Sevan. Not yet in the app.
 9. **The flood front**: 309 km² flooded across the 24-day outage at 12.9 km²/day, between the rates of the intervals before (9.3) and after (13.6): no sign of a hidden surge.
+
+**Earthquakes** (section 3.23, [`quake.md`](eda/quake.md)): eight earthquakes between June and October 2026 were checked against NISAR L2 GUNW pairs. Four are clearly seen as ground displacement along the line of sight (peak to peak within the stated radius; same-track pair from before the event in brackets): Tibet M7.0 127 cm (5 cm); Panama M7.7 133 cm descending and 85 cm ascending (21 / 15 cm; frames cover only part of the pattern, 107–165 cm across processing variants); Venezuela M7.2 51 / 55 cm (12 / 10 cm; approximate east/up split); Kumamoto M6.8 38 cm (6 cm). Four were not detected: Flores M7.8, Mexico M7.3, Sanriku M6.9 (offshore) and Qinghai M5.8 (too small). No independent check (GNSS or other satellites), sign convention unconfirmed, PROVISIONAL products. In the app as four event places.
 
 **Interferometry** (section 3.21): coherence shows the farming season on the Ararat Valley floor; no ground motion above ±15 mm in 120 days; the soil-moisture product did not help. Not in the app.
 
@@ -673,6 +675,52 @@ so one phase cycle is 121 mm. Questions: does coherence see what amplitude did n
 
 ---
 
+### 3.23 Earthquakes: ground displacement from interferometric pairs
+
+[`quake.py`](../scripts/detect/quake.py), notes and every number [`docs/eda/quake.md`](eda/quake.md), configuration [`docs/eda/quake/events.json`](eda/quake/events.json), results [`docs/eda/quake/results.json`](eda/quake/results.json), overview figure [`docs/eda/quake/overview.png`](eda/quake/overview.png), tests [`tests/test_quake.py`](../tests/test_quake.py) (8). Status: four events exported as places of the app (`kind: "event"`, one static pair each); four reported as not detected.
+
+**Purpose.** Did NISAR capture the ground displacement of an earthquake? Eight events between June and October 2026 (USGS, on land or within about 50 km of land, with a NISAR L2 GUNW pair spanning the event day) were checked. The question is the same as in section 3.21 (phase, not brightness), asked of a sudden event instead of a season.
+
+**Method.** One record per event in `events.json`: USGS facts, a window, one entry per look direction with its co-seismic and its control GUNW granule, a radius, a far-field radius, optional mask hints and a verdict.
+
+1. A window is cut from each GUNW product on the remote server at 80 m (unwrapped phase, coherence, connected components) and reduced to 2–11 MB per pair; the laptop never downloads the full product.
+2. **Phase to line-of-sight displacement**, positive toward the satellite (the code's convention, the same as in section 3.21; the sign is unconfirmed):
+$$d_{LOS}\;[\mathrm{cm}] = -\frac{\lambda}{4\pi}\,\phi \times 100,\qquad \lambda = c / f_0 .$$
+   The code reads the centre frequency from each product, so $\lambda$ is 24.2 cm in every `results.json` entry except Tibet, where it is 24.39 cm (`wavelength_m`, 0.2439); one phase cycle is half of that, about 12 cm of line-of-sight change. The form is the textbook one; only $\lambda$ comes from the file, where section 3.21 uses a fixed 0.2420 m.
+3. **Mask**: coherence at least 0.35 (`gmin`), the largest connected component of the unwrapping, and event-specific `mask_boxes` or the Tibet stripe mask where a straight low-coherence band carries a whole-cycle offset (the control pair gets the same mask). The ionosphere screen is **not** subtracted: at Tibet it leaks the earthquake displacement (a dipole at the epicentre) and changes the peak to peak from 127 to 138 cm.
+4. **Far-field ramp removal**: a least-squares plane $a + bx + cy$ (a quadric in the sensitivity test) is fitted only where the pixel is valid and farther than `far_km` from every epicentre of the event (the epicentral disc is masked), subtracted, and the far-field median is set to zero. Coordinates are scaled by $10^4$ m; the model is evaluated on the full grid.
+5. **Statistic**: peak to peak = 0.5 to 99.5 percentile of $d_{LOS}$ within `radius_km` of the USGS epicentre. The same number is computed for the control pair, a quiet pair on the same track and frame, with the same mask and processing. Also reported: far-field standard deviation, area above 5, 10 and 20 cm (window-limited, so minimums), and the spread over processing variants (far-field radius ±15 km, quadric instead of plane, coherence threshold 0.5).
+6. **Fringes**: the displacement is re-wrapped for display, $f = (d_{LOS} / \Delta) \bmod 1$ with $\Delta = 10$ cm (`fringe_cm`), so that all events share one colour cycle.
+7. **Approximate two-look east/up decomposition** (Venezuela only; `decompose_east_up`). With $u_e$ the east component of the unit vector from satellite to ground and $\theta$ the incidence angle (window means from the product cubes), a LOS value is $d = -E\,u_e - N\,u_n + U\cos\theta$. North is neglected. The two equations (ascending, descending) are solved for $E$ and $U$ on a common EPSG:4326 grid:
+$$\begin{pmatrix} d_{asc}\\ d_{desc}\end{pmatrix} = \begin{pmatrix} -u_{e,asc} & \cos\theta_{asc}\\ -u_{e,desc} & \cos\theta_{desc}\end{pmatrix}\begin{pmatrix}E\\U\end{pmatrix}.$$
+   The geometry assumption: the two pairs are 4 days apart rather than simultaneous, the unit vectors are window means, and any north–south motion leaks into $E$ and $U$; a wrong sign convention flips both. Panama's two frames cover different parts and have weak references, so no decomposition is exported for it.
+8. **Control-pair test**: an event is **clear** if there is a spatially coherent pattern at the epicentre well above the control pair's noise, with the same processing and colour scale; **marginal** if something exceeds the noise but is not coherent; **not detected** if the scene is decorrelated, offshore only or dominated by atmosphere.
+
+**Parameters** (per event, `events.json`): `gmin` 0.35; `far_km` 35–60; `radius_km` 25–60; `fringe_cm` 10; colour limits ±30 to ±60 cm in the app; the plane fit order 1.
+
+**Results** (peak to peak within the radius; control in brackets; from `quake.md`, table "Verdicts"):
+
+| Event (USGS id) | Look directions (track/frame) | Verdict | Peak to peak (control) | Far-field std (control) |
+|---|---|---|---|---|
+| Tibet M7.0, 22 Oct (us6000u43g) | asc 19–31 Oct, 112/18 | **clear** | 127 cm within 45 km (4.7) | 1.3 cm (0.7) |
+| Venezuela M7.2, 24 Jun (us6000t7zc) | asc 162/7; desc 54/83 | **clear, two directions** | 50 / 55 cm within 60 km (11.6 / 10.2) | 8.8 / 7.3 cm (2.9 / 2.3) |
+| Panama M7.7, 9 Oct (us6000u18k) | desc 40/85; asc 76/5 | **clear, two directions** | 133 / 85 cm within 60 km (21 / 15) | 3.3 / 6.1 cm (3.5 / 1.5) |
+| Kumamoto M6.8, 28 Jul (us6000tgb9) | asc 24/18, 24 days | **clear, one direction** | 38 cm within 30 km (5.8) | 3.7 cm (1.8) |
+| Flores Sea M7.8, 14 Aug (us6000tkt2) | asc 168/173; desc 3/93 | not detected | 12 / 11 cm (4.2 / 10.7) | 2.0 / 12.3 cm (0.9 / 5.2) |
+| Qinghai M5.8, 28 Jul (us6000tga9) | desc 62/71; asc 155/19 | not detected | 6.8 cm within 25 km (5.2) | 4.5 cm (1.8) |
+| Mexico M7.3, 17 Jul (us7000t1bu) | asc 62/9; desc 55/81 | not detected | 5.8 / 12.8 cm, under 1 % valid pixels (9.3 / 12.2) | 1.7 / 3.4 cm (2.3 / 3.2) |
+| Sanriku M6.9, 24 Jun (us6000t7zq) | asc 110/22; desc 118/68 | not detected | 20 / 5 cm, 1.4 % valid pixels (8.3 / 6.0) | 1.5 / 0.6 cm (2.2 / 2.4) |
+
+Sensitivity to the processing choices: Tibet 119–138 cm, Venezuela 50–51 cm (asc) and 53–55 cm (desc), Panama 68–87 cm (asc) and 107–165 cm (desc), Kumamoto 34–38 cm. Venezuela's east/up split within 60 km: east about −46 to +37 cm, vertical −9 to +7 cm. The Venezuela ascending value is 50.5 cm in `results.json`; the app shows 51. Not usable: Panama descending track 141, Kumamoto descending track 3, Qinghai ascending track 155.
+
+**Agreement with physics (order of magnitude only).** For Tibet, USGS gives Mw 7.0 normal faulting (nodal planes 175/57/−119 and 40/43/−54); a slip of order 2 m on a fault of about 30 × 15 km implies a line-of-sight change of order 0.5–1 m, and we see −87 to +40 cm in the percentiles. For Venezuela and Kumamoto the antisymmetric pattern across a line is what strike-slip motion looks like, and the size is the same order as expected. One look direction and an unconfirmed sign cannot choose between the two nodal planes of any event.
+
+**Limits.** PROVISIONAL, partly urgent-response products. Line-of-sight only; with one direction, up, east and north are mixed. **Sign convention unconfirmed.** No independent check (GNSS, Sentinel-1, ALOS-2, a forward model of the USGS finite fault) for any event. Near-fault pixels are the most decorrelated (35–65 % masked within 15 km), whole-cycle (12 cm) unwrapping errors cannot be excluded there, and extreme pixels are not results (percentiles are). The far field is not proven undeformed; for Panama it is only a strip, which makes its peak to peak uncertain by tens of cm. Pairs of 12–36 days include aftershocks and early afterslip; the Kumamoto control (12 days) is shorter than its event pair (24); the Flores controls are after the event. Frames can end at the epicentre (Panama). One static pair per event, not a time series (`dated: false`). The M7.5 that follows the Venezuela M7.2 by 40 s is inside the same pairs and cannot be separated.
+
+**Verdict.** NISAR's interferometric products show ground displacement of tens of centimetres to over a metre along the line of sight for four of eight earthquakes tried, with flat control pairs and patterns that agree with the USGS location and mechanism in type and order of magnitude. For four others nothing above the noise was found; this is a statement about those scenes (offshore, deep, small, decorrelated), not about NISAR. We do not claim damage, casualties, effects on people, fault plane, slip or rupture length, any vertical or horizontal motion except Venezuela's approximate split, or validation against other data.
+
+---
+
 ## 4. Products for the app
 
 ### 4.1 Layers ([`run.py`](../scripts/detect/run.py))
@@ -1171,7 +1219,7 @@ Prior art and the claim: the waterline method (shorelines as height contours, 19
 
 ### 7.1 Automated tests
 
-27 test files under [`tests/`](../tests/), 177 test functions, counted by `grep` for `def test_` on 14 November in the evening; they were **not** run for this document. The table below was written earlier, at 22 files and 129 functions, and does not list `test_hydro.py` (6), `test_crossscene.py` (6), `test_fusion2.py` (10), `test_insar.py` (10) and `test_calibrated.py` (11); the counts for `test_supervised.py` (now 6) and `test_unmix.py` (now 8) are also out of date. Times and pass counts in the right-hand column are from each module's notes where recorded. The four files marked † belong to work still in progress (section 8).
+28 test files under [`tests/`](../tests/), 186 test functions, counted by `grep` for `def test_` at about 22:00 on 14 November (the earlier count was 27 files and 177 functions); they were **not** run for this document. The table below was written earlier, at 22 files and 129 functions, and does not list `test_hydro.py` (6), `test_crossscene.py` (6), `test_fusion2.py` (10), `test_insar.py` (10) and `test_calibrated.py` (11); the counts for `test_supervised.py` (now 6) and `test_unmix.py` (now 8) are also out of date. Times and pass counts in the right-hand column are from each module's notes where recorded. The four files marked † belong to work still in progress (section 8).
 
 | File | Tests | What it covers |
 |---|---|---|
@@ -1196,6 +1244,7 @@ Prior art and the claim: the waterline method (shorelines as height contours, 19
 | [`test_supervised.py`](../tests/test_supervised.py) † | 3 | JRC labels with an ignore band; gain invariance; a tiny training run generalises to an unseen synthetic scene |
 | [`test_despeckle.py`](../tests/test_despeckle.py) † | 6 | self-supervised speckle removal on synthetic scenes (noise-to-noise beats a boxcar at edges; blind spot; the multi-temporal variant cannot see the target's noise; mean preserved) |
 | [`test_unmix.py`](../tests/test_unmix.py) † | 5 | a physics autoencoder that unmixes each pixel into fractions summing to one, with a terrain prior |
+| [`test_quake.py`](../tests/test_quake.py) | 8 | phase to centimetres (one cycle is half a wavelength); re-wrapping at an interval; far-field ramp removal keeps a central signal, ignores NaN, handles a quadric; largest connected component; every event record is complete; the job file contains no server address; the east/up decomposition recovers a synthetic pair |
 | [`test_remote_extract.py`](../tests/test_remote_extract.py) † | 4 | extraction of calibrated GCOV windows from a synthetic HDF5 onto an 80 m UTM grid (grid against rasterio, block coverage) |
 
 **`test_detect.py` in detail**: a synthetic $6 \times 2 \times 160 \times 160$ stack, valid everywhere; background HH 0.5, HV 0.4; a dark disc (HH = HV = 0.02) whose radius grows 15, 20, … 40 px over the six dates; a ring at radius 48–56 px whose HH rises to 0.85 from date 2; multiplicative gamma speckle with 30 looks; run through `run_pipeline` with the preview knobs on CPU. Assertions: water area within 10 % of the disc on every date; change date correct on > 80 % of each newly dark annulus; ≥ 99 % of far pixels stable; ring interior > 90 % class 3 (old flooded-vegetation rule, which `run_pipeline` still computes) with < 1 % water; Otsu and morphology exact. **Caveat**: the 30-look speckle is about twice the 0.06–0.10 relative noise measured on the previews; at 8 looks the "far pixels stable" share falls to 97.9 % and the test would fail.
@@ -1215,6 +1264,7 @@ Prior art and the claim: the waterline method (shorelines as height contours, 19
 | Place hold-out for the L-band pretrained model | yes (Sevan never seen) | 0.91 against the math detector's 0.99 (section 5.8) |
 | Expected flood from lake level and the Landsat record, no radar | yes, but a model | 17 Oct 5,421 km² (4,198–7,222); fusion v2 inside the range on 7 of 10 passes; its threshold was fitted to it (section 3.20) |
 | Calibrated data, tune strip and test strip | yes | balanced accuracy 0.995; 5.9 % from the independent estimate (section 3.22) |
+| Earthquakes: control pair on the same track, USGS location and mechanism | the control pair yes; USGS agreement is of type and order of magnitude only | four of eight clear, control pairs 5–21 cm against 38–133 cm; no GNSS or other-satellite check (section 3.23) |
 
 ---
 
@@ -1224,7 +1274,7 @@ Prior art and the claim: the waterline method (shorelines as height contours, 19
 
 * **The Tonle Sap floodplain extent.** No 2026 map exists for the floodplain. The app shows 5,046 km² on 17 October (fusion v2, probability range 4,196–6,051), against an independent model-based estimate of 5,421 km² (4,198–7,222; section 3.19). The strict math detector gives 3,837 km² (threshold-only 5–95 % range 2,000–4,800; tuning study 3,800–5,900); fusion v1 and other persistence models 3,100–3,300 km² (section 6.9). Fusion v2's floodplain threshold was fitted to the same estimate, and only 76 % of its water lies inside the independent map: the total is better than the outline (section 3.20). The altimeter checks the timing, not the extent. Open water also misses flooded forest and lagged the lake by about three weeks at the end of the season.
 * **The flooded-vegetation area.** About 1,600–2,500 km² at the 30 August peak, depending on the spatial-context knob; no reference map exists, Landsat cannot see under a canopy, and state 2 ("going under") cannot be told apart from a pixel partly covered by open water. Supported: its location (77 % inside the Landsat maximum extent), its stability, near-zero false alarms in Armenia, its July rise matching the gauge, Prek Toal found. Not supported: the area, and that state 1 is forest (shrub, reeds and flooded rice also double-bounce).
-* **The Ararat Valley.** The 0.5–3.8 km² left by the terrain mask is almost all false; the graph and HMM find nothing, including the real fish ponds, which are smaller than a pixel. Nothing at Ararat is significant in the statistical change test, so real irrigation changes may be missed.
+* **The Ararat Valley.** The 0.5–3.8 km² left by the math detector with the terrain mask is almost all false (the fused map shown in the app gives about 0.3 km² of open water on every pass, range 0 to 1: `src/app/public/data/ararat/timeseries.json`); the graph and HMM find nothing, including the real fish ponds, which are smaller than a pixel. Nothing at Ararat is significant in the statistical change test, so real irrigation changes may be missed.
 
 **Other limits.**
 
@@ -1314,7 +1364,15 @@ python3 -m venv .venv
 # 10. tests (light ones; see section 7.1)
 .venv/bin/python -m pytest tests/test_detect.py tests/test_qc.py tests/test_terrain.py tests/test_floodveg.py tests/test_fusion.py
 
-# 11. web app
+# 10b. earthquakes (server steps need SERVER and SSH_KEY in the environment; no address is stored in the repository)
+.venv/bin/python -m scripts.detect.quake list                    # events in docs/eda/quake/events.json
+.venv/bin/python -m scripts.detect.quake launch EVENT VIEW       # start the server job; then `fetch EVENT VIEW` (3-11 MB per pair)
+.venv/bin/python -m scripts.detect.quake run EVENT               # numbers and figures, results.json
+.venv/bin/python -m scripts.detect.quake export EVENT            # app layers and area (clear events only; Tibet is frozen)
+.venv/bin/python -m scripts.detect.quake overview                # docs/eda/quake/overview.png
+.venv/bin/python -m pytest -q tests/test_quake.py                # 8 tests
+
+# 11. web app (two designs; see README)
 cd src/app && npm install && npm run dev
 ```
 
@@ -1385,6 +1443,8 @@ Places where two notes disagree, and the number used here:
 * **Terrain mask availability**: `graph.md` and `tuning.md` were run when only Sevan (and Ararat) had a terrain mask; Tonle Sap has one now, and it removes nothing there.
 
 Contradictions found between notes in the evening update, and the number used here:
+
+* **Earthquake notes (22:00 update).** `quake.md` gives the Venezuela ascending peak to peak as 50 cm in its table and 50.5 in `results.json`; the app and the other docs show 51; both are the same number rounded differently. `quake.md`'s "Say" line for Kumamoto speaks of "up to about 30 cm" while the percentile peak to peak is 38 cm (−27 to +11 cm); 38 cm is used here. `docs/pitch/app-choice.md` says "15 places"; the app now has 19 (15 water, 4 earthquakes). Older notes quote the Ararat open water as 0.5–3.8 km² (`gmm.md`, `graph.md`, `terrain.md`, `subpixel.md`, `unmix.md`: the math detector with the terrain mask); the shipped fused map gives about 0.3 km².
 
 * **Number of other places**: `fusion2.md` (summary, sections 8, 9 and 10) says "13 other places" and "Thirteen places outside the three study areas"; 15 places minus the three study areas is 12, and its own table lists 12 (nine with anchors, three without). Twelve is used.
 * **Section reference**: `calibrated.md` line 5 says "Armenia: see section 8"; the Armenia section is 9.

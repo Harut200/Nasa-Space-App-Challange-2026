@@ -1,6 +1,6 @@
 # Pitch facts: Dancing with the SARs
 
-Prepared Sat 14 Nov 2026, 18:31 (Armenia time) for the 15:00 pitch and the 30 s video. Read time: two minutes.
+Prepared Sat 14 Nov 2026, 18:31 (Armenia time) for the 15:00 pitch and the 30 s video; earthquake claims added at about 22:00. Read time: two minutes.
 Every number has a source path (relative to the repo root). Where the app and a study differ, the app number is used on screen and the study number is named.
 
 ## 1. Headline claims, in order of impact
@@ -17,6 +17,9 @@ Every number has a source path (relative to the repo root). Where the app and a 
 | 8 | The flood front can be dated through the 24-day outage (27 Jul to 10 Aug). | 309 km² flooded between the 25 Jul and 18 Aug passes, 12.9 km²/day, between the rates before (9.3) and after (13.6). Hiding a real pass and predicting it: error 82 km² against 161 km² for "nothing changed". | Leave-one-pass-out test on our own passes. | `docs/RESULTS.md`; `docs/eda/novel.md` |
 | 9 | The method works in other places, not only where we built it. | 15 places (Asia, Africa, South America; Armenia on the Europe-Asia boundary). Pantanal and Lake Chad rescued (balanced accuracy 50 % to 99 %), Inner Niger 50 % to 97 %. Narrow channels stay weak (Mekong delta 65 %, Nile delta 71 %). | Landsat always-water and never-water pixels in each place. | `docs/eda/crossscene.md`; `docs/RESULTS.md` |
 | 10 | In Armenia's Ararat Valley, brightness shows nothing but interferometric coherence shows the farming season. | Valley floor losing coherence within 12 days: 43-44 % of the floor in June-July, 22-25 % in late Sept-Oct; hills 9-16 %. Mean floor coherence 0.368 (summer) to 0.449 (autumn). Not in the app yet. | Hills, Yerevan and Sevan land as controls. | `docs/eda/insar.md` section 3; figure `docs/eda/insar/fig3_coherence_series.png` |
+| 11 | NISAR also saw the ground move in earthquakes: four of eight we tried. | Change in distance to the satellite, peak to peak within the stated radius (same-track pair from before the event in brackets): Tibet M7.0, 22 Oct, 127 cm (5 cm); Panama M7.7, 9 Oct, 133 cm descending and 85 cm ascending (21 / 15 cm), frames cover only part of the pattern; Venezuela M7.2, 24 Jun, 51 / 55 cm (12 / 10 cm); Kumamoto, Japan M6.8, 28 Jul, 38 cm (6 cm), a 24-day pair. Four not detected: Flores M7.8, Mexico M7.3, Sanriku M6.9 (all offshore), Qinghai M5.8 (too small). | A pair from before each earthquake on the same track (flat); USGS location and mechanism. No GNSS or other-satellite check. | `docs/eda/quake.md`; `docs/eda/quake/results.json`; `docs/eda/quake/overview.png` |
+
+The app has 19 places: 15 of water, 4 of earthquakes (`src/app/public/data/index.json`).
 
 ## 2. Say / do not say
 
@@ -28,6 +31,9 @@ Every number has a source path (relative to the repo root). Where the app and a 
 - "Coherence shows the farming season in the Ararat Valley." / "Ground motion: nothing above our +/-15 mm limit over four months."
 - "Radar sees through cloud and at night." (`docs/research/science-brief.md`, section 1)
 - "AI was used for research, planning, code, analysis and first drafts, and we disclose it." (`README.md`)
+- "NISAR's 12-day pair spanning the M7.0 Tibet earthquake of 22 October shows the ground moving by more than a metre (127 cm peak to peak along the radar line of sight, within 45 km). The same track a fortnight earlier is flat to under 1 cm in the far field and 5 cm peak to peak." (`docs/eda/quake.md`, "What may and may not be claimed")
+- "For Venezuela and Panama, two look directions show the pattern flipping sign, as horizontal strike-slip motion would. These are provisional measurements; where we looked at earthquakes in the sea or too small to see, we report that nothing was detected."
+- Venezuela only, with "approximately": "Combining the two views gives roughly 40 cm of east-west motion and under 10 cm vertical." (`quake.md`)
 
 **Do not say**
 - Our models beat NASA's, or any model we did not test. We tested a few public networks (see Q on deep learning) and none beat our fusion; that is all we can say.
@@ -37,6 +43,11 @@ Every number has a source path (relative to the repo root). Where the app and a 
 - That soil moisture shows irrigation. It does not (`docs/eda/insar.md`, summary table).
 - Preview-image areas are calibrated measurements. The app numbers come from uncalibrated 8-bit previews.
 - That the flood "arrived late".
+- That we measured damage, casualties or any effect on people from an earthquake.
+- The fault plane, slip or rupture length of any earthquake; that one look direction tells vertical from horizontal motion (Tibet, Kumamoto, Panama); that the Venezuela east/up split is precise.
+- That the earthquake maps are validated against GNSS, Sentinel-1 or any other data, or that the sign (toward or away from the satellite) is confirmed. The products are PROVISIONAL, partly urgent-response.
+- That the Panama pattern is complete (the frames end at the epicentre), that the M7.5 and M7.2 Venezuela signals are separated, or that NISAR "failed" at Flores, Mexico, Sanriku or Qinghai (the ground was offshore or the signal too small: say so).
+- Extreme single pixels as results (percentiles are), or the earthquake maps as a time series (one pair per event).
 - That the calibrated result works everywhere. It is one place (Tonle Sap) so far.
 - That 98.9 % of our water is "correct". It is inside the 1984-2021 Landsat maximum extent, which is a plausibility check (the current app map: 97.0 %, `docs/eda/fusion2.md`).
 
@@ -52,14 +63,17 @@ Every number has a source path (relative to the repo root). Where the app and a 
 8. **What about the outage?** No passes exist from 27 Jul to 10 Aug 2026. The app shows the gap and does not invent a pass; a hidden-pass test says our front dating beats "nothing changed" (82 against 161 km²). (`docs/eda/novel.md`)
 9. **Can radar see ground motion or irrigation?** Not in our data. Ground motion at Ararat: nothing above +/-15 mm. Soil moisture: the product did not separate irrigated land from dry hills. Coherence did show the farming season. (`docs/eda/insar.md`)
 10. **Who is this for?** Teachers, reporters and anyone curious about a region: a dated, plain-language view of one radar season. (deck notes, slides 6-7; no user study was done.)
+11. **Did you validate the earthquake maps?** Not against an independent measurement: we did no GNSS, Sentinel-1 or other-satellite comparison. The evidence is that a pair from before each earthquake on the same track is flat (5 to 21 cm against 38 to 133 cm) and that the pattern sits on the USGS epicentre and fits its mechanism in type and order of magnitude. The sign convention is unconfirmed and the products are provisional. (`docs/eda/quake.md`, Limits)
+12. **Why were four earthquakes not seen?** Each for its own reason, listed in `docs/eda/quake.md`: Flores M7.8 and Mexico M7.3 had epicentres in the sea (Mexico: under 1 % valid pixels within 60 km), Sanriku M6.9 was offshore and 34 to 45 km deep (1.4 % valid pixels), Qinghai M5.8 is too small to expect more than a few centimetres. That is a statement about those scenes, not a failure of NISAR; we do not claim it could not be done with other data.
 
-## 4. Limits, in four lines
+## 4. Limits, in five lines
 
 1. The app uses uncalibrated 180 m previews; calibrated results exist for Tonle Sap only, are provisional, and are not in the app.
 2. Flood size is known to about plus or minus 20 %, its outline less well (only 76 % of our water lies inside the independent flood map); no 2026 ground truth exists for the floodplain.
 3. Water under vegetation (about 1,600-2,500 km² at the 30 Aug peak) is not validated.
-4. One season, ten passes, a 24-day outage; no ground motion detected; Ararat coherence is not in the app.
-(`docs/RESULTS.md`, Limits; `docs/eda/calibrated.md`; `docs/eda/insar.md`)
+4. One season, ten passes, a 24-day outage; no slow ground motion detected at Ararat; Ararat coherence is not in the app.
+5. Earthquakes: one pair per event; line-of-sight only; no independent check; sign unconfirmed; PROVISIONAL products; four of eight not detected.
+(`docs/RESULTS.md`, Limits; `docs/eda/calibrated.md`; `docs/eda/insar.md`; `docs/eda/quake.md`)
 
 ## 5. Space Apps judging criteria (scored 1-5 each)
 

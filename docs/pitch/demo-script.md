@@ -1,6 +1,8 @@
 # Demo script: 30 s recording and 3 min live walkthrough
 
-Prepared Sat 14 Nov 2026, 18:31. Numbers are the ones the app shows (`src/app/public/data/<place>/timeseries.json`). Deep link form: `#/<place>?layer=<layer-id>&date=<YYYY-MM-DD>` (`src/app/src/meta.js`). Prefix with the app address from the deck: `https://harut200.github.io/Nasa-Space-App-Challange-2026/` (not tested from here). Layer ids: `water`, `when`, `hh`, `hv`, `sig`, `change`, `rgb`, `classes` (`src/app/public/data/*/manifest.json`).
+Prepared Sat 14 Nov 2026, 18:31; earthquake shots added at about 22:00. Numbers are the ones the app shows (`src/app/public/data/<place>/timeseries.json`). Deep link form: `#/<place>?layer=<layer-id>&date=<YYYY-MM-DD>` (`src/app/src/meta.js`). Prefix with the app address from the deck: `https://harut200.github.io/Nasa-Space-App-Challange-2026/` (not tested from here). Layer ids: `water`, `when`, `hh`, `hv`, `sig`, `change`, `rgb`, `classes` (`src/app/public/data/*/manifest.json`).
+
+Two app designs exist on the same data (`src/app/`, design A; `src/app2/`, design B) and the team is choosing one; use only the links of the chosen design. Neither is deployed yet, so no live address is printed here: prefix the links below with the address from the deck once it exists. Links below were not run by the writer.
 
 Before recording: rehearse each link once, because I could not run the app. Check the on-screen headline number matches the one below and that the date given exists for that place.
 
@@ -36,6 +38,17 @@ Total spoken: about 75 words. Read it aloud once with a timer; cut shot 6 speech
 
 Shot 7: Ararat spot curves are flat across the season, except 31 Aug on `masis-fields` HH (72.8 against about 66 on other dates, `src/app/public/data/ararat/timeseries.json`). If someone asks, say the 31 Aug rise falls on the rain night seen around Yerevan (`docs/eda/validation-2026.md`) and that we did not test the cause at Ararat.
 
+## B2. The earthquake shot (Tibet M7.0, 22 Oct 2026)
+
+Numbers from `docs/eda/quake.md`: 127 cm peak to peak along the radar line of sight within 45 km; the same-track pair from before (7 to 19 Oct) is 5 cm; one look direction; one colour cycle in the fringe layer is 10 cm. Sources and limits: `docs/pitch/FACTS.md`, claim 11.
+
+| Design | Link | On screen | Spoken (about 10 s; in the 3-minute walkthrough it can replace shot 7) |
+|---|---|---|---|
+| A, natural map | `#/tibet-m70-2026?layer=fringes` | Fringe bands around the epicentre on the satellite globe; use the reveal or before/after bar to compare with the imagery | "On 22 October a magnitude 7.0 earthquake hit Tibet. NISAR's pair spanning it shows the ground moved by about 127 centimetres along the line of sight: each colour band is 10 centimetres. The pair from before is flat." |
+| B, story mode | `#/tibet-m70-2026?mode=story&scene=2` | Story scene 2 of the Tibet place (arrow keys step through the scenes) | Same sentence; then press the right arrow once for the next scene |
+
+Say, in this order: what it is (a pair of passes across the earthquake), what we see (127 cm, control 5 cm), what we do not know (no independent check; sign unconfirmed; provisional product). Do not say damage, casualties, fault plane, or that it is validated. If asked about the four events not seen, see `FACTS.md`, question 12.
+
 ## C. The coherence shot (not in the app)
 
 The coherence layer is a candidate only (`docs/eda/insar.md`, section 9). Do not point to a link for it. Slide-only alternative:
@@ -48,4 +61,4 @@ Caption for the slide: "Ararat Valley, NISAR 12-day coherence. Brightness previe
 
 ## D. Things not to say on camera
 
-Subsidence measured; harvest dates per field; soil moisture shows irrigation; four continents; our models beat NASA's; preview areas are calibrated. See `docs/pitch/FACTS.md`.
+Subsidence measured; harvest dates per field; soil moisture shows irrigation; four continents; our models beat NASA's; preview areas are calibrated; earthquake damage or casualties; fault plane or slip; that the earthquake maps are validated against other data. See `docs/pitch/FACTS.md`.
