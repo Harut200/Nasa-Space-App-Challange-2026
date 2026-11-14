@@ -1,6 +1,6 @@
 # Detection architecture
 
-Draft of 14 November 2026, 15:30. This is the design that ties the separate detection modules into one system. Parts marked *running* are being built now; the document is updated when their results arrive. A part enters the final system only if it passes the admission rule in section 5.
+Draft of 14 November 2026, 11:50. This is the design that ties the separate detection modules into one system. Parts marked *running* are being built now; the document is updated when their results arrive. A part enters the final system only if it passes the admission rule in section 5.
 
 Current, working detector (what the app shows today): [DETECTION.md](DETECTION.md).
 
