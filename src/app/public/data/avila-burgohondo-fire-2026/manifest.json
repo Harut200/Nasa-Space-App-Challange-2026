@@ -1,0 +1,271 @@
+{
+  "id": "avila-burgohondo-fire-2026",
+  "name": "Burgohondo fire, Avila, Spain",
+  "bounds": [
+    -5.599999999999999,
+    39.80073977763686,
+    -4.000887697815902,
+    40.899999999999984
+  ],
+  "dates": [
+    "2026-06-27",
+    "2026-07-09",
+    "2026-07-21",
+    "2026-08-26",
+    "2026-09-19",
+    "2026-10-01",
+    "2026-10-13"
+  ],
+  "gaps": [
+    [
+      "2026-07-27",
+      "2026-08-10"
+    ]
+  ],
+  "layers": [
+    {
+      "id": "hh",
+      "label": "HH brightness (preview)",
+      "dates": [
+        "2026-06-27",
+        "2026-07-09",
+        "2026-07-21",
+        "2026-08-26",
+        "2026-09-19",
+        "2026-10-01",
+        "2026-10-13"
+      ],
+      "legend": {
+        "type": "ramp",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": 0,
+        "max": 100,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    },
+    {
+      "id": "water",
+      "label": "Water and flooded vegetation",
+      "dates": [
+        "2026-06-27",
+        "2026-07-09",
+        "2026-07-21",
+        "2026-08-26",
+        "2026-09-19",
+        "2026-10-01",
+        "2026-10-13"
+      ],
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#2f6fde",
+            "label": "Open water"
+          },
+          {
+            "color": "#35b04a",
+            "label": "Possible water under vegetation"
+          },
+          {
+            "color": "#7fd3c4",
+            "label": "Going under: vegetation submerging, or part open water"
+          },
+          {
+            "color": "#f28e2b",
+            "label": "Usually water, not today (rain or wind?)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "when",
+      "label": "When it changed for good",
+      "dates": null,
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#440154",
+            "label": "9 Jul"
+          },
+          {
+            "color": "#414487",
+            "label": "21 Jul"
+          },
+          {
+            "color": "#2a788e",
+            "label": "26 Aug"
+          },
+          {
+            "color": "#22a884",
+            "label": "19 Sep"
+          },
+          {
+            "color": "#7ad151",
+            "label": "1 Oct"
+          },
+          {
+            "color": "#fde725",
+            "label": "13 Oct"
+          }
+        ]
+      }
+    },
+    {
+      "id": "classes",
+      "label": "Season classes",
+      "dates": null,
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#08306b",
+            "label": "Permanent water"
+          },
+          {
+            "color": "#4292c6",
+            "label": "Seasonal open water"
+          },
+          {
+            "color": "#41ab5d",
+            "label": "Flooded vegetation"
+          },
+          {
+            "color": "#9ecae1",
+            "label": "Got darker, not open water (wetter ground, shallow or partial flooding)"
+          },
+          {
+            "color": "#c994c7",
+            "label": "Got brighter (growing crops and other causes)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "change",
+      "label": "Change since first pass (HH)",
+      "dates": [
+        "2026-07-09",
+        "2026-07-21",
+        "2026-08-26",
+        "2026-09-19",
+        "2026-10-01",
+        "2026-10-13"
+      ],
+      "legend": {
+        "type": "diverging",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": -35,
+        "max": 35,
+        "colors": [
+          "#2166ac",
+          "#00000000",
+          "#b2182b"
+        ],
+        "labels": [
+          "darker: new water, cleared forest",
+          "brighter: flooded vegetation, growth"
+        ]
+      }
+    },
+    {
+      "id": "rgb",
+      "label": "Three-date composite",
+      "dates": null,
+      "legend": {
+        "type": "text",
+        "text": "HH: red = 27 Jun, green = 26 Aug, blue = 13 Oct. Grey = no change."
+      }
+    },
+    {
+      "id": "hv",
+      "label": "HV brightness (preview)",
+      "dates": [
+        "2026-06-27",
+        "2026-07-09",
+        "2026-07-21",
+        "2026-08-26",
+        "2026-09-19",
+        "2026-10-01",
+        "2026-10-13"
+      ],
+      "legend": {
+        "type": "ramp",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": 0,
+        "max": 100,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    }
+  ],
+  "story": {
+    "see": "Compare 21 July with 19 September over the Alberche valley west of Madrid. The cross-polarised HV radar layer shows a sharp dark band running east from Navaluenga that is absent in June and early July. It is still there on 1 and 13 October.",
+    "physics": "In late July 2026 the Burgohondo fire in \u00c1vila province had burned about 50,000 hectares by 26 July and about 55,000 by 30 July, which Spain's environment minister called the largest forest fire in recent history in the country. Fires in Madrid and Toledo, managed as one because their fronts were connected, brought the emergency to about 77,000 hectares on 26 July. By 30 July the \u00c1vila perimeter was almost consolidated.",
+    "lband": "HV echoes come from branches and leaves, so burned woodland returns less of it. In the band the HV brightness is about 0.06 to 0.08 lower on the preview's 0 to 1 scale from 19 September to 13 October than before the fire, and the band is the darkest 8 kilometre circle in the whole frame on 19 September and 1 October. Dark patches add up to a few hundred square kilometres, but a threshold decides that number, so we give no area of our own. A 26 August preview is flagged for a frame-wide radiometric drift and a 7 September preview is damaged; the 7 September preview was excluded from the data and the 26 August one is kept in the data but not used for the numbers here.",
+    "people": "Thousands of people were evacuated or confined, and the minister said no residents had died. The radar sees woodland scars through smoke and cloud, and shows that the scar is still plain more than two months later."
+  },
+  "spots": [
+    {
+      "id": "scar-east-of-navaluenga",
+      "label": "Burn scar east of Navaluenga",
+      "lngLat": [
+        -4.646,
+        40.381
+      ]
+    },
+    {
+      "id": "scar-further-east",
+      "label": "Burn scar, eastern part",
+      "lngLat": [
+        -4.35,
+        40.391
+      ]
+    },
+    {
+      "id": "navaluenga",
+      "label": "Navaluenga",
+      "lngLat": [
+        -4.708,
+        40.41
+      ]
+    },
+    {
+      "id": "unburned-reference",
+      "label": "Unburned ground (reference)",
+      "lngLat": [
+        -5.2,
+        40.7
+      ]
+    }
+  ],
+  "credits": "NISAR GCOV preview images: NASA/JPL-Caltech and ISRO, distributed by ASF DAAC. Uncalibrated previews at about 180 m; values are display brightness, not backscatter.",
+  "source": "preview",
+  "quality": {
+    "2026-08-26": {
+      "quality": "fail",
+      "quality_note": "HH stable-land brightness -9% vs the other dates; HH brightness change across the swath -0.270 vs usual -0.143; HH channel 5.8x more different from the other dates than usual (gradient across the frame) \u2014 likely instrument or processing effect",
+      "channels": [
+        "HH",
+        "HV"
+      ]
+    },
+    "2026-10-13": {
+      "quality": "fail",
+      "quality_note": "HH channel 4.1x more different from the other dates than usual (uniform across the frame); HV channel 2.9x more different from the other dates than usual (uniform across the frame); HH stable-land brightness +9% vs the other dates \u2014 likely instrument or processing effect",
+      "channels": [
+        "HH",
+        "HV"
+      ]
+    }
+  },
+  "defaultLayer": "hv",
+  "headline": "none",
+  "headlineNote": "Cross-polarised radar echo darker where the fire burned",
+  "category": "fire"
+}

@@ -1,0 +1,46 @@
+{
+  "story": {
+    "see": "Compare 21 July with 19 September over the Alberche valley west of Madrid. The cross-polarised HV radar layer shows a sharp dark band running east from Navaluenga that is absent in June and early July. It is still there on 1 and 13 October.",
+    "physics": "In late July 2026 the Burgohondo fire in Ávila province had burned about 50,000 hectares by 26 July and about 55,000 by 30 July, which Spain's environment minister called the largest forest fire in recent history in the country. Fires in Madrid and Toledo, managed as one because their fronts were connected, brought the emergency to about 77,000 hectares on 26 July. By 30 July the Ávila perimeter was almost consolidated.",
+    "lband": "HV echoes come from branches and leaves, so burned woodland returns less of it. In the band the HV brightness is about 0.06 to 0.08 lower on the preview's 0 to 1 scale from 19 September to 13 October than before the fire, and the band is the darkest 8 kilometre circle in the whole frame on 19 September and 1 October. Dark patches add up to a few hundred square kilometres, but a threshold decides that number, so we give no area of our own. A 26 August preview is flagged for a frame-wide radiometric drift and a 7 September preview is damaged; the 7 September preview was excluded from the data and the 26 August one is kept in the data but not used for the numbers here.",
+    "people": "Thousands of people were evacuated or confined, and the minister said no residents had died. The radar sees woodland scars through smoke and cloud, and shows that the scar is still plain more than two months later."
+  },
+  "spots": [
+    {
+      "id": "scar-east-of-navaluenga",
+      "label": "Burn scar east of Navaluenga",
+      "lngLat": [
+        -4.646,
+        40.381
+      ],
+      "radius_m": 3000
+    },
+    {
+      "id": "scar-further-east",
+      "label": "Burn scar, eastern part",
+      "lngLat": [
+        -4.35,
+        40.391
+      ],
+      "radius_m": 3000
+    },
+    {
+      "id": "navaluenga",
+      "label": "Navaluenga",
+      "lngLat": [
+        -4.708,
+        40.41
+      ],
+      "radius_m": 2500
+    },
+    {
+      "id": "unburned-reference",
+      "label": "Unburned ground (reference)",
+      "lngLat": [
+        -5.2,
+        40.7
+      ],
+      "radius_m": 3000
+    }
+  ]
+}

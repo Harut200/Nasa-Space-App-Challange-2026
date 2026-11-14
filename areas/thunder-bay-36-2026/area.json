@@ -1,0 +1,31 @@
+{
+  "id": "thunder-bay-36-2026",
+  "name": "Thunder Bay 36 fire, Wabakimi, Ontario",
+  "bbox": [
+    -90.74,
+    49.9,
+    -88.2,
+    51.18
+  ],
+  "track": 41,
+  "frame": 63,
+  "direction": "descending",
+  "pixel_m": 100,
+  "mode": "40+5",
+  "dates": [
+    "2026-06-17",
+    "2026-06-29",
+    "2026-07-11",
+    "2026-07-23",
+    "2026-08-16",
+    "2026-09-09",
+    "2026-09-21",
+    "2026-10-03",
+    "2026-10-15"
+  ],
+  "water_source": "fusion2",
+  "category": "fire",
+  "default_layer": "change",
+  "headline": "none",
+  "headline_note": "Radar echo brighter where the fire burned"
+}

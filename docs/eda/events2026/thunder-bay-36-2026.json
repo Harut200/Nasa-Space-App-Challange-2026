@@ -1,0 +1,17 @@
+{
+ "area": "thunder-bay-36-2026",
+ "method": "mean change in preview HH brightness (8-bit stretch /255) between dates, 3 km discs; largest connected patch of 9x9-smoothed change > +0.07",
+ "dates": ["2026-06-17","2026-06-29","2026-07-11","2026-07-23","2026-08-16","2026-09-09","2026-09-21","2026-10-03","2026-10-15"],
+ "published_fire": {"coordinate": [-89.48, 50.68], "burnt_ha": 313930, "date": "2026-07-29/30", "peak_ha_reported": 320000},
+ "hh_change_from_11_Jul": {
+  "burn_core_-89.41_50.70": {"23_Jul": 0.117, "16_Aug": 0.117, "9_Sep": 0.116, "15_Oct": 0.092},
+  "north_-89.44_50.84": {"23_Jul": 0.128, "16_Aug": 0.127, "9_Sep": 0.151, "15_Oct": 0.114},
+  "unburned_-90.4_50.2": {"23_Jul": 0.006, "16_Aug": 0.051, "9_Sep": 0.039, "15_Oct": 0.006},
+  "unburned_-88.6_50.6": {"23_Jul": 0.021, "16_Aug": 0.052, "9_Sep": 0.042, "15_Oct": 0.023}
+ },
+ "disc_25km_around_fire": {"HH_inside_mean_23_Jul": 0.0894, "HH_outside_mean": -0.0094, "HH_outside_sd": 0.0467, "HV_inside_mean_23_Jul": 0.0495, "HV_outside_mean": -0.0079},
+ "control_17Jun_to_11Jul_disc": {"HH_inside_mean": -0.0154, "HH_outside_mean": 0.0179},
+ "largest_patch_km2_above_0.07": {"23_Jul": 2104, "9_Sep": 3750, "15_Oct": 1932},
+ "largest_patch_centroid_lonlat": [-89.41, 50.70],
+ "note": "Brightness ROSE (HH strongly, HV weakly) in the burned area; HV did not drop. Patch area is threshold dependent and is not an estimate of burnt area. Water series (2,710 to 2,820 km2) is flat and unrelated."
+}

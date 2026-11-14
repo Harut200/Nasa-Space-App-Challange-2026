@@ -117,3 +117,62 @@ Opened 14 Nov 2026. Search summaries were not used as facts; the pages below wer
 - Locations: [Wikipedia: Sena district](https://en.wikipedia.org/wiki/Sena_district) 14.327 N, 100.404 E; [Wikipedia: Bang Ban district](https://en.wikipedia.org/wiki/Bang_Ban_district) 14.374 N, 100.486 E; [Wikipedia: Pa Sak Jolasid Dam](https://en.wikipedia.org/wiki/Pa_Sak_Jolasid_Dam) dam at 14.861 N, 101.066 E (the reservoir lies north of it; the spot is the centre of the large water body in our map at 14.951 N, 101.058 E, identified by position only).
 - Not used (no casualty or displacement figures appear in the story): DDPM/Nation counts of people affected.
 - Our own numbers: `data/processed/chao-phraya-2026/products/timeseries.json`, `docs/eda/events2026/chao-phraya-2026.json` (JRC comparison), `docs/research/events-2026.md`.
+
+
+## Mahanadi delta, Odisha, July 2026 flood (mahanadi-delta-2026)
+
+Opened 15 Nov 2026.
+
+- [Deccan Chronicle, 31 Jul 2026: "Mahanadi Swells, Flood Threat Looms Large In Odisha; Several Breaches Reported"](https://www.deccanchronicle.com/amp/nation/mahanadi-swells-flood-threat-looms-large-in-odisha-several-breaches-reported-1975582) supports: more than 9.5 lakh cusecs expected to pass Mundali in the next 24 to 48 hours; Hirakud 22 sluice gates open releasing nearly 5 lakh cusecs; Chhattisgarh opened 64 of 66 gates of the Kalama barrage; embankment breach at Jodum (Badamba block, Cuttack) submerging farmland; seven embankment breaches in Jajpur; Cuttack, Khordha, Puri, Jagatsinghpur and Kendrapara at risk.
+- [The Pioneer, 31 Jul 2026](https://dailypioneer.com/news/slug-lite/mahanadi-swells-as-hirakud-dam-opens-14-gates--floods-affect-7-lakh-in-odisha-mahanadi-swells-as-hirakud-dam-opens-14-gates--floods-affect-7-lakh-in-odisha?year=2026) supports: floods affected 20 of Odisha's 30 districts; Hirakud reservoir at 623.52 ft against 630 ft full; water expected to take 36 to 40 hours to reach Mundali near Cuttack. (The gate count differs from Deccan Chronicle because the articles are from different hours on 31 Jul; the story uses the 22 gates figure and does not repeat the 14 gates figure.)
+- [All India Radio / newsonair, 27 Jul 2026](https://newsonair.gov.in/odisha-reeling-under-heavy-rainfall-fresh-flooding-in-several-districts/) supports: a deep depression over the Bay of Bengal driving heavy rain over Odisha; IMD forecast of heavy to very heavy rain until 30 Jul.
+- [Wikipedia: Cuttack](https://en.wikipedia.org/wiki/Cuttack) 20.524 N, 85.788 E, at the apex of the Mahanadi delta between the Kathajodi and Mahanadi.
+- Spots other than Cuttack are centres of mapped change (checked on our map), not named places.
+- Not used: people-affected and death counts. Recession on 1 Aug (search summary only, not opened).
+- Our own numbers: `data/processed/mahanadi-delta-2026/products/timeseries.json`; `docs/eda/events2026/mahanadi-delta-2026.json` (JRC). The 9 Jul and 21 Jul previews are corrupt (striped, 0.69 and 0.52 of the median file size) and were excluded in `area.json`.
+
+
+## Eastern Uttar Pradesh and the Nepal Terai, late September 2026 (up-terai-2026)
+
+Opened 15 Nov 2026.
+
+- [Wikipedia: 2026 North Indian Ocean cyclone season](https://en.wikipedia.org/wiki/2026_North_Indian_Ocean_cyclone_season) (secondary, still being edited) supports: system BOB 06, 21 to 27 September 2026, moved toward the Odisha and north Andhra coast and brought severe flooding to Uttar Pradesh and Nepal. Death figures on that page are not used.
+- [All India Radio / newsonair, 29 Sep 2026: "Flood-like conditions persist in several Uttar Pradesh districts amid heavy rainfall"](https://newsonair.gov.in/flood-like-conditions-persist-in-several-uttar-pradesh-districts-amid-heavy-rainfall/) supports: Ghaghra above danger mark at Barabanki, Ayodhya and Turtipar (Ballia); Gandak above danger mark at Kushinagar; Ramganga at Shahjahanpur and Kuwano at Gonda; a 25 m embankment breach on the Narayani in Tamkuhi Raj (Kushinagar); causes heavy rain and water released from barrages. The page gives no rainfall figures.
+- [Wikipedia: Gorakhpur](https://en.wikipedia.org/wiki/Gorakhpur) 26.764 N, 83.404 E, on the Rapti.
+- Not used: death and displacement counts. The statement "heavy rain 25 to 27 Sep" in the story comes only from the Wikipedia date range of the system (21 to 27 Sep), not from a rainfall page.
+- Not opened (search summaries only): rainfall of 66.5 mm against 7.6 mm normal (25 to 27 Sep), Rapti above danger mark at Gorakhpur.
+- Our own numbers: `data/processed/up-terai-2026/products/timeseries.json`; `docs/eda/events2026/up-terai-2026.json` (JRC). The 9 Jul and 21 Jul previews are corrupt (0.44 and 0.63 of median file size) and were excluded in `area.json`. Note the two spots outside the Terai are centres of mapped change, not named places.
+
+
+## Thunder Bay 36 fire, northwestern Ontario, July 2026 (thunder-bay-36-2026)
+
+Opened 15 Nov 2026. This is a burn place, not a water place: the water layer is flat and unrelated. What we show is the change in HH preview brightness.
+
+- [Wikipedia: Thunder Bay 36 Fire](https://en.wikipedia.org/wiki/Thunder_Bay_36_Fire) (secondary) supports: coordinates 50.68 N, 89.48 W; start 12 July 2026; formed when the Dryden 13 fire merged with nearby fires in Wabakimi Provincial Park; 314,000 hectares as of 29 July; out of control on 31 July.
+- [Fort Frances Times / SNNewsWatch, 30 Jul 2026: "Thunder Bay 36 largest wildfire in Ontario history, by far"](https://fftimes.com/news/district-news/thunder-bay-36-largest-wildfire-in-ontario-history-by-far/) supports: 313,930 hectares as of Wednesday evening (29 Jul); peak "spanned 320,000 hectares"; previous Ontario record 196,974 hectares (Red Lake 12, 2025); near Whitesand and Armstrong, about 220 km north of Thunder Bay; 13 July evacuation of Namaygoosisagagun First Nation.
+- [CP24 / Canadian Press, 11 Aug 2026](https://www.cp24.com/news/canada/2026/08/11/ontario-fire-crews-making-good-progress-despite-large-area-burned-minister-says/) supports: largest fire peaked at about 3,500 square kilometres north of Thunder Bay (the article does not name the fire); 14 communities evacuated at that date. Its 3,500 km2 is larger than the 313,930 hectares (3,139 km2) in the other source; the story quotes only the 314,000 hectares and "up to about 320,000".
+- Our numbers: `docs/eda/events2026/thunder-bay-36-2026.json` and `.png`. HH brightness rise inside the burned area is about 0.12 against 0.01 to 0.05 at two unburned reference spots; no patch in the control pair 17 Jun to 11 Jul. The area of the bright patch (about 2,000 km2 at +0.07) is smaller than the published burnt area and is not an area estimate. HV did not drop (inside 25 km disc +0.05 on 23 Jul against -0.01 outside), so the story does not say "dropped".
+- Spots are centres of the mapped patch and the published coordinate, not named places.
+
+
+## La Mierla fire, Guadalajara, Spain, July 2026 (la-mierla-fire-2026)
+
+Opened 15 Nov 2026. Burn place; the water layer is zero.
+
+- [The Local Spain, 20 Jul 2026 (updated 23 Jul): "800 evacuated as Spain's biggest wildfire of the year rages on"](https://www.thelocal.es/20260720/800-evacuated-as-spains-biggest-wildfire-of-the-year-rages-on) supports: La Mierla forest fire, Guadalajara province; started 16 July 2026; over 32,000 hectares; second-largest wildfire in Spain this century, behind the 2025 Larouco-Quiroga-Oencia fire (37,765 ha per Copernicus); "stabilisation phase" on 23 July.
+- [El Debate, 22 Jul 2026: before and after image from Copernicus](https://www.eldebate.com/espana/castilla-la-mancha/20260722/herida-32000-hectareas-vista-desde-espacio-brutal-antes-despues-mierla_442543_amp.html) supports: about 32,000 hectares (29,000 in a 21 Jul article); before image 13 July, after image 21 July; affected villages Riofrío del Llano, Cardeñosa, Santiuste, Rebollosa del Jadraque and Angón, residents beginning to return; woodland, crops and pasture before the fire.
+- [elDiario.es, 30 Jul 2026](https://www.eldiario.es/castilla-la-mancha/provincias/guadalajara/incendio-mierla-compromete-gravemente-riqueza-ecologica-ornitologica-sierra-norte-guadalajara_1_13418409.amp.html) supports: nearly 33,000 hectares, about 95 % inside the Parque Natural de la Sierra Norte de Guadalajara (SEO/BirdLife).
+- [Wikipedia: Riofrío del Llano](https://en.wikipedia.org/wiki/Riofr%C3%ADo_del_Llano) 41.138 N, 2.825 W; [Wikipedia: Angón](https://en.wikipedia.org/wiki/Ang%C3%B3n) about 41.07 N, 2.85 W. No coordinates for La Mierla itself were found.
+- Our numbers: `docs/eda/events2026/la-mierla-fire-2026.json` and `.png`. HV drop inside the 9 km disc: 0.05, 0.08, 0.09 on 26 Jul, 31 Aug, 18 Oct, against about 0 outside and in the control interval; the disc is among the darkest 0.2 % (26 Jul, 31 Aug) and 1 % (18 Oct) of all equal discs. The disc was located from the data; the published villages lie 15 to 25 km to the east, so the independent check is weak. 7 Oct and 18 Oct previews carry QC warnings (widespread HH/HV difference).
+- Not used: evacuation counts, casualty counts, the 13,000 to 14,400 hectare figure in one search result (does not match).
+
+
+## Burgohondo / Navaluenga fire, Ávila, Spain, July 2026 (avila-burgohondo-fire-2026)
+
+Opened 15 Nov 2026. Burn place; water layer is zero.
+
+- [El Español, 26 Jul 2026](https://www.elespanol.com/castilla-y-leon/region/avila/20260726/incendio-burgohondo-hectareas-quemadas-mayor-historia-espana/1003744334616_0.html) supports: Burgohondo (Ávila) about 50,000 hectares per Minister Sara Aagesen; about 77,000 hectares across the incidents in operational situation 3 per Protección Civil; Madrid more than 25,000 and Toledo more than 2,000 hectares, managed as one fire because their fronts are connected; Aagesen's wording "el mayor incendio forestal de la historia reciente en nuestro país"; no residents had died. The article does not give the ignition date.
+- [El Debate, 30 Jul 2026](https://www.eldebate.com/espana/castilla-y-leon/20260730/perimetro-incendio-burgohondo-avila-esta-casi-consolidado-poca-llama-viva-nula_445333.html) supports: 55,000 hectares (photo caption), perimeter "casi consolidado con poca llama viva o nula", Cecopi at Navaluenga.
+- [Wikipedia: Navaluenga](https://en.wikipedia.org/wiki/Navaluenga) 40 deg 24' 35'' N, 4 deg 42' 29'' W (40.410, -4.708). [Wikipedia: Burgohondo](https://en.wikipedia.org/wiki/Burgohondo) in the Valle del Alberche (no coordinates obtained).
+- Not opened (search summaries only): first alerts 24 July, 71 km perimeter and 9,000 ha on 24 July, 160 km black landscape. The story therefore gives no ignition date.
+- Our numbers: `docs/eda/events2026/avila-burgohondo-fire-2026.json` and `.png`. The east-of-Navaluenga disc is the darkest HV disc in the frame (0.03 to 0.12 percentile) on 19 Sep, 1 Oct and 13 Oct against about 0 in the pre-fire control. The 7 Sep preview is corrupt and was excluded; the 26 Aug preview has a QC flag. The darkest discs were found in the data; the independent location check is the match with Navaluenga and the east-west direction of the fire.

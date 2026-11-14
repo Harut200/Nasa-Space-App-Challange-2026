@@ -1,0 +1,273 @@
+{
+  "id": "up-terai-2026",
+  "name": "Eastern Uttar Pradesh and Nepal Terai",
+  "bounds": [
+    82.38000000000001,
+    26.499324794480415,
+    83.5991571590196,
+    27.499999999999993
+  ],
+  "dates": [
+    "2026-06-27",
+    "2026-08-14",
+    "2026-08-26",
+    "2026-09-19",
+    "2026-10-01",
+    "2026-10-13"
+  ],
+  "gaps": [
+    [
+      "2026-07-27",
+      "2026-08-10"
+    ]
+  ],
+  "layers": [
+    {
+      "id": "hh",
+      "label": "HH brightness (preview)",
+      "dates": [
+        "2026-06-27",
+        "2026-08-14",
+        "2026-08-26",
+        "2026-09-19",
+        "2026-10-01",
+        "2026-10-13"
+      ],
+      "legend": {
+        "type": "ramp",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": 0,
+        "max": 100,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    },
+    {
+      "id": "water",
+      "label": "Water and flooded vegetation",
+      "dates": [
+        "2026-06-27",
+        "2026-08-14",
+        "2026-08-26",
+        "2026-09-19",
+        "2026-10-01",
+        "2026-10-13"
+      ],
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#2f6fde",
+            "label": "Open water"
+          },
+          {
+            "color": "#35b04a",
+            "label": "Possible water under vegetation"
+          },
+          {
+            "color": "#7fd3c4",
+            "label": "Going under: vegetation submerging, or part open water"
+          },
+          {
+            "color": "#f28e2b",
+            "label": "Usually water, not today (rain or wind?)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "when",
+      "label": "When it changed for good",
+      "dates": null,
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#440154",
+            "label": "14 Aug"
+          },
+          {
+            "color": "#3b528b",
+            "label": "26 Aug"
+          },
+          {
+            "color": "#21918c",
+            "label": "19 Sep"
+          },
+          {
+            "color": "#5ec962",
+            "label": "1 Oct"
+          },
+          {
+            "color": "#fde725",
+            "label": "13 Oct"
+          }
+        ]
+      }
+    },
+    {
+      "id": "classes",
+      "label": "Season classes",
+      "dates": null,
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#08306b",
+            "label": "Permanent water"
+          },
+          {
+            "color": "#4292c6",
+            "label": "Seasonal open water"
+          },
+          {
+            "color": "#41ab5d",
+            "label": "Flooded vegetation"
+          },
+          {
+            "color": "#9ecae1",
+            "label": "Got darker, not open water (wetter ground, shallow or partial flooding)"
+          },
+          {
+            "color": "#c994c7",
+            "label": "Got brighter (growing crops and other causes)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "change",
+      "label": "Change since first pass (HH)",
+      "dates": [
+        "2026-08-14",
+        "2026-08-26",
+        "2026-09-19",
+        "2026-10-01",
+        "2026-10-13"
+      ],
+      "legend": {
+        "type": "diverging",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": -35,
+        "max": 35,
+        "colors": [
+          "#2166ac",
+          "#00000000",
+          "#b2182b"
+        ],
+        "labels": [
+          "darker: new water, cleared forest",
+          "brighter: flooded vegetation, growth"
+        ]
+      }
+    },
+    {
+      "id": "rgb",
+      "label": "Three-date composite",
+      "dates": null,
+      "legend": {
+        "type": "text",
+        "text": "HH: red = 27 Jun, green = 19 Sep, blue = 13 Oct. Grey = no change."
+      }
+    },
+    {
+      "id": "hv",
+      "label": "HV brightness (preview)",
+      "dates": [
+        "2026-06-27",
+        "2026-08-14",
+        "2026-08-26",
+        "2026-09-19",
+        "2026-10-01",
+        "2026-10-13"
+      ],
+      "legend": {
+        "type": "ramp",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": 0,
+        "max": 100,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    }
+  ],
+  "story": {
+    "see": "Compare 19 September with 1 October over eastern Uttar Pradesh and the Nepal border plain. Mapped open water is only about 9 square kilometres on 19 September, then about 170 on 1 October and about 130 on 13 October. The new water sits in river valleys and low ground south and north of Gorakhpur.",
+    "physics": "A Bay of Bengal depression that moved inland from about 21 to 27 September brought heavy rain to Uttar Pradesh and Nepal. On 29 September the Ghaghra and Gandak rivers were reported above the danger mark, and an embankment on the Narayani river broke near Tamkuhi Raj in Kushinagar. Officials named heavy rain and water released from barrages as the causes.",
+    "lband": "Calm water is dark to radar, and in this plain the new patches are dark river-valley and field patches that were not there on 19 September. About 8 in 10 of the new water lies inside the largest extent the JRC long-term water record has ever shown here. The total is small next to the whole frame and the 180 metre preview images miss narrow channels, so read this as the clearest wet ground, not the full flood.",
+    "people": "The floodplain here is farmed and densely settled, and the rivers rise from the same monsoon rain that falls over Nepal. Seeing where water still stood days after the rain, and whether it was still there twelve days later, helps show which low fields stay wet longest."
+  },
+  "spots": [
+    {
+      "id": "south-of-gorakhpur",
+      "label": "Floodplain south of Gorakhpur",
+      "lngLat": [
+        83.367,
+        26.591
+      ]
+    },
+    {
+      "id": "rapti-gorakhpur",
+      "label": "Rapti valley near Gorakhpur",
+      "lngLat": [
+        83.321,
+        26.785
+      ]
+    },
+    {
+      "id": "northern-plain",
+      "label": "Northern plain near the Nepal border",
+      "lngLat": [
+        82.928,
+        27.224
+      ]
+    },
+    {
+      "id": "terai-edge",
+      "label": "Terai edge",
+      "lngLat": [
+        82.861,
+        27.398
+      ]
+    },
+    {
+      "id": "gorakhpur-city",
+      "label": "Gorakhpur (built-up, stays dry)",
+      "lngLat": [
+        83.404,
+        26.764
+      ]
+    }
+  ],
+  "credits": "NISAR GCOV preview images: NASA/JPL-Caltech and ISRO, distributed by ASF DAAC. Uncalibrated previews at about 180 m; values are display brightness, not backscatter.",
+  "source": "preview",
+  "quality": {
+    "2026-06-27": {
+      "quality": "warn",
+      "quality_note": "HH contrast 0.66x the other dates' (usual 0.97x); HH local noise 0.118 vs usual 0.057",
+      "channels": [
+        "HH"
+      ]
+    },
+    "2026-08-26": {
+      "quality": "warn",
+      "quality_note": "HH stable-land brightness +6% vs the other dates",
+      "channels": [
+        "HH"
+      ]
+    },
+    "2026-09-19": {
+      "quality": "warn",
+      "quality_note": "1 pass(es) missing, not explained by the outage or the area config (2026-09-07)",
+      "channels": [
+        "HH",
+        "HV"
+      ]
+    }
+  },
+  "category": "flood"
+}
