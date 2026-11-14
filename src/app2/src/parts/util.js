@@ -91,6 +91,10 @@ export function qualityFor(quality, date) {
 export function thumbUrl(manifest, base = import.meta.env.BASE_URL + 'data/') {
   if (!manifest?.id) return null
   const layers = manifest.layers || []
+  if (manifest.kind === 'event') { // earthquakes: the fringes image, else the first undated layer
+    const f = layers.find((l) => l.id === 'fringes') || layers.find((l) => !l.dates)
+    return f ? `${base}${manifest.id}/${f.id}.webp` : null
+  }
   const stat = ['rgb', 'classes'].map((id) => layers.find((l) => l.id === id && !l.dates)).find(Boolean)
   if (stat) return `${base}${manifest.id}/${stat.id}.webp`
   const fr = layers.find((l) => l.id === 'water' && l.dates?.length) || layers.find((l) => l.dates?.length)

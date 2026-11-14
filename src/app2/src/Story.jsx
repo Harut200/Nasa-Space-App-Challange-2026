@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react'
-import { fmtDate } from './data.js'
+import { fmtDate, isEvent } from './data.js'
+import { EventStrip } from './EventParts.jsx'
 import { Icon, Num } from './ui.jsx'
 
 function Stat({ s }) {
@@ -24,7 +25,8 @@ export default function Story({ place, scenes, n, index, playing, setPlaying, on
   const stat = sc.stat(index)
   const expanded = open === sc.key
   const last = n === scenes.length
-  const q = place.quality[place.dates[index]]
+  const ev = isEvent(place)
+  const q = ev ? null : place.quality[place.dates[index]]
   return (
     <section className="panel story" aria-label="Story" aria-live="polite"
       onTouchStart={(e) => { touch.current = e.touches[0].clientX }}
@@ -35,11 +37,14 @@ export default function Story({ place, scenes, n, index, playing, setPlaying, on
         <Stat s={stat} />
         <p className="body">{expanded ? sc.full : sc.text}</p>
         {sc.full && sc.full !== sc.text && <button className="linkish" onClick={() => setOpen(expanded ? null : sc.key)} aria-expanded={expanded}>{expanded ? 'Show less' : 'Read the full passage'}</button>}
-        {sc.compare && <p className="hint mono">Drag the handle on the map: first pass on the left, {fmtDate(place.dates[index])} on the right.</p>}
-        {sc.focus && <p className="hint mono">Zoomed to {place.spots.find((s) => s.id === sc.focus)?.label}, the spot where radar brightness changed most.</p>}
+        {ev && sc.strip && <EventStrip event={place.event} />}
+        {sc.note && <p className="hint mono">{sc.note}</p>}
+        {ev && sc.hint && <p className="hint mono">{sc.hint}</p>}
+        {!ev && sc.compare && <p className="hint mono">Drag the handle on the map: first pass on the left, {fmtDate(place.dates[index])} on the right.</p>}
+        {!ev && sc.focus && <p className="hint mono">Zoomed to {place.spots.find((s) => s.id === sc.focus)?.label}, the spot where radar brightness changed most.</p>}
         {missing && <p className="hint mono">No image for this pass in this layer.</p>}
       </div>
-      <div className="beats-wrap">
+      {!ev && <div className="beats-wrap">
         <div className="beats" role="group" aria-label="Radar passes">
           <button className="play sm" onClick={() => { if (!playing && index >= place.dates.length - 1) onIndex(0); setPlaying(!playing) }} aria-label={playing ? 'Pause' : 'Play the passes'}>{playing ? Icon.pause : Icon.play}</button>
           {place.dates.map((d, i) => (
@@ -48,7 +53,7 @@ export default function Story({ place, scenes, n, index, playing, setPlaying, on
           <span className="mono beat-date">{fmtDate(place.dates[index])}</span>
         </div>
         {q && <p className={`pill q-${q.quality}`} role="status">{q.quality === 'fail' ? 'Flagged pass' : 'Caution'}: {q.quality_note.split(';')[0]}</p>}
-      </div>
+      </div>}
       <div className="story-nav">
         <div className="dots" role="tablist" aria-label="Scenes">
           {scenes.map((s, i) => <button key={s.key} role="tab" aria-selected={i + 1 === n} aria-label={`Scene ${i + 1}: ${s.title}`} className={i + 1 === n ? 'on' : ''} onClick={() => onScene(i + 1)} />)}

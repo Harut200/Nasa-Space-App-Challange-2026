@@ -254,3 +254,28 @@ input[type=range] { accent-color: var(--accent); width: 100%; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .001ms !important; animation-delay: 0s !important; transition-duration: .001ms !important; }
 }
+
+/* earthquake places */
+.quake-star { display: flex; flex-direction: column; align-items: center; pointer-events: none; filter: drop-shadow(0 2px 6px rgba(0,0,0,.7)); }
+.quake-star span { font: 600 11px var(--mono); color: var(--ink); text-shadow: 0 1px 4px #000, 0 0 8px #000; margin-top: -2px; }
+.ev-strip { display: grid; gap: 18px; margin: 14px 0 6px; }
+.ev-row { display: grid; grid-template-columns: 1fr; gap: 4px; }
+.ev-name { color: var(--ink-3); text-transform: uppercase; letter-spacing: .1em; font-size: 10.5px; }
+.ev-track { position: relative; height: 56px; }
+.ev-line { position: absolute; top: 28px; height: 2px; background: var(--ink-3); opacity: .7; transform: translateY(-1px); }
+.ev-dot { position: absolute; top: 28px; width: 11px; height: 11px; border-radius: 50%; background: var(--ink); transform: translate(-50%, -50%); }
+.ev-star { position: absolute; top: 28px; transform: translate(-50%, -50%); color: var(--accent); font-size: 22px; line-height: 1; text-shadow: 0 0 8px rgba(255,106,61,.6); }
+.ev-q { position: absolute; top: 0; transform: translateX(-50%); color: var(--accent); white-space: nowrap; font-size: 10.5px; }
+.ev-d { position: absolute; top: 40px; transform: translateX(-50%); color: var(--ink-2); white-space: nowrap; font-size: 10.5px; }
+.ev-note { margin: 4px 0 0; color: var(--ink-2); font-size: 13.5px; }
+.ev-dock { height: auto; max-height: 52vh; overflow: auto; }
+.ev-dock .ev-strip { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 8px 36px; margin-top: 2px; }
+.ev .legend { bottom: 188px; }
+.ev.mode-story .legend { right: 24px; }
+.ev-modes { display: grid; gap: 8px; }
+.pt-gal-h { font: 400 30px var(--serif); margin: 4px 0 12px; color: var(--ink); }
+.pt-gal-h2 { margin-top: 34px; }
+.phone .ev-modes { grid-template-columns: repeat(2, 1fr); }
+.phone.ev .legend { display: none; }
+.phone .ev-dock { left: 8px; right: 8px; bottom: 8px; max-height: 34vh; }
+.phone .opening .actions .btn.big { flex: 1 1 100%; justify-content: center; }

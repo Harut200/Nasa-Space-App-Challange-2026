@@ -60,7 +60,7 @@ export default function TimelineChart({ place, index, onScrub, showFlood = true 
       onPointerDown={(e) => { setDrag(true); e.currentTarget.setPointerCapture(e.pointerId); onScrub(at(e.clientX)) }}
       onPointerMove={(e) => { const i = at(e.clientX); setHover(i); if (drag) onScrub(i) }}
       onPointerUp={() => setDrag(false)} onPointerLeave={() => { setHover(null) }}>
-      {size && <svg width={w} height={h} role="img" aria-label={`${P.label} over the ten radar passes. Drag to move through time.`}>
+      {size && <svg width={w} height={h} role="img" aria-label={`${P.label} over the ${dates.length} radar passes. Drag to move through time.`}>
         <defs>
           <pattern id="rest" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
             <rect width="7" height="7" fill="none" /><line x1="0" y1="0" x2="0" y2="7" stroke="var(--ink-3)" strokeWidth="1.2" opacity=".5" />

@@ -1,13 +1,15 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { FLAGSHIP, fmtDate, frameUrl, isDated, loadIndex, loadPlace } from './data.js'
+import { FLAGSHIP, fmtDate, frameUrl, isDated, isEvent, loadIndex, loadPlace } from './data.js'
 import { useRoute } from './route.js'
 import { buildScenes } from './scenes.js'
 import MapStage from './MapStage.jsx'
 import Opening from './Opening.jsx'
 import Explore from './Explore.jsx'
+import { EventExplore } from './EventParts.jsx'
 import Story from './Story.jsx'
 import Gallery from './Gallery.jsx'
 import Sheet from './Sheet.jsx'
+import Legend from './Legend.jsx'
 import { Icon, reducedMotion } from './ui.jsx'
 
 const useWidth = () => {
@@ -51,12 +53,13 @@ export default function App() {
   const sceneN = Math.min(Math.max(1, route.scene || 1), scenes.length || 1)
   const scene = mode === 'story' ? scenes[sceneN - 1] : null
 
+  const ev = isEvent(place) // an earthquake: one before/after pair, no dated passes
   const nDates = place?.dates.length || 1
   const index = Math.min(indexState, nDates - 1) // a new place can have fewer passes than the one just left
   const setIndex = useCallback((i) => setIndexRaw(Math.max(0, Math.min(nDates - 1, i))), [nDates])
 
   // Layer on show
-  const layerId = mode === 'story' ? scene?.layer : mode === 'explore' ? (route.layer && place?.layers.some((l) => l.id === route.layer) ? route.layer : 'water') : 'water'
+  const layerId = mode === 'story' ? scene?.layer : mode === 'explore' ? (route.layer && place?.layers.some((l) => l.id === route.layer) ? route.layer : ev ? (place.layers.some((l) => l.id === 'fringes') ? 'fringes' : place.layers[0]?.id) : 'water') : 'water'
   const layer = place?.layers.find((l) => l.id === layerId)
 
   // Reset the playhead when place / scene / mode changes
@@ -70,11 +73,11 @@ export default function App() {
     if (mode === 'story' && scene) {
       const dated = route.date && place.dates.includes(route.date) && firstApply.current ? place.dates.indexOf(route.date) : null
       setIndexRaw(dated ?? (scene.at ?? 0))
-      setPlaying(!!scene.play && !reducedMotion() && dated == null)
+      setPlaying(!!scene.play && !reducedMotion() && dated == null && !isEvent(place))
       if (scene.compare) setCmp((c) => ({ ...c, on: true })); else setCmp((c) => ({ ...c, on: false }))
     } else if (mode === 'explore') {
       const di = route.date ? place.dates.indexOf(route.date) : -1
-      applying.current = di >= 0 ? di : place.dates.length - 1
+      applying.current = di >= 0 ? di : Math.max(0, place.dates.length - 1)
       setIndexRaw(applying.current)
       setPlaying(false)
       setCmp((c) => ({ ...c, on: keepCmp }))
@@ -98,7 +101,7 @@ export default function App() {
 
   // keep the URL in step with the explore date
   useEffect(() => {
-    if (mode === 'explore' && place) {
+    if (mode === 'explore' && place && !isEvent(place)) {
       if (applying.current != null) { if (index !== applying.current) return; applying.current = null }
       const d = place.dates[index]
       if (route.date !== d) go({ date: d }, false)
@@ -113,12 +116,14 @@ export default function App() {
   const url = place && layer ? frameUrl(place, layerId, date) : null
   const dated = place ? isDated(place, layerId) : false
   const firstOfLayer = layer?.dates?.[0]
-  const cmpAvailable = !!(layer?.dates && layer.dates.length > 1)
+  // seasons: first pass vs now. Earthquakes: the layer vs bare terrain (explore) or ascending vs descending (story)
+  const cmpAvailable = ev ? !!layer : !!(layer?.dates && layer.dates.length > 1)
   const cmpOn = cmp.on && cmpAvailable && mode !== 'open'
-  const cmpUrl = cmpOn ? frameUrl(place, layerId, firstOfLayer) : null
+  const cmpLayerId = ev ? (mode === 'story' ? scene?.cmpLayer : null) : layerId
+  const cmpUrl = cmpOn && cmpLayerId ? frameUrl(place, cmpLayerId, firstOfLayer) : null
 
   // Camera
-  const focusSpot = scene?.focus ? place?.spots.find((s) => s.id === scene.focus) : null
+  const focusSpot = scene?.focus ? place?.spots.find((s) => s.id === scene.focus) : scene?.focusLL ? { id: 'epicentre', lngLat: scene.focusLL } : null
   const padding = mode === 'open' || mode === 'places' ? { top: 60, bottom: 60, left: 40, right: 40 }
     : phone ? { top: 70, left: 20, right: 20, bottom: mode === 'story' ? 360 : 300 }
     : mode === 'story' ? { top: 80, bottom: 70, left: 520, right: 60 }
@@ -143,6 +148,10 @@ export default function App() {
       if (mode === 'open') { if (k === 'Enter') { openPlace(FLAGSHIP) } else if (k === 'p') go({ place: null, mode: 'places' }); return }
       if (mode === 'places') { if (k === 'Escape') go({ place: null, mode: 'open' }); return }
       if (!place) return
+      if (ev) { // earthquakes have one pass: no playhead, so these keys do nothing
+        if (k === ' ' || k === '0' || /^[1-9]$/.test(k)) { if (k === ' ') e.preventDefault(); return }
+        if ((k === 'ArrowRight' || k === 'PageDown' || k === 'ArrowLeft' || k === 'PageUp') && mode !== 'story') { e.preventDefault(); return }
+      }
       if (k === ' ' ) { e.preventDefault(); if (tag === 'BUTTON') e.target.blur(); setPlaying((p) => (!p && index >= nDates - 1 ? (setIndexRaw(0), true) : !p)); return }
       if (/^[1-9]$/.test(k)) { setPlaying(false); setIndex(+k - 1); return }
       if (k === '0') { setPlaying(false); setIndex(nDates - 1); return }
@@ -164,16 +173,17 @@ export default function App() {
   const pass = place ? place.dates[index] : null
   const missing = place && layer && dated && !url
   const heroPlace = mode === 'open' || mode === 'places'
+  const quakeId = ids.includes('tibet-m70-2026') ? 'tibet-m70-2026' : ids.find((id) => places[id] && isEvent(places[id])) || null
 
   if (failed) return <div className="fatal"><h1>Data not available</h1><p>The place list could not be loaded.</p></div>
 
   return (
-    <div className={`app mode-${mode} ${phone ? 'phone' : ''}`}>
+    <div className={`app mode-${mode} ${phone ? 'phone' : ''} ${ev && !heroPlace ? 'ev' : ''}`}>
       <MapStage
         bounds={bounds} url={mode === 'places' ? null : url} opacity={opacity} padding={padding} camera={camera}
-        spots={place?.spots || []} showSpots={!!place && !heroPlace && spotsOn} activeSpot={activeSpot}
+        spots={(ev ? place.spots.filter((s) => s.id !== 'epicentre') : place?.spots) || []} showSpots={!!place && !heroPlace && spotsOn} activeSpot={activeSpot}
         onSpot={(id) => { if (mode === 'explore' || mode === 'story') setActiveSpot((a) => (a === id ? null : id)) }}
-        interactive={!heroPlace}
+        interactive={!heroPlace} star={ev && !heroPlace ? place.event.lngLat : null}
         compare={{ on: cmpOn, split: cmp.split, url: cmpUrl }} onSplit={(s) => setCmp((c) => ({ ...c, split: s }))}
       />
       <div className={`veil ${heroPlace ? 'hero' : ''}`} aria-hidden="true" />
@@ -195,22 +205,28 @@ export default function App() {
         <button className="chip" onClick={() => setSheet(true)} title="How sure are we? (?)">{Icon.info}<span>How sure are we?</span></button>
       </header>
 
-      {mode === 'open' && <Opening place={shownPlace} index={index} onWatch={() => openPlace(FLAGSHIP)} onChoose={() => go({ place: null, mode: 'places' })} />}
+      {mode === 'open' && <Opening place={shownPlace} index={index} onWatch={() => openPlace(FLAGSHIP)} onFeel={quakeId ? () => openPlace(quakeId) : null} onChoose={() => go({ place: null, mode: 'places' })} />}
       {mode === 'places' && <Gallery places={places} ids={ids} current={placeId} onPick={(id) => openPlace(id)} onClose={() => go({ place: null, mode: 'open' })} />}
       {mode === 'story' && place && scene && (
         <Story place={place} scenes={scenes} n={sceneN} index={index} playing={playing} setPlaying={setPlaying} phone={phone}
           onScene={setScene} onIndex={(i) => { setPlaying(false); setIndex(i) }} onSheet={() => setSheet(true)}
           onExplore={() => go({ mode: 'explore', layer: null, date: null })} missing={missing} />
       )}
-      {mode === 'explore' && place && (
+      {mode === 'explore' && place && ev && (
+        <EventExplore place={place} layerId={layerId} layer={layer} setLayer={setLayer} opacity={opacity} setOpacity={setOpacity} cmp={cmp} setCmp={setCmp}
+          spotsOn={spotsOn} setSpotsOn={setSpotsOn} setActiveSpot={setActiveSpot} phone={phone} />
+      )}
+      {mode === 'explore' && place && !ev && (
         <Explore place={place} layerId={layerId} layer={layer} setLayer={setLayer} index={index} setIndex={(i) => { setPlaying(false); setIndex(i) }}
           playing={playing} setPlaying={setPlaying} opacity={opacity} setOpacity={setOpacity} cmp={cmp} setCmp={setCmp} cmpAvailable={cmpAvailable}
           spotsOn={spotsOn} setSpotsOn={setSpotsOn} activeSpot={activeSpot} setActiveSpot={setActiveSpot} missing={missing} dated={dated} phone={phone} />
       )}
-      {cmpOn && <div className="cmp-tags" aria-hidden="true"><span>First pass · {firstOfLayer && fmtDate(firstOfLayer)}</span><span className="r">{date && fmtDate(date)}</span></div>}
+      {cmpOn && ev && <div className="cmp-tags" aria-hidden="true"><span>{scene?.cmpTags ? scene.cmpTags[0] : 'Bare terrain'}</span><span className="r">{scene?.cmpTags ? scene.cmpTags[1] : layer?.label.split(/ \(|:/)[0]}</span></div>}
+      {cmpOn && !ev && <div className="cmp-tags" aria-hidden="true"><span>First pass · {firstOfLayer && fmtDate(firstOfLayer)}</span><span className="r">{date && fmtDate(date)}</span></div>}
+      {mode === 'story' && ev && scene?.legend && layer && <Legend layer={layer} />}
       {mode !== 'places' && !place && mode !== 'open' && <div className="loading" role="status">Loading…</div>}
       <Sheet open={sheet} onClose={() => setSheet(false)} place={place || shownPlace} pass={pass} />
-      {mode !== 'open' && mode !== 'places' && <div className="keys-hint" aria-hidden="true">{mode === 'story' ? '← → scenes' : '← → passes'} · space play · 1–9 pass · ? caveats</div>}
+      {mode !== 'open' && mode !== 'places' && <div className="keys-hint" aria-hidden="true">{ev ? (mode === 'story' ? '← → scenes · M explore · ? caveats' : 'C compare · M story · ? caveats') : `${mode === 'story' ? '← → scenes' : '← → passes'} · space play · 1–9 pass · ? caveats`}</div>}
     </div>
   )
 }

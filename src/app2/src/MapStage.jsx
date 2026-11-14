@@ -60,7 +60,7 @@ function crossfade(st, m, url, bounds, opacity) {
  * props: bounds, url, opacity, padding, camera ({key, focus:[lng,lat], zoomBoost}), spots, activeSpot, onSpot,
  *        interactive, compare {on, split, url}
  */
-export default function MapStage({ bounds, url, opacity = 0.9, padding, camera, spots = [], showSpots, activeSpot, onSpot, interactive = true, compare, onSplit, onReady }) {
+export default function MapStage({ bounds, url, opacity = 0.9, padding, camera, spots = [], showSpots, activeSpot, onSpot, interactive = true, star, compare, onSplit, onReady }) {
   const el = useRef(null), el2 = useRef(null)
   const map = useRef(null), map2 = useRef(null)
   const st = useRef({ token: 0, active: 'a', ready: false, token2: 0, active2: 'a' })
@@ -148,6 +148,19 @@ export default function MapStage({ bounds, url, opacity = 0.9, padding, camera, 
   }, [spots, showSpots])
   useEffect(() => { markers.current.forEach((k, id) => k.getElement().classList.toggle('on', id === activeSpot)) }, [activeSpot, spots, showSpots])
 
+  // epicentre star (earthquake places): always visible, label as text only
+  const starKey = star ? star.join() : ''
+  useEffect(() => {
+    const m = map.current
+    if (!star || !m) return
+    const d = document.createElement('div')
+    d.className = 'quake-star'; d.setAttribute('role', 'img'); d.setAttribute('aria-label', 'Epicentre (USGS)')
+    d.innerHTML = '<svg width="34" height="34" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2l2.9 6.4 7 .7-5.3 4.6 1.6 6.9L12 17.2 5.8 20.8l1.6-6.9L2.1 9.3l7-.7z" fill="#ff6a3d" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg><span>Epicentre</span>'
+    const mk = new maplibregl.Marker({ element: d }).setLngLat(star).addTo(m)
+    return () => mk.remove()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [starKey])
+
   // compare map (first pass, clipped to the left of the divider)
   const cmpOn = !!compare?.on
   useEffect(() => {
@@ -171,7 +184,8 @@ export default function MapStage({ bounds, url, opacity = 0.9, padding, camera, 
   latest.current.cmpUrl = compare?.url
   useEffect(() => {
     const m2 = map2.current
-    if (!cmpOn || !m2 || !m2.isStyleLoaded() || !m2.getSource('sar-a') || !compare?.url) return
+    if (!cmpOn || !m2 || !m2.isStyleLoaded() || !m2.getSource('sar-a')) return
+    if (!compare?.url) { m2.setPaintProperty('sar-a', 'raster-opacity', 0); return } // bare terrain on this side
     m2.getSource('sar-a').updateImage({ url: compare.url, coordinates: quad(bounds) })
     m2.setPaintProperty('sar-a', 'raster-opacity', opacity)
     // eslint-disable-next-line react-hooks/exhaustive-deps

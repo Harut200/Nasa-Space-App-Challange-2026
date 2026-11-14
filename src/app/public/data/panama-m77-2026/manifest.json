@@ -146,15 +146,6 @@
     "radius_km": 60,
     "views": [
       {
-        "id": "asc",
-        "label": "ascending",
-        "track": 76,
-        "before": "2026-10-05",
-        "after": "2026-10-17",
-        "p2p_cm": 85,
-        "control_p2p_cm": 15
-      },
-      {
         "id": "desc40",
         "label": "descending",
         "track": 40,
@@ -162,6 +153,15 @@
         "after": "2026-10-14",
         "p2p_cm": 133,
         "control_p2p_cm": 21
+      },
+      {
+        "id": "asc",
+        "label": "ascending",
+        "track": 76,
+        "before": "2026-10-05",
+        "after": "2026-10-17",
+        "p2p_cm": 85,
+        "control_p2p_cm": 15
       }
     ]
   }

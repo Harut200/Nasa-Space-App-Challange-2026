@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { fmtDate, fmtDateLong, fmtKm } from './data.js'
+import { fmtDate, fmtDateLong, fmtKm, isEvent } from './data.js'
 import { Icon } from './ui.jsx'
 
 // "How sure are we?": always reachable, never in the way.
@@ -7,6 +7,7 @@ export default function Sheet({ open, onClose, place, pass }) {
   const ref = useRef(null)
   useEffect(() => { if (open) ref.current?.focus() }, [open])
   if (!open) return null
+  if (isEvent(place)) return <EventSheet onClose={onClose} place={place} sheetRef={ref} />
   const P = place?.primary
   const qs = place ? Object.entries(place.quality) : []
   const i = place && pass ? place.dates.indexOf(pass) : (place?.dates.length ?? 1) - 1
@@ -41,6 +42,48 @@ export default function Sheet({ open, onClose, place, pass }) {
           <h3>Credits</h3>
           <p>{place?.credits || 'NISAR GCOV preview images: NASA/JPL-Caltech and ISRO, distributed by ASF DAAC.'}</p>
           <p className="fine">Earth imagery: NASA GIBS, Blue Marble Shaded Relief with Bathymetry (when online; the radar layers work without it). Story figures are sourced in docs/research/story-sources.md in the project repository.</p>
+        </section>
+        <section>
+          <h3>Use of AI</h3>
+          <p>AI tools (Claude) were used for research, planning documents, code, analysis and first drafts of the story text. The team chose the challenge approach and the places, reviewed the results and edited the text.</p>
+        </section>
+      </aside>
+    </div>
+  )
+}
+
+function EventSheet({ onClose, place, sheetRef }) {
+  const e = place.event
+  const views = e.views || []
+  const ctl = views.filter((v) => v.control_p2p_cm != null)
+  const looks = new Set(views.map((v) => v.label)).size
+  return (
+    <div className="sheet-back" onClick={onClose}>
+      <aside className="sheet" role="dialog" aria-modal="true" aria-label="How sure are we?" onClick={(ev) => ev.stopPropagation()} ref={sheetRef} tabIndex={-1}>
+        <div className="row"><h2>How sure are we?</h2><button className="icon-btn" onClick={onClose} aria-label="Close">{Icon.close}</button></div>
+        <section>
+          <h3>Provisional data</h3>
+          <p>These ground-motion maps come from NISAR L2 GUNW interferograms, a provisional product.</p>
+        </section>
+        <section>
+          <h3>Line of sight only</h3>
+          <p>A radar measures movement along its line of sight, toward or away from the satellite, not up, down or sideways. {looks > 1 ? `Here we have two viewing directions (${views.map((v) => `${v.label}, track ${v.track}`).join('; ')}).` : `Here we have one viewing direction (${views[0] ? `${views[0].label}, track ${views[0].track}` : 'one track'}).`} The sign convention (which colour is toward the satellite) follows the interferogram definition we assumed; the product guide does not confirm it. The results are not validated against GNSS (GPS) measurements.</p>
+          {views.some((v) => v.p2p_cm != null) && <p>The “peak-to-peak” numbers ({views.filter((v) => v.p2p_cm != null).map((v) => `${v.label}, track ${v.track}: ≈ ${v.p2p_cm} cm`).join('; ')}) are the span from the most to the least line-of-sight change near the epicentre, not a single displacement of the fault.</p>}
+        </section>
+        {ctl.length > 0 && (
+          <section>
+            <h3>The control</h3>
+            <p>Measured the same way on a pair from before the earthquake: {ctl.map((v) => `${v.label}, track ${v.track}: ≈ ${v.control_p2p_cm} cm`).join('; ')}. This is how much apparent motion the method shows when the earthquake is not in the pair. No control image is shown.</p>
+          </section>
+        )}
+        <section>
+          <h3>What we do not claim</h3>
+          <p>This is a measurement of ground movement, not of damage or casualties. We do not infer which fault plane moved or how much it slipped.</p>
+        </section>
+        <section>
+          <h3>Credits</h3>
+          <p>Earthquake locations, magnitudes and mechanisms: USGS Earthquake Hazards Program. Ground-motion maps: NISAR L2 GUNW interferograms (NASA/JPL-Caltech and ISRO, via ASF DAAC), provisional.</p>
+          <p className="fine">Earth imagery: NASA GIBS, Blue Marble Shaded Relief with Bathymetry (when online; the radar layers work without it).</p>
         </section>
         <section>
           <h3>Use of AI</h3>

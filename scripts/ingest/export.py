@@ -96,6 +96,7 @@ def export(area, root=ROOT):
                           "before": f"{a[:4]}-{a[4:6]}-{a[6:]}", "after": f"{b[:4]}-{b[4:6]}-{b[6:]}",
                           "p2p_cm": round(num["p2p_cm_0.5_99.5pct"]) if "p2p_cm_0.5_99.5pct" in num else None,
                           "control_p2p_cm": round(num["control_p2p_cm_0.5_99.5pct"]) if "control_p2p_cm_0.5_99.5pct" in num else None})
+        views.sort(key=lambda v: v["id"] != ev.get("primary_view"))  # the view the fringes layer shows comes first
         manifest["kind"] = "event"
         manifest["event"] = {"type": "earthquake", "magnitude": ev["mag"], "time": ev["time"], "depth_km": ev["depth_km"],
                              "lngLat": [ev["lon"], ev["lat"]], "place": ev.get("place"), "mechanism": ev.get("mechanism"),
