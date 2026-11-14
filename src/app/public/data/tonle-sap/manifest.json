@@ -76,7 +76,11 @@
           },
           {
             "color": "#35b04a",
-            "label": "Flooded vegetation"
+            "label": "Water under vegetation"
+          },
+          {
+            "color": "#7fd3c4",
+            "label": "Going under: vegetation submerging, or part open water"
           },
           {
             "color": "#f28e2b",

@@ -43,6 +43,7 @@ CHANGE_MIN_ALPHA = 0.3   # opacity just above the threshold (rises linearly to 1
 
 WATER = "#2f6fde"
 FLOODED_VEG = "#35b04a"
+GOING_UNDER = "#7fd3c4"
 WIND = "#f28e2b"
 DARKER, BRIGHTER = "#2166ac", "#b2182b"
 CLASS_ITEMS = [  # ops.classify codes 1..3, then code 4 split by the sign of the step (0 = stable, transparent)
@@ -171,6 +172,14 @@ def run(area, source="auto", dev=None):
     water_ok = cached_water_possible(area, tuple(x.shape[-2:]))
     print("  terrain mask:", "applied" if water_ok is not None else "not built for this area")
     out = ops.run_pipeline(x, valid_in, source, dev=dev, water_ok=water_ok)
+    if source == "preview":  # thresholds of the rebuilt rule are in preview brightness; gamma0 keeps the simple rule
+        from scripts.detect.floodveg import detect_flooded_veg
+        fvp = detect_flooded_veg(out["L"], out["valid"], out["water"],
+                                 terrain={"water_possible": water_ok} if water_ok is not None else None)
+        wdev = out["water"].device
+        out["flooded_veg"] = fvp["flooded_veg"].to(wdev)
+        out["fv_state"] = fvp["fv_state"].to(wdev)
+        out["classes"] = ops.classify(out["water"], out["flooded_veg"], out["valid"], out["change_date"], out["knobs"])
     o = {k: (v.cpu() if torch.is_tensor(v) else v) for k, v in out.items()}
     L, valid, T = o["L"], o["valid"], len(dates)
     H, W = grid.h, grid.w
@@ -189,8 +198,11 @@ def run(area, source="auto", dev=None):
 
     # water: open water, flooded vegetation, usually-water-not-today
     for t, d in enumerate(dates):
+        fv = o["flooded_veg"][t] & valid[t]
+        going_under = fv & (o["fv_state"][t] == 2) if "fv_state" in o else torch.zeros_like(fv)
         img = paint([(o["wind_suspect"][t] & valid[t], WIND, 255),
-                     (o["flooded_veg"][t] & valid[t], FLOODED_VEG, 255),
+                     (fv, FLOODED_VEG, 255),
+                     (going_under, GOING_UNDER, 255),
                      (o["water"][t] & valid[t], WATER, 255)], (H, W))
         write_rgba(prod / "water" / f"{d}.tif", img, grid)
 
@@ -239,8 +251,9 @@ def run(area, source="auto", dev=None):
     layers = [
         {"id": "hh", "label": f"HH {kind}", "dated": True, "legend": hh_leg},
         {"id": "water", "label": "Water and flooded vegetation", "dated": True,
-         "legend": cls_legend([(WATER, "Open water"), (FLOODED_VEG, "Flooded vegetation"),
-                               (WIND, "Usually water, not today (wind?)")])},
+         "legend": cls_legend([(WATER, "Open water"), (FLOODED_VEG, "Water under vegetation")]
+                              + ([(GOING_UNDER, "Going under: vegetation submerging, or part open water")] if "fv_state" in o else [])
+                              + [(WIND, "Usually water, not today (wind?)")])},
         {"id": "when", "label": "When it changed for good", "dated": False,
          "legend": cls_legend([(when_cols[k - 1], day_label(dates[k])) for k in range(1, T)])},
         {"id": "classes", "label": "Season classes", "dated": False, "legend": cls_legend(CLASS_ITEMS)},
@@ -280,7 +293,9 @@ def run(area, source="auto", dev=None):
     km = lambda m: [round(float((m[t] & valid[t]).sum()) * km2, 1) for t in range(T)]
     ts = {"dates": dates, "unit": "dB" if source == "gamma0" else PREVIEW_UNIT, "series": series,
           "facts": [{"label": "Open water", "unit": "km²", "values": km(o["water"])},
-                    {"label": "Flooded vegetation", "unit": "km²", "values": km(o["flooded_veg"])}]}
+                    {"label": "Flooded vegetation", "unit": "km²", "values": km(o["flooded_veg"])}]
+                   + ([{"label": "of which going under", "unit": "km²", "values": km(o["flooded_veg"] & (o["fv_state"] == 2))}]
+                      if "fv_state" in o else [])}
     (prod / "timeseries.json").write_text(json.dumps(ts, indent=2, ensure_ascii=False))
     (prod / "source.json").write_text(json.dumps({"source": source, "credits": CREDITS[source]}, indent=2))
     print(f"{area}: source={source} grid={H}x{W} dates={T} spots={len(spots)} change_pol={pol_name}")
