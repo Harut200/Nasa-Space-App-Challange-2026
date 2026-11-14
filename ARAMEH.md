@@ -1,6 +1,6 @@
 # Arameh — app notes and requests
 
-Written Saturday 14 November, 16:00 (Yerevan). Deadline: **Sunday 15 November, 23:59**; we aim to submit by 21:00.
+Written Saturday 14 November, 11:55 (Yerevan). Deadline: **Sunday 15 November, 23:59**; we aim to submit by 21:00.
 
 This collects everything about the web app that came out of the detection work today: what was changed in your code, what the data now contains, what is coming, and what we recommend. Nothing here is merged to `main` yet — it is all in pull request 3.
 

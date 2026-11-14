@@ -1,6 +1,6 @@
 # Abel — your tasks
 
-Written Saturday 14 November, 13:30 (Yerevan). Deadline: **Sunday 15 November, 23:59**. We aim to submit by 21:00.
+Written Saturday 14 November, 11:20 (Yerevan). Deadline: **Sunday 15 November, 23:59**. We aim to submit by 21:00.
 
 You and Harutyun own detection: turning radar images into findings, and making sure what we say is true. Harutyun has the code side running. Your side is the science, the checking, and the words. No coding is needed for any task below.
 
