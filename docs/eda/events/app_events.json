@@ -167,5 +167,62 @@
    }
   ],
   "time_note": "start of the August eruption inferred from 'seventh day' on 13 Aug (Euronews); the 24-day pair also holds the 30 Jul paroxysm"
+ },
+ {
+  "id": "thunder-bay-36-coh-2026",
+  "type": "fire",
+  "title": "Thunder Bay 36 fire, Ontario: forest surface changed over 1,500 km2, 11-23 July 2026",
+  "time": "2026-07-12T00:00:00Z",
+  "lat": 50.68,
+  "lon": -89.48,
+  "place": "Wabakimi, northwestern Ontario, Canada",
+  "summary_number": "≥ 1,540 km² of forest changed completely (window-limited)",
+  "radius_km": 25,
+  "views": [
+   {
+    "id": "d_ign",
+    "label": "descending",
+    "track": 41,
+    "before": "2026-07-11",
+    "after": "2026-07-23",
+    "p2p_cm": null,
+    "control_p2p_cm": null,
+    "control_before": "2026-06-29",
+    "control_after": "2026-07-11",
+    "control_is_before": true,
+    "exported": true
+   },
+   {
+    "id": "a_ign",
+    "label": "ascending",
+    "track": 47,
+    "before": "2026-07-11",
+    "after": "2026-07-23",
+    "p2p_cm": null,
+    "control_p2p_cm": null,
+    "control_before": "2026-06-29",
+    "control_after": "2026-07-11",
+    "control_is_before": true,
+    "exported": false
+   }
+  ],
+  "source_url": "https://en.wikipedia.org/wiki/Thunder_Bay_36_Fire",
+  "before_after": [
+   {
+    "view": "d_ign",
+    "before": "coherence_before",
+    "after": "coherence",
+    "label": "Radar coherence",
+    "before_dates": [
+     "2026-06-29",
+     "2026-07-11"
+    ],
+    "after_dates": [
+     "2026-07-11",
+     "2026-07-23"
+    ]
+   }
+  ],
+  "time_note": "fire started 12 Jul; pair 11-23 Jul; the control pair ends the day before"
  }
 ]

@@ -1,0 +1,14 @@
+{
+  "id": "thunder-bay-36-coh-2026",
+  "name": "Thunder Bay 36 fire, Ontario: forest surface changed over 1,500 km2, 11-23 July 2026",
+  "bbox": [
+    -89.95,
+    50.35,
+    -88.9,
+    51.05
+  ],
+  "track": 41,
+  "frame": 63,
+  "direction": "descending",
+  "pixel_m": 80
+}
