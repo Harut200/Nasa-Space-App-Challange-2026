@@ -86,3 +86,82 @@ def test_decompose_east_up_synthetic():
     # pure uplift: both looks see the same sign; pure east motion: opposite signs
     e0, u0 = q.decompose_east_up(np.array([np.cos(np.radians(ia))]), np.array([np.cos(np.radians(idd))]), ua, ud, ia, idd)
     assert abs(e0[0]) < 1e-9 and abs(u0[0] - 1) < 1e-9
+
+
+# ---------------------------------------------------------------- BEFORE layers from the control pair
+def _ev(**kw):
+    ev = {"id": "syn", "time": "2026-06-28T22:00:00Z", "window": [0.0, 0.0, 1.0, 1.0], "los_lim_cm": 20, "fringe_cm": 10,
+          "primary_view": "asc", "export_views": ["asc"],
+          "views": {"asc": {"direction": "A", "label": "ascending", "co": {"pair": "20260625_20260707"},
+                            "control": {"pair": "20260613_20260625"}}}}
+    ev.update(kw)
+    return ev
+
+
+def test_control_is_before_rules():
+    assert q.control_is_before(_ev(), "asc")
+    e = _ev(); e["views"]["asc"]["control_after_event"] = True
+    assert not q.control_is_before(e, "asc")                       # flagged post-event (Flores-like)
+    e = _ev(); e["views"]["asc"]["control"]["pair"] = "20260707_20260719"
+    assert not q.control_is_before(e, "asc")                       # control after the event pair (Qaidam asc11-like)
+    e = _ev(time="2026-06-20T00:00:00Z")
+    assert not q.control_is_before(e, "asc")                       # control ends after the event date
+
+
+def test_pairing_block_well_formed_and_empty_for_post_event_control():
+    ba, skipped = q.before_pairing(_ev())
+    assert skipped == {} and [b["before"] for b in ba] == ["fringes_before", "los_before_cm"]
+    assert [b["after"] for b in ba] == ["fringes", "los_cm"]
+    for b in ba:
+        assert set(b) == {"view", "before", "after", "label", "before_dates", "after_dates"}
+        assert b["before_dates"] == ["2026-06-13", "2026-06-25"] and b["after_dates"] == ["2026-06-25", "2026-07-07"]
+    two = _ev(export_views=["asc", "desc"]); two["views"]["desc"] = dict(two["views"]["asc"], direction="D")
+    assert q.before_pairing(two)[0][1]["after"] == "los_asc_cm"
+    bad = _ev(); bad["views"]["asc"]["control_after_event"] = True
+    ba, skipped = q.before_pairing(bad)
+    assert ba == [] and "asc" in skipped
+
+
+def test_before_layers_use_event_scale():
+    G = np.array([[-20.0, 0.0, 20.0, np.nan]])
+    a = q.before_layers(_ev(), G, 20.0, 10.0)
+    assert a["los_before_cm"].shape == (1, 4, 4) and list(a["los_before_cm"][..., 3][0]) == [255, 255, 255, 0]
+    assert tuple(a["los_before_cm"][0, 0, :3]) == (103, 0, 31) and tuple(a["los_before_cm"][0, 2, :3]) == (5, 48, 97)  # RdBu ends = legend colours
+    G2 = np.array([[0.0, 10.0, 25.0, 5.0]])               # re-wrapped at the same 10 cm cycle: 0, 10 and 20 look alike
+    f = q.before_layers(_ev(), G2, 20.0, 10.0)["fringes_before"]
+    assert (f[0, 0] == f[0, 1]).all() and f[0, 0, :3].tolist() != f[0, 3, :3].tolist()
+
+
+def test_export_before_end_to_end(tmp_path, monkeypatch):
+    import json, os
+    ev = _ev()
+    app, vd = tmp_path / "products", tmp_path / "insar"
+    app.mkdir(); vd.mkdir()
+    x, y = np.linspace(0.005, 0.995, 100), np.linspace(0.995, 0.005, 100)
+    ctl = np.random.default_rng(1).normal(0, 1, (100, 100)).astype(np.float32); ctl[:, :10] = np.nan
+    np.savez(vd / "products_cm.npz", ctl_cm=ctl, ctl_x=x, ctl_y=y, epsg=4326)
+    legend_los = {"type": "diverging", "unit": "cm", "min": -20.0, "max": 20.0, "colors": ["a", "b", "c"]}
+    legend_fr = {"type": "ramp", "min": 0, "max": 10.0, "colors": ["x"]}
+    ev_layers = [{"id": "los_cm", "label": "L", "dated": False, "legend": legend_los},
+                 {"id": "fringes", "label": "F", "dated": False, "legend": legend_fr}]
+    (app / "layers.json").write_text(json.dumps(ev_layers))
+    monkeypatch.setattr(q, "app_dir", lambda e: str(app)); monkeypatch.setattr(q, "view_dir", lambda e, v: str(vd))
+    q.export_before(ev); q.export_before(ev)                        # idempotent
+    L = json.loads((app / "layers.json").read_text())
+    assert [l["id"] for l in L] == ["los_cm", "fringes", "fringes_before", "los_before_cm"] and L[:2] == ev_layers
+    assert L[2]["legend"] == legend_fr and L[3]["legend"] == legend_los and all(l["dated"] is False for l in L)
+    assert L[2]["label"] == "Before the earthquake: fringes (12 days, 13 Jun–25 Jun)"
+    assert L[3]["label"] == "Before the earthquake: ground motion (cm)"
+    import rasterio
+    with rasterio.open(app / "los_before_cm.tif") as f:             # same app grid as the event layers
+        (W, S, E, N), w, h = q._grid(ev)
+        assert (f.width, f.height) == (w, h) and abs(f.bounds.left - W) < 1e-9 and abs(f.bounds.top - N) < 1e-9
+    ba = json.loads((app / "before_after.json").read_text())["before_after"]
+    assert len(ba) == 2 and ba[0]["after"] == "fringes"
+    # a post-event control: no before layer, no before tif, layers untouched
+    e2 = _ev(); e2["views"]["asc"]["control_after_event"] = True
+    for n in ("fringes_before.tif", "los_before_cm.tif"):
+        os.remove(app / n)
+    q.export_before(e2)
+    assert json.loads((app / "layers.json").read_text()) == ev_layers
+    assert not (app / "los_before_cm.tif").exists() and json.loads((app / "before_after.json").read_text())["before_after"] == []

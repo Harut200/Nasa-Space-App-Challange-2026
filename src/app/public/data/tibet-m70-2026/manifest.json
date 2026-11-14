@@ -3,8 +3,8 @@
   "name": "Tibet earthquake, M7.0, 22 Oct 2026",
   "bounds": [
     93.0,
-    31.70058497825999,
-    94.60021700293018,
+    31.69986477735695,
+    94.59984712099434,
     32.99999999999999
   ],
   "dates": [],
@@ -64,6 +64,48 @@
         "colors": [
           "#000000",
           "#ffffff"
+        ]
+      }
+    },
+    {
+      "id": "fringes_before",
+      "label": "Before the earthquake: fringes (12 days, 7 Oct\u201319 Oct)",
+      "dates": null,
+      "legend": {
+        "type": "ramp",
+        "unit": "one colour cycle = 10 cm of line-of-sight change",
+        "min": 0,
+        "max": 10.0,
+        "colors": [
+          "#e2d9e2",
+          "#95b5c7",
+          "#6276ba",
+          "#592a8f",
+          "#2f1436",
+          "#741e4f",
+          "#b25652",
+          "#cca389",
+          "#e2d9e2"
+        ]
+      }
+    },
+    {
+      "id": "los_before_cm",
+      "label": "Before the earthquake: ground motion (cm)",
+      "dates": null,
+      "legend": {
+        "type": "diverging",
+        "unit": "cm",
+        "min": -40.0,
+        "max": 40.0,
+        "colors": [
+          "#67001f",
+          "#f7f7f7",
+          "#053061"
+        ],
+        "labels": [
+          "red: ground moved away from the satellite",
+          "blue: ground moved toward the satellite (sign convention not confirmed by the product guide)"
         ]
       }
     }
@@ -132,7 +174,39 @@
         "before": "2026-10-19",
         "after": "2026-10-31",
         "p2p_cm": 127,
-        "control_p2p_cm": 5
+        "control_p2p_cm": 5,
+        "control_before": "2026-10-07",
+        "control_after": "2026-10-19"
+      }
+    ],
+    "before_after": [
+      {
+        "view": "asc",
+        "before": "fringes_before",
+        "after": "fringes",
+        "label": "Fringes",
+        "before_dates": [
+          "2026-10-07",
+          "2026-10-19"
+        ],
+        "after_dates": [
+          "2026-10-19",
+          "2026-10-31"
+        ]
+      },
+      {
+        "view": "asc",
+        "before": "los_before_cm",
+        "after": "los_cm",
+        "label": "Ground motion (cm)",
+        "before_dates": [
+          "2026-10-07",
+          "2026-10-19"
+        ],
+        "after_dates": [
+          "2026-10-19",
+          "2026-10-31"
+        ]
       }
     ]
   },

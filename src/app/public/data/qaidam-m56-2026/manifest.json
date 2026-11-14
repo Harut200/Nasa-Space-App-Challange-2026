@@ -86,6 +86,48 @@
           "#ffffff"
         ]
       }
+    },
+    {
+      "id": "fringes_before",
+      "label": "Before the earthquake: fringes (12 days, 13 Jul\u201325 Jul) (noisy)",
+      "dates": null,
+      "legend": {
+        "type": "ramp",
+        "unit": "one colour cycle = 5 cm of line-of-sight change",
+        "min": 0,
+        "max": 5.0,
+        "colors": [
+          "#e2d9e2",
+          "#95b5c7",
+          "#6276ba",
+          "#592a8f",
+          "#2f1436",
+          "#741e4f",
+          "#b25652",
+          "#cca389",
+          "#e2d9e2"
+        ]
+      }
+    },
+    {
+      "id": "los_before_cm",
+      "label": "Before the earthquake: ground motion (cm) (noisy)",
+      "dates": null,
+      "legend": {
+        "type": "diverging",
+        "unit": "cm",
+        "min": -10.0,
+        "max": 10.0,
+        "colors": [
+          "#67001f",
+          "#f7f7f7",
+          "#053061"
+        ],
+        "labels": [
+          "red: ground moved away from the satellite",
+          "blue: ground moved toward the satellite (sign convention not confirmed by the product guide)"
+        ]
+      }
     }
   ],
   "story": {
@@ -136,7 +178,9 @@
         "before": "2026-07-25",
         "after": "2026-08-18",
         "p2p_cm": 11,
-        "control_p2p_cm": 4
+        "control_p2p_cm": 4,
+        "control_before": "2026-07-13",
+        "control_after": "2026-07-25"
       },
       {
         "id": "asc11",
@@ -145,7 +189,9 @@
         "before": "2026-08-13",
         "after": "2026-08-25",
         "p2p_cm": 16,
-        "control_p2p_cm": 9
+        "control_p2p_cm": 9,
+        "control_before": "2026-08-25",
+        "control_after": "2026-09-06"
       },
       {
         "id": "desc91",
@@ -154,7 +200,39 @@
         "before": "2026-07-26",
         "after": "2026-08-19",
         "p2p_cm": 9,
-        "control_p2p_cm": 6
+        "control_p2p_cm": 6,
+        "control_before": "2026-07-14",
+        "control_after": "2026-07-26"
+      }
+    ],
+    "before_after": [
+      {
+        "view": "asc83",
+        "before": "fringes_before",
+        "after": "fringes",
+        "label": "Fringes",
+        "before_dates": [
+          "2026-07-13",
+          "2026-07-25"
+        ],
+        "after_dates": [
+          "2026-07-25",
+          "2026-08-18"
+        ]
+      },
+      {
+        "view": "asc83",
+        "before": "los_before_cm",
+        "after": "los_asc_cm",
+        "label": "Ground motion (cm)",
+        "before_dates": [
+          "2026-07-13",
+          "2026-07-25"
+        ],
+        "after_dates": [
+          "2026-07-25",
+          "2026-08-18"
+        ]
       }
     ]
   },

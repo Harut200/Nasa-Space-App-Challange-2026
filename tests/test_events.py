@@ -93,3 +93,52 @@ def test_drop_rule_follows_partial_loss_and_clusters_rank_by_area():
     # without the drop rule a pixel just under `lo` but with a small drop would count; with it it does not
     ev2 = ctl.copy(); ev2[5, 5] = 0.5
     assert not E.coherence_loss(ev2, np.full(X.shape, 0.55), lo=0.6, drop=0.25)[0].any()
+
+
+# ---------------------------------------------------------------- BEFORE layer (control coherence)
+def _ev_syn(**kw):
+    ev = {"id": "syn-ev", "time": "2026-08-06T00:00:00Z", "window": [0.0, 0.0, 1.0, 1.0], "primary_view": "asc",
+          "views": {"asc": {"direction": "A", "label": "ascending", "co": {"pair": "20260723_20260816"},
+                            "control": {"pair": "20260629_20260723"}}}}
+    ev.update(kw)
+    return ev
+
+
+def test_pairing_block_and_post_event_control():
+    ba = E.before_pairing(_ev_syn())
+    assert ba == [{"view": "asc", "before": "coherence_before", "after": "coherence", "label": "Radar coherence",
+                   "before_dates": ["2026-06-29", "2026-07-23"], "after_dates": ["2026-07-23", "2026-08-16"]}]
+    e = _ev_syn(); e["views"]["asc"]["control_after_event"] = True      # kilauea-ep54-like: control is after the event
+    assert E.before_pairing(e) == []
+    e = _ev_syn(); e["views"]["asc"]["control"]["pair"] = "20260816_20260828"
+    assert E.before_pairing(e) == []
+
+
+def test_export_before_same_grid_ramp_and_legend(tmp_path, monkeypatch):
+    import json
+    import rasterio
+    ev = _ev_syn()
+    app, vd = tmp_path / "products", tmp_path / "insar"
+    app.mkdir(); vd.mkdir()
+    x, y = np.linspace(0.005, 0.995, 100), np.linspace(0.995, 0.005, 100)
+    coh_ctl = np.tile(np.linspace(0, 1, 100, dtype=np.float32), (100, 1)); coh_ctl[:5] = np.nan
+    np.savez(vd / "products_cm.npz", coh_ctl=coh_ctl, coh=coh_ctl, x=x, y=y, epsg=4326)
+    leg = {"type": "ramp", "unit": "coherence 0-1", "min": 0, "max": 1, "colors": ["#000000", "#ffffff"]}
+    ev_layers = [{"id": "coherence", "label": "C", "dated": False, "legend": leg}]
+    (app / "layers.json").write_text(json.dumps(ev_layers))
+    monkeypatch.setattr(E, "app_dir", lambda e: str(app)); monkeypatch.setattr(E, "view_dir", lambda e, v: str(vd))
+    E.export_before(ev); E.export_before(ev)
+    L = json.loads((app / "layers.json").read_text())
+    assert [l["id"] for l in L] == ["coherence", "coherence_before"] and L[0] == ev_layers[0]
+    assert L[1]["legend"] == leg and L[1]["dated"] is False and L[1]["label"] == "Before the event: radar coherence (29 Jun–23 Jul)"
+    with rasterio.open(app / "coherence_before.tif") as f:
+        a = f.read()
+    (W, S, Ee, N), w, h = E._grid(ev)
+    assert a.shape == (4, h, w) and a[3].max() == 255 and a[3].min() == 0          # NaN rows transparent
+    ok = a[3] == 255
+    assert a[0][ok].min() < 10 and a[0][ok].max() > 245                              # grey ramp black -> white
+    # control flagged after the event: nothing exported
+    (app / "coherence_before.tif").unlink()
+    e2 = _ev_syn(); e2["views"]["asc"]["control_after_event"] = True
+    E.export_before(e2)
+    assert not (app / "coherence_before.tif").exists() and json.loads((app / "layers.json").read_text()) == ev_layers
