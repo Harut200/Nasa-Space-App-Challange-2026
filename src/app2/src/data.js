@@ -91,11 +91,17 @@ export const defaultLayer = (p) => {
   if (isEvent(p)) return has('fringes') ? 'fringes' : has('coh_loss') ? 'coh_loss' : p.layers[0]?.id
   return p.primary.kind === 'pct' && has('coh') ? 'coh' : 'water'
 }
+// The layer that plays pass by pass for a place with no water series: its default layer if that is dated, else the first dated change or radar layer.
+export const playLayer = (p) => {
+  const dated = (id) => p.layers.some((l) => l.id === id && l.dates?.length)
+  const d = defaultLayer(p)
+  return dated(d) ? d : ['change', 'hv', 'hh'].find(dated) || d
+}
 // First pass that can be shown: one with a value for the primary series (Ararat has no change figure for the first pass),
 // or, for places without a series (wildfires), the first pass the default layer has an image for.
 export const startIndex = (p) => {
   if (p.primary.kind === 'none') {
-    const d = p.layers.find((l) => l.id === defaultLayer(p))?.dates?.[0]
+    const d = p.layers.find((l) => l.id === playLayer(p))?.dates?.[0]
     const k = d ? p.dates.indexOf(d) : 0
     return k < 0 ? 0 : k
   }

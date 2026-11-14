@@ -135,12 +135,14 @@ export default function PlaceGallery({ classes, entries, currentId, onPick, base
   const [sort, setSort] = useState('change')
   const rows = useMemo(() => (entries || []).map((e) => ({ e, d: e.event ? null : seasonData(e) })), [entries])
   const groups = useMemo(() => (classes || []).map((c) => {
-    const list = rows.filter((r) => r.e.category === c.id)
     const name = (r) => r.e.s?.name || r.e.m?.name || r.e.id
-    if (list.every((r) => r.e.event)) list.sort((x, y) => String(y.e.m?.event?.time || y.e.s?.headline?.date || '').localeCompare(String(x.e.m?.event?.time || x.e.s?.headline?.date || '')))
-    else if (sort === 'az') list.sort((x, y) => name(x).localeCompare(name(y)))
-    else if (sort === 'water') list.sort((x, y) => (y.d?.peak ?? -1) - (x.d?.peak ?? -1) || name(x).localeCompare(name(y)))
-    else list.sort((x, y) => Math.abs(y.d?.delta ?? 0) - Math.abs(x.d?.delta ?? 0) || name(x).localeCompare(name(y)))
+    const when = (r) => String(r.e.m?.event?.time || r.e.s?.headline?.date || '')
+    const seasons = rows.filter((r) => r.e.category === c.id && !r.e.event)
+    if (sort === 'az') seasons.sort((x, y) => name(x).localeCompare(name(y)))
+    else if (sort === 'water') seasons.sort((x, y) => (y.d?.peak ?? -1) - (x.d?.peak ?? -1) || name(x).localeCompare(name(y)))
+    else seasons.sort((x, y) => Math.abs(y.d?.delta ?? 0) - Math.abs(x.d?.delta ?? 0) || name(x).localeCompare(name(y)))
+    const events = rows.filter((r) => r.e.category === c.id && r.e.event).sort((x, y) => when(y).localeCompare(when(x)))
+    const list = [...seasons, ...events] // a class that has both kinds: the seasons first, then the single events
     return { ...c, list }
   }), [classes, rows, sort])
   const hasSeasons = rows.some((r) => !r.e.event && !r.d.note)

@@ -124,7 +124,7 @@ function buildEventScenes(p) {
   const views = e.views || []
   const v0 = views[0]
   const has = (id) => p.layers.some((l) => l.id === id)
-  const lposLayer = ['los_cm', 'los_asc_cm', 'los_desc_cm'].find(has) || (has('fringes') ? 'fringes' : null)
+  const lposLayer = ['los_cm', 'los_asc_cm', 'los_desc_cm'].find(has) || (has('fringes') ? 'fringes' : has('coh_loss') ? 'coh_loss' : has('coherence') ? 'coherence' : null)
   const bothLooks = has('los_asc_cm') && has('los_desc_cm')
   const nLooks = new Set(views.map((v) => v.label)).size
   const ev = e.time ? fmtDate(dayOf(e.time)) : 'an unknown date'
@@ -143,7 +143,7 @@ function buildEventScenes(p) {
     stat: () => ({ big: mag, unit: '', label: e.time ? `${nm}, ${fmtUTC(e.time)}` : nm, sub: depth != null ? `depth ${depth} km` : '' }),
   })
   scenes.push({
-    key: 'before-after', kicker: 'Before and after', title: 'Before and after', layer: has('fringes') ? 'fringes' : lposLayer, compare: false, strip: true,
+    key: 'before-after', kicker: 'Before and after', title: 'Before and after', layer: has('fringes') ? 'fringes' : has('coherence') ? 'coherence' : lposLayer, compare: false, strip: true,
     text: `${views.length > 1 ? 'Each pair is' : 'The pair is'} two passes of the same viewing direction${between ? `: one before the earthquake (${fmtDate(dayOf(v0.before))}), one after (${fmtDate(dayOf(v0.after))}). The earthquake struck on ${ev}, between them` : ''}.${nLooks > 1 ? ' The pairs look from two viewing directions, ascending and descending.' : ''} ${has('fringes') ? 'The coloured bands are fringes: each full colour cycle is 10 cm of ground motion toward or away from the satellite.' : ''}`.replace(/\s+/g, ' ').trim(),
     stat: () => main,
   })

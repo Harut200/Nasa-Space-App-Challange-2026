@@ -1,4 +1,4 @@
-import { cycleCm, defaultLayer, fmtDate, fmtDateLong, fmtKm, fmtSigned, fmtUTC, goodViews, isEvent, isNoisy, isQuake, isZeroChange, startIndex } from './data.js'
+import { cycleCm, defaultLayer, playLayer, fmtDate, fmtDateLong, fmtKm, fmtSigned, fmtUTC, goodViews, isEvent, isNoisy, isQuake, isZeroChange, startIndex } from './data.js'
 
 // split after . ! ? only where a space follows, so "about 0.3" stays whole
 const sentences = (t, n) => String(t).trim().split(/(?<=[.!?])\s+/).slice(0, n).join(' ')
@@ -30,7 +30,8 @@ export function buildScenes(p) {
   const emptyWater = P.kind === 'hh' || P.kind === 'pct' || Math.max(...vals.filter((v) => v != null), 0) < 1
   // wildfires: no open-water series; every scene runs on the layer the manifest names and the big text is its headline note
   const none = P.kind === 'none'
-  const dl = none ? defaultLayer(p) : null
+  const dl = none ? defaultLayer(p) : null // shown at rest
+  const pl = none ? playLayer(p) : null // plays and compares pass by pass (the same layer when it is dated)
   const wl = none ? dl : pct && has('coh') ? 'coh' : emptyWater ? 'hh' : 'water'
   const noteStat = (idx) => ({ big: p.headlineNote || p.name, text: true, unit: '', label: '', sub: `pass ${idx + 1} of ${n}, ${fmtDate(p.dates[idx])}` })
   const sureText = [
@@ -45,7 +46,7 @@ export function buildScenes(p) {
     stat: () => passStat,
   })
   scenes.push({
-    key: 'see', kicker: 'What you see', title: 'The season plays', layer: wl, at: first, play: true, text: sentences(p.story.see, 3), full: p.story.see,
+    key: 'see', kicker: 'What you see', title: 'The season plays', layer: none ? pl : wl, at: first, play: true, text: sentences(p.story.see, 3), full: p.story.see,
     note: !none && p.headlineNote ? p.headlineNote : undefined, // a caption the data adds beside the numbers (sevan, pantanal, sudd)
     stat: none ? noteStat : live,
   })
@@ -75,7 +76,7 @@ export function buildScenes(p) {
   const wmax = p.water ? Math.max(...p.water.values.filter((v) => v != null), 0) : 0
   const cohCmp = pct && has('coh') && p.layers.find((l) => l.id === 'coh').dates?.length > 1
   scenes.push({
-    key: 'lband', kicker: 'Why radar sees it', title: cohCmp ? 'Before and after, in coherence' : 'Before and after, in L-band', layer: none ? dl : cohCmp ? 'coh' : 'hh', at: last, compare: true, focus: cohCmp ? undefined : focus?.id,
+    key: 'lband', kicker: 'Why radar sees it', title: cohCmp ? 'Before and after, in coherence' : 'Before and after, in L-band', layer: none ? pl : cohCmp ? 'coh' : 'hh', at: last, compare: true, focus: cohCmp ? undefined : focus?.id,
     text: cohCmp ? sentences(p.story.physics, 3) : sentences(p.story.lband, 3), full: cohCmp ? p.story.physics : p.story.lband,
     stat: () => {
       if (none) return noteStat(last)

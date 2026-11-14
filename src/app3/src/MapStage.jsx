@@ -68,7 +68,7 @@ function crossfade(st, m, url, bounds, opacity) {
  * props: bounds, url, opacity, padding, camera ({key, focus:[lng,lat], zoomBoost}), spots, activeSpot, onSpot,
  *        interactive, compare {on, split, url}
  */
-export default function MapStage({ bounds, url, opacity = 0.9, padding, camera, spots = [], showSpots, activeSpot, onSpot, interactive = true, star, compare, onSplit, onReady, outline, ring }) {
+export default function MapStage({ bounds, url, opacity = 0.9, padding, camera, spots = [], showSpots, activeSpot, onSpot, interactive = true, star, compare, onSplit, onReady, outline, ring, starLabel = 'Epicentre' }) {
   const el = useRef(null), el2 = useRef(null)
   const map = useRef(null), map2 = useRef(null)
   const st = useRef({ token: 0, active: 'a', ready: false, token2: 0, active2: 'a' })
@@ -85,24 +85,6 @@ export default function MapStage({ bounds, url, opacity = 0.9, padding, camera, 
     outlineOf(ou).then((u) => { if (!u || tok !== st.current.otok || !map.current) return; m.getSource('outline').updateImage({ url: u, coordinates: quad(bb) }); m.setPaintProperty('outline', 'raster-opacity', 1) })
   }
   useEffect(() => { applyOutline() }, [outline, bounds.join()]) // eslint-disable-line react-hooks/exhaustive-deps
-
-  // radius ring around the epicentre (events): a dashed circle of event.radius_km
-  const ringKey = ring ? `${ring.lngLat.join()}|${ring.km}` : ''
-  useEffect(() => {
-    const m = map.current
-    const put = () => {
-      if (!m.getStyle()) return
-      if (m.getLayer('ring')) m.removeLayer('ring')
-      if (m.getSource('ring')) m.removeSource('ring')
-      if (!ring) return
-      const [lng, lat] = ring.lngLat, pts = []
-      for (let i = 0; i <= 72; i++) { const a = (i / 72) * 2 * Math.PI; pts.push([lng + (ring.km / (111.32 * Math.cos((lat * Math.PI) / 180))) * Math.cos(a), lat + (ring.km / 110.57) * Math.sin(a)]) }
-      m.addSource('ring', { type: 'geojson', data: { type: 'Feature', geometry: { type: 'LineString', coordinates: pts } } })
-      m.addLayer({ id: 'ring', type: 'line', source: 'ring', paint: { 'line-color': '#ffffff', 'line-width': 1.6, 'line-opacity': 0.85, 'line-dasharray': [2, 2] } })
-    }
-    if (m.isStyleLoaded() && st.current.ready) put(); else m.once('load', put)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ringKey])
 
   // build the main map once
   useEffect(() => {
@@ -131,6 +113,25 @@ export default function MapStage({ bounds, url, opacity = 0.9, padding, camera, 
     return () => { ro.disconnect(); markers.current.forEach((k) => k.remove()); markers.current.clear(); map2.current?.remove(); map2.current = null; m.remove(); map.current = null; st.current.ready = false }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  // radius ring around the epicentre (events): a dashed circle of event.radius_km
+  const ringKey = ring ? `${ring.lngLat.join()}|${ring.km}` : ''
+  useEffect(() => {
+    const m = map.current
+    if (!m) return
+    const put = () => {
+      if (!m.getStyle()) return
+      if (m.getLayer('ring')) m.removeLayer('ring')
+      if (m.getSource('ring')) m.removeSource('ring')
+      if (!ring) return
+      const [lng, lat] = ring.lngLat, pts = []
+      for (let i = 0; i <= 72; i++) { const a = (i / 72) * 2 * Math.PI; pts.push([lng + (ring.km / (111.32 * Math.cos((lat * Math.PI) / 180))) * Math.cos(a), lat + (ring.km / 110.57) * Math.sin(a)]) }
+      m.addSource('ring', { type: 'geojson', data: { type: 'Feature', geometry: { type: 'LineString', coordinates: pts } } })
+      m.addLayer({ id: 'ring', type: 'line', source: 'ring', paint: { 'line-color': '#ffffff', 'line-width': 1.6, 'line-opacity': 0.85, 'line-dasharray': [2, 2] } })
+    }
+    if (st.current.ready) put(); else m.once('load', put)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ringKey])
 
   // interactivity (opening is a cinematic, hands-off backdrop)
   useEffect(() => {
@@ -211,12 +212,12 @@ export default function MapStage({ bounds, url, opacity = 0.9, padding, camera, 
     const m = map.current
     if (!star || !m) return
     const d = document.createElement('div')
-    d.className = 'quake-star'; d.setAttribute('role', 'img'); d.setAttribute('aria-label', 'Epicentre (USGS)')
-    d.innerHTML = '<svg width="34" height="34" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2l2.9 6.4 7 .7-5.3 4.6 1.6 6.9L12 17.2 5.8 20.8l1.6-6.9L2.1 9.3l7-.7z" fill="#ff6a3d" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg><span>Epicentre</span>'
+    d.className = 'quake-star'; d.setAttribute('role', 'img'); d.setAttribute('aria-label', starLabel)
+    d.innerHTML = '<svg width="34" height="34" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2l2.9 6.4 7 .7-5.3 4.6 1.6 6.9L12 17.2 5.8 20.8l1.6-6.9L2.1 9.3l7-.7z" fill="#ff6a3d" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg><span>' + starLabel + '</span>'
     const mk = new maplibregl.Marker({ element: d }).setLngLat(star).addTo(m)
     return () => mk.remove()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [starKey])
+  }, [starKey, starLabel])
 
   // compare map (first pass, clipped to the left of the divider)
   const cmpOn = !!compare?.on

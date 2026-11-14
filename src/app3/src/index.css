@@ -925,3 +925,5 @@ button:active:not(:disabled):not(.handle):not(.globe-hit):not(.beat):not(.spot) 
 .quake-star svg { animation: starpulse 2.4s var(--ease) infinite; transform-origin: 50% 50%; }
 @keyframes starpulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.14); } }
 @media (prefers-reduced-motion: reduce) { .quake-star svg { animation: none; } }
+.app:not(.phone) .dock.panel.has-caution { height: calc(min(330px, 43vh) + 24px); }
+.app:not(.phone):has(.dock.has-caution) .legend { bottom: calc(min(330px, 43vh) + 36px); }

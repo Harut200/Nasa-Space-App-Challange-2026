@@ -19,15 +19,13 @@ export default function Gallery({ places, ids, summary, current, onPick, onClose
   const entries = useMemo(() => entriesFor(ids, places, summary), [ids, places, summary])
   const classes = useMemo(() => classList(entries, summary), [entries, summary])
   const total = entries.length
-  const evs = classes.filter((c) => entries.some((e) => e.category === c.id && e.event)).map((c) => c.label.toLowerCase())
-  const fire = classes.filter((c) => entries.some((e) => e.category === c.id && !e.event && c.id === 'fire')).map((c) => c.label.toLowerCase())
-  const wet = classes.filter((c) => entries.some((e) => e.category === c.id && !e.event) && c.id !== 'fire').map((c) => c.label.toLowerCase())
+  const lab = (ev) => classes.filter((c) => entries.some((e) => e.category === c.id && e.event === ev)).map((c) => c.label.toLowerCase())
+  const seasonKinds = lab(false), eventKinds = lab(true)
   const bits = [
-    wet.length ? `${joinList(wet)}: a season of radar passes at each place` : '',
-    fire.length ? `${joinList(fire)}: a season of passes where the radar echo changed` : '',
-    evs.length ? `${joinList(evs)}: each a single event, seen in before and after radar pairs` : '',
+    seasonKinds.length ? `A season of radar passes: ${joinList(seasonKinds)}` : '',
+    eventKinds.length ? `A single event, seen in before and after radar pairs: ${joinList(eventKinds)}` : '',
   ].filter(Boolean)
-  const sub = bits.length ? `${bits.join('; ')}.` : 'Each place is a real radar frame.'
+  const sub = bits.length ? `${bits.join('. ')}.` : 'Each place is a real radar frame.'
   return (
     <div className="gallery" role="region" aria-label="All places">
       <div className="gallery-in">

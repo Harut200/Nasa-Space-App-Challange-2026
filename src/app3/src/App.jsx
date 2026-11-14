@@ -466,7 +466,7 @@ export default function App() {
         spots={(ev ? place.spots.filter((s) => s.id !== 'epicentre') : place?.spots) || []} showSpots={!!place && inPlace && spotsOn} activeSpot={activeSpot}
         onSpot={(id) => { if (inPlace) setActiveSpot((a) => (a === id ? null : id)) }}
         interactive={inPlace} star={ev && inPlace && Array.isArray(place.event.lngLat) ? place.event.lngLat : null}
-        outline={outlineUrl}
+        outline={outlineUrl} starLabel={ev && place.event.type !== 'earthquake' ? 'Event site' : 'Epicentre'}
         ring={ev && inPlace && Array.isArray(place.event.lngLat) && Number(place.event.radius_km) > 0 ? { lngLat: place.event.lngLat, km: Number(place.event.radius_km) } : null}
         compare={{ on: cmpOn, split: cmp.split, url: cmpUrl, tags: cmpTags }} onSplit={(s) => setCmp((c) => ({ ...c, split: s }))}
       /></Suspense>

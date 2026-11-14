@@ -71,7 +71,10 @@ export default function Explore({ place, layerId, layer, setLayer, index, setInd
   const avail = (id) => place.layers.some((l) => l.id === id)
   const none = P.kind === 'none'
   const lead = P.kind === 'pct' ? COH : []
-  const modes = [...lead, ...(none ? BURN : MODES)].filter((m) => avail(m.id))
+  const base = [...lead, ...(none ? BURN : MODES)].filter((m) => avail(m.id))
+  // the layer the manifest opens on, when it is none of the usual ones (burn_*, ev_*): first, with its manifest label
+  const dl = place.defaultLayer && place.layers.find((l) => l.id === place.defaultLayer)
+  const modes = dl && !base.some((m) => m.id === dl.id) ? [{ id: dl.id, label: dl.label.split(/ \(|:/)[0], hint: dl.label }, ...base] : base
   const isMain = modes.some((m) => m.id === layerId)
   const rest = place.layers.filter((l) => !modes.some((m) => m.id === l.id))
   const q = place.quality[place.dates[index]]
