@@ -4,6 +4,8 @@ NASA Space Apps Challenge 2026 · hackathon window **14–15 November 2026** (tw
 
 **What we ship:** a public, open-source web app where anyone can scrub through a season of NISAR L-band radar images and watch one piece of Earth's surface change, with the physics explained in plain language next to the map.
 
+**Step-by-step work plan, split into three branches (frontend, backend, detection) plus pitch and repository:** [plan/](plan/README.md). Where the two differ, `plan/` is newer.
+
 Facts in this plan were checked against the ASF NISAR Data User Guide on 14 November 2026. Items we could not check are marked **(verify)**.
 
 ---
