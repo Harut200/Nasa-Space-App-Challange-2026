@@ -278,10 +278,10 @@
     }
   ],
   "story": {
-    "see": "At this preview detail almost nothing changes in the Ararat Valley. Fields here are smaller than one pixel, about 180 m wide, so their changes blur together. That is a finding, not a failure: this is where full-resolution, calibrated NISAR data, planned next, is needed.",
-    "physics": "Radar brightness follows plant material and water. At full resolution a wheat field should turn darker after the June\u2013July harvest, irrigated plots should flicker brighter after watering, and fish ponds should show as dark rectangles with bright banks. These are expectations we have not yet tested.",
-    "lband": "NISAR's L-band radar has a 24 cm wavelength and passes through cloud, so a field can be watched every 12 days all season. Orchards and vineyards should stay steady, which makes them useful reference points. Our spots mark where to look once the sharper data arrives.",
-    "people": "Pressure in the valley's artesian aquifer has fallen by about two-thirds since the early 1980s (International Association of Hydrogeologists). More than 200 fish farms draw on it (Yale E360). Spotting dried-up ponds and watering patterns from space could help guard a shrinking water source."
+    "see": "Across the Ararat Valley, towns, ponds and fields share the radar image. Some dry slopes return a weak echo and can look like water. We use elevation to screen dark patches on steep or high ground. Individual ponds and fields remain difficult to track consistently.",
+    "physics": "A preview pixel is roughly 180 metres wide. After the terrain screen, the open-water rule mapped about 0.5 to 3.8 square kilometres on different passes in our test box. Much of that area remains uncertain, and the comparison with historical water shows that many small water bodies are missed.",
+    "lband": "From Masis toward Vedi, the radar echo can change with wet soil, crops and surface roughness. An unusual cross-polarized echo on 6 October adds uncertainty. Sharper calibrated images and dated ground observations would help us test specific irrigation or harvest changes.",
+    "people": "Farms and fish ponds in the valley use artesian groundwater. The US Geological Survey found that the area with flowing wells fell from 619 to 291 square kilometres between 1984 and 2016. The ponds give us a surface feature to watch. Well readings tell us about groundwater."
   },
   "spots": [
     {
@@ -294,7 +294,7 @@
     },
     {
       "id": "fish-ponds",
-      "label": "Ararat-Vedi fish ponds",
+      "label": "Ararat\u2013Vedi valley sample",
       "lngLat": [
         44.6,
         39.9
@@ -302,7 +302,7 @@
     },
     {
       "id": "vedi-vineyards",
-      "label": "Vedi vineyards",
+      "label": "Vedi town and surroundings",
       "lngLat": [
         44.73,
         39.91
@@ -310,10 +310,10 @@
     },
     {
       "id": "aknalich",
-      "label": "Aknalich lake area",
+      "label": "Lake Akna near Aknalich",
       "lngLat": [
-        44.18,
-        40.07
+        44.16889,
+        40.14444
       ]
     },
     {
