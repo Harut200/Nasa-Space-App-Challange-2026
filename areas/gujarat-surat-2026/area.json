@@ -1,0 +1,26 @@
+{
+  "id": "gujarat-surat-2026",
+  "name": "Tapi and Narmada plains, Gujarat",
+  "bbox": [
+    72.64,
+    21.0,
+    73.7,
+    21.8
+  ],
+  "track": 113,
+  "frame": 12,
+  "direction": "ascending",
+  "pixel_m": 100,
+  "mode": "40+5",
+  "dates": [
+    "2026-06-22",
+    "2026-07-04",
+    "2026-08-21",
+    "2026-09-02",
+    "2026-09-14",
+    "2026-09-26",
+    "2026-10-08",
+    "2026-10-20"
+  ],
+  "water_source": "fusion2"
+}

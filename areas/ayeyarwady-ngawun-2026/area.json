@@ -1,0 +1,24 @@
+{
+  "id": "ayeyarwady-ngawun-2026",
+  "name": "Ayeyarwady delta, Ngawun embankment",
+  "bbox": [
+    94.4,
+    16.9,
+    95.6,
+    17.8
+  ],
+  "track": 134,
+  "frame": 80,
+  "direction": "descending",
+  "pixel_m": 100,
+  "mode": "20+5",
+  "dates": [
+    "2026-06-23",
+    "2026-07-17",
+    "2026-08-10",
+    "2026-09-03",
+    "2026-09-27",
+    "2026-10-21"
+  ],
+  "water_source": "fusion2"
+}
