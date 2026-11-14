@@ -3203,6 +3203,72 @@
      "max": 51.238400000000006
     },
     "incidence_deg_mean": 42.827728271484375
+   },
+   "d_ign": {
+    "event": "Hautes Fagnes (High Fens) fire, Belgium, from 14 Aug 2026",
+    "view": "d_ign",
+    "track": 66,
+    "frame": 63,
+    "direction": "D",
+    "event_pair": "20260724_20260817",
+    "control_pair": "20260712_20260724",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 10,
+    "far_km": 30,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.5572038888931274,
+    "mean_coh_control_within_radius": 0.7290330529212952,
+    "mean_coh_event_whole_window": 0.5417473316192627,
+    "mean_coh_control_whole_window": 0.6455774903297424,
+    "coherence_loss": {
+     "loss_area_km2": 29.299200000000003,
+     "comparable_area_km2": 291.98720000000003,
+     "loss_fraction_inside": 0.10034412467395831,
+     "loss_fraction_outside": 0.003574181792697456,
+     "comparable_px_inside": 45623,
+     "loss_area_km2_whole_window": 33.8688,
+     "mean_coh_control_at_loss_px": 0.7244840264320374,
+     "mean_coh_event_at_loss_px": 0.23468327522277832
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 25.497600000000002,
+      "lon": 6.103,
+      "lat": 50.5257,
+      "max_side_km": 7.76
+     },
+     {
+      "area_km2": 0.9600000000000001,
+      "lon": 6.1902,
+      "lat": 50.5875,
+      "max_side_km": 1.52
+     },
+     {
+      "area_km2": 0.7552,
+      "lon": 6.3567,
+      "lat": 50.5684,
+      "max_side_km": 2.0
+     },
+     {
+      "area_km2": 0.5312,
+      "lon": 6.0275,
+      "lat": 50.5326,
+      "max_side_km": 1.44
+     },
+     {
+      "area_km2": 0.4928,
+      "lon": 6.4015,
+      "lat": 50.6501,
+      "max_side_km": 1.28
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 2,
+     "median": 0.0,
+     "p95": 0.0,
+     "max": 0.0
+    },
+    "incidence_deg_mean": 39.63691711425781
    }
   },
   "verdict": null
@@ -3275,6 +3341,884 @@
      "max": 0.6592
     },
     "incidence_deg_mean": 41.199951171875
+   },
+   "d_ign": {
+    "event": "Bald Range fire, British Columbia: forest surface changed, 25 Jul-18 Aug 2026",
+    "view": "d_ign",
+    "track": 172,
+    "frame": 63,
+    "direction": "D",
+    "event_pair": "20260720_20260813",
+    "control_pair": "20260708_20260720",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 12,
+    "far_km": 24,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.5629192590713501,
+    "mean_coh_control_within_radius": 0.5716910362243652,
+    "mean_coh_event_whole_window": 0.686522901058197,
+    "mean_coh_control_whole_window": 0.6304786801338196,
+    "coherence_loss": {
+     "loss_area_km2": 56.3136,
+     "comparable_area_km2": 323.3088,
+     "loss_fraction_inside": 0.17417898925114317,
+     "loss_fraction_outside": 0.0,
+     "comparable_px_inside": 50517,
+     "loss_area_km2_whole_window": 56.3136,
+     "mean_coh_control_at_loss_px": 0.656389594078064,
+     "mean_coh_event_at_loss_px": 0.2056092768907547
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 45.152,
+      "lon": -119.7835,
+      "lat": 49.621,
+      "max_side_km": 15.84
+     },
+     {
+      "area_km2": 2.1248,
+      "lon": -119.8824,
+      "lat": 49.5982,
+      "max_side_km": 3.04
+     },
+     {
+      "area_km2": 1.3568,
+      "lon": -119.7257,
+      "lat": 49.5669,
+      "max_side_km": 2.08
+     },
+     {
+      "area_km2": 1.2416,
+      "lon": -119.6959,
+      "lat": 49.6392,
+      "max_side_km": 2.72
+     },
+     {
+      "area_km2": 1.0048000000000001,
+      "lon": -119.7355,
+      "lat": 49.5512,
+      "max_side_km": 1.84
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 21,
+     "median": 0.0,
+     "p95": 0.0,
+     "max": 0.0
+    },
+    "incidence_deg_mean": 45.170711517333984
+   }
+  },
+  "verdict": "clear"
+ },
+ "rowe-creek-coh-2026": {
+  "event_id": "rowe-creek-coh-2026",
+  "views": {
+   "a_ign": {
+    "event": "Rowe Creek Complex, Oregon, from 15 Jul 2026",
+    "view": "a_ign",
+    "track": 106,
+    "frame": 24,
+    "direction": "A",
+    "event_pair": "20260715_20260727",
+    "control_pair": "20260703_20260715",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 20,
+    "far_km": 60,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.7123316526412964,
+    "mean_coh_control_within_radius": 0.7537907958030701,
+    "mean_coh_event_whole_window": 0.7039645314216614,
+    "mean_coh_control_whole_window": 0.7352904677391052,
+    "coherence_loss": {
+     "loss_area_km2": 17.299200000000003,
+     "comparable_area_km2": 1197.952,
+     "loss_fraction_inside": 0.014440645368094881,
+     "loss_fraction_outside": 0.061432565370103914,
+     "comparable_px_inside": 187180,
+     "loss_area_km2_whole_window": 367.32800000000003,
+     "mean_coh_control_at_loss_px": 0.7957513928413391,
+     "mean_coh_event_at_loss_px": 0.3282604515552521
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 136.9344,
+      "lon": -120.4915,
+      "lat": 44.5713,
+      "max_side_km": 18.88
+     },
+     {
+      "area_km2": 89.86880000000001,
+      "lon": -119.7996,
+      "lat": 44.4339,
+      "max_side_km": 18.0
+     },
+     {
+      "area_km2": 57.689600000000006,
+      "lon": -120.7376,
+      "lat": 44.5209,
+      "max_side_km": 14.8
+     },
+     {
+      "area_km2": 26.489600000000003,
+      "lon": -120.6946,
+      "lat": 44.458,
+      "max_side_km": 9.36
+     },
+     {
+      "area_km2": 11.392000000000001,
+      "lon": -120.7943,
+      "lat": 44.5495,
+      "max_side_km": 6.72
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 4,
+     "median": 241.00480000000002,
+     "p95": 251.81216,
+     "max": 253.7024
+    },
+    "incidence_deg_mean": 36.9144172668457
+   },
+   "d_ign": {
+    "event": "Rowe Creek Complex, Oregon, from 15 Jul 2026",
+    "view": "d_ign",
+    "track": 71,
+    "frame": 66,
+    "direction": "D",
+    "event_pair": "20260713_20260725",
+    "control_pair": "20260701_20260713",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 20,
+    "far_km": 60,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.6440544128417969,
+    "mean_coh_control_within_radius": 0.6943774223327637,
+    "mean_coh_event_whole_window": 0.6674088835716248,
+    "mean_coh_control_whole_window": 0.6924282312393188,
+    "coherence_loss": {
+     "loss_area_km2": 28.7104,
+     "comparable_area_km2": 1101.4464,
+     "loss_fraction_inside": 0.026066089098843122,
+     "loss_fraction_outside": 0.044674960808512056,
+     "comparable_px_inside": 172101,
+     "loss_area_km2_whole_window": 200.1536,
+     "mean_coh_control_at_loss_px": 0.7626036405563354,
+     "mean_coh_event_at_loss_px": 0.31746411323547363
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 116.05760000000001,
+      "lon": -120.4923,
+      "lat": 44.5779,
+      "max_side_km": 18.32
+     },
+     {
+      "area_km2": 18.4448,
+      "lon": -120.7795,
+      "lat": 44.5448,
+      "max_side_km": 6.32
+     },
+     {
+      "area_km2": 10.2272,
+      "lon": -120.7868,
+      "lat": 44.4817,
+      "max_side_km": 5.68
+     },
+     {
+      "area_km2": 3.8656,
+      "lon": -120.2142,
+      "lat": 44.8798,
+      "max_side_km": 3.68
+     },
+     {
+      "area_km2": 3.5328000000000004,
+      "lon": -120.3742,
+      "lat": 44.5544,
+      "max_side_km": 3.2800000000000002
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 3,
+     "median": 148.9408,
+     "p95": 154.33792,
+     "max": 154.9376
+    },
+    "incidence_deg_mean": 46.33468246459961
+   }
+  },
+  "verdict": null
+ },
+ "big-grass-coh-2026": {
+  "event_id": "big-grass-coh-2026",
+  "views": {
+   "a_ign": {
+    "event": "Big Grass fire (Oregon/Idaho) by coherence, from 23 Jul 2026",
+    "view": "a_ign",
+    "track": 5,
+    "frame": 23,
+    "direction": "A",
+    "event_pair": "20260720_20260813",
+    "control_pair": "20260708_20260720",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 25,
+    "far_km": 75,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.719109296798706,
+    "mean_coh_control_within_radius": 0.6878213286399841,
+    "mean_coh_event_whole_window": 0.7185051441192627,
+    "mean_coh_control_whole_window": 0.7132895588874817,
+    "coherence_loss": {
+     "loss_area_km2": 0.24960000000000002,
+     "comparable_area_km2": 1936.3968,
+     "loss_fraction_inside": 0.0001288992008249549,
+     "loss_fraction_outside": 0.0021174920344482952,
+     "comparable_px_inside": 302562,
+     "loss_area_km2_whole_window": 11.7888,
+     "mean_coh_control_at_loss_px": 0.46246156096458435,
+     "mean_coh_event_at_loss_px": 0.19958975911140442
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 6.688000000000001,
+      "lon": -116.9875,
+      "lat": 42.7238,
+      "max_side_km": 7.5200000000000005
+     },
+     {
+      "area_km2": 1.0816000000000001,
+      "lon": -116.9669,
+      "lat": 42.7298,
+      "max_side_km": 2.24
+     },
+     {
+      "area_km2": 0.9152,
+      "lon": -116.9867,
+      "lat": 42.7727,
+      "max_side_km": 3.04
+     },
+     {
+      "area_km2": 0.7296,
+      "lon": -116.9991,
+      "lat": 42.4988,
+      "max_side_km": 2.08
+     },
+     {
+      "area_km2": 0.5696,
+      "lon": -116.9699,
+      "lat": 42.7717,
+      "max_side_km": 1.6
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": 38.362300872802734
+   },
+   "d_ign": {
+    "event": "Big Grass fire (Oregon/Idaho) by coherence, from 23 Jul 2026",
+    "view": "d_ign",
+    "track": 42,
+    "frame": 67,
+    "direction": "D",
+    "event_pair": "20260723_20260816",
+    "control_pair": "20260629_20260711",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 25,
+    "far_km": 75,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.5763835906982422,
+    "mean_coh_control_within_radius": 0.49039843678474426,
+    "mean_coh_event_whole_window": 0.5640233159065247,
+    "mean_coh_control_whole_window": 0.5022630095481873,
+    "coherence_loss": {
+     "loss_area_km2": 0.23040000000000002,
+     "comparable_area_km2": 1666.6560000000002,
+     "loss_fraction_inside": 0.00013824088474166234,
+     "loss_fraction_outside": 0.003908760426021573,
+     "comparable_px_inside": 260415,
+     "loss_area_km2_whole_window": 18.2528,
+     "mean_coh_control_at_loss_px": 0.572444498538971,
+     "mean_coh_event_at_loss_px": 0.13111113011837006
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 5.324800000000001,
+      "lon": -116.9854,
+      "lat": 42.4525,
+      "max_side_km": 5.2
+     },
+     {
+      "area_km2": 3.52,
+      "lon": -116.9873,
+      "lat": 42.7062,
+      "max_side_km": 3.44
+     },
+     {
+      "area_km2": 3.2192000000000003,
+      "lon": -116.9765,
+      "lat": 42.7332,
+      "max_side_km": 3.2
+     },
+     {
+      "area_km2": 1.0496,
+      "lon": -116.9988,
+      "lat": 42.499,
+      "max_side_km": 2.08
+     },
+     {
+      "area_km2": 0.9408000000000001,
+      "lon": -116.9866,
+      "lat": 42.7667,
+      "max_side_km": 2.4
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": 44.88713455200195
+   }
+  },
+  "verdict": null
+ },
+ "semeru-2026": {
+  "event_id": "semeru-2026",
+  "views": {
+   "asc": {
+    "event": "Semeru pyroclastic flow down the SE flank, Indonesia, 18 Jul 2026",
+    "view": "asc",
+    "track": 53,
+    "frame": 174,
+    "direction": "A",
+    "event_pair": "20260711_20260723",
+    "control_pair": "20260629_20260711",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 6,
+    "far_km": 18,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.5580686926841736,
+    "mean_coh_control_within_radius": 0.6323248744010925,
+    "mean_coh_event_whole_window": 0.4483746588230133,
+    "mean_coh_control_whole_window": 0.5195547938346863,
+    "coherence_loss": {
+     "loss_area_km2": 5.075200000000001,
+     "comparable_area_km2": 59.2,
+     "loss_fraction_inside": 0.08572972972972973,
+     "loss_fraction_outside": 0.0758285652596351,
+     "comparable_px_inside": 9250,
+     "loss_area_km2_whole_window": 27.552,
+     "mean_coh_control_at_loss_px": 0.6940680742263794,
+     "mean_coh_event_at_loss_px": 0.2713594138622284
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 10.592,
+      "lon": 113.0027,
+      "lat": -8.0538,
+      "max_side_km": 6.16
+     },
+     {
+      "area_km2": 6.112,
+      "lon": 112.9673,
+      "lat": -8.0948,
+      "max_side_km": 5.44
+     },
+     {
+      "area_km2": 2.24,
+      "lon": 113.0588,
+      "lat": -8.0081,
+      "max_side_km": 2.96
+     },
+     {
+      "area_km2": 1.6192,
+      "lon": 113.0207,
+      "lat": -8.0168,
+      "max_side_km": 3.04
+     },
+     {
+      "area_km2": 1.3632,
+      "lon": 113.0713,
+      "lat": -8.0056,
+      "max_side_km": 2.64
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 12,
+     "median": 3.8816,
+     "p95": 16.6816,
+     "max": 16.928
+    },
+    "incidence_deg_mean": 40.534698486328125
+   },
+   "desc": {
+    "event": "Semeru pyroclastic flow down the SE flank, Indonesia, 18 Jul 2026",
+    "view": "desc",
+    "track": 61,
+    "frame": 92,
+    "direction": "D",
+    "event_pair": "20260712_20260724",
+    "control_pair": "20260630_20260712",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 6,
+    "far_km": 18,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.5790894031524658,
+    "mean_coh_control_within_radius": 0.6207888126373291,
+    "mean_coh_event_whole_window": 0.5255351662635803,
+    "mean_coh_control_whole_window": 0.5479491949081421,
+    "coherence_loss": {
+     "loss_area_km2": 1.0688,
+     "comparable_area_km2": 98.1696,
+     "loss_fraction_inside": 0.010887280787535042,
+     "loss_fraction_outside": 0.002819631685611067,
+     "comparable_px_inside": 15339,
+     "loss_area_km2_whole_window": 2.5024,
+     "mean_coh_control_at_loss_px": 0.6257005333900452,
+     "mean_coh_event_at_loss_px": 0.2703712582588196
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 0.3392,
+      "lon": 112.9545,
+      "lat": -8.1051,
+      "max_side_km": 1.04
+     },
+     {
+      "area_km2": 0.23040000000000002,
+      "lon": 112.9603,
+      "lat": -8.0996,
+      "max_side_km": 0.88
+     },
+     {
+      "area_km2": 0.23040000000000002,
+      "lon": 113.0022,
+      "lat": -8.0631,
+      "max_side_km": 0.88
+     },
+     {
+      "area_km2": 0.2048,
+      "lon": 112.8961,
+      "lat": -8.1468,
+      "max_side_km": 1.04
+     },
+     {
+      "area_km2": 0.192,
+      "lon": 112.9992,
+      "lat": -8.0711,
+      "max_side_km": 1.12
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 20,
+     "median": 0.0,
+     "p95": 0.672,
+     "max": 0.672
+    },
+    "incidence_deg_mean": 43.357059478759766
+   }
+  },
+  "verdict": null
+ },
+ "fuego-2026": {
+  "event_id": "fuego-2026",
+  "views": {
+   "asc": {
+    "event": "Fuego pyroclastic density currents, Guatemala, 3-5 Aug 2026",
+    "view": "asc",
+    "track": 62,
+    "frame": 9,
+    "direction": "A",
+    "event_pair": "20260724_20260817",
+    "control_pair": "20260712_20260724",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 6,
+    "far_km": 18,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.33729657530784607,
+    "mean_coh_control_within_radius": 0.36883556842803955,
+    "mean_coh_event_whole_window": 0.3136710226535797,
+    "mean_coh_control_whole_window": 0.3940722942352295,
+    "coherence_loss": {
+     "loss_area_km2": 3.0336000000000003,
+     "comparable_area_km2": 31.264000000000003,
+     "loss_fraction_inside": 0.0970317297850563,
+     "loss_fraction_outside": 0.08797589298838748,
+     "comparable_px_inside": 4885,
+     "loss_area_km2_whole_window": 26.016000000000002,
+     "mean_coh_control_at_loss_px": 0.5434346199035645,
+     "mean_coh_event_at_loss_px": 0.14528270065784454
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 1.3376000000000001,
+      "lon": -90.9175,
+      "lat": 14.4809,
+      "max_side_km": 3.6
+     },
+     {
+      "area_km2": 1.1584,
+      "lon": -90.9074,
+      "lat": 14.4895,
+      "max_side_km": 3.12
+     },
+     {
+      "area_km2": 1.056,
+      "lon": -90.8516,
+      "lat": 14.6223,
+      "max_side_km": 2.08
+     },
+     {
+      "area_km2": 0.9472,
+      "lon": -90.8113,
+      "lat": 14.4968,
+      "max_side_km": 2.24
+     },
+     {
+      "area_km2": 0.9344,
+      "lon": -90.8201,
+      "lat": 14.5193,
+      "max_side_km": 2.24
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 26,
+     "median": 1.3664,
+     "p95": 6.5616,
+     "max": 6.7968
+    },
+    "incidence_deg_mean": 34.1566162109375
+   }
+  },
+  "verdict": null
+ },
+ "isaias-2026": {
+  "event_id": "isaias-2026",
+  "views": {
+   "asc": {
+    "event": "Hurricane Isaias landfall near Destin, Florida, 10 Oct 2026",
+    "view": "asc",
+    "track": 76,
+    "frame": 17,
+    "direction": "A",
+    "event_pair": "20261005_20261017",
+    "control_pair": "20260923_20261005",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 25,
+    "far_km": 75,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.19159825146198273,
+    "mean_coh_control_within_radius": 0.3180195689201355,
+    "mean_coh_event_whole_window": 0.19111734628677368,
+    "mean_coh_control_whole_window": 0.35080650448799133,
+    "coherence_loss": {
+     "loss_area_km2": 176.89600000000002,
+     "comparable_area_km2": 598.7008000000001,
+     "loss_fraction_inside": 0.2954664500197762,
+     "loss_fraction_outside": 0.5334855197752323,
+     "comparable_px_inside": 93547,
+     "loss_area_km2_whole_window": 1946.2720000000002,
+     "mean_coh_control_at_loss_px": 0.5041884183883667,
+     "mean_coh_event_at_loss_px": 0.19475716352462769
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 594.784,
+      "lon": -86.817,
+      "lat": 31.1632,
+      "max_side_km": 38.800000000000004
+     },
+     {
+      "area_km2": 353.8304,
+      "lon": -86.8668,
+      "lat": 30.8092,
+      "max_side_km": 38.32
+     },
+     {
+      "area_km2": 145.2416,
+      "lon": -86.8668,
+      "lat": 30.5094,
+      "max_side_km": 25.6
+     },
+     {
+      "area_km2": 78.5984,
+      "lon": -86.0329,
+      "lat": 30.9636,
+      "max_side_km": 18.64
+     },
+     {
+      "area_km2": 66.4512,
+      "lon": -86.5973,
+      "lat": 30.8527,
+      "max_side_km": 15.92
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 14,
+     "median": 456.0928,
+     "p95": 708.4307200000001,
+     "max": 722.2336
+    },
+    "incidence_deg_mean": 41.67450714111328
+   },
+   "asc_null": {
+    "event": "Hurricane Isaias landfall near Destin, Florida, 10 Oct 2026",
+    "view": "asc_null",
+    "track": 76,
+    "frame": 17,
+    "direction": "A",
+    "event_pair": "20260923_20261005",
+    "control_pair": "20260911_20260923",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 25,
+    "far_km": 75,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.3180195689201355,
+    "mean_coh_control_within_radius": 0.39946451783180237,
+    "mean_coh_event_whole_window": 0.35080650448799133,
+    "mean_coh_control_whole_window": 0.4275038242340088,
+    "coherence_loss": {
+     "loss_area_km2": 137.2928,
+     "comparable_area_km2": 1043.6672,
+     "loss_fraction_inside": 0.13154844762774953,
+     "loss_fraction_outside": 0.19736547647526373,
+     "comparable_px_inside": 163073,
+     "loss_area_km2_whole_window": 1119.4112,
+     "mean_coh_control_at_loss_px": 0.5572972297668457,
+     "mean_coh_event_at_loss_px": 0.22156351804733276
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 348.384,
+      "lon": -86.1539,
+      "lat": 31.091,
+      "max_side_km": 44.56
+     },
+     {
+      "area_km2": 244.92800000000003,
+      "lon": -86.4888,
+      "lat": 31.1363,
+      "max_side_km": 34.96
+     },
+     {
+      "area_km2": 90.77120000000001,
+      "lon": -86.4531,
+      "lat": 30.7872,
+      "max_side_km": 22.8
+     },
+     {
+      "area_km2": 35.052800000000005,
+      "lon": -86.352,
+      "lat": 31.0885,
+      "max_side_km": 18.56
+     },
+     {
+      "area_km2": 35.052800000000005,
+      "lon": -86.1997,
+      "lat": 30.7781,
+      "max_side_km": 13.200000000000001
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 23,
+     "median": 370.0032,
+     "p95": 563.0361599999999,
+     "max": 588.1600000000001
+    },
+    "incidence_deg_mean": null
+   }
+  },
+  "verdict": null
+ },
+ "atacama-snow-2026": {
+  "event_id": "atacama-snow-2026",
+  "views": {
+   "d_both": {
+    "event": "Rare snow and flash floods in the Atacama Desert, Chile, August 2026",
+    "view": "d_both",
+    "track": 97,
+    "frame": 100,
+    "direction": "D",
+    "event_pair": "20260726_20260819",
+    "control_pair": "20260714_20260726",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 40,
+    "far_km": 120,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.6166417598724365,
+    "mean_coh_control_within_radius": 0.21949291229248047,
+    "mean_coh_event_whole_window": 0.5701496601104736,
+    "mean_coh_control_whole_window": 0.3187107443809509,
+    "coherence_loss": {
+     "loss_area_km2": 5.8432,
+     "comparable_area_km2": 307.0272,
+     "loss_fraction_inside": 0.019031538573781086,
+     "loss_fraction_outside": 0.2179992806927482,
+     "comparable_px_inside": 47973,
+     "loss_area_km2_whole_window": 459.71840000000003,
+     "mean_coh_control_at_loss_px": 0.5594874024391174,
+     "mean_coh_event_at_loss_px": 0.23003725707530975
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 141.0368,
+      "lon": -69.0248,
+      "lat": -23.8171,
+      "max_side_km": 21.6
+     },
+     {
+      "area_km2": 55.244800000000005,
+      "lon": -69.0034,
+      "lat": -23.0106,
+      "max_side_km": 13.44
+     },
+     {
+      "area_km2": 42.016000000000005,
+      "lon": -69.0894,
+      "lat": -23.6728,
+      "max_side_km": 14.16
+     },
+     {
+      "area_km2": 27.1488,
+      "lon": -68.7494,
+      "lat": -23.8597,
+      "max_side_km": 10.8
+     },
+     {
+      "area_km2": 24.9024,
+      "lon": -68.7428,
+      "lat": -23.7524,
+      "max_side_km": 11.52
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": 45.57198715209961
+   }
+  },
+  "verdict": null
+ },
+ "hanjia-landslide-2026": {
+  "event_id": "hanjia-landslide-2026",
+  "views": {
+   "asc": {
+    "event": "Hanjia rock-slope failure on the Wujiang River, Chongqing, 17 Jul 2026",
+    "view": "asc",
+    "track": 25,
+    "frame": 16,
+    "direction": "A",
+    "event_pair": "20260709_20260721",
+    "control_pair": "20260627_20260709",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 5,
+    "far_km": 15,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.5932533740997314,
+    "mean_coh_control_within_radius": 0.5568782091140747,
+    "mean_coh_event_whole_window": 0.602988600730896,
+    "mean_coh_control_whole_window": 0.6139612197875977,
+    "coherence_loss": {
+     "loss_area_km2": 0.0,
+     "comparable_area_km2": 60.128,
+     "loss_fraction_inside": 0.0,
+     "loss_fraction_outside": 0.0026155991729931247,
+     "comparable_px_inside": 9395,
+     "loss_area_km2_whole_window": 3.0848
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 0.3264,
+      "lon": 108.1397,
+      "lat": 29.4065,
+      "max_side_km": 1.12
+     },
+     {
+      "area_km2": 0.19840000000000002,
+      "lon": 108.2377,
+      "lat": 29.3408,
+      "max_side_km": 0.8
+     },
+     {
+      "area_km2": 0.16,
+      "lon": 108.2499,
+      "lat": 29.3876,
+      "max_side_km": 0.56
+     },
+     {
+      "area_km2": 0.16,
+      "lon": 108.3224,
+      "lat": 29.1533,
+      "max_side_km": 0.72
+     },
+     {
+      "area_km2": 0.1408,
+      "lon": 108.3164,
+      "lat": 29.1592,
+      "max_side_km": 0.64
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 151,
+     "median": 0.0,
+     "p95": 0.8064,
+     "max": 1.1072
+    },
+    "incidence_deg_mean": 38.59669494628906
+   },
+   "desc": {
+    "event": "Hanjia rock-slope failure on the Wujiang River, Chongqing, 17 Jul 2026",
+    "view": "desc",
+    "track": 76,
+    "frame": 74,
+    "direction": "D",
+    "event_pair": "20260713_20260725",
+    "control_pair": "20260701_20260713",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 5,
+    "far_km": 15,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.5806201696395874,
+    "mean_coh_control_within_radius": 0.48849204182624817,
+    "mean_coh_event_whole_window": 0.5804758071899414,
+    "mean_coh_control_whole_window": 0.4798102378845215,
+    "coherence_loss": {
+     "loss_area_km2": 0.0,
+     "comparable_area_km2": 50.604800000000004,
+     "loss_fraction_inside": 0.0,
+     "loss_fraction_outside": 0.00030412439467548366,
+     "comparable_px_inside": 7907,
+     "loss_area_km2_whole_window": 0.24960000000000002
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 0.1472,
+      "lon": 108.2277,
+      "lat": 29.3086,
+      "max_side_km": 0.64
+     },
+     {
+      "area_km2": 0.1024,
+      "lon": 108.2336,
+      "lat": 29.3062,
+      "max_side_km": 0.64
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 152,
+     "median": 0.0,
+     "p95": 0.0,
+     "max": 0.0
+    },
+    "incidence_deg_mean": 45.424072265625
    }
   },
   "verdict": null
