@@ -1,6 +1,6 @@
 # Which app do we present? (decide Saturday night)
 
-Two finished designs are on branch `eda` (also `detection`). Same real data, 15 places. Pick one tonight; all remaining effort then goes into that one.
+Two finished designs are on branch `eda` (also `detection`). Same real data, 19 places (15 seasons of water, 4 earthquakes). Pick one tonight; all remaining effort then goes into that one.
 
 ## Try both (about 3 minutes)
 
