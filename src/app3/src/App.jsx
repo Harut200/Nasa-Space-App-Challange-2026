@@ -39,7 +39,7 @@ function useOnly(url, color) {
     return () => { dead = true }
   }, [url, color])
   if (!url || !color) return url
-  return r.color === color ? r.out : null
+  return r.src === url && r.color === color && r.out ? r.out : url // until the recoloured picture is ready, the whole picture stays on show
 }
 
 const km = (a, b) => { const r = Math.PI / 180, x = Math.sin(((b[1] - a[1]) * r) / 2) ** 2 + Math.cos(a[1] * r) * Math.cos(b[1] * r) * Math.sin(((b[0] - a[0]) * r) / 2) ** 2; return 12742 * Math.asin(Math.sqrt(x)) }
@@ -158,6 +158,7 @@ export default function App() {
     firstApply.current = false
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sceneKey, place])
+  useEffect(() => { setWaterShow('both') }, [layerId, placeId]) // legend isolation never carries over to another layer or place
   // the expanded globe holds the place still underneath: no playback while it is open
   useEffect(() => { if (globeFull) setPlaying(false) }, [globeFull])
 
@@ -287,8 +288,13 @@ export default function App() {
     return () => { clearTimeout(timer); clearTimeout(t2); ro.disconnect(); window.removeEventListener('resize', later) }
   }, [inPlace, diving, phone, mode, sceneN, placeId, layerId, width, height])
   const storyPad = phone ? { top: 116, left: 20, right: 20, bottom: 380 } : { top: 74, bottom: 70, left: Math.round(24 + Math.min(640, Math.max(440, width * 0.27)) + 28), right: 44 }
-  const camera = { key: focusSpot ? focusSpot.id : 'fit', focus: focusSpot?.lngLat, zoomBoost: 1.25, duration: mode === 'story' ? 820 : 1500, jump: !!diveTo }
+  const wasHolder = useRef(true) // the map showed a stand-in place until this one's data arrived: go straight there, no flight
+  useEffect(() => { if (place) wasHolder.current = false })
+  const camera = { key: focusSpot ? focusSpot.id : 'fit', focus: focusSpot?.lngLat, zoomBoost: 1.25, duration: mode === 'story' ? 820 : 1500, jump: !!diveTo || (!!place && wasHolder.current) }
   midRef.current = (() => { const p = measured || padding, W = width || 1; return Math.max(30, Math.min(70, ((p.left + (W - p.left - p.right) / 2) / W) * 100)) })()
+  // Compare in Explore: the handle starts in the middle of the visible footprint, so both sides have data
+  const exploreCmp = mode === 'explore' && cmpOn
+  useEffect(() => { if (exploreCmp) setCmp((c) => ({ ...c, split: midRef.current })) }, [exploreCmp, placeId, layerId, Math.round(midRef.current)]) // eslint-disable-line react-hooks/exhaustive-deps
 
   // ---- navigation ----
   const origin = inPlace ? (route.globe ? 'globe' : route.from) : mode === 'globe' ? 'globe' : mode === 'places' ? 'places' : 'home'
@@ -428,8 +434,10 @@ export default function App() {
     return () => window.removeEventListener('keydown', onKey)
   })
 
+  const lastShown = useRef(null)
+  if (place) lastShown.current = place
   const shownPlace = place || places[FLAGSHIP]
-  const bounds = shownPlace?.bounds || [-180, -60, 180, 75]
+  const bounds = (place || lastShown.current || shownPlace)?.bounds || [-180, -60, 180, 75] // while the next place loads, the map stays where it is
   const pass = place ? place.dates[index] : null
   const missing = place && layer && dated && !rawUrl
   const emptyPass = !!place && !ev && layerId === 'water' && place.primary?.kind === 'water' && place.primary.values[index] != null && place.primary.values[index] < 0.5

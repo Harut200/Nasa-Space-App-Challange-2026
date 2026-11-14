@@ -48,8 +48,9 @@ export function onlyClass(url, color, tol = 70) {
       for (let i = 0; i < p.length; i += 4) {
         if (p[i + 3] === 0) continue
         const dist = Math.hypot(p[i] - want[0], p[i + 1] - want[1], p[i + 2] - want[2])
-        if (dist > tol) p[i + 3] = 0
-        else if (dist > tol * 0.65) p[i + 3] = Math.round(p[i + 3] * (tol - dist) / (tol * 0.35)) // soft edge
+        // the chosen class stays as it is; the other classes stay in the picture, dimmed, so the map is never empty
+        if (dist > tol) p[i + 3] = Math.round(p[i + 3] * 0.16)
+        else if (dist > tol * 0.65) p[i + 3] = Math.round(p[i + 3] * (0.16 + 0.84 * (tol - dist) / (tol * 0.35)))
       }
       x.putImageData(d, 0, 0)
       return new Promise((res) => c.toBlob((b) => res(URL.createObjectURL(b)), 'image/png'))

@@ -181,7 +181,6 @@ export default function MapStage({ bounds, url, opacity = 0.9, padding, camera, 
     let dur = reduced() || camera?.jump ? 0 : (camera?.duration ?? 1500)
     if (near && dur) dur = Math.min(dur, 520)
     const bb = [[bounds[0], bounds[1]], [bounds[2], bounds[3]]]
-    let off
     if (camera?.focus) {
       setFlying(false)
       const cam = m.cameraForBounds(bb, { padding: pad })

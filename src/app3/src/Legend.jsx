@@ -22,10 +22,12 @@ export default function Legend({ layer, phone, strip, only, water, open0 }) {
       ? <li className={`${off ? 'off' : ''} pick`}><button type="button" onClick={() => pick(it.color)} aria-pressed={water.show === k} title={`${it.label}. ${water.show === k ? 'Click to show both again' : 'Click to show only this'}`}>{inner}</button></li>
       : <li className={off ? 'off' : ''} title={it.label}>{inner}</li>
   }
+  const showAll = only && water ? <button type="button" className="legend-all" onClick={() => water.setShow('both')}>Show all</button> : null
   if (!open && L.type === 'classes' && !phone) {
     return (
       <div className={`legend line ${strip ? 'strip' : ''}`} role="group" aria-label={`Legend: ${layer.label}`}>
         <ul>{L.items.map((it) => <Item key={it.label} it={it} />)}</ul>
+        {showAll}
         <button className="legend-more" onClick={() => setOpen(true)} aria-expanded="false" aria-label="Show the full legend" title="Show the full legend">+</button>
       </div>
     )
@@ -42,6 +44,7 @@ export default function Legend({ layer, phone, strip, only, water, open0 }) {
           {L.items.map((it) => <Item key={it.label} it={it} full />)}
         </ul>
       )}
+      {open && showAll}
       {open && (L.type === 'ramp' || L.type === 'diverging') && (
         <>
           <div className="ramp" style={{ background: grad }} />
