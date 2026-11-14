@@ -27,3 +27,15 @@ Text in `areas/*/story.json` was drafted with AI assistance (Claude) and needs h
 5. Ararat "about 180 m" pixel size and "planned next" wording match the real plan.
 6. The 59 cm rise is the 1 Jan to 19 Jul 2026 figure; the text says "mid-July".
 7. Wikipedia as source for Sevan area; consider a better one.
+
+## Corrections after the 2026 validation (14 November, 13:15)
+
+Independent 2026 data (weather stations, reanalysis, river gauges, satellite altimetry) changed three statements in the story text. Details and every number: [docs/eda/validation-2026.md](../eda/validation-2026.md).
+
+| Area | Was | Now | Evidence |
+|---|---|---|---|
+| Tonle Sap | "The flood arrived late in our images"; "the biggest jump came between 11 and 23 September" | The lake was already rising in early July; radar saw it first as water under vegetation. Open water spread later | Prek Kdam gauge rose 2.76 m in 12 days from 5 July (Mekong River Commission flood forecasting feed); altimeter lake level +1.3 m from 2 to 12 July (NASA GSFC Global Water Monitor, G-REALM, Sentinel-6). Level gains between passes were largest in July and across the outage, small for 11→23 September |
+| Tonle Sap | "No radar passes exist from 27 July to 10 August, so the flood's first days are hidden" | Our open-water area follows the altimeter lake level closely across the ten passes | Rank correlation 0.98, Pearson 0.96, n = 10 |
+| Lake Sevan | "Wind roughened the water" on 31 August and 12 September | Rain on the first night, a steady breeze on the second | Sevan shore station (SYNOP 37717, via Ogimet): 29.1 mm in the 48 h before the 31 August pass; 12 September dry with 2–4 m/s north-west wind overnight. No source shows more than about 3 m/s at pass time on either date, so "wind" alone is not supported |
+
+Still open for a human check: the Tonle Sap lake peaked on about 29 September at a normal height (altimeter), while our open-water class kept growing to 17 October. The story does not claim a late or weak flood any more; do not reintroduce that wording.

@@ -232,10 +232,10 @@
     }
   ],
   "story": {
-    "see": "Open water barely grew from mid-June to late July, then spread steadily. The biggest jump came between 11 and 23 September. The flood moved like a wave: the river plain towards Phnom Penh went under first, the ring around the lake followed, the far north-west last. The flood arrived late in our images.",
+    "see": "Open water barely grew until late July, then spread steadily. It moved like a wave: the river plain towards Phnom Penh went under first, the ring around the lake followed, the far north-west last. The lake was already rising in early July; radar saw that first as water under vegetation, not open water.",
     "physics": "Calm water is a mirror for radar: it bounces the signal away, so it looks dark. Trees standing in water do the opposite. The signal bounces off the water, then the trunk, and straight back, so flooded forest glows. The lake grows from about 2,500 km\u00b2 to 10,000\u201316,000 km\u00b2 (Hydrology and Earth System Sciences, 2022).",
-    "lband": "NISAR's L-band radar has a 24 cm wavelength, long enough to slip between leaves and reach the water below. Shorter-wave radar stops at the treetops and misses flooding under trees. Our images show the forest ring on the west and north-west shore peaking around the end of August, then turning to open water as it deepens.",
-    "people": "More than a million people depend on this lake. Fish and other aquatic foods average about 63 kg per person each year, second only to rice (FAO). A smaller flood means less flooded forest, the nursery of the fishery. No radar passes exist from 27 July to 10 August, so the flood's first days are hidden."
+    "lband": "NISAR's L-band radar has a 24 cm wavelength, long enough to slip between leaves and reach the water below. Shorter-wave radar stops at the treetops and misses flooding under trees. Our images show the forest ring on the west and north-west shore peaking around the end of August, then shrinking as the water deepens.",
+    "people": "More than a million people depend on this lake. Fish and other aquatic foods average about 63 kg per person each year, second only to rice (FAO). A smaller flood means less flooded forest, the nursery of the fishery. Our open-water area follows the lake level measured by a NASA satellite altimeter closely across all ten passes."
   },
   "spots": [
     {

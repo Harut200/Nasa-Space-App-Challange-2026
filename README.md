@@ -11,7 +11,7 @@ NASA Space Apps Challenge 2026 · challenge *Dancing with the SARs* · team: Ara
 | Place | What the radar shows |
 |---|---|
 | **Tonle Sap, Cambodia** | The monsoon flood spreading like a wave: the river plain south-east of the lake goes under in late August, the ring around the lake in September |
-| **Lake Sevan, Armenia** | A lake that does not change — and how wind can fool a naive method into thinking it shrank |
+| **Lake Sevan, Armenia** | A lake that does not change — and how wind and rain can fool a naive method into thinking it shrank |
 | **Ararat Valley, Armenia** | What radar at this resolution does not show: fields smaller than a pixel |
 
 For each place: a timeline of ten radar passes, a map of open water and flooded vegetation per date, a map of *when* each place changed, a before/after comparison, curves at named spots, and a four-part story.
@@ -20,6 +20,7 @@ For each place: a timeline of ten radar passes, a map of open water and flooded 
 
 - **The images are previews.** Everything shown today uses NISAR's free preview images: about 180 m per pixel and not calibrated. Patterns and timing are reliable; exact values and areas are not. The app says so on screen. Calibrated full-resolution data (20 m) needs a NASA Earthdata login and is the next step; the pipeline for it is written and tested on synthetic files only.
 - **Checked against an independent source.** Our water maps were compared with 38 years of Landsat water maps (JRC Global Surface Water). At Lake Sevan our permanent water overlaps the long-term lake at 0.94; at Tonle Sap 98.9 % of the water we map on 17 October lies inside the historical flood zone. The same check found false "water" on dark dry land in the Armenian mountains. Details: [docs/eda/validation.md](docs/eda/validation.md).
+- **Checked against independent 2026 measurements.** Our Tonle Sap open-water area follows the lake level from a NASA satellite altimeter (rank correlation 0.98 over ten passes). The same check corrected us: the lake began rising in early July, which radar saw as water under vegetation, and one of the two "windy" passes over Lake Sevan followed a night of rain. Details: [docs/eda/validation-2026.md](docs/eda/validation-2026.md).
 - **No radar passes exist from 27 July to 10 August 2026** (instrument outage). The timeline shows the gap.
 
 ## How it works

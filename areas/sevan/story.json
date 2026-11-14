@@ -1,7 +1,7 @@
 {
   "story": {
-    "see": "Lake Sevan looks the same on all ten dates. The dark shape never changes, and our measurement stays within a few percent of the lake's true size. On 31 August and 12 September wind roughened the water and parts of the lake looked like land. Our method flags those patches instead of losing the lake.",
-    "physics": "Smooth water reflects radar away and looks dark. Wind makes ripples that scatter some signal back, so the water turns brighter and can be mistaken for land. Between January and mid-July 2026 the lake rose about 59 cm (EcoLur), far less than one pixel sideways, so radar at this detail cannot see it.",
+    "see": "Lake Sevan looks the same on all ten dates, within a few percent of its true size. On 31 August, after a night of rain, and 12 September, after a steady breeze, the roughened surface made parts of the lake look like land. Our method flags those patches instead of losing the lake.",
+    "physics": "Smooth water reflects radar away and looks dark. Wind and rain make ripples that scatter some signal back, so the water turns brighter and can be mistaken for land. Between January and mid-July 2026 the lake rose about 59 cm (EcoLur), far less than one pixel sideways, so radar at this detail cannot see it.",
     "lband": "NISAR's L-band radar works day and night and through cloud, so every pass gives a clear view of the shoreline. But it measures roughness, not chemistry. Radar cannot see algal blooms or water quality. Optical satellites are the right tool for that, and saying so is part of the honest answer.",
     "people": "Sevan covers about 1,242 km², the main reservoir for Armenia's farms (Wikipedia). Irrigation releases in 2026 are limited to 143.6 million m³ (EcoLur). Watching its shoreline over years, every 12 days, is how a country keeps track of a lake it depends on."
   },
