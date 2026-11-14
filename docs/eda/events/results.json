@@ -461,9 +461,75 @@
      "max": 3.2448
     },
     "incidence_deg_mean": 41.108551025390625
+   },
+   "asc_late": {
+    "event": "Tailings dam failure near Brits, South Africa, 13 Aug 2026",
+    "view": "asc_late",
+    "track": 143,
+    "frame": 165,
+    "direction": "A",
+    "event_pair": "20260823_20260904",
+    "control_pair": "20260706_20260718",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 6,
+    "far_km": 12,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.6152166724205017,
+    "mean_coh_control_within_radius": 0.6642829179763794,
+    "mean_coh_event_whole_window": 0.6669654846191406,
+    "mean_coh_control_whole_window": 0.715447187423706,
+    "coherence_loss": {
+     "loss_area_km2": 0.5248,
+     "comparable_area_km2": 95.5776,
+     "loss_fraction_inside": 0.005490826302397215,
+     "loss_fraction_outside": 0.0033899970521764763,
+     "comparable_px_inside": 14934,
+     "loss_area_km2_whole_window": 5.824,
+     "mean_coh_control_at_loss_px": 0.6790731549263,
+     "mean_coh_event_at_loss_px": 0.1526341289281845
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 0.6272,
+      "lon": 27.7399,
+      "lat": -25.6994,
+      "max_side_km": 1.12
+     },
+     {
+      "area_km2": 0.5888,
+      "lon": 27.7414,
+      "lat": -25.6506,
+      "max_side_km": 1.36
+     },
+     {
+      "area_km2": 0.2752,
+      "lon": 27.7297,
+      "lat": -25.6312,
+      "max_side_km": 0.88
+     },
+     {
+      "area_km2": 0.26880000000000004,
+      "lon": 27.8535,
+      "lat": -25.5435,
+      "max_side_km": 0.72
+     },
+     {
+      "area_km2": 0.24960000000000002,
+      "lon": 27.8387,
+      "lat": -25.5446,
+      "max_side_km": 0.72
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 126,
+     "median": 0.0,
+     "p95": 1.1936,
+     "max": 1.8880000000000001
+    },
+    "incidence_deg_mean": 46.571571350097656
    }
   },
-  "verdict": null
+  "verdict": "marginal"
  },
  "etna-valle-del-bove-2026": {
   "event_id": "etna-valle-del-bove-2026",
@@ -941,9 +1007,75 @@
      "max": null
     },
     "incidence_deg_mean": 34.89886474609375
+   },
+   "asc": {
+    "event": "Ambrym eruption, Sep 2026",
+    "view": "asc",
+    "track": 22,
+    "frame": 169,
+    "direction": "A",
+    "event_pair": "20260919_20261001",
+    "control_pair": "20260907_20260919",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 8,
+    "far_km": 14,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.4159736633300781,
+    "mean_coh_control_within_radius": 0.4966287314891815,
+    "mean_coh_event_whole_window": 0.20112700760364532,
+    "mean_coh_control_whole_window": 0.2373775690793991,
+    "coherence_loss": {
+     "loss_area_km2": 2.048,
+     "comparable_area_km2": 122.1824,
+     "loss_fraction_inside": 0.016761824943690745,
+     "loss_fraction_outside": 0.13884673748103188,
+     "comparable_px_inside": 19091,
+     "loss_area_km2_whole_window": 30.1568,
+     "mean_coh_control_at_loss_px": 0.5628874897956848,
+     "mean_coh_event_at_loss_px": 0.24201250076293945
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 23.6096,
+      "lon": 168.2738,
+      "lat": -16.3093,
+      "max_side_km": 9.6
+     },
+     {
+      "area_km2": 1.6960000000000002,
+      "lon": 168.131,
+      "lat": -16.2277,
+      "max_side_km": 3.04
+     },
+     {
+      "area_km2": 0.448,
+      "lon": 168.242,
+      "lat": -16.2643,
+      "max_side_km": 0.88
+     },
+     {
+      "area_km2": 0.3456,
+      "lon": 168.1365,
+      "lat": -16.1474,
+      "max_side_km": 1.28
+     },
+     {
+      "area_km2": 0.33280000000000004,
+      "lon": 168.25,
+      "lat": -16.2772,
+      "max_side_km": 0.96
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 1,
+     "median": 0.16,
+     "p95": 0.16,
+     "max": 0.16
+    },
+    "incidence_deg_mean": 43.597145080566406
    }
   },
-  "verdict": null
+  "verdict": "marginal"
  },
  "kilauea-ep54-2026": {
   "event_id": "kilauea-ep54-2026",
@@ -4529,6 +4661,66 @@
      "max": 0.3008
     },
     "incidence_deg_mean": 41.504940032958984
+   },
+   "desc": {
+    "event": "Etna later pairs: new decorrelation 16-28 Aug 2026",
+    "view": "desc",
+    "track": 51,
+    "frame": 69,
+    "direction": "D",
+    "event_pair": "20260816_20260828",
+    "control_pair": "20260711_20260723",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 9,
+    "far_km": 27,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.5417595505714417,
+    "mean_coh_control_within_radius": 0.5733215808868408,
+    "mean_coh_event_whole_window": 0.5861573815345764,
+    "mean_coh_control_whole_window": 0.5549021363258362,
+    "coherence_loss": {
+     "loss_area_km2": 1.5488000000000002,
+     "comparable_area_km2": 193.15200000000002,
+     "loss_fraction_inside": 0.008018555334658714,
+     "loss_fraction_outside": 0.00011310846293678045,
+     "comparable_px_inside": 30180,
+     "loss_area_km2_whole_window": 1.728,
+     "mean_coh_control_at_loss_px": 0.6923471093177795,
+     "mean_coh_event_at_loss_px": 0.18406611680984497
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 0.736,
+      "lon": 15.0127,
+      "lat": 37.7526,
+      "max_side_km": 2.4
+     },
+     {
+      "area_km2": 0.6848000000000001,
+      "lon": 15.0382,
+      "lat": 37.7489,
+      "max_side_km": 1.44
+     },
+     {
+      "area_km2": 0.1792,
+      "lon": 14.9934,
+      "lat": 37.9179,
+      "max_side_km": 0.8
+     },
+     {
+      "area_km2": 0.128,
+      "lon": 14.9961,
+      "lat": 37.754,
+      "max_side_km": 0.56
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 37,
+     "median": 0.0,
+     "p95": 0.1792,
+     "max": 0.1792
+    },
+    "incidence_deg_mean": 43.009334564208984
    }
   },
   "verdict": null
@@ -4706,6 +4898,39 @@
      "max": null
     },
     "incidence_deg_mean": 38.8641357421875
+   },
+   "desc": {
+    "event": "Stromboli lava overflow, Italy, 5-6 Oct 2026",
+    "view": "desc",
+    "track": 51,
+    "frame": 69,
+    "direction": "D",
+    "event_pair": "20261003_20261015",
+    "control_pair": "20260909_20260921",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 3,
+    "far_km": 9,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.31864646077156067,
+    "mean_coh_control_within_radius": 0.29354730248451233,
+    "mean_coh_event_whole_window": 0.10774552077054977,
+    "mean_coh_control_whole_window": 0.10739129036664963,
+    "coherence_loss": {
+     "loss_area_km2": 0.0,
+     "comparable_area_km2": 8.512,
+     "loss_fraction_inside": 0.0,
+     "loss_fraction_outside": 0.0,
+     "comparable_px_inside": 1330,
+     "loss_area_km2_whole_window": 0.0
+    },
+    "largest_loss_clusters": [],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": 41.774253845214844
    }
   },
   "verdict": null
@@ -4844,6 +5069,1212 @@
      "max": null
     },
     "incidence_deg_mean": 42.67892837524414
+   },
+   "d_after": {
+    "event": "Atacama Desert after the August 2026 snow and rain storms: about 6,000 km2 lost coherence (west of the Salar)",
+    "view": "d_after",
+    "track": 97,
+    "frame": 100,
+    "direction": "D",
+    "event_pair": "20260819_20260831",
+    "control_pair": "20260702_20260714",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 40,
+    "far_km": 80,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.4666655957698822,
+    "mean_coh_control_within_radius": 0.7115811705589294,
+    "mean_coh_event_whole_window": 0.47617894411087036,
+    "mean_coh_control_whole_window": 0.7634966373443604,
+    "coherence_loss": {
+     "loss_area_km2": 1261.8688,
+     "comparable_area_km2": 4787.7952000000005,
+     "loss_fraction_inside": 0.2635594772307721,
+     "loss_fraction_outside": 0.28829166394764894,
+     "comparable_px_inside": 748093,
+     "loss_area_km2_whole_window": 3891.36,
+     "mean_coh_control_at_loss_px": 0.7071963548660278,
+     "mean_coh_event_at_loss_px": 0.23038005828857422
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 2032.7040000000002,
+      "lon": -69.3149,
+      "lat": -23.8008,
+      "max_side_km": 83.2
+     },
+     {
+      "area_km2": 317.184,
+      "lon": -69.2398,
+      "lat": -23.1411,
+      "max_side_km": 41.04
+     },
+     {
+      "area_km2": 314.0736,
+      "lon": -69.1291,
+      "lat": -23.335,
+      "max_side_km": 50.4
+     },
+     {
+      "area_km2": 247.5072,
+      "lon": -70.1089,
+      "lat": -23.1877,
+      "max_side_km": 48.88
+     },
+     {
+      "area_km2": 215.06560000000002,
+      "lon": -70.0691,
+      "lat": -23.9137,
+      "max_side_km": 26.8
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": null
+   }
+  },
+  "verdict": "clear"
+ },
+ "panama-landslides-2026": {
+  "event_id": "panama-landslides-2026",
+  "views": {
+   "asc": {
+    "event": "Landslides triggered by the M7.7 Panama earthquake, 9 Oct 2026",
+    "view": "asc",
+    "track": 76,
+    "frame": 5,
+    "direction": "A",
+    "event_pair": "20261005_20261017",
+    "control_pair": "20260830_20260911",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 40,
+    "far_km": 120,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.3176642954349518,
+    "mean_coh_control_within_radius": 0.467855304479599,
+    "mean_coh_event_whole_window": 0.2591891288757324,
+    "mean_coh_control_whole_window": 0.3256005346775055,
+    "coherence_loss": {
+     "loss_area_km2": 749.5104,
+     "comparable_area_km2": 2236.9984,
+     "loss_fraction_inside": 0.3350518265904884,
+     "loss_fraction_outside": 0.05092351906304718,
+     "comparable_px_inside": 349531,
+     "loss_area_km2_whole_window": 827.8720000000001,
+     "mean_coh_control_at_loss_px": 0.5672324299812317,
+     "mean_coh_event_at_loss_px": 0.1614173948764801
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 416.6464,
+      "lon": -80.7994,
+      "lat": 7.514,
+      "max_side_km": 37.28
+     },
+     {
+      "area_km2": 134.94400000000002,
+      "lon": -80.5075,
+      "lat": 7.4147,
+      "max_side_km": 29.2
+     },
+     {
+      "area_km2": 69.72160000000001,
+      "lon": -80.7572,
+      "lat": 7.2836,
+      "max_side_km": 19.92
+     },
+     {
+      "area_km2": 10.464,
+      "lon": -80.5332,
+      "lat": 7.5361,
+      "max_side_km": 6.32
+     },
+     {
+      "area_km2": 6.969600000000001,
+      "lon": -80.5832,
+      "lat": 7.327,
+      "max_side_km": 6.24
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": 45.18278884887695
+   },
+   "desc40": {
+    "event": "Landslides triggered by the M7.7 Panama earthquake, 9 Oct 2026",
+    "view": "desc40",
+    "track": 40,
+    "frame": 85,
+    "direction": "D",
+    "event_pair": "20261002_20261014",
+    "control_pair": "20260920_20261002",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 40,
+    "far_km": 120,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.44436192512512207,
+    "mean_coh_control_within_radius": 0.44815611839294434,
+    "mean_coh_event_whole_window": 0.31862640380859375,
+    "mean_coh_control_whole_window": 0.3234856426715851,
+    "coherence_loss": {
+     "loss_area_km2": 227.6416,
+     "comparable_area_km2": 1954.9888,
+     "loss_fraction_inside": 0.11644138319360192,
+     "loss_fraction_outside": 0.02874057565864498,
+     "comparable_px_inside": 305467,
+     "loss_area_km2_whole_window": 284.096,
+     "mean_coh_control_at_loss_px": 0.5538913607597351,
+     "mean_coh_event_at_loss_px": 0.18131023645401
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 76.3456,
+      "lon": -80.5696,
+      "lat": 7.4369,
+      "max_side_km": 21.12
+     },
+     {
+      "area_km2": 16.460800000000003,
+      "lon": -80.5362,
+      "lat": 7.5487,
+      "max_side_km": 8.48
+     },
+     {
+      "area_km2": 12.5632,
+      "lon": -80.4813,
+      "lat": 7.5011,
+      "max_side_km": 7.04
+     },
+     {
+      "area_km2": 6.784000000000001,
+      "lon": -80.6674,
+      "lat": 7.5159,
+      "max_side_km": 6.96
+     },
+     {
+      "area_km2": 5.6128,
+      "lon": -80.47,
+      "lat": 7.5506,
+      "max_side_km": 5.44
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": 34.55012130737305
+   },
+   "asc4w": {
+    "event": "Landslides triggered by the M7.7 Panama earthquake, 9 Oct 2026",
+    "view": "asc4w",
+    "track": 4,
+    "frame": 5,
+    "direction": "A",
+    "event_pair": "20260930_20261012",
+    "control_pair": "20260918_20260930",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 40,
+    "far_km": 120,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.2848065495491028,
+    "mean_coh_control_within_radius": 0.3130083382129669,
+    "mean_coh_event_whole_window": 0.1459810733795166,
+    "mean_coh_control_whole_window": 0.15443958342075348,
+    "coherence_loss": {
+     "loss_area_km2": 66.36160000000001,
+     "comparable_area_km2": 656.7552000000001,
+     "loss_fraction_inside": 0.10104465103588064,
+     "loss_fraction_outside": 0.06111040804150923,
+     "comparable_px_inside": 102618,
+     "loss_area_km2_whole_window": 174.52800000000002,
+     "mean_coh_control_at_loss_px": 0.556474506855011,
+     "mean_coh_event_at_loss_px": 0.18359263241291046
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 37.0304,
+      "lon": -80.9046,
+      "lat": 7.5691,
+      "max_side_km": 13.36
+     },
+     {
+      "area_km2": 17.305600000000002,
+      "lon": -81.7858,
+      "lat": 7.5879,
+      "max_side_km": 7.84
+     },
+     {
+      "area_km2": 5.824,
+      "lon": -81.7286,
+      "lat": 7.5476,
+      "max_side_km": 4.48
+     },
+     {
+      "area_km2": 5.7152,
+      "lon": -81.7726,
+      "lat": 7.4545,
+      "max_side_km": 5.04
+     },
+     {
+      "area_km2": 3.2768,
+      "lon": -81.7531,
+      "lat": 7.3727,
+      "max_side_km": 3.6
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": 38.33744812011719
+   }
+  },
+  "verdict": null
+ },
+ "polo-arizona-2026": {
+  "event_id": "polo-arizona-2026",
+  "views": {
+   "a_ev": {
+    "event": "Flash flooding in the Arizona desert from the remnants of Hurricane Polo, 28 Sep-2 Oct 2026",
+    "view": "a_ev",
+    "track": 77,
+    "frame": 18,
+    "direction": "A",
+    "event_pair": "20260923_20261005",
+    "control_pair": "20260911_20260923",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 30,
+    "far_km": 90,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.5436874032020569,
+    "mean_coh_control_within_radius": 0.5809026956558228,
+    "mean_coh_event_whole_window": 0.5923430919647217,
+    "mean_coh_control_whole_window": 0.6134697198867798,
+    "coherence_loss": {
+     "loss_area_km2": 9.3824,
+     "comparable_area_km2": 2088.8064,
+     "loss_fraction_inside": 0.00449175184449837,
+     "loss_fraction_outside": 0.0016187680589144259,
+     "comparable_px_inside": 326376,
+     "loss_area_km2_whole_window": 18.400000000000002,
+     "mean_coh_control_at_loss_px": 0.6654461622238159,
+     "mean_coh_event_at_loss_px": 0.15360437333583832
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 1.1136000000000001,
+      "lon": -111.5619,
+      "lat": 32.6272,
+      "max_side_km": 1.52
+     },
+     {
+      "area_km2": 0.8512000000000001,
+      "lon": -112.0216,
+      "lat": 32.9611,
+      "max_side_km": 1.52
+     },
+     {
+      "area_km2": 0.8064,
+      "lon": -112.009,
+      "lat": 32.9144,
+      "max_side_km": 0.96
+     },
+     {
+      "area_km2": 0.6528,
+      "lon": -111.4866,
+      "lat": 33.1248,
+      "max_side_km": 1.28
+     },
+     {
+      "area_km2": 0.6272,
+      "lon": -112.0433,
+      "lat": 33.0109,
+      "max_side_km": 0.88
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": 40.613914489746094
+   },
+   "a_after": {
+    "event": "Flash flooding in the Arizona desert from the remnants of Hurricane Polo, 28 Sep-2 Oct 2026",
+    "view": "a_after",
+    "track": 77,
+    "frame": 18,
+    "direction": "A",
+    "event_pair": "20261005_20261017",
+    "control_pair": "20260911_20260923",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 30,
+    "far_km": 90,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.5676435232162476,
+    "mean_coh_control_within_radius": 0.5809026956558228,
+    "mean_coh_event_whole_window": 0.5788607597351074,
+    "mean_coh_control_whole_window": 0.6134697198867798,
+    "coherence_loss": {
+     "loss_area_km2": 22.1952,
+     "comparable_area_km2": 2088.8064,
+     "loss_fraction_inside": 0.010625781307449077,
+     "loss_fraction_outside": 0.0045518517029233185,
+     "comparable_px_inside": 326376,
+     "loss_area_km2_whole_window": 47.552,
+     "mean_coh_control_at_loss_px": 0.6873690485954285,
+     "mean_coh_event_at_loss_px": 0.14623183012008667
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 1.6064,
+      "lon": -112.0253,
+      "lat": 32.962,
+      "max_side_km": 2.16
+     },
+     {
+      "area_km2": 1.536,
+      "lon": -111.9294,
+      "lat": 32.344,
+      "max_side_km": 2.8000000000000003
+     },
+     {
+      "area_km2": 1.4912,
+      "lon": -111.7001,
+      "lat": 32.7403,
+      "max_side_km": 1.52
+     },
+     {
+      "area_km2": 1.1456,
+      "lon": -111.4845,
+      "lat": 33.1246,
+      "max_side_km": 1.28
+     },
+     {
+      "area_km2": 1.0944,
+      "lon": -112.0927,
+      "lat": 33.0208,
+      "max_side_km": 1.76
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": null
+   },
+   "d_ev": {
+    "event": "Flash flooding in the Arizona desert from the remnants of Hurricane Polo, 28 Sep-2 Oct 2026",
+    "view": "d_ev",
+    "track": 56,
+    "frame": 72,
+    "direction": "D",
+    "event_pair": "20260922_20261004",
+    "control_pair": "20260910_20260922",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 30,
+    "far_km": 90,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.4787319004535675,
+    "mean_coh_control_within_radius": 0.5242587327957153,
+    "mean_coh_event_whole_window": 0.5345685482025146,
+    "mean_coh_control_whole_window": 0.5733558535575867,
+    "coherence_loss": {
+     "loss_area_km2": 7.027200000000001,
+     "comparable_area_km2": 1778.5600000000002,
+     "loss_fraction_inside": 0.003951061532925512,
+     "loss_fraction_outside": 0.00174323012618609,
+     "comparable_px_inside": 277900,
+     "loss_area_km2_whole_window": 16.0384,
+     "mean_coh_control_at_loss_px": 0.6488415002822876,
+     "mean_coh_event_at_loss_px": 0.1593078374862671
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 0.9088,
+      "lon": -112.0216,
+      "lat": 32.961,
+      "max_side_km": 1.52
+     },
+     {
+      "area_km2": 0.8384,
+      "lon": -111.6866,
+      "lat": 32.6054,
+      "max_side_km": 1.68
+     },
+     {
+      "area_km2": 0.7552,
+      "lon": -111.9202,
+      "lat": 32.8476,
+      "max_side_km": 1.52
+     },
+     {
+      "area_km2": 0.6848000000000001,
+      "lon": -111.5629,
+      "lat": 32.6253,
+      "max_side_km": 1.44
+     },
+     {
+      "area_km2": 0.6336,
+      "lon": -112.0432,
+      "lat": 33.0108,
+      "max_side_km": 0.8
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": 42.555999755859375
+   }
+  },
+  "verdict": null
+ },
+ "sheveluch-2026": {
+  "event_id": "sheveluch-2026",
+  "views": {
+   "asc": {
+    "event": "Sheveluch lava domes, Kamchatka, Jul-Oct 2026",
+    "view": "asc",
+    "track": 80,
+    "frame": 30,
+    "direction": "A",
+    "event_pair": "20260911_20260923",
+    "control_pair": "20260701_20260713",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 6,
+    "far_km": 18,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.5231415629386902,
+    "mean_coh_control_within_radius": 0.4184446334838867,
+    "mean_coh_event_whole_window": 0.5224382281303406,
+    "mean_coh_control_whole_window": 0.3600495755672455,
+    "coherence_loss": {
+     "loss_area_km2": 6.2656,
+     "comparable_area_km2": 48.473600000000005,
+     "loss_fraction_inside": 0.12925798785318193,
+     "loss_fraction_outside": 0.004306546519230223,
+     "comparable_px_inside": 7574,
+     "loss_area_km2_whole_window": 8.2048,
+     "mean_coh_control_at_loss_px": 0.5886129140853882,
+     "mean_coh_event_at_loss_px": 0.1952400505542755
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 2.8352,
+      "lon": 161.2694,
+      "lat": 56.6345,
+      "max_side_km": 5.04
+     },
+     {
+      "area_km2": 1.0368,
+      "lon": 161.3238,
+      "lat": 56.673,
+      "max_side_km": 2.0
+     },
+     {
+      "area_km2": 0.8192,
+      "lon": 161.3787,
+      "lat": 56.647,
+      "max_side_km": 1.76
+     },
+     {
+      "area_km2": 0.4288,
+      "lon": 161.3597,
+      "lat": 56.6768,
+      "max_side_km": 1.04
+     },
+     {
+      "area_km2": 0.3584,
+      "lon": 161.3091,
+      "lat": 56.661,
+      "max_side_km": 1.04
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 59,
+     "median": 0.0,
+     "p95": 0.0,
+     "max": 0.1728
+    },
+    "incidence_deg_mean": 37.530975341796875
+   },
+   "desc": {
+    "event": "Sheveluch lava domes, Kamchatka, Jul-Oct 2026",
+    "view": "desc",
+    "track": 60,
+    "frame": 60,
+    "direction": "D",
+    "event_pair": "20260910_20260922",
+    "control_pair": "20260630_20260712",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 6,
+    "far_km": 18,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.5231997966766357,
+    "mean_coh_control_within_radius": 0.3802298903465271,
+    "mean_coh_event_whole_window": 0.6421889066696167,
+    "mean_coh_control_whole_window": 0.39157870411872864,
+    "coherence_loss": {
+     "loss_area_km2": 1.6448,
+     "comparable_area_km2": 40.9664,
+     "loss_fraction_inside": 0.04014997656616154,
+     "loss_fraction_outside": 0.0002891968895267882,
+     "comparable_px_inside": 6401,
+     "loss_area_km2_whole_window": 1.8176,
+     "mean_coh_control_at_loss_px": 0.5792996287345886,
+     "mean_coh_event_at_loss_px": 0.20389105379581451
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 0.48000000000000004,
+      "lon": 161.2848,
+      "lat": 56.6497,
+      "max_side_km": 1.44
+     },
+     {
+      "area_km2": 0.32,
+      "lon": 161.2971,
+      "lat": 56.628,
+      "max_side_km": 1.04
+     },
+     {
+      "area_km2": 0.16,
+      "lon": 161.3906,
+      "lat": 56.67,
+      "max_side_km": 0.88
+     },
+     {
+      "area_km2": 0.13440000000000002,
+      "lon": 161.3177,
+      "lat": 56.6713,
+      "max_side_km": 0.56
+     },
+     {
+      "area_km2": 0.128,
+      "lon": 161.297,
+      "lat": 56.6219,
+      "max_side_km": 0.72
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 87,
+     "median": 0.0,
+     "p95": 0.0,
+     "max": 0.08320000000000001
+    },
+    "incidence_deg_mean": 42.42255401611328
+   }
+  },
+  "verdict": null
+ },
+ "polo-newmexico-2026": {
+  "event_id": "polo-newmexico-2026",
+  "views": {
+   "d_ev": {
+    "event": "Record wet September and flooding around Albuquerque, New Mexico, late Sep 2026",
+    "view": "d_ev",
+    "track": 27,
+    "frame": 71,
+    "direction": "D",
+    "event_pair": "20260920_20261002",
+    "control_pair": "20260908_20260920",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 30,
+    "far_km": 90,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.5990591049194336,
+    "mean_coh_control_within_radius": 0.07400231808423996,
+    "mean_coh_event_whole_window": 0.6519791483879089,
+    "mean_coh_control_whole_window": 0.07374978065490723,
+    "coherence_loss": {
+     "loss_area_km2": 0.0,
+     "comparable_area_km2": 0.0,
+     "loss_fraction_inside": 0.0,
+     "loss_fraction_outside": 0.0,
+     "comparable_px_inside": 0,
+     "loss_area_km2_whole_window": 0.0
+    },
+    "largest_loss_clusters": [],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": 42.54609680175781
+   },
+   "a_ev": {
+    "event": "Record wet September and flooding around Albuquerque, New Mexico, late Sep 2026",
+    "view": "a_ev",
+    "track": 120,
+    "frame": 19,
+    "direction": "A",
+    "event_pair": "20260926_20261008",
+    "control_pair": "20260914_20260926",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 30,
+    "far_km": 90,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.5455318093299866,
+    "mean_coh_control_within_radius": 0.4703127443790436,
+    "mean_coh_event_whole_window": 0.583457887172699,
+    "mean_coh_control_whole_window": 0.510132372379303,
+    "coherence_loss": {
+     "loss_area_km2": 0.0,
+     "comparable_area_km2": 1493.0240000000001,
+     "loss_fraction_inside": 0.0,
+     "loss_fraction_outside": 0.0002993464677730218,
+     "comparable_px_inside": 233285,
+     "loss_area_km2_whole_window": 1.5616
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 0.384,
+      "lon": -106.9157,
+      "lat": 34.6195,
+      "max_side_km": 1.44
+     },
+     {
+      "area_km2": 0.3584,
+      "lon": -106.6771,
+      "lat": 34.6283,
+      "max_side_km": 1.28
+     },
+     {
+      "area_km2": 0.30720000000000003,
+      "lon": -106.9139,
+      "lat": 34.6265,
+      "max_side_km": 0.88
+     },
+     {
+      "area_km2": 0.2816,
+      "lon": -106.9125,
+      "lat": 34.6592,
+      "max_side_km": 0.96
+     },
+     {
+      "area_km2": 0.23040000000000002,
+      "lon": -106.7124,
+      "lat": 34.6363,
+      "max_side_km": 0.8
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": 42.09489059448242
+   }
+  },
+  "verdict": null
+ },
+ "sakurajima-2026": {
+  "event_id": "sakurajima-2026",
+  "views": {
+   "asc": {
+    "event": "Sakurajima (Aira) pyroclastic flows, Japan, 3-10 Aug 2026",
+    "view": "asc",
+    "track": 24,
+    "frame": 18,
+    "direction": "A",
+    "event_pair": "20260721_20260814",
+    "control_pair": "20260709_20260721",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 5,
+    "far_km": 15,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.46654412150382996,
+    "mean_coh_control_within_radius": 0.5683543086051941,
+    "mean_coh_event_whole_window": 0.3453874886035919,
+    "mean_coh_control_whole_window": 0.3434830605983734,
+    "coherence_loss": {
+     "loss_area_km2": 2.2464,
+     "comparable_area_km2": 61.4528,
+     "loss_fraction_inside": 0.036554884399083526,
+     "loss_fraction_outside": 0.0,
+     "comparable_px_inside": 9602,
+     "loss_area_km2_whole_window": 2.2464,
+     "mean_coh_control_at_loss_px": 0.6497094035148621,
+     "mean_coh_event_at_loss_px": 0.27793729305267334
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 0.7040000000000001,
+      "lon": 130.632,
+      "lat": 31.5682,
+      "max_side_km": 1.6
+     },
+     {
+      "area_km2": 0.672,
+      "lon": 130.6207,
+      "lat": 31.5734,
+      "max_side_km": 1.92
+     },
+     {
+      "area_km2": 0.28800000000000003,
+      "lon": 130.6126,
+      "lat": 31.5906,
+      "max_side_km": 0.64
+     },
+     {
+      "area_km2": 0.16640000000000002,
+      "lon": 130.6175,
+      "lat": 31.5862,
+      "max_side_km": 0.88
+     },
+     {
+      "area_km2": 0.128,
+      "lon": 130.6228,
+      "lat": 31.5911,
+      "max_side_km": 0.64
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 61,
+     "median": 0.0,
+     "p95": 0.0,
+     "max": 0.0
+    },
+    "incidence_deg_mean": 46.74527359008789
+   }
+  },
+  "verdict": null
+ },
+ "etna-june-2026": {
+  "event_id": "etna-june-2026",
+  "views": {
+   "asc": {
+    "event": "Etna east-flank fracture, lava flow and flank slip, 26-29 Jun 2026",
+    "view": "asc",
+    "track": 43,
+    "frame": 21,
+    "direction": "A",
+    "event_pair": "20260617_20260629",
+    "control_pair": "20260629_20260723",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 9,
+    "far_km": 27,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.6075631380081177,
+    "mean_coh_control_within_radius": 0.5588443279266357,
+    "mean_coh_event_whole_window": 0.6091064810752869,
+    "mean_coh_control_whole_window": 0.5707082152366638,
+    "coherence_loss": {
+     "loss_area_km2": 0.0,
+     "comparable_area_km2": 184.8192,
+     "loss_fraction_inside": 0.0,
+     "loss_fraction_outside": 0.0006933041415800036,
+     "comparable_px_inside": 28878,
+     "loss_area_km2_whole_window": 1.0944
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 0.6464000000000001,
+      "lon": 15.0355,
+      "lat": 37.9611,
+      "max_side_km": 2.0
+     },
+     {
+      "area_km2": 0.3008,
+      "lon": 14.8279,
+      "lat": 37.5319,
+      "max_side_km": 0.88
+     },
+     {
+      "area_km2": 0.1472,
+      "lon": 14.8458,
+      "lat": 37.5244,
+      "max_side_km": 0.48
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 35,
+     "median": 0.0,
+     "p95": 0.6464000000000001,
+     "max": 0.6464000000000001
+    },
+    "incidence_deg_mean": 41.507957458496094
+   },
+   "desc": {
+    "event": "Etna east-flank fracture, lava flow and flank slip, 26-29 Jun 2026",
+    "view": "desc",
+    "track": 51,
+    "frame": 69,
+    "direction": "D",
+    "event_pair": "20260617_20260629",
+    "control_pair": "20260629_20260711",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 9,
+    "far_km": 27,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.6165688037872314,
+    "mean_coh_control_within_radius": 0.6217311024665833,
+    "mean_coh_event_whole_window": 0.5870614647865295,
+    "mean_coh_control_whole_window": 0.5868967771530151,
+    "coherence_loss": {
+     "loss_area_km2": 0.0,
+     "comparable_area_km2": 207.6672,
+     "loss_fraction_inside": 0.0,
+     "loss_fraction_outside": 0.0002364377742290578,
+     "comparable_px_inside": 32448,
+     "loss_area_km2_whole_window": 0.3904
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 0.24960000000000002,
+      "lon": 14.8277,
+      "lat": 37.532,
+      "max_side_km": 0.88
+     },
+     {
+      "area_km2": 0.1408,
+      "lon": 14.846,
+      "lat": 37.5243,
+      "max_side_km": 0.48
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 37,
+     "median": 0.0,
+     "p95": 0.3904,
+     "max": 0.3904
+    },
+    "incidence_deg_mean": 43.01054000854492
+   }
+  },
+  "verdict": null
+ },
+ "polo-baja-2026": {
+  "event_id": "polo-baja-2026",
+  "views": {
+   "a_ev": {
+    "event": "Hurricane Polo landfall in central Baja California Sur, Mexico, 28-29 Sep 2026",
+    "view": "a_ev",
+    "track": 5,
+    "frame": 14,
+    "direction": "A",
+    "event_pair": "20260918_20260930",
+    "control_pair": "20260906_20260918",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 30,
+    "far_km": 90,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.5179536938667297,
+    "mean_coh_control_within_radius": 0.5157983303070068,
+    "mean_coh_event_whole_window": 0.43080538511276245,
+    "mean_coh_control_whole_window": 0.43860793113708496,
+    "coherence_loss": {
+     "loss_area_km2": 4.9408,
+     "comparable_area_km2": 1966.2144,
+     "loss_fraction_inside": 0.0025128490565423586,
+     "loss_fraction_outside": 0.02538387350835813,
+     "comparable_px_inside": 307221,
+     "loss_area_km2_whole_window": 83.9424,
+     "mean_coh_control_at_loss_px": 0.5870621800422668,
+     "mean_coh_event_at_loss_px": 0.21054404973983765
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 4.7872,
+      "lon": -112.2458,
+      "lat": 24.8815,
+      "max_side_km": 4.5600000000000005
+     },
+     {
+      "area_km2": 4.1536,
+      "lon": -112.2249,
+      "lat": 24.885,
+      "max_side_km": 4.16
+     },
+     {
+      "area_km2": 2.9056,
+      "lon": -112.2225,
+      "lat": 24.825,
+      "max_side_km": 5.84
+     },
+     {
+      "area_km2": 2.4896000000000003,
+      "lon": -112.2326,
+      "lat": 24.9165,
+      "max_side_km": 3.04
+     },
+     {
+      "area_km2": 2.4256,
+      "lon": -112.1246,
+      "lat": 25.3059,
+      "max_side_km": 4.4
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": 42.64162826538086
+   },
+   "a_after": {
+    "event": "Hurricane Polo landfall in central Baja California Sur, Mexico, 28-29 Sep 2026",
+    "view": "a_after",
+    "track": 5,
+    "frame": 14,
+    "direction": "A",
+    "event_pair": "20260930_20261012",
+    "control_pair": "20260906_20260918",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 30,
+    "far_km": 90,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.5729973912239075,
+    "mean_coh_control_within_radius": 0.5157983303070068,
+    "mean_coh_event_whole_window": 0.47657886147499084,
+    "mean_coh_control_whole_window": 0.43860793113708496,
+    "coherence_loss": {
+     "loss_area_km2": 1.9776,
+     "comparable_area_km2": 1966.2144,
+     "loss_fraction_inside": 0.001005790619781851,
+     "loss_fraction_outside": 0.004556923500852367,
+     "comparable_px_inside": 307221,
+     "loss_area_km2_whole_window": 16.16,
+     "mean_coh_control_at_loss_px": 0.5962330102920532,
+     "mean_coh_event_at_loss_px": 0.19146926701068878
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 0.9216000000000001,
+      "lon": -111.6469,
+      "lat": 25.3157,
+      "max_side_km": 1.04
+     },
+     {
+      "area_km2": 0.8704000000000001,
+      "lon": -111.7688,
+      "lat": 25.0968,
+      "max_side_km": 1.52
+     },
+     {
+      "area_km2": 0.6272,
+      "lon": -112.2322,
+      "lat": 24.7935,
+      "max_side_km": 1.76
+     },
+     {
+      "area_km2": 0.6016,
+      "lon": -111.8684,
+      "lat": 25.2019,
+      "max_side_km": 0.88
+     },
+     {
+      "area_km2": 0.5888,
+      "lon": -112.1717,
+      "lat": 25.1031,
+      "max_side_km": 1.76
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": null
+   },
+   "d_ev": {
+    "event": "Hurricane Polo landfall in central Baja California Sur, Mexico, 28-29 Sep 2026",
+    "view": "d_ev",
+    "track": 128,
+    "frame": 76,
+    "direction": "D",
+    "event_pair": "20260927_20261009",
+    "control_pair": "20260915_20260927",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 30,
+    "far_km": 90,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.46850478649139404,
+    "mean_coh_control_within_radius": 0.5529127717018127,
+    "mean_coh_event_whole_window": 0.3924475908279419,
+    "mean_coh_control_whole_window": 0.4488813281059265,
+    "coherence_loss": {
+     "loss_area_km2": 11.571200000000001,
+     "comparable_area_km2": 2102.0224000000003,
+     "loss_fraction_inside": 0.005504793859475522,
+     "loss_fraction_outside": 0.06779819141180964,
+     "comparable_px_inside": 328441,
+     "loss_area_km2_whole_window": 211.56480000000002,
+     "mean_coh_control_at_loss_px": 0.6242124438285828,
+     "mean_coh_event_at_loss_px": 0.2096836268901825
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 76.42240000000001,
+      "lon": -111.9688,
+      "lat": 25.2727,
+      "max_side_km": 22.56
+     },
+     {
+      "area_km2": 13.92,
+      "lon": -112.2138,
+      "lat": 24.8258,
+      "max_side_km": 10.88
+     },
+     {
+      "area_km2": 6.7904,
+      "lon": -112.051,
+      "lat": 25.2389,
+      "max_side_km": 5.2
+     },
+     {
+      "area_km2": 5.952,
+      "lon": -112.1289,
+      "lat": 25.1479,
+      "max_side_km": 5.92
+     },
+     {
+      "area_km2": 5.7728,
+      "lon": -112.1437,
+      "lat": 25.1983,
+      "max_side_km": 10.56
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": 44.90439987182617
+   }
+  },
+  "verdict": null
+ },
+ "kilauea-ep53-2026": {
+  "event_id": "kilauea-ep53-2026",
+  "views": {
+   "asc": {
+    "event": "Kilauea summit eruption, episode 53, 12-13 Aug 2026",
+    "view": "asc",
+    "track": 151,
+    "frame": 11,
+    "direction": "A",
+    "event_pair": "20260811_20260823",
+    "control_pair": "20260718_20260811",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 4,
+    "far_km": 8,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.4378752112388611,
+    "mean_coh_control_within_radius": 0.523597240447998,
+    "mean_coh_event_whole_window": 0.5311371088027954,
+    "mean_coh_control_whole_window": 0.6748508810997009,
+    "coherence_loss": {
+     "loss_area_km2": 4.0192000000000005,
+     "comparable_area_km2": 36.6784,
+     "loss_fraction_inside": 0.10957948002093876,
+     "loss_fraction_outside": 0.18910984028919706,
+     "comparable_px_inside": 5731,
+     "loss_area_km2_whole_window": 185.8176,
+     "mean_coh_control_at_loss_px": 0.5686624050140381,
+     "mean_coh_event_at_loss_px": 0.15004459023475647
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 135.84,
+      "lon": -155.2093,
+      "lat": 19.5017,
+      "max_side_km": 20.16
+     },
+     {
+      "area_km2": 25.44,
+      "lon": -155.425,
+      "lat": 19.3506,
+      "max_side_km": 8.8
+     },
+     {
+      "area_km2": 7.7248,
+      "lon": -155.3033,
+      "lat": 19.3781,
+      "max_side_km": 5.36
+     },
+     {
+      "area_km2": 4.8512,
+      "lon": -155.4372,
+      "lat": 19.2919,
+      "max_side_km": 4.72
+     },
+     {
+      "area_km2": 1.1264,
+      "lon": -155.391,
+      "lat": 19.363,
+      "max_side_km": 2.8000000000000003
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 172,
+     "median": 0.7616,
+     "p95": 34.796800000000005,
+     "max": 44.275200000000005
+    },
+    "incidence_deg_mean": 38.520240783691406
+   }
+  },
+  "verdict": null
+ },
+ "great-sitkin-2026": {
+  "event_id": "great-sitkin-2026",
+  "views": {
+   "desc": {
+    "event": "Great Sitkin lava dome growth, Aleutians, 2026",
+    "view": "desc",
+    "track": 59,
+    "frame": 62,
+    "direction": "D",
+    "event_pair": "20260829_20260910",
+    "control_pair": "20260630_20260712",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 4,
+    "far_km": 12,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.698692798614502,
+    "mean_coh_control_within_radius": 0.49340859055519104,
+    "mean_coh_event_whole_window": 0.19208839535713196,
+    "mean_coh_control_whole_window": 0.1658443957567215,
+    "coherence_loss": {
+     "loss_area_km2": 0.0,
+     "comparable_area_km2": 27.846400000000003,
+     "loss_fraction_inside": 0.0,
+     "loss_fraction_outside": 0.0,
+     "comparable_px_inside": 4351,
+     "loss_area_km2_whole_window": 0.0
+    },
+    "largest_loss_clusters": [],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 4,
+     "median": 0.0,
+     "p95": 0.0,
+     "max": 0.0
+    },
+    "incidence_deg_mean": 45.9990348815918
    }
   },
   "verdict": null

@@ -1,5 +1,5 @@
 {
- "generated": "15 November 2026, 00:46 (Armenia time)",
+ "generated": "15 November 2026, 00:46 (Armenia time); updated about 04:00 with the evidence layers, the visibility audit, event-hunt round 3 and the new test counts (rows E01-E03, A01, G05; N01, N04, P02 changed)",
  "note": "All paths are relative to the repository root. landed = first commit that touched the write-up (day month hour:minute, Armenia time).",
  "studies": [
   {
@@ -470,7 +470,7 @@
    "question": "Round 2: five more events (UP-Terai flood, Mahanadi flood, Thunder Bay 36 fire, La Mierla fire, Avila fire)?",
    "method": "Same path; fires judged by HH or HV change in a sharp-edged patch against a control interval.",
    "result": "Rated clear: UP-Terai (172 km2 on 1 October against 9 km2, 80 % inside Landsat extent), Mahanadi (404 against 138 km2, bands do not overlap), Thunder Bay 36 (HH +0.12 in the core against +0.01 to +0.05), La Mierla (HV darker by 0.05-0.09), Avila (HV -0.06 to -0.08). Patch areas are threshold dependent and not claimed.",
-   "verdict": "clear in the log; not in the app at the time of writing (folders under areas/ are not committed)",
+   "verdict": "clear in the log; all five are places in the app since commit 5ae48d5 (15 Nov 00:58) (Mahanadi, Terai, Thunder Bay 36, La Mierla, Avila; Gironde stays marginal by brightness, no place from brightness)",
    "writeup": "docs/research/events-2026.md",
    "code": "scripts/ingest/add_area.py",
    "test": "tests/test_add_area.py",
@@ -595,7 +595,7 @@
    "group": "Data and app engineering",
    "question": "Can a new place be added in one command?",
    "method": "ASF search, pass choice, previews, terrain, detection, export.",
-   "result": "26 places in src/app/public/data/index.json at the time of writing. Selection logic tested on synthetic search results.",
+   "result": "37 places in 9 classes in src/app/public/data/summary.json (index.json lists 37 areas; Rondonia has in_app false in areas/rondonia/area.json and is not exported). Selection logic tested on synthetic search results.",
    "verdict": "shipped",
    "writeup": "docs/research/areas.md",
    "code": "scripts/ingest/add_area.py",
@@ -637,7 +637,7 @@
    "group": "Data and app engineering",
    "question": "Does the web app's own data layer hold up?",
    "method": "Node tests over the manifests and helpers in src/app (npm test).",
-   "result": "15 of 16 pass; one fails (see known limits).",
+   "result": "22 tests, 21 pass, 1 fails (15 Nov, about 03:50): 'event places: tooltip text, grouping, counts, summaries' expects the category list fire, earthquake, volcano, landslide and does not know the new storm class (src/app/tests/app.test.js line 115). Outdated expectation; not fixed.",
    "verdict": "evaluated (one failing test)",
    "writeup": "docs/evidence/app-tests.txt",
    "code": null,
@@ -659,6 +659,76 @@
    "results": null,
    "figure": null,
    "landed": "14 Nov 11:16"
+  },
+  {
+   "id": "E01",
+   "group": "Evidence layers (how we found it)",
+   "question": "Can the three wildfires seen by brightness change be shown as before, after, difference with a control test?",
+   "method": "Median of passes before and after, difference, control = difference between two halves of the before group, noise level = Gaussian 99.9 % level of the control, patch of at least min_km2 nearest the published fire position, rank against equal-size discs elsewhere, threshold sensitivity 0.5x/1x/2x.",
+   "result": "Area of changed radar echo (not burnt area): Thunder Bay 36 1,875 km2 (published 3,139; 0 at 2x threshold; control 8 % above threshold, not clean), La Mierla 397 km2 (published about 320; control 0 %), Avila 760 km2 (published 500-550; control 0 %); mean change +0.12 / -0.13 / -0.09 on the 0-1 preview scale; none of 129k / 275k / 228k discs as strong.",
+   "verdict": "shipped (evidence layers in the app for three fires)",
+   "writeup": "docs/eda/burn.md",
+   "code": "scripts/detect/burn.py, scripts/detect/evidence.py",
+   "test": "tests/test_burn.py",
+   "results": "src/app/public/data/<place>/manifest.json (evidence.stats)",
+   "figure": "docs/eda/burn/thunder-bay-36-2026.png",
+   "landed": "15 Nov 01:57"
+  },
+  {
+   "id": "E02",
+   "group": "Evidence layers (how we found it)",
+   "question": "Does the same before/after/difference test show the land change at Okavango, Sindh-Indus, Nile delta, Poyang, Haor and Urmia?",
+   "method": "As E01 on HH brightness (scripts/detect/evidence_places.py).",
+   "result": "Area of changed radar echo: Okavango 5,065 km2 (one later pass only), Sindh-Indus 2,146, Nile delta 5,734, Poyang 3,152, Haor 1,611, Urmia 297 km2; control not clean at Sindh-Indus (9 %), Poyang (11 %) and Urmia (16 %).",
+   "verdict": "shipped (evidence layers in the app for six places)",
+   "writeup": "docs/eda/burn.md",
+   "code": "scripts/detect/evidence_places.py, scripts/detect/evidence.py",
+   "test": "tests/test_burn.py",
+   "results": "src/app/public/data/<place>/manifest.json (evidence.stats)",
+   "figure": "docs/eda/evidence/okavango.png",
+   "landed": "15 Nov 01:57"
+  },
+  {
+   "id": "E03",
+   "group": "Evidence layers (how we found it)",
+   "question": "Does the same test find a change at the Sudd, the Gironde fire (by brightness) and Rondonia?",
+   "method": "As E01 and E02.",
+   "result": "Sudd: nothing above the noise (threshold 0.18), not added. Gironde by brightness: not clear (fades, control already darker). Rondonia: many small dark patches inside old cleared land, cannot be told from burning, regrowth or moisture; no new-clearing claim; place taken out of the app (areas/rondonia/area.json in_app false).",
+   "verdict": "negative result; none in the app",
+   "writeup": "docs/eda/burn.md",
+   "code": "scripts/detect/evidence_places.py",
+   "test": "tests/test_burn.py",
+   "results": null,
+   "figure": "docs/eda/evidence/rondonia.png",
+   "landed": "15 Nov 01:57"
+  },
+  {
+   "id": "A01",
+   "group": "Data and app engineering",
+   "question": "Does each place show on its opening view what its story says?",
+   "method": "Overlay images of 31 places measured and looked at on contact sheets; verdict per place; fix list.",
+   "result": "12 show it, 10 show it weakly, 9 do not (31 places, before the fixes; not re-run after them; the seven places added later are not in it). Fixes applied: default_layer and default_date per place, caution labels at Inner Niger, Lake Chad, Urmia, Okavango and Sindh-Indus, captions for steady places.",
+   "verdict": "shipped (fixes in areas/*/area.json); audit not repeated",
+   "writeup": "docs/eda/visibility-audit.md",
+   "code": null,
+   "test": "src/app/tests/app.test.js",
+   "results": "docs/eda/visibility/audit.json",
+   "figure": "docs/eda/visibility/flood.png",
+   "landed": "15 Nov 01:44"
+  },
+  {
+   "id": "G05",
+   "group": "Other ground events",
+   "question": "Round 3: does pair coherence show fires, storms and more volcanoes and landslides?",
+   "method": "As G01; fires use a lower and wider rule set per event in events.json; several event pairs can share one control.",
+   "result": "As of 15 Nov about 03:57 (round 3 runs until 07:30): events.json has 43 candidates (results.json has results for all 43 at 03:57; it carries no verdict for Budhi Gandaki, Kali Gandaki, Kilauea 54 and Gironde, which events.json has); 10 clear (Langtang, Kilauea 55, Etna, six wildfires, Atacama storm; all 10 in the app, app_events.json), 3 marginal, 2 not detected, 28 without a verdict field. Gironde is clear by coherence (events.json) while results.json still has no verdict for it and the brightness log says marginal.",
+   "verdict": "ten shipped as event places; the rest not shown; counts provisional",
+   "writeup": "docs/eda/events.md",
+   "code": "scripts/detect/events.py",
+   "test": "tests/test_events.py",
+   "results": "docs/eda/events/results.json",
+   "figure": "docs/eda/events/overview.png",
+   "landed": "15 Nov 01:52"
   }
  ],
  "negative_results": [
@@ -967,6 +1037,42 @@
    "what": "'Rain caused the odd HV channel on 6 October'",
    "number": "Contradicted: 0-1 mm in 48 h",
    "link": "docs/eda/validation-2026.md"
+  },
+  {
+   "kind": "Evidence layer",
+   "what": "Sudd, before/after test",
+   "number": "Nothing above the noise (threshold 0.18)",
+   "link": "docs/eda/burn.md"
+  },
+  {
+   "kind": "Evidence layer",
+   "what": "Gironde megafire by brightness",
+   "number": "Not clear: the change fades after its first weeks and the control is already darker (clear by lost coherence, see G05)",
+   "link": "docs/eda/burn.md"
+  },
+  {
+   "kind": "Evidence layer",
+   "what": "Rondonia new forest clearing",
+   "number": "Many small dark patches in old cleared land; no clear new clearing; taken out of the app",
+   "link": "docs/eda/burn.md"
+  },
+  {
+   "kind": "Evidence layer",
+   "what": "Control test at Thunder Bay 36, Sindh-Indus, Poyang, Urmia",
+   "number": "Not clean: 8 %, 9 %, 11 %, 16 % of control pixels above the threshold",
+   "link": "docs/eda/burn.md"
+  },
+  {
+   "kind": "Visibility",
+   "what": "Opening views that did not carry the story (audit of 31 places)",
+   "number": "9 do not show it, 10 only weakly, 12 show it",
+   "link": "docs/eda/visibility-audit.md"
+  },
+  {
+   "kind": "Ground event",
+   "what": "Round 3 candidates that showed nothing (events.md log, as of 03:57)",
+   "number": "Klyuchevskoy, Krasheninnikov, Nyamulagira, Chillan, Semeru, Lewotolok, Fuego, Hanjia landslide, Hurricane Isaias, Big Grass fire; Mahanadi, Terai and Chao Phraya floods by coherence",
+   "link": "docs/eda/events.md"
   }
  ]
 }

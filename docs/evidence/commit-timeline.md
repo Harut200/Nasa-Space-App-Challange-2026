@@ -1,6 +1,6 @@
 # Commit timeline
 
-Generated 15 Nov 2026 from `git log --format='%h %ad %s' --date=format:'%d %b %H:%M'`, grouped by hour (Armenia time, oldest first). 104 commits on the branch. Account handles and remote names in merge subjects are removed or replaced by `<remote>`. Work after the newest commit is not committed yet (see EVIDENCE.md, known limits).
+Generated 15 Nov 2026 from `git log --format='%h %ad %s' --date=format:'%d %b %H:%M'`, grouped by hour (Armenia time, oldest first). 120 commits on the branch (the last 16, from 00:47 to 03:20 on 15 Nov, were added at about 04:00). Account handles and remote names in merge subjects are removed or replaced by `<remote>`. Work after the newest commit is not committed yet (see EVIDENCE.md, known limits).
 
 ## 14 Nov 09:00 (4 commits)
 
@@ -185,3 +185,40 @@ Generated 15 Nov 2026 from `git log --format='%h %ad %s' --date=format:'%d %b %H
 |---|---|---|
 | 00:01 | `4ef5342` | Earthquakes, second round: Venezuela M7.5 and Qaidam M5.6 clear; eight more tried and not shown |
 | 00:30 | `91bf844` | Shrink the app data by a quarter with exact-colour class maps; add thumbnails, a one-file summary and a category per place |
+
+## 15 Nov 00:00, commits after 91bf844 (3 commits)
+
+| Time | Commit | What landed |
+|---|---|---|
+| 00:47 | `fdb2561` | Add the evidence record: full test output, every experiment with verdict and links, negative results, limits, reproduce commands |
+| 00:52 | `b69161b` | Bring the summaries in line with their sources: six earthquakes of fifteen, ground events, the NASA product comparison with its failures, 26 places by class |
+| 00:58 | `5ae48d5` | Add five more 2026 events: Mahanadi and Terai floods, three wildfire scars (Ontario, Spain); a Wildfires class; places can name their opening layer |
+
+## 15 Nov 01:00, commits after 91bf844 (6 commits)
+
+| Time | Commit | What landed |
+|---|---|---|
+| 01:06 | `ab735c6` | Add the project and team logos; list Harutyun first in the licence; keep the settings of the events tried and not shown |
+| 01:15 | `af4e1f2` | Show the Constellation team logo and name in the README |
+| 01:22 | `09a4e82` | Use the correct Constellation logo; add true before-the-event layers and pairing for all nine events |
+| 01:44 | `421704a` | Audit whether each of the 31 places shows its story on the opening view: 12 show it, 10 weakly, 9 do not |
+| 01:52 | `f7d6856` | Add the Thunder Bay 36 fire seen by lost radar coherence (11-23 July pair against a control pair ending before ignition) |
+| 01:57 | `1066663` | Show how each change was found: before, after, difference and outline layers with a control test for three fires and seven other places; La Mierla fire by lost coherence; opening layers, dates and caution labels from the visibility audit |
+
+## 15 Nov 02:00, commits after 91bf844 (5 commits)
+
+| Time | Commit | What landed |
+|---|---|---|
+| 02:05 | `374794e` | Add the Burgohondo fire seen by lost radar coherence, with a control pair before the fire |
+| 02:15 | `052ff42` | Add the Gironde forest fire seen by lost coherence; second look direction for La Mierla and a null-pair check for Thunder Bay |
+| 02:27 | `5ec11ad` | Add the Niebla (Spain) and Bald Range (British Columbia) fires seen by lost coherence; record the volcano and flood candidates that showed nothing |
+| 02:30 | `4b0036c` | Niebla fire: the straight northern edge appears at the same latitude on both look directions, so it is on the ground, not an image seam |
+| 02:57 | `47608f1` | Rename the land class to Farmland and take Rondonia out of the app: no layer shows new clearing; kept as a tried place |
+
+## 15 Nov 03:00, commits after 91bf844 (2 commits)
+
+| Time | Commit | What landed |
+|---|---|---|
+| 03:12 | `3c2a0c7` | Use of AI: state the team's roles (research, data analysis, detection design, app design) and the assistant role of AI tools |
+| 03:20 | `13a1f4e` | Add the Atacama snow and rain storms of August 2026 as a Storms class (lost coherence against a dry control pair); record the volcano, landslide and cyclone candidates that showed nothing |
+
