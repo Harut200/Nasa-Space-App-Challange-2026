@@ -39,3 +39,48 @@ Independent 2026 data (weather stations, reanalysis, river gauges, satellite alt
 | Lake Sevan | "Wind roughened the water" on 31 August and 12 September | Rain on the first night, a steady breeze on the second | Sevan shore station (SYNOP 37717, via Ogimet): 29.1 mm in the 48 h before the 31 August pass; 12 September dry with 2–4 m/s north-west wind overnight. No source shows more than about 3 m/s at pass time on either date, so "wind" alone is not supported |
 
 Still open for a human check: the Tonle Sap lake peaked on about 29 September at a normal height (altimeter), while our open-water class kept growing to 17 October. The story does not claim a late or weak flood any more; do not reintroduce that wording.
+
+## Sources for the revised stories
+
+The [2026 validation](../eda/validation-2026.md) supersedes the earlier open questions about weather and Tonle Sap timing. Sentinel-6 altimetry shows a roughly 1.3 m rise between July 2 and 12 and a lake height peak around September 29. The river gauge at Prek Kdam peaked September 24. The 0.98 rank correlation is for the baseline open-water series and lake height across ten passes. The August 31 Sevan pass followed rain, and September 12 was dry with an overnight northwest breeze. These conditions are consistent with roughened water.
+
+- [Prek Toal Ramsar information sheet](https://rsis.ramsar.org/RISapp/files/RISrep/KH2245RIS_1511_en.pdf) supports the approximately 21,300 ha site area and wetland context.
+- Lake Sevan measured 1,900.70 m on August 31, 1,900.68 m on September 13 and 1,900.58 m on October 18 in the published gauge series. The readings use the gauge datum. [Armstat](https://www.armstat.am/file/article/sv_08_26r_550.pdf) · [September Hydromet](https://nt.am/en/news/359969/) · [October Hydromet](https://nt.am/en/news/362098/)
+- The Water Committee reports 75.3 million cubic metres of actual 2026 irrigation withdrawal. [Water Committee](https://water.mtad.gov.am/en/articles/%D5%B6%D5%B8%D6%80%D5%B8%D6%82%D5%A9%D5%B5%D5%B8%D6%82%D5%B6%D5%B6%D5%A5%D6%80/water-intake-from-lake-sevan-for-irrigation-purposes-drops-to-its-lowest-level-in-65-years)
+- USGS estimates that the area within the flowing-well boundary fell from 619 to 291 square kilometres from 1984 to 2016. [USGS groundwater study](https://pubs.usgs.gov/sir/2017/5163/sir20175163.pdf)
+
+## Pin audit
+
+Coordinates are longitude, latitude. This is a source and map cross-check. Pending imagery checks are noted explicitly, including checks of the full sampling circles and the radar footprint by date.
+
+| Spot | Disposition |
+|---|---|
+| Tonle Sap lake-core | Keep [104.1, 12.8] as broad open-water control. Check the full circle against the persistent-water mask. |
+| prek-toal | Keep provisionally [103.7, 13.1]. Ramsar confirms the western floodplain setting. Confirm the exact circle overlaps the reserve and flooded forest rather than open water. |
+| chong-kneas | Keep provisionally [103.84, 13.27]. Confirm the landing or village target on dated imagery before using it as a site-specific measurement. |
+| southeast-corridor | Keep [104.85, 12.0] as a broad floodplain sample. The saved change map shows the southeastern strip and a strong local transition, near the swath edge. Check valid pixels on all dates. |
+| kampong-luong | Move to [104.2083, 12.5732] as the mapped Kampong Luong vicinity, about 36 km north of the original. Floating homes move with water level. This is a locality sample, separate from the MRC gauge. |
+| upland-forest | Keep [104.01, 12.04] with the label Stable radar reference. EDA picked a relatively stable bright sample. Verify land cover before using it as a forest reference. |
+| Sevan mid-lake | Keep [45.3, 40.35] as the broad lake control. Check the circle against an interior lake mask. |
+| gavar-shore | Move to [45.1641, 40.4309], the EUWI+ lake shoreline station at the Gavaraget estuary. |
+| martuni-shore | Move to [45.2963, 40.1762], the documented lake shore station in the Martuni area. |
+| sevan-town | Keep [44.97, 40.55] as a town marker. Check mixed land cover in its 800 m radius before using it as an urban control. |
+| north-lake | Move to [45.2484, 40.498], a documented Small Sevan open-water monitoring station. |
+| Ararat masis-fields | Keep provisionally [44.43, 40.07]. Inspect the 1.2 km circle for mixed urban/agricultural land before treating it as a field control. |
+| fish-ponds | Keep [44.6, 39.9] with a general valley label. The team's historical water check found pond/reservoir clusters elsewhere, including around [44.37, 40.05]. A specific pond sample still needs dated imagery and coverage confirmation. |
+| vedi-vineyards | Keep [44.73, 39.91], near the mapped centre of Vedi, with a town and surroundings label. A vineyard-specific sampling circle still needs imagery verification. |
+| aknalich | Move to [44.16889, 40.14444], mapped Lake Akna near Aknalich in Armavir, about 8 km north of the original. A 1 km circle samples surrounding land too. |
+| yerevan | Keep [44.51, 40.18] as a general urban reference. Check time series before describing it as radiometrically stable. |
+
+- [MRC gauge metadata](https://archive.iwlearn.net/mrcmekong.org/spatial/meta_html/WQmetadata.pdf) · [Kampong Luong place coordinates](https://www.geonames.org/search.html?country=KH&q=Kampong+Luong) · [Seasonal settlement movement study](https://www.fauna-flora.org/wp-content/uploads/2023/05/201712_Cambodian-Journal-of-Natural-History.pdf)
+- [EUWI+ Lake Sevan monitoring station table](https://www.euwipluseast.eu/images/2021/06/PDF/AM-Report-Sevan_SW-Monitoring.pdf) · [Armenian regional reference map](https://env.am/storage/files/amar-2024.pdf)
+- [Lake Akna place geometry](https://en.wikipedia.org/wiki/Lake_Akna_%28Armavir%29) · [Government account of Akna Lake](https://www.gov.am/en/news/item/8712/) · [Vedi map](https://en.wikipedia.org/wiki/Vedi)
+
+
+## Current detector sources
+
+- Tonle Sap's roughly 1.7× growth comes from the math run and the independent exploratory split, with different absolute extents. The figures in [stats-change.md](../eda/stats-change.md) include a threshold ensemble, and [novel.md](../eda/novel.md) defines the choreography colors. The reference to marked September 11–23 expansion refers to the observed passes.
+- The rebuilt [vegetation score](../eda/floodveg.md) detects retained HH as HV falls and a second state where both channels darken. Use “possible” for both. Comparing those detections to later water is partly circular because later water already enters the second-state score.
+- [GMM/HMM tests](../eda/gmm.md) gave 1,235.3 km² for Sevan's largest connected body on every pass. This is a temporal model result, separate from the individual-pass areas and the gauge heights.
+- The [terrain experiment](../eda/terrain.md) reports 0.5–3.8 km² of mapped Ararat water across passes after screening. This range describes the study box and an experimental method. Historical reference disagreement and missed ponds limit interpretation.
+- Keep the story's experimental results attributed by method. Compare the exported app assets with the version shown in the demo before using them as numerical evidence.

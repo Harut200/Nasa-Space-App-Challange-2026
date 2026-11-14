@@ -1,9 +1,9 @@
 {
   "story": {
-    "see": "Lake Sevan looks the same on all ten dates, within a few percent of its true size. On 31 August, after a night of rain, and 12 September, after a steady breeze, the roughened surface made parts of the lake look like land. Our method flags those patches instead of losing the lake.",
-    "physics": "Smooth water reflects radar away and looks dark. Wind and rain make ripples that scatter some signal back, so the water turns brighter and can be mistaken for land. Between January and mid-July 2026 the lake rose about 59 cm (EcoLur), far less than one pixel sideways, so radar at this detail cannot see it.",
-    "lband": "NISAR's L-band radar works day and night and through cloud, so every pass gives a clear view of the shoreline. But it measures roughness, not chemistry. Radar cannot see algal blooms or water quality. Optical satellites are the right tool for that, and saying so is part of the honest answer.",
-    "people": "Sevan covers about 1,242 km², the main reservoir for Armenia's farms (Wikipedia). Irrigation releases in 2026 are limited to 143.6 million m³ (EcoLur). Watching its shoreline over years, every 12 days, is how a country keeps track of a lake it depends on."
+    "see": "Some normally dark patches of Lake Sevan brightened on 31 August and 12 September. A shore station recorded rain around the first pass and a steady overnight breeze before the second. Both can roughen water. The seasonal radar model keeps the main lake connected through those changes.",
+    "physics": "The water-level record was 1,900.70 metres on 31 August and 1,900.58 metres on 18 October. Our time-series model estimates roughly 1,235 square kilometres for the largest water body on all ten passes. The gauge measures height. The radar map estimates where water covers the ground.",
+    "lband": "On a calm day, smooth water usually reflects the radar away. Ripples can send more energy back and look brighter. NISAR, the NASA–ISRO radar satellite, uses long-wavelength L-band radar for these observations, which lets it collect images through clouds.",
+    "people": "At the Gavaraget river mouth and along the Martuni shore, flat and steep stretches can move by different amounts for the same level change. Sevan also supplies irrigation water. Armenia's Water Committee reported 75.3 million cubic metres withdrawn for irrigation in the 2026 season."
   },
   "spots": [
     {
@@ -17,19 +17,19 @@
     },
     {
       "id": "gavar-shore",
-      "label": "Gavar shore",
+      "label": "Gavaraget river mouth",
       "lngLat": [
-        45.13,
-        40.35
+        45.1641,
+        40.4309
       ],
       "radius_m": 1000
     },
     {
       "id": "martuni-shore",
-      "label": "Martuni shore",
+      "label": "Martuni-area lake shore",
       "lngLat": [
-        45.3,
-        40.14
+        45.2963,
+        40.1762
       ],
       "radius_m": 1000
     },
@@ -44,10 +44,10 @@
     },
     {
       "id": "north-lake",
-      "label": "North basin",
+      "label": "Small Sevan open water",
       "lngLat": [
-        45.4,
-        40.5
+        45.2484,
+        40.498
       ],
       "radius_m": 1500
     }
