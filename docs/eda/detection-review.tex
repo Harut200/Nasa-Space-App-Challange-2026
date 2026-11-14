@@ -1,0 +1,170 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,booktabs}
+\usepackage[hidelinks]{hyperref}
+\newcommand{\HH}{\mathrm{HH}}
+\newcommand{\HV}{\mathrm{HV}}
+\newcommand{\kma}{\mathrm{km}^{2}}
+\title{Dancing with the SARs\\Radar Detection and Validation}
+\author{Science review for Abel and Harutyun}
+\date{}
+\begin{document}
+\maketitle
+
+\section{What the figures show}
+
+The Tonle Sap change-date map shows earlier changes in parts of the
+southeast corridor and later changes around parts of the lake margin and
+northwest. This is consistent with seasonal reverse flow from the Mekong.
+The map colors give the first observation of a new radar brightness level.
+Rain, crops, mixed pixels, and swath-edge effects can also change brightness.
+
+The open-water class expands. The area flagged as possible flooded
+vegetation peaks on August 30 and then declines. Both radar channels
+darkened at Prek Toal. Reduced vegetation contrast as water expands is a
+possible explanation. Use \emph{Possible flooded vegetation} in the legend.
+
+\section{Radar brightness and valid pixels}
+
+Smooth water often reflects radar away from the satellite. Wind can roughen
+water and increase the return. Water and upright trunks can produce a double
+reflection. HH transmits and receives horizontal polarization. HV transmits
+horizontal polarization and receives vertical polarization.
+
+For aligned preview brightness $B_t(p)\in[0,1]$ at pixel $p$ and date $t$,
+\begin{equation}
+ \Delta B(p)=B_{\mathrm{after}}(p)-B_{\mathrm{before}}(p).
+\end{equation}
+A change from $0.06$ to $0.12$ is $+0.06$ display units. Preview brightness
+uses an unknown display stretch. With positive calibrated linear power $P$,
+the physical backscatter change is
+\begin{equation}
+ \Delta_{\mathrm{dB}}=10\log_{10}\left(
+ \frac{P_{\mathrm{after}}}{P_{\mathrm{before}}}\right).
+\end{equation}
+Doubling calibrated power gives approximately $+3.01\,\mathrm{dB}$.
+Average calibrated power in linear units before converting to decibels.
+
+Let $V(q)=1$ for a valid pixel and $0$ otherwise. The mean over a
+neighborhood $W(p)$ is
+\begin{equation}
+ m_t(p)=\frac{\sum_{q\in W(p):\,V(q)=1} B_t(q)}
+              {\sum_{q\in W(p)}V(q)}.
+\end{equation}
+Exclude windows with zero valid pixels. The $3\times3$ filter spans roughly
+$540\,\mathrm{m}$, so shorelines and small fields can mix surface types.
+
+\section{Open water and possible flooded vegetation}
+
+For processed preview brightness in the two channels, define seeds and
+candidates on the common valid footprint:
+\begin{align}
+ S_t &= \{p:V(p)=1,\ B_{\HH,t}(p)<0.06,\ B_{\HV,t}(p)<0.35\},\\
+ C_t &= \{p:V(p)=1,\ B_{\HH,t}(p)<0.12,\ B_{\HV,t}(p)<0.35\}.
+\end{align}
+Keep candidates connected to a seed by an eight-neighbor path within $C_t$,
+then remove tiny connected components. HH $=0.09$ and HV $=0.20$ qualifies
+if the pixel connects to a seed and survives cleanup. A connected dark
+field can also pass.
+
+For channel $c$, calculate change from the mean of the first two dates:
+\begin{equation}
+ \Delta B_{c,t}(p)=B_{c,t}(p)-\frac{B_{c,1}(p)+B_{c,2}(p)}{2}.
+\end{equation}
+The vegetation rule requires $\Delta B_{\HH,t}>0.15$ and
+$\Delta B_{\HV,t}<0.06$, excluding current open water and likely permanent
+water. The peak flagged area is sensitive to the HH cutoff.
+\begin{center}
+\begin{tabular}{rr}
+\toprule
+HH increase cutoff & Peak flagged area ($\kma$)\\
+\midrule
+0.12 & 1,083\\
+0.15 & 611\\
+0.20 & 139\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+To check whether the same pixels later look like open water, let
+$F_{\mathrm{Aug30}}$ be the August vegetation mask and
+$M_{\mathrm{Sep23}}$ the September open-water mask. On the common
+footprint, for a nonempty August mask, calculate
+\begin{equation}
+ f=\frac{|F_{\mathrm{Aug30}}\cap M_{\mathrm{Sep23}}|}
+         {|F_{\mathrm{Aug30}}|}.
+\end{equation}
+Compare $f$ across thresholds and against gauge and optical observations.
+This fraction is a proposed check with the result still unknown.
+
+\section{First observed change}
+
+For a candidate split with $n_1$ earlier and $n_2$ later observations,
+\begin{equation}
+ \Delta=\overline B_{\mathrm{after}}-\overline B_{\mathrm{before}},
+ \qquad S=|\Delta|\sqrt{\frac{n_1n_2}{n_1+n_2}}.
+\end{equation}
+Five observations on either side and a $0.20$-unit step give
+$S\approx0.316$. The detector screens for minimum step size, persistence,
+and a $t$-like statistic. Temporal dependence and the search across
+candidate splits limit statistical interpretation. Report the first
+observation of the new state and the interval since the preceding pass.
+
+\section{Area and validation}
+
+For a classified mask $M$ with pixel ground areas $a_p$ on the common
+footprint,
+\begin{equation}
+ A(M)=\sum_{p\in M}a_p,
+ \qquad a_p\approx(0.18\,\mathrm{km})^2=0.0324\,\kma
+\end{equation}
+for nominal square $180\,\mathrm{m}$ cells. A uniform shoreline offset
+$d$ along perimeter $L$ gives $|\Delta A|\approx L|d|$. A one-pixel offset
+around a $250\,\mathrm{km}$ shoreline would affect about $45\,\kma$.
+
+For a bank at angle $\theta$ above horizontal,
+$|\Delta x|\approx|\Delta h|/\tan\theta$. A $0.12\,\mathrm{m}$ drop moves
+the waterline about $6.9\,\mathrm{m}$ at $1^\circ$ or $69\,\mathrm{m}$
+at $0.1^\circ$. These are illustrative slopes.
+
+For classified water $M$ and reference water $R$ on matching grids,
+\begin{equation}
+ \mathrm{IoU}=\frac{|M\cap R|}{|M\cup R|},
+ \qquad \text{share inside reference}=\frac{|M\cap R|}{|M|}.
+\end{equation}
+The team reports that $98$--$99\%$ of Tonle Sap late-season classified
+water lies inside the historical maximum extent, and that Sevan permanent
+water has IoU $0.94$. About $97\%$ of Ararat's latest classified water lies
+outside the historical reference. The
+\href{https://global-surface-water.appspot.com/}{JRC Landsat reference}
+ends in 2021, so this checks spatial agreement. The team's deep-learning
+perturbation tests measure stability under simulated noise relative to
+rule-generated masks or clean-input predictions.
+
+\section{Numbers for the demo}
+
+Use the same detector output for the story, map, and chart. The math run
+classifies about $2{,}234\,\kma$ on June 19 and $3{,}837\,\kma$ on
+October 17, an increase of roughly $72\%$ within the common footprint.
+The exploratory brightness analysis gives different extents.
+
+\begin{center}
+\begin{tabular}{lrrr}
+\toprule
+2026 observation interval & Change ($\kma$) & Days & $\kma$/day\\
+\midrule
+July 25 to August 18 & 381 & 24 & 16\\
+September 11 to September 23 & 375 & 12 & 31\\
+\bottomrule
+\end{tabular}
+\end{center}
+Each rate is the net classification difference divided by elapsed days.
+Within-interval rates are unknown. For the story, use \emph{marked
+expansion between September 11 and 23}.
+
+\paragraph{Before publishing.}
+Verify the sampling circles against higher-resolution imagery and valid
+radar coverage. Recompute the charts for the five moved centers. Show the
+Tonle Sap observation gap, use Ararat to explain the preview limits, and
+check the deployed figures, public links, and AI-use statement.
+\end{document}
