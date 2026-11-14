@@ -303,6 +303,21 @@
      "pair": "20260709_20260721",
      "granule": "NISAR_L2_PR_GUNW_025_021_D_101_026_4000_SH_20260709T161626_20260709T161700_20260721T161625_20260721T161700_P05023_N_F_J_001"
     }
+   },
+   "asc_late": {
+    "track": 143,
+    "frame": 165,
+    "direction": "A",
+    "label": "ascending",
+    "data_view": "asc",
+    "co": {
+     "pair": "20260823_20260904",
+     "granule": "NISAR_L2_PR_GUNW_028_143_A_165_029_4000_SH_20260823T035852_20260823T035933_20260904T035851_20260904T035932_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260706_20260718",
+     "granule": "NISAR_L2_PR_GUNW_024_143_A_165_025_4000_SH_20260706T035857_20260706T035934_20260718T035853_20260718T035934_P05023_N_F_J_001"
+    }
    }
   },
   "loss_lo": 0.35,
@@ -406,6 +421,20 @@
     "control": {
      "pair": "20260906_20260918",
      "granule": "NISAR_L2_PR_GUNW_030_001_D_097_031_2000_SH_20260906T065628_20260906T065702_20260918T065628_20260918T065702_P05023_F_F_J_001"
+    }
+   },
+   "asc": {
+    "track": 22,
+    "frame": 169,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260919_20261001",
+     "granule": "NISAR_L2_PR_GUNW_031_022_A_169_032_2000_SH_20260919T183508_20260919T183542_20261001T183508_20261001T183542_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260907_20260919",
+     "granule": "NISAR_L2_PR_GUNW_030_022_A_169_031_2000_SH_20260907T183508_20260907T183542_20260919T183508_20260919T183542_P05023_F_F_J_001"
     }
    }
   },
@@ -520,5 +549,1428 @@
   },
   "verdict": "marginal",
   "verdict_reason": "0.3 km2 patch at the crater, above the background (p95 0.1 km2), but the control pair is after the event so the crater floor is already dark in it"
+ },
+ {
+  "id": "klyuchevskoy-aug-2026",
+  "type": "volcano",
+  "title": "Klyuchevskoy eruption and Bezymianny, Kamchatka, from mid-August 2026",
+  "time": "2026-08-16T00:00:00Z",
+  "lat": 56.056,
+  "lon": 160.642,
+  "place": "Klyuchevskoy, Kamchatka, Russia",
+  "window": [
+   160.3,
+   55.85,
+   161.0,
+   56.25
+  ],
+  "heights": [
+   0,
+   5000
+  ],
+  "radius_km": 10,
+  "far_km": 30,
+  "gmin": 0.35,
+  "source_url": "https://watchers.news/2026/08/22/the-weekly-volcanic-activity-report-august-13-19-2026/",
+  "views": {
+   "desc": {
+    "track": 60,
+    "frame": 60,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260817_20260829",
+     "granule": "NISAR_L2_PR_GUNW_028_060_D_060_029_2000_SH_20260817T084852_20260817T084928_20260829T084852_20260829T084927_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260712_20260724",
+     "granule": "NISAR_L2_PR_GUNW_025_060_D_060_026_2000_SH_20260712T084854_20260712T084930_20260724T084853_20260724T084929_P05023_N_F_J_001"
+    }
+   },
+   "asc": {
+    "track": 152,
+    "frame": 30,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260811_20260823",
+     "granule": "NISAR_L2_PR_GUNW_027_152_A_030_028_2000_SH_20260811T174112_20260811T174135_20260823T174112_20260823T174135_P05023_N_P_J_001"
+    },
+    "control": {
+     "pair": "20260706_20260718",
+     "granule": "NISAR_L2_PR_GUNW_024_152_A_030_025_2000_SH_20260706T174113_20260706T174137_20260718T174113_20260718T174137_P05023_N_P_J_001"
+    }
+   }
+  },
+  "verdict": null,
+  "deformation": false,
+  "time_note": "new eruption reported 15-18 Aug",
+  "loss_hi": 0.45,
+  "loss_lo": 0.35,
+  "loss_drop": 0.25,
+  "min_px": 12
+ },
+ {
+  "id": "krasheninnikov-2026",
+  "type": "volcano",
+  "title": "Krasheninnikov lava field growth, Kamchatka, Aug-Oct 2026",
+  "time": "2026-10-05T00:00:00Z",
+  "lat": 54.596,
+  "lon": 160.27,
+  "place": "Krasheninnikov volcano, Kamchatka, Russia",
+  "window": [
+   159.95,
+   54.4,
+   160.6,
+   54.8
+  ],
+  "heights": [
+   0,
+   2000
+  ],
+  "radius_km": 8,
+  "far_km": 24,
+  "gmin": 0.35,
+  "source_url": "https://watchers.news/2026/10/30/the-weekly-volcanic-activity-report-october-22-28-2026/",
+  "views": {
+   "a_aug": {
+    "track": 80,
+    "frame": 29,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260818_20260830",
+     "granule": "NISAR_L2_PR_GUNW_028_080_A_029_029_2000_SH_20260818T174904_20260818T174919_20260830T174904_20260830T174919_P05023_N_P_J_001"
+    },
+    "control": {
+     "pair": "20260713_20260725",
+     "granule": "NISAR_L2_PR_GUNW_025_080_A_029_026_2000_SH_20260713T174905_20260713T174921_20260725T174905_20260725T174921_P05023_N_P_J_001"
+    }
+   },
+   "a_oct": {
+    "track": 80,
+    "frame": 29,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20261005_20261017",
+     "granule": "NISAR_L2_PR_GUNW_032_080_A_029_033_2000_SH_20261005T174904_20261005T174919_20261017T174904_20261017T174919_P05023_N_P_J_001"
+    },
+    "control": {
+     "pair": "20260818_20260830",
+     "granule": "NISAR_L2_PR_GUNW_028_080_A_029_029_2000_SH_20260818T174904_20260818T174919_20260830T174904_20260830T174919_P05023_N_P_J_001"
+    },
+    "data_view": "a_aug"
+   }
+  },
+  "verdict": null,
+  "deformation": false,
+  "time_note": "eruption ongoing since 2025",
+  "loss_hi": 0.45,
+  "loss_lo": 0.35,
+  "loss_drop": 0.25,
+  "min_px": 12
+ },
+ {
+  "id": "nyamulagira-2026",
+  "type": "volcano",
+  "title": "Nyamulagira lava flows, DR Congo, Jul-Aug 2026",
+  "time": "2026-08-01T00:00:00Z",
+  "lat": -1.408,
+  "lon": 29.2,
+  "place": "Nyamulagira, DR Congo",
+  "window": [
+   29.0,
+   -1.6,
+   29.4,
+   -1.2
+  ],
+  "heights": [
+   1000,
+   3500
+  ],
+  "radius_km": 8,
+  "far_km": 24,
+  "gmin": 0.35,
+  "source_url": "https://watchers.news/2026/08/22/the-weekly-volcanic-activity-report-august-13-19-2026/",
+  "views": {
+   "desc": {
+    "track": 50,
+    "frame": 89,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260816_20260828",
+     "granule": "NISAR_L2_PR_GUNW_028_050_D_089_029_4000_SH_20260816T162621_20260816T162655_20260828T162620_20260828T162655_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260617_20260629",
+     "granule": "NISAR_L2_PR_GUNW_023_050_D_089_024_4000_SH_20260617T162624_20260617T162658_20260629T162623_20260629T162658_P05023_N_F_J_001"
+    }
+   },
+   "asc": {
+    "track": 14,
+    "frame": 1,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260814_20260826",
+     "granule": "NISAR_L2_PR_GUNW_028_014_A_001_029_4000_SH_20260814T034036_20260814T034113_20260826T034036_20260826T034113_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260627_20260709",
+     "granule": "NISAR_L2_PR_GUNW_024_014_A_001_025_4000_SH_20260627T034038_20260627T034115_20260709T034037_20260709T034115_P05023_N_F_J_001"
+    }
+   }
+  },
+  "verdict": null,
+  "deformation": false,
+  "time_note": "flows reported July-August",
+  "loss_hi": 0.45,
+  "loss_lo": 0.35,
+  "loss_drop": 0.25,
+  "min_px": 12
+ },
+ {
+  "id": "chillan-2026",
+  "type": "volcano",
+  "title": "Nevados de Chillan new lava flow, Chile, from 29 Sep 2026",
+  "time": "2026-09-29T00:00:00Z",
+  "lat": -36.868,
+  "lon": -71.378,
+  "place": "Nevados de Chillan, Chile",
+  "window": [
+   -71.6,
+   -37.05,
+   -71.15,
+   -36.7
+  ],
+  "heights": [
+   500,
+   3300
+  ],
+  "radius_km": 6,
+  "far_km": 18,
+  "gmin": 0.35,
+  "source_url": "https://watchers.news/2026/10/16/the-weekly-volcanic-activity-report-october-8-14-2026/",
+  "views": {
+   "asc": {
+    "track": 75,
+    "frame": 159,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260923_20261005",
+     "granule": "NISAR_L2_PR_GUNW_031_075_A_159_032_2000_SH_20260923T104323_20260923T104358_20261005T104323_20261005T104358_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260911_20260923",
+     "granule": "NISAR_L2_PR_GUNW_030_075_A_159_031_2000_SH_20260911T104323_20260911T104358_20260923T104323_20260923T104358_P05023_N_F_J_001"
+    }
+   },
+   "desc": {
+    "track": 97,
+    "frame": 107,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260924_20261006",
+     "granule": "NISAR_L2_PR_GUNW_031_097_D_107_032_2000_SH_20260924T225055_20260924T225133_20261006T225100_20261006T225136_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260912_20260924",
+     "granule": "NISAR_L2_PR_GUNW_030_097_D_107_031_2000_SH_20260912T225059_20260912T225136_20260924T225055_20260924T225133_P05023_N_F_J_001"
+    }
+   }
+  },
+  "verdict": null,
+  "deformation": false,
+  "time_note": "first seen 29 Sep",
+  "loss_hi": 0.45,
+  "loss_lo": 0.35,
+  "loss_drop": 0.25,
+  "min_px": 12
+ },
+ {
+  "id": "lewotolok-2026",
+  "type": "volcano",
+  "title": "Lewotolok lava flow, Indonesia, 18 Aug 2026",
+  "time": "2026-08-18T00:00:00Z",
+  "lat": -8.274,
+  "lon": 123.508,
+  "place": "Lewotolok, Lembata, Indonesia",
+  "window": [
+   123.35,
+   -8.4,
+   123.65,
+   -8.15
+  ],
+  "heights": [
+   0,
+   1600
+  ],
+  "radius_km": 4,
+  "far_km": 12,
+  "gmin": 0.35,
+  "source_url": "https://watchers.news/2026/08/22/the-weekly-volcanic-activity-report-august-13-19-2026/",
+  "views": {
+   "asc": {
+    "track": 67,
+    "frame": 173,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260817_20260829",
+     "granule": "NISAR_L2_PR_GUNW_028_067_A_173_029_4000_SH_20260817T213210_20260817T213244_20260829T213209_20260829T213244_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260712_20260724",
+     "granule": "NISAR_L2_PR_GUNW_025_067_A_173_026_4000_SH_20260712T213212_20260712T213246_20260724T213211_20260724T213245_P05023_N_F_J_001"
+    }
+   },
+   "desc": {
+    "track": 75,
+    "frame": 93,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260818_20260830",
+     "granule": "NISAR_L2_PR_GUNW_028_075_D_093_029_4000_SH_20260818T100541_20260818T100615_20260830T100541_20260830T100615_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260713_20260725",
+     "granule": "NISAR_L2_PR_GUNW_025_075_D_093_026_4000_SH_20260713T100543_20260713T100617_20260725T100542_20260725T100617_P05023_N_F_J_001"
+    }
+   }
+  },
+  "verdict": null,
+  "deformation": false,
+  "loss_hi": 0.45,
+  "loss_lo": 0.35,
+  "loss_drop": 0.25,
+  "min_px": 12
+ },
+ {
+  "id": "stromboli-2026",
+  "type": "volcano",
+  "title": "Stromboli lava overflow, Italy, 5-6 Oct 2026",
+  "time": "2026-10-05T15:05:00Z",
+  "lat": 38.789,
+  "lon": 15.213,
+  "place": "Stromboli, Italy",
+  "window": [
+   15.0,
+   38.65,
+   15.4,
+   38.9
+  ],
+  "heights": [
+   0,
+   1000
+  ],
+  "radius_km": 3,
+  "far_km": 9,
+  "gmin": 0.35,
+  "source_url": "https://watchers.news/2026/10/16/the-weekly-volcanic-activity-report-october-8-14-2026/",
+  "views": {
+   "asc": {
+    "track": 43,
+    "frame": 21,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20261003_20261015",
+     "granule": "NISAR_L2_PR_GUNW_032_043_A_021_033_2000_SH_20261003T040828_20261003T040903_20261015T040828_20261015T040903_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260909_20260921",
+     "granule": "NISAR_L2_PR_GUNW_030_043_A_021_031_2000_SH_20260909T040828_20260909T040903_20260921T040828_20260921T040903_P05023_N_F_J_001"
+    }
+   },
+   "desc": {
+    "track": 51,
+    "frame": 69,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20261003_20261015",
+     "granule": "NISAR_L2_PR_GUNW_032_051_D_069_033_2000_SH_20261003T175502_20261003T175537_20261015T175502_20261015T175537_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260909_20260921",
+     "granule": "NISAR_L2_PR_GUNW_030_051_D_069_031_2000_SH_20260909T175502_20260909T175537_20260921T175502_20260921T175537_P05023_N_F_J_001"
+    }
+   }
+  },
+  "verdict": null,
+  "deformation": false,
+  "loss_hi": 0.45,
+  "loss_lo": 0.35,
+  "loss_drop": 0.25,
+  "min_px": 12
+ },
+ {
+  "id": "thunder-bay-36-coh-2026",
+  "type": "fire",
+  "title": "Thunder Bay 36 fire, Ontario: forest surface changed over 1,500 km2, 11-23 July 2026",
+  "time": "2026-07-12T00:00:00Z",
+  "lat": 50.68,
+  "lon": -89.48,
+  "place": "Wabakimi, northwestern Ontario, Canada",
+  "window": [
+   -89.95,
+   50.35,
+   -88.9,
+   51.05
+  ],
+  "heights": [
+   300,
+   700
+  ],
+  "radius_km": 25,
+  "far_km": 50,
+  "gmin": 0.35,
+  "source_url": "https://en.wikipedia.org/wiki/Thunder_Bay_36_Fire",
+  "views": {
+   "d_ign": {
+    "track": 41,
+    "frame": 63,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260711_20260723",
+     "granule": "NISAR_L2_PR_GUNW_025_041_D_063_026_4000_SH_20260711T011249_20260711T011325_20260723T011249_20260723T011324_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260629_20260711",
+     "granule": "NISAR_L2_PR_GUNW_024_041_D_063_025_4000_SH_20260629T011250_20260629T011325_20260711T011249_20260711T011325_P05023_N_F_J_001"
+    }
+   },
+   "d_late": {
+    "track": 41,
+    "frame": 63,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260921_20261003",
+     "granule": "NISAR_L2_PR_GUNW_031_041_D_063_032_4000_SH_20260921T011247_20260921T011322_20261003T011247_20261003T011322_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260629_20260711",
+     "granule": "NISAR_L2_PR_GUNW_024_041_D_063_025_4000_SH_20260629T011250_20260629T011325_20260711T011249_20260711T011325_P05023_N_F_J_001"
+    },
+    "data_view": "d_ign"
+   },
+   "a_ign": {
+    "track": 47,
+    "frame": 27,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260711_20260723",
+     "granule": "NISAR_L2_PR_GUNW_025_047_A_027_026_4000_SH_20260711T105126_20260711T105201_20260723T105125_20260723T105200_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260629_20260711",
+     "granule": "NISAR_L2_PR_GUNW_024_047_A_027_025_4000_SH_20260629T105127_20260629T105202_20260711T105126_20260711T105201_P05023_N_F_J_001"
+    }
+   },
+   "a_late": {
+    "track": 47,
+    "frame": 27,
+    "direction": "A",
+    "label": "ascending",
+    "data_view": "a_ign",
+    "co": {
+     "pair": "20260921_20261003",
+     "granule": "NISAR_L2_PR_GUNW_031_047_A_027_032_4000_SH_20260921T105124_20260921T105159_20261003T105124_20261003T105159_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260629_20260711",
+     "granule": "NISAR_L2_PR_GUNW_024_047_A_027_025_4000_SH_20260629T105127_20260629T105202_20260711T105126_20260711T105201_P05023_N_F_J_001"
+    }
+   },
+   "d_null": {
+    "track": 41,
+    "frame": 63,
+    "direction": "D",
+    "label": "descending",
+    "data_view": "d_ign",
+    "co": {
+     "pair": "20260629_20260711",
+     "granule": "NISAR_L2_PR_GUNW_024_041_D_063_025_4000_SH_20260629T011250_20260629T011325_20260711T011249_20260711T011325_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260617_20260629",
+     "granule": "NISAR_L2_PR_GUNW_023_041_D_063_024_4000_SH_20260617T011251_20260617T011326_20260629T011250_20260629T011325_P05023_N_F_J_001"
+    }
+   }
+  },
+  "verdict": "clear",
+  "deformation": false,
+  "loss_hi": 0.35,
+  "loss_lo": 0.25,
+  "loss_drop": 0.15,
+  "min_px": 30,
+  "primary_view": "d_ign",
+  "export_views": [
+   "d_ign"
+  ],
+  "export_deformation": false,
+  "zoom_km": 30,
+  "summary_number": "\u2265 1,540 km\u00b2 of forest changed completely (window-limited)",
+  "time_note": "fire started 12 Jul; pair 11-23 Jul; the control pair ends the day before",
+  "site_label": "Published fire location (Wikipedia, 50.68 N 89.48 W)",
+  "verdict_reason": "sharp-edged patch of lost coherence 1,253 km2 connected (1,540 km2 in the window, cut by the window edge), in both look directions at the published fire; control coherence 0.66 -> 0.13 on those pixels; the same ground is coherent again in the 21 Sep-3 Oct pair",
+  "extra_spots": [
+   {
+    "id": "patch",
+    "label": "Centre of the largest patch of lost coherence",
+    "lngLat": [
+     -89.2864,
+     50.6519
+    ],
+    "radius_m": 8000
+   },
+   {
+    "id": "reference",
+    "label": "Reference: coherence 0.56 before, 0.47 now (no loss)",
+    "lngLat": [
+     -89.02,
+     51.0
+    ],
+    "radius_m": 5000
+   }
+  ],
+  "story": {
+   "see": "Thunder Bay 36 started on 12 July 2026 in Wabakimi Provincial Park, north-western Ontario, and was about 314,000 hectares (3,140 km2) on 29 July, the largest wildfire in the province's recorded history (Wikipedia, citing the provincial figures). The orange area is where the radar picture between NISAR's 11 and 23 July passes no longer matches the pair taken just before it (29 June to 11 July). It forms a sharp-edged blotch tens of kilometres across, far larger than the 40 x 40 km box the pair was cut to.",
+   "physics": "A fire changes the ground the radar sees: leaves, twigs and the litter on the ground burn or fall, so the tiny details that made the echo repeatable disappear. In the window about 1,540 km2 lost coherence (the biggest connected patch is 1,253 km2), at 50.65 N 89.29 W, 14 km from the published fire point. The ascending pass (track 47) sees a similar patch where its swath covers the area. We do not measure the burned area: the patch is cut by the window and the fire kept growing after 23 July.",
+   "lband": "NISAR's L-band radar (wavelength about 24 cm) normally keeps a good match between two passes 12 days apart over boreal forest, which is why the control pair is largely bright. Lost coherence here has a hard, irregular outline, not the gentle gradient of rain or soil moisture. In the autumn pair (21 September to 3 October) the same ground is coherent again, so the map marks the change that happened inside 11 to 23 July. Rain on the ground in those days cannot be ruled out from coherence alone; the outline and the published fire place and date are what we rely on.",
+   "people": "This map shows where the surface changed, not damage. We did not look at reports of damage, evacuations or casualties. A second, independent look at this fire from the radar brightness is in the separate Thunder Bay 36 place."
+  },
+  "app_views": [
+   "d_ign",
+   "a_ign"
+  ]
+ },
+ {
+  "id": "la-mierla-coh-2026",
+  "type": "fire",
+  "title": "La Mierla fire, Guadalajara: forest and scrub surface changed, 14-26 July 2026",
+  "time": "2026-07-16T00:00:00Z",
+  "lat": 40.97,
+  "lon": -3.15,
+  "place": "Sierra Norte de Guadalajara, Spain",
+  "window": [
+   -3.45,
+   40.85,
+   -2.55,
+   41.4
+  ],
+  "heights": [
+   500,
+   1500
+  ],
+  "radius_km": 12,
+  "far_km": 24,
+  "gmin": 0.35,
+  "source_url": "https://www.thelocal.es/20260720/800-evacuated-as-spains-biggest-wildfire-of-the-year-rages-on",
+  "views": {
+   "d_ign": {
+    "track": 95,
+    "frame": 68,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260714_20260726",
+     "granule": "NISAR_L2_PR_GUNW_025_095_D_068_026_2000_SH_20260714T190925_20260714T191004_20260726T190924_20260726T191001_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260702_20260714",
+     "granule": "NISAR_L2_PR_GUNW_024_095_D_068_025_2000_SH_20260702T190926_20260702T191004_20260714T190925_20260714T191004_P05023_F_F_J_001"
+    }
+   },
+   "d_late": {
+    "track": 95,
+    "frame": 68,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260831_20260912",
+     "granule": "NISAR_L2_PR_GUNW_029_095_D_068_030_2000_SH_20260831T190923_20260831T191000_20260912T190923_20260912T191000_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260702_20260714",
+     "granule": "NISAR_L2_PR_GUNW_024_095_D_068_025_2000_SH_20260702T190926_20260702T191004_20260714T190925_20260714T191004_P05023_F_F_J_001"
+    },
+    "data_view": "d_ign"
+   },
+   "a_ign": {
+    "track": 159,
+    "frame": 22,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260707_20260719",
+     "granule": "NISAR_L2_PR_GUNW_024_159_A_022_025_2000_SH_20260707T051543_20260707T051615_20260719T051543_20260719T051614_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260625_20260707",
+     "granule": "NISAR_L2_PR_GUNW_023_159_A_022_024_2000_SH_20260625T051544_20260625T051615_20260707T051543_20260707T051615_P05023_N_F_J_001"
+    }
+   }
+  },
+  "verdict": "clear",
+  "deformation": false,
+  "loss_hi": 0.5,
+  "loss_lo": 0.45,
+  "loss_drop": 0.3,
+  "min_px": 30,
+  "primary_view": "d_ign",
+  "export_views": [
+   "d_ign"
+  ],
+  "export_deformation": false,
+  "app_views": [
+   "d_ign"
+  ],
+  "zoom_km": 14,
+  "summary_number": "\u2248 150 km\u00b2 of ground changed completely (largest connected patch 44 km\u00b2)",
+  "time_note": "fire began 16 Jul (The Local); pair 14-26 Jul; the control pair ends the day of 14 Jul, before it",
+  "site_label": "La Mierla village (Wikipedia, 40.94 N 3.24 W)",
+  "verdict_reason": "87 km2 of lost coherence within 12 km (largest patch 43.6 km2, 149 km2 in the window) against a 95th percentile of 13.8 km2 in 98 equal random discs and 1.3 % of comparable ground outside; control 0.79 -> 0.27; the same ground is coherent again on 31 Aug-12 Sep",
+  "extra_spots": [
+   {
+    "id": "patch",
+    "label": "Centre of the largest patch of lost coherence",
+    "lngLat": [
+     -3.1045,
+     41.0497
+    ],
+    "radius_m": 5000
+   },
+   {
+    "id": "reference",
+    "label": "Reference: stays coherent in both pairs",
+    "lngLat": [
+     -2.827,
+     41.005
+    ],
+    "radius_m": 4000
+   }
+  ],
+  "story": {
+   "see": "The La Mierla fire began on 16 July 2026 in the province of Guadalajara, north of Madrid. By 20 July it had burned over 32,000 hectares and was called the second biggest wildfire in Spain this century and the largest in the history of Castilla-La Mancha (The Local). The orange area is where the radar picture between NISAR's 14 and 26 July passes no longer matches the pair taken just before it (2 to 14 July). It is a long band running north-north-east from the village of La Mierla.",
+   "physics": "Burning removes leaves, twigs and scrub, and what is left reflects the radar differently, so the passes cannot be compared there. About 150 km2 in the map lost coherence (87 km2 within 12 km of the centre, 44 km2 in the largest connected patch). Equal circles placed elsewhere in the same map lose at most 14 km2 (95th percentile of 98), and only about 1 % of the comparable ground outside the site changes like this. We do not measure the burned area: the patch only counts ground that was coherent before.",
+   "lband": "NISAR's L-band radar has a wavelength of about 24 cm. Over this dry Mediterranean land the quiet pair before the fire is bright almost everywhere, so a burn stands out as a dark scar with a hard edge. In the pair of 31 August to 12 September the same ground is coherent again (nothing like this patch remains), so the map marks the change that happened inside 14 to 26 July. Dew or rain on the ground cannot be fully excluded from coherence alone; the shape, the place and the date are what we rely on.",
+   "people": "This map shows where the surface changed, not damage. We did not look at reports of damage, evacuations or casualties."
+  }
+ },
+ {
+  "id": "burgohondo-coh-2026",
+  "type": "fire",
+  "title": "Burgohondo fire scar by coherence, Avila, from late Jul 2026",
+  "time": "2026-07-22T00:00:00Z",
+  "lat": 40.38,
+  "lon": -4.65,
+  "place": "Valle del Alberche, Avila, Spain",
+  "window": [
+   -5.1,
+   40.1,
+   -4.1,
+   40.7
+  ],
+  "heights": [
+   400,
+   2300
+  ],
+  "radius_km": 15,
+  "far_km": 45,
+  "gmin": 0.35,
+  "source_url": "https://www.elespanol.com/castilla-y-leon/region/avila/20260726/incendio-burgohondo-hectareas-quemadas-mayor-historia-espana/1003744334616_0.html",
+  "views": {
+   "d_late": {
+    "track": 23,
+    "frame": 68,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260907_20260919",
+     "granule": "NISAR_L2_PR_GUNW_030_023_D_068_031_2000_SH_20260907T191742_20260907T191817_20260919T191742_20260919T191817_P05023_F_F_J_001"
+    },
+    "control": {
+     "pair": "20260709_20260721",
+     "granule": "NISAR_L2_PR_GUNW_025_023_D_068_026_2000_SH_20260709T191745_20260709T191819_20260721T191744_20260721T191819_P05023_N_F_J_001"
+    }
+   },
+   "a_late": {
+    "track": 87,
+    "frame": 22,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260819_20260831",
+     "granule": "NISAR_L2_PR_GUNW_028_087_A_022_029_2000_SH_20260819T052400_20260819T052432_20260831T052359_20260831T052431_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260702_20260714",
+     "granule": "NISAR_L2_PR_GUNW_024_087_A_022_025_2000_SH_20260702T052402_20260702T052434_20260714T052401_20260714T052434_P05023_F_F_J_001"
+    }
+   },
+   "a_ign": {
+    "track": 87,
+    "frame": 22,
+    "direction": "A",
+    "label": "ascending",
+    "data_view": "a_late",
+    "co": {
+     "pair": "20260714_20260726",
+     "granule": "NISAR_L2_PR_GUNW_025_087_A_022_026_2000_SH_20260714T052401_20260714T052434_20260726T052401_20260726T052433_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260702_20260714",
+     "granule": "NISAR_L2_PR_GUNW_024_087_A_022_025_2000_SH_20260702T052402_20260702T052434_20260714T052401_20260714T052434_P05023_F_F_J_001"
+    }
+   },
+   "d_ign": {
+    "track": 23,
+    "frame": 68,
+    "direction": "D",
+    "label": "descending",
+    "data_view": "d_late",
+    "co": {
+     "pair": "20260721_20260826",
+     "granule": "NISAR_L2_PR_GUNW_026_023_D_068_029_2000_SH_20260721T191744_20260721T191819_20260826T191742_20260826T191817_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260709_20260721",
+     "granule": "NISAR_L2_PR_GUNW_025_023_D_068_026_2000_SH_20260709T191745_20260709T191819_20260721T191744_20260721T191819_P05023_N_F_J_001"
+    }
+   }
+  },
+  "verdict": null,
+  "deformation": false,
+  "loss_hi": 0.5,
+  "loss_lo": 0.45,
+  "loss_drop": 0.3,
+  "min_px": 30,
+  "time_note": "fire originated 22 Jul (AP via search summary)"
+ },
+ {
+  "id": "gironde-coh-2026",
+  "type": "fire",
+  "title": "Gironde megafire scar by coherence, France, from about 22 Jul 2026",
+  "time": "2026-07-22T00:00:00Z",
+  "lat": 44.85,
+  "lon": -1.02,
+  "place": "Landes de Gascogne, Gironde, France",
+  "window": [
+   -1.45,
+   44.55,
+   -0.7,
+   45.1
+  ],
+  "heights": [
+   0,
+   150
+  ],
+  "radius_km": 12,
+  "far_km": 36,
+  "gmin": 0.35,
+  "source_url": "https://www.paris-match.be/",
+  "views": {
+   "a_late": {
+    "track": 130,
+    "frame": 24,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260822_20260903",
+     "granule": "NISAR_L2_PR_GUNW_028_130_A_024_029_2000_SH_20260822T050006_20260822T050041_20260903T050006_20260903T050041_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260705_20260717",
+     "granule": "NISAR_L2_PR_GUNW_024_130_A_024_025_2000_SH_20260705T050009_20260705T050044_20260717T050008_20260717T050043_P05023_N_F_J_001"
+    }
+   },
+   "a_late2": {
+    "track": 130,
+    "frame": 24,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260915_20260927",
+     "granule": "NISAR_L2_PR_GUNW_030_130_A_024_031_2000_SH_20260915T050006_20260915T050041_20260927T050006_20260927T050041_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260705_20260717",
+     "granule": "NISAR_L2_PR_GUNW_024_130_A_024_025_2000_SH_20260705T050009_20260705T050044_20260717T050008_20260717T050043_P05023_N_F_J_001"
+    },
+    "data_view": "a_late"
+   }
+  },
+  "verdict": null,
+  "deformation": false,
+  "loss_hi": 0.5,
+  "loss_lo": 0.45,
+  "loss_drop": 0.3,
+  "min_px": 30
+ },
+ {
+  "id": "mahanadi-coh-2026",
+  "type": "flood",
+  "title": "Mahanadi flood by coherence, Odisha, late Jul 2026",
+  "time": "2026-07-31T00:00:00Z",
+  "lat": 20.5,
+  "lon": 85.7,
+  "place": "Mahanadi delta, Odisha, India",
+  "window": [
+   85.3,
+   20.2,
+   86.4,
+   20.9
+  ],
+  "heights": [
+   0,
+   600
+  ],
+  "radius_km": 25,
+  "far_km": 75,
+  "gmin": 0.35,
+  "source_url": "https://www.deccanchronicle.com/amp/nation/mahanadi-swells-flood-threat-looms-large-in-odisha-several-breaches-reported-1975582",
+  "views": {
+   "a_peak": {
+    "track": 26,
+    "frame": 12,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260721_20260814",
+     "granule": "NISAR_L2_PR_GUNW_026_026_A_012_028_4000_SH_20260721T234524_20260721T234559_20260814T234523_20260814T234558_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260627_20260709",
+     "granule": "NISAR_L2_PR_GUNW_024_026_A_012_025_4000_SH_20260627T234526_20260627T234600_20260709T234525_20260709T234600_P05023_N_F_J_001"
+    }
+   },
+   "a_after": {
+    "track": 26,
+    "frame": 12,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260814_20260826",
+     "granule": "NISAR_L2_PR_GUNW_028_026_A_012_029_4000_SH_20260814T234523_20260814T234558_20260826T234523_20260826T234557_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260627_20260709",
+     "granule": "NISAR_L2_PR_GUNW_024_026_A_012_025_4000_SH_20260627T234526_20260627T234600_20260709T234525_20260709T234600_P05023_N_F_J_001"
+    },
+    "data_view": "a_peak"
+   }
+  },
+  "verdict": null,
+  "deformation": false,
+  "loss_hi": 0.4,
+  "loss_lo": 0.25,
+  "loss_drop": 0.2,
+  "min_px": 30
+ },
+ {
+  "id": "terai-coh-2026",
+  "type": "flood",
+  "title": "Terai/Uttar Pradesh flood by coherence, late Sep 2026",
+  "time": "2026-09-24T00:00:00Z",
+  "lat": 27.0,
+  "lon": 83.0,
+  "place": "eastern Uttar Pradesh and the Nepal Terai",
+  "window": [
+   82.5,
+   26.5,
+   83.6,
+   27.4
+  ],
+  "heights": [
+   0,
+   300
+  ],
+  "radius_km": 25,
+  "far_km": 75,
+  "gmin": 0.35,
+  "source_url": "https://newsonair.gov.in/",
+  "views": {
+   "a_ev": {
+    "track": 26,
+    "frame": 15,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260919_20261001",
+     "granule": "NISAR_L2_PR_GUNW_031_026_A_015_032_4000_SH_20260919T234703_20260919T234738_20261001T234703_20261001T234738_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260814_20260826",
+     "granule": "NISAR_L2_PR_GUNW_028_026_A_015_029_4000_SH_20260814T234704_20260814T234738_20260826T234704_20260826T234738_P05023_N_F_J_001"
+    }
+   },
+   "a_after": {
+    "track": 26,
+    "frame": 15,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20261001_20261013",
+     "granule": "NISAR_L2_PR_GUNW_032_026_A_015_033_4000_SH_20261001T234703_20261001T234738_20261013T234704_20261013T234738_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260814_20260826",
+     "granule": "NISAR_L2_PR_GUNW_028_026_A_015_029_4000_SH_20260814T234704_20260814T234738_20260826T234704_20260826T234738_P05023_N_F_J_001"
+    },
+    "data_view": "a_ev"
+   }
+  },
+  "verdict": null,
+  "deformation": false,
+  "loss_hi": 0.4,
+  "loss_lo": 0.25,
+  "loss_drop": 0.2,
+  "min_px": 30
+ },
+ {
+  "id": "chaophraya-coh-2026",
+  "type": "flood",
+  "title": "Chao Phraya flood by coherence, Thailand, late Sep-Oct 2026",
+  "time": "2026-09-30T00:00:00Z",
+  "lat": 14.7,
+  "lon": 100.5,
+  "place": "Chao Phraya plain, Thailand",
+  "window": [
+   100.1,
+   14.2,
+   100.9,
+   15.2
+  ],
+  "heights": [
+   0,
+   200
+  ],
+  "radius_km": 30,
+  "far_km": 90,
+  "gmin": 0.35,
+  "source_url": "https://www.nationthailand.com/",
+  "views": {
+   "d_ev": {
+    "track": 4,
+    "frame": 81,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260918_20260930",
+     "granule": "NISAR_L2_PR_GUNW_031_004_D_081_032_4000_SH_20260918T114712_20260918T114746_20260930T114712_20260930T114746_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260825_20260906",
+     "granule": "NISAR_L2_PR_GUNW_029_004_D_081_030_4000_SH_20260825T114712_20260825T114746_20260906T114712_20260906T114746_P05023_N_F_J_001"
+    }
+   },
+   "d_after": {
+    "track": 4,
+    "frame": 81,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260930_20261012",
+     "granule": "NISAR_L2_PR_GUNW_032_004_D_081_033_4000_SH_20260930T114712_20260930T114746_20261012T114712_20261012T114746_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260825_20260906",
+     "granule": "NISAR_L2_PR_GUNW_029_004_D_081_030_4000_SH_20260825T114712_20260825T114746_20260906T114712_20260906T114746_P05023_N_F_J_001"
+    },
+    "data_view": "d_ev"
+   }
+  },
+  "verdict": null,
+  "deformation": false,
+  "loss_hi": 0.4,
+  "loss_lo": 0.25,
+  "loss_drop": 0.2,
+  "min_px": 30
+ },
+ {
+  "id": "etna-aug-2026",
+  "type": "volcano",
+  "title": "Etna later pairs: new decorrelation 16-28 Aug 2026",
+  "time": "2026-08-17T00:00:00Z",
+  "lat": 37.7505,
+  "lon": 15.0286,
+  "place": "Mount Etna, Sicily, Italy",
+  "window": [
+   14.82,
+   37.55,
+   15.28,
+   37.95
+  ],
+  "heights": [
+   0,
+   3400
+  ],
+  "radius_km": 9,
+  "far_km": 27,
+  "gmin": 0.35,
+  "source_url": "https://watchers.news/2026/08/22/the-weekly-volcanic-activity-report-august-13-19-2026/",
+  "views": {
+   "asc": {
+    "track": 43,
+    "frame": 21,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260816_20260828",
+     "granule": "NISAR_L2_PR_GUNW_028_043_A_021_029_2000_SH_20260816T040828_20260816T040903_20260828T040828_20260828T040903_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260723_20260816",
+     "granule": "NISAR_L2_PR_GUNW_026_043_A_021_028_2000_SH_20260723T040829_20260723T040904_20260816T040828_20260816T040903_P05023_N_F_J_001"
+    }
+   },
+   "desc": {
+    "track": 51,
+    "frame": 69,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260816_20260828",
+     "granule": "NISAR_L2_PR_GUNW_028_051_D_069_029_2000_SH_20260816T175502_20260816T175537_20260828T175502_20260828T175537_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260711_20260723",
+     "granule": "NISAR_L2_PR_GUNW_025_051_D_069_026_2000_SH_20260711T175504_20260711T175539_20260723T175503_20260723T175538_P05023_N_F_J_001"
+    }
+   }
+  },
+  "verdict": null,
+  "deformation": false,
+  "min_px": 20,
+  "loss_hi": 0.45,
+  "loss_lo": 0.35,
+  "loss_drop": 0.25
+ },
+ {
+  "id": "semeru-2026",
+  "type": "volcano",
+  "title": "Semeru pyroclastic flow down the SE flank, Indonesia, 18 Jul 2026",
+  "time": "2026-07-18T00:00:00Z",
+  "lat": -8.108,
+  "lon": 112.922,
+  "place": "Semeru, East Java, Indonesia",
+  "window": [
+   112.8,
+   -8.25,
+   113.05,
+   -8.0
+  ],
+  "heights": [
+   0,
+   3700
+  ],
+  "radius_km": 6,
+  "far_km": 18,
+  "gmin": 0.35,
+  "source_url": "https://watchers.news/2026/07/25/the-weekly-volcanic-activity-report-july-16-22-2026/",
+  "views": {
+   "asc": {
+    "track": 53,
+    "frame": 174,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260711_20260723",
+     "granule": "NISAR_L2_PR_GUNW_025_053_A_174_026_4000_SH_20260711T221422_20260711T221457_20260723T221421_20260723T221456_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260629_20260711",
+     "granule": "NISAR_L2_PR_GUNW_024_053_A_174_025_4000_SH_20260629T221423_20260629T221457_20260711T221422_20260711T221457_P05023_N_F_J_001"
+    }
+   },
+   "desc": {
+    "track": 61,
+    "frame": 92,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260712_20260724",
+     "granule": "NISAR_L2_PR_GUNW_025_061_D_092_026_4000_SH_20260712T104646_20260712T104721_20260724T104646_20260724T104720_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260630_20260712",
+     "granule": "NISAR_L2_PR_GUNW_024_061_D_092_025_4000_SH_20260630T104647_20260630T104722_20260712T104646_20260712T104721_P05023_N_F_J_001"
+    }
+   }
+  },
+  "verdict": null,
+  "deformation": false,
+  "loss_hi": 0.45,
+  "loss_lo": 0.35,
+  "loss_drop": 0.25,
+  "min_px": 12
+ },
+ {
+  "id": "sheveluch-2026",
+  "type": "volcano",
+  "title": "Sheveluch lava domes, Kamchatka, Jul-Oct 2026",
+  "time": "2026-09-15T00:00:00Z",
+  "lat": 56.653,
+  "lon": 161.36,
+  "place": "Young Sheveluch, Kamchatka, Russia",
+  "window": [
+   161.05,
+   56.48,
+   161.65,
+   56.82
+  ],
+  "heights": [
+   0,
+   3500
+  ],
+  "radius_km": 6,
+  "far_km": 18,
+  "gmin": 0.35,
+  "source_url": "https://watchers.news/2026/10/30/the-weekly-volcanic-activity-report-october-22-28-2026/",
+  "views": {
+   "asc": {
+    "track": 80,
+    "frame": 30,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260911_20260923",
+     "granule": "NISAR_L2_PR_GUNW_030_080_A_030_031_2000_SH_20260911T174918_20260911T174954_20260923T174918_20260923T174954_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260701_20260713",
+     "granule": "NISAR_L2_PR_GUNW_024_080_A_030_025_2000_SH_20260701T174921_20260701T174957_20260713T174920_20260713T174956_P05023_N_F_J_001"
+    }
+   },
+   "desc": {
+    "track": 60,
+    "frame": 60,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260910_20260922",
+     "granule": "NISAR_L2_PR_GUNW_030_060_D_060_031_2000_SH_20260910T084852_20260910T084927_20260922T084852_20260922T084927_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260630_20260712",
+     "granule": "NISAR_L2_PR_GUNW_024_060_D_060_025_2000_SH_20260630T084855_20260630T084930_20260712T084854_20260712T084930_P05023_N_F_J_001"
+    }
+   }
+  },
+  "verdict": null,
+  "deformation": false,
+  "loss_hi": 0.45,
+  "loss_lo": 0.35,
+  "loss_drop": 0.25,
+  "min_px": 12,
+  "time_note": "dome activity continuous through the window"
+ },
+ {
+  "id": "isaias-2026",
+  "type": "storm",
+  "title": "Hurricane Isaias landfall near Destin, Florida, 10 Oct 2026",
+  "time": "2026-10-10T01:30:00Z",
+  "lat": 30.6,
+  "lon": -86.45,
+  "place": "Florida Panhandle and south Alabama",
+  "window": [
+   -86.95,
+   30.35,
+   -86.0,
+   31.25
+  ],
+  "heights": [
+   0,
+   150
+  ],
+  "radius_km": 25,
+  "far_km": 75,
+  "gmin": 0.35,
+  "source_url": "https://en.wikipedia.org/wiki/2026_Atlantic_hurricane_season",
+  "views": {
+   "asc": {
+    "track": 76,
+    "frame": 17,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20261005_20261017",
+     "granule": "NISAR_L2_PR_GUNW_032_076_A_017_033_4000_SH_20261005T110224_20261005T110258_20261017T110224_20261017T110259_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260923_20261005",
+     "granule": "NISAR_L2_PR_GUNW_031_076_A_017_032_4000_SH_20260923T110224_20260923T110258_20261005T110224_20261005T110258_P05023_N_F_J_001"
+    }
+   },
+   "asc_null": {
+    "track": 76,
+    "frame": 17,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260923_20261005",
+     "granule": "NISAR_L2_PR_GUNW_031_076_A_017_032_4000_SH_20260923T110224_20260923T110258_20261005T110224_20261005T110258_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260911_20260923",
+     "granule": "NISAR_L2_PR_GUNW_030_076_A_017_031_4000_SH_20260911T110224_20260911T110258_20260923T110224_20260923T110258_P05023_N_F_J_001"
+    },
+    "data_view": "asc"
+   }
+  },
+  "verdict": null,
+  "deformation": false,
+  "loss_hi": 0.4,
+  "loss_lo": 0.3,
+  "loss_drop": 0.2,
+  "min_px": 30
+ },
+ {
+  "id": "noul-2026",
+  "type": "storm",
+  "title": "Typhoon Noul landfall at Huidong, Guangdong, 25-26 Jul 2026",
+  "time": "2026-07-25T19:50:00Z",
+  "lat": 22.95,
+  "lon": 114.85,
+  "place": "Huidong, Guangdong, China",
+  "window": [
+   114.45,
+   22.5,
+   115.3,
+   23.3
+  ],
+  "heights": [
+   0,
+   1000
+  ],
+  "radius_km": 25,
+  "far_km": 75,
+  "gmin": 0.35,
+  "source_url": "https://en.wikipedia.org/wiki/2026_Pacific_typhoon_season",
+  "views": {
+   "desc": {
+    "track": 90,
+    "frame": 77,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260714_20260726",
+     "granule": "NISAR_L2_PR_GUNW_025_090_D_077_026_2000_SH_20260714T105503_20260714T105530_20260726T105502_20260726T105530_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260702_20260714",
+     "granule": "NISAR_L2_PR_GUNW_024_090_D_077_025_2000_SH_20260702T105504_20260702T105531_20260714T105503_20260714T105530_P05023_F_F_J_001"
+    }
+   },
+   "desc_null": {
+    "track": 90,
+    "frame": 77,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260702_20260714",
+     "granule": "NISAR_L2_PR_GUNW_024_090_D_077_025_2000_SH_20260702T105504_20260702T105531_20260714T105503_20260714T105530_P05023_F_F_J_001"
+    },
+    "control": {
+     "pair": "20260620_20260702",
+     "granule": "NISAR_L2_PR_GUNW_023_090_D_077_024_2000_SH_20260620T105505_20260620T105532_20260702T105504_20260702T105531_P05023_N_F_J_001"
+    },
+    "data_view": "desc"
+   }
+  },
+  "verdict": null,
+  "deformation": false,
+  "loss_hi": 0.4,
+  "loss_lo": 0.3,
+  "loss_drop": 0.2,
+  "min_px": 30
+ },
+ {
+  "id": "niebla-fire-2026",
+  "type": "fire",
+  "title": "Niebla fire (Huelva, Spain) by coherence, from 6 Aug 2026",
+  "time": "2026-08-06T00:00:00Z",
+  "lat": 37.5,
+  "lon": -6.62,
+  "place": "Niebla, Huelva and Seville provinces, Spain",
+  "window": [
+   -6.95,
+   37.2,
+   -6.3,
+   37.75
+  ],
+  "heights": [
+   0,
+   500
+  ],
+  "radius_km": 15,
+  "far_km": 45,
+  "gmin": 0.35,
+  "source_url": "https://www.infobae.com/espana/2026/08/13/el-incendio-de-niebla-huelva-pierde-fuerza-tras-arrasar-31000-hectareas-y-dejar-a-700-vecinos-desalojados/",
+  "views": {
+   "a_ign": {
+    "track": 15,
+    "frame": 21,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260721_20260814",
+     "granule": "NISAR_L2_PR_GUNW_026_015_A_021_028_2000_SH_20260721T053143_20260721T053218_20260814T053142_20260814T053217_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260709_20260721",
+     "granule": "NISAR_L2_PR_GUNW_025_015_A_021_026_2000_SH_20260709T053144_20260709T053219_20260721T053143_20260721T053218_P05023_N_F_J_001"
+    }
+   },
+   "a_after": {
+    "track": 15,
+    "frame": 21,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260814_20260826",
+     "granule": "NISAR_L2_PR_GUNW_028_015_A_021_029_2000_SH_20260814T053142_20260814T053217_20260826T053142_20260826T053217_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260709_20260721",
+     "granule": "NISAR_L2_PR_GUNW_025_015_A_021_026_2000_SH_20260709T053144_20260709T053219_20260721T053143_20260721T053218_P05023_N_F_J_001"
+    },
+    "data_view": "a_ign"
+   },
+   "d_ign": {
+    "track": 23,
+    "frame": 70,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260721_20260814",
+     "granule": "NISAR_L2_PR_GUNW_026_023_D_070_028_2000_SH_20260721T191851_20260721T191926_20260814T191850_20260814T191925_P05023_F_F_J_001"
+    },
+    "control": {
+     "pair": "20260709_20260721",
+     "granule": "NISAR_L2_PR_GUNW_025_023_D_070_026_2000_SH_20260709T191852_20260709T191927_20260721T191851_20260721T191926_P05023_N_F_J_001"
+    }
+   }
+  },
+  "verdict": null,
+  "deformation": false,
+  "loss_hi": 0.5,
+  "loss_lo": 0.45,
+  "loss_drop": 0.3,
+  "min_px": 30
+ },
+ {
+  "id": "big-grass-coh-2026",
+  "type": "fire",
+  "title": "Big Grass fire (Oregon/Idaho) by coherence, from 23 Jul 2026",
+  "time": "2026-07-23T00:00:00Z",
+  "lat": 42.75,
+  "lon": -117.4,
+  "place": "Owyhee uplands, Oregon and Idaho, USA",
+  "window": [
+   -118.0,
+   42.4,
+   -117.0,
+   43.1
+  ],
+  "heights": [
+   900,
+   2200
+  ],
+  "radius_km": 25,
+  "far_km": 75,
+  "gmin": 0.35,
+  "source_url": "https://www.idahonews.com/",
+  "views": {
+   "a_ign": {
+    "track": 5,
+    "frame": 23,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260720_20260813",
+     "granule": "NISAR_L2_PR_GUNW_026_005_A_023_028_4000_SH_20260720T125400_20260720T125435_20260813T125359_20260813T125434_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260708_20260720",
+     "granule": "NISAR_L2_PR_GUNW_025_005_A_023_026_4000_SH_20260708T125401_20260708T125436_20260720T125400_20260720T125435_P05023_N_F_J_001"
+    }
+   },
+   "d_ign": {
+    "track": 42,
+    "frame": 67,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260723_20260816",
+     "granule": "NISAR_L2_PR_GUNW_026_042_D_067_028_4000_SH_20260723T025458_20260723T025533_20260816T025457_20260816T025532_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260629_20260711",
+     "granule": "NISAR_L2_PR_GUNW_024_042_D_067_025_4000_SH_20260629T025500_20260629T025535_20260711T025459_20260711T025534_P05023_N_F_J_001"
+    }
+   }
+  },
+  "verdict": null,
+  "deformation": false,
+  "loss_hi": 0.35,
+  "loss_lo": 0.25,
+  "loss_drop": 0.15,
+  "min_px": 30
+ },
+ {
+  "id": "great-sitkin-2026",
+  "type": "volcano",
+  "title": "Great Sitkin lava dome growth, Aleutians, 2026",
+  "time": "2026-09-06T00:00:00Z",
+  "lat": 52.076,
+  "lon": -176.13,
+  "place": "Great Sitkin, Aleutian Islands, Alaska",
+  "window": [
+   -176.35,
+   51.95,
+   -175.9,
+   52.2
+  ],
+  "heights": [
+   0,
+   1800
+  ],
+  "radius_km": 4,
+  "far_km": 12,
+  "gmin": 0.35,
+  "source_url": "https://watchers.news/2026/09/11/the-weekly-volcanic-activity-report-september-3-9-2026/",
+  "views": {
+   "desc": {
+    "track": 59,
+    "frame": 62,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260829_20260910",
+     "granule": "NISAR_L2_PR_GUNW_029_059_D_062_030_2000_SH_20260829T071020_20260829T071044_20260910T071019_20260910T071044_P05023_N_P_J_001"
+    },
+    "control": {
+     "pair": "20260630_20260712",
+     "granule": "NISAR_L2_PR_GUNW_024_059_D_062_025_2000_SH_20260630T071022_20260630T071047_20260712T071021_20260712T071046_P05023_N_P_J_001"
+    }
+   }
+  },
+  "verdict": null,
+  "deformation": false,
+  "loss_hi": 0.45,
+  "loss_lo": 0.35,
+  "loss_drop": 0.25,
+  "min_px": 12,
+  "time_note": "dome growth continuous through the window"
  }
 ]

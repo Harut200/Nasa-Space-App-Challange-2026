@@ -121,8 +121,19 @@ def proc_dir(ev):
     return os.path.join(ROOT, "data", "processed", f"{ev['id']}-insar")
 
 
+def data_view(ev, view):
+    """Views of one event may share the downloaded windows (several event pairs against one control): `data_view` names the folder."""
+    return ev["views"][view].get("data_view", view)
+
+
+def pcm_path(ev, view):
+    """Reduced arrays of a view; views with their own folder keep the historical name."""
+    name = "products_cm.npz" if "data_view" not in ev["views"][view] else f"products_cm_{view}.npz"
+    return os.path.join(view_dir(ev, view), name)
+
+
 def view_dir(ev, view):
-    return os.path.join(proc_dir(ev), view)
+    return os.path.join(proc_dir(ev), data_view(ev, view))
 
 
 def fig_dir(ev):
@@ -167,13 +178,21 @@ def resolve(ev):
 
 
 def job_for(ev, view):
-    v = ev["views"][view]
+    """Job for the data folder `view`: every pair (event or control) of every view that uses that folder, once."""
+    prods, seen = [], set()
+    for k, v in ev["views"].items():
+        if data_view(ev, k) != view:
+            continue
+        for w in ("co", "control"):
+            have = os.path.exists(os.path.join(view_dir(ev, k), f"GUNW_{v[w]['pair']}.npz"))  # already fetched: not extracted again
+            if v[w]["pair"] not in seen and not have:
+                seen.add(v[w]["pair"])
+                prods.append({"id": v[w]["pair"], "url": Q.granule_url(v[w]["granule"]), "kind": "GUNW"})
     return {"out": f"{WORK}/out/{ev['id']}/{view}",
             "windows": [{"id": "win", "bbox": ev["window"], "fine": False}],
             "gunw_fine": False, "cache_mb": 12, "hmin": ev["heights"][0], "hmax": ev["heights"][1],
             "layers": ["unwrappedPhase", "coherenceMagnitude", "connectedComponents"],
-            "products": [{"id": v[k]["pair"], "url": Q.granule_url(v[k]["granule"]), "kind": "GUNW"}
-                         for k in ("co", "control")]}
+            "products": prods}
 
 
 # ============================================================ server (address and key from the environment)
@@ -350,7 +369,7 @@ def analyse_view(ev, view):
     arrays = {"los_cm": None if r is None else r.astype(np.float32), "ctl_cm": None if rt is None else rt.astype(np.float32),
               "coh": coh_c.astype(np.float32), "coh_ctl": coh_t.astype(np.float32), "loss": loss, "x": Pc["x"], "y": Pc["y"],
               "epsg": Pc["epsg"], "ex": ex, "ey": ey}
-    np.savez_compressed(os.path.join(view_dir(ev, view), "products_cm.npz"),
+    np.savez_compressed(pcm_path(ev, view),
                         **{k: v_ for k, v_ in arrays.items() if v_ is not None})
     return out, arrays
 
@@ -388,7 +407,7 @@ def export_products(ev):
     prim = ev.get("primary_view", views[0])
     lim, fcm = float(ev.get("los_lim_cm", 20)), float(ev.get("fringe_cm", 6))
     (W, S, E, N), w, h = _grid(ev)
-    D = {k: np.load(os.path.join(view_dir(ev, k), "products_cm.npz")) for k in views}
+    D = {k: np.load(pcm_path(ev, k)) for k in views}
     z = D[prim]
 
     def rgba(v, cmap, vmin, vmax, finite):
@@ -477,7 +496,7 @@ def export_before(ev):
         print(f"{ev['id']}: {prim}: no before layer (control pair is not before the event)")
         Q.append_layers(app, [])
         return
-    z = np.load(os.path.join(view_dir(ev, prim), "products_cm.npz"))
+    z = np.load(pcm_path(ev, prim))
     import matplotlib
     cm = matplotlib.colormaps
     g = to_grid(ev, z["coh_ctl"], z["x"], z["y"], int(z["epsg"]))
@@ -516,7 +535,7 @@ def overview():
     fig, axs = plt.subplots(len(evs), 2, figsize=(7.4, 3.6 * len(evs)), squeeze=False)
     for row, ev in zip(axs, evs):
         k = ev.get("primary_view", list(ev["views"])[0])
-        z = np.load(os.path.join(view_dir(ev, k), "products_cm.npz"))
+        z = np.load(pcm_path(ev, k))
         res = json.load(open(os.path.join(DOCS, "results.json")))[ev["id"]]["views"][k]
         c = res["largest_loss_clusters"][0] if res.get("largest_loss_clusters") else {"lon": ev["lon"], "lat": ev["lat"]}
         cx, cy = lonlat_xy(int(z["epsg"]), c["lon"], c["lat"])
@@ -538,6 +557,35 @@ def overview():
     _save({"id": ""}, fig, "overview.png", dpi=75)
 
 
+def before_after_fig(ev, half_km=None):
+    """before_after.png: control (before) and event pair coherence side by side, zoomed to the largest loss patch of the primary view,
+    with the lost-coherence outline on the event panel."""
+    plt = _plt()
+    from scipy.ndimage import binary_dilation
+    k = ev.get("primary_view", list(ev["views"])[0])
+    z = np.load(pcm_path(ev, k))
+    res = json.load(open(os.path.join(DOCS, "results.json")))[ev["id"]]["views"][k]
+    c = res["largest_loss_clusters"][0] if res.get("largest_loss_clusters") else {"lon": ev["lon"], "lat": ev["lat"]}
+    cx, cy = lonlat_xy(int(z["epsg"]), c["lon"], c["lat"])
+    h = (half_km or ev.get("zoom_km", 12)) * 1e3
+    sx = (z["x"] >= cx - h) & (z["x"] <= cx + h)
+    sy = (z["y"] >= cy - h) & (z["y"] <= cy + h)
+    ext = ((z["x"][sx][0] - cx) / 1e3, (z["x"][sx][-1] - cx) / 1e3, (z["y"][sy][-1] - cy) / 1e3, (z["y"][sy][0] - cy) / 1e3)
+    sub = lambda a: a[np.ix_(sy, sx)]
+    v = ev["views"][k]
+    fig, axs = plt.subplots(1, 2, figsize=(9, 4.4))
+    for ax, key, pair, t in ((axs[0], "coh_ctl", v["control"]["pair"], "before"), (axs[1], "coh", v["co"]["pair"], "event pair")):
+        ax.imshow(sub(z[key]), extent=ext, cmap="gray", vmin=0, vmax=1)
+        ax.set_title(f"{t}: coherence {pair[:4]}-{pair[4:6]}-{pair[6:8]} to {pair[9:13]}-{pair[13:15]}-{pair[15:]}", fontsize=8)
+        ax.tick_params(labelsize=6)
+    L = sub(z["loss"])
+    ov = np.ma.masked_where(~binary_dilation(L, iterations=1), np.ones(L.shape))
+    axs[1].imshow(ov, extent=ext, cmap="autumn", vmin=0, vmax=1, alpha=0.5)
+    fig.suptitle(f"{ev['title']} ({v['label']}, track {v['track']}): orange = lost coherence", fontsize=8)
+    _save(ev, fig, "before_after.png", dpi=90)
+    plt.close(fig)
+
+
 def app_events():
     """docs/eda/events/app_events.json: one record per clear event with what the app exporter needs."""
     res = json.load(open(os.path.join(DOCS, "results.json")))
@@ -555,7 +603,7 @@ def app_events():
         else:
             summary = ev["summary_number"]
         vs = []
-        for k in ev["views"]:
+        for k in ev.get("app_views", list(ev["views"])):
             v = ev["views"][k]
             d1, d2 = v["co"]["pair"].split("_")
             vr = res[ev["id"]]["views"].get(k, {})
@@ -583,14 +631,19 @@ def main(argv):
         resolve(get_event(argv[2]))
     elif cmd in ("launch", "fetch"):
         ev = get_event(argv[2]); only = argv[3] if len(argv) > 3 else None
+        done = set()
         for k in views_of(ev, only):
-            (launch if cmd == "launch" else fetch)(ev, k)
+            if data_view(ev, k) not in done:
+                done.add(data_view(ev, k))
+                (launch if cmd == "launch" else fetch)(ev, data_view(ev, k))
     elif cmd == "run":
         run(get_event(argv[2]), argv[3] if len(argv) > 3 else None)
     elif cmd == "export":
         ev = get_event(argv[2]); export_products(ev); write_area(ev)
     elif cmd == "before":  # only the before layer; existing layers and areas/ are not touched
         export_before(get_event(argv[2]))
+    elif cmd == "fig_ba":
+        before_after_fig(get_event(argv[2]))
     elif cmd == "overview":
         overview()
     elif cmd == "app_events":

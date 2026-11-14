@@ -43,7 +43,7 @@
       ],
       "legend": {
         "type": "ramp",
-        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "unit": "relative brightness (0–100, uncalibrated)",
         "min": 0,
         "max": 100,
         "colors": [
@@ -227,7 +227,7 @@
       ],
       "legend": {
         "type": "diverging",
-        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "unit": "relative brightness (0–100, uncalibrated)",
         "min": -35,
         "max": 35,
         "colors": [
@@ -267,7 +267,7 @@
       ],
       "legend": {
         "type": "ramp",
-        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "unit": "relative brightness (0–100, uncalibrated)",
         "min": 0,
         "max": 100,
         "colors": [
@@ -280,7 +280,7 @@
   "story": {
     "see": "Some normally dark patches of Lake Sevan brightened on 31 August and 12 September. A shore station recorded rain around the first pass and a steady overnight breeze before the second. Both can roughen water. The seasonal radar model keeps the main lake connected through those changes.",
     "physics": "The water-level record was 1,900.70 metres on 31 August and 1,900.58 metres on 18 October. Our map shows about 1,240 square kilometres of open water on all ten passes, close to the published 1,242. The gauge measures height. The radar map estimates where water covers the ground.",
-    "lband": "On a calm day, smooth water usually reflects the radar away. Ripples can send more energy back and look brighter. NISAR, the NASA\u2013ISRO radar satellite, uses long-wavelength L-band radar for these observations, which lets it collect images through clouds.",
+    "lband": "On a calm day, smooth water usually reflects the radar away. Ripples can send more energy back and look brighter. NISAR, the NASA–ISRO radar satellite, uses long-wavelength L-band radar for these observations, which lets it collect images through clouds.",
     "people": "At the Gavaraget river mouth and along the Martuni shore, flat and steep stretches can move by different amounts for the same level change. Sevan also supplies irrigation water. Armenia's Water Committee reported 75.3 million cubic metres withdrawn for irrigation in the 2026 season."
   },
   "spots": [
@@ -338,11 +338,12 @@
     },
     "2026-10-06": {
       "quality": "fail",
-      "quality_note": "HV channel 4.6x more different from the other dates than usual (uniform across the frame); HH-HV over stable land -0.055 vs usual +0.065 (departure in HV); HV stable-land brightness +15% vs the other dates while HH is normal \u2014 likely instrument or processing effect",
+      "quality_note": "HV channel 4.6x more different from the other dates than usual (uniform across the frame); HH-HV over stable land -0.055 vs usual +0.065 (departure in HV); HV stable-land brightness +15% vs the other dates while HH is normal — likely instrument or processing effect",
       "channels": [
         "HV"
       ]
     }
   },
-  "category": "lake"
+  "category": "lake",
+  "headlineNote": "The steady lake, our control: the water edge matches NASA's OPERA water product (overlap 0.97) and barely moves all season"
 }

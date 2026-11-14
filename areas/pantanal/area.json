@@ -26,5 +26,7 @@
     "2026-07-05"
   ],
   "water_source": "fusion2",
-  "category": "wetland"
+  "category": "wetland",
+  "default_layer": "classes",
+  "headline_note": "Steady through the dry season: the wetland classes hardly change between June and October"
 }

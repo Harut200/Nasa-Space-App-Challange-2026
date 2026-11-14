@@ -1,0 +1,14 @@
+{
+  "id": "la-mierla-coh-2026",
+  "name": "La Mierla fire, Guadalajara: forest and scrub surface changed, 14-26 July 2026",
+  "bbox": [
+    -3.45,
+    40.85,
+    -2.55,
+    41.4
+  ],
+  "track": 95,
+  "frame": 68,
+  "direction": "descending",
+  "pixel_m": 80
+}

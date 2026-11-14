@@ -107,6 +107,42 @@
   ],
   "facts": [
     {
+      "label": "Radar echo inside the changed patch",
+      "unit": "relative brightness (0–100, uncalibrated)",
+      "values": [
+        56.93,
+        50.2,
+        54.11,
+        49.93,
+        47.22,
+        48.18
+      ]
+    },
+    {
+      "label": "Radar echo outside the changed patch",
+      "unit": "relative brightness (0–100, uncalibrated)",
+      "values": [
+        68.96,
+        67.11,
+        68.35,
+        67.54,
+        67.56,
+        67.92
+      ]
+    },
+    {
+      "label": "Difference",
+      "unit": "relative brightness (0–100, uncalibrated)",
+      "values": [
+        -12.03,
+        -16.91,
+        -14.24,
+        -17.61,
+        -20.34,
+        -19.74
+      ]
+    },
+    {
       "label": "Open water",
       "unit": "km²",
       "values": [
@@ -158,5 +194,77 @@
         1.4
       ]
     }
-  ]
+  ],
+  "evidence": {
+    "kind": "ev",
+    "channel": "hv",
+    "sign": -1,
+    "before_dates": [
+      "2026-06-30",
+      "2026-08-17",
+      "2026-08-29"
+    ],
+    "after_dates": [
+      "2026-10-04",
+      "2026-10-16"
+    ],
+    "excluded_dates": [],
+    "ignition": null,
+    "ignition_between": null,
+    "control_dates": [
+      "2026-06-30",
+      "2026-08-17",
+      "2026-08-29"
+    ],
+    "area_km2": 869,
+    "area_label": "area of changed radar echo, not a measurement of land cover, crop or forest loss",
+    "mean_change": -0.1031,
+    "mean_change_db_like": -3.09,
+    "control_mean": 0.0483,
+    "control_frac_above": 0.06,
+    "rank_percentile": 0.179,
+    "rank_n_discs": 626199,
+    "disc_radius_km": 1.9,
+    "threshold": 0.0458,
+    "threshold_db_like": 1.37,
+    "sensitivity": {
+      "0.5": {
+        "threshold": 0.0229,
+        "area_km2": 3225
+      },
+      "1.0": {
+        "threshold": 0.0458,
+        "area_km2": 869
+      },
+      "2.0": {
+        "threshold": 0.0915,
+        "area_km2": 144
+      }
+    },
+    "persistence": {
+      "2026-10-04": {
+        "patch_change": 0.0646,
+        "above_threshold": true
+      },
+      "2026-10-16": {
+        "patch_change": 0.0551,
+        "above_threshold": true
+      }
+    },
+    "unit_note": "brightness units are the preview's 0-1 display scale; dB-like = 30 x brightness assumes a ~30 dB stretch (unverified)",
+    "published": null,
+    "distance_to_ref_km": 0.7,
+    "mask_exported": false,
+    "method_note": "Preview brightness (uncalibrated, ~180 m), 3x3 boxcar + per-date gain normalisation; AFTER minus BEFORE (medians), 5x5 boxcar; threshold = median + 3.09 robust sigma of the same-signed change in a control built from two halves of a quiet interval (a Gaussian 99.9 % level that heavy tails do not inflate); connected patches of at least 2 km² kept, the one nearest the reference position (else the largest) reported. The area is the area of changed radar echo, not a measurement of land cover, crop or forest loss.",
+    "layers": {
+      "before": "ev_before",
+      "after": "ev_after",
+      "diff": "ev_diff",
+      "mask": null
+    },
+    "series": [
+      "Radar echo inside the changed patch",
+      "Radar echo outside the changed patch"
+    ]
+  }
 }

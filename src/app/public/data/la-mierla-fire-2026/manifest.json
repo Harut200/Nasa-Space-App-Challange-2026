@@ -27,6 +27,70 @@
   ],
   "layers": [
     {
+      "id": "burn_before",
+      "label": "Before the fire (HV, median of passes 20 Jun\u201314 Jul)",
+      "dates": null,
+      "legend": {
+        "type": "ramp",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": 10,
+        "max": 98,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    },
+    {
+      "id": "burn_after",
+      "label": "After the fire (HV, median of passes 26 Jul\u201318 Oct)",
+      "dates": null,
+      "legend": {
+        "type": "ramp",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": 10,
+        "max": 98,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    },
+    {
+      "id": "burn_diff",
+      "label": "Radar echo change after the fire (HV)",
+      "dates": null,
+      "legend": {
+        "type": "diverging",
+        "unit": "change in echo brightness (0\u20131 preview scale), after minus before",
+        "min": -0.125,
+        "max": 0.125,
+        "colors": [
+          "#2166ac",
+          "#00000000",
+          "#b2182b"
+        ],
+        "labels": [
+          "darker after the fire",
+          "brighter after the fire"
+        ]
+      }
+    },
+    {
+      "id": "burn_scar",
+      "label": "Where the radar echo changed after the fire",
+      "dates": null,
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#ff5a1f",
+            "label": "Where the radar echo changed after the fire"
+          }
+        ]
+      }
+    },
+    {
       "id": "hh",
       "label": "HH brightness (preview)",
       "dates": [
@@ -234,7 +298,7 @@
   "story": {
     "see": "Switch between 14 July and 26 July over the Sierra Norte de Guadalajara, north-east of Madrid. A patch of the cross-polarised HV radar layer turns darker and stays dark through August and October. Nothing like it appears between 20 June and 14 July.",
     "physics": "The La Mierla fire started on 16 July 2026 and burned about 32,000 hectares in the following week, which Spanish reports called the second-largest wildfire in Spain this century. SEO/BirdLife put it at nearly 33,000 hectares, 95 percent of it inside the Sierra Norte de Guadalajara natural park. The fire was described as stabilised on 23 July.",
-    "lband": "HV echoes come from branches and leaves, so burned woodland tends to return less of it. On 26 July the burned area is about 0.05 darker on the preview's 0 to 1 scale than before the fire, then about 0.08 by 31 August and about 0.09 by 18 October, while unburned ground just north of the patch stays within 0.01. The patch is one of the darkest 0.2 percent of equal-sized circles in the frame. It is roughly 15 to 20 kilometres across, the right size for 32,000 hectares, but the mountain terrain is speckled, so we show it as a patch and give no area of our own.",
+    "lband": "HV echoes come from branches and leaves, so burned woodland tends to return less of it. On 26 July the burned area is about 0.05 darker on the preview's 0 to 1 scale than before the fire, then about 0.08 by 31 August and about 0.09 by 18 October, while unburned ground just north of the patch stays within 0.01. The patch is one of the darkest 0.2 percent of equal-sized circles in the frame. It is roughly 15 to 20 kilometres across, the right size for 32,000 hectares, but the mountain terrain is speckled, so we show it as a patch of changed echo. At our noise-based threshold it covers about 400 square kilometres, 770 at half the threshold, which is an area of changed echo and not a burnt-area measurement.",
     "people": "Villages such as Riofr\u00edo del Llano and Ang\u00f3n were among those evacuated and began to return after 21 July. Satellite images before and after the fire, from Copernicus, show a landscape of woodland, crops and pasture that the fire changed within a week. Radar shows the scar through cloud, smoke and darkness."
   },
   "spots": [
@@ -306,8 +370,200 @@
       ]
     }
   },
-  "defaultLayer": "hv",
+  "defaultLayer": "burn_diff",
   "headline": "none",
-  "headlineNote": "Cross-polarised radar echo darker where the fire burned",
-  "category": "fire"
+  "headlineNote": "Cross-polarised (HV) radar echo about 0.13 lower (0\u20131 brightness) inside a patch of changed echo of about 397 km\u00b2 after the fire",
+  "category": "fire",
+  "burn": {
+    "kind": "burn",
+    "channel": "hv",
+    "sign": -1,
+    "before_dates": [
+      "2026-06-20",
+      "2026-07-02",
+      "2026-07-14"
+    ],
+    "after_dates": [
+      "2026-07-26",
+      "2026-08-19",
+      "2026-08-31",
+      "2026-09-12",
+      "2026-09-24",
+      "2026-10-18"
+    ],
+    "excluded_dates": [
+      "2026-10-06"
+    ],
+    "ignition": "2026-07-16",
+    "ignition_between": null,
+    "control_dates": [
+      "2026-06-20",
+      "2026-07-02",
+      "2026-07-14"
+    ],
+    "area_km2": 397,
+    "area_label": "area of changed radar echo, not a burnt-area measurement",
+    "mean_change": -0.1293,
+    "mean_change_db_like": -3.88,
+    "control_mean": 0.0044,
+    "control_frac_above": 0.0,
+    "rank_percentile": 0.0,
+    "rank_n_discs": 275404,
+    "disc_radius_km": 11.2,
+    "threshold": 0.05,
+    "threshold_db_like": 1.5,
+    "sensitivity": {
+      "0.5": {
+        "threshold": 0.025,
+        "area_km2": 766
+      },
+      "1.0": {
+        "threshold": 0.05,
+        "area_km2": 397
+      },
+      "2.0": {
+        "threshold": 0.1,
+        "area_km2": 193
+      }
+    },
+    "persistence": {
+      "2026-07-26": {
+        "patch_change": 0.0572,
+        "above_threshold": true
+      },
+      "2026-08-19": {
+        "patch_change": 0.0878,
+        "above_threshold": true
+      },
+      "2026-08-31": {
+        "patch_change": 0.101,
+        "above_threshold": true
+      },
+      "2026-09-12": {
+        "patch_change": 0.1206,
+        "above_threshold": true
+      },
+      "2026-09-24": {
+        "patch_change": 0.1488,
+        "above_threshold": true
+      },
+      "2026-10-18": {
+        "patch_change": 0.1345,
+        "above_threshold": true
+      }
+    },
+    "unit_note": "brightness units are the preview's 0-1 display scale; dB-like = 30 x brightness assumes a ~30 dB stretch (unverified)",
+    "published": {
+      "burnt_km2": 320.0,
+      "text": "about 32,000 ha (The Local 20 Jul, elDiario.es 30 Jul)"
+    },
+    "distance_to_ref_km": 8.4,
+    "mask_exported": true,
+    "method_note": "Preview brightness (uncalibrated, ~180 m), 3x3 boxcar + per-date gain normalisation; AFTER minus BEFORE (medians), 9x9 boxcar; threshold = median + 3.09 robust sigma of the same-signed change in a control built from two halves of a quiet interval (a Gaussian 99.9 % level that heavy tails do not inflate); connected patches of at least 10 km\u00b2 kept, the one nearest the reference position (else the largest) reported. The area is the area of changed radar echo, not a burnt-area measurement."
+  },
+  "evidence": {
+    "kind": "burn",
+    "before": "burn_before",
+    "after": "burn_after",
+    "diff": "burn_diff",
+    "mask": "burn_scar",
+    "series": [
+      "Radar echo inside the burn",
+      "Radar echo outside the burn"
+    ],
+    "steps": [
+      "1. Radar image before the fire, 20 Jun\u201314 Jul (median of 3 passes, HV channel).",
+      "2. Radar image after, 26 Jul\u201318 Oct (median of 6 passes).",
+      "3. The difference: the echo fell by about 0.13 (0\u20131 brightness scale) inside a patch of about 397 km\u00b2 of changed echo at the published fire position.",
+      "4. A check: between 20 Jun\u201314 Jul, before the fire, the same test finds nothing there (mean change +0.00 in the same pixels).",
+      "5. It stays: the patch is still there on every later pass."
+    ],
+    "stats": {
+      "kind": "burn",
+      "channel": "hv",
+      "sign": -1,
+      "before_dates": [
+        "2026-06-20",
+        "2026-07-02",
+        "2026-07-14"
+      ],
+      "after_dates": [
+        "2026-07-26",
+        "2026-08-19",
+        "2026-08-31",
+        "2026-09-12",
+        "2026-09-24",
+        "2026-10-18"
+      ],
+      "excluded_dates": [
+        "2026-10-06"
+      ],
+      "ignition": "2026-07-16",
+      "ignition_between": null,
+      "control_dates": [
+        "2026-06-20",
+        "2026-07-02",
+        "2026-07-14"
+      ],
+      "area_km2": 397,
+      "area_label": "area of changed radar echo, not a burnt-area measurement",
+      "mean_change": -0.1293,
+      "mean_change_db_like": -3.88,
+      "control_mean": 0.0044,
+      "control_frac_above": 0.0,
+      "rank_percentile": 0.0,
+      "rank_n_discs": 275404,
+      "disc_radius_km": 11.2,
+      "threshold": 0.05,
+      "threshold_db_like": 1.5,
+      "sensitivity": {
+        "0.5": {
+          "threshold": 0.025,
+          "area_km2": 766
+        },
+        "1.0": {
+          "threshold": 0.05,
+          "area_km2": 397
+        },
+        "2.0": {
+          "threshold": 0.1,
+          "area_km2": 193
+        }
+      },
+      "persistence": {
+        "2026-07-26": {
+          "patch_change": 0.0572,
+          "above_threshold": true
+        },
+        "2026-08-19": {
+          "patch_change": 0.0878,
+          "above_threshold": true
+        },
+        "2026-08-31": {
+          "patch_change": 0.101,
+          "above_threshold": true
+        },
+        "2026-09-12": {
+          "patch_change": 0.1206,
+          "above_threshold": true
+        },
+        "2026-09-24": {
+          "patch_change": 0.1488,
+          "above_threshold": true
+        },
+        "2026-10-18": {
+          "patch_change": 0.1345,
+          "above_threshold": true
+        }
+      },
+      "unit_note": "brightness units are the preview's 0-1 display scale; dB-like = 30 x brightness assumes a ~30 dB stretch (unverified)",
+      "published": {
+        "burnt_km2": 320.0,
+        "text": "about 32,000 ha (The Local 20 Jul, elDiario.es 30 Jul)"
+      },
+      "distance_to_ref_km": 8.4,
+      "mask_exported": true,
+      "method_note": "Preview brightness (uncalibrated, ~180 m), 3x3 boxcar + per-date gain normalisation; AFTER minus BEFORE (medians), 9x9 boxcar; threshold = median + 3.09 robust sigma of the same-signed change in a control built from two halves of a quiet interval (a Gaussian 99.9 % level that heavy tails do not inflate); connected patches of at least 10 km\u00b2 kept, the one nearest the reference position (else the largest) reported. The area is the area of changed radar echo, not a burnt-area measurement."
+    }
+  }
 }

@@ -23,6 +23,56 @@
   ],
   "layers": [
     {
+      "id": "ev_before",
+      "label": "Before (HV, median of passes 30 Jun\u201329 Aug)",
+      "dates": null,
+      "legend": {
+        "type": "ramp",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": 30,
+        "max": 98,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    },
+    {
+      "id": "ev_after",
+      "label": "After (HV, median of passes 4 Oct\u201316 Oct)",
+      "dates": null,
+      "legend": {
+        "type": "ramp",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": 30,
+        "max": 98,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    },
+    {
+      "id": "ev_diff",
+      "label": "Radar echo change (HV)",
+      "dates": null,
+      "legend": {
+        "type": "diverging",
+        "unit": "change in echo brightness (0\u20131 preview scale), after minus before",
+        "min": -0.114,
+        "max": 0.114,
+        "colors": [
+          "#2166ac",
+          "#00000000",
+          "#b2182b"
+        ],
+        "labels": [
+          "darker after",
+          "brighter after"
+        ]
+      }
+    },
+    {
       "id": "hh",
       "label": "HH brightness (preview)",
       "dates": [
@@ -196,7 +246,7 @@
     }
   ],
   "story": {
-    "see": "In HV, standing forest is bright and cleared land is dark, so the settlement roads and farm plots show as a dark 'fishbone' cut into the forest. Most of it was cleared before 2026 and looks the same on every date. A few small blocks at the forest edge drop sharply in HV between late August and early October.",
+    "see": "In HV, standing forest is bright and cleared land is dark, so the settlement roads and farm plots show as a dark 'fishbone' cut into the forest. Most of it was cleared before 2026 and looks the same on every date. Between late August and October many small patches inside the cleared land get darker in HV, but at 180 metres we cannot tell whether they are new clearing, burning or wetter ground, so we do not claim new clearing.",
     "physics": "Settlers and ranchers clear forest along roads and side roads, plot by plot, turning it into pasture and fields. Clearing and burning mostly happen in the dry season. Once trees are gone the land holds far less plant material, and it rarely grows back to full forest.",
     "lband": "HV is the cross-polarised channel: the signal comes back mainly after bouncing around inside a 3D canopy of trunks and branches. L-band's 24 cm waves penetrate the canopy and scatter in that woody volume, so forest is bright in HV and pasture dark. Clouds and smoke do not block radar, which matters in the burning season.",
     "people": "Rond\u00f4nia is one of the Brazilian states that clears the most forest; by 2003 around 70,000 km\u00b2 of its rainforest had been cleared. Radar can flag new clearings through clouds and smoke. Our previews are coarse (about 180 m), so only larger clearings show; three corrupt previews (18 June, 12 and 24 July) were removed."
@@ -263,5 +313,85 @@
       ]
     }
   },
-  "category": "land"
+  "category": "land",
+  "evidence": {
+    "kind": "ev",
+    "before": "ev_before",
+    "after": "ev_after",
+    "diff": "ev_diff",
+    "mask": null,
+    "series": [
+      "Radar echo inside the changed patch",
+      "Radar echo outside the changed patch"
+    ],
+    "steps": [
+      "1. Radar image before, 30 Jun\u201329 Aug (median of 3 passes, HV channel).",
+      "2. Radar image after, 4 Oct\u201316 Oct (median of 2 passes).",
+      "3. The difference: the echo fell by about 0.10 (0\u20131 brightness scale) inside a patch of about 869 km\u00b2 of changed echo, summed over every changed patch in the frame.",
+      "4. A check: between 30 Jun\u201329 Aug, within the before group, the same pixels change by +0.05 on average, and 6 % of them cross the threshold, so the control is not clean.",
+      "5. It stays: the patch is still there on every later pass."
+    ],
+    "stats": {
+      "kind": "ev",
+      "channel": "hv",
+      "sign": -1,
+      "before_dates": [
+        "2026-06-30",
+        "2026-08-17",
+        "2026-08-29"
+      ],
+      "after_dates": [
+        "2026-10-04",
+        "2026-10-16"
+      ],
+      "excluded_dates": [],
+      "ignition": null,
+      "ignition_between": null,
+      "control_dates": [
+        "2026-06-30",
+        "2026-08-17",
+        "2026-08-29"
+      ],
+      "area_km2": 869,
+      "area_label": "area of changed radar echo, not a measurement of land cover, crop or forest loss",
+      "mean_change": -0.1031,
+      "mean_change_db_like": -3.09,
+      "control_mean": 0.0483,
+      "control_frac_above": 0.06,
+      "rank_percentile": 0.179,
+      "rank_n_discs": 626199,
+      "disc_radius_km": 1.9,
+      "threshold": 0.0458,
+      "threshold_db_like": 1.37,
+      "sensitivity": {
+        "0.5": {
+          "threshold": 0.0229,
+          "area_km2": 3225
+        },
+        "1.0": {
+          "threshold": 0.0458,
+          "area_km2": 869
+        },
+        "2.0": {
+          "threshold": 0.0915,
+          "area_km2": 144
+        }
+      },
+      "persistence": {
+        "2026-10-04": {
+          "patch_change": 0.0646,
+          "above_threshold": true
+        },
+        "2026-10-16": {
+          "patch_change": 0.0551,
+          "above_threshold": true
+        }
+      },
+      "unit_note": "brightness units are the preview's 0-1 display scale; dB-like = 30 x brightness assumes a ~30 dB stretch (unverified)",
+      "published": null,
+      "distance_to_ref_km": 0.7,
+      "mask_exported": false,
+      "method_note": "Preview brightness (uncalibrated, ~180 m), 3x3 boxcar + per-date gain normalisation; AFTER minus BEFORE (medians), 5x5 boxcar; threshold = median + 3.09 robust sigma of the same-signed change in a control built from two halves of a quiet interval (a Gaussian 99.9 % level that heavy tails do not inflate); connected patches of at least 2 km\u00b2 kept, the one nearest the reference position (else the largest) reported. The area is the area of changed radar echo, not a measurement of land cover, crop or forest loss."
+    }
+  }
 }

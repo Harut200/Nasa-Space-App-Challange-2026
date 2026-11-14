@@ -224,5 +224,49 @@
    }
   ],
   "time_note": "fire started 12 Jul; pair 11-23 Jul; the control pair ends the day before"
+ },
+ {
+  "id": "la-mierla-coh-2026",
+  "type": "fire",
+  "title": "La Mierla fire, Guadalajara: forest and scrub surface changed, 14-26 July 2026",
+  "time": "2026-07-16T00:00:00Z",
+  "lat": 40.97,
+  "lon": -3.15,
+  "place": "Sierra Norte de Guadalajara, Spain",
+  "summary_number": "≈ 150 km² of ground changed completely (largest connected patch 44 km²)",
+  "radius_km": 12,
+  "views": [
+   {
+    "id": "d_ign",
+    "label": "descending",
+    "track": 95,
+    "before": "2026-07-14",
+    "after": "2026-07-26",
+    "p2p_cm": null,
+    "control_p2p_cm": null,
+    "control_before": "2026-07-02",
+    "control_after": "2026-07-14",
+    "control_is_before": true,
+    "exported": true
+   }
+  ],
+  "source_url": "https://www.thelocal.es/20260720/800-evacuated-as-spains-biggest-wildfire-of-the-year-rages-on",
+  "before_after": [
+   {
+    "view": "d_ign",
+    "before": "coherence_before",
+    "after": "coherence",
+    "label": "Radar coherence",
+    "before_dates": [
+     "2026-07-02",
+     "2026-07-14"
+    ],
+    "after_dates": [
+     "2026-07-14",
+     "2026-07-26"
+    ]
+   }
+  ],
+  "time_note": "fire began 16 Jul (The Local); pair 14-26 Jul; the control pair ends the day of 14 Jul, before it"
  }
 ]

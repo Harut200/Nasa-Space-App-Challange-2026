@@ -26,5 +26,7 @@
     "2026-10-06"
   ],
   "water_source": "fusion2",
-  "category": "wetland"
+  "category": "wetland",
+  "default_layer": "classes",
+  "headline_note": "Steady swamp: open water varies by about 2 % over the season"
 }

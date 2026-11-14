@@ -1,0 +1,37 @@
+{
+  "story": {
+    "see": "The La Mierla fire began on 16 July 2026 in the province of Guadalajara, north of Madrid. By 20 July it had burned over 32,000 hectares and was called the second biggest wildfire in Spain this century and the largest in the history of Castilla-La Mancha (The Local). The orange area is where the radar picture between NISAR's 14 and 26 July passes no longer matches the pair taken just before it (2 to 14 July). It is a long band running north-north-east from the village of La Mierla.",
+    "physics": "Burning removes leaves, twigs and scrub, and what is left reflects the radar differently, so the passes cannot be compared there. About 150 km2 in the map lost coherence (87 km2 within 12 km of the centre, 44 km2 in the largest connected patch). Equal circles placed elsewhere in the same map lose at most 14 km2 (95th percentile of 98), and only about 1 % of the comparable ground outside the site changes like this. We do not measure the burned area: the patch only counts ground that was coherent before.",
+    "lband": "NISAR's L-band radar has a wavelength of about 24 cm. Over this dry Mediterranean land the quiet pair before the fire is bright almost everywhere, so a burn stands out as a dark scar with a hard edge. In the pair of 31 August to 12 September the same ground is coherent again (nothing like this patch remains), so the map marks the change that happened inside 14 to 26 July. Dew or rain on the ground cannot be fully excluded from coherence alone; the shape, the place and the date are what we rely on.",
+    "people": "This map shows where the surface changed, not damage. We did not look at reports of damage, evacuations or casualties."
+  },
+  "spots": [
+    {
+      "id": "site",
+      "label": "La Mierla village (Wikipedia, 40.94 N 3.24 W)",
+      "lngLat": [
+        -3.15,
+        40.97
+      ],
+      "radius_m": 3000
+    },
+    {
+      "id": "patch",
+      "label": "Centre of the largest patch of lost coherence",
+      "lngLat": [
+        -3.1045,
+        41.0497
+      ],
+      "radius_m": 5000
+    },
+    {
+      "id": "reference",
+      "label": "Reference: stays coherent in both pairs",
+      "lngLat": [
+        -2.827,
+        41.005
+      ],
+      "radius_m": 4000
+    }
+  ]
+}

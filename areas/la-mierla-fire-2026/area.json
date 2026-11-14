@@ -26,7 +26,7 @@
   ],
   "water_source": "fusion2",
   "category": "fire",
-  "default_layer": "hv",
+  "default_layer": "burn_diff",
   "headline": "none",
-  "headline_note": "Cross-polarised radar echo darker where the fire burned"
+  "headline_note": "Cross-polarised (HV) radar echo about 0.13 lower (0–1 brightness) inside a patch of changed echo of about 397 km² after the fire"
 }

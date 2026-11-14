@@ -27,6 +27,70 @@
   ],
   "layers": [
     {
+      "id": "ev_before",
+      "label": "Before (HH, median of passes 18 Jun\u201312 Jul)",
+      "dates": null,
+      "legend": {
+        "type": "ramp",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": 2,
+        "max": 82,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    },
+    {
+      "id": "ev_after",
+      "label": "After (HH, median of passes 4 Oct\u201316 Oct)",
+      "dates": null,
+      "legend": {
+        "type": "ramp",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": 2,
+        "max": 82,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    },
+    {
+      "id": "ev_diff",
+      "label": "Radar echo change (HH)",
+      "dates": null,
+      "legend": {
+        "type": "diverging",
+        "unit": "change in echo brightness (0\u20131 preview scale), after minus before",
+        "min": -0.33,
+        "max": 0.33,
+        "colors": [
+          "#2166ac",
+          "#00000000",
+          "#b2182b"
+        ],
+        "labels": [
+          "darker after",
+          "brighter after"
+        ]
+      }
+    },
+    {
+      "id": "ev_mask",
+      "label": "Where the radar echo changed",
+      "dates": null,
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#ff5a1f",
+            "label": "Where the radar echo changed"
+          }
+        ]
+      }
+    },
+    {
       "id": "hh",
       "label": "HH brightness (preview)",
       "dates": [
@@ -291,5 +355,86 @@
       ]
     }
   },
-  "category": "flood"
+  "defaultLayer": "classes",
+  "category": "flood",
+  "evidence": {
+    "kind": "ev",
+    "before": "ev_before",
+    "after": "ev_after",
+    "diff": "ev_diff",
+    "mask": "ev_mask",
+    "series": [
+      "Radar echo inside the changed patch",
+      "Radar echo outside the changed patch"
+    ],
+    "steps": [
+      "1. Radar image before, 18 Jun\u201312 Jul (median of 3 passes, HH channel).",
+      "2. Radar image after, 4 Oct\u201316 Oct (median of 2 passes).",
+      "3. The difference: the echo rose by about 0.22 (0\u20131 brightness scale) inside a patch of about 1,611 km\u00b2 of changed echo, summed over every changed patch in the frame.",
+      "4. A check: between 18 Jun\u201312 Jul, within the before group, the same test finds nothing there (mean change -0.01 in the same pixels).",
+      "5. It stays: the patch is still there on every later pass."
+    ],
+    "stats": {
+      "kind": "ev",
+      "channel": "hh",
+      "sign": 1,
+      "before_dates": [
+        "2026-06-18",
+        "2026-06-30",
+        "2026-07-12"
+      ],
+      "after_dates": [
+        "2026-10-04",
+        "2026-10-16"
+      ],
+      "excluded_dates": [],
+      "ignition": null,
+      "ignition_between": null,
+      "control_dates": [
+        "2026-06-18",
+        "2026-06-30",
+        "2026-07-12"
+      ],
+      "area_km2": 1611,
+      "area_label": "area of changed radar echo, not a measurement of land cover, crop or forest loss",
+      "mean_change": 0.2183,
+      "mean_change_db_like": 6.55,
+      "control_mean": -0.0145,
+      "control_frac_above": 0.002,
+      "rank_percentile": 1.887,
+      "rank_n_discs": 222437,
+      "disc_radius_km": 10.3,
+      "threshold": 0.1321,
+      "threshold_db_like": 3.96,
+      "sensitivity": {
+        "0.5": {
+          "threshold": 0.066,
+          "area_km2": 5203
+        },
+        "1.0": {
+          "threshold": 0.1321,
+          "area_km2": 1611
+        },
+        "2.0": {
+          "threshold": 0.2642,
+          "area_km2": 92
+        }
+      },
+      "persistence": {
+        "2026-10-04": {
+          "patch_change": 0.1982,
+          "above_threshold": true
+        },
+        "2026-10-16": {
+          "patch_change": 0.2316,
+          "above_threshold": true
+        }
+      },
+      "unit_note": "brightness units are the preview's 0-1 display scale; dB-like = 30 x brightness assumes a ~30 dB stretch (unverified)",
+      "published": null,
+      "distance_to_ref_km": 5.6,
+      "mask_exported": true,
+      "method_note": "Preview brightness (uncalibrated, ~180 m), 3x3 boxcar + per-date gain normalisation; AFTER minus BEFORE (medians), 9x9 boxcar; threshold = median + 3.09 robust sigma of the same-signed change in a control built from two halves of a quiet interval (a Gaussian 99.9 % level that heavy tails do not inflate); connected patches of at least 20 km\u00b2 kept, the one nearest the reference position (else the largest) reported. The area is the area of changed radar echo, not a measurement of land cover, crop or forest loss."
+    }
+  }
 }

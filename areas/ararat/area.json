@@ -12,5 +12,6 @@
   "direction": "ascending",
   "pixel_m": 30,
   "water_source": "fusion2",
-  "category": "land"
+  "category": "land",
+  "default_layer": "coh_change"
 }

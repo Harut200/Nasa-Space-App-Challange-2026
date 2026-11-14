@@ -189,3 +189,17 @@ the thin debris track). Of the events found, only those with a NISAR pair spanni
 *Data credit: NISAR L2 GUNW (PROVISIONAL and urgent response), NASA/JPL-Caltech and ISRO, distributed by the ASF DAAC. Event facts from the sources linked
 above; all facts about an event are cited to those pages, which were read on 14 Nov 2026.*
 
+
+## Round 3 (15 Nov 2026, in progress): pair-based events of more kinds
+
+Interim log, kept up to date after each candidate. Same rule as above; fires use a lower and wider rule (control >= 0.35-0.5 and event < 0.25-0.45 with a drop of 0.15-0.3, 30 px, set per event in `events.json`).
+Several event pairs can share one control (`data_view` in `events.json`); `before_after.png` is made by `python -m scripts.detect.events fig_ba EVENT`.
+
+| Event (source) | Type, date | Pairs (track/frame) and control | Verdict | What is seen |
+|---|---|---|---|---|
+| **Thunder Bay 36 fire, Ontario** ([Wikipedia](https://en.wikipedia.org/wiki/Thunder_Bay_36_Fire)) | fire, started 12 Jul | desc 11-23 Jul (41/63) vs 29 Jun-11 Jul; asc 11-23 Jul (47/27) same control | **clear** | 1,540 km2 lost coherence in the 86 x 83 km window (largest connected 1,253 km2, cut by the window), 0.66 -> 0.13; asc sees 686 km2 where its swath covers; the same ground is coherent again on 21 Sep-3 Oct |
+| **La Mierla fire, Guadalajara** ([The Local](https://www.thelocal.es/20260720/800-evacuated-as-spains-biggest-wildfire-of-the-year-rages-on)) | fire, started 16 Jul | desc 14-26 Jul (95/68) vs 2-14 Jul | **clear** | 149 km2 in the window, 87 km2 within 12 km (95th percentile of 98 equal discs 13.8 km2), largest patch 43.6 km2 next to La Mierla village; coherent again 31 Aug-12 Sep |
+| Klyuchevskoy / Bezymianny eruption ([Watchers weekly, 13-19 Aug](https://watchers.news/2026/08/22/the-weekly-volcanic-activity-report-august-13-19-2026/)) | volcano, from 15-18 Aug | desc 17-29 Aug (60/60) vs 12-24 Jul; asc 11-23 Aug (152/30) vs 6-18 Jul | not detected | patches are drainage lines; the one patch in both looks (1.3 km2 at 55.96 N 160.80 E) is 13 km from the volcanoes and unexplained; the cones are dark in the control |
+| Krasheninnikov lava field ([Watchers 22-28 Oct](https://watchers.news/2026/10/30/the-weekly-volcanic-activity-report-october-22-28-2026/)) | volcano, ongoing | asc 18-30 Aug (80/29) vs 13-25 Jul: 0.0 km2; asc 5-17 Oct vs 18-30 Aug: 120 km2 in the window | not detected | August pair: nothing; October pair: loss all over the window (19 % vs 4 % outside, background p95 45 km2) is the first snow, not an event |
+| Nyamulagira lava flows ([Watchers 13-19 Aug](https://watchers.news/2026/08/22/the-weekly-volcanic-activity-report-august-13-19-2026/)) | volcano, Jul-Aug | asc 14-26 Aug (14/1) vs 27 Jun-9 Jul; desc 16-28 Aug (50/89) vs 17-29 Jun | not detected | 6.8 / 1.1 km2 in 8 km (background p95 7.3-7.6 km2); the patches differ between the looks and are in forest |
+| Nevados de Chillan new lava flow ([Watchers 8-14 Oct](https://watchers.news/2026/10/16/the-weekly-volcanic-activity-report-october-8-14-2026/)) | volcano, from 29 Sep | asc 23 Sep-5 Oct (75/159) vs 11-23 Sep; desc 24 Sep-6 Oct (97/107) | not detected | the control pairs have mean coherence 0.24-0.27 (snow, wet ground): no comparable ground |
