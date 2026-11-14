@@ -56,9 +56,11 @@ DOCS = ROOT / "docs" / "eda" / "foundation"
 
 WEIGHTS = {
     "ai4g": {"repo": "torchgeo/ai4g_flood", "file": "unet_mobilenetv2_sentinel1_ai4g_flood-d95df7aa.pth",
-             "size": 26_801_051, "dir": "torchgeo_ai4g_flood"},
+             "size": 26_801_051, "dir": "torchgeo_ai4g_flood",
+             "sha256": "b61d6096d067c2dd3e67b183d1fc0a5dd188a9dfe4160acd3e53428d85943c5b"},
     "alos2": {"repo": "gsvrg/ALOS-2_FM", "file": "model_weights_simmim_pretrain/sar_w_simim_encoder.pth",
-              "size": 351_966_554, "dir": "gsvrg_ALOS-2_FM"},
+              "size": 351_966_554, "dir": "gsvrg_ALOS-2_FM",
+              "sha256": "a53f6e69f706252a50e25928022729ae7b717d9dc58655b6b15e6a8c2b317f14"},
 }
 
 # ai4g-flood defaults (src/run_flood_detection_downloaded_images.py), in 2*dB+135 units
@@ -75,41 +77,75 @@ def weights_path(name: str) -> pathlib.Path:
     return HF_DIR / w["dir"] / pathlib.Path(w["file"]).name
 
 
-def download(name: str, workers: int = 32, chunk: int = 1_000_000) -> pathlib.Path:
-    """Parallel ranged download from https://huggingface.co/<repo>/resolve/main/<file>.
+def sha256(path: pathlib.Path) -> str:
+    import hashlib
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        for b in iter(lambda: f.read(1 << 22), b""):
+            h.update(b)
+    return h.hexdigest()
 
-    The link here was throttled per connection (~10 KB/s each), so many ranges run at once.
-    Resumable: finished chunks in <file>.parts/ are kept and skipped."""
+
+def download(name: str, workers: int = 32, chunk: int = 2_000_000) -> pathlib.Path:
+    """Parallel ranged download from https://huggingface.co/<repo>/resolve/main/<file>, verified by SHA-256.
+
+    The link here was throttled per connection (~10 KB/s each), so many ranges run at once. Resumable: finished
+    chunks in <file>.parts/ are kept (the chunk size is stored in parts/CHUNK, never guessed from a file that may
+    be partial). On a hash mismatch every chunk is re-fetched and compared, the bad ones replaced. The parts are
+    deleted once the file verifies."""
+    import shutil
     w = WEIGHTS[name]
     out = weights_path(name)
-    if out.exists() and out.stat().st_size == w["size"]:
+    if out.exists() and out.stat().st_size == w["size"] and sha256(out) == w["sha256"]:
         return out
     url = f"https://huggingface.co/{w['repo']}/resolve/main/{w['file']}"
     parts = out.parent / (out.name + ".parts")
     parts.mkdir(parents=True, exist_ok=True)
+    meta = parts / "CHUNK"
+    if meta.exists():
+        chunk = int(meta.read_text())
+    else:
+        for f in parts.iterdir():   # parts of unknown chunking cannot be trusted
+            f.unlink()
+        meta.write_text(str(chunk))
     size = w["size"]
-    # keep the chunking of an earlier partial run, if any (largest finished part = chunk size)
-    old = [f for f in parts.iterdir() if f.is_file()]
-    if len(old) > 1:
-        chunk = max(f.stat().st_size for f in old)
     n = (size + chunk - 1) // chunk
 
-    def get(i):
-        s, e = i * chunk, min(size, (i + 1) * chunk) - 1
+    def rng(i):
+        return i * chunk, min(size, (i + 1) * chunk) - 1
+
+    def get(i, force=False):
+        s, e = rng(i)
         f = parts / f"{i:05d}"
         for _ in range(8):
-            if f.exists() and f.stat().st_size == e - s + 1:
+            if not force and f.exists() and f.stat().st_size == e - s + 1:
                 return
+            force = False
             subprocess.run(["curl", "-s", "-L", "-m", "900", "-r", f"{s}-{e}", "-o", str(f), url], check=False)
         raise RuntimeError(f"chunk {i} of {name} failed")
+
+    def assemble():
+        with open(out, "wb") as fo:
+            for i in range(n):
+                fo.write((parts / f"{i:05d}").read_bytes())
+        return sha256(out) == w["sha256"]
 
     t0 = time.time()
     with cf.ThreadPoolExecutor(workers) as ex:
         list(ex.map(get, range(n)))
-    with open(out, "wb") as fo:
+    ok = assemble()
+    if not ok:  # re-fetch every chunk into .new and keep the version that changed
         for i in range(n):
-            fo.write((parts / f"{i:05d}").read_bytes())
-    print(f"downloaded {out} ({out.stat().st_size} B) in {time.time() - t0:.0f} s")
+            f = parts / f"{i:05d}"
+            old = f.read_bytes()
+            get(i, force=True)
+            if f.read_bytes() != old:
+                print(f"  chunk {i} replaced")
+        ok = assemble()
+    if not ok:
+        raise RuntimeError(f"{out}: SHA-256 mismatch after repair")
+    shutil.rmtree(parts)
+    print(f"downloaded {out} ({out.stat().st_size} B, sha256 ok) in {time.time() - t0:.0f} s")
     return out
 
 
@@ -467,6 +503,285 @@ def evaluate(pred: torch.Tensor, d: dict) -> dict:
     return out
 
 
+# ----------------------------------------------------------------------------- ALOS-2 L-band encoder: place hold-out
+ALOS2_TRAIN = ["tonle-sap", "ararat", "bangladesh-haor", "inner-niger", "lake-chad", "mekong-delta", "pantanal",
+               "sindh-indus", "sudd"]   # never Lake Sevan; Tonle Sap only its west 70 %
+TONLE_SPLIT = 0.70
+P_ALOS = 256       # the absolute position embedding is fixed at 256 x 256 (64 x 64 tokens)
+
+
+def alos2_input(z: torch.Tensor, medians: list, slope_db: float = 30.0) -> torch.Tensor:
+    """supervised.py cache z [T, 2, H, W] (= brightness / scene median, per channel) -> ALOS-2 normalised input.
+
+    Preview brightness b ~ (dB - dB_min) / 30 (docs/eda/stats-change.md), so dB = 30 * b + offset. The offset is set
+    so the scene MEDIAN maps onto the ALOS-2 pretraining mean (-10.43 dB): HH_in = 30 * (b - median) / 5.80.
+    No detector output is used. HV is centred the same way on its own median (its weights start at 0)."""
+    out = torch.empty(z.shape, dtype=torch.float32)
+    for c in range(2):
+        b = z[:, c].float() * medians[c]
+        out[:, c] = slope_db * (b - medians[c]) / ALOS2_STD_DB
+    return out
+
+
+class ALOS2Seg(nn.Module):
+    def __init__(self, enc: SwinEncoder):
+        super().__init__()
+        self.encoder = enc
+        self.head = LightFPNHead(enc.dims, classes=1, width=64, stride0=4)
+
+    def forward(self, x, frozen: bool):
+        if frozen:
+            with torch.no_grad():
+                f = self.encoder(x)
+        else:
+            f = self.encoder(x)
+        return self.head(f)[:, 0]
+
+
+def build_alos2(pretrained: bool) -> ALOS2Seg:
+    if pretrained:
+        enc, info = load_alos2_encoder(in_chans=2, mode="zero")
+        assert not [k for k in info["missing"]] and set(info["unexpected"]) <= {"mask_token"}, info
+    else:
+        torch.manual_seed(0)
+        enc = SwinEncoder(in_chans=2)
+        for m in enc.modules():  # Swin init: trunc-normal linears, unit layer norms
+            if isinstance(m, nn.Linear):
+                nn.init.trunc_normal_(m.weight, std=0.02)
+                if m.bias is not None:
+                    nn.init.zeros_(m.bias)
+        nn.init.trunc_normal_(enc.absolute_pos_embed, std=0.02)
+        for b in enc.modules():
+            if isinstance(b, _WinAttn):
+                nn.init.trunc_normal_(b.relative_position_bias_table, std=0.02)
+    return ALOS2Seg(enc)
+
+
+def _scene(area: str) -> dict:
+    from scripts.detect.supervised import cache_path
+    d = torch.load(cache_path(area), weights_only=False)
+    d["x_alos"] = alos2_input(d["z"], d["medians"])
+    return d
+
+
+def _targets(d: dict, labels: str) -> torch.Tensor:
+    """[T, H, W] float: 1 water, 0 land, -1 ignore. 'jrc' = static JRC anchors (supervised.py); 'math' = the
+    terrain-masked math detector per date (water vs everything else valid)."""
+    T = d["z"].shape[0]
+    if labels == "jrc":
+        y = d["lab"].float()[None].expand(T, -1, -1).clone()
+    else:
+        w = d["math_water_terrain"] if d["math_water_terrain"] is not None else d["math_water"]
+        y = w.float().clone()
+        y[~(d["math_valid"][None] & d["fp"][None]).expand_as(y)] = -1
+    y[~d["fp"][None].expand_as(y)] = -1
+    return y
+
+
+def _alos2_train(model, scenes, labels, dev, seconds, mode, B=4, seed=0, lr=1e-3):
+    """mode 'frozen': head only (encoder under no_grad); 'last': head + last Swin stage + final norm at lr/100
+    (a first try at lr/10 overfitted the training places in 400 steps: Sevan balanced accuracy 0.61)."""
+    g = torch.Generator().manual_seed(seed)
+    for q in model.parameters():
+        q.requires_grad = False
+    head = list(model.head.parameters())
+    groups = [{"params": head, "lr": lr}]
+    if mode == "last":
+        last = list(model.encoder.layers[3].parameters()) + list(model.encoder.norm.parameters())
+        groups.append({"params": last, "lr": lr / 100})
+    for gr in groups:
+        for q in gr["params"]:
+            q.requires_grad = True
+    opt = torch.optim.AdamW(groups, weight_decay=1e-4)
+    pool = []
+    for d in scenes:
+        H, W = d["fp"].shape
+        cmax = int(W * TONLE_SPLIT) - P_ALOS if d["area"] == "tonle-sap" else W - P_ALOS
+        if H < P_ALOS or cmax < 0:
+            continue
+        pool.append((d, _targets(d, labels), cmax))
+    w_scene = torch.tensor([0.4 if d["area"] == "tonle-sap" else 0.6 / (len(pool) - 1) for d, _, _ in pool])
+    model.train()
+    if mode == "frozen":
+        model.encoder.eval()
+    t0, steps, losses = time.time(), 0, []
+    while time.time() - t0 < seconds:
+        xb, yb = [], []
+        while len(xb) < B:
+            d, y, cmax = pool[int(torch.multinomial(w_scene, 1, generator=g))]
+            T, _, H, W = d["x_alos"].shape
+            t = int(torch.randint(0, T, (1,), generator=g))
+            r = int(torch.randint(0, H - P_ALOS + 1, (1,), generator=g))
+            c = int(torch.randint(0, cmax + 1, (1,), generator=g))
+            yy = y[t, r:r + P_ALOS, c:c + P_ALOS]
+            if (yy >= 0).float().mean() < 0.05:
+                continue
+            xx = d["x_alos"][t, :, r:r + P_ALOS, c:c + P_ALOS]
+            if torch.rand(1, generator=g).item() < 0.5:
+                xx, yy = xx.flip(-1), yy.flip(-1)
+            if torch.rand(1, generator=g).item() < 0.5:
+                xx, yy = xx.flip(-2), yy.flip(-2)
+            xb.append(xx)
+            yb.append(yy)
+        xb, yb = torch.stack(xb).to(dev), torch.stack(yb).to(dev)
+        logit = model(xb, frozen=(mode == "frozen"))
+        m = yb >= 0
+        pos = (yb == 1) & m
+        # class-balanced BCE (water and land weigh the same, as in supervised.py)
+        wt = torch.where(pos, 0.5 / pos.sum().clamp_min(1), 0.5 / (m & ~pos).sum().clamp_min(1)) * m
+        loss = (F.binary_cross_entropy_with_logits(logit, yb.clamp_min(0), reduction="none") * wt).sum()
+        opt.zero_grad()
+        loss.backward()
+        opt.step()
+        steps += 1
+        losses.append(loss.item())
+    return {"steps": steps, "seconds": round(time.time() - t0, 1), "batch": B,
+            "loss_first10": round(float(np.mean(losses[:10])), 4), "loss_last10": round(float(np.mean(losses[-10:])), 4),
+            "trainable_params": sum(q.numel() for gr in groups for q in gr["params"])}
+
+
+@torch.no_grad()
+def alos2_predict(model, x: torch.Tensor, dev, ov: int = 16) -> torch.Tensor:
+    """x [T, 2, H, W] -> p_water [T, H, W] float16; 256 px tiles with overlap, edge-replicated padding."""
+    model.eval()
+    T, _, H, W = x.shape
+    step = P_ALOS - 2 * ov
+    ph, pw = max(P_ALOS - H, 0), max(P_ALOS - W, 0)
+    xp = F.pad(x, (0, pw, 0, ph), mode="replicate") if (ph or pw) else x
+    Hp, Wp = xp.shape[-2:]
+    out = torch.zeros(T, H, W, dtype=torch.float16)
+    for t in range(T):
+        for y0 in range(0, H, step):
+            for x0 in range(0, W, step):
+                ya = min(max(y0 - ov, 0), Hp - P_ALOS)
+                xa = min(max(x0 - ov, 0), Wp - P_ALOS)
+                o = torch.sigmoid(model(xp[t:t + 1, :, ya:ya + P_ALOS, xa:xa + P_ALOS].to(dev), frozen=True)[0]).cpu()
+                ye, xe = min(y0 + step, H), min(x0 + step, W)
+                out[t, y0:ye, x0:xe] = o[y0 - ya:ye - ya, x0 - xa:xe - xa].half()
+    return out
+
+
+def _eval_place(d: dict, methods: dict, region_cols: int | None = None) -> dict:
+    """supervised.evaluate on the whole area, or only on columns >= region_cols (Tonle Sap east hold-out)."""
+    from scripts.detect.supervised import evaluate
+    if region_cols is not None:
+        d = dict(d)
+        fp = d["fp"].clone()
+        fp[:, :region_cols] = False
+        d["fp"] = fp
+    r = evaluate(d, methods, boot=0)
+    keep = ("balanced_acc", "recall_perm", "spec_never", "iou", "fp_km2_per_date", "false_far_km2_per_date",
+            "largest_body_km2", "largest_body_mae_km2", "windy", "water_km2", "false_far_km2_late3")
+    return {k: {kk: v for kk, v in m.items() if kk in keep} for k, m in r["methods"].items()}
+
+
+def cmd_alos2_smoke(a):
+    from scripts.detect.stack import device as auto_device
+    dev = auto_device()
+    res = {"device": str(dev), "free_memory_pct": _free_pct()}
+    path = weights_path("alos2")
+    res["file_bytes"] = path.stat().st_size
+    res["sha256_ok"] = sha256(path) == WEIGHTS["alos2"]["sha256"]
+    t0 = time.time()
+    raw = torch.load(path, map_location="cpu", weights_only=True)
+    res["checkpoint"] = {"n_tensors": len(raw), "patch_embed.proj.weight": list(raw["patch_embed.proj.weight"].shape),
+                         "absolute_pos_embed": list(raw["absolute_pos_embed"].shape),
+                         "norm.weight": list(raw["norm.weight"].shape)}
+    del raw
+    enc, info = load_alos2_encoder(in_chans=2, mode="zero")
+    res["load_s"] = round(time.time() - t0, 2)
+    res["key_match"] = {"missing": info["missing"], "unexpected": info["unexpected"]}
+    res["encoder_params"] = sum(q.numel() for q in enc.parameters())
+    enc = enc.to(dev).eval()
+    d = _scene("tonle-sap")
+    T, _, H, W = d["x_alos"].shape
+    t = len(d["dates"]) - 3
+    r0, c0 = H // 2 - 128, W // 2 - 128
+    x = d["x_alos"][t:t + 1, :, r0:r0 + 256, c0:c0 + 256].contiguous()
+    res["patch"] = {"area": "tonle-sap", "date": d["dates"][t], "rows": [r0, r0 + 256], "cols": [c0, c0 + 256],
+                    "hh_input_mean_std": [round(x[0, 0].mean().item(), 3), round(x[0, 0].std().item(), 3)]}
+    with torch.no_grad():
+        enc(x.to(dev))
+        torch.mps.synchronize() if dev.type == "mps" else None
+        t0 = time.time()
+        for _ in range(3):
+            feats = enc(x.to(dev))
+        torch.mps.synchronize() if dev.type == "mps" else None
+        res["forward_ms_256_b1"] = round((time.time() - t0) / 3 * 1000, 1)
+        xb = x.repeat(4, 1, 1, 1).to(dev)
+        enc(xb)
+        torch.mps.synchronize() if dev.type == "mps" else None
+        t0 = time.time()
+        enc(xb)
+        torch.mps.synchronize() if dev.type == "mps" else None
+        res["forward_ms_256_b4"] = round((time.time() - t0) * 1000, 1)
+    res["feature_shapes"] = [list(f.shape) for f in feats]
+    res["mps_driver_mem_mb"] = round(_mem_mb(dev), 1)
+    del enc, feats, xb
+    if dev.type == "mps":
+        torch.mps.empty_cache()
+    DOCS.mkdir(parents=True, exist_ok=True)
+    (DOCS / "alos2_smoke.json").write_text(json.dumps(res, indent=1))
+    print(json.dumps(res, indent=1))
+
+
+def _free_pct() -> int:
+    try:
+        out = subprocess.run(["memory_pressure"], capture_output=True, text=True, timeout=20).stdout
+        return int(out.strip().splitlines()[-1].split(":")[-1].strip().rstrip("%"))
+    except Exception:  # noqa: BLE001
+        return -1
+
+
+def cmd_alos2_finetune(a):
+    from scripts.detect.stack import device as auto_device
+    dev = auto_device()
+    out_p = DOCS / "alos2_finetune.json"
+    R = json.loads(out_p.read_text()) if out_p.exists() else {"runs": {}}
+    scenes = []
+    for ar in ALOS2_TRAIN:
+        try:
+            scenes.append(_scene(ar))
+        except Exception as e:  # noqa: BLE001
+            R.setdefault("skipped_areas", {})[ar] = f"{type(e).__name__}: {e}"
+    sev = _scene("sevan")
+    ts = next(d for d in scenes if d["area"] == "tonle-sap")
+    split = int(ts["fp"].shape[1] * TONLE_SPLIT)
+    R["train_areas"] = [d["area"] for d in scenes]
+    R["test"] = {"sevan": "whole area, never seen", "tonle-sap": f"east columns >= {split} (patches trained on < {split})"}
+    if "baselines" not in R:
+        R["baselines"] = {"sevan": _eval_place(sev, {"math": sev["math_water"], "math_terrain": sev["math_water_terrain"]}),
+                          "tonle_east": _eval_place(ts, {"math": ts["math_water"], "math_terrain": ts["math_water_terrain"]}, split)}
+    variants = {"pre_frozen": (True, "frozen", "jrc"), "pre_last": (True, "last", "jrc"),
+                "rand_frozen": (False, "frozen", "jrc"), "rand_last": (False, "last", "jrc"),
+                "pre_last_mathlabels": (True, "last", "math")}
+    todo = a.variants.split(",") if a.variants else list(variants)
+    for name in todo:
+        free = _free_pct()
+        if 0 <= free < 20:
+            R["runs"][name] = {"skipped": f"free memory {free} %"}
+            continue
+        pre, mode, labels = variants[name]
+        model = build_alos2(pre).to(dev)
+        tr = _alos2_train(model, scenes, labels, dev, a.minutes * 60, mode, B=a.batch)
+        t0 = time.time()
+        ps, pt = alos2_predict(model, sev["x_alos"], dev), alos2_predict(model, ts["x_alos"], dev)
+        r = {"pretrained": pre, "mode": mode, "labels": labels, "train": tr, "free_memory_pct_before": free,
+             "sevan": _eval_place(sev, {"net": ps >= 0.5})["net"],
+             "tonle_east": _eval_place(ts, {"net": pt >= 0.5}, split)["net"],
+             "predict_s": round(time.time() - t0, 1)}
+        R["runs"][name] = r
+        torch.save(model.head.state_dict(), MODELS / f"foundation_alos2_{name}_head.pt")
+        print(name, json.dumps({"BA_sevan": r["sevan"].get("balanced_acc"), "MAE": r["sevan"].get("largest_body_mae_km2"),
+                                "BA_tonle_east": r["tonle_east"].get("balanced_acc"), "steps": tr["steps"]}), flush=True)
+        del model, ps, pt
+        if dev.type == "mps":
+            torch.mps.empty_cache()
+        out_p.write_text(json.dumps(R, indent=1, default=float))
+    out_p.write_text(json.dumps(R, indent=1, default=float))
+    print("wrote", out_p)
+
+
 # ----------------------------------------------------------------------------- commands
 def cmd_download(a):
     for n in (a.which or ["ai4g"]):
@@ -617,6 +932,13 @@ def main(argv=None):
     p.add_argument("--minutes", type=float, default=5)
     p.add_argument("--control", action="store_true", help="also train a random-init model (extra budget/2)")
     p.set_defaults(fn=cmd_finetune)
+    p = sub.add_parser("alos2-smoke")
+    p.set_defaults(fn=cmd_alos2_smoke)
+    p = sub.add_parser("alos2-finetune")
+    p.add_argument("--minutes", type=float, default=2.0, help="training time per variant")
+    p.add_argument("--batch", type=int, default=4)
+    p.add_argument("--variants", default="", help="comma list; default all five")
+    p.set_defaults(fn=cmd_alos2_finetune)
     a = ap.parse_args(argv)
     a.fn(a)
 

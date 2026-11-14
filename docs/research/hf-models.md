@@ -4,7 +4,7 @@
 
 ## The short answer
 
-* There is **one** openly licensed model pretrained on **L-band** radar: **`gsvrg/ALOS-2_FM`** (AIST Japan, MIT licence). It is a Swin-B encoder pretrained with SAR-W-SimMIM on ALOS-2 PALSAR-2 **HH** images of Japan. That is the same radar band and the same HH channel as NISAR, so it is the best physical fit. We wrote a loader for it in plain PyTorch, but we could **not download its 352 MB of weights**: on the event network a download ran at about 50 KB/s, so it would have taken about two hours. The partial download resumes with `foundation download alos2`.
+* There is **one** openly licensed model pretrained on **L-band** radar: **`gsvrg/ALOS-2_FM`** (AIST Japan, MIT licence). It is a Swin-B encoder pretrained with SAR-W-SimMIM on ALOS-2 PALSAR-2 **HH** images of Japan. That is the same radar band and the same HH channel as NISAR, so it is the best physical fit. We **loaded it** (SHA-256 verified, every key matched) into our own plain-PyTorch Swin module. We then trained a light head with **independent JRC labels**, holding out whole places: Lake Sevan was never seen in training. With the encoder frozen, **L-band pretraining clearly beats the same network with random weights** (Lake Sevan balanced accuracy 0.91 vs 0.67). It is **still below our math detector** (0.99). See §6b.
 * Almost everything else is pretrained on **Sentinel-1 C-band VV/VH** or on optical images. The NASA–IBM **Prithvi** flood model is **optical** (Sentinel-2 HLS bands), so it cannot read radar.
 * We loaded and tested **`torchgeo/ai4g_flood`** (Microsoft AI for Good, MIT licence, 27 MB). It is a global Sentinel-1 flood model and it runs on our MacBook. Results are in the smoke-test section below.
 * **Honest expectation:** on today's 8-bit previews a pretrained model is unlikely to beat our math detector. The previews are not radar measurements in decibels, and our own 118k-parameter U-Net already matches the detector. On calibrated NISAR γ⁰ in dB, the L-band model has a real chance of helping.
@@ -78,7 +78,7 @@ So **no labelled set is realistic tonight**. Our labels remain the math detector
 
 | Rank | Option | L-band HH/HV fit | Licence | Download | Params | Plain PyTorch | Fine-tune time on M5 (est.) | What it adds over our detector | Risk |
 |---|---|---|---|---|---|---|---|---|---|
-| 1 | **gsvrg/ALOS-2_FM** Swin-B encoder + light head | **high** (L-band HH) | MIT + JAXA credit | 352 MB | ≈88 M | yes (our module) | frozen encoder, head only: ~5–10 min at 224², batch 4 | L-band texture and backscatter features from many scenes | weights not yet downloaded; Japan-only HH; key match unverified; 180 m previews ≠ ALOS-2 stripmap |
+| 1 | **gsvrg/ALOS-2_FM** Swin-B encoder + light head | **high** (L-band HH) | MIT + JAXA credit | 352 MB | ≈88 M | yes (our module) | frozen encoder, head only: ~5–10 min at 224², batch 4 | L-band texture and backscatter features from many scenes | loaded and tested (§6b): beats random init, below the math detector on previews; Japan-only HH; 180 m previews ≠ ALOS-2 stripmap |
 | 2 | **torchgeo/ai4g_flood** | medium (via dB rules) | MIT | 27 MB | 6.6 M | **yes, tested** | decoder only: 2–3 min | a flood-cleaning network trained on 10 years of global floods | input is a binary rule mask; ignores permanent water and flooded vegetation |
 | 3 | Fabien-Ctrees/sentinel1-water-unet | medium | CC BY 4.0 | 138 MB | 34.6 M | yes (needs a U-Net rewrite) | decoder: ~10 min | **independent** water labels (Amazon) — a second opinion that is not our detector | C-band 10 m; Amazon only; 8-bit dB scaling must be imitated |
 | 4 | SSL4EO-S12 S1 ViT-S/16 MAE or SoftCon ViT-S/14 | low–medium | CC BY 4.0 | 86 MB | 22 M | yes | head: ~5 min | generic C-band SAR features | no labels; patch 16 at 180 m is very coarse |
@@ -95,6 +95,13 @@ Not practical here: TerraMind, Prithvi flood, granite flood and Clay (they need 
 4. **Labels:** v2 `math_labels` from the terrain-masked math detector on Tonle Sap west 70 %, Sevan west two-thirds and Ararat. Train for 3 epochs × 100 steps with batch 4, then unfreeze the last Swin stage at lr 1e-5 for 2 more epochs.
 5. **Validation:** IoU against the math labels on the Tonle Sap east 30 % and the Sevan east third. Agreement with JRC Global Surface Water through `scripts/detect/validate.py`, the same metric as the detector. Sevan's largest water body per date against 1,242 km² (the U-Net v2 mean absolute error is 12 km²). False water on slopes: water pixels outside the terrain `water_possible` mask.
 6. **Chance it beats the math detector:** on previews **~10–15 %** — the inputs are not dB, the pixels are 180 m, and the labels come from the detector itself. On calibrated 20 m γ⁰ **~35–40 %**, mainly for flooded vegetation, where L-band pretraining knows double-bounce texture that thresholds miss. Anything it "wins" must be shown against JRC, not against the math labels.
+7. **What we actually ran (§6b), and how it differs from steps 2–5:**
+   * Labels were the independent JRC anchors, with one water/land output, instead of the 3-class math labels.
+   * We held out by place: Sevan was never seen.
+   * The pseudo-dB offset was set by the scene median rather than by the detector's water.
+   * Each variant trained for 2 minutes.
+   * Result: the frozen pretrained encoder scored 0.91 balanced accuracy at Sevan, against 0.67 with random weights and 0.99 for the math detector. Unfreezing the last stage did not help.
+   * Next step on calibrated γ⁰: real dB input, longer training (at least 20 min), several seeds, and HV given a learned weight before any unfreezing.
 
 ### Fallback — ai4g flood network (tested; see below)
 1. Take the reference date (first date) and each later date as pre/post. Convert both to pseudo-dB as above, with HH in the VV slot and HV in the VH slot. Apply the ai4g dB rules (2·dB+135 scaling; VV<100, VH<90, a drop >10, minima 75/70) to get two binary change channels.
@@ -137,7 +144,44 @@ What this shows:
 * **Zero-shot it adds nothing**: with the official gating it equals its own threshold rule (0.390 vs 0.389). Ungated it marks almost everything as flood, because previews are not Sentinel-1 dB.
 * **Fine-tuned it reproduces the math detector well** (IoU 0.71–0.73). The pretrained start beats a random start in the same 90 s (0.725 vs 0.635, one seed). The pretraining helps the network learn faster; it does not show that the network knows more. With longer training the gap may close.
 * **At Lake Sevan** (a permanent lake, so new water there should be about 0), false flood stays small: ≤ 2.6 km² zero-shot and ≤ 10.6 km² fine-tuned, against a 1,242 km² lake. By design this model does not measure the lake itself, so it cannot be compared with the U-Net v2's 12 km² error on the lake area (`docs/eda/dl-notes.md` §0). It is a flood-change model, not a water model.
-* The ALOS-2 L-band encoder was **not tested** (download blocked). Its loader and head pass shape tests only.
+
+### 6b. ALOS-2 L-band encoder (gsvrg/ALOS-2_FM): smoke test and place-hold-out fine-tune
+
+**Load** (`foundation alos2-smoke`, [`alos2_smoke.json`](../eda/foundation/alos2_smoke.json)):
+* The file is 351,966,554 bytes, the same as the repository's LFS listing. The first assembled download had one corrupt 2.2 MB chunk: SHA-256 mismatch, and a zip CRC error in tensor `data/138`. We re-fetched that chunk and the **SHA-256 now matches** (`a53f6e69…7f14`). The downloader now checks the hash itself.
+* `torch.load(weights_only=True)`: 364 tensors, loaded in 0.23 s.
+* Key match against our Swin module: **0 missing, 1 unexpected (`mask_token`, the SimMIM masking token, not needed)**.
+* What the checkpoint and the repository code say the input is:
+  * `patch_embed.proj.weight` is [128, **1**, **4**, **4**]: one channel, patch size 4.
+  * `absolute_pos_embed` is [1, **4096**, 128], i.e. 64×64 tokens, so the image size is **256×256**.
+  * The repository's data loader normalises with mean **−10.4327**, std **5.8041** (dB). The file names are `IMG-HH-*`, so HH.
+* Encoder: 87,286,520 parameters (2 input channels; HV weights start at 0).
+* Forward pass on a real Tonle Sap 256² patch (23 Sep), on MPS: **71 ms** at batch 1 and **220 ms** at batch 4. GPU (MPS driver) memory 1.36 GB.
+* Input mapping without detector outputs: HH_in = 30·(brightness − scene median)/5.80. This puts the scene median at the ALOS-2 mean (−10.43 dB) and uses the 30 dB stretch of the previews. HV is centred the same way.
+
+**Fine-tune** (`foundation alos2-finetune --minutes 2`, [`alos2_finetune.json`](../eda/foundation/alos2_finetune.json)):
+* Training places: Tonle Sap west 70 %, Ararat, Bangladesh haor, Inner Niger, Lake Chad, Mekong delta, Pantanal, Sindh-Indus and Sudd. **Lake Sevan was never seen.**
+* Labels: the JRC anchors from `scripts/detect/supervised.py` (permanent water / never water; shorelines and floodplains ignored), class-balanced BCE.
+* Patches 256², batch 4, 2 minutes per variant on MPS, one process. Peak process memory 3.3 GB.
+* Scores use `supervised.evaluate`, the same function and anchors as the other methods. They are measured against the independent JRC labels, not against our detector.
+
+| Method | trainable params | steps | **Sevan** balanced acc. | recall / specificity | largest body MAE vs 1,242 km² | windy 31 Aug / 12 Sep, km² | false water >3 px from JRC (last 3 dates), km² | **Tonle Sap east** balanced acc. | recall / spec. | false far water, km² |
+|---|---|---|---|---|---|---|---|---|---|---|
+| math detector, no terrain mask | – | – | 0.985 | 0.985 / 0.985 | 29.3 | 1,187 / 1,134 | 121.7 | 0.886 | 0.771 / 1.000 | 0.2 |
+| math detector + terrain mask | – | – | **0.990** | 0.985 / 0.995 | **29.3** | 1,187 / 1,134 | **31.6** | **0.886** | 0.771 / 1.000 | 0.2 |
+| **ALOS-2 pretrained, encoder frozen** + head | 160k | 500 | **0.912** | 0.845 / 0.980 | **50.4** | 1,085 / 1,127 | 73.7 | 0.856 | 0.731 / 0.980 | 63.3 |
+| same Swin, **random init**, frozen + head | 160k | 516 | 0.672 | 0.354 / 0.990 | 845.9 | 213 / 222 | 88.8 | 0.972 | 0.982 / 0.962 | 158.5 |
+| ALOS-2 pretrained + last stage (lr 1e-5) | 25.4 M | 363 | 0.663 | 0.336 / 0.989 | 815.8 | 466 / 357 | – | 0.879 | 0.792 / 0.967 | – |
+| ALOS-2 pretrained + last stage, first try lr 1e-4 | 25.4 M | 400 | 0.615 | 0.235 / 0.995 | 926.2 | 211 / 346 | – | 0.695 | 0.424 / 0.966 | – |
+| same Swin random + last stage (lr 1e-5) | 25.4 M | 412 | 0.499 | 0.001 / 0.996 | 1,232 | 5 / 10 | – | 0.729 | 0.488 / 0.970 | – |
+| ALOS-2 pretrained + last stage, **math-detector labels** | 25.4 M | 364 | 0.539 | 0.080 / 0.998 | 1,193.9 | 20 / 66 | – | 0.996 | 1.000 / 0.993 | – |
+
+"–" means not computed: we did not keep those predictions, and we only re-ran the two frozen models for the last-3-dates metric. The earlier U-Net v2 (`docs/eda/dl-notes.md` §0, 12 km² largest-body error) was trained on Sevan's west two-thirds with math labels. It is therefore not a place hold-out and not comparable. The Markov model (23–37 km² false water) and the graph method (0.0 km²) come from other team members' documents.
+
+What this shows (one seed and 2 minutes each, so treat these as indications, not proof):
+* **The L-band pretraining carries real knowledge.** With the same head, the same labels, the same budget and the encoder frozen, pretrained features find Lake Sevan, a place they never saw. Balanced accuracy is 0.91 vs 0.67, and the largest-body error is 50 km² vs 846 km². Random features miss two-thirds of the lake. At Tonle Sap east the random-feature model scores higher (0.97 vs 0.86), so it learned that river and lake, but it does not transfer to the mountain lake.
+* **It does not beat the math detector** on previews. Sevan balanced accuracy is 0.91 vs 0.99, the lake-area error is 50 vs 29 km², false far water is 74 vs 32 km² (terrain-masked), and the windy 31 Aug date is worse (1,085 vs 1,187 km²).
+* **Unfreezing the last stage hurts transfer** in a 2-minute budget: it fits the training places and loses Lake Sevan (0.66). Training on **math-detector labels** gives near-perfect agreement on Tonle Sap east (0.996), because the network copies the detector there, but it fails at Sevan (0.54). Independent labels and a frozen encoder are the combination that generalises.
 
 ## 7. What to say in the pitch — and what not to
 
@@ -149,12 +193,14 @@ Say:
 Do not say:
 * that any pretrained model is "more accurate" — we have no ground truth, and every score here is agreement with our own detector;
 * that Prithvi maps our floods — the Prithvi flood model is optical (Sentinel-2) only;
-* that we used an L-band foundation model — we built its loader but did not load its weights.
+* that the L-band foundation model beats our detector — on previews it does not (Sevan balanced accuracy 0.91 vs 0.99).
+
+Can say: "A Japanese L-band (ALOS-2) foundation model, with a small head trained on Landsat-derived JRC labels from eight other places, finds Lake Sevan without ever seeing it. Random weights do not. That is evidence that L-band pretraining transfers to NISAR." Always add: previews, one seed, 2 minutes of training.
 
 ## 8. Attribution and licence obligations
 
 * **ai4g-flood** (used): MIT. Keep the copyright notice: "Copyright (c) Microsoft Corporation". Cite Misra, A., White, K., Nsutezo, S. F., Straka III, W., Lavista, J. (2025), *Mapping global floods with 10 years of satellite radar data*, Nature Communications 16, 5762. Weights via `torchgeo/ai4g_flood`.
-* **ALOS-2_FM** (if used): MIT (© 2026 AIST). The model card requires us to state that **the source data for the foundation model are ALOS-2, copyrighted by JAXA and provided under the JAXA–AIST agreement**. Cite Imamoglu, Caglayan, Kouyama, arXiv 2603.15119.
+* **ALOS-2_FM** (used in §6b): MIT (© 2026 AIST). The model card requires us to state that **the source data for the foundation model are ALOS-2, copyrighted by JAXA and provided under the JAXA–AIST agreement**. Cite Imamoglu, Caglayan, Kouyama, arXiv 2603.15119.
 * **Fabien-Ctrees water U-Net** (if used): CC BY 4.0. Cite Wagner et al. 2024, Remote Sensing 16(6):1056.
 * **SSL4EO-S12 / SoftCon / FG-MAE / Copernicus-FM / DOFA**: CC BY 4.0, which requires citing the papers. **Satlas** weights: ODC-BY, which requires attribution.
 * Sentinel-1-derived weights contain no Copernicus imagery, so no extra notice is needed beyond the citations above.
@@ -165,7 +211,9 @@ Do not say:
 .venv/bin/python -m scripts.detect.foundation download ai4g      # 27 MB (parallel ranged download, resumable)
 .venv/bin/python -m scripts.detect.foundation smoke              # ~35 s
 .venv/bin/python -m scripts.detect.foundation finetune --minutes 3 --control   # ~6 min; weights -> data/processed/models/foundation_ai4g_ft_*.pt
-.venv/bin/python -m scripts.detect.foundation download alos2     # 352 MB, needs a fast network; ~37 MB already in data/external/hf/gsvrg_ALOS-2_FM/*.parts
+.venv/bin/python -m scripts.detect.foundation download alos2     # 352 MB, SHA-256 verified (bad chunks re-fetched)
+.venv/bin/python -m scripts.detect.foundation alos2-smoke        # ~40 s
+.venv/bin/python -m scripts.detect.foundation alos2-finetune --minutes 2 [--variants pre_frozen,rand_frozen,...]   # ~2.5 min per variant; heads -> data/processed/models/foundation_alos2_*_head.pt
 .venv/bin/python -m pytest tests/test_foundation.py
 ```
 No packages were installed for this work. `foundation.py` needs `torchvision` (0.29.2, already installed by another teammate's job), but nothing else beyond torch and numpy.

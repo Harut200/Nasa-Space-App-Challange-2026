@@ -67,3 +67,21 @@ def test_swin_encoder_and_head_shapes():
 
 def test_alos2_normalise():
     assert abs(fd.alos2_normalise(torch.tensor(fd.ALOS2_MEAN_DB)).item()) < 1e-6
+
+
+def test_alos2_input_centres_scene_median():
+    z = torch.ones(3, 2, 8, 8)            # brightness == median everywhere
+    z[:, 0, :2] = 0.5                     # darker rows (z = brightness / median)
+    x = fd.alos2_input(z, [0.4, 0.2])
+    assert x.shape == (3, 2, 8, 8)
+    assert torch.allclose(x[:, :, 4:], torch.zeros(3, 2, 4, 8))           # median -> ALOS-2 mean -> 0
+    want = 30.0 * (0.5 * 0.4 - 0.4) / fd.ALOS2_STD_DB                     # 30 dB per unit brightness
+    assert torch.allclose(x[:, 0, :2], torch.full((3, 2, 8), want))
+
+
+def test_alos2_seg_small_shapes():
+    enc = fd.SwinEncoder(img=64, in_chans=2, embed=16, depths=(2, 2, 2, 2), heads=(1, 2, 4, 8), window=4)
+    m = fd.ALOS2Seg(enc).eval()
+    with torch.no_grad():
+        y = m(torch.zeros(2, 2, 64, 64), frozen=True)
+    assert y.shape == (2, 64, 64)
