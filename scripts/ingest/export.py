@@ -110,6 +110,7 @@ def export(area, root=ROOT):
                              "radius_km": oe.get("radius_km"), "source_url": oe.get("source_url"),
                              "views": [{k: v.get(k) for k in ("id", "label", "track", "before", "after", "p2p_cm", "control_p2p_cm")}
                                        for v in oe.get("views", []) if v.get("exported", True)]}
+    manifest["category"] = (manifest["event"]["type"] if manifest.get("kind") == "event" else cfg.get("category")) or "other"
     (pub / area / "manifest.json").write_text(json.dumps(manifest, indent=2))
     shutil.copy(prod / "timeseries.json", pub / area / "timeseries.json")
     idx = load(pub / "index.json", {"areas": []})
@@ -122,3 +123,8 @@ def export(area, root=ROOT):
 
 if __name__ == "__main__":
     export(sys.argv[1])
+    try:  # shrink the new place's overlays, make its thumbnails, refresh summary.json (CLI only; tests call export() directly)
+        import optimize
+        optimize.run([sys.argv[1]])
+    except Exception as e:  # the export itself is done; never fail it over optimisation
+        print(f"optimize skipped: {e}", file=sys.stderr)

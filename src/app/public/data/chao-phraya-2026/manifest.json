@@ -272,5 +272,6 @@
   ],
   "credits": "NISAR GCOV preview images: NASA/JPL-Caltech and ISRO, distributed by ASF DAAC. Uncalibrated previews at about 180 m; values are display brightness, not backscatter.",
   "source": "preview",
-  "quality": {}
+  "quality": {},
+  "category": "flood"
 }

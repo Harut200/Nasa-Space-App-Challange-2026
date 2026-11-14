@@ -129,7 +129,7 @@ def test_pipeline():
         ex.export("t", root)
         pub = root / "src/app/public/data"
         m = json.loads((pub / "t/manifest.json").read_text())
-        assert set(m) == {"id", "name", "bounds", "dates", "gaps", "layers", "story", "spots", "credits"}
+        assert set(m) == {"id", "name", "bounds", "dates", "gaps", "layers", "story", "spots", "credits", "category"}
         assert m["dates"] == DATES and m["gaps"] == [["2026-07-27", "2026-08-10"]]
         by = {L["id"]: L for L in m["layers"]}
         assert [L["id"] for L in m["layers"]] == ["hh", "hv", "change", "rgb"], "display order kept"
