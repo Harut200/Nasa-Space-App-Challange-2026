@@ -1,8 +1,10 @@
+<p align="center"><img src="assets/logos/team/lockup-constilation-dark-tile.png" alt="Constellation" width="420"></p>
+
 # Dancing with the SARs
 
 **Press play on a season of radar.** A web app that lets anyone see the Earth's surface change as seen by NASA and ISRO's NISAR radar satellite, June to October 2026, and read what is physically happening and why radar can see it. It shows three kinds of change: **water through a season** (17 places), **the ground moving in earthquakes** (6 places, before and after one event) and **ground events seen as loss of radar coherence** (3 places: two volcanoes and a rock-ice collapse). That makes 26 places in `src/app/public/data/` (by class, from `summary.json`: floods 6, lakes 4, wetlands and deltas 4, farmland and forest 3, earthquakes 6, volcanoes 2, landslide 1). The places lie in Asia (Cambodia, China, Armenia, Bangladesh, Iran, Pakistan, Vietnam, Thailand, Nepal, Tibet, Japan; Armenia sits on the Europe–Asia boundary), Africa (Mali, Botswana, Egypt, South Sudan, Chad), South America (Brazil, Venezuela), North America (Panama, Hawaii) and Europe (Etna, Italy). The app exists in three designs on the same data: `src/app/` (satellite globe), `src/app2/` (story mode) and `src/app3/`, a merged app on branch `front_harut` (in progress). None is deployed and there is no live address; which one is submitted is not decided in this document.
 
-NASA Space Apps Challenge 2026 · challenge *Dancing with the SARs* · team: Arameh Haghverdian, Abel Babayan, Harutyun Kesablyan.
+NASA Space Apps Challenge 2026 · challenge *Dancing with the SARs* · team **Constellation**: Harutyun Kesablyan, Arameh Haghverdian, Abel Babayan.
 
 ![Tonle Sap: when each place changed](docs/design/screenshots/tonle-sap-when-desktop.png)
 
