@@ -112,10 +112,10 @@ button:disabled { cursor: default; opacity: .4; }
 .beats-wrap { margin: 10px 0 0; flex: none; }
 .beats { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
 .beat { width: 28px; height: 40px; border: 0; background: none; display: grid; place-items: center; padding: 0; }
-.beat i { width: 10px; height: 10px; border-radius: 50%; background: var(--ink-3); transition: all var(--t1) var(--ease); }
+.beat i { width: 10px; height: 10px; border-radius: 50%; background: var(--ink-3); transition: transform var(--t1) var(--ease), background var(--t1), box-shadow var(--t1); }
 .beat:hover i { background: var(--ink); }
 .beat.q i { border-radius: 2px; transform: rotate(45deg); }
-.beat.on i { width: 16px; height: 16px; background: var(--accent); box-shadow: 0 0 0 4px rgba(255,106,61,.22); }
+.beat.on i { transform: scale(1.6); background: var(--accent); box-shadow: 0 0 0 2.5px rgba(255,106,61,.22); }
 .beat-date { margin-left: 8px; color: var(--ink-2); }
 .play { width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--ink); color: #0a0d12; display: inline-grid; place-items: center; flex: none; }
 .play.sm { width: 36px; height: 36px; margin-right: 6px; }
@@ -626,7 +626,7 @@ button:active:not(:disabled):not(.handle):not(.globe-hit):not(.beat):not(.spot) 
 @keyframes stepout { from { opacity: 1; } to { opacity: 0; transform: translateY(calc(var(--dir, 1) * -10px)); } }
 .roll { display: inline-block; animation: stepin 320ms var(--e-out) both; }
 .beat.on i { animation: beat .55s var(--e-out); }
-@keyframes beat { 0% { transform: scale(.6); } 60% { transform: scale(1.25); } 100% { transform: none; } }
+@keyframes beat { 0% { transform: scale(.9); } 60% { transform: scale(1.9); } 100% { transform: scale(1.6); } }
 .beat.q.on i { animation: none; }
 .ev-line { transform-origin: left center; animation: draw .7s var(--e-out) .1s both; }
 @keyframes draw { from { transform: translateY(-1px) scaleX(0); } to { transform: translateY(-1px) scaleX(1); } }
@@ -990,3 +990,4 @@ button:active:not(:disabled):not(.handle):not(.globe-hit):not(.beat):not(.spot) 
   .story:not(.how) .hint, .story:not(.how) .cap-note { margin-top: 6px; }
   .story:not(.how) .beats-wrap { margin-top: 4px; }
 }
+.beat.q.on i { transform: rotate(45deg) scale(1.5); }

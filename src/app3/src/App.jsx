@@ -4,21 +4,20 @@ import { useRoute } from './route.js'
 import { buildScenes } from './scenes.js'
 import { buildHow } from './how.js'
 import { rng } from './evidence.js'
-import Explainer from './Explainer.jsx'
 import { hasWaterClasses, onlyClass, waterClasses } from './water.js'
 const MapStage = lazy(() => import('./MapStage.jsx')) // MapLibre loads after the home page is interactive
 const GlobeMap = lazy(() => import('./GlobeMap.jsx'))
-import GlobeUI from './GlobeUI.jsx'
+// Everything the landing does not need is its own chunk, fetched when the browser is idle after the landing is up (and at the latest when first used).
+const loaders = {
+  Story: () => import('./Story.jsx'), Explainer: () => import('./Explainer.jsx'), Explore: () => import('./Explore.jsx'),
+  EventExplore: () => import('./EventParts.jsx').then((m) => ({ default: m.EventExplore })), Gallery: () => import('./Gallery.jsx'), GalleryFilter: () => import('./GalleryFilter.jsx'),
+  GlobeUI: () => import('./GlobeUI.jsx'), InfoPanel: () => import('./InfoPanel.jsx'), Sheet: () => import('./Sheet.jsx'), About: () => import('./About.jsx'),
+}
+const Story = lazy(loaders.Story), Explainer = lazy(loaders.Explainer), Explore = lazy(loaders.Explore), EventExplore = lazy(loaders.EventExplore), Gallery = lazy(loaders.Gallery), GalleryFilter = lazy(loaders.GalleryFilter)
+const GlobeUI = lazy(loaders.GlobeUI), InfoPanel = lazy(loaders.InfoPanel), Sheet = lazy(loaders.Sheet), About = lazy(loaders.About)
+const S = ({ children }) => <Suspense fallback={null}>{children}</Suspense>
 import Home from './Home.jsx'
 import TopBar from './TopBar.jsx'
-import InfoPanel from './InfoPanel.jsx'
-import About from './About.jsx'
-import Explore from './Explore.jsx'
-import { EventExplore } from './EventParts.jsx'
-import Story from './Story.jsx'
-import Gallery from './Gallery.jsx'
-import GalleryFilter from './GalleryFilter.jsx'
-import Sheet from './Sheet.jsx'
 import Legend from './Legend.jsx'
 import { SearchPanel, filterPlaces } from './Search.jsx'
 import { reducedMotion } from './ui.jsx'
@@ -68,6 +67,7 @@ export default function App() {
   const diveRef = useRef(false)
   const [diveTo, setDiveTo] = useState(null) // the place the camera is flying to: the map underneath is made ready for it (still hidden)
   const [overlayHold, setOverlayHold] = useState(false)
+  const [stageIdle, setStageIdle] = useState(false) // the place map is built once the landing is up and idle, or at once when a place is opened
   const [selected, setSelected] = useState(null)
   const [near, setNear] = useState(null)
   const [panelOpen, setPanelOpen] = useState(false)
@@ -77,6 +77,12 @@ export default function App() {
   const phone = width < 760
   const barInput = useRef(null), panelInput = useRef(null)
 
+  useEffect(() => {
+    const go = () => Object.values(loaders).forEach((l) => l().catch(() => {}))
+    const t0 = setTimeout(() => setStageIdle(true), 2200)
+    const t = setTimeout(() => (window.requestIdleCallback ? requestIdleCallback(go, { timeout: 4000 }) : go()), 1200)
+    return () => { clearTimeout(t); clearTimeout(t0) }
+  }, [])
   // index and places: the one on show first, then the rest three at a time
   useEffect(() => { loadIndex().then(setIds).catch(() => setFailed(true)) }, [])
   // summary.json: one small request that is enough for the landing globe, the class counts and the search; manifests load as places open
@@ -221,6 +227,21 @@ export default function App() {
     return () => { dead = true; clearTimeout(t) }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [layerKey, inPlace])
+
+  // the next step's picture is fetched and decoded while this one is read, so the cross-fade never waits for it
+  useEffect(() => {
+    if (!place || !inPlace || globeFull) return
+    const nxt = how ? howSteps[howN] : mode === 'story' ? scenes[sceneN] : null
+    if (!nxt?.layer) return
+    const t = setTimeout(() => {
+      const l = place.layers.find((x) => x.id === nxt.layer)
+      if (!l) return
+      const d = l.dates ? place.dates[Math.min(nxt.at ?? indexRef.current, place.dates.length - 1)] : undefined
+      for (const id of [nxt.layer, nxt.cmpLayer]) { const u = id && frameUrl(place, id, id === nxt.layer ? d : place.layers.find((x) => x.id === id)?.dates?.[0]); if (u) { const im = new Image(); im.decoding = 'async'; im.src = u; im.decode?.().catch(() => {}) } }
+    }, 500)
+    return () => clearTimeout(t)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [placeId, sceneN, howN, how, mode, globeFull])
 
   const stt = place?.evi?.stats || {}
   const cmpTags = !cmpOn ? null : driver?.cmpTags ? driver.cmpTags : ev
@@ -475,7 +496,7 @@ export default function App() {
 
   return (
     <div className={`app mode-${mode} ${diving || diveTo ? 'diving' : ''} ${phase === 'dissolve' ? 'dv-dissolve' : ''} ${phase ? 'dv-reveal' : ''} ${phone ? 'phone' : ''} ${ev && inPlace ? 'ev' : ''} ${globeFull ? 'globe-on' : ''}`}>
-      <Suspense fallback={null}><MapStage
+      {(stageIdle || mode !== 'open' || !!diveTo) && <Suspense fallback={null}><MapStage
         bounds={(diveTo && (places[diveTo]?.bounds || stubs[diveTo]?.bounds)) || bounds} hold={overlayHold} url={mode === 'places' || mode === 'globe' || mode === 'open' ? null : url} opacity={opacity} padding={diveTo || diving ? storyPad : inPlace && measured ? measured : padding} camera={camera}
         spots={(ev ? place.spots.filter((s) => s.id !== 'epicentre') : place?.spots) || []} showSpots={!!place && inPlace && spotsOn} activeSpot={activeSpot}
         onSpot={(id) => { if (inPlace) setActiveSpot((a) => (a === id ? null : id)) }}
@@ -483,7 +504,7 @@ export default function App() {
         outline={outlineUrl} starLabel={ev && place.event.type !== 'earthquake' ? 'Event site' : 'Epicentre'}
         ring={ev && inPlace && Array.isArray(place.event.lngLat) && Number(place.event.radius_km) > 0 ? { lngLat: place.event.lngLat, km: Number(place.event.radius_km) } : null}
         compare={{ on: cmpOn, split: cmp.split, url: cmpUrl, tags: cmpTags }} onSplit={(s) => setCmp((c) => ({ ...c, split: s }))}
-      /></Suspense>
+      /></Suspense>}
       <div className={`veil ${heroPlace ? 'hero' : ''}`} aria-hidden="true" />
 
       <TopBar view={globeFull ? 'globe' : inPlace ? 'place' : mode === 'places' ? 'places' : mode === 'open' ? 'open' : 'globe'} phone={phone} place={place} placeIndex={Math.max(0, poolIdx)} count={pool0.length} prevName={(places[pool0[(poolIdx - 1 + pool0.length) % (pool0.length || 1)]] || stubs[pool0[(poolIdx - 1 + pool0.length) % (pool0.length || 1)]])?.name} nextName={(places[pool0[(poolIdx + 1) % (pool0.length || 1)]] || stubs[pool0[(poolIdx + 1) % (pool0.length || 1)]])?.name} classLabel={activeClass ? classInfo(activeClass).label : ''} onClearClass={() => go({ cls: '' }, false)}
@@ -492,37 +513,37 @@ export default function App() {
         onPlaces={goPlaces} onGlobe={openGlobe} onInfo={() => setInfo((x) => !x)} onSheet={() => setSheet(true)} onSearchSheet={() => setSearchSheet(true)} infoOpen={info} />
 
       {mode === 'open' && <Home place={shownPlace} index={index} list={list} onWatch={() => openPlace(FLAGSHIP, 'story', 'home')} onChoose={goPlaces} onFeel={quakePick ? () => openPlace(quakePick, 'story', 'home') : null} />}
-      {mode === 'places' && <Gallery places={places} ids={galIds} total={ids.length} current={placeId} onPick={(id) => openPlace(id, 'story', 'places')} onClose={goBack}
-        filter={<GalleryFilter places={list} shown={galShown} q={q} setQ={setQ} kind={kind} setKind={setKind} onPick={(p) => openPlace(p.id, 'story', 'places')} />} />}
-      {!diving && how && place && hstep && <Explainer place={place} steps={howSteps} n={howN} index={index} onStep={setStep} onIndex={(i) => { setPlaying(false); setIndex(i) }} onClose={() => setHow(false)} emptyPass={emptyPass} />}
+      {mode === 'places' && <S><Gallery places={places} ids={galIds} total={ids.length} current={placeId} onPick={(id) => openPlace(id, 'story', 'places')} onClose={goBack}
+        filter={<S><GalleryFilter places={list} shown={galShown} q={q} setQ={setQ} kind={kind} setKind={setKind} onPick={(p) => openPlace(p.id, 'story', 'places')} /></S>} /></S>}
+      {!diving && how && place && hstep && <S><Explainer place={place} steps={howSteps} n={howN} index={index} onStep={setStep} onIndex={(i) => { setPlaying(false); setIndex(i) }} onClose={() => setHow(false)} emptyPass={emptyPass} /></S>}
       {!diving && !how && mode === 'story' && place && scene && (
-        <Story place={place} scenes={scenes} n={sceneN} index={index} playing={playing} setPlaying={setPlaying} phone={phone}
+        <S><Story place={place} scenes={scenes} n={sceneN} index={index} playing={playing} setPlaying={setPlaying} phone={phone}
           onScene={setScene} onIndex={(i) => { setPlaying(false); setIndex(i) }} onSheet={() => setSheet(true)}
-          onExplore={() => setMode('explore')} onHow={howSteps.length ? () => setHow(true) : null} missing={missing} emptyPass={emptyPass} />
+          onExplore={() => setMode('explore')} onHow={howSteps.length ? () => setHow(true) : null} missing={missing} emptyPass={emptyPass} /></S>
       )}
       {!diving && !how && mode === 'explore' && place && ev && (
-        <EventExplore place={place} layerId={layerId} layer={layer} setLayer={setLayer} opacity={opacity} setOpacity={setOpacity} cmp={cmp} setCmp={setCmp}
-          spotsOn={spotsOn} setSpotsOn={setSpotsOn} setActiveSpot={setActiveSpot} phone={phone} onHow={howSteps.length ? () => setHow(true) : null} />
+        <S><EventExplore place={place} layerId={layerId} layer={layer} setLayer={setLayer} opacity={opacity} setOpacity={setOpacity} cmp={cmp} setCmp={setCmp}
+          spotsOn={spotsOn} setSpotsOn={setSpotsOn} setActiveSpot={setActiveSpot} phone={phone} onHow={howSteps.length ? () => setHow(true) : null} /></S>
       )}
       {!diving && !how && mode === 'explore' && place && !ev && (
-        <Explore key={place.id} place={place} layerId={layerId} layer={layer} setLayer={setLayer} index={index} setIndex={(i) => { setPlaying(false); setIndex(i) }}
+        <S><Explore key={place.id} place={place} layerId={layerId} layer={layer} setLayer={setLayer} index={index} setIndex={(i) => { setPlaying(false); setIndex(i) }}
           playing={playing} setPlaying={setPlaying} opacity={opacity} setOpacity={setOpacity} cmp={cmp} setCmp={setCmp} cmpAvailable={cmpAvailable} onHow={howSteps.length ? () => setHow(true) : null}
           spotsOn={spotsOn} setSpotsOn={setSpotsOn} activeSpot={activeSpot} setActiveSpot={setActiveSpot} missing={missing} dated={dated} phone={phone}
-          water={wc ? { show: waterShow, setShow: setWaterShow, only, blue: wc.blue, green: wc.green } : null} />
+          water={wc ? { show: waterShow, setShow: setWaterShow, only, blue: wc.blue, green: wc.green } : null} /></S>
       )}
       {!diving && storyLegend && layer && <Legend key={layer.id} layer={layer} phone={phone} strip open0={!!place?.evi && !phone} only={only} water={wc ? { show: waterShow, setShow: setWaterShow, blue: wc.blue, green: wc.green } : null} />}
       {!place && inPlace && <div className="loading" role="status"><img src={`${import.meta.env.BASE_URL}brand/mark.svg`} width="32" height="32" alt="" /><span>Loading…</span></div>}
-      {info && inPlace && place && !globeFull && <InfoPanel place={place} onClose={() => setInfo(false)} onSheet={() => { setSheet(true) }} />}
-      <Sheet open={sheet} onClose={() => setSheet(false)} place={place || shownPlace} pass={pass} onAbout={() => { setSheet(false); setAbout(true) }} />
-      <About open={about} onClose={() => setAbout(false)} />
+      {info && inPlace && place && !globeFull && <S><InfoPanel place={place} onClose={() => setInfo(false)} onSheet={() => { setSheet(true) }} /></S>}
+      <S><Sheet open={sheet} onClose={() => setSheet(false)} place={place || shownPlace} pass={pass} onAbout={() => { setSheet(false); setAbout(true) }} /></S>
+      <S><About open={about} onClose={() => setAbout(false)} /></S>
 
       {(gMounted || globeMode !== 'hidden') && (
         <Suspense fallback={null}><GlobeMap mode={globeMode} places={list} currentId={inPlace ? placeId : null} matchIds={matchIds} paused={!!matchIds} phase={phase} faceLL={faceLL} faceKey={kind}
           onDiveStart={onDiveStart} onDive={onDive} onDiveEnd={onDiveEnd} divePad={storyPad} onOpen={globeOpenPlace} onExpand={openGlobe} onSelect={setSelected} selectedId={selected} /></Suspense>
       )}
       {globeFull && (
-        <GlobeUI list={list} q={q} setQ={setQ} kind={kind} setKind={setKind} selected={selected} onSelect={setSelected} onOpen={globeOpenPlace} onRandom={random} onNear={nearMe} near={near}
-          inputRef={panelInput} onEscape={closeGlobe} phone={phone} panelOpen={panelOpen} setPanelOpen={setPanelOpen} />
+        <S><GlobeUI list={list} q={q} setQ={setQ} kind={kind} setKind={setKind} selected={selected} onSelect={setSelected} onOpen={globeOpenPlace} onRandom={random} onNear={nearMe} near={near}
+          inputRef={panelInput} onEscape={closeGlobe} phone={phone} panelOpen={panelOpen} setPanelOpen={setPanelOpen} /></S>
       )}
       {searchSheet && (
         <div className="sheet-back" onClick={() => setSearchSheet(false)}>

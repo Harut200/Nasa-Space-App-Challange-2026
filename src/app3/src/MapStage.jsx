@@ -236,23 +236,26 @@ export default function MapStage({ bounds, url, opacity = 0.9, padding, camera, 
   // compare map (first pass, clipped to the left of the divider)
   const cmpOn = !!compare?.on
   useEffect(() => {
-    if (!cmpOn) { map2.current?.remove(); map2.current = null; return }
+    if (!cmpOn) return // the second map is kept (hidden) once built: switching Compare on and off never builds a new WebGL map
     const m = map.current
-    const c = m.getCenter()
-    const m2 = new maplibregl.Map({ container: el2.current, style: styleFor(), attributionControl: false, center: c, zoom: m.getZoom(), interactive: false, fadeDuration: 0 })
-    m2.on('error', () => {})
-    map2.current = m2
-    if (new URLSearchParams(location.search).has('still')) window.__map2 = m2
-    st.current.active2 = 'a'
-    m2.on('load', () => {
-      addSlots(m2, ['sar-a', 'sar-b'], latest.current.bounds, 1)
-      const u = latest.current.cmpUrl
-      if (u) { m2.getSource('sar-a').updateImage({ url: u, coordinates: quad(latest.current.bounds) }); m2.setPaintProperty('sar-a', 'raster-opacity', latest.current.opacity) }
-    })
+    let m2 = map2.current
+    if (!m2) {
+      const c = m.getCenter()
+      m2 = new maplibregl.Map({ container: el2.current, style: styleFor(), attributionControl: false, center: c, zoom: m.getZoom(), interactive: false, fadeDuration: 0 })
+      m2.on('error', () => {})
+      map2.current = m2
+      if (new URLSearchParams(location.search).has('still')) window.__map2 = m2
+      m2.on('load', () => {
+        addSlots(m2, ['sar-a', 'sar-b'], latest.current.bounds, 1)
+        const u = latest.current.cmpUrl
+        if (u) { m2.getSource('sar-a').updateImage({ url: u, coordinates: quad(latest.current.bounds) }); m2.setPaintProperty('sar-a', 'raster-opacity', latest.current.opacity) }
+      })
+    }
     const sync = () => map2.current?.jumpTo({ center: m.getCenter(), zoom: m.getZoom() })
     m.on('move', sync)
     sync()
-    return () => { m.off('move', sync); map2.current?.remove(); map2.current = null }
+    m2.resize()
+    return () => { m.off('move', sync) }
   }, [cmpOn])
   latest.current.cmpUrl = compare?.url
   useEffect(() => {
