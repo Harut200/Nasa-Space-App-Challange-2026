@@ -6,29 +6,33 @@ import { Icon } from './ui.jsx'
 const day = (s) => String(s).slice(0, 10)
 const ms = (s) => (String(s).length === 10 ? Date.parse(`${s}T00:00:00Z`) : Date.parse(s))
 
-// Compact "before -> after" strip: the two pass dates of each pair, with the earthquake marked between them.
+// "Before -> quake -> after": for each pair, the two pass dates with the earthquake marked between them.
 export function EventStrip({ event }) {
   const views = (event.views || []).filter((v) => v.before && v.after)
   if (!views.length) return null
   const all = [ms(event.time), ...views.flatMap((v) => [ms(v.before), ms(v.after)])].filter(Number.isFinite)
   const a = Math.min(...all), b = Math.max(...all), span = b - a || 1
-  const pos = (t) => 14 + ((t - a) / span) * 72
+  const pos = (t) => 12 + ((t - a) / span) * 76
+  const looks = new Set(views.map((v) => v.label)).size
   return (
-    <div className="ev-strip" role="group" aria-label="Before and after: pass dates with the earthquake marked">
-      {views.map((v) => (
-        <div className="ev-row" key={v.id}>
-          <div className="ev-name mono">{views.length > 1 ? `${v.label}, track ${v.track}` : `${v.label} · track ${v.track}`}</div>
-          <div className="ev-track">
-            <i className="ev-line" style={{ left: `${pos(ms(v.before))}%`, width: `${pos(ms(v.after)) - pos(ms(v.before))}%` }} />
-            <i className="ev-dot" style={{ left: `${pos(ms(v.before))}%` }} />
-            <i className="ev-dot" style={{ left: `${pos(ms(v.after))}%` }} />
-            <span className="ev-star" style={{ left: `${pos(ms(event.time))}%` }} title="Earthquake" aria-hidden="true">★</span>
-            <span className="ev-q mono" style={{ left: `${pos(ms(event.time))}%` }}>quake {fmtDate(day(event.time))}</span>
-            <span className="ev-d mono" style={{ left: `${pos(ms(v.before))}%` }}>before {fmtDate(day(v.before))}</span>
-            <span className="ev-d mono" style={{ left: `${pos(ms(v.after))}%` }}>after {fmtDate(day(v.after))}</span>
+    <div className="ev-strip" role="group" aria-label="Before, earthquake, after: the pass dates with the earthquake marked">
+      {views.map((v) => {
+        const q = pos(ms(event.time)), b0 = pos(ms(v.before)), b1 = pos(ms(v.after))
+        return (
+          <div className="ev-row" key={v.id}>
+            <div className="ev-name mono">{looks > 1 || views.length > 1 ? `${v.label}, track ${v.track}` : `${v.label} · track ${v.track}`}</div>
+            <div className="ev-track">
+              <i className="ev-line" style={{ left: `${b0}%`, width: `${b1 - b0}%` }} />
+              <i className="ev-dot" style={{ left: `${b0}%` }} />
+              <i className="ev-dot" style={{ left: `${b1}%` }} />
+              <span className="ev-star" style={{ left: `${q}%` }} title="Earthquake" aria-hidden="true">★</span>
+              <span className="ev-q mono" style={{ left: `${q}%` }}>quake · {fmtDate(day(event.time))}</span>
+              <span className="ev-d mono" style={{ left: `${b0}%` }}><b>before</b>{fmtDate(day(v.before))}</span>
+              <span className="ev-d mono" style={{ left: `${b1}%` }}><b>after</b>{fmtDate(day(v.after))}</span>
+            </div>
           </div>
-        </div>
-      ))}
+        )
+      })}
     </div>
   )
 }
@@ -69,8 +73,12 @@ export function EventExplore({ place, layerId, layer, setLayer, opacity, setOpac
           <button className={`chip ${spotsOn ? 'on' : ''}`} aria-pressed={spotsOn} onClick={() => { setSpotsOn((x) => !x); setActiveSpot(null) }}>{Icon.pin}<span>Spots</span></button>
         </div>
       </aside>
-      {!phone && <Legend layer={layer} />}
+      <Legend key={layer?.id} layer={layer} phone={phone} />
       <section className="dock panel ev-dock" aria-label="Before and after">
+        <div className="ev-head">
+          <div className="ev-fig"><strong>M {Number(place.event.magnitude).toFixed(1)}</strong><span className="mono">{place.name.split(',')[0]}, {fmtDate(day(place.event.time))}</span></div>
+          {place.event.views?.[0]?.p2p_cm != null && <div className="ev-fig"><strong>≈ {place.event.views[0].p2p_cm}<small> cm</small></strong><span className="mono">ground motion along the line of sight{place.event.views.length > 1 ? `, ${place.event.views[0].label}` : ''}</span></div>}
+        </div>
         <EventStrip event={place.event} />
         <p className="ev-note">Each full colour cycle is 10 cm of ground motion toward or away from the satellite.</p>
       </section>

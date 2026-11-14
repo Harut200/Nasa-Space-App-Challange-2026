@@ -6,18 +6,24 @@ import 'maplibre-gl/dist/maplibre-gl.css'
 maplibregl.setWorkerUrl(workerUrl)
 
 const GIBS = 'https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/BlueMarble_ShadedRelief_Bathymetry/default/GoogleMapsCompatible_Level8/{z}/{y}/{x}.jpeg'
+const EOX = 'https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/g/{z}/{y}/{x}.jpg'
 const reduced = () => window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
 
 // Works with no network: the radar images are our own sources on a plain dark background.
+// Blue Marble carries the wide views; Sentinel-2 cloudless (EOX, CC BY-NC-SA 4.0) blends in from about zoom 6 for a sharper close view,
+// dimmed and desaturated so the radar layers stay the hero.
 const styleFor = () => ({
   version: 8,
   sources: {
     gibs: { type: 'raster', tiles: [GIBS], tileSize: 256, maxzoom: 8, attribution: 'Imagery: NASA GIBS · Blue Marble' },
+    eox: { type: 'raster', tiles: [EOX], tileSize: 256, maxzoom: 13, attribution: 'Sentinel-2 cloudless by EOX IT Services GmbH (Contains modified Copernicus Sentinel data 2020)' },
   },
   layers: [
     { id: 'bg', type: 'background', paint: { 'background-color': '#070a0f' } },
     { id: 'earth', type: 'raster', source: 'gibs',
-      paint: { 'raster-opacity': ['interpolate', ['linear'], ['zoom'], 7, 1, 10, 0.4], 'raster-brightness-max': 0.62, 'raster-saturation': -0.25, 'raster-contrast': 0.1, 'raster-fade-duration': 600 } },
+      paint: { 'raster-opacity': ['interpolate', ['linear'], ['zoom'], 6, 1, 8.5, 0.15], 'raster-brightness-max': 0.7, 'raster-saturation': -0.2, 'raster-contrast': 0.12, 'raster-fade-duration': 500 } },
+    { id: 's2', type: 'raster', source: 'eox', minzoom: 5.5,
+      paint: { 'raster-opacity': ['interpolate', ['linear'], ['zoom'], 6, 0, 8, 0.9], 'raster-brightness-max': 0.5, 'raster-brightness-min': 0.02, 'raster-saturation': -0.45, 'raster-contrast': 0.18, 'raster-fade-duration': 500 } },
   ],
 })
 
@@ -27,7 +33,7 @@ function addSlots(m, names, bounds) {
   names.forEach((n) => {
     if (m.getSource(n)) return
     m.addSource(n, { type: 'image', url: 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==', coordinates: quad(bounds) })
-    m.addLayer({ id: n, type: 'raster', source: n, paint: { 'raster-opacity': 0, 'raster-opacity-transition': { duration: reduced() ? 0 : 450 }, 'raster-fade-duration': 0, 'raster-resampling': 'linear' } })
+    m.addLayer({ id: n, type: 'raster', source: n, paint: { 'raster-opacity': 0, 'raster-opacity-transition': { duration: reduced() ? 0 : 500 }, 'raster-fade-duration': 0, 'raster-resampling': 'linear' } })
   })
 }
 
@@ -77,8 +83,11 @@ export default function MapStage({ bounds, url, opacity = 0.9, padding, camera, 
     m.on('error', (e) => { if (import.meta.env.DEV || window.__dbg) console.log('MAPERR', e?.error?.message, e?.sourceId) }) // offline tiles must not make noise
     m.addControl(new maplibregl.AttributionControl({ compact: true }), 'bottom-right')
     m.touchZoomRotate.disableRotation()
+    m.getCanvas().tabIndex = -1 // the app owns the arrow keys; Tab goes to real controls
     map.current = m
     m.on('load', () => {
+      el.current.querySelector('.maplibregl-ctrl-attrib')?.classList.remove('maplibregl-compact-show') // credits stay one tap away (the info button and the sheet)
+      el.current.querySelector('.maplibregl-ctrl-attrib')?.removeAttribute('open')
       const { bounds: b, url: u, opacity: o } = latest.current
       addSlots(m, ['sar-a', 'sar-b'], b, o)
       st.current.ready = true
@@ -118,7 +127,7 @@ export default function MapStage({ bounds, url, opacity = 0.9, padding, camera, 
   useEffect(() => {
     const m = map.current
     const go = () => {
-      const dur = reduced() ? 0 : (camera?.duration ?? 1600)
+      const dur = reduced() ? 0 : (camera?.duration ?? 1500)
       const pad = padding || 40
       if (camera?.focus) {
         const cam = m.cameraForBounds([[bounds[0], bounds[1]], [bounds[2], bounds[3]]], { padding: pad })
@@ -206,7 +215,9 @@ export default function MapStage({ bounds, url, opacity = 0.9, padding, camera, 
       <div ref={el2} className="map map2" style={{ display: cmpOn ? 'block' : 'none', clipPath: `inset(0 ${100 - split}% 0 0)` }} />
       {cmpOn && (
         <div className="divider" style={{ left: `${split}%` }}>
-          <button className="handle" role="slider" aria-label="Compare: drag to reveal first pass (left) and current pass (right)" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(split)}
+          {compare.tags && split > 16 && <span className="cmp-tag l mono">{compare.tags[0]}</span>}
+          {compare.tags && split < 84 && <span className="cmp-tag r mono">{compare.tags[1]}</span>}
+          <button className="handle" role="slider" aria-label={`Compare: drag the handle. ${compare.tags ? `${compare.tags[0]} on the left, ${compare.tags[1]} on the right.` : ''}`} aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(split)}
             onPointerDown={drag}
             onKeyDown={(e) => { if (e.key === 'ArrowLeft') { onSplit?.(Math.max(2, split - 4)); e.stopPropagation(); e.preventDefault() } if (e.key === 'ArrowRight') { onSplit?.(Math.min(98, split + 4)); e.stopPropagation(); e.preventDefault() } }}>
             <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><path d="M8 5 3 11l5 6M14 5l5 6-5 6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>

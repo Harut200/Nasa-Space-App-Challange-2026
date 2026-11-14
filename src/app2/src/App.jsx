@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { FLAGSHIP, fmtDate, frameUrl, isDated, isEvent, loadIndex, loadPlace } from './data.js'
+import { FLAGSHIP, defaultLayer, fmtDate, frameUrl, isDated, isEvent, loadIndex, loadPlace, startIndex } from './data.js'
 import { useRoute } from './route.js'
 import { buildScenes } from './scenes.js'
 import MapStage from './MapStage.jsx'
@@ -10,7 +10,7 @@ import Story from './Story.jsx'
 import Gallery from './Gallery.jsx'
 import Sheet from './Sheet.jsx'
 import Legend from './Legend.jsx'
-import { Icon, reducedMotion } from './ui.jsx'
+import { Icon, KeyHint, reducedMotion } from './ui.jsx'
 
 const useWidth = () => {
   const [w, setW] = useState(window.innerWidth)
@@ -59,7 +59,7 @@ export default function App() {
   const setIndex = useCallback((i) => setIndexRaw(Math.max(0, Math.min(nDates - 1, i))), [nDates])
 
   // Layer on show
-  const layerId = mode === 'story' ? scene?.layer : mode === 'explore' ? (route.layer && place?.layers.some((l) => l.id === route.layer) ? route.layer : ev ? (place.layers.some((l) => l.id === 'fringes') ? 'fringes' : place.layers[0]?.id) : 'water') : 'water'
+  const layerId = mode === 'story' ? scene?.layer : mode === 'explore' ? (route.layer && place?.layers.some((l) => l.id === route.layer) ? route.layer : place ? defaultLayer(place) : 'water') : 'water'
   const layer = place?.layers.find((l) => l.id === layerId)
 
   // Reset the playhead when place / scene / mode changes
@@ -122,12 +122,17 @@ export default function App() {
   const cmpLayerId = ev ? (mode === 'story' ? scene?.cmpLayer : null) : layerId
   const cmpUrl = cmpOn && cmpLayerId ? frameUrl(place, cmpLayerId, firstOfLayer) : null
 
+  const cmpTags = !cmpOn ? null : ev
+    ? (scene?.cmpTags || ['Bare terrain', layer?.label.split(/ \(|:/)[0] || 'Layer'])
+    : [`${layer?.id === 'coh' ? 'First pair' : 'First pass'} · ${firstOfLayer ? fmtDate(firstOfLayer) : ''}`, date ? fmtDate(date) : '']
+
   // Camera
   const focusSpot = scene?.focus ? place?.spots.find((s) => s.id === scene.focus) : scene?.focusLL ? { id: 'epicentre', lngLat: scene.focusLL } : null
-  const padding = mode === 'open' || mode === 'places' ? { top: 60, bottom: 60, left: 40, right: 40 }
-    : phone ? { top: 70, left: 20, right: 20, bottom: mode === 'story' ? 360 : 300 }
+  const padding = mode === 'places' ? { top: 60, bottom: 60, left: 40, right: 40 }
+    : mode === 'open' ? (phone ? { top: 90, bottom: 430, left: 24, right: 24 } : { top: 76, bottom: 150, left: Math.round(width * 0.46), right: 36 })
+    : phone ? { top: mode === 'story' ? 70 : 200, left: 20, right: 20, bottom: mode === 'story' ? 380 : 300 }
     : mode === 'story' ? { top: 80, bottom: 70, left: 520, right: 60 }
-    : { top: 80, bottom: 340, left: 330, right: activeSpot ? 340 : 40 }
+    : { top: 80, bottom: 340, left: 330, right: 340 }
   const camera = { key: focusSpot ? focusSpot.id : mode === 'places' ? 'wide' : 'fit', focus: focusSpot?.lngLat, zoomBoost: 1.25 }
 
   // Actions
@@ -141,7 +146,7 @@ export default function App() {
       if (e.metaKey || e.ctrlKey || e.altKey) return
       const tag = e.target.tagName
       if (tag === 'INPUT' || tag === 'SELECT' || tag === 'TEXTAREA') return
-      if (e.key === 'Escape') { if (sheet) setSheet(false); return }
+      if (e.key === 'Escape') { if (sheet) setSheet(false); else if (mode === 'places') go({ place: null, mode: 'open' }); return }
       if (sheet) return
       const k = e.key
       if (k === '?' || k === 'h') { setSheet(true); return }
@@ -152,7 +157,7 @@ export default function App() {
         if (k === ' ' || k === '0' || /^[1-9]$/.test(k)) { if (k === ' ') e.preventDefault(); return }
         if ((k === 'ArrowRight' || k === 'PageDown' || k === 'ArrowLeft' || k === 'PageUp') && mode !== 'story') { e.preventDefault(); return }
       }
-      if (k === ' ' ) { e.preventDefault(); if (tag === 'BUTTON') e.target.blur(); setPlaying((p) => (!p && index >= nDates - 1 ? (setIndexRaw(0), true) : !p)); return }
+      if (k === ' ' ) { e.preventDefault(); if (tag === 'BUTTON') e.target.blur(); setPlaying((p) => (!p && index >= nDates - 1 ? (setIndexRaw(startIndex(place)), true) : !p)); return }
       if (/^[1-9]$/.test(k)) { setPlaying(false); setIndex(+k - 1); return }
       if (k === '0') { setPlaying(false); setIndex(nDates - 1); return }
       if (k === 'p') { go({ place: null, mode: 'places' }); return }
@@ -184,7 +189,7 @@ export default function App() {
         spots={(ev ? place.spots.filter((s) => s.id !== 'epicentre') : place?.spots) || []} showSpots={!!place && !heroPlace && spotsOn} activeSpot={activeSpot}
         onSpot={(id) => { if (mode === 'explore' || mode === 'story') setActiveSpot((a) => (a === id ? null : id)) }}
         interactive={!heroPlace} star={ev && !heroPlace ? place.event.lngLat : null}
-        compare={{ on: cmpOn, split: cmp.split, url: cmpUrl }} onSplit={(s) => setCmp((c) => ({ ...c, split: s }))}
+        compare={{ on: cmpOn, split: cmp.split, url: cmpUrl, tags: cmpTags }} onSplit={(s) => setCmp((c) => ({ ...c, split: s }))}
       />
       <div className={`veil ${heroPlace ? 'hero' : ''}`} aria-hidden="true" />
 
@@ -221,12 +226,10 @@ export default function App() {
           playing={playing} setPlaying={setPlaying} opacity={opacity} setOpacity={setOpacity} cmp={cmp} setCmp={setCmp} cmpAvailable={cmpAvailable}
           spotsOn={spotsOn} setSpotsOn={setSpotsOn} activeSpot={activeSpot} setActiveSpot={setActiveSpot} missing={missing} dated={dated} phone={phone} />
       )}
-      {cmpOn && ev && <div className="cmp-tags" aria-hidden="true"><span>{scene?.cmpTags ? scene.cmpTags[0] : 'Bare terrain'}</span><span className="r">{scene?.cmpTags ? scene.cmpTags[1] : layer?.label.split(/ \(|:/)[0]}</span></div>}
-      {cmpOn && !ev && <div className="cmp-tags" aria-hidden="true"><span>First pass · {firstOfLayer && fmtDate(firstOfLayer)}</span><span className="r">{date && fmtDate(date)}</span></div>}
-      {mode === 'story' && ev && scene?.legend && layer && <Legend layer={layer} />}
+      {mode === 'story' && ev && scene?.legend && layer && <Legend key={layer.id} layer={layer} phone={phone} />}
       {mode !== 'places' && !place && mode !== 'open' && <div className="loading" role="status">Loading…</div>}
       <Sheet open={sheet} onClose={() => setSheet(false)} place={place || shownPlace} pass={pass} />
-      {mode !== 'open' && mode !== 'places' && <div className="keys-hint" aria-hidden="true">{ev ? (mode === 'story' ? '← → scenes · M explore · ? caveats' : 'C compare · M story · ? caveats') : `${mode === 'story' ? '← → scenes' : '← → passes'} · space play · 1–9 pass · ? caveats`}</div>}
+      {mode !== 'open' && mode !== 'places' && !phone && <KeyHint text={ev ? (mode === 'story' ? '← → scenes · M explore · P places · ? caveats' : 'C compare · M story · P places · ? caveats') : (mode === 'story' ? '← → scenes · Space play · M explore · P places · ? caveats' : '← → passes · Space play · C compare · M story · P places · ? caveats')} />}
     </div>
   )
 }

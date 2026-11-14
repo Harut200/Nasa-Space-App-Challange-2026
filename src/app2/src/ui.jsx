@@ -25,6 +25,18 @@ export function useCountUp(target, ms = 650) {
 
 export const Num = ({ value }) => { const v = useCountUp(value); return <>{fmtKm(v)}</> }
 
+// A small, dismissible hint for the keyboard; remembered for the visit when storage allows.
+export function KeyHint({ text }) {
+  const [gone, setGone] = useState(() => { try { return sessionStorage.getItem('keyhint') === '1' } catch { return false } })
+  if (gone) return null
+  return (
+    <div className="keys-hint">
+      <span>{text}</span>
+      <button onClick={() => { setGone(true); try { sessionStorage.setItem('keyhint', '1') } catch { /* private window */ } }} aria-label="Hide the keyboard hint">×</button>
+    </div>
+  )
+}
+
 const I = (d, p = {}) => <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...p}>{d}</svg>
 export const Icon = {
   play: I(<path d="M7 4.5v15l12-7.5z" fill="currentColor" />),
