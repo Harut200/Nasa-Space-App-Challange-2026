@@ -1,0 +1,46 @@
+{
+  "story": {
+    "see": "In August 2026 back-to-back winter storms dropped rare snow on northern Chile: NASA Earth Observatory shows Landsat images of 6 and 14 August and a MODIS image of 19 August with snow reaching from the Andes across the hyper-arid core of the Atacama to near the Pacific coast, and it reports mudflows and flash flooding in parts of northern Chile. The orange area is where the radar picture between NISAR's 26 July and 19 August passes no longer matches the dry pair before it (2 to 14 July): about 6,000 km2 in this 115 x 110 km box, the box edge cutting it off.",
+    "physics": "In the hyper-arid desert the ground hardly changes, so two radar passes match almost perfectly (the average coherence of this box was 0.76 in the dry pair). Snow, rain-wetted soil and fresh mud change the surface, and the average fell to 0.41. The ascending pass of 16 to 28 August shows the same: 0.82 down to 0.62, about 1,000 km2 lost. We cannot say how much of the loss is snow, wet soil or flood deposits.",
+    "lband": "NISAR's L-band radar has a wavelength of about 24 cm. Dry snow is largely transparent to it, which is probably why the ascending pair of 23 July to 16 August, over the eastern half of the area, shows nothing; wet ground and moved sediment are not. The dry pair before is bright almost everywhere, so a desert-wide drop stands out. One more pair we tried as a control (14 to 26 July) is itself dark over part of this desert; we do not know why, and we use the pair of 2 to 14 July.",
+    "people": "This map shows where the surface changed, not damage. We did not look at reports of damage or casualties."
+  },
+  "spots": [
+    {
+      "id": "site",
+      "label": "Centre of the box (Atacama Desert west of the Salar de Atacama)",
+      "lngLat": [
+        -69.45,
+        -23.5
+      ],
+      "radius_m": 3000
+    },
+    {
+      "id": "patch",
+      "label": "Centre of the largest patch of lost coherence",
+      "lngLat": [
+        -69.4819,
+        -23.8233
+      ],
+      "radius_m": 8000
+    },
+    {
+      "id": "patch2",
+      "label": "Second patch",
+      "lngLat": [
+        -69.2439,
+        -23.1878
+      ],
+      "radius_m": 6000
+    },
+    {
+      "id": "reference",
+      "label": "Reference: stays coherent in both pairs",
+      "lngLat": [
+        -69.746,
+        -23.1735
+      ],
+      "radius_m": 4000
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "id": "atacama-west-2026",
+  "name": "Atacama Desert after the August 2026 snow and rain storms: about 6,000 km2 lost coherence (west of the Salar)",
+  "bbox": [
+    -70.15,
+    -24.0,
+    -69.0,
+    -23.0
+  ],
+  "track": 97,
+  "frame": 100,
+  "direction": "descending",
+  "pixel_m": 80
+}

@@ -3893,6 +3893,72 @@
      "max": 6.7968
     },
     "incidence_deg_mean": 34.1566162109375
+   },
+   "asc2": {
+    "event": "Fuego pyroclastic density currents, Guatemala, 3-5 Aug 2026",
+    "view": "asc2",
+    "track": 134,
+    "frame": 9,
+    "direction": "A",
+    "event_pair": "20260717_20260810",
+    "control_pair": "20260705_20260717",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 6,
+    "far_km": 18,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.296962708234787,
+    "mean_coh_control_within_radius": 0.3770102262496948,
+    "mean_coh_event_whole_window": 0.31589287519454956,
+    "mean_coh_control_whole_window": 0.37571045756340027,
+    "coherence_loss": {
+     "loss_area_km2": 4.454400000000001,
+     "comparable_area_km2": 36.1088,
+     "loss_fraction_inside": 0.12336051045728465,
+     "loss_fraction_outside": 0.025440740961580506,
+     "comparable_px_inside": 5642,
+     "loss_area_km2_whole_window": 12.6464,
+     "mean_coh_control_at_loss_px": 0.5585747361183167,
+     "mean_coh_event_at_loss_px": 0.15367814898490906
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 3.52,
+      "lon": -90.9146,
+      "lat": 14.4864,
+      "max_side_km": 4.08
+     },
+     {
+      "area_km2": 2.6112,
+      "lon": -90.7625,
+      "lat": 14.4616,
+      "max_side_km": 2.96
+     },
+     {
+      "area_km2": 1.0688,
+      "lon": -90.9392,
+      "lat": 14.5029,
+      "max_side_km": 2.0
+     },
+     {
+      "area_km2": 0.5696,
+      "lon": -90.8447,
+      "lat": 14.3652,
+      "max_side_km": 1.2
+     },
+     {
+      "area_km2": 0.4224,
+      "lon": -90.761,
+      "lat": 14.5663,
+      "max_side_km": 1.04
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 16,
+     "median": 1.1840000000000002,
+     "p95": 2.6112,
+     "max": 2.6112
+    },
+    "incidence_deg_mean": 46.090110778808594
    }
   },
   "verdict": null
@@ -4038,6 +4104,138 @@
  "atacama-snow-2026": {
   "event_id": "atacama-snow-2026",
   "views": {
+   "d_after": {
+    "event": "Rare snow and flash floods in the Atacama Desert, Chile, August 2026",
+    "view": "d_after",
+    "track": 97,
+    "frame": 100,
+    "direction": "D",
+    "event_pair": "20260819_20260831",
+    "control_pair": "20260702_20260714",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 40,
+    "far_km": 120,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.6422819495201111,
+    "mean_coh_control_within_radius": 0.4868515133857727,
+    "mean_coh_event_whole_window": 0.5925561189651489,
+    "mean_coh_control_whole_window": 0.5402438640594482,
+    "coherence_loss": {
+     "loss_area_km2": 216.448,
+     "comparable_area_km2": 2928.1472000000003,
+     "loss_fraction_inside": 0.07391978108204396,
+     "loss_fraction_outside": 0.2142891667636344,
+     "comparable_px_inside": 457523,
+     "loss_area_km2_whole_window": 982.5472000000001,
+     "mean_coh_control_at_loss_px": 0.5850136280059814,
+     "mean_coh_event_at_loss_px": 0.22296510636806488
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 243.06560000000002,
+      "lon": -69.0476,
+      "lat": -23.5443,
+      "max_side_km": 39.36
+     },
+     {
+      "area_km2": 162.5728,
+      "lon": -69.051,
+      "lat": -23.2339,
+      "max_side_km": 27.76
+     },
+     {
+      "area_km2": 149.0368,
+      "lon": -69.0446,
+      "lat": -23.8201,
+      "max_side_km": 22.240000000000002
+     },
+     {
+      "area_km2": 72.69760000000001,
+      "lon": -68.7845,
+      "lat": -23.8363,
+      "max_side_km": 17.6
+     },
+     {
+      "area_km2": 52.8448,
+      "lon": -69.0921,
+      "lat": -23.1294,
+      "max_side_km": 13.280000000000001
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": null
+   },
+   "a_early": {
+    "event": "Rare snow and flash floods in the Atacama Desert, Chile, August 2026",
+    "view": "a_early",
+    "track": 46,
+    "frame": 166,
+    "direction": "A",
+    "event_pair": "20260723_20260816",
+    "control_pair": "20260711_20260723",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 40,
+    "far_km": 120,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.8106064796447754,
+    "mean_coh_control_within_radius": 0.8635404706001282,
+    "mean_coh_event_whole_window": 0.8023039698600769,
+    "mean_coh_control_whole_window": 0.8625904321670532,
+    "coherence_loss": {
+     "loss_area_km2": 2.4256,
+     "comparable_area_km2": 4916.7168,
+     "loss_fraction_inside": 0.0004933373425127923,
+     "loss_fraction_outside": 0.007653329685132177,
+     "comparable_px_inside": 768237,
+     "loss_area_km2_whole_window": 39.6608,
+     "mean_coh_control_at_loss_px": 0.7005698680877686,
+     "mean_coh_event_at_loss_px": 0.2629973590373993
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 29.8688,
+      "lon": -68.7501,
+      "lat": -23.8273,
+      "max_side_km": 10.64
+     },
+     {
+      "area_km2": 2.8288,
+      "lon": -68.7298,
+      "lat": -23.6802,
+      "max_side_km": 3.7600000000000002
+     },
+     {
+      "area_km2": 1.6320000000000001,
+      "lon": -68.8233,
+      "lat": -23.7791,
+      "max_side_km": 2.88
+     },
+     {
+      "area_km2": 1.2864,
+      "lon": -68.1975,
+      "lat": -23.7465,
+      "max_side_km": 2.32
+     },
+     {
+      "area_km2": 0.6912,
+      "lon": -68.8325,
+      "lat": -23.7883,
+      "max_side_km": 1.36
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": 37.56400680541992
+   },
    "d_both": {
     "event": "Rare snow and flash floods in the Atacama Desert, Chile, August 2026",
     "view": "d_both",
@@ -4045,55 +4243,55 @@
     "frame": 100,
     "direction": "D",
     "event_pair": "20260726_20260819",
-    "control_pair": "20260714_20260726",
+    "control_pair": "20260702_20260714",
     "wavelength_m": 0.24393202441008952,
     "radius_km": 40,
     "far_km": 120,
     "pixel_km2": 0.0064,
     "mean_coh_event_within_radius": 0.6166417598724365,
-    "mean_coh_control_within_radius": 0.21949291229248047,
+    "mean_coh_control_within_radius": 0.4868515133857727,
     "mean_coh_event_whole_window": 0.5701496601104736,
-    "mean_coh_control_whole_window": 0.3187107443809509,
+    "mean_coh_control_whole_window": 0.5402438640594482,
     "coherence_loss": {
-     "loss_area_km2": 5.8432,
-     "comparable_area_km2": 307.0272,
-     "loss_fraction_inside": 0.019031538573781086,
-     "loss_fraction_outside": 0.2179992806927482,
-     "comparable_px_inside": 47973,
-     "loss_area_km2_whole_window": 459.71840000000003,
-     "mean_coh_control_at_loss_px": 0.5594874024391174,
-     "mean_coh_event_at_loss_px": 0.23003725707530975
+     "loss_area_km2": 318.3168,
+     "comparable_area_km2": 2928.1472000000003,
+     "loss_fraction_inside": 0.10870928893192255,
+     "loss_fraction_outside": 0.26148125870470423,
+     "comparable_px_inside": 457523,
+     "loss_area_km2_whole_window": 1253.1328,
+     "mean_coh_control_at_loss_px": 0.5921427607536316,
+     "mean_coh_event_at_loss_px": 0.21815605461597443
     },
     "largest_loss_clusters": [
      {
-      "area_km2": 141.0368,
-      "lon": -69.0248,
-      "lat": -23.8171,
-      "max_side_km": 21.6
+      "area_km2": 356.416,
+      "lon": -68.9621,
+      "lat": -23.7403,
+      "max_side_km": 37.28
      },
      {
-      "area_km2": 55.244800000000005,
-      "lon": -69.0034,
-      "lat": -23.0106,
-      "max_side_km": 13.44
+      "area_km2": 290.6304,
+      "lon": -69.0478,
+      "lat": -23.5216,
+      "max_side_km": 52.56
      },
      {
-      "area_km2": 42.016000000000005,
-      "lon": -69.0894,
-      "lat": -23.6728,
-      "max_side_km": 14.16
+      "area_km2": 230.51520000000002,
+      "lon": -69.0355,
+      "lat": -23.167,
+      "max_side_km": 39.76
      },
      {
-      "area_km2": 27.1488,
-      "lon": -68.7494,
-      "lat": -23.8597,
-      "max_side_km": 10.8
+      "area_km2": 133.8432,
+      "lon": -68.7627,
+      "lat": -23.8056,
+      "max_side_km": 22.56
      },
      {
-      "area_km2": 24.9024,
-      "lon": -68.7428,
-      "lat": -23.7524,
-      "max_side_km": 11.52
+      "area_km2": 61.945600000000006,
+      "lon": -69.006,
+      "lat": -23.0154,
+      "max_side_km": 13.6
      }
     ],
     "background_loss_area_km2_discs_of_same_size": {
@@ -4103,6 +4301,72 @@
      "max": null
     },
     "incidence_deg_mean": 45.57198715209961
+   },
+   "a_late": {
+    "event": "Rare snow and flash floods in the Atacama Desert, Chile, August 2026",
+    "view": "a_late",
+    "track": 46,
+    "frame": 166,
+    "direction": "A",
+    "event_pair": "20260816_20260828",
+    "control_pair": "20260711_20260723",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 40,
+    "far_km": 120,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.7748011350631714,
+    "mean_coh_control_within_radius": 0.8635404706001282,
+    "mean_coh_event_whole_window": 0.7566673159599304,
+    "mean_coh_control_whole_window": 0.8625904321670532,
+    "coherence_loss": {
+     "loss_area_km2": 68.8448,
+     "comparable_area_km2": 4916.7168,
+     "loss_fraction_inside": 0.014002189428522709,
+     "loss_fraction_outside": 0.04181443635292137,
+     "comparable_px_inside": 768237,
+     "loss_area_km2_whole_window": 272.2816,
+     "mean_coh_control_at_loss_px": 0.8198025822639465,
+     "mean_coh_event_at_loss_px": 0.2537982761859894
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 69.5808,
+      "lon": -69.0488,
+      "lat": -23.5559,
+      "max_side_km": 15.44
+     },
+     {
+      "area_km2": 36.6976,
+      "lon": -69.0893,
+      "lat": -23.2411,
+      "max_side_km": 11.68
+     },
+     {
+      "area_km2": 27.808,
+      "lon": -69.0713,
+      "lat": -23.6411,
+      "max_side_km": 13.280000000000001
+     },
+     {
+      "area_km2": 19.0976,
+      "lon": -69.0754,
+      "lat": -23.4479,
+      "max_side_km": 12.16
+     },
+     {
+      "area_km2": 18.9696,
+      "lon": -69.0012,
+      "lat": -23.2103,
+      "max_side_km": 10.08
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": null
    }
   },
   "verdict": null
@@ -4219,6 +4483,367 @@
      "max": 0.0
     },
     "incidence_deg_mean": 45.424072265625
+   }
+  },
+  "verdict": null
+ },
+ "etna-aug-2026": {
+  "event_id": "etna-aug-2026",
+  "views": {
+   "asc": {
+    "event": "Etna later pairs: new decorrelation 16-28 Aug 2026",
+    "view": "asc",
+    "track": 43,
+    "frame": 21,
+    "direction": "A",
+    "event_pair": "20260816_20260828",
+    "control_pair": "20260723_20260816",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 9,
+    "far_km": 27,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.5557498335838318,
+    "mean_coh_control_within_radius": 0.5064902901649475,
+    "mean_coh_event_whole_window": 0.6281935572624207,
+    "mean_coh_control_whole_window": 0.5648293495178223,
+    "coherence_loss": {
+     "loss_area_km2": 0.0,
+     "comparable_area_km2": 173.5488,
+     "loss_fraction_inside": 0.0,
+     "loss_fraction_outside": 0.00018758655922347146,
+     "comparable_px_inside": 27117,
+     "loss_area_km2_whole_window": 0.3008
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 0.3008,
+      "lon": 14.8032,
+      "lat": 37.5525,
+      "max_side_km": 1.2
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 37,
+     "median": 0.0,
+     "p95": 0.3008,
+     "max": 0.3008
+    },
+    "incidence_deg_mean": 41.504940032958984
+   }
+  },
+  "verdict": null
+ },
+ "noul-2026": {
+  "event_id": "noul-2026",
+  "views": {
+   "desc": {
+    "event": "Typhoon Noul landfall at Huidong, Guangdong, 25-26 Jul 2026",
+    "view": "desc",
+    "track": 90,
+    "frame": 77,
+    "direction": "D",
+    "event_pair": "20260714_20260726",
+    "control_pair": "20260702_20260714",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 25,
+    "far_km": 75,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.29329660534858704,
+    "mean_coh_control_within_radius": 0.45363590121269226,
+    "mean_coh_event_whole_window": 0.2481384575366974,
+    "mean_coh_control_whole_window": 0.3797069787979126,
+    "coherence_loss": {
+     "loss_area_km2": 265.6064,
+     "comparable_area_km2": 1239.808,
+     "loss_fraction_inside": 0.2142318810654553,
+     "loss_fraction_outside": 0.27269643070515337,
+     "comparable_px_inside": 193720,
+     "loss_area_km2_whole_window": 1083.5456000000001,
+     "mean_coh_control_at_loss_px": 0.5190181136131287,
+     "mean_coh_event_at_loss_px": 0.19296711683273315
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 115.5968,
+      "lon": 114.4949,
+      "lat": 22.6054,
+      "max_side_km": 29.6
+     },
+     {
+      "area_km2": 113.9008,
+      "lon": 115.1393,
+      "lat": 22.8931,
+      "max_side_km": 25.12
+     },
+     {
+      "area_km2": 82.7968,
+      "lon": 115.1737,
+      "lat": 23.1056,
+      "max_side_km": 24.72
+     },
+     {
+      "area_km2": 76.17280000000001,
+      "lon": 114.858,
+      "lat": 22.6758,
+      "max_side_km": 21.52
+     },
+     {
+      "area_km2": 22.7968,
+      "lon": 115.0473,
+      "lat": 22.9173,
+      "max_side_km": 10.08
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": 36.294368743896484
+   },
+   "desc_null": {
+    "event": "Typhoon Noul landfall at Huidong, Guangdong, 25-26 Jul 2026",
+    "view": "desc_null",
+    "track": 90,
+    "frame": 77,
+    "direction": "D",
+    "event_pair": "20260702_20260714",
+    "control_pair": "20260620_20260702",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 25,
+    "far_km": 75,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.45363590121269226,
+    "mean_coh_control_within_radius": 0.5618618130683899,
+    "mean_coh_event_whole_window": 0.3797069787979126,
+    "mean_coh_control_whole_window": 0.4572288990020752,
+    "coherence_loss": {
+     "loss_area_km2": 42.8416,
+     "comparable_area_km2": 1660.3776,
+     "loss_fraction_inside": 0.025802323519662034,
+     "loss_fraction_outside": 0.01733043277469222,
+     "comparable_px_inside": 259434,
+     "loss_area_km2_whole_window": 106.7264,
+     "mean_coh_control_at_loss_px": 0.5389638543128967,
+     "mean_coh_event_at_loss_px": 0.20520228147506714
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 4.256,
+      "lon": 115.2859,
+      "lat": 23.1616,
+      "max_side_km": 5.04
+     },
+     {
+      "area_km2": 3.2384,
+      "lon": 114.7624,
+      "lat": 22.8628,
+      "max_side_km": 3.12
+     },
+     {
+      "area_km2": 3.1168,
+      "lon": 114.8342,
+      "lat": 23.1753,
+      "max_side_km": 4.96
+     },
+     {
+      "area_km2": 2.9504,
+      "lon": 115.1847,
+      "lat": 23.0576,
+      "max_side_km": 4.16
+     },
+     {
+      "area_km2": 2.6304000000000003,
+      "lon": 115.2543,
+      "lat": 22.9243,
+      "max_side_km": 3.52
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": null
+   }
+  },
+  "verdict": null
+ },
+ "stromboli-2026": {
+  "event_id": "stromboli-2026",
+  "views": {
+   "asc": {
+    "event": "Stromboli lava overflow, Italy, 5-6 Oct 2026",
+    "view": "asc",
+    "track": 43,
+    "frame": 21,
+    "direction": "A",
+    "event_pair": "20261003_20261015",
+    "control_pair": "20260909_20260921",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 3,
+    "far_km": 9,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.3730665445327759,
+    "mean_coh_control_within_radius": 0.32632774114608765,
+    "mean_coh_event_whole_window": 0.11237336695194244,
+    "mean_coh_control_whole_window": 0.1098785549402237,
+    "coherence_loss": {
+     "loss_area_km2": 0.0,
+     "comparable_area_km2": 10.796800000000001,
+     "loss_fraction_inside": 0.0,
+     "loss_fraction_outside": 0.0,
+     "comparable_px_inside": 1687,
+     "loss_area_km2_whole_window": 0.0
+    },
+    "largest_loss_clusters": [],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": 38.8641357421875
+   }
+  },
+  "verdict": null
+ },
+ "atacama-west-2026": {
+  "event_id": "atacama-west-2026",
+  "views": {
+   "d_both": {
+    "event": "Rare snow and flash floods in the Atacama Desert, Chile (west of the Salar), August 2026",
+    "view": "d_both",
+    "track": 97,
+    "frame": 100,
+    "direction": "D",
+    "event_pair": "20260726_20260819",
+    "control_pair": "20260702_20260714",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 40,
+    "far_km": 120,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.41540971398353577,
+    "mean_coh_control_within_radius": 0.7115811705589294,
+    "mean_coh_event_whole_window": 0.4080583155155182,
+    "mean_coh_control_whole_window": 0.7634966373443604,
+    "coherence_loss": {
+     "loss_area_km2": 1803.8272000000002,
+     "comparable_area_km2": 4787.7952000000005,
+     "loss_fraction_inside": 0.3767552964671505,
+     "loss_fraction_outside": 0.4547663400584457,
+     "comparable_px_inside": 748093,
+     "loss_area_km2_whole_window": 5952.0384,
+     "mean_coh_control_at_loss_px": 0.7082485556602478,
+     "mean_coh_event_at_loss_px": 0.22125905752182007
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 3805.7408,
+      "lon": -69.4819,
+      "lat": -23.8233,
+      "max_side_km": 123.84
+     },
+     {
+      "area_km2": 908.4608000000001,
+      "lon": -69.2439,
+      "lat": -23.1878,
+      "max_side_km": 66.72
+     },
+     {
+      "area_km2": 440.832,
+      "lon": -70.0906,
+      "lat": -23.1842,
+      "max_side_km": 57.76
+     },
+     {
+      "area_km2": 106.09280000000001,
+      "lon": -70.1244,
+      "lat": -23.5508,
+      "max_side_km": 18.080000000000002
+     },
+     {
+      "area_km2": 74.75840000000001,
+      "lon": -69.3328,
+      "lat": -23.4971,
+      "max_side_km": 15.68
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": 40.787437438964844
+   },
+   "a_late": {
+    "event": "Rare snow and flash floods in the Atacama Desert, Chile (west of the Salar), August 2026",
+    "view": "a_late",
+    "track": 46,
+    "frame": 166,
+    "direction": "A",
+    "event_pair": "20260816_20260828",
+    "control_pair": "20260711_20260723",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 40,
+    "far_km": 120,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.6250943541526794,
+    "mean_coh_control_within_radius": 0.8130065202713013,
+    "mean_coh_event_whole_window": 0.6241543889045715,
+    "mean_coh_control_whole_window": 0.8211373686790466,
+    "coherence_loss": {
+     "loss_area_km2": 250.48960000000002,
+     "comparable_area_km2": 4978.8096000000005,
+     "loss_fraction_inside": 0.05031114264743122,
+     "loss_fraction_outside": 0.08068367492406049,
+     "comparable_px_inside": 777939,
+     "loss_area_km2_whole_window": 1003.9104000000001,
+     "mean_coh_control_at_loss_px": 0.7163118720054626,
+     "mean_coh_event_at_loss_px": 0.2686939537525177
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 128.2176,
+      "lon": -69.3096,
+      "lat": -23.9814,
+      "max_side_km": 24.080000000000002
+     },
+     {
+      "area_km2": 69.5808,
+      "lon": -69.0488,
+      "lat": -23.5559,
+      "max_side_km": 15.44
+     },
+     {
+      "area_km2": 47.187200000000004,
+      "lon": -69.4108,
+      "lat": -23.9135,
+      "max_side_km": 19.6
+     },
+     {
+      "area_km2": 40.025600000000004,
+      "lon": -69.6669,
+      "lat": -23.9166,
+      "max_side_km": 13.6
+     },
+     {
+      "area_km2": 36.7104,
+      "lon": -69.0893,
+      "lat": -23.2411,
+      "max_side_km": 11.68
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": 42.67892837524414
    }
   },
   "verdict": null
