@@ -221,6 +221,22 @@
         0.0,
         0.0
       ]
+    },
+    {
+      "label": "Valley floor changed between passes",
+      "unit": "%",
+      "values": [
+        null,
+        43.4,
+        43.6,
+        38.4,
+        47.9,
+        35.3,
+        31.4,
+        22.0,
+        23.3,
+        25.0
+      ]
     }
   ]
 }
