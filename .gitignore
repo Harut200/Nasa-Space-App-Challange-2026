@@ -1,0 +1,9 @@
+data/raw/*
+data/processed/*
+data/external/*
+!data/*/.gitkeep
+.env
+.DS_Store
+node_modules/
+__pycache__/
+.ipynb_checkpoints/
