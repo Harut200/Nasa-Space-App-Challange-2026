@@ -39,11 +39,11 @@ def to_webp(tif, grid, out):
     Image.fromarray(dst.transpose(1, 2, 0), "RGBA").save(out, "WEBP", quality=80)
 
 
-def export(area):
-    prod = ROOT / "data/processed" / area / "products"
-    pub = ROOT / "src/app/public/data"
-    cfg = json.loads((ROOT / "areas" / area / "area.json").read_text())
-    story = load(ROOT / "areas" / area / "story.json", {})
+def export(area, root=ROOT):
+    prod = root / "data/processed" / area / "products"
+    pub = root / "src/app/public/data"
+    cfg = json.loads((root / "areas" / area / "area.json").read_text())
+    story = load(root / "areas" / area / "story.json", {})
     layers_in = json.loads((prod / "layers.json").read_text())
 
     first = next(prod.glob("*/*.tif"), None) or next(prod.glob("*.tif"))
