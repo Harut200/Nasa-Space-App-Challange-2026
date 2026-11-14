@@ -97,6 +97,34 @@ def weak_labels(x: torch.Tensor, valid: torch.Tensor, ref: int = 0, th: dict | N
     return lab, th
 
 
+def math_labels(water: torch.Tensor, fv: torch.Tensor, valid: torch.Tensor, wind: torch.Tensor | None = None,
+                band_px: int = 1) -> torch.Tensor:
+    """v2 labels from the math detector (scripts/detect/ops.run_pipeline): DENSE labels.
+
+    water, fv, valid, wind: [T, H, W] bool. Every valid pixel gets a class -- open water,
+    flooded vegetation, or other land (including dark slopes / radar shadow that the math
+    detector rejects). IGNORE only on
+      * a thin band of `band_px` px on both sides of every class boundary (where the math
+        mask is least certain: 1 px = 180 m of shoreline position),
+      * wind-suspect pixels (usually water, not today: could be wind or real drying),
+      * invalid / swath-edge pixels.
+    """
+    lab = torch.full(water.shape, OTHER, dtype=torch.uint8)
+    lab[fv] = FLOODED_VEG
+    lab[water] = WATER
+    k = 2 * band_px + 1
+    T, H, W = lab.shape
+    n_cls = torch.zeros(T, H, W)
+    for c in (WATER, FLOODED_VEG, OTHER):
+        m = ((lab == c) & valid).float()[:, None]
+        n_cls += F.max_pool2d(m, k, 1, band_px)[:, 0]
+    lab[n_cls > 1] = IGNORE
+    if wind is not None:
+        lab[wind] = IGNORE
+    lab[~valid] = IGNORE
+    return lab
+
+
 if __name__ == "__main__":
     import sys
     from scripts.detect.stack import load_preview_stack

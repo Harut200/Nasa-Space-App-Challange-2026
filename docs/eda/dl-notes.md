@@ -1,11 +1,139 @@
 # Deep-learning notes: two small PyTorch models (no labels needed)
 
-**Read this first:** we have **no ground truth**. Nothing below is "accuracy". The U-Net numbers measure how well the network **agrees with our own physics rules**. The autoencoder numbers measure how well it **reproduces its input**. Everything runs on uncalibrated 8-bit preview brightness at about 180 m per pixel.
+**Read this first:** we have **no ground truth**. Nothing below is "accuracy". The U-Net numbers measure how well the network **agrees with another algorithm** (v2: the math detector; v1: our loose physics rules). The autoencoder numbers measure how well it **reproduces its input**. Everything runs on uncalibrated 8-bit preview brightness at about 180 m per pixel.
 
-Code: `scripts/detect/models.py` (models and k-means), `scripts/detect/weak_labels.py` (rules), `scripts/detect/train.py` (command-line tool).
+Code: `scripts/detect/models.py` (models and k-means), `scripts/detect/weak_labels.py` (v1 rules and v2 `math_labels`), `scripts/detect/train.py` (command-line tool).
 Weights: `data/processed/models/`. Products: `data/processed/<area>/dl/products.pt`. Figures: `docs/eda/dl/`.
 
 We did not build a region-proposal detector such as R-CNN. Those find boxed objects, and floods and lakes are not boxed objects, so we use per-pixel models instead.
+
+## 0. U-Net v2 (current default) — trained on the math detector's labels
+
+### Why v2
+The v1 U-Net (sections 1–4 below) was trained on loose rule labels with ~60–80 % "not sure" pixels and scored 0.97–1.0 agreement with those rules, which only proved it copied them. Where the rules were unsure it guessed badly: Tonle Sap 17 Oct = 10,149 km² open water (math detector: 3,837) and 6,098 km² flooded vegetation (math: 144); Lake Sevan (true 1,242 km²) = 1,500–2,300 km² water because dark slopes and radar shadow look like water.
+
+### What changed
+1. **Labels** (`weak_labels.math_labels`): per date, from `ops.run_pipeline` (the math detector, `docs/eda/math-detection.md`): water → open water, flooded veg → flooded vegetation, **everything else valid → other land** (so dark slopes, shadow and dry dark fields are labelled as land). Ignore (255) only on a **1-px band on both sides of every class boundary**, on the math detector's **wind-suspect** pixels and on invalid / swath-edge pixels. Ignored share: 4.9 % Tonle Sap, 5.6 % Sevan, 1.4 % Ararat (v1: 58–78 %). Training now contains 59,594 (Tonle Sap), 13,617 (Sevan) and 10,792 (Ararat) "other land" pixel-dates darker than HH 0.15. Labels are cached in `data/processed/<area>/dl/math_labels.pt` (delete it to recompute; 3 s).
+2. **Scenes**: Tonle Sap west 70 % (east 30 % held out, same split as v1) + Lake Sevan west two-thirds (east third held out) + all of Ararat Valley. Patches are drawn 50 % Tonle Sap / 25 % Sevan / 25 % Ararat so the small Armenian scenes are not drowned out.
+3. **Inputs**: this date HH, HV + reference date (first date) HH, HV as in v1, optionally + 3 **season channels**: per-pixel minimum, mean and standard deviation of HH over the valid dates (`--temporal`). 4 or 7 input channels.
+4. **Optional noise augmentation** (`--aug-noise`): half of the training patches get gamma speckle (2–16 looks) and a gain error (±10 % global, ±3 % per date).
+5. **Evaluation** per class (IoU + area error) on both hold-outs, Sevan area per date (all water and the largest connected water body), ignore-band / wind-suspect behaviour, and a speckle/gain robustness test against the math detector (`robust`).
+
+### Commands (from the repo root; times measured on the M5, GPU shared with other jobs)
+```bash
+.venv/bin/python -m scripts.detect.train sweep --model unet --versions v2 --workers 3   # 6 v2 versions, 252 s total; writes unet_v2_best.txt
+.venv/bin/python -m scripts.detect.train unet --version v2_t_d3                         # one version alone: ~105 s training, ~2 min total
+.venv/bin/python -m scripts.detect.train robust --versions v2_t_d3,v2_t_d2,v2_t_d2_aug  # robustness test, 50 s
+.venv/bin/python -m scripts.detect.train figs_v2                                        # comparison maps + area curves, 10 s
+.venv/bin/python -m scripts.detect.train predict --area tonle-sap                       # uses best v2 by default, 16 s
+.venv/bin/python -m scripts.detect.train predict --area sevan                           # same weights, 4 s
+.venv/bin/python -m scripts.detect.train predict --area sevan --version v1 --weights-area tonle-sap   # old rules-trained net
+```
+Ad-hoc v2 run: `unet --v2 --temporal --depth 2 --scenes tonle-sap,sevan,ararat --aug-noise --band-px 1`. v2 versions use 8 epochs × 100 steps × 16 patches of 128 px. `predict` reads the best version from `data/processed/models/unet_v2_best.txt` and writes `data/processed/<area>/dl/products.pt` with the same keys as before plus `math_water_km2`, `math_flooded_veg_km2`, `water_largest_body_km2`, `unet_version`. The old v1 commands and the old v1 sweep (`sweep --model unet` without `--versions`) are unchanged.
+
+### Leaderboard (`docs/eda/dl/sweep_unet_v2.md`, 3 workers, 252 s, no crashes)
+Numbers are **agreement with the math detector on the held-out parts, not accuracy**. Score = mean of Tonle Sap mean IoU (3 classes) and Sevan mean IoU (water, other land; Sevan has ~no flooded vegetation).
+
+| rank | version | params | train s (3 parallel) | Tonle Sap IoU water / fl-veg / other | Sevan IoU water / other | score | Sevan largest body, mean abs. error vs 1,242 km² |
+|---|---|---|---|---|---|---|---|
+| 1 | **v2_t_d3** (season channels, depth 3) | 483,347 | 105 | 0.822 / 0.332 / 0.996 | 0.999 / 1.000 | **0.858** | 12 |
+| 2 | v2_t_d2_tsonly (Tonle Sap only) | 117,971 | 101 | 0.817 / 0.313 / 0.996 | 0.999 / 1.000 | 0.854 | 5 |
+| 3 | v2_t_d2 | 117,971 | 97 | 0.797 / 0.247 / 0.995 | 0.999 / 1.000 | 0.839 | 4 |
+| 4 | v2_not_d2_aug (no season ch., noise aug.) | 117,539 | 119 | 0.848 / 0.185 / 0.995 | 0.997 / 0.999 | 0.837 | 17 |
+| 5 | v2_t_d2_aug | 117,971 | 122 | 0.845 / 0.158 / 0.994 | 0.999 / 1.000 | 0.832 | 11 |
+| 6 | v2_not_d2 (no season channels) | 117,539 | 92 | 0.665 / 0.339 / 0.992 | 0.996 / 0.999 | 0.832 | 4 |
+
+What the sweep says:
+- **Season channels help open water** at Tonle Sap (IoU 0.665 → 0.797 at depth 2, 0.822 at depth 3). Noise augmentation gives the same water gain but lowers flooded-vegetation agreement.
+- **Depth 3 vs 2**: small gain (0.84 → 0.86 score) for 4× the parameters. The 118k depth-2 model is a fine alternative.
+- **Armenian scenes barely matter**: the Tonle-Sap-only model is #2 and gets Sevan right (largest body within 5 km² of 1,242 on average) without ever seeing Sevan. The fix for Sevan came from the **labels** (dense "other land" on dark ground) and the season channels, not from extra scenes.
+- **Flooded vegetation stays poor** (IoU 0.16–0.34 against the math detector). Both methods find only a few hundred km² and disagree on where.
+
+Held-out area error of the best model (mean per date, network vs math, same pixels): Tonle Sap east open water −5.8 %, flooded vegetation +18 %, other +0.1 %; Sevan east open water −1.3 %, other +0.4 %.
+
+### Lake Sevan, km² per date (true lake area 1,242 km²)
+v2 = best model `v2_t_d3`. Note: the west two-thirds of Sevan were in the v2 training set (the Tonle-Sap-only model gives nearly identical numbers, see leaderboard). Math values are on the same valid pixels.
+
+| date | math all water | math largest body | v2 all water | v2 largest body | v1 all water |
+|---|---|---|---|---|---|
+| 2026-06-20 | 1245 | 1230 | 1245 | 1233 | 1493 |
+| 2026-07-02 | 1235 | 1215 | 1247 | 1232 | 1661 |
+| 2026-07-14 | 1235 | 1213 | 1246 | 1234 | 1585 |
+| 2026-07-26 | 1284 | 1230 | 1265 | 1236 | 1973 |
+| 2026-08-19 | 1261 | 1226 | 1251 | 1232 | 1705 |
+| 2026-08-31 (windy) | 1236 | 1186 | 1255 | 1229 | 1865 |
+| 2026-09-12 (windy) | 1197 | 1133 | 1235 | 1207 | 2076 |
+| 2026-09-24 | 1279 | 1221 | 1269 | 1232 | 2311 |
+| 2026-10-06 | 1329 | 1234 | 1283 | 1233 | 2278 |
+| 2026-10-18 | 1304 | 1231 | 1275 | 1233 | 2246 |
+
+Largest body: math 1,133–1,234 km², v2 1,207–1,236 km² (true 1,242; mean abs. error math 30 km², v2 12 km²). All water: math 1,197–1,329, v2 1,235–1,283. The network's lake is steadier on the windy dates. A 1-px shoreline error is ~45 km² here, so both are within the pixel-size uncertainty. Remember the math thresholds were themselves tuned so Sevan comes out near 1,242 km², so this anchor is not independent of the labels.
+
+### Tonle Sap, km² per date (whole scene, same valid pixels)
+| date | math water | v2 water | math flooded veg | v2 flooded veg | v1 water | v1 flooded veg |
+|---|---|---|---|---|---|---|
+| 2026-06-19 | 2234 | 2245 | 1 | 0 | 2793 | 0 |
+| 2026-07-01 | 2297 | 2286 | 0 | 12 | 3802 | 2362 |
+| 2026-07-13 | 2310 | 2334 | 39 | 0 | 4925 | 1505 |
+| 2026-07-25 | 2421 | 2418 | 99 | 114 | 4288 | 3914 |
+| 2026-08-18 | 2803 | 2875 | 263 | 578 | 6819 | 4379 |
+| 2026-08-30 | 2954 | 2958 | 611 | 1221 | 7430 | 4820 |
+| 2026-09-11 | 3147 | 3168 | 509 | 1069 | 7469 | 4923 |
+| 2026-09-23 | 3522 | 3493 | 264 | 433 | 10724 | 4080 |
+| 2026-10-05 | 3541 | 3492 | 185 | 368 | 10075 | 5710 |
+| 2026-10-17 | 3837 | 3693 | 144 | 347 | 10192 | 6139 |
+
+Open water now follows the math detector within ±4 % on every date (v1 was 1.3–2.9× higher). Flooded vegetation is still about **2× the math detector** in August–October; treat it as unreliable.
+
+### What the network does where the labels are ignored (held-out parts)
+| | Tonle Sap east | Sevan east | Ararat (training scene) |
+|---|---|---|---|
+| boundary band → water / fl-veg / other | 0.31 / 0.03 / 0.66 (agrees with math mask 76 %) | 0.37 / 0.00 / 0.63 (82 %) | 0.16 / 0.04 / 0.80 (71 %) |
+| wind-suspect pixels → water / other | 863 px: 0.40 / 0.60 | 45 px: 0.49 / 0.51 | 31 px: 0.16 / 0.84 |
+
+The band is filled sensibly (shoreline pixels split between water and land). On wind-suspect pixels (usually water, not water today per math) the network calls 40–49 % of them water: it partly "repairs" wind-roughened lake, but not reliably. There are few such pixels, so this barely moves km².
+
+### Robustness test (`docs/eda/dl/robust_v2.md`, `v2_robustness.png`)
+Held-out inputs (whole stack) were perturbed with multiplicative gamma speckle (16, 8, 4, 2 looks; clipped to 0..1) or a global gain error (±10 %), and both the math detector (re-run on the perturbed stack) and the networks were compared (a) with the clean-input math labels and (b) with **their own clean output** (the fair stability measure; (a) favours the math detector, which scores 1.0 on clean input by construction).
+
+Open-water IoU, Tonle Sap east, self-consistency (perturbed vs own clean output):
+
+| condition | math | v2_t_d3 | v2_t_d2 | v2_t_d2_aug |
+|---|---|---|---|---|
+| speckle 16 looks | 0.870 | **0.902** | 0.873 | 0.888 |
+| speckle 8 looks | 0.823 | **0.851** | 0.797 | 0.831 |
+| speckle 4 looks | 0.753 | **0.776** | 0.688 | 0.745 |
+| speckle 2 looks | **0.666** | 0.649 | 0.547 | 0.627 |
+| gain −10 % | 0.848 | 0.842 | 0.872 | **0.897** |
+| gain +10 % | 0.856 | 0.851 | 0.884 | **0.894** |
+| 4 looks + gain +10 % | 0.774 | 0.776 | 0.757 | **0.791** |
+
+Sevan open water: everyone stays ≥ 0.95; the best network is slightly steadier (2 looks: 0.972 vs math 0.962; other-land 0.991 vs 0.953). Flooded vegetation collapses for **both** methods under speckle (math 0.11 at 16 looks; network 0.21, noise-augmented network 0.53) — it is a small, noise-sensitive class.
+
+**Honest reading:** the network is **about as stable as the math detector, not clearly more**. The best model is a few IoU points steadier for mild-to-moderate speckle and equal under gain errors; the noise-augmented model is the steadiest under gain errors and for flooded vegetation, but agrees less with the math detector on clean data. The math detector has its own multi-temporal speckle filter, so the network has little to add here. Note that a ±10 % gain on every date is **not** removed by the math detector's per-date normalisation (it is relative between dates), which is why both drop to ~0.85.
+
+### What is and is not validated (v2)
+- **Not validated against truth**: still nothing, except the one anchor (Sevan 1,242 km²), and that anchor was also used to tune the math thresholds that make the labels.
+- **Checked**: v2 agrees with the math detector on unseen ground (water IoU 0.82 Tonle Sap, 0.999 Sevan); open-water km² match the math detector within ±4 % per date; Sevan dark slopes are no longer water (v1 error of +250 to +1,070 km² is gone); stability under synthetic noise is comparable to the math detector.
+- **Not checked**: flooded-vegetation extent (network ~2× math, IoU 0.33); any real speckle or calibration error (our noise is synthetic, on display brightness, not on power); scenes other than these three.
+
+### Verdict
+**Show the math detector in the app as the main product; do not show the v2 network as a separate source of numbers.** v2 is now trustworthy in the sense that it no longer invents water (it reproduces the math detector's open water within a few percent everywhere, and Sevan comes out at 1,207–1,236 km²), but that is because it learned the math detector; it adds no independent evidence. Its only measurable extras are a slightly steadier Sevan outline on windy dates and slightly better stability under moderate speckle, which are too small to justify a second, harder-to-explain layer. Its flooded vegetation disagrees with the math detector by 2× and should not be shown. If the team wants to mention deep learning, show the v1 → v2 comparison figures (`v2_compare_*.png`, `v2_area_vs_date.png`) as a lesson in "labels matter", and keep the network as a ready-to-retrain pipeline for when calibrated NISAR data and real reference masks (e.g. JRC / Sentinel-1) exist.
+
+### v2 limitations
+- Labels are another algorithm's output; held-out IoU measures agreement with it, and v2 inherits its mistakes (thresholds tuned on Sevan, flooded vegetation defined vs the first two dates).
+- Sevan west two-thirds and all of Ararat are in the training set, so the Sevan whole-lake numbers are partly in-sample (the Tonle-Sap-only model, which never saw Armenia, gives the same picture).
+- Model selection used the held-out parts (no separate test split); with 6 versions the selection bias is small but non-zero.
+- One seed per version; differences below ~0.02 IoU between versions are probably noise.
+- Robustness noise is synthetic, applied to display brightness and clipped to 0..1, so calm water at the floor (1/255) is barely affected by multiplicative noise — this makes water look easier than in real data.
+- The math pipeline uses only pixels valid on all dates (common footprint); network predictions outside it are unscored (products still contain them).
+- Flooded-vegetation IoU on Sevan is undefined/0 (no such class there) and was left out of the score.
+- Training times were measured with 3 runs (and other agents' jobs) sharing the GPU.
+
+Figures: `docs/eda/dl/v2_compare_tonle-sap.png` and `v2_compare_sevan.png` (input / v1 rules / math / v1 network / v2 network), `v2_area_vs_date.png` (math vs v2 vs v1, with Sevan's true-area line), `v2_robustness.png`.
+
+---
+**Sections 1–8 below describe v1 (rules-trained U-Net and the autoencoder) and are kept for reference.** The autoencoder is unchanged and still used by `predict`.
 
 ## 1. The two models in plain words
 
