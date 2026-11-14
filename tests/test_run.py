@@ -56,7 +56,8 @@ def test_run_demo():
     assert ((c[3][ring] > 0) & (c[2][ring] == 0xAC)).mean() > 0.9
 
     layers = json.loads((PROD / "layers.json").read_text())
-    assert [L["id"] for L in layers] == ["hh", "water", "when", "classes", "change", "rgb", "hv"]
+    optional = {"sig", "arrival", "choreo"}  # added only when the analysis products for the area exist
+    assert [L["id"] for L in layers if L["id"] not in optional] == ["hh", "water", "when", "classes", "change", "rgb", "hv"]
     for L in layers:
         assert {"id", "label", "dated", "legend"} <= set(L) and "type" in L["legend"]
         assert L["dated"] == (L["id"] in DATED)

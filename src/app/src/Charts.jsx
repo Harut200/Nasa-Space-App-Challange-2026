@@ -22,7 +22,7 @@ function months(dates) {
 }
 
 // HTML, not SVG: text stays the same size on a phone and on a projector.
-export function Strip({ dates, gaps, index, onPick }) {
+export function Strip({ dates, gaps, index, onPick, quality }) {
   const f = frac(dates)
   const pct = (d) => `${(f(d) * 100).toFixed(2)}%`
   return (
@@ -35,8 +35,8 @@ export function Strip({ dates, gaps, index, onPick }) {
           </div>
         ))}
         {dates.map((d, i) => (
-          <button key={d} type="button" className="strip-pass" style={{ left: pct(d) }}
-            aria-pressed={i === index} aria-label={`Pass ${i + 1}: ${short(d)}`} title={short(d)}
+          <button key={d} type="button" className={`strip-pass ${quality?.[d]?.quality || ''}`} style={{ left: pct(d) }}
+            aria-pressed={i === index} aria-label={`Pass ${i + 1}: ${short(d)}${quality?.[d] ? `, ${quality[d].quality === 'fail' ? 'faulty pass' : 'caution'}` : ''}`} title={short(d)}
             onClick={() => onPick(i)} />
         ))}
       </div>

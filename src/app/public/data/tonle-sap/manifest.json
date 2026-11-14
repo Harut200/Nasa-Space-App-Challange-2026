@@ -136,6 +136,81 @@
       }
     },
     {
+      "id": "sig",
+      "label": "Significant change (1 % false-discovery rate)",
+      "dates": null,
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#440154",
+            "label": "largest change by 1 Jul"
+          },
+          {
+            "color": "#472d7b",
+            "label": "largest change by 13 Jul"
+          },
+          {
+            "color": "#3b528b",
+            "label": "largest change by 25 Jul"
+          },
+          {
+            "color": "#2c728e",
+            "label": "largest change by 18 Aug"
+          },
+          {
+            "color": "#21918c",
+            "label": "largest change by 30 Aug"
+          },
+          {
+            "color": "#28ae80",
+            "label": "largest change by 11 Sep"
+          },
+          {
+            "color": "#5ec962",
+            "label": "largest change by 23 Sep"
+          },
+          {
+            "color": "#addc30",
+            "label": "largest change by 5 Oct"
+          },
+          {
+            "color": "#fde725",
+            "label": "largest change by 17 Oct"
+          }
+        ]
+      }
+    },
+    {
+      "id": "arrival",
+      "label": "Day the water arrived (estimated between passes)",
+      "dates": null,
+      "legend": {
+        "type": "ramp",
+        "unit": "",
+        "min": "19 Jun",
+        "max": "17 Oct",
+        "colors": [
+          "#440154",
+          "#443983",
+          "#31688e",
+          "#21918c",
+          "#35b779",
+          "#90d743",
+          "#fde725"
+        ]
+      }
+    },
+    {
+      "id": "choreo",
+      "label": "Choreography: when and how much each place changed",
+      "dates": null,
+      "legend": {
+        "type": "text",
+        "text": "Colour shows when a place changed: yellow-green in late July, green in mid-August, blue in September, purple in October. Stronger colour means a bigger change. Grey means no significant change."
+      }
+    },
+    {
       "id": "classes",
       "label": "Season classes",
       "dates": null,
@@ -288,5 +363,6 @@
     }
   ],
   "credits": "NISAR GCOV preview images: NASA/JPL-Caltech and ISRO, distributed by ASF DAAC. Uncalibrated previews at about 180 m; values are display brightness, not backscatter.",
-  "source": "preview"
+  "source": "preview",
+  "quality": {}
 }

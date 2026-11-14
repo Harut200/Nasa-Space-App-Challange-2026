@@ -136,6 +136,52 @@
       }
     },
     {
+      "id": "sig",
+      "label": "Significant change (1 % false-discovery rate)",
+      "dates": null,
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#440154",
+            "label": "largest change by 2 Jul"
+          },
+          {
+            "color": "#472d7b",
+            "label": "largest change by 14 Jul"
+          },
+          {
+            "color": "#3b528b",
+            "label": "largest change by 26 Jul"
+          },
+          {
+            "color": "#2c728e",
+            "label": "largest change by 19 Aug"
+          },
+          {
+            "color": "#21918c",
+            "label": "largest change by 31 Aug"
+          },
+          {
+            "color": "#28ae80",
+            "label": "largest change by 12 Sep"
+          },
+          {
+            "color": "#5ec962",
+            "label": "largest change by 24 Sep"
+          },
+          {
+            "color": "#addc30",
+            "label": "largest change by 6 Oct"
+          },
+          {
+            "color": "#fde725",
+            "label": "largest change by 18 Oct"
+          }
+        ]
+      }
+    },
+    {
       "id": "classes",
       "label": "Season classes",
       "dates": null,
@@ -280,5 +326,22 @@
     }
   ],
   "credits": "NISAR GCOV preview images: NASA/JPL-Caltech and ISRO, distributed by ASF DAAC. Uncalibrated previews at about 180 m; values are display brightness, not backscatter.",
-  "source": "preview"
+  "source": "preview",
+  "quality": {
+    "2026-08-31": {
+      "quality": "warn",
+      "quality_note": "HH stable-land brightness +11% vs the other dates; HH 10.7% of pixels at the display floor vs usual 22.1%; HV channel 2.9x more different from the other dates than usual (gradient across the frame)",
+      "channels": [
+        "HH",
+        "HV"
+      ]
+    },
+    "2026-10-06": {
+      "quality": "fail",
+      "quality_note": "HV channel 4.6x more different from the other dates than usual (uniform across the frame); HH-HV over stable land -0.055 vs usual +0.065 (departure in HV); HV stable-land brightness +15% vs the other dates while HH is normal \u2014 likely instrument or processing effect",
+      "channels": [
+        "HV"
+      ]
+    }
+  }
 }

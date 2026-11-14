@@ -125,7 +125,9 @@ export default function App() {
 
   const step = (d) => { setPlaying(false); setDateIndex((i) => Math.min(n - 1, Math.max(0, i + d))) }
   const preview = m.source === 'preview'
-  const facts = (ts?.facts || NONE).map((f) => ({ ...f, v: f.values[ts.dates.indexOf(date)] })).filter((f) => f.v != null)
+  const facts = (ts?.facts || NONE).map((f) => { const i = ts.dates.indexOf(date); return { ...f, v: f.values[i], lo: f.lo?.[i], hi: f.hi?.[i] } }).filter((f) => f.v != null)
+  const km = (v) => Math.round(v).toLocaleString('en')
+  const quality = m?.quality?.[date]
 
   return (
     <div className="app">
@@ -166,7 +168,8 @@ export default function App() {
                 <strong>{words(date)}</strong> <span>pass {dateIndex + 1} of {n}</span>
               </p>
             </div>
-            <Strip dates={m.dates} gaps={m.gaps} index={dateIndex} onPick={(i) => { setPlaying(false); setDateIndex(i) }} />
+            <Strip dates={m.dates} gaps={m.gaps} quality={m.quality} index={dateIndex} onPick={(i) => { setPlaying(false); setDateIndex(i) }} />
+            {quality && <p className={`quality-note ${quality.quality}`} role="status"><strong>{quality.quality === 'fail' ? 'Faulty pass' : 'Caution'}{quality.channels?.length ? ` (${quality.channels.join(', ')})` : ''}:</strong> {quality.quality_note}{quality.quality === 'fail' ? ' Left out of change detection.' : ''}</p>}
             {now.shown && now.shown !== date && <p role="status" className="status">No “{layer.label}” image for {words(date)}. Showing the nearest one, {words(now.shown)}.</p>}
             {!layer.dates && (
               <p role="status" className="status">“{layer.label}” sums up the whole season, so it stays the same as you move the timeline{ts?.series?.length ? '; the chart still follows the date' : ''}.</p>
@@ -187,7 +190,7 @@ export default function App() {
             <section aria-label="Backscatter over time" className="card">
               {facts.length > 0 && (
                 <dl className="facts">
-                  {facts.map((f) => <div key={f.label}><dt>{f.label}</dt><dd>{f.v.toLocaleString('en')} <span>{f.unit}</span></dd></div>)}
+                  {facts.map((f) => <div key={f.label}><dt>{f.label}</dt><dd>{f.lo != null ? '≈ ' : ''}{km(f.v)} <span>{f.unit}{f.lo != null && ` (range ${km(f.lo)}–${km(f.hi)})`}</span></dd></div>)}
                 </dl>
               )}
               {ts?.series?.length > 0 && (

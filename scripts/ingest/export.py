@@ -78,6 +78,11 @@ def export(area, root=ROOT):
     src_info = load(prod / "source.json")  # written by scripts/detect/run.py: says preview or gamma0
     if src_info:
         manifest.update(credits=src_info.get("credits", CREDITS), source=src_info.get("source"))
+    qc = load(root / "data/processed" / area / "qc.json")  # written by scripts/detect/qc.py
+    if qc:
+        manifest["quality"] = {p["date"]: {"quality": p["verdict"], "quality_note": p["reason"],
+                                           "channels": p["fail_channels"] or p["warn_channels"]}
+                               for p in qc["passes"] if p["date"] in all_dates and p["verdict"] != "ok"}
     (pub / area / "manifest.json").write_text(json.dumps(manifest, indent=2))
     shutil.copy(prod / "timeseries.json", pub / area / "timeseries.json")
     idx = load(pub / "index.json", {"areas": []})

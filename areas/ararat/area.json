@@ -1,9 +1,15 @@
 {
   "id": "ararat",
   "name": "Ararat Valley, Armenia",
-  "bbox": [44.0, 39.8, 44.8, 40.3],
+  "bbox": [
+    44.0,
+    39.8,
+    44.8,
+    40.3
+  ],
   "track": 85,
   "frame": 22,
   "direction": "ascending",
-  "pixel_m": 30
+  "pixel_m": 30,
+  "water_source": "fusion"
 }

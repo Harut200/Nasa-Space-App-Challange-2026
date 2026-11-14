@@ -243,3 +243,9 @@ input[type='checkbox'] { accent-color: var(--accent); width: 1.1rem; height: 1.1
 @media (prefers-reduced-motion: no-preference) {
   .btn, .chip, .strip-pass { transition: background-color 120ms, border-color 120ms; }
 }
+
+.strip-pass.warn { border-color: #e0a526; }
+.strip-pass.fail { border-color: #e5484d; border-style: dashed; }
+.quality-note { margin: 0.5rem 0 0; padding: 0.45rem 0.7rem; border-left: 3px solid #e0a526; background: rgba(224, 165, 38, 0.08); font-size: 0.85rem; color: var(--muted); }
+.quality-note.fail { border-left-color: #e5484d; background: rgba(229, 72, 77, 0.08); }
+.quality-note strong { color: var(--text, inherit); }

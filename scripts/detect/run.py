@@ -162,16 +162,91 @@ def ramp(unit, lo, hi):
     return {"type": "ramp", "unit": unit, "min": lo, "max": hi, "colors": ["#000000", "#ffffff"]}
 
 
+def _product(area, name, shape):
+    """An analysis product for this area, or None if absent or on another grid."""
+    fp = ROOT / "data/processed" / area / name / "products.pt"
+    if not fp.exists():
+        return None
+    d = torch.load(fp, map_location="cpu", weights_only=False)
+    return d if tuple(d["valid"].shape[-2:]) == tuple(shape) else None
+
+
+def area_range(area, T):
+    """5-95 % range of open-water area per date from the uncertainty study (threshold, shoreline, noise)."""
+    fp = ROOT / "data/processed" / area / "stats/products.pt"
+    if not fp.exists():
+        return {}
+    d = torch.load(fp, map_location="cpu", weights_only=False)
+    if "water_km2_lo" not in d or len(d["water_km2_lo"]) != T:
+        return {}
+    return {"lo": [round(float(v)) for v in d["water_km2_lo"]], "hi": [round(float(v)) for v in d["water_km2_hi"]]}
+
+
+def extra_layers(area, prod, grid, dates, valid, when_cols, cls_legend):
+    """Whole-season layers built by the analysis modules; each is added only if its product exists."""
+    H, W, T = grid.h, grid.w, len(dates)
+    vany = valid.any(0)
+    out = []
+    wanted = set(load_area(area).get("extra_layers", ["sig"]))  # arrival and choreo only where a flood moves
+    st = _product(area, "stats", (H, W)) if "sig" in wanted else None
+    if st is not None and "changed_fdr" in st:
+        big = st["largest_change"]
+        img = paint([(st["changed_fdr"] & (big == k) & vany, when_cols[k - 1], 255) for k in range(1, T)], (H, W))
+        write_rgba(prod / "sig.tif", img, grid)
+        out.append({"id": "sig", "label": "Significant change (1 % false-discovery rate)", "dated": False,
+                    "legend": cls_legend([(when_cols[k - 1], "largest change by " + day_label(dates[k])) for k in range(1, T)])})
+    nv = _product(area, "novel", (H, W)) if wanted & {"arrival", "choreo"} else None
+    if nv is not None and "arrival" in wanted and "arrival_day" in nv:
+        doy = lambda d: dt.date.fromisoformat(d).timetuple().tm_yday
+        d0, d1, n = doy(dates[0]), doy(dates[-1]), 48
+        cols = viridis(n)
+        day = nv["arrival_day"]
+        idx = ((day - d0) / max(d1 - d0, 1) * (n - 1)).round().clamp(0, n - 1)
+        ok = torch.isfinite(day) & vany
+        write_rgba(prod / "arrival.tif", paint([(ok & (idx == i), cols[i], 255) for i in range(n)], (H, W)), grid)
+        out.append({"id": "arrival", "label": "Day the water arrived (estimated between passes)", "dated": False,
+                    "legend": {"type": "ramp", "unit": "", "min": day_label(dates[0]), "max": day_label(dates[-1]),
+                               "colors": viridis(7)}})
+    if nv is not None and "choreo" in wanted and "choreo_rgb" in nv:
+        rgb = nv["choreo_rgb"].permute(2, 0, 1).to(torch.uint8)
+        alpha = (nv["valid"] & vany).to(torch.uint8) * 255
+        write_rgba(prod / "choreo.tif", torch.cat([rgb, alpha[None]]), grid)
+        out.append({"id": "choreo", "label": "Choreography: when and how much each place changed", "dated": False,
+                    "legend": {"type": "text", "text": "Colour shows when a place changed: yellow-green in late July, green "
+                               "in mid-August, blue in September, purple in October. Stronger colour means a bigger change. "
+                               "Grey means no significant change."}})
+    return out
+
+
 # ------------------------------- main ---------------------------------------
 def run(area, source="auto", dev=None):
     if source == "auto":
         source = "gamma0" if any((ROOT / "data/processed" / area / "gamma0/hh").glob("*.tif")) else "preview"
     dates, x, valid_in, grid, km2 = load_gamma0(area) if source == "gamma0" else load_preview(area)
     dev = dev or device()
+    cfg = load_area(area)
+    from scripts.detect.qc import apply_qc, load_qc
+    x_obs = x  # as observed, for the image layers
+    x, valid_det, qc_done = apply_qc(x, valid_in, dates, load_qc(area))
+    if qc_done:
+        print("  quality control: left out of detection:", qc_done)
     from scripts.detect.terrain import cached_water_possible
     water_ok = cached_water_possible(area, tuple(x.shape[-2:]))
     print("  terrain mask:", "applied" if water_ok is not None else "not built for this area")
-    out = ops.run_pipeline(x, valid_in, source, dev=dev, water_ok=water_ok)
+    out = ops.run_pipeline(x, valid_det, source, dev=dev, water_ok=water_ok)
+    water_src = "math"
+    if cfg.get("water_source") == "fusion":  # lakes and mountains: the fused, time-smoothed water map
+        fp = ROOT / "data/processed" / area / "fusion/products.pt"
+        fz = torch.load(fp, map_location="cpu", weights_only=False) if fp.exists() else None
+        if fz is not None and tuple(fz["water"].shape) == tuple(out["water"].shape) and list(fz["dates"]) == list(dates):
+            wdev = out["water"].device
+            out["water"] = fz["water"].to(wdev) & out["valid"]
+            out["wind_suspect"] = torch.zeros_like(out["water"])
+            out["classes"] = ops.classify(out["water"], out["flooded_veg"], out["valid"], out["change_date"], out["knobs"])
+            water_src = "fusion"
+        else:
+            print("  fused water map missing or on another grid: run scripts.detect.fusion first; using the math detector")
+    print("  water source:", water_src)
     if source == "preview":  # thresholds of the rebuilt rule are in preview brightness; gamma0 keeps the simple rule
         from scripts.detect.floodveg import detect_flooded_veg
         fvp = detect_flooded_veg(out["L"], out["valid"], out["water"],
@@ -183,7 +258,6 @@ def run(area, source="auto", dev=None):
     o = {k: (v.cpu() if torch.is_tensor(v) else v) for k, v in out.items()}
     L, valid, T = o["L"], o["valid"], len(dates)
     H, W = grid.h, grid.w
-    cfg = load_area(area)
     pol_name = cfg.get("change_pol", "hh").lower()
     pol = {"hh": 0, "hv": 1}[pol_name]
     disp = DISPLAY[source]
@@ -194,7 +268,12 @@ def run(area, source="auto", dev=None):
     for c, name in enumerate(("hh", "hv")):
         lo, hi = disp["grey"][name]
         for t, d in enumerate(dates):
-            write_rgba(prod / name / f"{d}.tif", grey(L[t, c], lo, hi, valid[t]), grid)
+            img, vis = L[t, c], valid[t]
+            if name.upper() in qc_done.get(d, []):
+                vis = valid_in[t].cpu() & valid.any(0)
+                xo = torch.nan_to_num(x_obs[t:t + 1].cpu().float(), nan=0.0)
+                img = ops.to_loglike(ops.box_mean(xo, vis[None], o["knobs"]["box"]).clamp_min(1e-6), source)[0, c] * vis
+            write_rgba(prod / name / f"{d}.tif", grey(img, lo, hi, vis), grid)
 
     # water: open water, flooded vegetation, usually-water-not-today
     for t, d in enumerate(dates):
@@ -248,6 +327,7 @@ def run(area, source="auto", dev=None):
         hh_leg, hv_leg = ramp(PREVIEW_UNIT, 0, 100), ramp(PREVIEW_UNIT, 0, 100)
         ch_unit, ch_lim, kind = PREVIEW_UNIT, round(full * 100), "brightness (preview)"
     cls_legend = lambda items: {"type": "classes", "items": [{"color": c, "label": l} for c, l in items]}
+    extra = extra_layers(area, prod, grid, dates, valid, when_cols, cls_legend)
     layers = [
         {"id": "hh", "label": f"HH {kind}", "dated": True, "legend": hh_leg},
         {"id": "water", "label": "Water and flooded vegetation", "dated": True,
@@ -273,6 +353,9 @@ def run(area, source="auto", dev=None):
     story_p = ROOT / "areas" / area / "story.json"
     spots = json.loads(story_p.read_text()).get("spots", []) if story_p.exists() else []
     raw = torch.nan_to_num(x.cpu().float(), nan=0.0)
+    at = next(i for i, l in enumerate(layers) if l["id"] == "when") + 1
+    layers[at:at] = extra
+    (prod / "layers.json").write_text(json.dumps(layers, indent=2, ensure_ascii=False))
     series = []
     for s in spots:
         circle = grid.pixel_lonlat_dist(*s["lngLat"]) <= s.get("radius_m", 1000)
@@ -282,7 +365,7 @@ def run(area, source="auto", dev=None):
             vals = []
             for t in range(T):
                 m = circle & valid[t]
-                if n_c == 0 or int(m.sum()) < 0.5 * n_c:
+                if n_c == 0 or int(m.sum()) < 0.5 * n_c or name.upper() in qc_done.get(dates[t], []):
                     vals.append(None)
                 elif source == "gamma0":
                     vals.append(round(10 * math.log10(max(float(raw[t, c][m].mean()), 1e-10)), 2))
@@ -292,7 +375,8 @@ def run(area, source="auto", dev=None):
         series.append(row)
     km = lambda m: [round(float((m[t] & valid[t]).sum()) * km2, 1) for t in range(T)]
     ts = {"dates": dates, "unit": "dB" if source == "gamma0" else PREVIEW_UNIT, "series": series,
-          "facts": [{"label": "Open water", "unit": "km²", "values": km(o["water"])},
+          "facts": [dict({"label": "Open water", "unit": "km²", "values": km(o["water"])},
+                         **(area_range(area, T) if water_src == "math" else {})),
                     {"label": "Flooded vegetation", "unit": "km²", "values": km(o["flooded_veg"])}]
                    + ([{"label": "of which going under", "unit": "km²", "values": km(o["flooded_veg"] & (o["fv_state"] == 2))}]
                       if "fv_state" in o else [])}

@@ -64,7 +64,7 @@
           },
           {
             "color": "#35b04a",
-            "label": "Flooded vegetation"
+            "label": "Possible water under vegetation"
           },
           {
             "color": "#f28e2b",
@@ -99,6 +99,36 @@
           {
             "color": "#fde725",
             "label": "3 Sep"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sig",
+      "label": "Significant change (1 % false-discovery rate)",
+      "dates": null,
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#440154",
+            "label": "largest change by 2 Jul"
+          },
+          {
+            "color": "#3b528b",
+            "label": "largest change by 14 Jul"
+          },
+          {
+            "color": "#21918c",
+            "label": "largest change by 10 Aug"
+          },
+          {
+            "color": "#5ec962",
+            "label": "largest change by 22 Aug"
+          },
+          {
+            "color": "#fde725",
+            "label": "largest change by 3 Sep"
           }
         ]
       }
