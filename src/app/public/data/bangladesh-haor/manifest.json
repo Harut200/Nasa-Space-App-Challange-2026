@@ -76,7 +76,7 @@
           },
           {
             "color": "#35b04a",
-            "label": "Water under vegetation"
+            "label": "Possible water under vegetation"
           },
           {
             "color": "#7fd3c4",
@@ -280,5 +280,15 @@
     }
   ],
   "credits": "NISAR GCOV preview images: NASA/JPL-Caltech and ISRO, distributed by ASF DAAC. Uncalibrated previews at about 180 m; values are display brightness, not backscatter.",
-  "source": "preview"
+  "source": "preview",
+  "quality": {
+    "2026-06-30": {
+      "quality": "warn",
+      "quality_note": "HH stable-land brightness +6% vs the other dates; HH brightness change across the swath -0.342 vs usual -0.220; HH 0.0% of pixels at the display floor vs usual 6.8%",
+      "channels": [
+        "HH",
+        "HV"
+      ]
+    }
+  }
 }

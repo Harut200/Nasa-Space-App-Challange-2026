@@ -24,5 +24,6 @@
   ],
   "excluded_dates": [
     "2026-07-06"
-  ]
+  ],
+  "water_source": "fusion2"
 }

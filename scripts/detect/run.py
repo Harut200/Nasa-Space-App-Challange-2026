@@ -235,17 +235,18 @@ def run(area, source="auto", dev=None):
     print("  terrain mask:", "applied" if water_ok is not None else "not built for this area")
     out = ops.run_pipeline(x, valid_det, source, dev=dev, water_ok=water_ok)
     water_src = "math"
-    if cfg.get("water_source") == "fusion":  # lakes and mountains: the fused, time-smoothed water map
-        fp = ROOT / "data/processed" / area / "fusion/products.pt"
+    src = cfg.get("water_source")
+    if src in ("fusion", "fusion2"):  # fused, time-smoothed water map (fusion2: also handles floodplains)
+        fp = ROOT / "data/processed" / area / src / "products.pt"
         fz = torch.load(fp, map_location="cpu", weights_only=False) if fp.exists() else None
         if fz is not None and tuple(fz["water"].shape) == tuple(out["water"].shape) and list(fz["dates"]) == list(dates):
             wdev = out["water"].device
             out["water"] = fz["water"].to(wdev) & out["valid"]
             out["wind_suspect"] = torch.zeros_like(out["water"])
             out["classes"] = ops.classify(out["water"], out["flooded_veg"], out["valid"], out["change_date"], out["knobs"])
-            water_src = "fusion"
+            water_src = src
         else:
-            print("  fused water map missing or on another grid: run scripts.detect.fusion first; using the math detector")
+            print(f"  fused water map missing or on another grid: run scripts.detect.{src} first; using the math detector")
     print("  water source:", water_src)
     if source == "preview":  # thresholds of the rebuilt rule are in preview brightness; gamma0 keeps the simple rule
         from scripts.detect.floodveg import detect_flooded_veg

@@ -244,5 +244,23 @@
     }
   ],
   "credits": "NISAR GCOV preview images: NASA/JPL-Caltech and ISRO, distributed by ASF DAAC. Uncalibrated previews at about 180 m; values are display brightness, not backscatter.",
-  "source": "preview"
+  "source": "preview",
+  "quality": {
+    "2026-06-30": {
+      "quality": "warn",
+      "quality_note": "HH channel 3.5x more different from the other dates than usual (uniform across the frame); HV channel 3.6x more different from the other dates than usual (uniform across the frame)",
+      "channels": [
+        "HH",
+        "HV"
+      ]
+    },
+    "2026-10-04": {
+      "quality": "warn",
+      "quality_note": "1 pass(es) missing, not explained by the outage or the area config (2026-09-22)",
+      "channels": [
+        "HH",
+        "HV"
+      ]
+    }
+  }
 }

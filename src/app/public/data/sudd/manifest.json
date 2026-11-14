@@ -70,7 +70,7 @@
           },
           {
             "color": "#35b04a",
-            "label": "Water under vegetation"
+            "label": "Possible water under vegetation"
           },
           {
             "color": "#7fd3c4",
@@ -254,5 +254,23 @@
     }
   ],
   "credits": "NISAR GCOV preview images: NASA/JPL-Caltech and ISRO, distributed by ASF DAAC. Uncalibrated previews at about 180 m; values are display brightness, not backscatter.",
-  "source": "preview"
+  "source": "preview",
+  "quality": {
+    "2026-06-20": {
+      "quality": "warn",
+      "quality_note": "HH stable-land brightness +11% vs the other dates; HH channel 3.1x more different from the other dates than usual (widespread across the frame); HV stable-land brightness +7% vs the other dates",
+      "channels": [
+        "HH",
+        "HV"
+      ]
+    },
+    "2026-10-18": {
+      "quality": "warn",
+      "quality_note": "1 pass(es) missing, not explained by the outage or the area config (2026-09-24)",
+      "channels": [
+        "HH",
+        "HV"
+      ]
+    }
+  }
 }

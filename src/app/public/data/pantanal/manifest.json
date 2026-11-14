@@ -1,0 +1,248 @@
+{
+  "id": "pantanal",
+  "name": "Pantanal, Brazil",
+  "bounds": [
+    -58.00000000000001,
+    -18.99993659795255,
+    -56.65942496850873,
+    -18.120000000000005
+  ],
+  "dates": [
+    "2026-07-17",
+    "2026-08-10",
+    "2026-08-22",
+    "2026-09-03",
+    "2026-09-15",
+    "2026-09-27",
+    "2026-10-09",
+    "2026-10-21"
+  ],
+  "gaps": [
+    [
+      "2026-07-27",
+      "2026-08-10"
+    ]
+  ],
+  "layers": [
+    {
+      "id": "hh",
+      "label": "HH brightness (preview)",
+      "dates": [
+        "2026-07-17",
+        "2026-08-10",
+        "2026-08-22",
+        "2026-09-03",
+        "2026-09-15",
+        "2026-09-27",
+        "2026-10-09",
+        "2026-10-21"
+      ],
+      "legend": {
+        "type": "ramp",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": 0,
+        "max": 100,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    },
+    {
+      "id": "water",
+      "label": "Water and flooded vegetation",
+      "dates": [
+        "2026-07-17",
+        "2026-08-10",
+        "2026-08-22",
+        "2026-09-03",
+        "2026-09-15",
+        "2026-09-27",
+        "2026-10-09",
+        "2026-10-21"
+      ],
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#2f6fde",
+            "label": "Open water"
+          },
+          {
+            "color": "#35b04a",
+            "label": "Possible water under vegetation"
+          },
+          {
+            "color": "#7fd3c4",
+            "label": "Going under: vegetation submerging, or part open water"
+          },
+          {
+            "color": "#f28e2b",
+            "label": "Usually water, not today (rain or wind?)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "when",
+      "label": "When it changed for good",
+      "dates": null,
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#440154",
+            "label": "10 Aug"
+          },
+          {
+            "color": "#443983",
+            "label": "22 Aug"
+          },
+          {
+            "color": "#31688e",
+            "label": "3 Sep"
+          },
+          {
+            "color": "#21918c",
+            "label": "15 Sep"
+          },
+          {
+            "color": "#35b779",
+            "label": "27 Sep"
+          },
+          {
+            "color": "#90d743",
+            "label": "9 Oct"
+          },
+          {
+            "color": "#fde725",
+            "label": "21 Oct"
+          }
+        ]
+      }
+    },
+    {
+      "id": "classes",
+      "label": "Season classes",
+      "dates": null,
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#08306b",
+            "label": "Permanent water"
+          },
+          {
+            "color": "#4292c6",
+            "label": "Seasonal open water"
+          },
+          {
+            "color": "#41ab5d",
+            "label": "Flooded vegetation"
+          },
+          {
+            "color": "#9ecae1",
+            "label": "Got darker, not open water (wetter ground, shallow or partial flooding)"
+          },
+          {
+            "color": "#c994c7",
+            "label": "Got brighter (growing crops and other causes)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "change",
+      "label": "Change since first pass (HH)",
+      "dates": [
+        "2026-08-10",
+        "2026-08-22",
+        "2026-09-03",
+        "2026-09-15",
+        "2026-09-27",
+        "2026-10-09",
+        "2026-10-21"
+      ],
+      "legend": {
+        "type": "diverging",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": -35,
+        "max": 35,
+        "colors": [
+          "#2166ac",
+          "#00000000",
+          "#b2182b"
+        ],
+        "labels": [
+          "darker: new water, cleared forest",
+          "brighter: flooded vegetation, growth"
+        ]
+      }
+    },
+    {
+      "id": "rgb",
+      "label": "Three-date composite",
+      "dates": null,
+      "legend": {
+        "type": "text",
+        "text": "HH: red = 17 Jul, green = 15 Sep, blue = 21 Oct. Grey = no change."
+      }
+    },
+    {
+      "id": "hv",
+      "label": "HV brightness (preview)",
+      "dates": [
+        "2026-07-17",
+        "2026-08-10",
+        "2026-08-22",
+        "2026-09-03",
+        "2026-09-15",
+        "2026-09-27",
+        "2026-10-09",
+        "2026-10-21"
+      ],
+      "legend": {
+        "type": "ramp",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": 0,
+        "max": 100,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    }
+  ],
+  "story": {
+    "see": "",
+    "physics": "",
+    "lband": "",
+    "people": ""
+  },
+  "spots": [],
+  "credits": "NISAR GCOV preview images: NASA/JPL-Caltech and ISRO, distributed by ASF DAAC. Uncalibrated previews at about 180 m; values are display brightness, not backscatter.",
+  "source": "preview",
+  "quality": {
+    "2026-07-17": {
+      "quality": "warn",
+      "quality_note": "HV brightness change across the swath -0.517 vs usual -0.473",
+      "channels": [
+        "HV"
+      ]
+    },
+    "2026-09-15": {
+      "quality": "warn",
+      "quality_note": "HH channel 3.4x more different from the other dates than usual (uniform across the frame)",
+      "channels": [
+        "HH"
+      ]
+    },
+    "2026-09-27": {
+      "quality": "warn",
+      "quality_note": "HV brightness change across the swath -0.508 vs usual -0.473",
+      "channels": [
+        "HV"
+      ]
+    }
+  }
+}

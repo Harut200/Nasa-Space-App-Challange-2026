@@ -253,5 +253,22 @@
     }
   ],
   "credits": "NISAR GCOV preview images: NASA/JPL-Caltech and ISRO, distributed by ASF DAAC. Uncalibrated previews at about 180 m; values are display brightness, not backscatter.",
-  "source": "preview"
+  "source": "preview",
+  "quality": {
+    "2026-07-05": {
+      "quality": "warn",
+      "quality_note": "HH 9.7% of pixels at the display floor vs usual 7.4%; HV stable-land brightness +5% vs the other dates",
+      "channels": [
+        "HH",
+        "HV"
+      ]
+    },
+    "2026-09-03": {
+      "quality": "warn",
+      "quality_note": "HV brightness change across the swath -0.076 vs usual -0.274",
+      "channels": [
+        "HV"
+      ]
+    }
+  }
 }
