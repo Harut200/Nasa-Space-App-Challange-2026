@@ -1,0 +1,1020 @@
+{
+ "langtang-collapse-2026": {
+  "event_id": "langtang-collapse-2026",
+  "views": {
+   "asc": {
+    "event": "Langtang Lirung rock-ice collapse, 26 Aug 2026",
+    "view": "asc",
+    "track": 98,
+    "frame": 16,
+    "direction": "A",
+    "event_pair": "20260819_20260831",
+    "control_pair": "20260714_20260726",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 20,
+    "far_km": 40,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.5935325026512146,
+    "mean_coh_control_within_radius": 0.5955895781517029,
+    "mean_coh_event_whole_window": 0.5904356837272644,
+    "mean_coh_control_whole_window": 0.5764020085334778,
+    "coherence_loss": {
+     "loss_area_km2": 10.5344,
+     "comparable_area_km2": 913.1776000000001,
+     "loss_fraction_inside": 0.01153598160971097,
+     "loss_fraction_outside": 0.002635472126006573,
+     "comparable_px_inside": 142684,
+     "loss_area_km2_whole_window": 18.1504,
+     "mean_coh_control_at_loss_px": 0.6502624750137329,
+     "mean_coh_event_at_loss_px": 0.14419440925121307
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 8.4608,
+      "lon": 85.4772,
+      "lat": 28.3222,
+      "max_side_km": 9.6
+     },
+     {
+      "area_km2": 1.7856,
+      "lon": 85.6785,
+      "lat": 28.4985,
+      "max_side_km": 2.08
+     },
+     {
+      "area_km2": 0.9024000000000001,
+      "lon": 85.5871,
+      "lat": 28.5924,
+      "max_side_km": 1.92
+     },
+     {
+      "area_km2": 0.7872,
+      "lon": 85.5685,
+      "lat": 28.5894,
+      "max_side_km": 1.36
+     },
+     {
+      "area_km2": 0.43520000000000003,
+      "lon": 85.5196,
+      "lat": 28.2909,
+      "max_side_km": 1.04
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "valid_pixels_within_radius": 150567,
+    "valid_fraction_within_radius": 0.7668140195768867,
+    "p2p_cm_0.5_99.5pct": 15.279509541734768,
+    "p0.5_cm": -10.974390477670596,
+    "p99.5_cm": 4.305119064064173,
+    "min_cm": -17.623255332083268,
+    "max_cm": 11.17060987312331,
+    "far_std_cm": 0.7694483822401365,
+    "control_far_std_cm": 1.9946851455285517,
+    "control_p2p_cm_0.5_99.5pct": 5.567529852323212,
+    "local_noise_cm_event_far": 0.5904786684850438,
+    "local_noise_cm_control_far": 0.6237749127754388,
+    "unwrapping_components_event": 1,
+    "incidence_deg_mean": 39.284751892089844
+   },
+   "desc": {
+    "event": "Langtang Lirung rock-ice collapse, 26 Aug 2026",
+    "view": "desc",
+    "track": 48,
+    "frame": 74,
+    "direction": "D",
+    "event_pair": "20260816_20260828",
+    "control_pair": "20260711_20260723",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 20,
+    "far_km": 40,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.45444154739379883,
+    "mean_coh_control_within_radius": 0.4185471534729004,
+    "mean_coh_event_whole_window": 0.5115692019462585,
+    "mean_coh_control_whole_window": 0.47369760274887085,
+    "coherence_loss": {
+     "loss_area_km2": 10.6304,
+     "comparable_area_km2": 549.8752000000001,
+     "loss_fraction_inside": 0.019332386694289903,
+     "loss_fraction_outside": 0.006754945442866964,
+     "comparable_px_inside": 85918,
+     "loss_area_km2_whole_window": 26.918400000000002,
+     "mean_coh_control_at_loss_px": 0.6160529851913452,
+     "mean_coh_event_at_loss_px": 0.18371343612670898
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 5.024,
+      "lon": 85.4835,
+      "lat": 28.326,
+      "max_side_km": 5.28
+     },
+     {
+      "area_km2": 2.4512,
+      "lon": 85.6309,
+      "lat": 28.0468,
+      "max_side_km": 2.56
+     },
+     {
+      "area_km2": 1.9200000000000002,
+      "lon": 85.3087,
+      "lat": 28.3198,
+      "max_side_km": 2.64
+     },
+     {
+      "area_km2": 1.6896,
+      "lon": 85.8064,
+      "lat": 28.6095,
+      "max_side_km": 2.8000000000000003
+     },
+     {
+      "area_km2": 1.4144,
+      "lon": 85.7609,
+      "lat": 28.032,
+      "max_side_km": 1.92
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "valid_pixels_within_radius": 112538,
+    "valid_fraction_within_radius": 0.5731937759441771,
+    "p2p_cm_0.5_99.5pct": 152.15776010800826,
+    "p0.5_cm": -3.999808584545859,
+    "p99.5_cm": 148.1579515234624,
+    "min_cm": -11.921299484429596,
+    "max_cm": 149.04328306763668,
+    "far_std_cm": 1.4743187740214505,
+    "control_far_std_cm": 1.5552011762186584,
+    "control_p2p_cm_0.5_99.5pct": 141.48313683547283,
+    "local_noise_cm_event_far": 1.8659557786078191,
+    "local_noise_cm_control_far": 1.1237942045460674,
+    "unwrapping_components_event": 1,
+    "incidence_deg_mean": 37.59821319580078
+   }
+  },
+  "verdict": "clear"
+ },
+ "kilauea-ep55-2026": {
+  "event_id": "kilauea-ep55-2026",
+  "views": {
+   "asc": {
+    "event": "Kilauea summit eruption, episode 55, 17 Oct 2026",
+    "view": "asc",
+    "track": 151,
+    "frame": 11,
+    "direction": "A",
+    "event_pair": "20261010_20261022",
+    "control_pair": "20260928_20261010",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 4,
+    "far_km": 8,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.5651257634162903,
+    "mean_coh_control_within_radius": 0.7185143232345581,
+    "mean_coh_event_whole_window": 0.6744595766067505,
+    "mean_coh_control_whole_window": 0.6832606792449951,
+    "coherence_loss": {
+     "loss_area_km2": 8.4352,
+     "comparable_area_km2": 47.257600000000004,
+     "loss_fraction_inside": 0.1784940411700975,
+     "loss_fraction_outside": 0.0047922463738893145,
+     "comparable_px_inside": 7384,
+     "loss_area_km2_whole_window": 12.9984,
+     "mean_coh_control_at_loss_px": 0.7519271969795227,
+     "mean_coh_event_at_loss_px": 0.1800849884748459
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 10.2272,
+      "lon": -155.295,
+      "lat": 19.3925,
+      "max_side_km": 5.76
+     },
+     {
+      "area_km2": 1.4272,
+      "lon": -155.3307,
+      "lat": 19.3824,
+      "max_side_km": 2.56
+     },
+     {
+      "area_km2": 0.18560000000000001,
+      "lon": -155.2884,
+      "lat": 19.3822,
+      "max_side_km": 0.8
+     },
+     {
+      "area_km2": 0.1728,
+      "lon": -155.3323,
+      "lat": 19.3643,
+      "max_side_km": 0.8
+     },
+     {
+      "area_km2": 0.1728,
+      "lon": -155.315,
+      "lat": 19.3657,
+      "max_side_km": 0.88
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 168,
+     "median": 0.0,
+     "p95": 0.4393600000000001,
+     "max": 1.9200000000000002
+    },
+    "valid_pixels_within_radius": 6225,
+    "valid_fraction_within_radius": 0.792387983706721,
+    "p2p_cm_0.5_99.5pct": 9.735871930604263,
+    "p0.5_cm": -3.923891681006782,
+    "p99.5_cm": 5.8119802495974815,
+    "min_cm": -5.160196906020028,
+    "max_cm": 7.839460795770211,
+    "far_std_cm": 0.6318564044169561,
+    "control_far_std_cm": 1.964590273769609,
+    "control_p2p_cm_0.5_99.5pct": 15.901435064302703,
+    "local_noise_cm_event_far": 0.4800691199150764,
+    "local_noise_cm_control_far": 0.6001988508157738,
+    "unwrapping_components_event": 1,
+    "incidence_deg_mean": 38.52109146118164
+   },
+   "desc": {
+    "event": "Kilauea summit eruption, episode 55, 17 Oct 2026",
+    "view": "desc",
+    "track": 72,
+    "frame": 79,
+    "direction": "D",
+    "event_pair": "20261017_20261029",
+    "control_pair": "20261005_20261017",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 4,
+    "far_km": 8,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.536586344242096,
+    "mean_coh_control_within_radius": 0.5821208357810974,
+    "mean_coh_event_whole_window": 0.5871193408966064,
+    "mean_coh_control_whole_window": 0.6694378852844238,
+    "coherence_loss": {
+     "loss_area_km2": 4.268800000000001,
+     "comparable_area_km2": 38.6368,
+     "loss_fraction_inside": 0.11048534040086136,
+     "loss_fraction_outside": 0.11324869160690056,
+     "comparable_px_inside": 6037,
+     "loss_area_km2_whole_window": 108.96640000000001,
+     "mean_coh_control_at_loss_px": 0.6586027145385742,
+     "mean_coh_event_at_loss_px": 0.15528036653995514
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 67.4496,
+      "lon": -155.4126,
+      "lat": 19.362,
+      "max_side_km": 14.64
+     },
+     {
+      "area_km2": 12.377600000000001,
+      "lon": -155.3201,
+      "lat": 19.3704,
+      "max_side_km": 6.4
+     },
+     {
+      "area_km2": 6.2912,
+      "lon": -155.3763,
+      "lat": 19.4533,
+      "max_side_km": 5.84
+     },
+     {
+      "area_km2": 3.5776000000000003,
+      "lon": -155.3387,
+      "lat": 19.4369,
+      "max_side_km": 4.08
+     },
+     {
+      "area_km2": 3.4176,
+      "lon": -155.2804,
+      "lat": 19.4089,
+      "max_side_km": 3.2800000000000002
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 173,
+     "median": 0.7296,
+     "p95": 27.740160000000007,
+     "max": 37.088
+    },
+    "valid_pixels_within_radius": 6336,
+    "valid_fraction_within_radius": 0.8062094414047589,
+    "p2p_cm_0.5_99.5pct": 7.173933662631948,
+    "p0.5_cm": -6.50860570317939,
+    "p99.5_cm": 0.6653279594525586,
+    "min_cm": -8.984723588096168,
+    "max_cm": 1.609670780710614,
+    "far_std_cm": 1.2370810237215653,
+    "control_far_std_cm": 1.103640963336229,
+    "control_p2p_cm_0.5_99.5pct": 12.014777872831917,
+    "local_noise_cm_event_far": 0.6303628999435581,
+    "local_noise_cm_control_far": 0.5766862286108362,
+    "unwrapping_components_event": 1,
+    "incidence_deg_mean": 43.742671966552734
+   }
+  },
+  "verdict": "clear"
+ },
+ "brits-tailings-2026": {
+  "event_id": "brits-tailings-2026",
+  "views": {
+   "asc": {
+    "event": "Tailings dam failure near Brits, South Africa, 13 Aug 2026",
+    "view": "asc",
+    "track": 143,
+    "frame": 165,
+    "direction": "A",
+    "event_pair": "20260811_20260823",
+    "control_pair": "20260706_20260718",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 6,
+    "far_km": 12,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.5946979522705078,
+    "mean_coh_control_within_radius": 0.6642829179763794,
+    "mean_coh_event_whole_window": 0.6571341753005981,
+    "mean_coh_control_whole_window": 0.715447187423706,
+    "coherence_loss": {
+     "loss_area_km2": 0.8064,
+     "comparable_area_km2": 95.5776,
+     "loss_fraction_inside": 0.008437123342707915,
+     "loss_fraction_outside": 0.0023731199162043176,
+     "comparable_px_inside": 14934,
+     "loss_area_km2_whole_window": 4.518400000000001,
+     "mean_coh_control_at_loss_px": 0.6926031708717346,
+     "mean_coh_event_at_loss_px": 0.18812698125839233
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 0.5760000000000001,
+      "lon": 27.8438,
+      "lat": -25.6494,
+      "max_side_km": 1.84
+     },
+     {
+      "area_km2": 0.26880000000000004,
+      "lon": 27.745,
+      "lat": -25.651,
+      "max_side_km": 0.64
+     },
+     {
+      "area_km2": 0.256,
+      "lon": 27.7986,
+      "lat": -25.5559,
+      "max_side_km": 0.8
+     },
+     {
+      "area_km2": 0.2368,
+      "lon": 27.8013,
+      "lat": -25.7962,
+      "max_side_km": 0.96
+     },
+     {
+      "area_km2": 0.19840000000000002,
+      "lon": 27.7872,
+      "lat": -25.7016,
+      "max_side_km": 0.64
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 126,
+     "median": 0.0,
+     "p95": 0.6736000000000001,
+     "max": 1.2096
+    },
+    "incidence_deg_mean": 46.56834030151367
+   },
+   "desc": {
+    "event": "Tailings dam failure near Brits, South Africa, 13 Aug 2026",
+    "view": "desc",
+    "track": 21,
+    "frame": 101,
+    "direction": "D",
+    "event_pair": "20260721_20260814",
+    "control_pair": "20260709_20260721",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 6,
+    "far_km": 12,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.5971932411193848,
+    "mean_coh_control_within_radius": 0.7033216953277588,
+    "mean_coh_event_whole_window": 0.6190232634544373,
+    "mean_coh_control_whole_window": 0.7313688397407532,
+    "coherence_loss": {
+     "loss_area_km2": 1.3504,
+     "comparable_area_km2": 101.5488,
+     "loss_fraction_inside": 0.013298039957143758,
+     "loss_fraction_outside": 0.006239235393256696,
+     "comparable_px_inside": 15867,
+     "loss_area_km2_whole_window": 14.310400000000001,
+     "mean_coh_control_at_loss_px": 0.6953744292259216,
+     "mean_coh_event_at_loss_px": 0.15344075858592987
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 0.512,
+      "lon": 27.6704,
+      "lat": -25.5699,
+      "max_side_km": 1.52
+     },
+     {
+      "area_km2": 0.49920000000000003,
+      "lon": 27.8449,
+      "lat": -25.6494,
+      "max_side_km": 1.44
+     },
+     {
+      "area_km2": 0.41600000000000004,
+      "lon": 27.7299,
+      "lat": -25.6307,
+      "max_side_km": 0.96
+     },
+     {
+      "area_km2": 0.3456,
+      "lon": 27.8287,
+      "lat": -25.6458,
+      "max_side_km": 0.64
+     },
+     {
+      "area_km2": 0.3264,
+      "lon": 27.7338,
+      "lat": -25.5182,
+      "max_side_km": 1.44
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 167,
+     "median": 0.15360000000000001,
+     "p95": 2.66688,
+     "max": 3.2448
+    },
+    "incidence_deg_mean": 41.108551025390625
+   }
+  },
+  "verdict": null
+ },
+ "etna-valle-del-bove-2026": {
+  "event_id": "etna-valle-del-bove-2026",
+  "views": {
+   "asc": {
+    "event": "Etna eruption and Valle del Bove lava field, Jul-Aug 2026",
+    "view": "asc",
+    "track": 43,
+    "frame": 21,
+    "direction": "A",
+    "event_pair": "20260723_20260816",
+    "control_pair": "20260629_20260723",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 9,
+    "far_km": 18,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.4964869022369385,
+    "mean_coh_control_within_radius": 0.5515180230140686,
+    "mean_coh_event_whole_window": 0.5648293495178223,
+    "mean_coh_control_whole_window": 0.5707082152366638,
+    "coherence_loss": {
+     "loss_area_km2": 2.9056,
+     "comparable_area_km2": 182.12480000000002,
+     "loss_fraction_inside": 0.015953895350880275,
+     "loss_fraction_outside": 0.0001861850679575498,
+     "comparable_px_inside": 28457,
+     "loss_area_km2_whole_window": 3.2,
+     "mean_coh_control_at_loss_px": 0.6790132522583008,
+     "mean_coh_event_at_loss_px": 0.15022026002407074
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 2.4512,
+      "lon": 15.0286,
+      "lat": 37.7505,
+      "max_side_km": 4.88
+     },
+     {
+      "area_km2": 0.3008,
+      "lon": 15.0148,
+      "lat": 37.7446,
+      "max_side_km": 0.8
+     },
+     {
+      "area_km2": 0.2944,
+      "lon": 15.0333,
+      "lat": 37.959,
+      "max_side_km": 1.36
+     },
+     {
+      "area_km2": 0.15360000000000001,
+      "lon": 14.9922,
+      "lat": 37.7427,
+      "max_side_km": 0.56
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 38,
+     "median": 0.0,
+     "p95": 0.2944,
+     "max": 0.2944
+    },
+    "incidence_deg_mean": 41.50410461425781
+   },
+   "desc": {
+    "event": "Etna eruption and Valle del Bove lava field, Jul-Aug 2026",
+    "view": "desc",
+    "track": 51,
+    "frame": 69,
+    "direction": "D",
+    "event_pair": "20260723_20260816",
+    "control_pair": "20260711_20260723",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 9,
+    "far_km": 18,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.49796023964881897,
+    "mean_coh_control_within_radius": 0.5733215808868408,
+    "mean_coh_event_whole_window": 0.5149938464164734,
+    "mean_coh_control_whole_window": 0.5549021363258362,
+    "coherence_loss": {
+     "loss_area_km2": 2.4576000000000002,
+     "comparable_area_km2": 193.15200000000002,
+     "loss_fraction_inside": 0.012723658051689861,
+     "loss_fraction_outside": 0.0001535043425570592,
+     "comparable_px_inside": 30180,
+     "loss_area_km2_whole_window": 2.7008,
+     "mean_coh_control_at_loss_px": 0.6798437237739563,
+     "mean_coh_event_at_loss_px": 0.13351041078567505
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 1.1840000000000002,
+      "lon": 15.0393,
+      "lat": 37.7483,
+      "max_side_km": 2.0
+     },
+     {
+      "area_km2": 0.9600000000000001,
+      "lon": 15.0132,
+      "lat": 37.7529,
+      "max_side_km": 2.4
+     },
+     {
+      "area_km2": 0.2432,
+      "lon": 15.0187,
+      "lat": 37.8444,
+      "max_side_km": 0.96
+     },
+     {
+      "area_km2": 0.16,
+      "lon": 14.9956,
+      "lat": 37.7539,
+      "max_side_km": 0.64
+     },
+     {
+      "area_km2": 0.15360000000000001,
+      "lon": 14.9918,
+      "lat": 37.7434,
+      "max_side_km": 0.56
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 37,
+     "median": 0.0,
+     "p95": 0.0,
+     "max": 0.0
+    },
+    "incidence_deg_mean": 43.007511138916016
+   }
+  },
+  "verdict": "clear"
+ },
+ "budhi-gandaki-landslide-2026": {
+  "event_id": "budhi-gandaki-landslide-2026",
+  "views": {
+   "asc": {
+    "event": "Budhi Gandaki landslide and dam breach, 11 Oct 2026",
+    "view": "asc",
+    "track": 98,
+    "frame": 16,
+    "direction": "A",
+    "event_pair": "20261006_20261018",
+    "control_pair": "20260924_20261006",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 12,
+    "far_km": 24,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.43714290857315063,
+    "mean_coh_control_within_radius": 0.26953744888305664,
+    "mean_coh_event_whole_window": 0.4544049799442291,
+    "mean_coh_control_whole_window": 0.24437686800956726,
+    "coherence_loss": {
+     "loss_area_km2": 3.4432,
+     "comparable_area_km2": 81.1712,
+     "loss_fraction_inside": 0.04241898604431128,
+     "loss_fraction_outside": 0.00581926061159288,
+     "comparable_px_inside": 12683,
+     "loss_area_km2_whole_window": 5.728000000000001,
+     "mean_coh_control_at_loss_px": 0.6002305150032043,
+     "mean_coh_event_at_loss_px": 0.2149219512939453
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 0.7424000000000001,
+      "lon": 84.9345,
+      "lat": 28.4673,
+      "max_side_km": 2.0
+     },
+     {
+      "area_km2": 0.5184,
+      "lon": 84.8285,
+      "lat": 28.6105,
+      "max_side_km": 1.6
+     },
+     {
+      "area_km2": 0.5056,
+      "lon": 85.0007,
+      "lat": 28.4993,
+      "max_side_km": 1.68
+     },
+     {
+      "area_km2": 0.4672,
+      "lon": 84.9221,
+      "lat": 28.5051,
+      "max_side_km": 1.28
+     },
+     {
+      "area_km2": 0.46080000000000004,
+      "lon": 84.9241,
+      "lat": 28.4903,
+      "max_side_km": 1.68
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": 41.619384765625
+   },
+   "desc": {
+    "event": "Budhi Gandaki landslide and dam breach, 11 Oct 2026",
+    "view": "desc",
+    "track": 48,
+    "frame": 74,
+    "direction": "D",
+    "event_pair": "20261003_20261015",
+    "control_pair": "20260921_20261003",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 12,
+    "far_km": 24,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.5074962973594666,
+    "mean_coh_control_within_radius": 0.34703412652015686,
+    "mean_coh_event_whole_window": 0.40374693274497986,
+    "mean_coh_control_whole_window": 0.302477091550827,
+    "coherence_loss": {
+     "loss_area_km2": 2.6496,
+     "comparable_area_km2": 132.46720000000002,
+     "loss_fraction_inside": 0.02000193255386994,
+     "loss_fraction_outside": 0.008541776404766312,
+     "comparable_px_inside": 20698,
+     "loss_area_km2_whole_window": 6.4896,
+     "mean_coh_control_at_loss_px": 0.5859033465385437,
+     "mean_coh_event_at_loss_px": 0.1667632907629013
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 1.4144,
+      "lon": 85.1275,
+      "lat": 28.2683,
+      "max_side_km": 2.96
+     },
+     {
+      "area_km2": 1.088,
+      "lon": 84.943,
+      "lat": 28.4693,
+      "max_side_km": 2.32
+     },
+     {
+      "area_km2": 0.7168,
+      "lon": 85.229,
+      "lat": 28.4055,
+      "max_side_km": 1.76
+     },
+     {
+      "area_km2": 0.6336,
+      "lon": 85.2126,
+      "lat": 28.4291,
+      "max_side_km": 1.28
+     },
+     {
+      "area_km2": 0.5312,
+      "lon": 85.2141,
+      "lat": 28.4094,
+      "max_side_km": 1.12
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": 34.50522994995117
+   }
+  },
+  "verdict": null
+ },
+ "kaligandaki-lete-2026": {
+  "event_id": "kaligandaki-lete-2026",
+  "views": {
+   "desc": {
+    "event": "Kali Gandaki landslide at Lete, 27 Sep 2026",
+    "view": "desc",
+    "track": 149,
+    "frame": 74,
+    "direction": "D",
+    "event_pair": "20260916_20260928",
+    "control_pair": "20260904_20260916",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 10,
+    "far_km": 20,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.31206926703453064,
+    "mean_coh_control_within_radius": 0.4553067684173584,
+    "mean_coh_event_whole_window": 0.27068161964416504,
+    "mean_coh_control_whole_window": 0.47117358446121216,
+    "coherence_loss": {
+     "loss_area_km2": 39.392,
+     "comparable_area_km2": 162.0352,
+     "loss_fraction_inside": 0.24310767043210363,
+     "loss_fraction_outside": 0.4763066421360855,
+     "comparable_px_inside": 25318,
+     "loss_area_km2_whole_window": 862.8736,
+     "mean_coh_control_at_loss_px": 0.6373146772384644,
+     "mean_coh_event_at_loss_px": 0.19970884919166565
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 159.1808,
+      "lon": 83.8843,
+      "lat": 28.7554,
+      "max_side_km": 28.32
+     },
+     {
+      "area_km2": 93.12,
+      "lon": 83.5635,
+      "lat": 28.8213,
+      "max_side_km": 15.040000000000001
+     },
+     {
+      "area_km2": 64.0832,
+      "lon": 83.8557,
+      "lat": 28.4154,
+      "max_side_km": 16.64
+     },
+     {
+      "area_km2": 63.2832,
+      "lon": 83.7224,
+      "lat": 28.4088,
+      "max_side_km": 19.04
+     },
+     {
+      "area_km2": 43.9872,
+      "lon": 83.4482,
+      "lat": 28.8408,
+      "max_side_km": 11.84
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 78,
+     "median": 79.40480000000001,
+     "p95": 123.81183999999998,
+     "max": 141.376
+    },
+    "incidence_deg_mean": 38.375633239746094
+   },
+   "asc": {
+    "event": "Kali Gandaki landslide at Lete, 27 Sep 2026",
+    "view": "asc",
+    "track": 26,
+    "frame": 16,
+    "direction": "A",
+    "event_pair": "20260919_20261001",
+    "control_pair": "20260814_20260826",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 10,
+    "far_km": 20,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.4639434814453125,
+    "mean_coh_control_within_radius": 0.541411280632019,
+    "mean_coh_event_whole_window": 0.3552654981613159,
+    "mean_coh_control_whole_window": 0.5162020921707153,
+    "coherence_loss": {
+     "loss_area_km2": 17.728,
+     "comparable_area_km2": 203.78240000000002,
+     "loss_fraction_inside": 0.08699475518984956,
+     "loss_fraction_outside": 0.3140983432102214,
+     "comparable_px_inside": 31841,
+     "loss_area_km2_whole_window": 622.2080000000001,
+     "mean_coh_control_at_loss_px": 0.7201444506645203,
+     "mean_coh_event_at_loss_px": 0.193272203207016
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 151.4752,
+      "lon": 83.8842,
+      "lat": 28.7449,
+      "max_side_km": 27.2
+     },
+     {
+      "area_km2": 147.2448,
+      "lon": 83.5935,
+      "lat": 28.8196,
+      "max_side_km": 25.76
+     },
+     {
+      "area_km2": 53.2288,
+      "lon": 83.4432,
+      "lat": 28.8481,
+      "max_side_km": 12.32
+     },
+     {
+      "area_km2": 24.5696,
+      "lon": 83.3661,
+      "lat": 28.8087,
+      "max_side_km": 11.84
+     },
+     {
+      "area_km2": 18.041600000000003,
+      "lon": 83.4856,
+      "lat": 28.6306,
+      "max_side_km": 8.24
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 78,
+     "median": 39.6,
+     "p95": 133.05983999999995,
+     "max": 151.872
+    },
+    "incidence_deg_mean": 37.51215362548828
+   }
+  },
+  "verdict": null
+ },
+ "ambrym-2026": {
+  "event_id": "ambrym-2026",
+  "views": {
+   "desc": {
+    "event": "Ambrym eruption, Sep 2026",
+    "view": "desc",
+    "track": 1,
+    "frame": 97,
+    "direction": "D",
+    "event_pair": "20260918_20260930",
+    "control_pair": "20260906_20260918",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 8,
+    "far_km": 14,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.4243355095386505,
+    "mean_coh_control_within_radius": 0.5008723139762878,
+    "mean_coh_event_whole_window": 0.19472679495811462,
+    "mean_coh_control_whole_window": 0.22094056010246277,
+    "coherence_loss": {
+     "loss_area_km2": 2.7968,
+     "comparable_area_km2": 120.92160000000001,
+     "loss_fraction_inside": 0.02312903567270033,
+     "loss_fraction_outside": 0.025422247088855474,
+     "comparable_px_inside": 18894,
+     "loss_area_km2_whole_window": 7.4496,
+     "mean_coh_control_at_loss_px": 0.6728786826133728,
+     "mean_coh_event_at_loss_px": 0.19675971567630768
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 1.9072,
+      "lon": 168.1321,
+      "lat": -16.2454,
+      "max_side_km": 2.16
+     },
+     {
+      "area_km2": 0.5376000000000001,
+      "lon": 168.1373,
+      "lat": -16.15,
+      "max_side_km": 1.52
+     },
+     {
+      "area_km2": 0.5056,
+      "lon": 168.132,
+      "lat": -16.3545,
+      "max_side_km": 1.52
+     },
+     {
+      "area_km2": 0.39680000000000004,
+      "lon": 168.1565,
+      "lat": -16.3438,
+      "max_side_km": 1.28
+     },
+     {
+      "area_km2": 0.23040000000000002,
+      "lon": 168.0996,
+      "lat": -16.3342,
+      "max_side_km": 0.8
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": 34.89886474609375
+   }
+  },
+  "verdict": null
+ },
+ "kilauea-ep54-2026": {
+  "event_id": "kilauea-ep54-2026",
+  "views": {
+   "asc": {
+    "event": "Kilauea summit eruption, episode 54, 25 Aug 2026",
+    "view": "asc",
+    "track": 151,
+    "frame": 11,
+    "direction": "A",
+    "event_pair": "20260823_20260904",
+    "control_pair": "20260904_20260916",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 4,
+    "far_km": 8,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.6060275435447693,
+    "mean_coh_control_within_radius": 0.5732784867286682,
+    "mean_coh_event_whole_window": 0.7073888182640076,
+    "mean_coh_control_whole_window": 0.6509026885032654,
+    "coherence_loss": {
+     "loss_area_km2": 0.6592,
+     "comparable_area_km2": 38.540800000000004,
+     "loss_fraction_inside": 0.017103952175357023,
+     "loss_fraction_outside": 0.00045024130119736044,
+     "comparable_px_inside": 6022,
+     "loss_area_km2_whole_window": 1.0688,
+     "mean_coh_control_at_loss_px": 0.7121164798736572,
+     "mean_coh_event_at_loss_px": 0.12217474728822708
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 0.32,
+      "lon": -155.2792,
+      "lat": 19.4062,
+      "max_side_km": 0.88
+     },
+     {
+      "area_km2": 0.224,
+      "lon": -155.2738,
+      "lat": 19.413,
+      "max_side_km": 0.72
+     },
+     {
+      "area_km2": 0.1216,
+      "lon": -155.4464,
+      "lat": 19.3113,
+      "max_side_km": 0.48
+     },
+     {
+      "area_km2": 0.11520000000000001,
+      "lon": -155.4306,
+      "lat": 19.2832,
+      "max_side_km": 0.56
+     },
+     {
+      "area_km2": 0.11520000000000001,
+      "lon": -155.2882,
+      "lat": 19.4093,
+      "max_side_km": 0.56
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 171,
+     "median": 0.0,
+     "p95": 0.096,
+     "max": 0.2944
+    },
+    "incidence_deg_mean": 38.51950454711914
+   }
+  },
+  "verdict": null
+ }
+}

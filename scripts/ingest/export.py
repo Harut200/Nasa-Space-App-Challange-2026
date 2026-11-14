@@ -101,6 +101,15 @@ def export(area, root=ROOT):
         manifest["event"] = {"type": "earthquake", "magnitude": ev["mag"], "time": ev["time"], "depth_km": ev["depth_km"],
                              "lngLat": [ev["lon"], ev["lat"]], "place": ev.get("place"), "mechanism": ev.get("mechanism"),
                              "usgs_id": ev.get("usgs_id"), "radius_km": ev.get("radius_km"), "views": views}
+    other = load(root / "docs/eda/events/app_events.json") or []  # written by scripts/detect/events.py
+    oe = next((e for e in other if e.get("id") == area), None)
+    if oe:  # volcano, landslide and other ground events: a before/after pair, shown like an earthquake
+        manifest["kind"] = "event"
+        manifest["event"] = {"type": oe["type"], "title": oe.get("title"), "time": oe["time"], "time_note": oe.get("time_note"),
+                             "lngLat": [oe["lon"], oe["lat"]], "place": oe.get("place"), "summary": oe.get("summary_number"),
+                             "radius_km": oe.get("radius_km"), "source_url": oe.get("source_url"),
+                             "views": [{k: v.get(k) for k in ("id", "label", "track", "before", "after", "p2p_cm", "control_p2p_cm")}
+                                       for v in oe.get("views", []) if v.get("exported", True)]}
     (pub / area / "manifest.json").write_text(json.dumps(manifest, indent=2))
     shutil.copy(prod / "timeseries.json", pub / area / "timeseries.json")
     idx = load(pub / "index.json", {"areas": []})

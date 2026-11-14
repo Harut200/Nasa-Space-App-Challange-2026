@@ -1,0 +1,37 @@
+{
+  "story": {
+    "see": "On 26 August 2026 a huge piece of the north face of Langtang Lirung, on the Nepal-China border, collapsed. The seismic signal was recorded at 02:52 UTC (USGS and GFZ, as summarised on Wikipedia). The orange patch is where the radar picture between NISAR's 19 and 31 August passes changed completely compared with an earlier quiet pair (14 to 26 July): the surface was rearranged, so the two passes can no longer be compared there. A thin orange track continues down the valley to the south-west.",
+    "physics": "A rock-ice avalanche throws a huge mass of debris onto the valley floor, burying and churning the surface. Radar does not see the rock itself; it sees that the tiny details of the ground no longer match. The loss of coherence is concentrated in about 8 square kilometres around 28.32 N, 85.48 E, a few kilometres from the location given in published descriptions of the event (north of Langtang Lirung). ICIMOD's preliminary estimate of the detached volume is 132 million cubic metres; we do not measure volume.",
+    "lband": "NISAR's L-band radar has a wavelength of about 24 cm, so it keeps its grip on snow, rock and soil that shorter wavelengths lose within days. That is why this mountain scene is mostly well matched between passes and the collapse stands out so sharply. In the same pair taken 5 weeks earlier on the same track nothing like this exists. The descending track (16 to 28 August) shows the same patch at the same place.",
+    "people": "This map shows where the ground surface changed, not damage. We did not look at reports of damage or casualties. Steep mountain geometry distorts radar images, so we only claim the loss of coherence, not the size of the deposit or the path of the flood."
+  },
+  "spots": [
+    {
+      "id": "site",
+      "label": "Collapse deposit (centre of the coherence loss)",
+      "lngLat": [
+        85.477,
+        28.322
+      ],
+      "radius_m": 3000
+    },
+    {
+      "id": "source",
+      "label": "Largest patch of lost coherence (about 8 km2)",
+      "lngLat": [
+        85.477,
+        28.322
+      ],
+      "radius_m": 3000
+    },
+    {
+      "id": "summit",
+      "label": "Langtang Lirung summit",
+      "lngLat": [
+        85.516,
+        28.257
+      ],
+      "radius_m": 2000
+    }
+  ]
+}

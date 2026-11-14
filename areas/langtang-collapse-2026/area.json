@@ -1,0 +1,14 @@
+{
+  "id": "langtang-collapse-2026",
+  "name": "Langtang Lirung rock-ice collapse, 26 Aug 2026",
+  "bbox": [
+    85.1,
+    28.05,
+    85.85,
+    28.6
+  ],
+  "track": 98,
+  "frame": 16,
+  "direction": "ascending",
+  "pixel_m": 80
+}

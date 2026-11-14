@@ -1,0 +1,95 @@
+{
+  "id": "etna-valle-del-bove-2026",
+  "name": "Etna eruption and Valle del Bove lava field, Jul-Aug 2026",
+  "bounds": [
+    14.819999999999997,
+    37.549960462346085,
+    15.279945149500566,
+    37.949999999999996
+  ],
+  "dates": [],
+  "gaps": [],
+  "layers": [
+    {
+      "id": "coherence",
+      "label": "Radar coherence (how comparable the two passes are)",
+      "dates": null,
+      "legend": {
+        "type": "ramp",
+        "unit": "coherence 0-1",
+        "min": 0,
+        "max": 1,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    },
+    {
+      "id": "coh_loss",
+      "label": "Where the radar picture changed completely between the passes",
+      "dates": null,
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#ff5a00",
+            "label": "was comparable before (control pair), not comparable in the event pair"
+          }
+        ]
+      }
+    }
+  ],
+  "story": {
+    "see": "Mount Etna in Sicily had a week of lava fountains and lava flows in early August 2026; on 13 August it was in its seventh day, with several vents feeding a lava field in the Valle del Bove (Euronews, citing INGV). The orange patch is where the radar picture between NISAR's 23 July and 16 August passes changed completely compared with the 24 days before (29 June to 23 July). It is a strip about 5 km long running east from the summit craters.",
+    "physics": "Fresh lava has a completely new surface, so the radar no longer matches the earlier picture there. The patch covers about 2.5 square kilometres (3.2 in the whole window); in the whole rest of the 40 km window almost nothing behaves like this. The pair spans 24 days, so it includes the 30 July summit paroxysm as well as the August lava, and we cannot separate them. Older flows already dark before 23 July are not counted.",
+    "lband": "NISAR's L-band radar has a wavelength of about 24 cm. Over most of Etna it keeps a good match between passes, which makes new lava, which scrambles the surface, easy to pick out. The control pair of equal length (29 June to 23 July) shows no such patch. The descending track (23 July to 16 August) shows the same strip, about 2 km2, at the same place.",
+    "people": "This map shows where the surface changed, not damage or the full extent of the lava, which can be thinner or hidden from the radar by steep slopes. We did not look at reports of damage. The product is provisional."
+  },
+  "spots": [
+    {
+      "id": "site",
+      "label": "Etna summit area, lava field",
+      "lngLat": [
+        15.0286,
+        37.7505
+      ]
+    },
+    {
+      "id": "summit",
+      "label": "Etna summit craters",
+      "lngLat": [
+        14.9993,
+        37.751
+      ]
+    }
+  ],
+  "credits": "NISAR data: NASA/JPL-Caltech and ISRO, distributed by ASF DAAC. PROVISIONAL calibration.",
+  "source": null,
+  "kind": "event",
+  "event": {
+    "type": "volcano",
+    "title": "Etna eruption and Valle del Bove lava field, Jul-Aug 2026",
+    "time": "2026-08-06T00:00:00Z",
+    "time_note": "start of the August eruption inferred from 'seventh day' on 13 Aug (Euronews); the 24-day pair also holds the 30 Jul paroxysm",
+    "lngLat": [
+      15.0286,
+      37.7505
+    ],
+    "place": "Mount Etna, Sicily, Italy",
+    "summary": "\u2248 2.5 km\u00b2 of surface changed completely",
+    "radius_km": 9,
+    "source_url": "https://www.euronews.com/2026/08/13/etna-eruption-enters-seventh-day-in-phenomenon-unseen-since-the-1970s",
+    "views": [
+      {
+        "id": "asc",
+        "label": "ascending",
+        "track": 43,
+        "before": "2026-07-23",
+        "after": "2026-08-16",
+        "p2p_cm": null,
+        "control_p2p_cm": null
+      }
+    ]
+  }
+}
