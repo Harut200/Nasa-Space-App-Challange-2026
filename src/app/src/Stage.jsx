@@ -44,6 +44,8 @@ export default function Stage({ mode, places, view, manifest, layer, date, opaci
       attributionControl: { compact: true }, scrollZoom: true, fadeDuration: 0,
     })
     map.current = m
+    // On a phone the open attribution text would sit on top of the timeline; start it collapsed (the (i) button opens it).
+    if (!wide()) m.once('load', () => el.current?.querySelector('.maplibregl-ctrl-attrib')?.removeAttribute('open'))
     m.touchZoomRotate.disableRotation()
     m.jumpTo({ zoom: idleZoom(), padding: globePad() })
     onMap?.(m)

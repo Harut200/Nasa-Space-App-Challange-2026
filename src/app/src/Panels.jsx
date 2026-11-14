@@ -27,8 +27,8 @@ export function Landing({ places, tip, selected, onOpen, onRandom, onNear, near,
         <button className="glass btn" onClick={onAbout}>About</button>
       </header>
       {tip && tp && <div className="glass tip" style={{ left: tip.x, top: tip.y }} role="tooltip"><Fact p={tp} /></div>}
-      {sel && <div className="glass sheet-tip" role="dialog" aria-label={sel.name}><Fact p={sel} /><button className="btn solid" onClick={() => onOpen(sel.id)}>Open this place</button></div>}
       <section className="glass dock" aria-label="Start">
+        {sel && <div className="sheet-tip" role="dialog" aria-label={sel.name}><Fact p={sel} /><button className="btn solid" onClick={() => onOpen(sel.id)}>Open this place</button></div>}
         <p className="lede">Press play on a season of radar. NISAR watched {places.length} places change between June and October 2026. Pick a dot on the globe.</p>
         <div className="legend-dots" aria-label="Dot legend">
           <span><i style={{ background: DOT_COLOR.big }} />Over 1,000 km² of open water at peak</span>
@@ -73,6 +73,7 @@ export function PlaceUI({ m, ts, v, patch, places, layer, date, preview, otherDa
   const head = facts[0]
   const flood = facts.find((f) => f.label === 'Flooded vegetation')
   const shownV = useTween(head?.v)
+  const noWater = head?.label === 'Open water' && !(places.find((p) => p.id === m.id)?.peak?.v >= 1) // same rule as the globe tooltip
   const quality = m.quality?.[date]
   const idx = places.findIndex((p) => p.id === m.id)
   const hop = (d) => onPlace(places[(idx + d + places.length) % places.length].id)
@@ -108,7 +109,12 @@ export function PlaceUI({ m, ts, v, patch, places, layer, date, preview, otherDa
 
       {!v.sheet && (
         <div className="glass headline" aria-label="Headline number">
-          {head ? (
+          {head && noWater ? (
+            <>
+              <p className="hl-label">No open water mapped here: a land-surface story</p>
+              <p className="hl-sub">{words(date)}</p>
+            </>
+          ) : head ? (
             <>
               <p className="hl-num">{head.lo != null && <small>≈ </small>}<span>{km(shownV)}</span><small> {head.unit}</small></p>
               <p className="hl-label">{head.label.toLowerCase()} · {words(date)}</p>
@@ -194,7 +200,7 @@ export function PlaceUI({ m, ts, v, patch, places, layer, date, preview, otherDa
 
       <section aria-label="Timeline" className="glass timeline">
         <div className="timeline-head">
-          <button className="btn solid play" onClick={() => patch({ playing: !v.playing, touched: true })} disabled={n < 2} aria-label={v.playing ? 'Pause' : 'Play'}>
+          <button className="btn solid play" onClick={() => patch({ playing: !v.playing, touched: true, ...(!v.playing && v.dateIndex >= n - 1 ? { dateIndex: 0 } : {}) })} disabled={n < 2} aria-label={v.playing ? 'Pause' : 'Play'}>
             <span aria-hidden="true">{v.playing ? '❚❚' : '▶'}</span> {v.playing ? 'Pause' : 'Play'}
           </button>
           <button className="btn icon" onClick={() => step(-1)} disabled={v.dateIndex === 0} aria-label="Previous pass">‹</button>

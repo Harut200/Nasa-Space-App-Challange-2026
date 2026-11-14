@@ -25,7 +25,7 @@ export default function About({ open, onClose, manifest, theme, onTheme }) {
       <div className="seg" role="group" aria-label="Theme">
         {THEMES.map(([k, name]) => <button key={k} aria-pressed={theme === k} onClick={() => pick(k)}>{name}</button>)}
       </div>
-      <form method="dialog"><button className="pill go">Close</button></form>
+      <form method="dialog"><button className="btn solid">Close</button></form>
     </dialog>
   )
 }

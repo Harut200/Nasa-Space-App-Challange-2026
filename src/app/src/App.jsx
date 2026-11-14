@@ -58,6 +58,17 @@ export default function App() {
   const cmp = !!(v?.compare && layer?.dates)
   const extent = useExtent(cmp ? maps.a : null, m?.bounds)
 
+  // A link for the place that is already open (pasted or edited in the same tab) changes its layer and date instead of being ignored.
+  useEffect(() => {
+    if (!m || !v || v.id !== m.id || route.id !== m.id) return
+    const p = {}
+    if (route.layer && m.layers.some((l) => l.id === route.layer)) p.layerId = route.layer
+    if (route.date) Object.assign(p, { dateIndex: m.dates.indexOf(nearest(m.dates, route.date)), playing: false, touched: true })
+    if (route.compare) Object.assign(p, { compare: true, split: route.split })
+    if (Object.keys(p).length) patch(p)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [route])
+
   // Play: a step every 1.1 s, once through, then stop on the last pass.
   useEffect(() => {
     if (!v?.playing || n < 2) return
