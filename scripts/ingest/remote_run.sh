@@ -12,15 +12,15 @@
 #   scripts/ingest/remote_run.sh sevan,ararat:20 --dates 2026-06-20
 # Results: data/processed/<area>-cal/{gamma0,nlooks}/{hh,hv}/<date>.tif, grid.json, summary.json
 #          data/raw/<area>-cal/{npz/,passes.json,b4_report.txt,<job>.log}
-# Server: SERVER (default opc@151.145.86.139), key SSH_KEY (default ~/.ssh/oracle_team).
+# Server: set SERVER=user@host and SSH_KEY=/path/to/private/key in the environment (no defaults are kept here).
 set -euo pipefail
 MODE=all
 case "${1:-}" in all|start|status|fetch) MODE=$1; shift;; esac
 SPEC=${1:?usage: remote_run.sh [all|start|status|fetch] AREA[:PIXEL][,AREA...] [args]}; shift
 ROOT=$(cd "$(dirname "$0")/../.." && pwd)
 PY="$ROOT/.venv/bin/python"
-SERVER=${SERVER:-opc@151.145.86.139}
-KEY=${SSH_KEY:-$HOME/.ssh/oracle_team}
+SERVER=${SERVER:?set SERVER=user@host}
+KEY=${SSH_KEY:?set SSH_KEY=/path/to/private/key}
 OPTS=(-o IdentitiesOnly=yes -i "$KEY" -o BatchMode=yes -o ConnectTimeout=15 -o ServerAliveInterval=20 -o LogLevel=ERROR)
 JOB=${JOB:-$(echo "$SPEC" | sed 's/:[0-9]*//g; s/,/+/g')}
 rsh() { ssh "${OPTS[@]}" "$SERVER" "$@"; }

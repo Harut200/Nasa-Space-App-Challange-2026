@@ -161,9 +161,10 @@ def noise_vs_distance(d, x, y, stable, ref_xy, bins):
 
 
 # ============================================================ data access
-SSH = ["ssh", "-o", "IdentitiesOnly=yes", "-i", os.path.expanduser("~/.ssh/oracle_team"), "-o", "BatchMode=yes",
-       "-o", "ConnectTimeout=15", "opc@151.145.86.139"]
-SCP = ["scp", "-q", "-o", "IdentitiesOnly=yes", "-i", os.path.expanduser("~/.ssh/oracle_team")]
+SERVER = os.environ.get("SERVER", "")  # user@host of the extraction server; set SERVER and SSH_KEY in the environment
+_KEY = os.path.expanduser(os.environ.get("SSH_KEY", ""))
+SSH = ["ssh", "-o", "IdentitiesOnly=yes", "-i", _KEY, "-o", "BatchMode=yes", "-o", "ConnectTimeout=15", SERVER]
+SCP = ["scp", "-q", "-o", "IdentitiesOnly=yes", "-i", _KEY]
 FETCH = {  # server folder -> (local area folder, local sub folder)
     "armenia_85_22/ararat": ("ararat-insar", "a085"), "armenia_85_22/sevan": ("sevan-insar", "a085"),
     "armenia_122_68/ararat": ("ararat-insar", "d122"), "tonle_83_8/tonle-sap": ("tonle-sap-insar", "a083"),
@@ -173,6 +174,8 @@ FETCH = {  # server folder -> (local area folder, local sub folder)
 def fetch():
     """Copy npz windows from the server (GUNW_* -> <area>-insar, SME2_* -> <area>-sm)."""
     import subprocess
+    if not SERVER or not _KEY:
+        raise SystemExit("set SERVER=user@host and SSH_KEY=/path/to/key")
     for src, (dst, sub) in FETCH.items():
         src = src + "/small2"  # reduced copies (uint8 coherence, int16 phase, ...), see remote_products.reduce_npz2
         ls = subprocess.run(SSH + [f"ls ~/work2/out/{src}/ 2>/dev/null"], capture_output=True, text=True).stdout.split()
@@ -184,7 +187,7 @@ def fetch():
             os.makedirs(out, exist_ok=True)
             need = [f for f in files if not os.path.exists(os.path.join(out, f))]
             if need:  # one remote path per argument (the SFTP-based scp does not expand {a,b})
-                subprocess.run(SCP + [f"opc@151.145.86.139:work2/out/{src}/{f}" for f in need] + [out + "/"], check=False)
+                subprocess.run(SCP + [f"{SERVER}:work2/out/{src}/{f}" for f in need] + [out + "/"], check=False)
             got = [f for f in need if os.path.exists(os.path.join(out, f))]
             print(f"{src}: {kind} {len(files)} on server, {len(got)}/{len(need)} new copied -> {out}")
 

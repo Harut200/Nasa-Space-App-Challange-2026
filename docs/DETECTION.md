@@ -1,6 +1,6 @@
 # Radar change detection: design and results
 
-NASA Space Apps 2026, challenge "Dancing with the SARs". Status as of 14 November 2026, about 14:00 (Armenia time). The one-page summary for judges is [RESULTS.md](RESULTS.md); the design that ties the modules together is [ARCHITECTURE.md](ARCHITECTURE.md).
+NASA Space Apps 2026, challenge "Dancing with the SARs". Status as of 14 November 2026, about 18:45 (Armenia time). The body was first written about 14:00; sections 3.18–3.22, 5.9–5.11 and the lines that name the shipped water detector were added or corrected in the evening. The one-page summary for judges is [RESULTS.md](RESULTS.md); the design that ties the modules together is [ARCHITECTURE.md](ARCHITECTURE.md).
 
 This document describes everything the detection side of the project does, from the downloaded radar images to the layers the web app shows, with every formula as the code computes it and every number taken from a file in this repository. Where a number comes from a file, the file is named. Where the code and older notes disagree, the code was followed; where two notes disagree, the more recent or more carefully measured one is used (both lists are at the end, in [Notes on sources](#notes-on-sources)).
 
@@ -8,11 +8,11 @@ This document describes everything the detection side of the project does, from 
 
 ## Summary (for judges)
 
-**What goes in.** Ten passes (June to October 2026) of NASA-ISRO NISAR L-band radar over three study areas: the Tonle Sap lake and floodplain (Cambodia), Lake Sevan (Armenia) and the Ararat Valley (Armenia); ten more places use the same chain in the app ([`areas.md`](research/areas.md)). Each pass has two polarisation channels, HH and HV. Today we use the **free preview images** of the provisional GCOV product: 8-bit display brightness at about 180 m per pixel, not calibrated backscatter, because the calibrated files need a NASA Earthdata login. The code also accepts calibrated gamma-naught files (tested only on a synthetic fixture).
+**What goes in.** Ten passes (June to October 2026) of NASA-ISRO NISAR L-band radar over three study areas: the Tonle Sap lake and floodplain (Cambodia), Lake Sevan (Armenia) and the Ararat Valley (Armenia); twelve more places use the same chain in the app, fifteen in all ([`areas.md`](research/areas.md)). Each pass has two polarisation channels, HH and HV. Today we use the **free preview images** of the provisional GCOV product: 8-bit display brightness at about 180 m per pixel, not calibrated backscatter, because the app was built on them first. Calibrated gamma-naught files at 80 m (Tonle Sap, all ten dates) and 30 m (most Armenia dates) have since been extracted through a small remote server and analysed with a separate detector (section 1.6, section 3.22); the app does not yet show them.
 
-**What comes out.** For every pass: an open-water mask (cut by a terrain mask built from an elevation model), a flooded-vegetation mask with two states (radar "double bounce" appearing; vegetation going under or a pixel partly open water), a "usually water, not today" rough-surface flag, and a change map against the first pass. For the whole season: the date on which each pixel changed for good, and a season class map. Around this physics detector (pure mathematics in PyTorch) sit the modules built on 14 November: automatic quality control of every pass, a statistical change test with a stated false-discovery rate, a Gaussian-mixture and hidden-Markov model, graph refinement, a sub-pixel water fraction, a fusion layer that combines them under a written admission rule, a flood-front model that dates the flood day by day, and a per-pixel "choreography" map. One scoreboard measures every detector the same way.
+**What comes out.** For every pass: an open-water mask (cut by a terrain mask built from an elevation model), a flooded-vegetation mask with two states (radar "double bounce" appearing; vegetation going under or a pixel partly open water), a "usually water, not today" rough-surface flag, and a change map against the first pass. For the whole season: the date on which each pixel changed for good, and a season class map. Around this physics detector (pure mathematics in PyTorch) sit the modules built on 14 November, in two groups. Shipped in the app: automatic quality control, the terrain mask, the rebuilt flooded-vegetation rule, the statistical change test, the flood-front and choreography layers, and **fusion v2** (section 3.20), which is the water source for all 15 places. Built and measured but not shipped (evaluated only): a Gaussian-mixture and hidden-Markov model, graph refinement, a stand-alone sub-pixel water fraction, a learned despeckling filter, a physics autoencoder, a network trained on independent labels, interferometry, and the calibrated-data detector. The full list of modules: automatic quality control of every pass, a statistical change test with a stated false-discovery rate, a Gaussian-mixture and hidden-Markov model, graph refinement, a sub-pixel water fraction, a fusion layer that combines them under a written admission rule, a flood-front model that dates the flood day by day, and a per-pixel "choreography" map. One scoreboard measures every detector the same way.
 
-**Which detector feeds the app.** Following the fusion study ([`fusion.md`](eda/fusion.md), section 6): for **lakes and mountains (Lake Sevan, Ararat Valley)** the fused (or Markov) water probability; for the **Tonle Sap flood extent and its area** the math detector with the terrain mask, because every persistence model shrinks the late flood. Details in [section 4.5](#45-which-detector-feeds-which-layer).
+**Which detector feeds the app.** **Fusion v2** ([`fusion2.md`](eda/fusion2.md), section 3.20) for every place: `"water_source": "fusion2"` in all 15 `areas/*/area.json`, applied in `scripts/detect/run.py`. It replaced the earlier split (fusion v1 for lakes, the math detector for floodplains) once it passed a rule that also measures the floodplain. The app shows a range: the area at fused probability above 0.75 to the area above 0.25. Details in [section 4.5](#45-which-detector-feeds-which-layer).
 
 **Headline results.**
 
@@ -21,10 +21,14 @@ This document describes everything the detection side of the project does, from 
 3. **Lake Sevan**: 1,242.5 km² (calm-date mean of the sub-pixel water fraction) against the published 1,242 km²; 1,235.3 km² largest body on every date, including the two rough-surface dates, with the hidden Markov model.
 4. **False water in the mountains** (more than 3 pixels from any water Landsat has seen in 38 years): Sevan 142.9 km² without terrain mask, 39.1 km² with it, 9.3 km² fused; Ararat 31.7 → 2.6 → 0.4 km².
 5. **Flooded vegetation is stable now**: the rebuilt rule moves by at most 1.53× under a one-step threshold change (old rule 7.8×), is ≤ 1.4 km² in Armenia (old 39 km²), and its July growth (1 → 213 → 462 km²) matches the early-July rise of the river gauge.
-6. **Tonle Sap open water grows from 2,234 km² (19 June) to 3,837 km² (17 October)**, a factor of 1.7. The absolute October area is uncertain: about 3,500 km² with a 5–95 % range of 2,000–4,800 km² from the threshold alone, while the tuning study calls 3,837 km² a lower bound with 3,800–5,900 km² plausible ([section 6.9](#69-uncertainty-of-the-water-areas)).
-7. **The flood front**: 309 km² flooded across the 24-day outage at 12.9 km²/day, between the rates of the intervals before (9.3) and after (13.6): no sign of a hidden surge.
+6. **Tonle Sap open water grows from 2,234 km² (19 June) to 3,837 km² (17 October) with the strict math detector**, a factor of 1.7. That detector is a lower bound: an independent estimate from the 2026 lake level and the 38-year Landsat record (section 3.19) puts the Landsat-visible flood at 5,421 km² (range 4,198–7,222) on 17 October ([section 6.9](#69-uncertainty-of-the-water-areas)).
+7. **Fusion v2 sizes the flood** (section 3.20): 5,046 km² on 17 October (probability range 4,196–6,051), inside the independent range on 7 of 10 passes (the strict detector and fusion v1: 1 of 10), mean area error 8.5 % (v1 25 %, math 20 %). Limits: the floodplain threshold was fitted to the same independent estimate, and only 76 % of its water lies inside the independent map.
+8. **Calibrated data** (section 3.22): a dB water rule tuned on one strip and tested on another gives 2,340 → 5,625 km² over the ten Tonle Sap dates, a mean deviation of 5.9 % from the independent estimate, and a threshold sensitivity at the flood peak of ×1.25 against ×2.39 on previews. The same rule gives 0 km² at Lake Sevan. Not yet in the app.
+9. **The flood front**: 309 km² flooded across the 24-day outage at 12.9 km²/day, between the rates of the intervals before (9.3) and after (13.6): no sign of a hidden surge.
 
-**Main limits** (section 8). Still unproven: the floodplain extent (no 2026 truth), the flooded-vegetation area (no reference map), and whether the little water left in the Ararat Valley is real. Then: uncalibrated 8-bit previews at 180 m; thresholds chosen on the same data; one season; the outage from 27 July to 10 August.
+**Interferometry** (section 3.21): coherence shows the farming season on the Ararat Valley floor; no ground motion above ±15 mm in 120 days; the soil-moisture product did not help. Not in the app.
+
+**Main limits** (section 8). Still unproven: the floodplain extent (no 2026 independent truth; the independent estimate is a model, not a measurement), the flooded-vegetation area (no reference map), and whether the little water left in the Ararat Valley is real. Then: uncalibrated 8-bit previews at 180 m; thresholds chosen on the same data; one season; the outage from 27 July to 10 August.
 
 ---
 
@@ -89,7 +93,7 @@ What these images are:
 * **About 180 m per pixel** on a north-up latitude/longitude grid with a transparent margin outside the swath.
 * **Red = blue = HH, green = HV.** The loader reads the red channel as HH and the green channel as HV.
 
-Why previews: the calibrated GCOV HDF5 files (1.9 GB per Tonle Sap pass, 7.5 GB per Armenia pass) require an Earthdata login, which we did not have on the first day. Previews let us build and test the full chain on real imagery.
+Why previews: the calibrated GCOV HDF5 files (1.9 GB per Tonle Sap pass, 7.5 GB per Armenia pass) require an Earthdata login, which we did not have on the first day. Previews let us build and test the full chain on real imagery. The login later worked, and the calibrated files are now read through a small remote server (section 1.6).
 
 What changes with calibrated data: values become linear-power gamma-naught (converted to decibels inside the detector), pixels become 30–80 m (`pixel_m` in `area.json`: 80 m for Tonle Sap, 30 m for Armenia), thresholds acquire physical meaning, and absolute brightness becomes comparable between areas and dates.
 
@@ -107,7 +111,11 @@ Every function in [`ops.py`](../scripts/detect/ops.py) works on a "log-like inte
 | Relative normalisation | on, multiplicative gain | off; if switched on, additive offset |
 | Spot time series | mean of $L$ × 100, "relative brightness 0–100" | $10\log_{10}$ of the mean raw linear power, dB |
 
-`run.py --source auto` uses `gamma0` if `data/processed/<area>/gamma0/hh/*.tif` exist, otherwise the previews. Today the app shows only preview-based products (`"source": "preview"` in every [`manifest.json`](../src/app/public/data/tonle-sap/manifest.json)).
+`run.py --source auto` uses `gamma0` if `data/processed/<area>/gamma0/hh/*.tif` exist, otherwise the previews. Today the app shows only preview-based products (`"source": "preview"` in every [`manifest.json`](../src/app/public/data/tonle-sap/manifest.json)); the calibrated detector of section 3.22 is not wired into it.
+
+### 1.6 Calibrated data path (extracted; detector analysed, not in the app)
+
+Source and procedure: [`calibrated-data.md`](research/calibrated-data.md). The GCOV files are too large for a laptop. [`remote_extract.py`](../scripts/ingest/remote_extract.py) runs on a small remote server (2 CPUs, 0.5 GB of memory), opens each remote HDF5 file over HTTPS with range requests, reads only the area's window and block-averages it to the area's grid; only the small result comes back. [`remote_run.sh`](../scripts/ingest/remote_run.sh) starts the job from the laptop, polls, copies the results and writes contract-A GeoTIFFs under `data/processed/<area>-cal/`. Each cell is the mean in linear power of the 20 m samples inside it (Tonle Sap 80 m, a 4 × 4 block; Armenia 30 m, a 3 × 3 block). State at the time of writing: all ten Tonle Sap dates are extracted and analysed; for Lake Sevan and the Ararat Valley eight of ten dates are local, and only the first five Sevan dates were analysed ([`calibrated.md`](eda/calibrated.md), section 9). The calibration tier is PROVISIONAL (`NISAR_L2_GCOV_PROVISIONAL_V1`, release P05023). Limits: the extractor reads about 3 MB/s and one job at a time; the sample-slip mask `inputDataExceptionMask` is not applied.
 
 ---
 
@@ -467,7 +475,9 @@ with $I_w$ the local mean of the water interior (31 × 31 window, water shrunk b
 
 **Results** (Lake Sevan, 8 calm dates, against 30 m Landsat): lake area **1,242.5 km²** against the published 1,242 km² (hard mask 1,225.9 km², −16.1 km²); date-to-date scatter 5.6 km² (hard 6.6); the median distance of the $f = 0.5$ line to the 30 m shoreline 52–63 m (hard staircase 84–107 m). A single pixel's fraction is still poor (RMSE about 0.35). At Tonle Sap the partial pixels add 80–290 km² that cannot be verified; quote them only as the upper side of the open-water range.
 
-### 3.17 Fusion layer and the admission rule
+### 3.17 Fusion layer and the admission rule (fusion v1)
+
+> **Superseded for the app by fusion v2 (section 3.20).** Fusion v1 is described here because v2 builds on it and because its failure on the floodplain (the gap below) is what v2 was built to fix.
 
 [`fusion.py`](../scripts/detect/fusion.py), [`scoreboard.py`](../scripts/detect/scoreboard.py), notes [`docs/eda/fusion.md`](eda/fusion.md) and [`docs/eda/scoreboard.md`](eda/scoreboard.md), tests [`tests/test_fusion.py`](../tests/test_fusion.py). Ten water detectors and three priors are combined into one probability of water per pixel and date.
 
@@ -500,6 +510,167 @@ fitted by class-balanced, penalised logistic regression on tune-strip anchor pix
 
 Admitted weights: Tonle Sap U-Net 0.74, deep autoencoder 0.42, math 0.11; Sevan U-Net 0.62, deep autoencoder 0.48, sub-pixel 0.26; Ararat math 0.98. **The gap in the rule**: it measured lakes and mountains but not the floodplain, so the fused map passed while losing about 700 km² of the 17 October Tonle Sap flood (3,120 against 3,837 km², which is itself a lower bound) and while its rank agreement with the 38-year record fell from 0.50 to 0.33. The cause is the time prior: learned on tune-strip pixels that almost never change, its land → water probability is 0.0013 per 12 days at Tonle Sap, so a pixel that floods late, with only one or two dates of evidence, is pulled back to land. The GMM + HMM and the random walker show the same loss. Hence the per-terrain choice in section 4.5. Further caveats: the anchors are easy pixels; several experts are copies of the math detector (U-Net, flood-order, statistical confidence and sub-pixel all derive from its masks); the TEST strip had been looked at three times by the tuning; the two admissions at 1.7 km² are within what the greedy selection could produce by chance.
 
+### 3.18 Self-calibrating ("seeded") water detector
+
+[`crossscene.py`](../scripts/detect/crossscene.py), notes [`docs/eda/crossscene.md`](eda/crossscene.md), tests [`tests/test_crossscene.py`](../tests/test_crossscene.py) (6), numbers `docs/eda/crossscene/results.json` and `scene_knobs.json`. Status: an expert inside fusion v2 and the per-scene mode switch; not a layer of its own.
+
+**Purpose.** The fixed brightness thresholds (HH < 0.06 / 0.12) assume that calm water sits at the display floor. That holds for Tonle Sap, Sevan, Poyang, Urmia and the Sudd. In Pantanal, Lake Chad, the Mekong and the Nile the water never goes below about 0.15 (0.0 % of pixels at the floor), so the fixed rule reaches 0 % of the permanent-water pixels in Pantanal, the Mekong and the Nile, and 0.2 % in Lake Chad. Those layers were empty.
+
+**Method.** All steps work on $u$, the log-odds of the filtered, normalised brightness (close to an affine function of dB), so no absolute brightness is used.
+
+1. *Robust units.* $z_c = (u_c - \operatorname{med}_c)/\operatorname{IQR}_c$ per channel, from the season median. Unchanged by any gain and offset of the stretch.
+2. *Is there water?* Smooth the histogram of $z_{HH}$, $z_{HV}$ and their mean; look for a valley at most 0.70 × the smaller neighbouring peak (`valley_depth_max`), with at least 300 pixels (about 10 km²) on the dark side and at most 40 % of the scene (`mode_max_frac`). If no feature has one, `has_water = False` and the masks are empty (Ararat, Okavango and Sindh come out water-free this way).
+3. *Seeds.* Pixels below the valley in the season composite and on at least 70 % of the dates, after a 3-pixel opening, components of at least 30 pixels, inside the terrain mask; at least 100 seed pixels.
+4. *Per date.* $a_t$ = median of the feature on the seeds today; $b_t$ = 25th percentile on land today (`land_q`);
+$$s(i,t) = \frac{f(i,t) - a_t}{b_t - a_t},$$
+0 = this scene's permanent water today, 1 = its darker land today. Hysteresis: seed where $s < 0.447$, grow where $s < 0.635$; with a single-channel feature the other channel must be below 0.936 in its own units; stable seed pixels stay water while $s < 0.70$. When a windy date brightens the lake, $a_t$ moves with it.
+5. *Lake mode* (`seeds_only`): grow only from seeds, so no new isolated water appears. This removes most false water in lake scenes (Pantanal 1.28 % → 0.06 %, Lake Chad 3.2 % → 0.0 %) but hides floodwater not connected to permanent water, so floodplains use the full mode. The mode is a human choice per place, made after looking at the Pantanal map.
+
+**Parameters.** $s$ thresholds 0.447 / 0.635 / 0.936 are where the old 0.06 / 0.12 / 0.35 sit on Tonle Sap and Sevan, so on those two scenes the new method reproduces the old one by construction. The three structural knobs (`valley_depth_max`, `mode_max_frac`, `land_q`) were chosen on a 3 × 3 × 2 grid over all 15 places.
+
+**Results** (balanced accuracy against Landsat anchors; 15 places):
+
+| protocol | places that work | fail badly | mean balanced accuracy (10 places with anchors) | mean false water |
+|---|---|---|---|---|
+| fixed thresholds (old) | 9 | 6 | 0.741 | 0.92 % |
+| seeded, leave one scene out | 9 | 3 | 0.913 | 4.0 % |
+| seeded, knobs chosen on all 15 | 10 | 2 | 0.917 | 1.2 % |
+
+Pantanal 0.500 → 0.994 (lake mode 1.000), Lake Chad 0.503 → 0.976 (lake mode 0.991), Inner Niger 0.501 → 0.913. On Tonle Sap it gives 2,301 → 4,389 km² (fixed 2,234 → 3,837), on Sevan 1,121–1,229 km² per date, on Ararat 0 km².
+
+**Limits.** The anchors are easy pixels. Leave-one-scene-out fails on Rondônia (43 % false water when it is held out: a land class can form a second dark mode as large as 47 % of the scene). The Nile delta is not rescued: sea, lagoons and land overlap in brightness (best single-threshold balanced accuracy 0.87). Rivers narrower than about 0.5 km are missed (Mekong, recall 0.30). Urmia is better with the fixed rule (0.957 against 0.886). Lake mode and the per-place mode were introduced after seeing results. On calibrated data its "no re-tuning in decibels" property did not hold (section 3.22).
+
+**Verdict.** Adopted as an expert in fusion v2 and as the source of its scene switch; it rescues Pantanal and Lake Chad. Do not quote its areas for the Nile delta, the Mekong or the Sudd.
+
+### 3.19 Independent flood-extent estimate from lake level (no radar)
+
+[`hydro.py`](../scripts/detect/hydro.py), notes [`docs/eda/hydro.md`](eda/hydro.md), tests [`tests/test_hydro.py`](../tests/test_hydro.py) (6), numbers `docs/eda/hydro/results.json`. Status: a reference used to judge and to set one threshold of fusion v2; not an app layer.
+
+**Purpose.** No 2026 map of the Tonle Sap flood exists, so the area of every radar detector was unscored. This module builds an expected flood map for each date using only the altimeter lake level $h_t$ and the 38-year Landsat water occurrence $o$ (JRC), with no NISAR data.
+
+**Method.** If a pixel at height $z$ is wet whenever the lake exceeds $z$ (the "bathtub" assumption), its long-term occurrence is how often the lake reaches $z$. The exceedance of level $h$, with equal weight per calendar month as JRC builds occurrence, is
+$$e(h) = \sum_{m=1}^{12} w_m\,P(H \ge h \mid m),\qquad \sum_m w_m = 1 .$$
+With the optical detection efficiency $d = 0.929$ (median occurrence of the 865 km² permanent core; 10th–90th percentile 0.908–0.950), the expected flooded set on date $t$ is the pixels with $o \ge o_t = 100\,d\,e(h_t)$; its area is $A^{exp}_t = \sum f_t\,a_{cell}$, with $f_t$ the share of 30 m pixels in a cell that pass. Data: G-REALM altimeter record 1992–2026, JRC GSW 1984–2021, Mekong River Commission gauge, Copernicus DEM.
+
+**Results.**
+
+* 17 October: **5,421 km², plausible range 4,198–7,222**, against 3,837 km² for the strict math detector (× 1.41; × 1.09 to × 1.88 across the range). The estimate exceeds the strict detector's area on every date (1.03–1.66 ×), so that detector is a lower bound.
+* Between 5 and 17 October the lake fell 0.26 m and the expected area fell 466 km², while the radar open water grew; 73 % of the water that "appeared" after 5 October was already inside the expected area on 5 October.
+* Occurrence against DEM height: Spearman −0.667 on the floodplain.
+* A fitted weak HH threshold of 0.202 (bootstrap 0.183–0.212) makes the detected area match the expected area. The same threshold on Sevan gives 1,467 km² (published 1,242) and triples false water in Armenia, so it is only valid inside a floodplain zone. This is the origin of the relaxed threshold in fusion v2 (3.20).
+* Counting water under flooded forest, total inundation is about 6,600–8,900 km² (bathtub on the DEM lower envelope and the published Kummu curve).
+
+**Limits.** The estimate is "water Landsat can see", not all inundation; at high water it reaches only 55–65 % of the published area–level curve. The bathtub assumption, the datum link between altimeter and gauge (0.6 m spread) and the detection efficiency $d$ all enter. It is a model, not a measurement.
+
+**Verdict.** Useful as an independent yardstick for area. Any detector scored against it and also tuned on it is partly in-sample (see 3.20).
+
+### 3.20 Fusion v2: one water detector for lakes, mountains and floodplains
+
+[`fusion2.py`](../scripts/detect/fusion2.py), notes [`docs/eda/fusion2.md`](eda/fusion2.md), tests [`tests/test_fusion2.py`](../tests/test_fusion2.py) (10), numbers `docs/eda/fusion2/results.json`, products `data/processed/<area>/fusion2/products.pt`. Status: **shipped**; the water source for all 15 places.
+
+**Purpose.** Fusion v1 (3.17) was the best map for lakes and mountains but lost 19 % of the Tonle Sap flood (3,120 km² on 17 October). v2 keeps v1's pooling of experts and changes three things.
+
+**Method.** Per-date pooled water probability $q_t(i)$ as in v1 (log-linear pooling, hard terrain mask, weights fitted on tune-strip anchors). Hidden state $S_t \in \{W, L\}$ (open water, land) in the admitted model.
+
+1. *Time model that knows when a pixel darkens.* The transition matrix depends on an input class $k_t(i)$:
+$$P(S_{t+1}=s' \mid S_t=s, k_t(i)=k) = A^{(k)}_{ss'},\quad d_t(i) = [\mathrm{HH}_{t+1}-\mathrm{HH}_t < -0.03] \wedge [\mathrm{HH}_{t+1} < 0.12] \wedge [i \in \mathcal R].$$
+$A^{(k)}$ is fitted by Baum–Welch on 40,000 random tune-strip pixels per area, 2 pseudo-counts per cell, partial pooling $0.7\,A^{(k)}_{MLE} + 0.3\,A_{pooled}$; the outage is one phantom step ($A^{(k)}A^{(k)}$). At Tonle Sap land → water is 0.0033 per 12 days without darkening and 0.654 with it (v1: 0.0013 for everything).
+2. *Floodplain zone found without any reference.*
+$$\mathcal R = \{ i : \text{slope} < 1^\circ,\ \text{height above local low} < 5\ \text{m},\ \text{terrain allows water},\ \operatorname{IQR}_t \mathrm{HH}_t(i) > 0.08\}.$$
+Tonle Sap: 12,055 km² (33 % of the footprint); Sevan and Ararat: 0 km². Inside $\mathcal R$ the strict threshold is relaxed from 0.12 to $\theta = 0.19$, chosen on the Tonle Sap tune strip only as the value at which summed water area matches the independent estimate of 3.19.
+3. *Seeded detector as an expert* (3.18). Main-set weights: math 0.00, U-Net 0.54, deep autoencoder 0.39, sub-pixel 0.11, seeded 0.37 (Ararat: sub-pixel 0.50, seeded 0.53). Then a masked 3 × 3 mean.
+4. *Scene switches.* The floodplain regime is off for a scene when it covers less than 5 % of the footprint, or when the seeded detector chose lake mode or found no water.
+
+A third state, water under vegetation, is computed as a separate layer (`p_state`, `fv_km2`). The admitted model has two states because the three-state version lowered area agreement with the independent estimate. The layer is about a third the size of the existing rule (peak 751 km² on 11 September against 2,113 on 30 August) and is not validated; the app keeps the rebuilt rule.
+
+**Admission rule** (`RULE2`, declared before the TEST strip was read). A change is admitted only if lakes and mountains keep the v1 gains (balanced accuracy not down by more than 0.1 pp; mountain false water up by at most max(1 km², 10 %); Sevan rough-date dip ≤ 5 km²), the floodplain does not degrade (altimeter Spearman, rank consistency, hydro area error, IoU with the hydro map, dates in band), a hard "no flood eaten" guard holds (every date at least 98 % of the strict detector's confident core), at least one named improvement, and at most 600 s per area. Admitted: darkening-flag time model, floodplain expert set with the math HH score, relaxed threshold, and (amendment 2) the seeded detector in the main set. Amendment 3 (scene switch) was adopted after looking at the fifteen places. Rejected: stationary and per-interval time models, the regime as input, three states, every other expert offered. Full table: `fusion2.md`, section 3.
+
+**Results.**
+
+| | math + terrain | fusion v1 | seeded | **fusion v2** |
+|---|---|---|---|---|
+| Tonle Sap balanced accuracy | 99.57 % | 99.98 % | 99.74 % | **99.97 %** |
+| Sevan balanced accuracy | 99.58 % | 99.89 % | 99.94 % | **99.92 %** |
+| Sevan calm-date error (km², published 1,242) | 16.1 | 10.0 | 31.3 | **8.6** |
+| Sevan rough-date dip (km²) | 65.7 | 0.7 | 42.9 | **−0.1** |
+| Far water, Sevan / Ararat (km²) | 39.1 / 2.65 | 9.3 / 0.41 | 0 / 0 | **6.0 / 0.31** |
+| Tonle Sap 17 Oct open water (km²; independent 5,421, range 4,198–7,222) | 3,837 | 3,120 | 4,388 | **5,046** |
+| Mean area error against the independent estimate | 20.1 % | 25.4 % | 15.5 % | **8.5 %** |
+| Dates inside the independent range (of 10) | 1 | 1 | 3 | **7** |
+| Spearman with the altimeter level | 0.976 | 0.976 | 0.952 | **0.976** |
+| Pixel IoU with the independent map, TEST strip | 0.481 | 0.474 | 0.494 | **0.520** |
+| "No flood eaten" guard (worst date / core) | 1.00 pass | 0.81 fail | 1.13 pass | **1.12 pass** |
+
+Tonle Sap per date, v2 (km²): 2,281 (19 Jun), 2,355, 2,418, 2,537, 3,152, 3,461, 3,818, 4,436, 4,904, 5,046 (17 Oct). It does not flood early: on 19 June to 25 July it is 0–13 % below the independent estimate. The probability band (area at $\gamma(W) > 0.75$ to $> 0.25$) is the range the app shows: Tonle Sap 17 October 4,196–6,051 km²; at Sevan it contains the published 1,242 km² on 10 of 10 dates (1,206–1,260 km²); at Tonle Sap it contains the independent estimate on 9 of 10 dates. Both coverage checks use the references they are compared with, so they are in-sample.
+
+On the other places (no study-area tuning), v2 has the best balanced accuracy on 5 of the 8 that have a balanced-accuracy anchor set and is within 0.6 pp of the best on the others (Inner Niger 97.3 %, Poyang 99.9 %, Urmia 97.0 %, Sudd 96.7 %, Mekong 65.1 %, Lake Chad 99.3 %, Nile delta 71.4 %, Pantanal 99.98 %).
+
+**Limits** (`fusion2.md`, section 10).
+
+1. Area is better, location only a little: on 17 October only 76 % of v2's water lies inside the independent map (v1 93 %, math 86 %), and 49 % of its newest water. IoU rises only from 0.48 to 0.52. The relaxed threshold also catches dark, wet, non-flooded surfaces (far water at Tonle Sap 18.8 km², v1 0.65).
+2. $\theta = 0.19$ was fitted to the independent estimate on the tune strip; the area error and in-band count are measured on the whole lake, so they are partly in-sample. Only the TEST-strip IoU, the altimeter correlation and the rank consistency are clean. The independent map is itself "water Landsat can see".
+3. One floodplain: every floodplain criterion comes from Tonle Sap; the darkening thresholds (0.03, 0.12) and the regime rule (1°, 5 m, IQR 0.08) were set by hand.
+4. The other-place check is not fully fresh: the seeded detector's knobs saw those places and amendment 3 was decided after seeing them. Before the seeded detector joined, v2 on the six declared places was no better than the v1 recipe.
+5. Three amendments after first results (all logged in `results.json`).
+6. The altimeter correlation cannot separate methods (ten dates; math, v1 and v2 all 0.976).
+7. Uncalibrated previews at about 180 m; the anchors are easy pixels, so 99.9 % figures overstate accuracy in mixed areas.
+
+**Verdict.** Shipped as the water source for all 15 places. It fixes the area of the Tonle Sap flood without breaking Lake Sevan or the Armenian mountains, and the per-terrain behaviour is inside the model, so no per-place choice is needed. It does not make the flood outline reliable.
+
+### 3.21 Interferometry: coherence, ground motion and soil moisture
+
+[`insar.py`](../scripts/detect/insar.py), [`remote_products.py`](../scripts/ingest/remote_products.py), notes [`docs/eda/insar.md`](eda/insar.md), tests [`tests/test_insar.py`](../tests/test_insar.py) (10), numbers `docs/eda/insar/results.json`. Status: evaluated only; no layer in the app (a candidate coherence layer exists as a GeoTIFF).
+
+**Purpose.** NISAR records phase as well as strength. Two passes 12 days apart give an interferogram. Its coherence $|\gamma| \in [0, 1]$ says how similar the echoes were: rock and buildings stay near 0.7–0.9; growing crops, ploughing, irrigation and water drop it to 0.1–0.3. Its phase gives ground motion along the line of sight,
+$$d_{LOS} = -\frac{\lambda}{4\pi}\,\phi,\qquad \lambda = 0.2420\ \mathrm{m},$$
+so one phase cycle is 121 mm. Questions: does coherence see what amplitude did not (Ararat farming), is there groundwater subsidence in the Ararat Valley, does the 200 m soil-moisture product (SME2) help, and does coherence confirm the Tonle Sap flood onset?
+
+**Method.** Products: L2 GUNW (80 m unwrapped phase, coherence, ionosphere screen) and L3 SME2, all PROVISIONAL V1; windows are read from the remote files over HTTP range requests on the remote server and shrunk before download. Ground motion: subtract the ionosphere screen, mask coherence below 0.4, convert to mm, fit a plane plus a height term on stable ground (DEM above 1,000 m, or Yerevan) to absorb the troposphere, reference to Yerevan, stack the nine pairs (120 days), test four 3-km targets and a Sevan control.
+
+**Results.**
+
+| Question | Result |
+|---|---|
+| Coherence, Ararat valley floor | Share of the floor with coherence below 0.3: 43–44 % in the first two June–July pairs, 22–25 % in the last three pairs (12 Sep to 18 Oct); foothills 9–16 % throughout. Mean valley-floor coherence 0.368 (summer) to 0.449 (autumn), +0.081, about twice the change of the foothills (+0.039). The autumn-minus-summer map has spatial correlation 0.26 / 0.16 / 0.10 at 80 / 160 / 320 m against 0.08 / 0.04 / 0.02 for noise, the size of fields. The amplitude change test found 0.04 km² of significant change on the same floor. |
+| Ground motion, Ararat | Not detected. All four targets within noise, $\lvert D\rvert \le 12$ mm against a ±15 mm (2σ) limit over 120 days; the Sevan control shows the same scatter; per-pair scatter on stable ground 20–29 mm in June–July, 7–9 mm from mid-August. A year of passes would detect steady subsidence of about 7–8 mm per year (estimate, not measured). |
+| Soil moisture (SME2) | Not useful: the irrigated floor reads drier than the foothills on all ten dates; the 31 August rain step (+0.012 m³/m³) is no larger than steps on dry dates; changes are region-wide. Median stated uncertainty 0.032 m³/m³. |
+| Tonle Sap coherence | Newly flooded pixels from the amplitude map have median coherence 0.12–0.22 against 0.39–0.52 on dry land, but 4–14 × more dry land also loses coherence in the wet season: a supporting check, not a flood map. |
+
+**Limits.** Provisional products; ionosphere is the largest term (about 80 mm across the window, stated 1σ of 12–42 mm); nine pairs, one track; coherence at 80 m blurs single fields (a field-by-field harvest date is not supported); region rules come from the DEM, not a land-cover map; the phase sign convention follows ISCE3 and is not stated in the ASF guide (the verdict does not depend on it).
+
+**Verdict.** Coherence shows the farming season on the Ararat floor, which the 180 m amplitude previews did not. We did not measure subsidence, harvest dates or irrigation with soil moisture, and do not claim them.
+
+### 3.22 Detector on calibrated data
+
+[`calibrated.py`](../scripts/detect/calibrated.py), notes [`docs/eda/calibrated.md`](eda/calibrated.md), tests [`tests/test_calibrated.py`](../tests/test_calibrated.py) (11), numbers `docs/eda/calibrated_det/results.json` and `gamma0_knobs.json`, masks `data/processed/tonle-sap-cal/det/`. Status: **done and analysed for Tonle Sap (ten dates, 80 m); not wired into the app**, which still shows preview-based fusion v2. Data: section 1.6; calibration tier PROVISIONAL.
+
+**Purpose.** Previews are display stretches: the lake is clipped to black and every threshold is a number on an arbitrary 0–1 scale. Calibrated gamma-naught (converted to dB) makes thresholds physical and separates calm from rough water.
+
+**Measured levels** (single 80 m pixels, 19 June): calm lake HH −19.5 dB, HV −25.8 dB (HV of the lake is the instrument noise floor, −25.5 to −26.8 dB over the dates, and does not follow wind); upland forest −5.0 / −9.7 dB; open land −8.5 / −16.1 dB. Wind moves the lake HH median between −20.7 and −18.4 dB. Effective number of looks about 80 (HH) and 100 (HV) at 80 m. No per-date normalisation is needed (stable forest varies by 0.27 dB HH, 0.17 dB HV).
+
+**Method.** The water rule of 3.3 in dB on the 3 × 3 Quegan-filtered HH, with thresholds tuned by the procedure of `tune.py` (random plus local search on a tune strip, 0–42 % of the columns; test strip 50–100 %; hard budget of 0.02 % false alarms on never-wet land; 40 evaluations), plus 2-pixel shoreline refinement, and the rebuilt flooded-vegetation rule with its floors translated to dB.
+
+**Parameters.** `water_hh_strong` −20.15 dB, `water_hh_weak` −15.66 dB, `water_hv_max` −24.0 dB, box 3, specks under 9 cells removed. The search run with 1, 5 and 10 dates gave −20.2/−15.8, −20.2/−16.3 and −20.15/−15.7: stable. The values match what the physics gives without a search (strong 1 dB below the calm-lake median; HV the noise floor + 2 dB).
+
+**Results.**
+
+* Held-out strip: balanced accuracy 0.995 (95 % interval 0.993–0.996), recall 0.990, false water 2.0 km² per date. The untested literature knobs gave 0.990; the preview-tuned seeded detector 0.989 with 122 km² of false water per date.
+* Open water, ten dates (km²): 2,340, 2,261, 2,400, 2,432, 3,079, 3,569, 4,042, 5,015, 5,629, **5,625** (17 Oct). Mean absolute deviation from the independent estimate of 3.19: **5.9 %** (preview math detector 20 %, fusion v2 8.5 %). Seven of ten dates inside the independent range (all six from 18 August); the misses are 19 June (−5 %) and 13 and 25 July (−13 %, −14 %), when the new water is under the flooded forest. Spearman with the lake level 1.00 (Pearson 0.94; fusion v2 0.98 / 0.95). From 5 to 17 October the lake fell and the calibrated area stayed flat (5,629 → 5,625 km²) while the preview series kept rising.
+* Threshold sensitivity at the flood peak (17 October, weak threshold varied over the physically justified interval −17.5 … −15.5 dB): 4,793–5,984 km², a factor of **1.25**; on previews 2,015–4,819 km² (weak 0.04–0.17), a factor of 2.39.
+* Flooded vegetation, rebuilt rule in dB: 1, 2, 284, 539, 1,870, **2,594** (30 Aug), 2,405, 2,030, 1,861, 1,363 km²; 88 % of it lies inside the Landsat maximum water extent (previews 77 %). The area moves by a factor of 2.1 across eight rule variants (previews 1.5), so calibration did not make this rule more stable; the km² are uncertain by roughly a factor 1.5.
+* Resolution: at 17 October the whole-footprint water mask has 773 water bodies against 344 on previews; the Tonle Sap river and side channels at Kampong Chhnang become continuous ribbons.
+* Change test with the theoretical gamma null at the measured ENL: on real data it is not at its nominal level (17 % of stable forest flagged at nominal 1 %; the false-discovery-rate map flags 83 % of the footprint). It needs a minimum effect size (for example 1.5 dB) or an empirical null.
+
+**Limits.**
+
+* **The same dB thresholds give 0 km² at Lake Sevan.** The Armenian product (40 MHz mode, 30 m) has a noise floor about 7–8 dB higher than Tonle Sap's: calm lake HH −15.0 to −15.6 dB and HV −16.8 to −17.1 dB there, against dry land HV near −15 dB, so the HV guard rejects the whole lake. Absolute dB water thresholds are mode-specific. A diagnostic HH-only rule read off Sevan itself (−15.5 / −14.0 dB) gives 1,210–1,239 km² on five dates (published 1,242) with 26–60 km² per date of false water; that shows the data can measure the lake, not that a rule transfers. Armenia needs its own knobs or noise-floor-relative thresholds.
+* The self-calibrating seeded detector does not transfer to dB as designed: with its preview levels it gives 7,356 km² on 17 October and 122 km² of false water per date; with levels re-derived for dB it undercounts (4,626 km² on 17 October).
+* Wind still brightens the lake by up to about 2.3 dB: on the windy 18 August the area depends on the weak threshold (factor 1.6). Calibrated data show the wind, they do not remove it.
+* Water under vegetation in early July is still missed by the open-water rule.
+* The tuning labels are Landsat 1984–2021, which also cannot see water under trees. PROVISIONAL calibration; sample-slip mask not applied; one season, one area. Armenia: only the first five Sevan dates were analysed; the Ararat dates and the 6 October HV anomaly were not.
+
+**Verdict.** On Tonle Sap, calibrated data narrow the area uncertainty at the flood peak and give the best match with the independent estimate of any detector we ran, with an independent check on timing (altimeter rank 1.00). The result is for one lake in one mode. It is not shipped; moving it into the app needs the code changes listed in `calibrated.md`, section 11.
+
 ---
 
 ## 4. Products for the app
@@ -523,7 +694,7 @@ For Tonle Sap the composite dates are 19 June, 30 August and 17 October. The leg
 **Added on 14 November** (in `run.py` as read at about 13:50, and in the app export of 13:49; the lead was still editing the file):
 
 * quality-control neutralisation of a failed channel before detection (section 2.8); the `hh`/`hv` image layers keep the pass as observed, and the spot time series shows a gap for the neutralised channel;
-* a per-area water source: `"water_source": "fusion"` in `areas/<area>/area.json` replaces the open-water mask with the fused map from `data/processed/<area>/fusion/products.pt` (then the rough-surface flag is switched off and the classes are recomputed); set for Sevan and Ararat, not for Tonle Sap (section 4.5);
+* a per-area water source: `"water_source": "fusion"` in `areas/<area>/area.json` replaces the open-water mask with the fused map from `data/processed/<area>/<source>/products.pt` (then the rough-surface flag is switched off and the classes are recomputed). Accepted values: `fusion` (v1) and `fusion2`; **all 15 areas now set `"fusion2"`** (section 4.5). If the products are missing or on another grid, `run.py` prints a message and falls back to the math detector. An optional `"fv_source": "fusion2"` swaps in the three-state vegetation layer; it is not set (unvalidated, section 3.20);
 * extra season layers, chosen per area by `"extra_layers"` (default `["sig"]`) and inserted after `when` in `layers.json`, each only if its product exists:
 
 | id | What is painted | Source |
@@ -532,7 +703,7 @@ For Tonle Sap the composite dates are 19 June, 30 August and 17 October. The leg
 | `arrival` | estimated day the water arrived, 48 viridis steps from the first to the last pass; label "Day the water arrived (estimated between passes)" | `novel/products.pt`, section 4.6 (Tonle Sap only) |
 | `choreo` | the choreography colour image (hue = moment of the step, saturation = size, value = mean HH; grey = no significant step) | `novel/products.pt`, section 4.6 (Tonle Sap only) |
 
-* for the math water source, the "Open water" fact in `timeseries.json` also carries `lo` / `hi`: the 5–95 % range per date from the uncertainty study (section 6.9); a third fact "of which going under" gives the state-2 flooded-vegetation area.
+* for the math water source, the "Open water" fact in `timeseries.json` also carries `lo` / `hi`: the 5–95 % range per date from the uncertainty study (section 6.9); for the fusion v2 source the range is the area at fused probability above 0.75 to the area above 0.25 (section 3.20); a third fact "of which going under" gives the state-2 flooded-vegetation area.
 
 The layer order in `layers.json` is now hh, water, when, (sig, arrival, choreo), classes, change, rgb, hv. [`tests/test_run.py`](../tests/test_run.py) still checks the original seven layers on the synthetic gamma0 fixture (which has no extra products).
 
@@ -559,7 +730,7 @@ Defined in [`plan/00-contracts.md`](../plan/00-contracts.md):
 ```mermaid
 flowchart TD
     A["ASF search API (no login)"] --> B["fetch_previews.py: LATLON.png + footprint wkt"]
-    A2["ASF / Earthdata login (not yet)"] -.-> C2["backend: GCOV HDF5 to contract A GeoTIFFs"]
+    A2["ASF GCOV HDF5, via a small remote server"] -.-> C2["remote_extract.py: contract A GeoTIFFs, data/processed/AREA-cal"]
     B --> C["stack.load_preview_stack: georeference, resample, co-register"]
     C --> Q["qc.py: qc.json per area"]
     DEM["Copernicus DEM GLO-90"] --> TM["terrain.py: terrain.pt"]
@@ -570,7 +741,14 @@ flowchart TD
     D2 -.-> E
     E --> FV["floodveg.py: two-state flooded vegetation"]
     E --> M["analysis modules: stats_change, gmm, graphdet, subpixel, novel"]
-    M --> FU["fusion.py and scoreboard.py: fused water, admission table"]
+    M --> FU["fusion.py and scoreboard.py: fused water v1, admission table"]
+    C --> CS["crossscene.py: seeded detector"]
+    HY["altimeter level + Landsat record"] --> HM["hydro.py: independent flood estimate"]
+    CS --> F2["fusion2.py: shipped water source, all 15 places"]
+    FU --> F2
+    HM -.-> F2
+    F2 --> F
+    C2 -.-> CAL["calibrated.py: dB detector, evaluated only"]
     FV --> F["run.py: coloured RGBA GeoTIFFs, layers.json, timeseries.json, source.json (contract B)"]
     E --> F
     M --> F
@@ -584,19 +762,21 @@ flowchart TD
     L --> V2["validate_2026.py: weather, gauges, altimetry"]
 ```
 
-Dashed arrows are the calibrated-data path, which exists in code but has run only on the synthetic fixture.
+Dashed arrows are the calibrated-data path (extracted and analysed for Tonle Sap; not connected to the app) and the use of the independent estimate to set one fusion v2 threshold and to judge it. Evaluated-only modules (learned despeckling, physics autoencoder, supervised network, interferometry) are not drawn.
 
 ### 4.5 Which detector feeds which layer
 
-Following the recommendation of [`fusion.md`](eda/fusion.md) (section 6), the choice depends on the kind of place:
+Since the evening of 14 November one detector feeds the water layer everywhere: **fusion v2** (section 3.20), set per place by `"water_source": "fusion2"` in `areas/<area>/area.json` (all 15). The earlier per-terrain split (fusion v1 for Sevan and Ararat, the math detector for floodplains) was replaced because v2 passes a rule that measures the floodplain too; the reason for the split is in section 3.17.
 
-| Kind of area | Open water layer and area | Why | Set by |
-|---|---|---|---|
-| **Lakes and mountains** (Lake Sevan, Ararat Valley) | the **fused** water map, $\gamma > 0.5$ (section 3.17); the HMM water mask of section 3.14 is the equivalent fallback | removes the rough-surface dip (Sevan dip 66 → 1 km²), almost all mountain false water and almost all date-to-date flicker; every gain measured on the TEST strip | `"water_source": "fusion"` in `areas/sevan/area.json` and `areas/ararat/area.json` |
-| **Floodplains** (Tonle Sap, and by default every other place) | the **math detector with the terrain mask** (sections 3.3, 2.9), with the 5–95 % range of section 6.9 | every persistence model (fusion, HMM, random walker) shrinks the late flood: fused 3,120 km² on 17 October against the detector's 3,837 km², which the tuning study already calls a lower bound | default (no `water_source`) |
-| everywhere | flooded vegetation: the rebuilt two-state rule (section 3.6); change: the change point (`when`) and the statistical test (`sig`) | – | `run.py` |
+| Layer | Source | Notes |
+|---|---|---|
+| Open water per date and its area | fusion v2, $\gamma(W) > 0.5$; the app shows the range from area at $\gamma > 0.75$ to area at $\gamma > 0.25$ | Tonle Sap 17 October 5,046 km² (4,196–6,051); Sevan largest body 1,233 km² on every date; a sharpness band, not a confidence interval |
+| Flooded vegetation | the rebuilt two-state rule (3.6) | the fusion v2 three-state layer is not used (unvalidated, a third of the rule's size) |
+| Change | change point (`when`) and statistical test (`sig`) | unchanged |
+| Flood front, choreography | physics water masks (`novel.py`) | Tonle Sap only; these still read the math detector's masks, not fusion v2 |
+| Fallback | the math detector with the terrain mask | used when `fusion2/products.pt` is missing or on another grid |
 
-The fused probability can also be shown as a confidence layer on floodplains; that layer is not in `run.py` yet. The other ten places in the app use the default (math detector with terrain mask, rebuilt flooded vegetation, `sig` layer).
+Not used by the app: the stand-alone Markov (3.14), graph (3.15) and sub-pixel (3.16) detectors, the calibrated-data detector (3.22), the learned filters and networks of section 5.
 
 ### 4.6 Flood front, height from flood order, choreography
 
@@ -615,7 +795,7 @@ Results are in section 6.12.
 
 ## 5. Machine learning
 
-Code: [`models.py`](../scripts/detect/models.py) (models, k-means), [`weak_labels.py`](../scripts/detect/weak_labels.py) (labels), [`train.py`](../scripts/detect/train.py) (training, prediction, sweep, robustness). Full notes: [`docs/eda/dl-notes.md`](eda/dl-notes.md). **No ground truth exists**; every network score below is agreement with another algorithm, or reconstruction error, not accuracy. No network draws a layer on its own. Two of them, the U-Net v2 and the deep autoencoder of section 5.6, are admitted experts in the fusion layer (section 3.17) and therefore contribute to the fused water map that the app shows for Lake Sevan (weights 0.62 and 0.48; Ararat's fused map uses the math detector only).
+Code: [`models.py`](../scripts/detect/models.py) (models, k-means), [`weak_labels.py`](../scripts/detect/weak_labels.py) (labels), [`train.py`](../scripts/detect/train.py) (training, prediction, sweep, robustness). Full notes: [`docs/eda/dl-notes.md`](eda/dl-notes.md). **No ground truth exists**; every network score below is agreement with another algorithm, or reconstruction error, not accuracy. No network draws a layer on its own. Two of them, the U-Net v2 and the deep autoencoder of section 5.6, are admitted experts in fusion v1 (section 3.17) and in the main expert set of fusion v2 (section 3.20; weights 0.54 and 0.39), and therefore contribute to the water map that the app shows. Sections 5.9–5.11 add three later studies (learned despeckling, a physics autoencoder, a network trained on independent labels); none of them is used by the app.
 
 The networks use [`train.load_stack`](../scripts/detect/train.py), which applies its own swath-edge clean-up: pixels at most 1.5/255 in both channels that are connected (up to 40 px deep, 3 × 3 growth) to the invalid area are removed, plus every pixel within 8 px (`EDGE_PX`) of that area. The input is the co-registered preview stack.
 
@@ -702,6 +882,72 @@ Survey and tests in [`docs/research/hf-models.md`](research/hf-models.md), code 
 
 * **Microsoft `ai4g_flood`** (global Sentinel-1 flood network, MIT, 6.6 M parameters), loaded in plain PyTorch with HH in the VV slot and HV in the VH slot: zero-shot it equals its own threshold rule (flood IoU 0.390 against 0.389); fine-tuned for 90 s on math-detector labels it reproduces the detector (IoU 0.725), which shows it runs on NISAR, not that it knows more.
 * **`gsvrg/ALOS-2_FM`**, the only open L-band model (Swin-B pretrained on ALOS-2 PALSAR-2 HH, about 87 M parameters, SHA-256 verified): with the encoder frozen, a light head trained on independent JRC labels at nine other places, and **Lake Sevan held out**, balanced accuracy at Sevan is **0.91**, against 0.67 for the same network with random weights and **0.99** for the math detector (largest-body error 50 against 29 km²). L-band pretraining carries real knowledge, but on previews it does not beat the detector. One seed, 2 minutes of training per variant.
+
+### 5.9 Learned despeckling (evaluated; the current filter stays)
+
+[`despeckle.py`](../scripts/detect/despeckle.py), notes [`docs/eda/despeckle.md`](eda/despeckle.md), tests [`tests/test_despeckle.py`](../tests/test_despeckle.py) (6), numbers `docs/eda/despeckle/results.json`.
+
+**Purpose.** Replace the 3 × 3 Quegan multi-temporal filter with a network that removes speckle without clean training images.
+
+**Method.** Noise2Noise logic (Lehtinen et al. 2018): speckle differs on every pass, the ground mostly does not, so a network that predicts one look from another learns the ground. Four variants, each with a guard against erasing real change: plain `n2n` (no guard, the control); `n2n_masked` (low frequencies of the target replaced by the input's, loss weighted by a no-change probability); `blindspot` (sees only the same date, never the pixel itself); `multitemporal` (5 × 5 blind spot plus all other dates through learned attention). The blind-spot and multitemporal outputs are combined with the observed pixel by a Bayesian step using the measured noise level. Seven models of 0.09–1.1 M parameters, 174–586 s of training each on the laptop GPU, trained on 12 areas (Ararat held out), training columns only.
+
+**Results** (held-out TEST anchors, balanced accuracy; intervals ±0.003):
+
+| filter | Tonle Sap | Sevan |
+|---|---|---|
+| Quegan 3 × 3 (current) | 0.9957 | 0.9958 |
+| best learned (multi-temporal S, no Bayes) | 0.9953 | 0.9977 |
+| multi-temporal S | 0.9951 | 0.9963 |
+| plain Noise2Noise (control) | 0.8160 | 0.9811 |
+
+The learned filters never move an edge and keep 97–100 % of a real flood step on its date (the current filter keeps 89 %), but they gain only ×1.1–1.5 in equivalent number of looks against ×2.5–3.1 for the current filter, because the previews are already heavily averaged and the remaining noise is correlated. They leave about three times more speckle-sized water specks.
+
+**Limits.** Previews are the least favourable setting; training was 3–10 minutes per model and the validation loss was still falling; the Bayes step trusts a measured noise table that is probably under-estimated; Sevan's noise figures rest on only 253 stable pixels. On calibrated 80 m data, and more at 20 m, the learned filters may pay off; that was run as a glimpse on one date only.
+
+**Verdict.** Keep the current filter. No detection number improved beyond the test noise.
+
+### 5.10 Physics autoencoder (evaluated; not used)
+
+[`unmix.py`](../scripts/detect/unmix.py), notes [`docs/eda/unmix.md`](eda/unmix.md), tests [`tests/test_unmix.py`](../tests/test_unmix.py) (8), numbers `docs/eda/unmix/results.json`, model `data/processed/models/unmix_full.pt` (268,003 parameters).
+
+**Purpose.** Split every pixel and date into open water, water under vegetation and dry land fractions, without labels.
+
+**Method.** An encoder (small U-Net plus per-date and temporal blocks) outputs per-date fractions $f_w, f_v, f_l$ (softmax) and a dry-land end-member $E_l$. A fixed physics decoder adds the three parts in power and converts back to display brightness with an assumed 30 dB stretch $D$:
+$$\hat I^c_t = g^c_t\big[f_w\,E^c_w\,r^c_t\,q^c + f_v\,G^c E^c_l + f_l\,E^c_l\big] + N^c,\qquad I = 10^{D(b-1)/10},$$
+with $r^c_t$ a learned water roughness per scene and date, $G^c$ double-bounce gains, $g^c_t$ a date gain, $N^c$ a noise floor. The loss is a Huber reconstruction term plus entropy, water all-or-nothing, temporal and spatial smoothness and physical-range terms. The terrain mask is applied after inference.
+
+**Results.**
+
+* Lake Sevan shoreline fractions against the 30 m reference: RMSE 0.507 and correlation 0.30, against 0.354 and 0.53 for `subpixel.py` and 0.474 for the hard mask. Lake area 1,177 km² (published 1,242; `subpixel.py` 1,242.5).
+* Tonle Sap open water 3,998 → 9,757 km², above the independent range on every date (expected 2,458 → 5,421, up to 7,222); only 0.49–0.65 of its water lies inside the independent set (strict detector 0.86–0.97).
+* In its favour: on synthetic scenes with known truth it is the best method (water RMSE 0.110 against 0.158 hard and 0.317 for the analytic one-liner); at Sevan its learned roughness jumps only on 31 August (+0.5 dB HH, +1.4 dB HV); its rank agreement with long-term occurrence in the Tonle Sap floodplain is the highest of all methods (0.596 against 0.519 hard).
+
+**Limits.** Constant partly flooded pixels are called land; the flooded-vegetation fraction is unusable (about 2,000 km² in dry June at Tonle Sap); HV roughness follows noise, not wind; previews only, one seed per variant, ablations of 2.5 minutes.
+
+**Verdict.** Does not beat `subpixel.py` and does not replace the hard detector. Not used in the app; a talk item.
+
+### 5.11 Network trained on independent labels (cross-check only)
+
+[`supervised.py`](../scripts/detect/supervised.py), notes [`docs/eda/supervised.md`](eda/supervised.md), tests [`tests/test_supervised.py`](../tests/test_supervised.py) (6), numbers `docs/eda/supervised/results.json`.
+
+**Purpose.** Every earlier network learned from our own detector's labels, so at best it copied it. This one learns from the JRC Global Surface Water record (permanent water, and land with no water within 3 pixels; everything else ignored, plus a weak land target where water was seen under 10 % of the time) and is tested on places it never saw.
+
+**Method.** Residual U-Net (width 32, depth 3, 2,057,858 parameters) with a water-probability head and a sub-pixel fraction head. Inputs: log of median-normalised HH, season min, mean, max and std, HH of the previous and next dates, slope and relative height; none from our detector. Augmentation pastes synthetic floods and wind. 500 iterations of 16 patches of 128 pixels, 150 s.
+
+**Results** (trained on 8–9 other places).
+
+| place | this network | math + terrain | fusion v2 |
+|---|---|---|---|
+| Lake Sevan balanced accuracy | 0.994 (leave-one-place-out run: 0.987) | 0.989 | 0.9988 |
+| Sevan false water on land (km²) | 99 (15.7 in the leave-one-place-out run) | 31 | 6 |
+| Lake Chad balanced accuracy (held out) | 0.850 | 0.503 | 0.994 |
+| Tonle Sap balanced accuracy | 0.9985 | 0.995 | – |
+
+On Tonle Sap fusion v2 tracks the independent expected extent far better (7 of 10 dates inside the range, against 1 for the math detector). A per-pixel logistic regression on the same inputs is as good or better at Sevan.
+
+**Limits.** Labels and test anchors are the same kind of reference (JRC) at different places; agreement is not agreement with 2026 truth, and the reference ends in 2021. Only unambiguous pixels are tested. HV had to be dropped. Few water-rich training places. The recipe was chosen while looking at the Sevan and Tonle Sap scores; single seed. The Ararat product comes from an earlier model.
+
+**Verdict.** About as good as the math detector with terrain mask on places it never saw; loses to fusion v2 on every summary number except the lake area on windy dates. Kept as an independent cross-check and for its sub-pixel head; not the water source.
 
 ---
 
@@ -857,9 +1103,9 @@ The June lake area is insensitive (±1.4 %); the October flood area moves by abo
 
 On 17 October at Tonle Sap the 5–95 % widths of the components alone are 2,264 km² (threshold), 956 km² (boundary) and 15 km² (speckle): **the threshold dominates every date**. The combined result is **3,455 km², 5–95 %: 1,967–4,769 km²**, quoted as "about 3,500 km² (2,000–4,800)". The median lies below the detector's 3,837 km² because 0.12 sits in the upper half of the interval. Sevan has a steep, clean shore, so it cannot pin the threshold down; Tonle Sap's floodplain has much land at intermediate brightness, so the same interval moves its area by up to ±1,100 km².
 
-**From the tuning study** ([`tuning.md`](eda/tuning.md), section 5). Tuned against Landsat anchors, every looser setting that still passes the never-water test grows the 17 October flood (top-5 % band 4,109–4,837 km²; the extended setting with terrain 5,857 km²), the added water stays about 94 % inside the 38-year maximum extent, and the rank consistency with the long-term record improves (ρ 0.50 → 0.61–0.65). Its reading: **3,837 km² is a lower bound, and about 3,800–5,900 km² is plausible**.
+**From the tuning study** ([`tuning.md`](eda/tuning.md), section 5). Tuned against Landsat anchors, every looser setting that still passes the never-water test grows the 17 October flood (top-5 % band 4,109–4,837 km²; the extended setting with terrain 5,857 km²), the added water stays about 94 % inside the 38-year maximum extent, and the rank consistency with the long-term record improves (ρ 0.50 → 0.61–0.65). Its reading: **3,837 km² is a lower bound, and about 3,800–5,900 km² is plausible**. The independent lake-level estimate of section 3.19 later confirmed the direction (5,421 km², range 4,198–7,222 on 17 October); the 3,837 km² and the 5–95 % range above describe the strict math detector, not the map the app now shows (fusion v2, 5,046 km²).
 
-**What the two mean together.** The first range says how far the area moves if we do not know the right threshold and only demand that Lake Sevan comes out right; it is centred near the current threshold. The second says which way the threshold is probably wrong on the floodplain: too strict. Neither can be narrowed without 2026 truth for the floodplain. Two more numbers sit at the low end and explain why the app does not use them for the flood: the fused map gives 3,120 km² (expected 3,200 km²; $\gamma$ band 2,827–3,515 km²), the HMM 3,326 km², both because their time prior resists late flooding. The sub-pixel fraction adds 290 km² of partial pixels on 17 October (4,127 km²), which belongs on the upper side of the range. The 2026 altimeter fit (open water ≈ 1,379 + 228 × h km², h in metres, R² 0.92) describes our detector, not the lake (section 6.10).
+**What the two mean together.** The first range says how far the area moves if we do not know the right threshold and only demand that Lake Sevan comes out right; it is centred near the current threshold. The second says which way the threshold is probably wrong on the floodplain: too strict. Neither can be narrowed without 2026 truth for the floodplain. Two more numbers sit at the low end and explain why the app does not use them for the flood: the fused map gives 3,120 km² (expected 3,200 km²; $\gamma$ band 2,827–3,515 km²), the HMM 3,326 km², both because their time prior resists late flooding. The sub-pixel fraction adds 290 km² of partial pixels on 17 October (4,127 km²), which belongs on the upper side of the range. The 2026 altimeter fit (open water ≈ 1,379 + 228 × h km², h in metres, R² 0.92) describes our detector, not the lake (section 6.10). Both low-end numbers (the v1 fused map and the HMM) are why fusion v1 was replaced for the app (section 3.20).
 
 ![Tonle Sap water area with uncertainty bands](eda/stats/tonle-sap_water_area_bands.png)
 
@@ -895,9 +1141,10 @@ What this changes in our story: the July rise is visible in our data as flooded 
 | deep autoencoder + GMM | 92.53 | 92.10 | 636–923 (369) / 190 | 25.5 / – | 1,915 → 1,955 |
 | sub-pixel fraction | – | 99.47 | 1,182–1,253 (6) / 43 | 57.7 / – | – |
 | supervised (JRC labels, other places) | 99.44 | 71.98 | 411–1,110 (554) / −311 | 412.3 / – | 4,142 → 4,030 |
-| **fused (admitted configuration)** | **99.98** [99.95, 100.00] | **99.89** [99.71, 99.99] | 1,231–1,232 (10) / 1 | **9.3 / 0.4** | 2,207 → 3,120 |
+| fused v1 (admitted configuration) | 99.98 [99.95, 100.00] | 99.89 [99.71, 99.99] | 1,231–1,232 (10) / 1 | 9.3 / 0.4 | 2,207 → 3,120 |
+| **fusion v2 (shipped)** | 99.97 [99.95, 99.99] | 99.92 [99.80, 100] | 1,233 (8.6) / −0.1 | **6.0 / 0.31** | 2,281 → 5,046 |
 
-The anchors are easy pixels (deep lake interiors, land far from water), so almost every detector is near the ceiling there; the differences show in far-false water, the rough-surface dip, date-to-date flips (fused 0.002 flips per permanent-water pixel at Tonle Sap against 0.139 for the math detector) and the Tonle Sap flood area, which has no truth. The fused probability is the best calibrated on the anchors (balanced Brier score 0.00013 at Tonle Sap, 0.00088 at Sevan). How the fused configuration was chosen, and why it is not used for the Tonle Sap flood: section 3.17 and section 4.5.
+The anchors are easy pixels (deep lake interiors, land far from water), so almost every detector is near the ceiling there; the differences show in far-false water, the rough-surface dip, date-to-date flips (fused 0.002 flips per permanent-water pixel at Tonle Sap against 0.139 for the math detector) and the Tonle Sap flood area, which has no truth. The fused probability is the best calibrated on the anchors (balanced Brier score 0.00013 at Tonle Sap, 0.00088 at Sevan). How fusion v1 was chosen, and why it was not used for the Tonle Sap flood: section 3.17. The fusion v2 row is from [`fusion2/results.json`](eda/fusion2/results.json), computed with the same anchors and the same TEST strip; the Sevan largest-body range for v2 is quoted as in `fusion2.md` (1,233 km² on every date, calm-date error 8.6 km²). Fusion v2 is the app's source (section 3.20).
 
 ![Scoreboard](eda/fusion/scoreboard_heat.png)
 
@@ -924,7 +1171,7 @@ Prior art and the claim: the waterline method (shorelines as height contours, 19
 
 ### 7.1 Automated tests
 
-22 test files under [`tests/`](../tests/), 129 test functions (136 cases counting parametrised ones), counted by reading the files on 14 November; they were **not** run for this document. Times and pass counts in the right-hand column are from each module's notes where recorded. The four files marked † belong to work still in progress (section 8).
+27 test files under [`tests/`](../tests/), 177 test functions, counted by `grep` for `def test_` on 14 November in the evening; they were **not** run for this document. The table below was written earlier, at 22 files and 129 functions, and does not list `test_hydro.py` (6), `test_crossscene.py` (6), `test_fusion2.py` (10), `test_insar.py` (10) and `test_calibrated.py` (11); the counts for `test_supervised.py` (now 6) and `test_unmix.py` (now 8) are also out of date. Times and pass counts in the right-hand column are from each module's notes where recorded. The four files marked † belong to work still in progress (section 8).
 
 | File | Tests | What it covers |
 |---|---|---|
@@ -966,6 +1213,8 @@ Prior art and the claim: the waterline method (shorelines as height contours, 19
 | Elevation model against height from flood order | yes | ρ 0.45, conservative 0.25 (section 6.12) |
 | Leave one radar pass out, predict it | yes (uses only the other passes) | front area error 82 km² against 161–178 km² for naive baselines |
 | Place hold-out for the L-band pretrained model | yes (Sevan never seen) | 0.91 against the math detector's 0.99 (section 5.8) |
+| Expected flood from lake level and the Landsat record, no radar | yes, but a model | 17 Oct 5,421 km² (4,198–7,222); fusion v2 inside the range on 7 of 10 passes; its threshold was fitted to it (section 3.20) |
+| Calibrated data, tune strip and test strip | yes | balanced accuracy 0.995; 5.9 % from the independent estimate (section 3.22) |
 
 ---
 
@@ -973,15 +1222,16 @@ Prior art and the claim: the waterline method (shorelines as height contours, 19
 
 **Still unproven (read these first).**
 
-* **The Tonle Sap floodplain extent.** No 2026 truth exists for the floodplain. The 17 October open-water area is about 3,500 km² (5–95 %: 2,000–4,800) from the threshold uncertainty, at least 3,800 and plausibly up to 5,900 km² from the tuning study; persistence models give 3,100–3,300 km² (section 6.9). The altimeter checks the timing, not the extent. Open water also misses flooded forest and lagged the lake by about three weeks at the end of the season.
+* **The Tonle Sap floodplain extent.** No 2026 map exists for the floodplain. The app shows 5,046 km² on 17 October (fusion v2, probability range 4,196–6,051), against an independent model-based estimate of 5,421 km² (4,198–7,222; section 3.19). The strict math detector gives 3,837 km² (threshold-only 5–95 % range 2,000–4,800; tuning study 3,800–5,900); fusion v1 and other persistence models 3,100–3,300 km² (section 6.9). Fusion v2's floodplain threshold was fitted to the same estimate, and only 76 % of its water lies inside the independent map: the total is better than the outline (section 3.20). The altimeter checks the timing, not the extent. Open water also misses flooded forest and lagged the lake by about three weeks at the end of the season.
 * **The flooded-vegetation area.** About 1,600–2,500 km² at the 30 August peak, depending on the spatial-context knob; no reference map exists, Landsat cannot see under a canopy, and state 2 ("going under") cannot be told apart from a pixel partly covered by open water. Supported: its location (77 % inside the Landsat maximum extent), its stability, near-zero false alarms in Armenia, its July rise matching the gauge, Prek Toal found. Not supported: the area, and that state 1 is forest (shrub, reeds and flooded rice also double-bounce).
 * **The Ararat Valley.** The 0.5–3.8 km² left by the terrain mask is almost all false; the graph and HMM find nothing, including the real fish ponds, which are smaller than a pixel. Nothing at Ararat is significant in the statistical change test, so real irrigation changes may be missed.
 
 **Other limits.**
 
-* **Uncalibrated previews**: 8-bit display brightness with an unknown stretch, at about 180 m. Thresholds are in display units; nothing transfers directly to calibrated data, but the procedures (tuning, mixtures, fusion weights, transition matrices) can be re-run unchanged.
+* **Uncalibrated previews**: everything the app shows is 8-bit display brightness with an unknown stretch, at about 180 m. Thresholds are in display units; nothing transfers directly to calibrated data, but the procedures (tuning, mixtures, fusion weights, transition matrices) can be re-run unchanged. The calibrated detector (section 3.22) exists for Tonle Sap only, is PROVISIONAL, and fails at Lake Sevan with the same thresholds.
 * **Thresholds chosen on the same data**: the water threshold originally on Sevan's area (the tuning study kept it); the flooded-vegetation rule by looking at Tonle Sap trajectories with Armenia as a check.
-* **The admission rule had a blind spot**: it measured lakes and mountains, not the floodplain (section 3.17). Its accuracy condition is on easy pixels, and the TEST strip had been looked at before.
+* **The admission rule of fusion v1 had a blind spot**: it measured lakes and mountains, not the floodplain (section 3.17). Fusion v2's rule adds floodplain criteria and a "no flood eaten" guard, but it was amended three times after first results, one of them after looking at the other places (section 3.20). The accuracy condition is on easy pixels, and the TEST strip had been looked at before.
+* **The independent flood estimate is a model** (bathtub assumption, datum link, optical detection efficiency; section 3.19), and one fusion v2 threshold was fitted to it. Scores against it are partly in-sample.
 * **Several experts share labels** (U-Net, flood-order mask, statistical confidence and sub-pixel fraction derive from the math detector), so their agreement is not independent confirmation.
 * **One season** of one year, ten passes; the outage (27 July – 10 August) hides the open-water onset in the south-east; the day-level arrival inside it is a model estimate.
 * **Rough surfaces**: on these previews HH stays dark enough on most dates; with calibrated data and stronger wind or rain the HH rule may fail. The fused and HMM maps keep the lake through it, but by persistence, not by seeing the water.
@@ -1030,6 +1280,17 @@ python3 -m venv .venv
 .venv/bin/python -m scripts.detect.fusion                       # fit, admission rule, products, ~5 min CPU
 .venv/bin/python -m scripts.detect.scoreboard                   # ~2.5 min
 
+# 6b. later lanes (each writes docs/eda/<lane>/results.json; run one at a time)
+.venv/bin/python -m scripts.detect.hydro tonle-sap              # independent flood estimate, ~25 s
+.venv/bin/python -m scripts.detect.crossscene                   # seeded detector, all 15 places, ~25 min (--skip-grid ~6 min)
+.venv/bin/python -m scripts.detect.fusion2 --final              # fusion v2 products; or `fusion2 <area>` for one place (2-20 s)
+.venv/bin/python -m scripts.detect.insar coherence              # also: fetch, motion, sm, tonle, layer
+.venv/bin/python -m scripts.detect.despeckle evaluate --areas tonle-sap --no-final
+.venv/bin/python -m scripts.detect.unmix evaluate               # after prepare, train
+.venv/bin/python -m scripts.detect.supervised train --holdout sevan,tonle-sap --products
+.venv/bin/python -m scripts.detect.calibrated tonle-sap-cal --step water --evals 40   # also: look, fv, change, res, knobs
+#    calibrated extraction (laptop side; the job runs on a small remote server): scripts/ingest/remote_run.sh tonle-sap
+
 # 7. detector for the app (contract B), then export (contract C); repeat for every area
 .venv/bin/python scripts/detect/run.py tonle-sap                # --source auto|preview|gamma0, --cpu
 .venv/bin/python scripts/ingest/export.py tonle-sap
@@ -1065,8 +1326,8 @@ The end-to-end time of the whole chain was not measured. The fusion run per area
 
 In order of value:
 
-1. **Calibrated data** via a NASA Earthdata login: GCOV HDF5 windows → contract A GeoTIFFs at 30–80 m (an extraction script is in progress; see the end of [Notes on sources](#notes-on-sources)). Then re-run the tuning, mixtures, fusion fit and validation by the same code; the gamma0 knobs and the flooded-vegetation floors must be re-derived in dB.
-2. **Close the admission rule's blind spot**: add a floodplain guard (rank consistency and an area lower bound) to the rule, refit the time prior on floodplain pixels (or use a fixed, physically motivated land → water probability), and only then consider the fused map for Tonle Sap.
+1. **Calibrated data into the app.** Extraction works (section 1.6) and the Tonle Sap detector is done (section 3.22). Open: wire it into `run.py` (the code changes are in `calibrated.md`, section 11), give the 40 MHz Armenia product its own water knobs or noise-floor-relative thresholds, finish the Sevan and Ararat dates, add a minimum effect size to the change test, then re-run the mixtures and fusion fit on calibrated data.
+2. **Floodplains other than Tonle Sap.** Fusion v2 closed the blind spot of v1 for Tonle Sap (floodplain criteria, darkening-aware time model). Every floodplain criterion comes from that one lake; a second floodplain with independent evidence would test it.
 3. **2026 truth for the floodplain**: Sentinel-1 or Sentinel-2 water masks for the same dates, and an on-lake gauge (Kampong Luong) to turn the flood order into metres.
 4. **Flooded vegetation**: calibrated HH/HV ratio, a reference from a dry season, and validation against forest and rice maps.
 5. **Deployment and demo**: merge, deploy the app, record the demo (see [ARCHITECTURE.md](ARCHITECTURE.md), section 7).
@@ -1093,6 +1354,8 @@ In order of value:
 * **IoU** (intersection over union): $|A\cap B| / |A \cup B|$ for two masks; 1 = identical. Precision = $|A\cap B|/|A|$, recall = $|A \cap B|/|B|$.
 * **Co-registration**: aligning images of different dates so the same pixel is the same ground.
 * **GCOV**: NISAR Level-2 geocoded polarimetric covariance product (backscatter on a map grid).
+* **Coherence**: a number from 0 to 1 saying how similar the radar echo of one place was on two dates; it drops where the surface changed (crops, water, ploughing).
+* **Seeds**: pixels that are dark on most dates; the seeded detector measures every date relative to them instead of using fixed brightness thresholds.
 * **Weak labels**: training labels produced by rules or another algorithm instead of by people, with an "ignore" value where they are unsure.
 
 ---
@@ -1121,4 +1384,12 @@ Places where two notes disagree, and the number used here:
 * **Number of areas in quality control**: `qc.md` says 15 areas in its summary and 16 in its limits section; 15 is used.
 * **Terrain mask availability**: `graph.md` and `tuning.md` were run when only Sevan (and Ararat) had a terrain mask; Tonle Sap has one now, and it removes nothing there.
 
-Not documented because the information is missing or the work is unfinished: end-to-end run times; the exact ASF processing behind the preview brightness stretch; the GCOV mask value meanings; and, still in progress at the time of writing, the self-supervised speckle filter ([`despeckle.md`](eda/despeckle.md) has no results yet), the physics unmixing autoencoder (`unmix.py`, no note yet), the supervised network trained on JRC labels at other places (`supervised.py`; its scoreboard row is in section 6.11, but `supervised.md` does not exist yet) and the calibrated-data extraction (`remote_extract.py`; `docs/research/calibrated-data.md` does not exist yet).
+Contradictions found between notes in the evening update, and the number used here:
+
+* **Number of other places**: `fusion2.md` (summary, sections 8, 9 and 10) says "13 other places" and "Thirteen places outside the three study areas"; 15 places minus the three study areas is 12, and its own table lists 12 (nine with anchors, three without). Twelve is used.
+* **Section reference**: `calibrated.md` line 5 says "Armenia: see section 8"; the Armenia section is 9.
+* **`calibrated-data.md`** was last updated at 14:20 and says only one Tonle Sap date was extracted; `data/processed/` holds ten Tonle Sap dates and eight Sevan and eight Ararat dates, and `calibrated.md` reports ten analysed. The newer state is used.
+* **Fusion v1 and the "lower bound"**: sections 3.17 and 6.9 still call 3,837 km² a lower bound; `hydro.md` confirms it for the strict math detector. It does not describe the map the app shows now (fusion v2).
+* **`crossscene.md` says Nile delta "not rescued"** while `fusion2.md` gives the seeded and v2 balanced accuracy there as 71.7 % and 71.4 %; both agree that no water layer should be quoted for it.
+
+Not documented because the information is missing or the work is unfinished: end-to-end run times; the exact ASF processing behind the preview brightness stretch; the Armenia calibrated dates after the first five, and the Ararat calibrated dates, which were extracted but not analysed ([`calibrated.md`](eda/calibrated.md), section 9). The GCOV mask meanings were answered from a real file ([`calibrated-data.md`](research/calibrated-data.md)); the self-supervised filter, the physics autoencoder, the supervised network and the calibrated detector now have notes (sections 5.9–5.11 and 3.22).

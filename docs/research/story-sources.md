@@ -84,3 +84,24 @@ Coordinates are longitude, latitude. This is a source and map cross-check. Pendi
 - [GMM/HMM tests](../eda/gmm.md) gave 1,235.3 km² for Sevan's largest connected body on every pass. This is a temporal model result, separate from the individual-pass areas and the gauge heights.
 - The [terrain experiment](../eda/terrain.md) reports 0.5–3.8 km² of mapped Ararat water across passes after screening. This range describes the study box and an experimental method. Historical reference disagreement and missed ponds limit interpretation.
 - Keep the story's experimental results attributed by method. Compare the exported app assets with the version shown in the demo before using them as numerical evidence.
+
+
+## Pantanal (story and spots)
+
+- [Wikipedia: Pantanal](https://en.wikipedia.org/wiki/Pantanal) supports rainfall mostly November to March, June the driest month, the world's largest tropical wetland description, UNESCO World Heritage inscription in 2000, ranching on mostly private land and fishing. Secondary source; the primary UNESCO and Ramsar pages should be checked if time allows.
+- [Wikipedia: Paraguay River](https://en.wikipedia.org/wiki/Paraguay_River) supports the flood peak at Corumbá being delayed 4 to 6 months compared with the rainy-season peak.
+- [Wikipedia: Lake Mandioré](https://en.wikipedia.org/wiki/Lake_Mandior%C3%A9) supports coordinates -18.133, -57.550 and the Brazil-Bolivia border location.
+- [Wikipedia: Cáceres Lagoon](https://en.wikipedia.org/wiki/Lake_C%C3%A1ceres) supports coordinates -18.933, -57.800 (stub article, no cited source; lies close to the southern box edge).
+- Amolar on the Paraguay River (about -18.04, -57.49, Brazilian Navy fluviometric station list, https://www.marinha.mil.br/chm/estacoes-fluviometricas) was left out because it falls just north of the box (north edge -18.12).
+- Corumbá (-19.009, -57.653) was left out because it falls just outside the box (south edge -19.0).
+- Our own numbers: `data/processed/pantanal/products/timeseries.json` and `docs/eda/crossscene.md`, `docs/eda/fusion2.md`.
+
+## Lake Chad (story and spots)
+
+- [NASA Earth Observatory: Lake Chad](https://science.nasa.gov/earth/earth-observatory/lake-chad) supports rain mostly July to September, the Chari as the main inflow, shrinkage to less than a tenth of the 1960s area, and "lifeblood of more than 30 million people" in Chad, Cameroon, Nigeria and Niger.
+- [FAO: Lake Chad basin chapter](https://www.fao.org/4/i2345e/i2345e06.pdf) supports the Chari and Logone having a single flood at the end of the rainy season (seen only via a search summary; the PDF was not opened).
+- [Wikipedia: Chari River](https://en.wikipedia.org/wiki/Chari_River) supports the mouth at 12.978 N, 14.512 E and "90 percent of the water flowing into Lake Chad".
+- [Wikipedia: Baga Sola](https://en.wikipedia.org/wiki/Baga_Sola) supports 13.536 N, 14.314 E and a lakeshore town with a fish market.
+- [Wikipedia: Bol, Chad](https://en.wikipedia.org/wiki/Bol,_Chad) supports 13.46 N, 14.74 E and the July to September rains.
+- [Wikipedia: Baga, Borno State](https://en.wikipedia.org/wiki/Baga,_Borno_State) supports 13.119 N, 13.857 E.
+- Our own numbers: `data/processed/lake-chad/products/timeseries.json` and `docs/eda/crossscene.md`, `docs/eda/fusion2.md`.

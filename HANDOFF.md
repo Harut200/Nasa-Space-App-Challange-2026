@@ -1,103 +1,45 @@
-# Handoff — 14 November 2026
+# Handoff — 14 November 2026, about 18:50 (Armenia time)
 
-State of the work after the first session. Read [plan/README.md](plan/README.md) and [plan/00-contracts.md](plan/00-contracts.md) first if you have not.
+Replaces the first-session handoff. Results: [docs/RESULTS.md](docs/RESULTS.md). Design: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md). Full method: [docs/DETECTION.md](docs/DETECTION.md). Contracts between stages: [plan/00-contracts.md](plan/00-contracts.md).
 
-## Where things are
+## Done
 
-| Branch | State | On GitHub? |
-|---|---|---|
-| `main` | Plans only. No code | Yes |
-| `backend` | Data pipeline scripts and tests. 5 commits | Branch exists, **commits not pushed** |
-| `frontend` | Working app with no visual design. Contains all `backend` commits plus 1 | Branch exists, **commits not pushed** |
-| `detection` | Empty, same as `main` | Yes |
+- **Pipeline**: ingest, detect, export, web app, 15 places (`areas/*`, `src/app/public/data/index.json`). All 15 use `"water_source": "fusion2"`; `scripts/detect/run.py` reads `data/processed/<area>/fusion2/products.pt` and falls back to the math detector if it is missing.
+- **Fusion v2** (water source): Tonle Sap 17 Oct 5,046 km² (range 4,196–6,051) against an independent estimate of 5,421 km² (4,198–7,222); inside the range on 7 of 10 passes. Limits: threshold fitted to the same estimate; 76 % of its water inside the independent map. [fusion2.md](docs/eda/fusion2.md), [hydro.md](docs/eda/hydro.md).
+- **Evaluated, not shipped**: seeded detector (used inside fusion v2), learned despeckling, physics autoencoder, network on independent labels, interferometry. Verdicts in RESULTS.md.
+- **Calibrated data**: extraction through a small remote server (`scripts/ingest/remote_extract.py`, `remote_run.sh`, [calibrated-data.md](docs/research/calibrated-data.md)). Ten Tonle Sap dates (80 m) analysed; Sevan and Ararat have 8 of 10 dates (30 m). Detector done: 17 Oct 5,625 km², 5.9 % mean deviation from the independent estimate. Same thresholds give 0 km² at Sevan. Not in the app. [calibrated.md](docs/eda/calibrated.md).
+- **Docs** updated this evening: README, RESULTS, ARCHITECTURE, DETECTION.
+- **Pitch files** exist in `docs/pitch/` (deck as .pptx and .pdf, fact sheet, deck audit, demo script).
 
-Nothing is merged to `main`, so nothing is deployed. The commits exist only on Arameh's laptop until someone pushes them.
+## Running or in progress
 
-## Next steps, in order
+- **App redesign** (`src/app/`, `src/app2/`): uncommitted work in the tree; the `demo` area is being removed (its files show as deleted).
+- Nothing heavy is meant to be running. Check with `ps` before starting a new heavy job; one at a time (see the concurrency note in the team memory: about four heavy agents at most).
 
-1. Push `backend` and `frontend`.
-2. Merge `backend` to `main` by pull request. This puts the `demo` area on `main`, which unblocks the other two branches.
-3. Repository owner: Settings → Pages → Source → **GitHub Actions**. Then merge `frontend` to `main`; the deploy workflow runs on that push.
-4. Start the visual design (see "Frontend" below).
-5. Someone with a NASA Earthdata login runs the first real extract (see "Not verified").
+## Open, in order
 
-## Backend (`backend` branch)
+1. Finish and check the redesigned app at desktop and phone width; confirm every place loads and the range display shows.
+2. Commit the app work. Commit the doc updates.
+3. **Merge `eda` to `main`.** Local `main` is 14 commits behind `origin/main`; the app branches (`backend`, `frontend`) are on `origin` but not merged. Resolve by pull request, not by force.
+4. **GitHub Pages**: repository owner sets Settings, Pages, Source, GitHub Actions. `.github/workflows/deploy.yml` deploys on a push to `main`. Nothing is deployed today; no live URL exists.
+5. **Demo video and project page** not started. Deck draft in `docs/pitch/`; check its numbers against RESULTS.md (the deck was drafted before fusion v2 and the calibrated result).
+6. Wire the calibrated detector into `run.py` only if time allows. The code changes are in [calibrated.md](docs/eda/calibrated.md), section 11. Armenia needs its own thresholds first.
+7. Finish the Sevan and Ararat calibrated dates and check the 6 October HV anomaly there.
 
-Set up: `python3 -m venv .venv && .venv/bin/pip install -r requirements.txt`
+## Know before you change anything
 
-| File | Does | Checked how |
-|---|---|---|
-| [scripts/ingest/search.py](scripts/ingest/search.py) | Finds NISAR passes for an area, writes `data/raw/{area}/passes.json`. With empty track/frame it prints the coverage table instead | Ran against the real ASF service |
-| [scripts/ingest/extract.py](scripts/ingest/extract.py) | Cuts each pass to the area, writes contract A | Synthetic files only |
-| [scripts/ingest/export.py](scripts/ingest/export.py) | Contract B → web images and manifest (contract C) | Synthetic files only |
-| [scripts/ingest/make_fixture.py](scripts/ingest/make_fixture.py) | Generates the `demo` area | Runs in the tests |
-| [scripts/build_area.sh](scripts/build_area.sh) | Runs the four steps in order | **Never run** — needs `scripts/detect/run.py` |
+- Every number in the docs comes from a file in the repo; keep it so. Do not say we beat NASA or any model we did not test.
+- Places: Asia, Africa and South America (Armenia is on the Europe–Asia boundary). Do not write "four continents".
+- Do not write a server host name, user name, key path or token into any document. `scripts/ingest/remote_run.sh` has defaults for them; set `SERVER` and `SSH_KEY` in the environment and consider removing the defaults before the repository is shown to anyone.
+- Previews are uncalibrated 180 m images; the calibration of the real files is PROVISIONAL.
+- No radar passes from 27 July to 10 August (instrument outage).
+- Contradictions found between notes are listed at the end of [DETECTION.md](docs/DETECTION.md) ("Notes on sources").
 
-Run the checks:
-
-```bash
-.venv/bin/python tests/test_export.py
-.venv/bin/python tests/test_pipeline.py --net    # --net also runs the real ASF search
-.venv/bin/python scripts/ingest/extract.py --selftest
-```
-
-All three pass.
-
-**Coverage gate result for Tonle Sap: passed.** Track 83, frame 8, ascending, 10 passes from 19 June to 17 October 2026, HH and HV, one acquisition mode, the box fits one frame. Saved in [areas/tonle-sap/area.json](areas/tonle-sap/area.json). Each source file is about 1.9 GB.
-
-Real ASF property names, which the plan left open: `pathNumber` (track), `frameNumber`, `flightDirection` (upper case), `rangeBandwidth`, `mainBandPolarization`, `startTime`, `sceneName`, `url`.
-
-### Not verified
-
-- **`extract.py` has never opened a real NISAR file.** There is no Earthdata login on this laptop. It follows the file layout written in [plan/02-backend.md](plan/02-backend.md) step B4. The open points are listed in a comment at the top of the file: the type of `projection`, what no-data looks like, what `mask` means, whether the data is linear power. Do step B4 (open one file, print its tree) before trusting it.
-- **Streaming over the network** is untested for the same reason.
-- **`search.py` does not filter by acquisition mode.** The contract's `area.json` has no field for it. This is safe for track 83 and wrong for a track that mixes modes (track 76 does). Fixing it means adding a field to the contract, which needs all three owners to agree.
-
-### Open question
-
-Arameh said the real data is not their job. The plan gives `extract.py` to the backend owner, and detection cannot start on real data until someone runs it. The team needs to decide who does.
-
-## Frontend (`frontend` branch)
+## Run
 
 ```bash
-cd src/app && npm install && npm run dev
+cd src/app && npm install && npm run dev                       # app, Node 20.19+
+.venv/bin/python -m pytest tests -q                            # checks (not run for this handoff)
+.venv/bin/python -m scripts.detect.fusion2 <area>              # rebuild one place's water source
+.venv/bin/python scripts/detect/run.py <area> && .venv/bin/python scripts/ingest/export.py <area>
 ```
-
-Needs Node 20.19 or newer. Stack: Vite, React, MapLibre GL JS 6. No other libraries.
-
-| File | Holds |
-|---|---|
-| [src/app/src/App.jsx](src/app/src/App.jsx) | All state and every control |
-| [src/app/src/MapView.jsx](src/app/src/MapView.jsx) | One map with one radar image and the spot markers |
-| [src/app/src/Charts.jsx](src/app/src/Charts.jsx) | Timeline strip and backscatter chart, both inline SVG |
-| [src/app/src/index.css](src/app/src/index.css) | Seven lines, layout only |
-| [.github/workflows/deploy.yml](.github/workflows/deploy.yml) | Deploy to GitHub Pages on push to `main` |
-
-Working: area buttons, timeline slider, play and pause, the instrument gap drawn on the timeline, layer buttons with legend, compare mode (two synced maps with a divider), chart, spot markers, story panel, About dialog, credits, and a link that restores area, date and layer.
-
-Checked by driving the built app in headless Chrome through every feature, at desktop size and at 375 px wide, with no console errors. That script is not in the repository.
-
-Left out on purpose: cross-fade between frames (it cuts), the satellite basemap toggle (the provider's terms are not checked), favicon and social preview image.
-
-### For whoever does the design
-
-All styling goes in `index.css`; there is nothing to undo. Hooks already in the markup: `header`, `nav`, `main`, `footer`, `section[aria-label="…"]`, `.maps`, `.map`, `.strip`, `.chart`, `.legend-bar`, and `[aria-pressed='true']` on the active button.
-
-Three things must survive:
-
-- `.maps .map { position: absolute; inset: 0 }` — MapLibre's own stylesheet overrides a weaker selector and the map collapses to zero height.
-- `.maps` needs a height.
-- The compare divider is an inline `clip-path` on the second map.
-
-The plan asks for a dark interface, the story as a side panel on desktop and a bottom sheet on phones, and text readable on a 1280×720 projector.
-
-**The demo area only has HH and HV images.** Story text, chart, spots, the change layer and the composite layer are empty until detection delivers them, so those panels show nothing in the app today. To design them, add a richer fake area to `make_fixture.py` first.
-
-### Two traps already hit
-
-- MapLibre 6 has no default export: `import * as maplibregl from 'maplibre-gl'`.
-- The bundler moves MapLibre's worker file, so `MapView.jsx` imports it with `?url` and calls `setWorkerUrl`. Without that the map stays blank and the console says "Worker failed to load".
-
-## Detection (`detection` branch)
-
-Not started. Inputs it can use today: the `demo` area in contract A form, made by `make_fixture.py`. Its outputs must match contract B. `tests/test_pipeline.py` contains a small grey stand-in for this step that shows the expected file shapes.
