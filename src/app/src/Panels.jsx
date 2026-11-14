@@ -1,5 +1,5 @@
 import { Chart, Strip } from './Charts.jsx'
-import { words, dayMonth, dayMon, km, shortLabel, splitLayers, DOT_COLOR, useTween, isEvent, eventTip, placeSummary, groupPlaces, landingText, countPlaces, eventViews, viewMotion, viewControl, viewingNote, magnitude, utcStamp } from './meta.js'
+import { words, dayMonth, dayMon, km, shortLabel, splitLayers, DOT_COLOR, useTween, isEvent, eventTip, placeSummary, groupPlaces, landingText, countPlaces, eventViews, viewMotion, viewControl, viewingNote, magnitude, utcStamp, fmtVal, withUnit } from './meta.js'
 
 export const COLORS = ['#ff6b6b', '#5aa9ff', '#5ad17a', '#ffb347', '#c792ff', '#f0e442', '#5fd4c4']
 const STORY = [['see', 'What you see'], ['physics', 'What is happening'], ['lband', 'Why radar shows it'], ['people', 'Why it matters']]
@@ -55,6 +55,7 @@ export function Landing({ places, tip, selected, onOpen, onRandom, onNear, near,
   )
 }
 
+const minus = (v) => (typeof v === 'string' ? v : typeof v === 'number' ? String(v).replace(/^-(?=\d)/, '\u2212') : '')
 function Legend({ legend }) {
   if (!legend?.type) return null
   if (legend.type === 'text') return <p className="legend-text">{legend.text}</p>
@@ -66,25 +67,29 @@ function Legend({ legend }) {
   return (
     <div className="legend-ramp">
       <div className="legend-bar" style={{ background: `linear-gradient(to right, ${(legend.colors || ['#000', '#fff']).join(',')})` }} />
-      <div className="legend-ends"><span>{legend.min}{u}</span><span>{legend.max}{u}</span></div>
+      <div className="legend-ends"><span>{minus(legend.min)}{u}</span><span>{minus(legend.max)}{u}</span></div>
       {legend.labels && <div className="legend-ends legend-labels">{legend.labels.map((l) => <span key={l}>{l}</span>)}</div>}
       {long && <p className="legend-unit">{legend.unit}</p>}
     </div>
   )
 }
 
-// Earthquake headline: magnitude, where and when, and how far the ground moved along the line of sight.
+// Earthquake headline: magnitude (strongest), how far the ground moved (second), then the line-of-sight and control clauses, then where and when.
 function EventHeadline({ e, onStory, reveal, onReveal, revealOn }) {
-  const views = eventViews(e), many = views.length > 1
+  const views = eventViews(e).filter((v) => viewMotion(v)), many = views.length > 1
+  const tag = (v) => `${v.label[0].toUpperCase() + v.label.slice(1)}, track ${v.track}`
+  const ctl = views.filter((v) => viewControl(v))
+  const mag = magnitude(e)
   return (
-    <div className="glass headline" aria-label="Headline number">
-      <p className="hl-num"><span>M {magnitude(e) ?? '?'}</span></p>
-      <p className="hl-label">{[e.place, e.time && utcStamp(e.time), Number.isFinite(e.depth_km) && `depth ${e.depth_km} km`].filter(Boolean).join(' · ')}</p>
-      {views.map((v) => {
-        const mo = viewMotion(v), ct = viewControl(v)
-        if (!mo) return null
-        return <p className="hl-sub ev-motion" key={v.id}>{many && <b>{v.label[0].toUpperCase() + v.label.slice(1)}, track {v.track}: </b>}{mo} ground motion along the radar's line of sight{ct && <span className="muted"> (same track before the earthquake: {ct})</span>}</p>
-      })}
+    <div className="glass headline ev-head" aria-label="Headline number">
+      <p className="hl-num"><span>{mag ? `M ${mag}` : 'Earthquake'}</span></p>
+      {views.map((v) => (
+        <p className="hl-motion" key={v.id}>{many && <small>{tag(v)}</small>}<b>{viewMotion(v)}</b> ground motion</p>
+      ))}
+      {views.length > 0 && (
+        <p className="hl-clause">along the radar's line of sight{ctl.length > 0 && ` · same track before the earthquake: ${ctl.map((v) => `${many ? `track ${v.track} ` : ''}${viewControl(v)}`).join('; ')}`}</p>
+      )}
+      <p className="hl-label">{e.place && <span className="hl-where">{e.place}</span>}<span className="nw">{[e.time && utcStamp(e.time), Number.isFinite(e.depth_km) && `depth ${e.depth_km} km`].filter(Boolean).join(' · ')}</span></p>
       <div className="hl-actions">
         <button className="chip" onClick={onStory}>Story</button>
         {reveal && <button className="chip" aria-pressed={revealOn} onClick={onReveal}>Reveal</button>}
@@ -123,7 +128,7 @@ export function PlaceUI({ m, ts, v, patch, places, layer, date, preview, otherDa
   const quality = m.quality?.[date]
   const idx = places.findIndex((p) => p.id === m.id)
   const hop = (d) => onPlace(places[(idx + d + places.length) % places.length].id)
-  const rng = (f) => (f.lo != null ? `range ${km(f.lo)}–${km(f.hi)}` : null)
+  const rng = (f) => (f.lo != null ? `range ${fmtVal(f.lo, f.unit)}–${fmtVal(f.hi, f.unit)}` : null)
   const pick = (i) => patch({ dateIndex: i, playing: false, touched: true })
   const step = (d) => pick(Math.min(n - 1, Math.max(0, v.dateIndex + d)))
   const chip = (l) => <button key={l.id} className="chip" title={l.label} aria-pressed={l.id === layer.id} onClick={() => patch({ layerId: l.id, touched: true, ...(ev ? {} : { opacity: GREY.includes(l.id) ? 0.8 : 0.9 }), ...(l.dates || ev ? {} : { compare: false }) })}>{shortLabel(l)}</button>
@@ -132,7 +137,7 @@ export function PlaceUI({ m, ts, v, patch, places, layer, date, preview, otherDa
     <div className={`ui place${ev ? ` ev ev${Math.min(2, eventViews(m.event).length)}` : ''}`}>
       <header className="top">
         <div className="glass group">
-          <button className="btn plain" onClick={onBack} aria-label="Back to the globe"><span aria-hidden="true">‹</span> Globe</button>
+          <button className="btn plain" onClick={onBack} aria-label="Back to the globe"><span aria-hidden="true">‹</span><span className="wide-only"> Globe</span></button>
           <h1 className="vtitle">{m.name}</h1>
         </div>
         <div className="glass group right">
@@ -144,7 +149,7 @@ export function PlaceUI({ m, ts, v, patch, places, layer, date, preview, otherDa
         </div>
         {v.list && (
           <>
-            <button className="scrim" aria-label="Close the list" onClick={() => patch({ list: false })} />
+            <button className="scrim" tabIndex={-1} aria-label="Close the list" onClick={() => patch({ list: false })} />
             <ul className="glass drawer" role="menu">
               {groupPlaces(places).map((g) => [
                 <li key={g.key} role="presentation" className="grp">{g.title}</li>,
@@ -161,14 +166,14 @@ export function PlaceUI({ m, ts, v, patch, places, layer, date, preview, otherDa
         <div className="glass headline" aria-label="Headline number">
           {head && noWater ? (
             <>
-              <p className="hl-label">No open water mapped here: a land-surface story</p>
+              <p className="hl-label hl-big">No open water mapped here: a land-surface story</p>
               <p className="hl-sub">{words(date)}</p>
             </>
           ) : head ? (
             <>
-              <p className="hl-num">{head.lo != null && <small>≈ </small>}<span>{km(shownV)}</span><small> {head.unit}</small></p>
+              <p className="hl-num">{head.lo != null && <small>≈ </small>}<span>{fmtVal(shownV, head.unit)}</span><small>{head.unit === '%' ? '' : ' '}{head.unit}</small></p>
               <p className="hl-label">{head.label.toLowerCase()} · {words(date)}</p>
-              {(rng(head) || flood) && <p className="hl-sub">{[rng(head), flood && `${km(flood.v)} ${flood.unit} flooded vegetation`].filter(Boolean).join(' · ')}</p>}
+              {(rng(head) || flood) && <p className="hl-sub">{[rng(head), flood && `${withUnit(flood.v, flood.unit)} flooded vegetation`].filter(Boolean).join(' · ')}</p>}
             </>
           ) : <p className="hl-label">{words(date)}</p>}
           <div className="hl-actions">
@@ -223,7 +228,7 @@ export function PlaceUI({ m, ts, v, patch, places, layer, date, preview, otherDa
               <div>
                 {facts.length > 0 && (
                   <dl className="facts">
-                    {facts.map((f) => <div key={f.label}><dt>{f.label}</dt><dd>{f.lo != null ? '≈ ' : ''}{km(f.v)} <span>{f.unit}{f.lo != null && ` (range ${km(f.lo)}–${km(f.hi)})`}</span></dd></div>)}
+                    {facts.map((f) => <div key={f.label}><dt>{f.label}</dt><dd>{f.lo != null ? '≈ ' : ''}{fmtVal(f.v, f.unit)}{f.unit === '%' ? '' : ' '}<span>{f.unit}{f.lo != null && ` (range ${fmtVal(f.lo, f.unit)}–${fmtVal(f.hi, f.unit)})`}</span></dd></div>)}
                   </dl>
                 )}
                 {ts?.series?.length > 0

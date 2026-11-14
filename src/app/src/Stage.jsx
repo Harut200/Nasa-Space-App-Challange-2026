@@ -12,6 +12,10 @@ maplibregl.setWorkerUrl(workerUrl)
 const STILL = new URLSearchParams(location.search).has('still') // ?still: no auto-rotation (screenshots, demo recording)
 const reduced = matchMedia('(prefers-reduced-motion: reduce)')
 const wide = () => innerWidth >= 900
+const FLY = (t) => t * t * (3 - 2 * t) // one calm ease for every flight (in and out)
+// Dots shrink when the globe is small, so neighbouring places (Tonle Sap / Mekong, Sevan / Ararat) stay apart. `extra` adds a ring offset.
+const scaled = (extra = 0) => ['interpolate', ['linear'], ['zoom'], 1, ['+', ['max', 3.4, ['*', ['get', 'r'], 0.45]], extra * 0.6], 4, ['+', ['get', 'r'], extra]]
+const HIT = 16 // px: how far from a dot's centre a click still counts
 
 // The one map of the app: a globe when zoomed out, the place when zoomed in, our radar frames draped on top.
 export default function Stage({ mode, places, view, manifest, layer, date, opacity, spots, epicentre, colors, onOpen, onHover, onSelect, target, onMap, onImagery }) {
@@ -30,22 +34,24 @@ export default function Stage({ mode, places, view, manifest, layer, date, opaci
     return Math.log2((Math.PI * 0.94 * Math.max(160, Math.min(w, h - globePad().bottom))) / 512)
   }
   // Keep the globe clear of the start card at the bottom.
-  const globePad = () => ({ top: 0, left: 0, right: 0, bottom: wide() ? 210 : 270 })
+  const globePad = () => ({ top: 0, left: 0, right: 0, bottom: wide() ? 150 : 270 })
   const placeCamera = (m, b) => {
     const phone = !wide()
     const two = (manifest?.event?.views?.length || 0) > 1
     // On a phone an earthquake's headline card and before/after bar are taller than a season's, so the map keeps clear of them.
-    const padding = phone ? (manifest?.event ? { top: two ? 340 : 270, bottom: two ? 300 : 260, left: 24, right: 24 } : { top: 130, bottom: 230, left: 24, right: 24 }) : { top: 110, bottom: 190, left: 60, right: 60 }
+    // On a desktop the earthquake's headline card (left) and layer card (right) are wide, so the image keeps clear of both.
+    const padding = phone ? (manifest?.event ? { top: two ? 356 : 304, bottom: two ? 300 : 260, left: 24, right: 24 } : { top: 130, bottom: 230, left: 24, right: 24 }) : manifest?.event ? { top: 96, bottom: 220, left: 480, right: 360 } : { top: 110, bottom: 190, left: 60, right: 60 }
     return m.cameraForBounds([[b[0], b[1]], [b[2], b[3]]], { padding })
   }
 
   // Create the map once.
   useEffect(() => {
     const m = new maplibregl.Map({
-      container: el.current, style: styleFor(mode), center: [75, 18], zoom: 1.5, maxPitch: 0, dragRotate: false, pixelRatio: Math.min(devicePixelRatio, 2),
+      container: el.current, style: styleFor(mode), center: [88, 24], zoom: 1.5, maxPitch: 0, dragRotate: false, pixelRatio: Math.min(devicePixelRatio, 2),
       attributionControl: { compact: true }, scrollZoom: true, fadeDuration: 0,
     })
     map.current = m
+    if (STILL) window.__map = m // test and screenshot hook (only with ?still)
     // On a phone the open attribution text would sit on top of the timeline; start it collapsed (the (i) button opens it).
     if (!wide()) m.once('load', () => el.current?.querySelector('.maplibregl-ctrl-attrib')?.removeAttribute('open'))
     m.touchZoomRotate.disableRotation()
@@ -57,20 +63,40 @@ export default function Stage({ mode, places, view, manifest, layer, date, opaci
       const color = ['match', ['get', 'kind'], 'big', DOT_COLOR.big, 'some', DOT_COLOR.some, 'quake', DOT_COLOR.quake, DOT_COLOR.land]
       const vis = live.current.view === 'globe' ? 'visible' : 'none'
       // Earthquakes get a pulsing ring so they read differently from water places even at a glance.
-      m.addLayer({ id: 'quake-ring', type: 'circle', source: 'places', filter: ['==', ['get', 'kind'], 'quake'], layout: { visibility: vis }, paint: { 'circle-radius': ['+', ['get', 'r'], 6], 'circle-color': 'rgba(0,0,0,0)', 'circle-stroke-color': DOT_COLOR.quake, 'circle-stroke-width': 2, 'circle-stroke-opacity': 0.8 } })
-      m.addLayer({ id: 'quake-static', type: 'circle', source: 'places', filter: ['==', ['get', 'kind'], 'quake'], layout: { visibility: vis }, paint: { 'circle-radius': ['+', ['get', 'r'], 4], 'circle-color': 'rgba(0,0,0,0)', 'circle-stroke-color': '#fff', 'circle-stroke-width': 1.5, 'circle-stroke-opacity': 0.9 } })
-      m.addLayer({ id: 'halo', type: 'circle', source: 'places', layout: { visibility: vis }, paint: { 'circle-radius': ['+', ['get', 'r'], 8], 'circle-color': color, 'circle-opacity': 0.25, 'circle-blur': 0.7 } })
-      m.addLayer({ id: 'dots', type: 'circle', source: 'places', layout: { visibility: vis }, paint: { 'circle-radius': ['get', 'r'], 'circle-color': color, 'circle-opacity': 0.95, 'circle-stroke-color': '#fff', 'circle-stroke-width': 1.5 } })
+      m.addLayer({ id: 'quake-ring', type: 'circle', source: 'places', filter: ['==', ['get', 'kind'], 'quake'], layout: { visibility: vis }, paint: { 'circle-radius': scaled(6), 'circle-color': 'rgba(0,0,0,0)', 'circle-stroke-color': DOT_COLOR.quake, 'circle-stroke-width': 2, 'circle-stroke-opacity': 0.8 } })
+      m.addLayer({ id: 'quake-static', type: 'circle', source: 'places', filter: ['==', ['get', 'kind'], 'quake'], layout: { visibility: vis }, paint: { 'circle-radius': scaled(4), 'circle-color': 'rgba(0,0,0,0)', 'circle-stroke-color': '#fff', 'circle-stroke-width': 1.5, 'circle-stroke-opacity': 0.9 } })
+      m.addLayer({ id: 'halo', type: 'circle', source: 'places', layout: { visibility: vis, 'circle-sort-key': ['-', 0, ['get', 'r']] }, paint: { 'circle-radius': scaled(8), 'circle-color': color, 'circle-opacity': 0.22, 'circle-blur': 0.7 } })
+      m.addLayer({ id: 'dots', type: 'circle', source: 'places', layout: { visibility: vis, 'circle-sort-key': ['-', 0, ['get', 'r']] }, paint: { 'circle-radius': scaled(), 'circle-color': color, 'circle-opacity': 0.95, 'circle-stroke-color': '#fff', 'circle-stroke-width': 1.5 } })
+      m.addLayer({ id: 'hover-ring', type: 'circle', source: 'places', filter: ['==', ['get', 'id'], ''], layout: { visibility: vis }, paint: { 'circle-radius': scaled(4), 'circle-color': 'rgba(0,0,0,0)', 'circle-stroke-color': '#fff', 'circle-stroke-width': 2, 'circle-stroke-opacity': 0.95 } })
       if (!wired) {
         wired = true
-        m.on('mousemove', 'dots', (e) => { m.getCanvas().style.cursor = 'pointer'; live.current.hover = true; live.current.onHover({ id: e.features[0].properties.id, x: e.point.x, y: e.point.y }) })
-        m.on('mouseleave', 'dots', () => { m.getCanvas().style.cursor = ''; live.current.hover = false; live.current.onHover(null) })
-        m.on('click', 'dots', (e) => {
-          e.originalEvent.stopPropagation()
-          const id = e.features[0].properties.id
+        // Hit test: the place whose centre is nearest to the pointer, not whichever circle happens to be drawn on top.
+        const pick = (pt) => {
+          const fs = m.queryRenderedFeatures([[pt.x - HIT, pt.y - HIT], [pt.x + HIT, pt.y + HIT]], { layers: ['dots'] })
+          let best = null, bd = HIT
+          for (const f of new Set(fs.map((x) => x.properties.id))) {
+            const p = live.current.places.find((x) => x.id === f)
+            if (!p) continue
+            const c = m.project(p.lngLat), d = Math.hypot(c.x - pt.x, c.y - pt.y)
+            if (d <= bd) { bd = d; best = p.id }
+          }
+          return best
+        }
+        m.on('mousemove', (e) => {
+          if (live.current.view !== 'globe') return
+          const id = pick(e.point)
+          m.getCanvas().style.cursor = id ? 'pointer' : ''
+          live.current.hover = !!id
+          if (m.getLayer('hover-ring')) m.setFilter('hover-ring', ['==', ['get', 'id'], id || ''])
+          live.current.onHover(id ? { id, x: e.point.x, y: e.point.y } : null)
+        })
+        m.getCanvas().addEventListener('mouseleave', () => { live.current.hover = false; m.getCanvas().style.cursor = ''; if (m.getLayer('hover-ring')) m.setFilter('hover-ring', ['==', ['get', 'id'], '']); live.current.onHover(null) })
+        m.on('click', (e) => {
+          if (live.current.view !== 'globe') return
+          const id = pick(e.point)
+          if (!id) return live.current.onSelect(null)
           if (matchMedia('(hover: none)').matches) live.current.onSelect(id); else live.current.onOpen(id)
         })
-        m.on('click', (e) => { if (live.current.view === 'globe' && !m.queryRenderedFeatures(e.point, { layers: ['dots'] }).length) live.current.onSelect(null) })
       }
       radar.current = { ids: [], shown: null }
       setStyleVer((v) => v + 1)
@@ -90,13 +116,13 @@ export default function Stage({ mode, places, view, manifest, layer, date, opaci
       const dt = Math.min(t - last, 100)
       last = t
       if (live.current.view === 'globe' && m.getLayer('quake-ring') && !reduced.matches) {
-        const k = (t % 2000) / 2000
-        m.setPaintProperty('quake-ring', 'circle-radius', ['+', ['get', 'r'], 4 + 10 * k])
-        m.setPaintProperty('quake-ring', 'circle-stroke-opacity', 0.9 * (1 - k))
+        const k = 1 - (1 - (t % 2600) / 2600) ** 2 // a slow breath: the ring opens quickly, then fades as it widens
+        m.setPaintProperty('quake-ring', 'circle-radius', scaled(4 + 10 * k))
+        m.setPaintProperty('quake-ring', 'circle-stroke-opacity', 0.85 * (1 - k))
       }
       if (!STILL && !reduced.matches && live.current.view === 'globe' && !live.current.hover && t - touched > 4000 && !m.isMoving()) {
         const c = m.getCenter()
-        m.jumpTo({ center: [c.lng + dt * 0.005, c.lat] })
+        m.jumpTo({ center: [c.lng + dt * 0.0028, c.lat] })
       }
       raf = requestAnimationFrame(tick)
     }
@@ -120,11 +146,11 @@ export default function Stage({ mode, places, view, manifest, layer, date, opaci
     if (view === 'place' && bounds) {
       m.setPadding({ top: 0, bottom: 0, left: 0, right: 0 })
       const cam = placeCamera(m, bounds)
-      if (cam) { if (jump) m.jumpTo(cam); else m.flyTo({ ...cam, duration: reduced.matches ? 0 : 3200, curve: 1.6, essential: true }) }
+      if (cam) { if (jump) m.jumpTo(cam); else m.flyTo({ ...cam, duration: reduced.matches ? 0 : 2800, curve: 1.5, easing: FLY, essential: true }) }
     } else if (view === 'globe') {
       const c = m.getCenter()
-      const o = { center: [c.lng, 15], zoom: idleZoom(), padding: globePad() }
-      if (jump) m.jumpTo(o); else m.flyTo({ ...o, duration: reduced.matches ? 0 : 2600, curve: 1.4, essential: true })
+      const o = { center: [c.lng, 24], zoom: idleZoom(), padding: globePad() }
+      if (jump) m.jumpTo(o); else m.flyTo({ ...o, duration: reduced.matches ? 0 : 2600, curve: 1.5, easing: FLY, essential: true })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [view, manifest?.id])
@@ -133,7 +159,7 @@ export default function Stage({ mode, places, view, manifest, layer, date, opaci
   useEffect(() => {
     const m = map.current
     if (!styleVer) return
-    for (const id of ['halo', 'dots', 'quake-ring', 'quake-static']) m.setLayoutProperty(id, 'visibility', view === 'globe' ? 'visible' : 'none')
+    for (const id of ['halo', 'dots', 'quake-ring', 'quake-static', 'hover-ring']) m.setLayoutProperty(id, 'visibility', view === 'globe' ? 'visible' : 'none')
   }, [view, styleVer])
 
   // Random / Near me: fly to a place and open it.

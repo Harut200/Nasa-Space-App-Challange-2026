@@ -135,3 +135,47 @@ test('event places: dot size grows with magnitude; link with a date param parses
   assert.ok(Number.isFinite(meta.quakeRadius(undefined)))
   assert.equal(meta.parseHash('#/tibet-m70-2026?layer=fringes&date=2026-10-19').id, 'tibet-m70-2026')
 })
+
+// ---- polish pass ----
+test('viewing note: same-direction passes are written plainly', () => {
+  const same = meta.viewingNote({ views: [{ label: 'ascending' }, { label: 'ascending' }] })
+  assert.equal(same, "Provisional data, two passes of the same viewing direction: this is motion along the radar's line of sight, not up/down or sideways.")
+  assert.match(meta.viewingNote({ views: [{ label: 'ascending' }, { label: 'ascending' }, { label: 'ascending' }] }), /three passes of the same viewing direction/)
+  assert.match(meta.viewingNote({ views: [{ label: 'ascending' }, { label: 'descending' }] }), /two viewing directions/)
+  assert.doesNotMatch(same, /tracks, all/)
+})
+
+test('link: compare and split survive a reload, other date is optional', () => {
+  const h = meta.parseHash('#/tonle-sap?layer=water&date=2026-10-17&compare=1&split=35&other=2026-07-02')
+  assert.equal(h.compare, true); assert.equal(h.split, 35); assert.equal(h.other, '2026-07-02')
+  assert.ok(!('other' in meta.parseHash('#/tonle-sap?compare')))
+})
+
+test('layer labels: known ids get a short name, unknown ids fall back to the manifest label, cut at a word', () => {
+  assert.equal(meta.shortLabel({ id: 'water', label: 'x' }), 'Water and flooded vegetation')
+  assert.equal(meta.shortLabel({ id: 'coh', label: 'Coherence' }), 'Coherence')
+  const t = meta.shortLabel({ id: 'coh_change', label: 'Coherence change since the first pass of the season (unitless)' })
+  assert.ok(t.endsWith('…') && t.length <= 31 && !/\s…$/.test(t), t)
+  assert.equal(meta.shortLabel({ id: 'zz' }), 'zz')
+})
+
+test('numbers: percent, dB and nulls display cleanly', () => {
+  assert.equal(meta.withUnit(63.44, '%'), '63.4%')
+  assert.equal(meta.withUnit(-18.26, 'dB'), '−18.3 dB')
+  assert.equal(meta.withUnit(1234.4, 'km²'), '1,234 km²')
+  assert.equal(meta.fmtVal(null, '%'), '')
+})
+
+test('calibrated place (dB, negative values, axis not from 0) and a % fact with a null first value render without NaN', () => {
+  const ts = { dates: ['2026-08-12', '2026-08-24', '2026-09-05'], unit: 'dB', series: [{ spot: 'lake', hh: [-21.4, -20.9, -22.1], hv: [-27, -26.5, null] }, { spot: 'rice', hh: [-12.2, -11.8, -9.5] }] }
+  for (const pol of ['hh', 'hv', 'vv']) {
+    const c = html(h(Chart, { ts, pol, gaps: [], index: 1, onPick: noop, colors: ['#f00', '#00f'], spots: [{ id: 'lake', label: 'Lake' }, { id: 'rice', label: 'Rice' }] }))
+    assert.ok(!BAD.test(c.replace(/null/g, '')) && c.includes('−'), pol)
+  }
+  const one = { dates: ['2026-08-12'], series: [{ spot: 'lake', hh: [-20] }] }
+  assert.ok(html(h(Chart, { ts: one, pol: 'hh', gaps: [], index: 0, onPick: noop, colors: ['#f00'], spots: [] })).includes('−20'))
+  const noData = { dates: ['2026-08-12'], series: [{ spot: 'lake', hh: [null] }] }
+  assert.equal(html(h(Chart, { ts: noData, pol: 'hh', gaps: [], index: 0, onPick: noop, colors: ['#f00'], spots: [] })), '')
+  const peak = meta.peakWater({ dates: ['a', 'b'], facts: [{ label: 'Open water', unit: '%', values: [null, 12.5] }] })
+  assert.deepEqual(peak, { v: 12.5, date: 'b', unit: '%' })
+})

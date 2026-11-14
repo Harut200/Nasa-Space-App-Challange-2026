@@ -8,11 +8,12 @@ import { Divider, useExtent } from './Compare.jsx'
 
 const Stage = lazy(() => import('./Stage.jsx'))
 const reduced = matchMedia('(prefers-reduced-motion: reduce)')
+// A compare link opens the Compare tab, so the mode can be turned off again.
 const initial = (m, link, theme) => {
   const ev = isEvent(m)
   const idx = link.date && m.dates.length ? m.dates.indexOf(nearest(m.dates, link.date)) : 0 // a date a place does not have snaps to its nearest pass
   return { id: m.id, dateIndex: idx, layerId: m.layers.some((l) => l.id === link.layer) ? link.layer : defaultLayer(m), playing: false, touched: ev || !!link.date, // an earthquake has nothing to play
-    compare: link.compare, otherIndex: 0, split: link.split, opacity: theme === 'earth' ? 0.9 : 1, sheet: null, list: false, layersOpen: innerWidth >= 900 }
+    compare: link.compare, otherIndex: link.other && m.dates.includes(link.other) ? m.dates.indexOf(link.other) : 0, split: link.split, opacity: theme === 'earth' ? 0.9 : 1, sheet: link.compare && !ev ? 'compare' : null, list: false, layersOpen: innerWidth >= 900 }
 }
 
 export default function App() {
@@ -85,9 +86,14 @@ export default function App() {
     return () => clearTimeout(t)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [placeId])
+  // The address always describes the view, compare included, so a reload or a pasted link comes back the same. The divider is debounced while it is dragged.
+  const cmpKey = cmp ? `${Math.round(v.split)}|${ev ? '' : m.dates[v.otherIndex]}` : ''
   useEffect(() => {
-    if (v && m && layer) history.replaceState(null, '', `${location.pathname}${location.search}#/${m.id}?${new URLSearchParams(date ? { layer: layer.id, date } : { layer: layer.id })}`)
-  }, [v?.id, v?.layerId, v?.dateIndex]) // eslint-disable-line react-hooks/exhaustive-deps
+    if (!(v && m && layer)) return
+    const q = { layer: layer.id, ...(date ? { date } : {}), ...(cmp ? { compare: '1', split: String(Math.round(v.split)), ...(ev ? {} : { other: m.dates[v.otherIndex] }) } : {}) }
+    const t = setTimeout(() => history.replaceState(null, '', `${location.pathname}${location.search}#/${m.id}?${new URLSearchParams(q)}`), cmp ? 200 : 0)
+    return () => clearTimeout(t)
+  }, [v?.id, v?.layerId, v?.dateIndex, cmpKey]) // eslint-disable-line react-hooks/exhaustive-deps
 
   // Compare: keep the two cameras identical.
   useEffect(() => {
@@ -133,11 +139,11 @@ export default function App() {
   return (
     <div className={`app view-${placeId ? 'place' : 'globe'}`}>
       <Suspense fallback={<p className="splash"><span className="spin" /> Loading</p>}>
-        <Stage mode={mode} places={places} view={placeId ? 'place' : 'globe'} manifest={m} layer={layer} date={date} opacity={v?.opacity ?? 1} spots={ev ? null : m?.spots} epicentre={ev ? m.event.lngLat : null} colors={COLORS}
+        <Stage mode={mode} places={places} view={placeId ? 'place' : 'globe'} manifest={m} layer={layer} date={date} opacity={v?.opacity ?? 1} spots={ev || cmp ? null : m?.spots} epicentre={ev ? m.event.lngLat : null} colors={COLORS}
           onOpen={go} onHover={setTip} onSelect={setSelected} target={target} onMap={setA} onImagery={setImagery} />
       </Suspense>
       {cmp && m && layer && extent && (
-        <MapView mode={mode} bounds={m.bounds} url={ev ? null : frame(DATA, m.id, layer, m.dates[v.otherIndex]).url} opacity={v.opacity} onMap={setB}
+        <MapView mode={mode} bounds={m.bounds} url={ev ? null : frame(DATA, m.id, layer, m.dates[v.otherIndex]).url} opacity={v.opacity} onMap={setB} epicentre={ev ? m.event.lngLat : null}
           style={{ clipPath: `inset(${extent.top - 1}px 0 ${innerHeight - extent.top - extent.height}px ${extent.left + (extent.width * v.split) / 100}px)` }} />
       )}
       {cmp && extent && <Divider rect={extent} split={v.split} onSplit={(s) => patch({ split: s })} left={ev ? 'Ground motion' : dayMonth(shown)} right={ev ? 'Satellite only' : dayMonth(frame(DATA, m.id, layer, m.dates[v.otherIndex]).shown)} label={ev ? 'Drag to reveal the satellite image beneath the ground-motion layer' : undefined} />}

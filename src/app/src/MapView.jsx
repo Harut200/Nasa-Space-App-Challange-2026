@@ -5,7 +5,7 @@ import { coords } from './meta.js'
 
 // Second map for "compare two dates": same basemap, the other date's radar frame, clipped to the right of the divider.
 // Its camera is kept identical to the main map by the caller.
-export default function CompareMap({ mode, bounds, url, opacity, onMap, style }) {
+export default function CompareMap({ mode, bounds, url, opacity, onMap, style, epicentre }) {
   const el = useRef(null)
   const map = useRef(null)
   const [ready, setReady] = useState(false)
@@ -27,6 +27,16 @@ export default function CompareMap({ mode, bounds, url, opacity, onMap, style })
     return () => { onMap?.(null); m.remove() }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+  // The star is on this side of the divider too, so it never disappears behind the clipped map.
+  useEffect(() => {
+    if (!ready || !epicentre) return
+    const star = document.createElement('div')
+    star.className = 'epicentre'
+    star.setAttribute('aria-hidden', 'true')
+    star.textContent = '★'
+    const k = new maplibregl.Marker({ element: star }).setLngLat(epicentre).addTo(map.current)
+    return () => k.remove()
+  }, [ready, epicentre])
   useEffect(() => { if (ready) map.current.getSource('cmp')?.updateImage({ url }) }, [ready, url])
   useEffect(() => { if (ready && map.current.getLayer('cmp')) map.current.setPaintProperty('cmp', 'raster-opacity', opacity) }, [ready, opacity])
   return <div ref={el} className="compare-map" style={style} />

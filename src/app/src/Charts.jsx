@@ -49,17 +49,22 @@ export function Strip({ dates, gaps, index, onPick, quality }) {
   )
 }
 
-export function Chart({ ts, pol, gaps, index, onPick, colors, spots }) {
-  const H = 180, L = 34, R = 8
+export function Chart({ ts, pol: wanted, gaps, index, onPick, colors, spots }) {
+  const H = 180, L = 40, R = 8
   const f = frac(ts.dates)
   const x = (d) => L + f(d) * (W - L - R)
+  // A place without the wanted polarity (a calibrated product may carry one channel) falls back to the first channel it has.
+  const has = (k) => ts.series.some((s) => (s[k] || []).some((v) => v != null))
+  const key = has(wanted) ? wanted : ['hh', 'hv'].find(has) || Object.keys(ts.series[0] || {}).find((k) => k !== 'spot' && Array.isArray(ts.series[0][k]))
+  if (!key) return null
+  const pol = key
   const all = ts.series.flatMap((s) => s[pol] || []).filter((v) => v != null)
   if (!all.length) return null
   const unit = ts.unit || 'dB'
   const lo = Math.min(...all), hi = Math.max(...all)
   const y = (v) => H - 22 - ((v - lo) / (hi - lo || 1)) * (H - 40)
   const label = (id) => spots.find((s) => s.id === id)?.label || id
-  const fmt = (v) => (Math.abs(hi - lo) >= 10 ? v.toFixed(0) : v.toFixed(1))
+  const fmt = (v) => (Math.abs(hi - lo) >= 10 ? v.toFixed(0) : v.toFixed(1)).replace(/^-(?=\d)/, '\u2212')
   return (
     <figure className="chart-figure">
       <figcaption>
@@ -78,7 +83,7 @@ export function Chart({ ts, pol, gaps, index, onPick, colors, spots }) {
         <line className="chart-grid" x1={L} x2={W - R} y1={y(hi)} y2={y(hi)} />
         <line className="chart-grid" x1={L} x2={W - R} y1={y(lo)} y2={y(lo)} />
         <text className="chart-tick" x={L - 4} y={y(hi) + 4} textAnchor="end">{fmt(hi)}</text>
-        <text className="chart-tick" x={L - 4} y={y(lo) + 4} textAnchor="end">{fmt(lo)}</text>
+        {hi !== lo && <text className="chart-tick" x={L - 4} y={y(lo) + 4} textAnchor="end">{fmt(lo)}</text>}
         <text className="chart-tick" x={x(ts.dates[0])} y={H - 4}>{short(ts.dates[0])}</text>
         <text className="chart-tick" x={x(ts.dates[ts.dates.length - 1])} y={H - 4} textAnchor="end">{short(ts.dates[ts.dates.length - 1])}</text>
         <line className="chart-now" x1={x(ts.dates[index])} x2={x(ts.dates[index])} y1="4" y2={H - 20} />
@@ -95,7 +100,7 @@ export function Chart({ ts, pol, gaps, index, onPick, colors, spots }) {
               {vals.map((v, j) => v != null && (
                 <circle key={j} cx={x(ts.dates[j])} cy={y(v)} r={j === index ? 6 : 4} fill={c}
                   className="chart-dot" onClick={() => onPick(j)}>
-                  <title>{label(s.spot)}, {short(ts.dates[j])}: {v} {unit}</title>
+                  <title>{`${label(s.spot)}, ${short(ts.dates[j])}: ${v} ${unit}`}</title>
                 </circle>
               ))}
             </g>

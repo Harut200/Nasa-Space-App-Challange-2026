@@ -29,7 +29,22 @@ export const SHORT = {
   up_cm: 'Vertical, approximate',
   coherence: 'Coherence',
 }
-export const shortLabel = (l) => SHORT[l.id] || l.label
+// A layer id without a short name falls back to the manifest label, cut at a word boundary when it is long.
+export function shortLabel(l) {
+  if (SHORT[l.id]) return SHORT[l.id]
+  const t = String(l.label ?? l.id), max = 30
+  if (t.length <= max) return t
+  const cut = t.slice(0, max), sp = cut.lastIndexOf(' ')
+  return `${(sp > 14 ? cut.slice(0, sp) : cut).replace(/[\s,;:.(–-]+$/, '')}…`
+}
+// A number for display: whole numbers for areas, one decimal for a percentage or a dB value; a real minus sign.
+export function fmtVal(v, unit) {
+  if (!Number.isFinite(v)) return ''
+  const t = unit === '%' || unit === 'dB' ? v.toFixed(1) : km(v)
+  return t.replace(/^-(?=\d)/, '\u2212')
+}
+// "63.4 %" is written "63.4%": a percent sign sits against its number.
+export const withUnit = (v, unit) => (unit === '%' ? `${fmtVal(v, unit)}%` : `${fmtVal(v, unit)}${unit ? ` ${unit}` : ''}`)
 
 export function splitLayers(layers, event) {
   if (event) return { main: layers, more: [] }
@@ -85,7 +100,8 @@ export const viewMotion = (v) => (Number.isFinite(v.p2p_cm) ? `≈ ${km(v.p2p_cm
 export const viewControl = (v) => (Number.isFinite(v.control_p2p_cm) ? `≈ ${km(v.control_p2p_cm)} cm` : null)
 export function viewingNote(e) {
   const vs = e?.views || [], dirs = new Set(vs.map((v) => v.label))
-  const how = vs.length < 2 ? 'one viewing direction' : dirs.size > 1 ? 'two viewing directions' : `${vs.length} tracks, all ${[...dirs][0]}`
+  const NUM = ['zero', 'one', 'two', 'three', 'four', 'five', 'six']
+  const how = vs.length < 2 ? 'one viewing direction' : dirs.size > 1 ? 'two viewing directions' : `${NUM[vs.length] || vs.length} passes of the same viewing direction`
   return `Provisional data, ${how}: this is motion along the radar's line of sight, not up/down or sideways.`
 }
 
@@ -105,11 +121,11 @@ export const dotRadius = (peak) => 4 + 2.4 * Math.log10(1 + (peak?.v || 0))
 // Earthquake dots grow with magnitude (M6.8 is about 9 px, M7.7 about 11 px).
 export const quakeRadius = (mag) => 5 + 2.2 * Math.max(0, (Number.isFinite(mag) ? mag : 6) - 5)
 
-// Link state. Format: #/<place>?layer=<id>&date=<YYYY-MM-DD>; theme is a normal query parameter (?theme=a|b|c).
+// Link state. Format: #/<place>?layer=<id>&date=<YYYY-MM-DD>[&compare&split=<2-98>&other=<YYYY-MM-DD>]; theme is a normal query parameter (?theme=a|b|c).
 export function parseHash(h = location.hash) {
   const [path, query = ''] = h.replace(/^#\/?/, '').split('?')
   const q = new URLSearchParams(query)
-  return { id: path || null, layer: q.get('layer'), date: q.get('date'), about: q.has('about'), compare: q.has('compare'), split: q.has('split') ? Math.min(98, Math.max(2, +q.get('split') || 50)) : 50 }
+  return { id: path || null, layer: q.get('layer'), date: q.get('date'), about: q.has('about'), compare: q.has('compare'), split: q.has('split') ? Math.min(98, Math.max(2, +q.get('split') || 50)) : 50, ...(q.get('other') ? { other: q.get('other') } : {}) }
 }
 export const THEMES = [['earth', 'Earth'], ['arameh', 'Dark serif'], ['mission', 'Mission control']]
 export const basemapMode = (t) => (t === 'earth' ? 'natural' : 'dark')
