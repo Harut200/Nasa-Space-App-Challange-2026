@@ -2572,5 +2572,128 @@
   "loss_drop": 0.25,
   "min_px": 8,
   "time_note": "09:08 local on 17 Jul (Landslide Blog)"
+ },
+ {
+  "id": "atacama-west-2026",
+  "type": "storm",
+  "title": "Atacama Desert after the August 2026 snow and rain storms: about 6,000 km2 lost coherence (west of the Salar)",
+  "time": "2026-08-17T00:00:00Z",
+  "lat": -23.5,
+  "lon": -69.45,
+  "place": "Atacama Desert west of the Salar de Atacama, Antofagasta region, Chile",
+  "window": [
+   -70.15,
+   -24.0,
+   -69.0,
+   -23.0
+  ],
+  "heights": [
+   500,
+   3500
+  ],
+  "radius_km": 40,
+  "far_km": 80,
+  "gmin": 0.35,
+  "source_url": "https://science.nasa.gov/earth/earth-observatory/rare-widespread-snow-in-the-atacama-desert/",
+  "views": {
+   "d_both": {
+    "track": 97,
+    "frame": 100,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260726_20260819",
+     "granule": "NISAR_L2_PR_GUNW_026_097_D_100_028_2000_SH_20260726T224704_20260726T224739_20260819T224703_20260819T224737_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260702_20260714",
+     "granule": "NISAR_L2_PR_GUNW_024_097_D_100_025_2000_SH_20260702T224705_20260702T224740_20260714T224705_20260714T224739_P05023_F_F_J_001"
+    }
+   },
+   "d_after": {
+    "track": 97,
+    "frame": 100,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260819_20260831",
+     "granule": "NISAR_L2_PR_GUNW_028_097_D_100_029_2000_SH_20260819T224703_20260819T224737_20260831T224703_20260831T224737_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260702_20260714",
+     "granule": "NISAR_L2_PR_GUNW_024_097_D_100_025_2000_SH_20260702T224705_20260702T224740_20260714T224705_20260714T224739_P05023_F_F_J_001"
+    },
+    "data_view": "d_both"
+   },
+   "a_late": {
+    "track": 46,
+    "frame": 166,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260816_20260828",
+     "granule": "NISAR_L2_PR_GUNW_028_046_A_166_029_2000_SH_20260816T103041_20260816T103115_20260828T103040_20260828T103115_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260711_20260723",
+     "granule": "NISAR_L2_PR_GUNW_025_046_A_166_026_2000_SH_20260711T103043_20260711T103117_20260723T103042_20260723T103116_P05023_N_F_J_001"
+    }
+   }
+  },
+  "verdict": "clear",
+  "deformation": false,
+  "loss_hi": 0.45,
+  "loss_lo": 0.35,
+  "loss_drop": 0.25,
+  "min_px": 30,
+  "time_note": "back-to-back storms in early August and a second one in the second half of August (NASA Earth Observatory); pair 26 Jul-19 Aug (24 days)",
+  "primary_view": "d_both",
+  "export_views": [
+   "d_both"
+  ],
+  "export_deformation": false,
+  "app_views": [
+   "d_both",
+   "a_late"
+  ],
+  "zoom_km": 35,
+  "summary_number": "\u2248 6,000 km\u00b2 of desert lost coherence (window-limited)",
+  "site_label": "Centre of the box (Atacama Desert west of the Salar de Atacama)",
+  "verdict_reason": "descending 26 Jul-19 Aug vs 2-14 Jul: window mean coherence 0.76 -> 0.41, 5,952 km2 lost (largest connected patch 3,806 km2, cut by the window); ascending 16-28 Aug vs 11-23 Jul: 0.82 -> 0.62, 1,004 km2; the ascending pair 23 Jul-16 Aug over the eastern window shows nothing. Cause (snow, rain-wet soil, mud or flash-flood deposits) not separable; a second control, 14-26 Jul, is itself dark",
+  "extra_spots": [
+   {
+    "id": "patch",
+    "label": "Centre of the largest patch of lost coherence",
+    "lngLat": [
+     -69.4819,
+     -23.8233
+    ],
+    "radius_m": 8000
+   },
+   {
+    "id": "patch2",
+    "label": "Second patch",
+    "lngLat": [
+     -69.2439,
+     -23.1878
+    ],
+    "radius_m": 6000
+   },
+   {
+    "id": "reference",
+    "label": "Reference: stays coherent in both pairs",
+    "lngLat": [
+     -69.746,
+     -23.1735
+    ],
+    "radius_m": 4000
+   }
+  ],
+  "story": {
+   "see": "In August 2026 back-to-back winter storms dropped rare snow on northern Chile: NASA Earth Observatory shows Landsat images of 6 and 14 August and a MODIS image of 19 August with snow reaching from the Andes across the hyper-arid core of the Atacama to near the Pacific coast, and it reports mudflows and flash flooding in parts of northern Chile. The orange area is where the radar picture between NISAR's 26 July and 19 August passes no longer matches the dry pair before it (2 to 14 July): about 6,000 km2 in this 115 x 110 km box, the box edge cutting it off.",
+   "physics": "In the hyper-arid desert the ground hardly changes, so two radar passes match almost perfectly (the average coherence of this box was 0.76 in the dry pair). Snow, rain-wetted soil and fresh mud change the surface, and the average fell to 0.41. The ascending pass of 16 to 28 August shows the same: 0.82 down to 0.62, about 1,000 km2 lost. We cannot say how much of the loss is snow, wet soil or flood deposits.",
+   "lband": "NISAR's L-band radar has a wavelength of about 24 cm. Dry snow is largely transparent to it, which is probably why the ascending pair of 23 July to 16 August, over the eastern half of the area, shows nothing; wet ground and moved sediment are not. The dry pair before is bright almost everywhere, so a desert-wide drop stands out. One more pair we tried as a control (14 to 26 July) is itself dark over part of this desert; we do not know why, and we use the pair of 2 to 14 July.",
+   "people": "This map shows where the surface changed, not damage. We did not look at reports of damage or casualties."
+  }
  }
 ]
