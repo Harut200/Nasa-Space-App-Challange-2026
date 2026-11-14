@@ -21,7 +21,7 @@ export function useExtent(map, bounds) {
 }
 
 // A draggable divider with a round handle and a date at each end. `split` is 0..100 across the image.
-export function Divider({ rect, split, onSplit, left, right }) {
+export function Divider({ rect, split, onSplit, left, right, label = 'Drag to compare the two dates' }) {
   if (!rect) return null
   const x = rect.left + (rect.width * split) / 100
   const move = (e) => onSplit(Math.max(2, Math.min(98, ((e.clientX - rect.left) / rect.width) * 100)))
@@ -35,7 +35,7 @@ export function Divider({ rect, split, onSplit, left, right }) {
       <span className="cmp-label l">{left}</span>
       <span className="cmp-label r">{right}</span>
       <div className="cmp-line" aria-hidden="true" />
-      <button className="cmp-handle" aria-label="Drag to compare the two dates" role="slider" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(split)}
+      <button className="cmp-handle" aria-label={label} role="slider" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(split)}
         onPointerDown={down} onPointerMove={(e) => e.buttons && move(e)} onKeyDown={key}>
         <span aria-hidden="true">‹ ›</span>
       </button>

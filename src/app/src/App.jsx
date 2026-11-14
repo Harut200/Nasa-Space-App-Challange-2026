@@ -1,5 +1,5 @@
 import { lazy, Suspense, useCallback, useEffect, useMemo, useState } from 'react'
-import { getJson, peakWater, centre, nearestPlace, distanceKm, parseHash, km, words, dayMonth, defaultLayer, currentTheme, basemapMode, DATA } from './meta.js'
+import { getJson, makePlace, isEvent, nearestPlace, distanceKm, parseHash, km, words, dayMonth, defaultLayer, currentTheme, basemapMode, DATA } from './meta.js'
 import { nearest, frame } from './data.js'
 import { Landing, PlaceUI, COLORS } from './Panels.jsx'
 import About from './About.jsx'
@@ -9,8 +9,9 @@ import { Divider, useExtent } from './Compare.jsx'
 const Stage = lazy(() => import('./Stage.jsx'))
 const reduced = matchMedia('(prefers-reduced-motion: reduce)')
 const initial = (m, link, theme) => {
-  const idx = link.date ? m.dates.indexOf(nearest(m.dates, link.date)) : 0 // a date a place does not have snaps to its nearest pass
-  return { id: m.id, dateIndex: idx, layerId: m.layers.some((l) => l.id === link.layer) ? link.layer : defaultLayer(m), playing: false, touched: !!link.date,
+  const ev = isEvent(m)
+  const idx = link.date && m.dates.length ? m.dates.indexOf(nearest(m.dates, link.date)) : 0 // a date a place does not have snaps to its nearest pass
+  return { id: m.id, dateIndex: idx, layerId: m.layers.some((l) => l.id === link.layer) ? link.layer : defaultLayer(m), playing: false, touched: ev || !!link.date, // an earthquake has nothing to play
     compare: link.compare, otherIndex: 0, split: link.split, opacity: theme === 'earth' ? 0.9 : 1, sheet: null, list: false, layersOpen: innerWidth >= 900 }
 }
 
@@ -42,7 +43,7 @@ export default function App() {
     return () => removeEventListener('hashchange', on)
   }, [])
 
-  const places = useMemo(() => (manifests || []).map((m) => ({ id: m.id, name: m.name, lngLat: centre(m.bounds), peak: peakWater(series[m.id]) })), [manifests, series])
+  const places = useMemo(() => (manifests || []).map((m) => makePlace(m, series[m.id])), [manifests, series])
   const go = useCallback((id) => { setTip(null); setSelected(null); location.hash = id ? `#/${id}` : '#/' }, [])
   const placeId = manifests?.some((m) => m.id === route.id) ? route.id : null
   const m = manifests?.find((x) => x.id === placeId)
@@ -52,10 +53,12 @@ export default function App() {
   const patch = useCallback((p) => setV((s) => (s ? { ...s, ...p } : s)), [])
 
   const layer = m && v ? m.layers.find((l) => l.id === v.layerId) || m.layers[0] : null
-  const date = m && v ? m.dates[v.dateIndex] : null
+  const date = m && v ? m.dates[v.dateIndex] ?? null : null
   const n = m?.dates.length || 0
+  const ev = isEvent(m)
   // Compare only makes sense on a dated layer: on a whole-season layer both sides would be the same image.
-  const cmp = !!(v?.compare && layer?.dates)
+  // An earthquake has no second date: its compare is the layer against the bare satellite image ("reveal").
+  const cmp = !!(v?.compare && (layer?.dates || ev))
   const extent = useExtent(cmp ? maps.a : null, m?.bounds)
 
   // A link for the place that is already open (pasted or edited in the same tab) changes its layer and date instead of being ignored.
@@ -63,7 +66,7 @@ export default function App() {
     if (!m || !v || v.id !== m.id || route.id !== m.id) return
     const p = {}
     if (route.layer && m.layers.some((l) => l.id === route.layer)) p.layerId = route.layer
-    if (route.date) Object.assign(p, { dateIndex: m.dates.indexOf(nearest(m.dates, route.date)), playing: false, touched: true })
+    if (route.date && n) Object.assign(p, { dateIndex: m.dates.indexOf(nearest(m.dates, route.date)), playing: false, touched: true })
     if (route.compare) Object.assign(p, { compare: true, split: route.split })
     if (Object.keys(p).length) patch(p)
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -77,13 +80,13 @@ export default function App() {
   }, [v?.playing, n])
   // On entering a place (without a date in the link) play once after the fly-in, unless the person already touched something.
   useEffect(() => {
-    if (!placeId || route.date || reduced.matches) return
+    if (!placeId || route.date || reduced.matches || ev) return
     const t = setTimeout(() => setV((s) => (s && s.id === placeId && !s.touched ? { ...s, playing: true } : s)), 3000)
     return () => clearTimeout(t)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [placeId])
   useEffect(() => {
-    if (v && m && layer) history.replaceState(null, '', `${location.pathname}${location.search}#/${m.id}?${new URLSearchParams({ layer: layer.id, date })}`)
+    if (v && m && layer) history.replaceState(null, '', `${location.pathname}${location.search}#/${m.id}?${new URLSearchParams(date ? { layer: layer.id, date } : { layer: layer.id })}`)
   }, [v?.id, v?.layerId, v?.dateIndex]) // eslint-disable-line react-hooks/exhaustive-deps
 
   // Compare: keep the two cameras identical.
@@ -123,21 +126,21 @@ export default function App() {
   }
 
   const shown = m && layer?.dates ? frame(DATA, m.id, layer, date).shown : null
-  const other = m && v ? (layer?.dates ? words(frame(DATA, m.id, layer, m.dates[v.otherIndex]).shown) : 'whole season') : null
+  const other = m && v && !ev ? (layer?.dates ? words(frame(DATA, m.id, layer, m.dates[v.otherIndex]).shown) : 'whole season') : null
   const note = shown && shown !== date ? `No “${layer.label}” image for ${words(date)}. Showing the nearest one, ${words(shown)}.` : null
   const mode = basemapMode(theme)
 
   return (
     <div className={`app view-${placeId ? 'place' : 'globe'}`}>
       <Suspense fallback={<p className="splash"><span className="spin" /> Loading</p>}>
-        <Stage mode={mode} places={places} view={placeId ? 'place' : 'globe'} manifest={m} layer={layer} date={date} opacity={v?.opacity ?? 1} spots={m?.spots} colors={COLORS}
+        <Stage mode={mode} places={places} view={placeId ? 'place' : 'globe'} manifest={m} layer={layer} date={date} opacity={v?.opacity ?? 1} spots={ev ? null : m?.spots} epicentre={ev ? m.event.lngLat : null} colors={COLORS}
           onOpen={go} onHover={setTip} onSelect={setSelected} target={target} onMap={setA} onImagery={setImagery} />
       </Suspense>
       {cmp && m && layer && extent && (
-        <MapView mode={mode} bounds={m.bounds} url={frame(DATA, m.id, layer, m.dates[v.otherIndex]).url} opacity={v.opacity} onMap={setB}
-          style={{ clipPath: `inset(${extent.top}px 0 ${innerHeight - extent.top - extent.height}px ${extent.left + (extent.width * v.split) / 100}px)` }} />
+        <MapView mode={mode} bounds={m.bounds} url={ev ? null : frame(DATA, m.id, layer, m.dates[v.otherIndex]).url} opacity={v.opacity} onMap={setB}
+          style={{ clipPath: `inset(${extent.top - 1}px 0 ${innerHeight - extent.top - extent.height}px ${extent.left + (extent.width * v.split) / 100}px)` }} />
       )}
-      {cmp && extent && <Divider rect={extent} split={v.split} onSplit={(s) => patch({ split: s })} left={dayMonth(shown)} right={dayMonth(frame(DATA, m.id, layer, m.dates[v.otherIndex]).shown)} />}
+      {cmp && extent && <Divider rect={extent} split={v.split} onSplit={(s) => patch({ split: s })} left={ev ? 'Ground motion' : dayMonth(shown)} right={ev ? 'Satellite only' : dayMonth(frame(DATA, m.id, layer, m.dates[v.otherIndex]).shown)} label={ev ? 'Drag to reveal the satellite image beneath the ground-motion layer' : undefined} />}
       {!imagery && mode === 'natural' && <p className="glass imagery-note" role="status">Satellite imagery unavailable. Showing the radar data only.</p>}
       {placeId && v ? (
         <PlaceUI m={m} ts={series[m.id]} v={v} patch={patch} places={places} layer={layer} date={date} preview={m.source === 'preview'} otherDates={other} note={note}
@@ -145,7 +148,7 @@ export default function App() {
       ) : (
         <Landing places={places} tip={tip} selected={selected} onOpen={go} onRandom={random} onNear={nearMe} near={near} onAbout={() => setAboutOpen(true)} />
       )}
-      <About open={aboutOpen} onClose={() => setAboutOpen(false)} manifest={m} theme={theme} onTheme={setTheme} />
+      <About open={aboutOpen} hasEvents={manifests.some(isEvent)} onClose={() => setAboutOpen(false)} manifest={m} theme={theme} onTheme={setTheme} />
     </div>
   )
 }

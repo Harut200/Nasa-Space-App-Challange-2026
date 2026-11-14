@@ -12,6 +12,7 @@ const vite = await createServer({ root, server: { middlewareMode: true }, appTyp
 after(() => vite.close())
 const { frame, nearest } = await vite.ssrLoadModule('/src/data.js')
 const meta = await vite.ssrLoadModule('/src/meta.js')
+const { Fact } = await vite.ssrLoadModule('/src/Panels.jsx')
 const { Strip, Chart } = await vite.ssrLoadModule('/src/Charts.jsx')
 const count = (s, re) => (s.match(re) || []).length
 const noop = () => {}
@@ -71,4 +72,66 @@ test('no invented events, planets or demo data in the app source', () => {
   const re = /data\/demo|Demo \(synthetic\)|PLANETS|predicted event/
   const bad = fs.readdirSync(path.join(root, 'src')).filter((f) => /\.(jsx?|css)$/.test(f) && re.test(fs.readFileSync(path.join(root, 'src', f), 'utf8')))
   assert.deepEqual(bad, [])
+})
+
+// ---- earthquake event places ----
+const readManifest = (a) => JSON.parse(fs.readFileSync(path.join(pub, a, 'manifest.json'), 'utf8'))
+const idxAreas = JSON.parse(fs.readFileSync(path.join(pub, 'index.json'), 'utf8')).areas
+const manifests = idxAreas.map(readManifest)
+const events = manifests.filter(meta.isEvent)
+const places = manifests.map((m) => meta.makePlace(m, null))
+const BAD = /NaN|undefined|null|Infinity/
+
+test('event places: data shape, layers on disk, helpers survive dates: []', () => {
+  assert.ok(events.length >= 4)
+  for (const m of events) {
+    assert.deepEqual(m.dates, [])
+    assert.equal(meta.defaultLayer(m), 'fringes')
+    for (const l of m.layers) assert.ok(fs.existsSync(path.join(root, 'public', frame('data/', m.id, l, undefined).url)), `${m.id} ${l.id}`)
+    assert.equal(meta.splitLayers(m.layers, true).main.length, m.layers.length)
+    assert.ok(meta.eventViews(m.event).length >= 1)
+  }
+  assert.equal(meta.peakWater({ dates: [], series: [], facts: [] }), null)
+})
+
+test('event places: tooltip text, grouping, counts, summaries', () => {
+  const tibet = places.find((p) => p.id === 'tibet-m70-2026')
+  assert.equal(tibet.kind, 'event')
+  const { head, rest } = meta.eventTip(tibet)
+  assert.equal(`${head} · ${rest}`, "Tibet earthquake, M7.0 · 22 Oct 2026 · ground moved ≈ 127 cm along the radar's line of sight")
+  const noNum = { ...tibet, event: { ...tibet.event, views: [{ ...tibet.event.views[0], p2p_cm: null }] } }
+  assert.equal(meta.eventTip(noNum).rest, '22 Oct 2026')
+  for (const p of places) {
+    const t = html(h(Fact, { p })) + meta.placeSummary(p)
+    assert.ok(!BAD.test(t), `${p.id}: ${t}`)
+  }
+  const g = meta.groupPlaces(places)
+  assert.deepEqual(g.map((x) => x.title), ['A season of water', 'Earthquakes'])
+  assert.equal(g[0].items.length + g[1].items.length, places.length)
+  assert.ok(g[1].items.every((p) => p.kind === 'event'))
+  assert.deepEqual(meta.groupPlaces(places.filter((p) => p.kind === 'event')).map((x) => x.key), ['event'])
+  const { seasons, quakes } = meta.countPlaces(places)
+  assert.equal(quakes, events.length)
+  assert.equal(meta.landingText(places), `NISAR watched ${seasons} places through a season, and ${quakes} earthquakes between June and October 2026.`)
+  assert.equal(meta.landingText(places.slice(0, 3)), 'NISAR watched 3 places through a season between June and October 2026.')
+  assert.equal(meta.eventSummary(tibet), 'M7.0 · 22 Oct 2026')
+})
+
+test('event places: before/after and honesty text, no NaN', () => {
+  for (const m of events) {
+    const e = m.event
+    const txt = [meta.viewingNote(e), meta.utcStamp(e.time), ...meta.eventViews(e).flatMap((v) => [meta.dayMon(v.before), meta.dayMon(v.after), meta.viewMotion(v), meta.viewControl(v)])].filter(Boolean).join(' ')
+    assert.ok(!BAD.test(txt), txt)
+  }
+  const t = readManifest('tibet-m70-2026').event
+  assert.equal(meta.dayMon(t.views[0].before), '19 Oct')
+  assert.match(meta.viewingNote(t), /one viewing direction/)
+  assert.match(meta.viewingNote({ views: [{ label: 'ascending' }, { label: 'descending' }] }), /two viewing directions/)
+  assert.equal(meta.viewMotion({ p2p_cm: null }), null)
+})
+
+test('event places: dot size grows with magnitude; link with a date param parses', () => {
+  assert.ok(meta.quakeRadius(7.7) > meta.quakeRadius(6.8))
+  assert.ok(Number.isFinite(meta.quakeRadius(undefined)))
+  assert.equal(meta.parseHash('#/tibet-m70-2026?layer=fringes&date=2026-10-19').id, 'tibet-m70-2026')
 })

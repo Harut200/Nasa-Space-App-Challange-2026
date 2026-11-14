@@ -3,7 +3,7 @@ import * as maplibregl from 'maplibre-gl'
 import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?url'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import { styleFor, IMAGERY_SOURCES } from './basemap.js'
-import { dotKind, dotRadius, DOT_COLOR, DATA, coords } from './meta.js'
+import { dotKind, dotRadius, quakeRadius, DOT_COLOR, DATA, coords } from './meta.js'
 import { frame } from './data.js'
 import { withoutGrey, GREY_BACKGROUND } from './transparent.js'
 
@@ -14,7 +14,7 @@ const reduced = matchMedia('(prefers-reduced-motion: reduce)')
 const wide = () => innerWidth >= 900
 
 // The one map of the app: a globe when zoomed out, the place when zoomed in, our radar frames draped on top.
-export default function Stage({ mode, places, view, manifest, layer, date, opacity, spots, colors, onOpen, onHover, onSelect, target, onMap, onImagery }) {
+export default function Stage({ mode, places, view, manifest, layer, date, opacity, spots, epicentre, colors, onOpen, onHover, onSelect, target, onMap, onImagery }) {
   const box = useRef(null)
   const el = useRef(null)
   const map = useRef(null)
@@ -33,7 +33,9 @@ export default function Stage({ mode, places, view, manifest, layer, date, opaci
   const globePad = () => ({ top: 0, left: 0, right: 0, bottom: wide() ? 210 : 270 })
   const placeCamera = (m, b) => {
     const phone = !wide()
-    const padding = phone ? { top: 130, bottom: 230, left: 24, right: 24 } : { top: 110, bottom: 190, left: 60, right: 60 }
+    const two = (manifest?.event?.views?.length || 0) > 1
+    // On a phone an earthquake's headline card and before/after bar are taller than a season's, so the map keeps clear of them.
+    const padding = phone ? (manifest?.event ? { top: two ? 340 : 270, bottom: two ? 300 : 260, left: 24, right: 24 } : { top: 130, bottom: 230, left: 24, right: 24 }) : { top: 110, bottom: 190, left: 60, right: 60 }
     return m.cameraForBounds([[b[0], b[1]], [b[2], b[3]]], { padding })
   }
 
@@ -51,9 +53,12 @@ export default function Stage({ mode, places, view, manifest, layer, date, opaci
     onMap?.(m)
     let wired = false
     m.on('style.load', () => {
-      m.addSource('places', { type: 'geojson', data: { type: 'FeatureCollection', features: live.current.places.map((p) => ({ type: 'Feature', properties: { id: p.id, r: dotRadius(p.peak), kind: dotKind(p.peak) }, geometry: { type: 'Point', coordinates: p.lngLat } })) } })
-      const color = ['match', ['get', 'kind'], 'big', DOT_COLOR.big, 'some', DOT_COLOR.some, DOT_COLOR.land]
+      m.addSource('places', { type: 'geojson', data: { type: 'FeatureCollection', features: live.current.places.map((p) => ({ type: 'Feature', properties: { id: p.id, r: p.kind === 'event' ? quakeRadius(p.event?.magnitude) : dotRadius(p.peak), kind: p.kind === 'event' ? 'quake' : dotKind(p.peak) }, geometry: { type: 'Point', coordinates: p.lngLat } })) } })
+      const color = ['match', ['get', 'kind'], 'big', DOT_COLOR.big, 'some', DOT_COLOR.some, 'quake', DOT_COLOR.quake, DOT_COLOR.land]
       const vis = live.current.view === 'globe' ? 'visible' : 'none'
+      // Earthquakes get a pulsing ring so they read differently from water places even at a glance.
+      m.addLayer({ id: 'quake-ring', type: 'circle', source: 'places', filter: ['==', ['get', 'kind'], 'quake'], layout: { visibility: vis }, paint: { 'circle-radius': ['+', ['get', 'r'], 6], 'circle-color': 'rgba(0,0,0,0)', 'circle-stroke-color': DOT_COLOR.quake, 'circle-stroke-width': 2, 'circle-stroke-opacity': 0.8 } })
+      m.addLayer({ id: 'quake-static', type: 'circle', source: 'places', filter: ['==', ['get', 'kind'], 'quake'], layout: { visibility: vis }, paint: { 'circle-radius': ['+', ['get', 'r'], 4], 'circle-color': 'rgba(0,0,0,0)', 'circle-stroke-color': '#fff', 'circle-stroke-width': 1.5, 'circle-stroke-opacity': 0.9 } })
       m.addLayer({ id: 'halo', type: 'circle', source: 'places', layout: { visibility: vis }, paint: { 'circle-radius': ['+', ['get', 'r'], 8], 'circle-color': color, 'circle-opacity': 0.25, 'circle-blur': 0.7 } })
       m.addLayer({ id: 'dots', type: 'circle', source: 'places', layout: { visibility: vis }, paint: { 'circle-radius': ['get', 'r'], 'circle-color': color, 'circle-opacity': 0.95, 'circle-stroke-color': '#fff', 'circle-stroke-width': 1.5 } })
       if (!wired) {
@@ -84,6 +89,11 @@ export default function Stage({ mode, places, view, manifest, layer, date, opaci
     const tick = (t) => {
       const dt = Math.min(t - last, 100)
       last = t
+      if (live.current.view === 'globe' && m.getLayer('quake-ring') && !reduced.matches) {
+        const k = (t % 2000) / 2000
+        m.setPaintProperty('quake-ring', 'circle-radius', ['+', ['get', 'r'], 4 + 10 * k])
+        m.setPaintProperty('quake-ring', 'circle-stroke-opacity', 0.9 * (1 - k))
+      }
       if (!STILL && !reduced.matches && live.current.view === 'globe' && !live.current.hover && t - touched > 4000 && !m.isMoving()) {
         const c = m.getCenter()
         m.jumpTo({ center: [c.lng + dt * 0.005, c.lat] })
@@ -123,7 +133,7 @@ export default function Stage({ mode, places, view, manifest, layer, date, opaci
   useEffect(() => {
     const m = map.current
     if (!styleVer) return
-    for (const id of ['halo', 'dots']) m.setLayoutProperty(id, 'visibility', view === 'globe' ? 'visible' : 'none')
+    for (const id of ['halo', 'dots', 'quake-ring', 'quake-static']) m.setLayoutProperty(id, 'visibility', view === 'globe' ? 'visible' : 'none')
   }, [view, styleVer])
 
   // Random / Near me: fly to a place and open it.
@@ -174,6 +184,18 @@ export default function Stage({ mode, places, view, manifest, layer, date, opaci
     const markers = spots.map((s, i) => new maplibregl.Marker({ color: colors[i % colors.length], scale: 0.8 }).setLngLat(s.lngLat).setPopup(new maplibregl.Popup({ offset: 24 }).setText(s.label)).addTo(m))
     return () => markers.forEach((k) => k.remove())
   }, [view, spots, colors, styleVer])
+
+  // An earthquake's epicentre: a star that is always visible in the place view.
+  useEffect(() => {
+    const m = map.current
+    if (view !== 'place' || !epicentre) return
+    const el = document.createElement('div')
+    el.className = 'epicentre'
+    el.setAttribute('aria-hidden', 'true')
+    el.textContent = '★'
+    const k = new maplibregl.Marker({ element: el }).setLngLat(epicentre).setPopup(new maplibregl.Popup({ offset: 16 }).setText('USGS epicentre')).addTo(m)
+    return () => k.remove()
+  }, [view, epicentre, styleVer])
 
   useEffect(() => { first.current = false }, [])
 

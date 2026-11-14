@@ -251,3 +251,26 @@ input[type='checkbox'] { accent-color: var(--accent-2); width: 1.1rem; height: 1
   .drawer { position: fixed; left: var(--gut); right: var(--gut); width: auto; top: 66px; }
   .wide-only { display: none; }
 }
+
+/* earthquake places */
+.legend-dots i.quake-key { border-radius: 2px; transform: rotate(45deg); width: 9px; height: 9px; background: none; border: 2px solid; }
+.drawer .grp { padding: 10px 12px 4px; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); }
+.epicentre { font-size: 26px; line-height: 1; color: #fff; text-shadow: 0 0 4px #000, 0 0 10px #ff4f8b; cursor: pointer; }
+.ev-motion b { font-weight: 600; }
+.evbar .ev-pass { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; margin: 0 0 6px; }
+.ev-view { font-size: 0.82rem; color: var(--muted); min-width: 9.5rem; }
+.ev-dates { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-num); font-size: 1.1rem; }
+.ev-dates i { font-style: normal; color: var(--muted); }
+.ev-quake { color: #ff7aa6; }
+.ev-cap { font-size: 0.75rem; color: var(--faint); }
+@media (max-width: 899px) { .evbar { padding: 10px 14px 8px; } .ev-dates { font-size: 1rem; } .evbar .status { margin-top: 2px; } }
+@media (max-width: 899px) {
+  .ev .layers { bottom: 250px; }
+  .ev2 .layers { bottom: 300px; }
+  .ev .hl-label { font-size: 0.88rem; margin-top: 6px; }
+  .ev .hl-sub { font-size: 0.76rem; }
+  .ev .hl-num { font-size: 2.1rem; }
+  .ev-cap { display: none; }
+  .ev-view { min-width: 0; flex-basis: 100%; font-size: 0.78rem; }
+  .evbar .ev-pass { margin-bottom: 4px; gap: 0 14px; }
+}
