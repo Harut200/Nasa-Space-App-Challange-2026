@@ -1,0 +1,7 @@
+/* Layout only: what the app needs to work. Visual styling comes later. */
+body { margin: 0; font-family: sans-serif; }
+.maps { position: relative; height: 60vh; }
+.maps .map { position: absolute; inset: 0; } /* two classes: beats MapLibre's own position rule */
+.strip, .chart { display: block; width: 100%; max-width: 600px; }
+.legend-bar { height: 12px; width: 240px; border: 1px solid; }
+[aria-pressed='true'] { font-weight: bold; text-decoration: underline; }
