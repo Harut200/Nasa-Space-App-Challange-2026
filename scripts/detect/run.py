@@ -251,7 +251,7 @@ def run(area, source="auto", dev=None):
     layers = [
         {"id": "hh", "label": f"HH {kind}", "dated": True, "legend": hh_leg},
         {"id": "water", "label": "Water and flooded vegetation", "dated": True,
-         "legend": cls_legend([(WATER, "Open water"), (FLOODED_VEG, "Water under vegetation")]
+         "legend": cls_legend([(WATER, "Open water"), (FLOODED_VEG, "Possible water under vegetation")]
                               + ([(GOING_UNDER, "Going under: vegetation submerging, or part open water")] if "fv_state" in o else [])
                               + [(WIND, "Usually water, not today (wind?)")])},
         {"id": "when", "label": "When it changed for good", "dated": False,
