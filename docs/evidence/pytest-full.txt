@@ -1,7 +1,7 @@
-........................................................................ [ 32%]
-........................................................................ [ 64%]
-........................................................................ [ 96%]
-.......                                                                  [100%]
+........................................................................ [ 29%]
+........................................................................ [ 59%]
+........................................................................ [ 89%]
+..........................                                               [100%]
 =============================== warnings summary ===============================
 tests/test_graphdet.py::test_laplacian_matches_hand_computed
   <repo>/scripts/detect/graphdet.py:139: UserWarning: Sparse invariant checks are implicitly disabled. Memory errors (e.g. SEGFAULT) will occur when operating on a sparse tensor which violates the invariants, but checks incur performance overhead. To silence this warning, explicitly opt in or out. See `torch.sparse.check_sparse_tensor_invariants.__doc__` for guidance.  (Triggered internally at <ci>/aten/src/ATen/Context.cpp:923.)
@@ -27,6 +27,20 @@ tests/test_unmix.py::test_decoder_reproduces_hand_computed_mixture
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
 ==================================== PASSES ====================================
+__________________ test_idempotent_append_legends_and_series ___________________
+----------------------------- Captured stdout call -----------------------------
+synthetic-fire evidence layers written: ['burn_before', 'burn_after', 'burn_diff', 'burn_scar']
+synthetic-fire evidence layers written: ['burn_before', 'burn_after', 'burn_diff', 'burn_scar']
+________________________ test_no_mask_when_not_obvious _________________________
+----------------------------- Captured stdout call -----------------------------
+synthetic-fire evidence layers written: ['burn_before', 'burn_after', 'burn_diff']
+_________________ test_export_before_same_grid_ramp_and_legend _________________
+----------------------------- Captured stdout call -----------------------------
+wrote coherence_before 216 KB
+before layer syn-ev asc 20260629 20260723
+wrote coherence_before 216 KB
+before layer syn-ev asc 20260629 20260723
+syn-ev: asc: no before layer (control pair is not before the event)
 _____________________________________ test _____________________________________
 ----------------------------- Captured stdout call -----------------------------
 ok
@@ -76,6 +90,15 @@ dropped duplicate on 2026-10-17: NISAR_L2_PR_GCOV_033_083_A_008_4005_DHDH_A_2026
 dropped duplicate on 2026-10-17: NISAR_L2_PR_GCOV_033_083_A_008_4005_DHDH_A_20261017T223704_20261017T223708_P05023_N_P_J_001
 10 passes -> <repo>/data/raw/tonle-sap/passes.json
 search ok: 10 passes 2026-06-19 .. 2026-10-17
+________________________ test_export_before_end_to_end _________________________
+----------------------------- Captured stdout call -----------------------------
+wrote los_before_cm 140 KB
+wrote fringes_before 193 KB
+before layers syn asc 12 days, 13 Jun–25 Jun
+wrote los_before_cm 140 KB
+wrote fringes_before 193 KB
+before layers syn asc 12 days, 13 Jun–25 Jun
+syn: asc: no before layer (control pair is not before the event)
 ________________________________ test_run_demo _________________________________
 ----------------------------- Captured stdout call -----------------------------
   terrain mask: not built for this area
@@ -101,6 +124,17 @@ PASSED tests/test_add_area.py::test_choose_prefers_inside_then_most_dates
 PASSED tests/test_add_area.py::test_choose_shrinks_when_nothing_contains_box
 PASSED tests/test_add_area.py::test_choose_fails_cleanly
 PASSED tests/test_add_area.py::test_suspect_previews_flags_small_files
+PASSED tests/test_burn.py::test_patch_recovered_for_both_channels_and_signs[hv--1]
+PASSED tests/test_burn.py::test_patch_recovered_for_both_channels_and_signs[hh--1]
+PASSED tests/test_burn.py::test_patch_recovered_for_both_channels_and_signs[hv-1]
+PASSED tests/test_burn.py::test_patch_recovered_for_both_channels_and_signs[hh-1]
+PASSED tests/test_burn.py::test_wrong_sign_finds_nothing
+PASSED tests/test_burn.py::test_threshold_comes_from_the_control_noise
+PASSED tests/test_burn.py::test_sensitivity_is_monotone
+PASSED tests/test_burn.py::test_corrupt_date_left_out
+PASSED tests/test_burn.py::test_split_dates_leaves_out_the_ignition_interval_and_excluded
+PASSED tests/test_burn.py::test_idempotent_append_legends_and_series
+PASSED tests/test_burn.py::test_no_mask_when_not_obvious
 PASSED tests/test_calibrated.py::test_db_conversion_and_power_domain_filter
 PASSED tests/test_calibrated.py::test_synthetic_scene_shapes_and_levels
 PASSED tests/test_calibrated.py::test_water_detected_at_every_enl
@@ -147,6 +181,10 @@ PASSED tests/test_events.py::test_nan_coherence_ignored
 PASSED tests/test_events.py::test_job_file_has_two_pairs_and_no_server_details
 PASSED tests/test_events.py::test_config_ids_unique_and_views_have_pairs
 PASSED tests/test_events.py::test_drop_rule_follows_partial_loss_and_clusters_rank_by_area
+PASSED tests/test_events.py::test_pairing_block_and_post_event_control
+PASSED tests/test_events.py::test_export_before_same_grid_ramp_and_legend
+PASSED tests/test_events.py::test_views_sharing_a_data_folder_download_each_pair_once
+PASSED tests/test_events.py::test_fire_rule_is_wider_than_default_and_catches_a_partial_drop
 PASSED tests/test_export.py::test
 PASSED tests/test_floodveg.py::test_ring_patch_found_town_crop_not
 PASSED tests/test_floodveg.py::test_area_tolerance_and_shapes
@@ -259,6 +297,10 @@ PASSED tests/test_quake.py::test_largest_component
 PASSED tests/test_quake.py::test_events_config_complete
 PASSED tests/test_quake.py::test_job_for_and_no_server_in_repo_config
 PASSED tests/test_quake.py::test_decompose_east_up_synthetic
+PASSED tests/test_quake.py::test_control_is_before_rules
+PASSED tests/test_quake.py::test_pairing_block_well_formed_and_empty_for_post_event_control
+PASSED tests/test_quake.py::test_before_layers_use_event_scale
+PASSED tests/test_quake.py::test_export_before_end_to_end
 PASSED tests/test_remote_extract.py::test_utm_matches_rasterio
 PASSED tests/test_remote_extract.py::test_extraction
 PASSED tests/test_remote_extract.py::test_b4_report
@@ -314,4 +356,4 @@ PASSED tests/test_unmix.py::test_synthetic_study_dark_land_is_land
 PASSED tests/test_unmix.py::test_terrain_prior_moves_water_to_land
 PASSED tests/test_unmix.py::test_noise_floor_map_follows_a_swath_gradient
 PASSED tests/test_unmix.py::test_impute_bad_channel_uses_other_dates
-223 passed, 9 warnings in 124.61s (0:02:04)
+242 passed, 9 warnings in 79.57s (0:01:19)

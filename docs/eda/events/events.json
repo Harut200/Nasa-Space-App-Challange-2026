@@ -2503,6 +2503,20 @@
      "pair": "20260709_20260721",
      "granule": "NISAR_L2_PR_GUNW_025_024_A_018_026_4000_SH_20260709T202900_20260709T202935_20260721T202900_20260721T202934_P05023_N_F_J_001"
     }
+   },
+   "desc": {
+    "track": 3,
+    "frame": 73,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260720_20260813",
+     "granule": "NISAR_L2_PR_GUNW_026_003_D_073_028_2000_SH_20260720T100251_20260720T100326_20260813T100250_20260813T100325_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260626_20260708",
+     "granule": "NISAR_L2_PR_GUNW_024_003_D_073_025_2000_SH_20260626T100253_20260626T100327_20260708T100252_20260708T100327_P05023_N_F_J_001"
+    }
    }
   },
   "verdict": null,
@@ -2576,8 +2590,8 @@
  {
   "id": "atacama-west-2026",
   "type": "storm",
-  "title": "Atacama Desert after the August 2026 snow and rain storms: about 6,000 km2 lost coherence (west of the Salar)",
-  "time": "2026-08-17T00:00:00Z",
+  "title": "Atacama Desert after the 17-18 August 2026 rain and the snow storms: about 6,000 km2 lost coherence (west of the Salar)",
+  "time": "2026-08-18T00:00:00Z",
   "lat": -23.5,
   "lon": -69.45,
   "place": "Atacama Desert west of the Salar de Atacama, Antofagasta region, Chile",
@@ -2594,7 +2608,7 @@
   "radius_km": 40,
   "far_km": 80,
   "gmin": 0.35,
-  "source_url": "https://science.nasa.gov/earth/earth-observatory/rare-widespread-snow-in-the-atacama-desert/",
+  "source_url": "https://www.meteored.cl/noticias/actualidad/el-norte-de-chile-recibio-lluvias-historicas-aluvion-deja-enterrada-parte-de-tocopilla.html",
   "views": {
    "d_both": {
     "track": 97,
@@ -2646,7 +2660,7 @@
   "loss_lo": 0.35,
   "loss_drop": 0.25,
   "min_px": 30,
-  "time_note": "back-to-back storms in early August and a second one in the second half of August (NASA Earth Observatory); pair 26 Jul-19 Aug (24 days)",
+  "time_note": "rain on 17-18 Aug (Meteored); pair 26 Jul-19 Aug (24 days); the ascending pair that ends on 16 Aug shows nothing",
   "primary_view": "d_both",
   "export_views": [
    "d_both"
@@ -2659,7 +2673,7 @@
   "zoom_km": 35,
   "summary_number": "\u2248 6,000 km\u00b2 of desert lost coherence (window-limited)",
   "site_label": "Centre of the box (Atacama Desert west of the Salar de Atacama)",
-  "verdict_reason": "descending 26 Jul-19 Aug vs 2-14 Jul: window mean coherence 0.76 -> 0.41, 5,952 km2 lost (largest connected patch 3,806 km2, cut by the window); ascending 16-28 Aug vs 11-23 Jul: 0.82 -> 0.62, 1,004 km2; the ascending pair 23 Jul-16 Aug over the eastern window shows nothing. Cause (snow, rain-wet soil, mud or flash-flood deposits) not separable; a second control, 14-26 Jul, is itself dark",
+  "verdict_reason": "descending 26 Jul-19 Aug vs 2-14 Jul: window mean coherence 0.76 -> 0.41, 5,952 km2 lost (largest connected patch 3,806 km2, cut by the window); ascending 16-28 Aug vs 11-23 Jul: 0.82 -> 0.62, 1,004 km2; the ascending pair 23 Jul-16 Aug over the eastern window shows nothing. Cause (snow, rain-wet soil, mud or flash-flood deposits) not separable; a second control, 14-26 Jul, is itself dark; next descending pair 19-31 Aug: 0.48, 3,891 km2 lost; the ascending pair ending 16 Aug (before the 17-18 Aug rain) shows nothing, which brackets the change to 16-19 Aug",
   "extra_spots": [
    {
     "id": "patch",
@@ -2690,10 +2704,510 @@
    }
   ],
   "story": {
-   "see": "In August 2026 back-to-back winter storms dropped rare snow on northern Chile: NASA Earth Observatory shows Landsat images of 6 and 14 August and a MODIS image of 19 August with snow reaching from the Andes across the hyper-arid core of the Atacama to near the Pacific coast, and it reports mudflows and flash flooding in parts of northern Chile. The orange area is where the radar picture between NISAR's 26 July and 19 August passes no longer matches the dry pair before it (2 to 14 July): about 6,000 km2 in this 115 x 110 km box, the box edge cutting it off.",
-   "physics": "In the hyper-arid desert the ground hardly changes, so two radar passes match almost perfectly (the average coherence of this box was 0.76 in the dry pair). Snow, rain-wetted soil and fresh mud change the surface, and the average fell to 0.41. The ascending pass of 16 to 28 August shows the same: 0.82 down to 0.62, about 1,000 km2 lost. We cannot say how much of the loss is snow, wet soil or flood deposits.",
-   "lband": "NISAR's L-band radar has a wavelength of about 24 cm. Dry snow is largely transparent to it, which is probably why the ascending pair of 23 July to 16 August, over the eastern half of the area, shows nothing; wet ground and moved sediment are not. The dry pair before is bright almost everywhere, so a desert-wide drop stands out. One more pair we tried as a control (14 to 26 July) is itself dark over part of this desert; we do not know why, and we use the pair of 2 to 14 July.",
+   "see": "On 17 and 18 August 2026 a cut-off low brought record rain to northern Chile: more than 37 mm in two days at Tocopilla and 33 mm at Taltal, new daily records at Arica and Iquique, and a mudflow down the hills of Tocopilla on the afternoon of 18 August (Meteored). NASA Earth Observatory shows back-to-back winter storms that month with rare snow from the Andes to near the coast (Landsat 6 and 14 August, MODIS 19 August). The orange area is where the radar picture between NISAR's 26 July and 19 August passes no longer matches the dry pair before it (2 to 14 July): about 6,000 km2 in this 115 x 110 km box of the desert west of the Salar de Atacama, the box edge cutting it off.",
+   "physics": "In the hyper-arid desert the ground hardly changes, so two radar passes match almost perfectly (the average coherence of this box was 0.76 in the dry pair). Snow, rain-wetted soil and fresh mud change the surface, and the average fell to 0.41. In the next descending pair (19 to 31 August) it is still 0.48, about 3,900 km2 lost. The ascending pass of 16 to 28 August shows the same: 0.82 down to 0.62, about 1,000 km2 lost. We cannot say how much of the loss is snow, wet soil or flood deposits.",
+   "lband": "NISAR's L-band radar has a wavelength of about 24 cm. Dry snow is largely transparent to it, and the ascending pair of 23 July to 16 August, which ends the day before the rain, shows nothing; wet ground and moved sediment are not transparent. The dry pair before is bright almost everywhere, so a desert-wide drop stands out. One more pair we tried as a control (14 to 26 July) is itself dark over part of this desert; we do not know why, and we use the pair of 2 to 14 July.",
    "people": "This map shows where the surface changed, not damage. We did not look at reports of damage or casualties."
   }
+ },
+ {
+  "id": "polo-arizona-2026",
+  "type": "storm",
+  "title": "Flash flooding in the Arizona desert from the remnants of Hurricane Polo, 28 Sep-2 Oct 2026",
+  "time": "2026-09-29T00:00:00Z",
+  "lat": 32.7,
+  "lon": -111.7,
+  "place": "between Tucson and Phoenix, Arizona, USA",
+  "window": [
+   -112.3,
+   32.2,
+   -111.4,
+   33.1
+  ],
+  "heights": [
+   300,
+   1500
+  ],
+  "radius_km": 30,
+  "far_km": 90,
+  "gmin": 0.35,
+  "source_url": "https://weather.com/2026/10/02/forecast/regional/hurricane-polo-southwest-plains-flash-flooding",
+  "views": {
+   "d_ev": {
+    "track": 56,
+    "frame": 72,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260922_20261004",
+     "granule": "NISAR_L2_PR_GUNW_031_056_D_072_032_4000_SH_20260922T021609_20260922T021643_20261004T021609_20261004T021644_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260910_20260922",
+     "granule": "NISAR_L2_PR_GUNW_030_056_D_072_031_4000_SH_20260910T021609_20260910T021643_20260922T021609_20260922T021643_P05023_N_F_J_001"
+    }
+   },
+   "a_ev": {
+    "track": 77,
+    "frame": 18,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260923_20261005",
+     "granule": "NISAR_L2_PR_GUNW_031_077_A_018_032_4000_SH_20260923T124251_20260923T124325_20261005T124251_20261005T124325_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260911_20260923",
+     "granule": "NISAR_L2_PR_GUNW_030_077_A_018_031_4000_SH_20260911T124251_20260911T124325_20260923T124251_20260923T124325_P05023_N_F_J_001"
+    }
+   },
+   "a_after": {
+    "track": 77,
+    "frame": 18,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20261005_20261017",
+     "granule": "NISAR_L2_PR_GUNW_032_077_A_018_033_4000_SH_20261005T124251_20261005T124325_20261017T124251_20261017T124325_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260911_20260923",
+     "granule": "NISAR_L2_PR_GUNW_030_077_A_018_031_4000_SH_20260911T124251_20260911T124325_20260923T124251_20260923T124325_P05023_N_F_J_001"
+    },
+    "data_view": "a_ev"
+   }
+  },
+  "verdict": null,
+  "deformation": false,
+  "time_note": "rain ramped up 28 Sep, Polo's remnants 29 Sep, lasting into 2 Oct (weather.com)",
+  "loss_hi": 0.45,
+  "loss_lo": 0.35,
+  "loss_drop": 0.25,
+  "min_px": 30
+ },
+ {
+  "id": "polo-newmexico-2026",
+  "type": "storm",
+  "title": "Record wet September and flooding around Albuquerque, New Mexico, late Sep 2026",
+  "time": "2026-09-29T00:00:00Z",
+  "lat": 35.1,
+  "lon": -106.65,
+  "place": "Albuquerque and the Rio Grande valley, New Mexico, USA",
+  "window": [
+   -107.3,
+   34.65,
+   -106.3,
+   35.5
+  ],
+  "heights": [
+   1400,
+   2400
+  ],
+  "radius_km": 30,
+  "far_km": 90,
+  "gmin": 0.35,
+  "source_url": "https://weather.com/2026/10/02/forecast/regional/hurricane-polo-southwest-plains-flash-flooding",
+  "views": {
+   "d_ev": {
+    "track": 27,
+    "frame": 71,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260920_20261002",
+     "granule": "NISAR_L2_PR_GUNW_031_027_D_071_032_4000_SH_20260920T015856_20260920T015931_20261002T015856_20261002T015931_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260908_20260920",
+     "granule": "NISAR_L2_PR_GUNW_030_027_D_071_031_4000_SH_20260908T015856_20260908T015931_20260920T015856_20260920T015931_P05023_F_F_J_001"
+    }
+   },
+   "a_ev": {
+    "track": 120,
+    "frame": 19,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260926_20261008",
+     "granule": "NISAR_L2_PR_GUNW_031_120_A_019_032_4000_SH_20260926T121826_20260926T121901_20261008T121826_20261008T121901_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260914_20260926",
+     "granule": "NISAR_L2_PR_GUNW_030_120_A_019_031_4000_SH_20260914T121826_20260914T121901_20260926T121826_20260926T121901_P05023_N_F_J_001"
+    }
+   }
+  },
+  "verdict": null,
+  "deformation": false,
+  "time_note": "record wettest September at Albuquerque (4.49 in); rain 28 Sep-2 Oct (weather.com)",
+  "loss_hi": 0.45,
+  "loss_lo": 0.35,
+  "loss_drop": 0.25,
+  "min_px": 30
+ },
+ {
+  "id": "panama-landslides-2026",
+  "type": "landslide",
+  "title": "Landslides triggered by the M7.7 Panama earthquake, 9 Oct 2026",
+  "time": "2026-10-09T17:56:05Z",
+  "lat": 7.6069,
+  "lon": -80.7566,
+  "place": "Azuero peninsula, Panama",
+  "window": [
+   -81.9,
+   7.0,
+   -80.1,
+   8.2
+  ],
+  "heights": [
+   0,
+   1500
+  ],
+  "radius_km": 40,
+  "far_km": 120,
+  "gmin": 0.35,
+  "source_url": "https://eos.org/thelandslideblog/9-october-2026-panama-earthquake",
+  "views": {
+   "asc": {
+    "track": 76,
+    "frame": 5,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20261005_20261017",
+     "granule": "NISAR_L2_PR_GUNW_032_076_A_005_033_4000_SH_20261005T105604_20261005T105616_20261017T105604_20261017T105616_P05023_N_P_J_001"
+    },
+    "control": {
+     "pair": "20260830_20260911",
+     "granule": "NISAR_L2_PR_GUNW_029_076_A_005_030_4000_SH_20260830T105604_20260830T105616_20260911T105603_20260911T105616_P05023_N_P_J_001"
+    },
+    "data_view": "asc"
+   },
+   "desc40": {
+    "track": 40,
+    "frame": 85,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20261002_20261014",
+     "granule": "NISAR_L2_PR_GUNW_032_040_D_085_033_4000_SH_20261002T234516_20261002T234533_20261014T234516_20261014T234533_P05023_N_P_J_001"
+    },
+    "control": {
+     "pair": "20260920_20261002",
+     "granule": "NISAR_L2_PR_GUNW_031_040_D_085_032_4000_SH_20260920T234516_20260920T234532_20261002T234516_20261002T234533_P05023_N_P_J_001"
+    },
+    "data_view": "desc40"
+   },
+   "asc4w": {
+    "track": 4,
+    "frame": 5,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260930_20261012",
+     "granule": "NISAR_L2_PR_GUNW_032_004_A_005_033_4000_SH_20260930T110420_20260930T110435_20261012T110420_20261012T110436_P05023_N_P_J_001"
+    },
+    "control": {
+     "pair": "20260918_20260930",
+     "granule": "NISAR_L2_PR_GUNW_031_004_A_005_032_4000_SH_20260918T110419_20260918T110435_20260930T110420_20260930T110435_P05023_N_P_J_001"
+    },
+    "data_view": "asc4w"
+   }
+  },
+  "verdict": null,
+  "deformation": false,
+  "loss_hi": 0.4,
+  "loss_lo": 0.3,
+  "loss_drop": 0.2,
+  "min_px": 8,
+  "insar_id": "panama-m77-2026"
+ },
+ {
+  "id": "etna-june-2026",
+  "type": "volcano",
+  "title": "Etna east-flank fracture, lava flow and flank slip, 26-29 Jun 2026",
+  "time": "2026-06-26T00:00:00Z",
+  "lat": 37.7505,
+  "lon": 15.0286,
+  "place": "Mount Etna, Sicily, Italy",
+  "window": [
+   14.82,
+   37.55,
+   15.28,
+   37.95
+  ],
+  "heights": [
+   0,
+   3400
+  ],
+  "radius_km": 9,
+  "far_km": 27,
+  "gmin": 0.35,
+  "source_url": "https://watchers.news/2026/07/04/the-weekly-volcanic-activity-report-june-25-july-1-2026/",
+  "views": {
+   "desc": {
+    "track": 51,
+    "frame": 69,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260617_20260629",
+     "granule": "NISAR_L2_PR_GUNW_023_051_D_069_024_2000_SH_20260617T175506_20260617T175540_20260629T175505_20260629T175540_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260629_20260711",
+     "granule": "NISAR_L2_PR_GUNW_024_051_D_069_025_2000_SH_20260629T175505_20260629T175540_20260711T175504_20260711T175539_P05023_N_F_J_001"
+    },
+    "control_after_event": true
+   },
+   "asc": {
+    "track": 43,
+    "frame": 21,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260617_20260629",
+     "granule": "NISAR_L2_PR_GUNW_023_043_A_021_024_2000_SH_20260617T040831_20260617T040906_20260629T040831_20260629T040905_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260629_20260723",
+     "granule": "NISAR_L2_PR_GUNW_024_043_A_021_026_2000_SH_20260629T040831_20260629T040905_20260723T040829_20260723T040904_P05023_N_F_J_001"
+    },
+    "control_after_event": true
+   }
+  },
+  "verdict": null,
+  "deformation": false,
+  "loss_hi": 0.45,
+  "loss_lo": 0.35,
+  "loss_drop": 0.25,
+  "min_px": 20,
+  "time_note": "lava flow began 26 Jun from a fracture on the upper east flank; ground on the east flank moved about 3 m downslope (Watchers)"
+ },
+ {
+  "id": "kilauea-ep53-2026",
+  "type": "volcano",
+  "title": "Kilauea summit eruption, episode 53, 12-13 Aug 2026",
+  "time": "2026-08-13T01:45:00Z",
+  "lat": 19.407,
+  "lon": -155.281,
+  "place": "Halemaumau, Kilauea summit, Hawaii",
+  "window": [
+   -155.42,
+   19.3,
+   -155.14,
+   19.52
+  ],
+  "heights": [
+   0,
+   1500
+  ],
+  "radius_km": 4,
+  "far_km": 8,
+  "gmin": 0.35,
+  "loss_lo": 0.35,
+  "loss_drop": 0.25,
+  "min_px": 12,
+  "deformation": false,
+  "source_url": "https://www.usgs.gov/volcanoes/kilauea/recent-eruption",
+  "views": {
+   "asc": {
+    "track": 151,
+    "frame": 11,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260811_20260823",
+     "granule": "NISAR_L2_PR_GUNW_027_151_A_011_028_4000_SH_20260811T155040_20260811T155058_20260823T155040_20260823T155057_P05023_N_P_J_001"
+    },
+    "control": {
+     "pair": "20260718_20260811",
+     "granule": "NISAR_L2_PR_GUNW_025_151_A_011_027_4000_SH_20260718T155041_20260718T155059_20260811T155040_20260811T155058_P05023_N_P_J_001"
+    }
+   }
+  },
+  "time_note": "episode 53 began 12 Aug 15:45 HST (USGS HVO table); pair 11-23 Aug holds only this episode",
+  "verdict": null
+ },
+ {
+  "id": "polo-baja-2026",
+  "type": "storm",
+  "title": "Hurricane Polo landfall in central Baja California Sur, Mexico, 28-29 Sep 2026",
+  "time": "2026-09-29T06:00:00Z",
+  "lat": 24.9,
+  "lon": -111.8,
+  "place": "central Baja California Sur (Las Barrancas area), Mexico",
+  "window": [
+   -112.25,
+   24.5,
+   -111.4,
+   25.3
+  ],
+  "heights": [
+   0,
+   800
+  ],
+  "radius_km": 30,
+  "far_km": 90,
+  "gmin": 0.35,
+  "source_url": "https://goodmorningamerica.com/news/story/hurricane-polo-makes-baja-landfall-headed-2nd-mexico-136848159",
+  "views": {
+   "d_ev": {
+    "track": 128,
+    "frame": 76,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260927_20261009",
+     "granule": "NISAR_L2_PR_GUNW_031_128_D_076_032_4000_SH_20260927T021004_20260927T021028_20261009T021004_20261009T021029_P05023_N_P_J_001"
+    },
+    "control": {
+     "pair": "20260915_20260927",
+     "granule": "NISAR_L2_PR_GUNW_030_128_D_076_031_4000_SH_20260915T021004_20260915T021028_20260927T021004_20260927T021028_P05023_N_P_J_001"
+    }
+   },
+   "a_ev": {
+    "track": 5,
+    "frame": 14,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260918_20260930",
+     "granule": "NISAR_L2_PR_GUNW_031_005_A_014_032_4000_SH_20260918T124855_20260918T124930_20260930T124856_20260930T124930_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260906_20260918",
+     "granule": "NISAR_L2_PR_GUNW_030_005_A_014_031_4000_SH_20260906T124855_20260906T124930_20260918T124855_20260918T124930_P05023_F_F_J_001"
+    }
+   },
+   "a_after": {
+    "track": 5,
+    "frame": 14,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260930_20261012",
+     "granule": "NISAR_L2_PR_GUNW_032_005_A_014_033_4000_SH_20260930T124856_20260930T124930_20261012T124856_20261012T124930_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260906_20260918",
+     "granule": "NISAR_L2_PR_GUNW_030_005_A_014_031_4000_SH_20260906T124855_20260906T124930_20260918T124855_20260918T124930_P05023_F_F_J_001"
+    },
+    "data_view": "a_ev"
+   }
+  },
+  "verdict": null,
+  "deformation": false,
+  "loss_hi": 0.45,
+  "loss_lo": 0.35,
+  "loss_drop": 0.25,
+  "min_px": 30,
+  "time_note": "first landfall overnight 28 Sep near Las Barrancas, about 11 pm local (ABC/GMA); time given is approximate"
+ },
+ {
+  "id": "atacama-tocopilla-2026",
+  "type": "storm",
+  "title": "Record rain and mudflow at Tocopilla, northern Chile, 17-18 Aug 2026",
+  "time": "2026-08-18T00:00:00Z",
+  "lat": -22.09,
+  "lon": -70.2,
+  "place": "Tocopilla and the coastal range, Antofagasta region, Chile",
+  "window": [
+   -70.55,
+   -22.5,
+   -69.85,
+   -21.8
+  ],
+  "heights": [
+   0,
+   2200
+  ],
+  "radius_km": 30,
+  "far_km": 90,
+  "gmin": 0.35,
+  "source_url": "https://www.meteored.cl/noticias/actualidad/el-norte-de-chile-recibio-lluvias-historicas-aluvion-deja-enterrada-parte-de-tocopilla.html",
+  "views": {
+   "d_ev": {
+    "track": 97,
+    "frame": 100,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260726_20260819",
+     "granule": "NISAR_L2_PR_GUNW_026_097_D_100_028_2000_SH_20260726T224704_20260726T224739_20260819T224703_20260819T224737_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260702_20260714",
+     "granule": "NISAR_L2_PR_GUNW_024_097_D_100_025_2000_SH_20260702T224705_20260702T224740_20260714T224705_20260714T224739_P05023_F_F_J_001"
+    }
+   },
+   "a_ev": {
+    "track": 46,
+    "frame": 167,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260816_20260828",
+     "granule": "NISAR_L2_PR_GUNW_028_046_A_167_029_2000_SH_20260816T103114_20260816T103149_20260828T103114_20260828T103149_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260711_20260723",
+     "granule": "NISAR_L2_PR_GUNW_025_046_A_167_026_2000_SH_20260711T103116_20260711T103151_20260723T103115_20260723T103150_P05023_N_F_J_001"
+    }
+   }
+  },
+  "verdict": null,
+  "deformation": false,
+  "time_note": "rain on 17-18 Aug, mudflow in Tocopilla on the afternoon of 18 Aug (Meteored)",
+  "loss_hi": 0.45,
+  "loss_lo": 0.35,
+  "loss_drop": 0.25,
+  "min_px": 30
+ },
+ {
+  "id": "atacama-taltal-2026",
+  "type": "storm",
+  "title": "Record rain around Taltal, northern Chile, 17-18 Aug 2026",
+  "time": "2026-08-18T00:00:00Z",
+  "lat": -25.4,
+  "lon": -70.48,
+  "place": "Taltal and Paposo, Antofagasta region, Chile",
+  "window": [
+   -70.8,
+   -25.8,
+   -70.0,
+   -25.1
+  ],
+  "heights": [
+   0,
+   2200
+  ],
+  "radius_km": 30,
+  "far_km": 90,
+  "gmin": 0.35,
+  "source_url": "https://www.meteored.cl/noticias/actualidad/el-norte-de-chile-recibio-lluvias-historicas-aluvion-deja-enterrada-parte-de-tocopilla.html",
+  "views": {
+   "d_ev": {
+    "track": 97,
+    "frame": 101,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260726_20260819",
+     "granule": "NISAR_L2_PR_GUNW_026_097_D_101_028_2000_SH_20260726T224738_20260726T224812_20260819T224736_20260819T224811_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260702_20260714",
+     "granule": "NISAR_L2_PR_GUNW_024_097_D_101_025_2000_SH_20260702T224739_20260702T224814_20260714T224738_20260714T224813_P05023_F_F_J_001"
+    }
+   }
+  },
+  "verdict": null,
+  "deformation": false,
+  "time_note": "33.4 mm in two days at Taltal (Meteored)",
+  "loss_hi": 0.45,
+  "loss_lo": 0.35,
+  "loss_drop": 0.25,
+  "min_px": 30
  }
 ]

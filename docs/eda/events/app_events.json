@@ -513,8 +513,8 @@
  {
   "id": "atacama-west-2026",
   "type": "storm",
-  "title": "Atacama Desert after the August 2026 snow and rain storms: about 6,000 km2 lost coherence (west of the Salar)",
-  "time": "2026-08-17T00:00:00Z",
+  "title": "Atacama Desert after the 17-18 August 2026 rain and the snow storms: about 6,000 km2 lost coherence (west of the Salar)",
+  "time": "2026-08-18T00:00:00Z",
   "lat": -23.5,
   "lon": -69.45,
   "place": "Atacama Desert west of the Salar de Atacama, Antofagasta region, Chile",
@@ -548,7 +548,7 @@
     "exported": false
    }
   ],
-  "source_url": "https://science.nasa.gov/earth/earth-observatory/rare-widespread-snow-in-the-atacama-desert/",
+  "source_url": "https://www.meteored.cl/noticias/actualidad/el-norte-de-chile-recibio-lluvias-historicas-aluvion-deja-enterrada-parte-de-tocopilla.html",
   "before_after": [
    {
     "view": "d_both",
@@ -565,6 +565,6 @@
     ]
    }
   ],
-  "time_note": "back-to-back storms in early August and a second one in the second half of August (NASA Earth Observatory); pair 26 Jul-19 Aug (24 days)"
+  "time_note": "rain on 17-18 Aug (Meteored); pair 26 Jul-19 Aug (24 days); the ascending pair that ends on 16 Aug shows nothing"
  }
 ]

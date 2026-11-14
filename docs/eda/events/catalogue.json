@@ -1,5 +1,5 @@
 {
- "compiled": "2026-11-14",
+ "compiled": "2026-11-15",
  "note": "Candidate non-earthquake ground events, 17 Jun - 31 Oct 2026, found by web search of public pages (no catalogue download). Sources are search-result pages read on 14 Nov 2026; figures are quoted as the source gives them. 'nisar' = GUNW pairs found with the ASF search API (track/frame, 12-day pairs).",
  "events": [
   {
@@ -288,6 +288,392 @@
    "processed": false,
    "verdict": "not attempted",
    "reason": "location and size not found"
+  },
+  {
+   "id": "thunder-bay-36-coh-2026",
+   "type": "fire",
+   "date": "2026-07-12",
+   "where": "Wabakimi Provincial Park, north-western Ontario, Canada",
+   "facts": [
+    "started 12 Jul 2026; 314,000 ha as of 29 Jul, largest in Ontario's recorded history; out of control on 31 Jul (Wikipedia)"
+   ],
+   "sources": [
+    "https://en.wikipedia.org/wiki/Thunder_Bay_36_Fire"
+   ],
+   "processed": true,
+   "verdict": "clear",
+   "verdict_reason": "1,540 km2 lost coherence in the window, desc 11-23 Jul vs 29 Jun-11 Jul; autumn pair coherent again; null pair 12 km2",
+   "nisar": "GUNW pairs, see events.json"
+  },
+  {
+   "id": "la-mierla-coh-2026",
+   "type": "fire",
+   "date": "2026-07-16",
+   "where": "La Mierla, Guadalajara, Spain",
+   "facts": [
+    "began 16 July; over 32,000 ha by 20 Jul; second biggest wildfire in Spain this century, largest in Castilla-La Mancha (The Local)"
+   ],
+   "sources": [
+    "https://www.thelocal.es/20260720/800-evacuated-as-spains-biggest-wildfire-of-the-year-rages-on"
+   ],
+   "processed": true,
+   "verdict": "clear",
+   "verdict_reason": "149 km2 in the window desc 14-26 Jul, 56 km2 within 12 km asc",
+   "nisar": "GUNW pairs, see events.json"
+  },
+  {
+   "id": "burgohondo-coh-2026",
+   "type": "fire",
+   "date": "2026-07-22",
+   "where": "Burgohondo/Navaluenga, Avila, Spain",
+   "facts": [
+    "declared Wednesday 22 Jul (eldiario.es)",
+    "about 50,000 ha by 26 Jul; 'largest forest fire in recent history' per the minister; managed together with Madrid and Toledo fronts (El Espanol)"
+   ],
+   "sources": [
+    "https://www.eldiario.es/133_cc79d0",
+    "https://www.elespanol.com/castilla-y-leon/region/avila/20260726/incendio-burgohondo-hectareas-quemadas-mayor-historia-espana/1003744334616_0.html"
+   ],
+   "processed": true,
+   "verdict": "clear",
+   "verdict_reason": "216 km2 in the window asc 14-26 Jul; desc 196 km2 within 15 km",
+   "nisar": "GUNW pairs, see events.json"
+  },
+  {
+   "id": "gironde-coh-2026",
+   "type": "fire",
+   "date": "2026-07-22",
+   "where": "Saumos-Le Porge-Lacanau, Gironde, France",
+   "facts": [
+    "fire began 22 Jul (search summary of AFP/Reporterre); 42,000 ha, unchanged on 30 Jul (prefecture, via Paris Match Belgium)"
+   ],
+   "sources": [
+    "https://www.parismatch.be/actualites/monde/2026/07/30/megafeu-en-gironde-lincendie-est-stabilise-et-la-meteo-favorable-PI3SAONZT5ELNDYIA5JBABKJAU/"
+   ],
+   "processed": true,
+   "verdict": "clear",
+   "verdict_reason": "asc 334 km2 in the window (patch 261 km2); desc 31 km2",
+   "nisar": "GUNW pairs, see events.json"
+  },
+  {
+   "id": "niebla-fire-2026",
+   "type": "fire",
+   "date": "2026-08-06",
+   "where": "Niebla, Huelva and Seville, Spain",
+   "facts": [
+    "declared 'last Thursday' (probably 6 Aug); more than 31,000 ha, perimeter about 120 km on 13 Aug (Infobae)"
+   ],
+   "sources": [
+    "https://www.infobae.com/espana/2026/08/13/el-incendio-de-niebla-huelva-pierde-fuerza-tras-arrasar-31000-hectareas-y-dejar-a-700-vecinos-desalojados/"
+   ],
+   "processed": true,
+   "verdict": "clear",
+   "verdict_reason": "218-240 km2 in the window, both looks",
+   "nisar": "GUNW pairs, see events.json"
+  },
+  {
+   "id": "bald-range-fire-2026",
+   "type": "fire",
+   "date": "2026-08-07",
+   "where": "Summerland, South Okanagan, British Columbia, Canada",
+   "facts": [
+    "first reported on the evening of 7 Aug; about 10,341 ha on 9 Aug; provincial state of emergency declared 8 Aug (Watchers)"
+   ],
+   "sources": [
+    "https://watchers.news/2026/08/09/b-c-declares-provincial-emergency-as-out-of-control-bald-range-wildfire-grows-to-over-10-000-ha-25-000-acres/"
+   ],
+   "processed": true,
+   "verdict": "clear",
+   "verdict_reason": "asc 134 km2 single patch; desc 45 km2 same place",
+   "nisar": "GUNW pairs, see events.json"
+  },
+  {
+   "id": "hautes-fagnes-fire-2026",
+   "type": "fire",
+   "date": "2026-08-14",
+   "where": "Hautes Fagnes plateau, Belgium",
+   "facts": [
+    "broke out 14 Aug; about 3,000 ha on 16 Aug, 'to be confirmed' (Paris Match Belgium)"
+   ],
+   "sources": [
+    "https://www.parismatch.be/actualites/environnement/2026/08/16/incendie-dans-les-fagnes-3000-hectares-ravages-bart-de-wever-salue-le-travail-remarquable-des-equipes-mobilisees-FWOBHOF3UVHH3PAEPEF3SCHGEU/"
+   ],
+   "processed": true,
+   "verdict": "clear signal, not exported",
+   "verdict_reason": "desc 25.5 km2, asc 45 km2 at the same place; wet August lowers coherence everywhere",
+   "nisar": "GUNW pairs, see events.json"
+  },
+  {
+   "id": "rowe-creek-coh-2026",
+   "type": "fire",
+   "date": "2026-07-15",
+   "where": "Wheeler County, Oregon, USA",
+   "facts": [
+    "four lightning fires merged; over 300,000 acres on 1 Aug, 57 % contained (KPTV)"
+   ],
+   "sources": [
+    "https://www.kptv.com/2026/08/02/thousands-firefighters-battle-growing-rowe-creek-complex-central-oregon/"
+   ],
+   "processed": true,
+   "verdict": "signal at the window edge, not exported",
+   "verdict_reason": "137/116 km2 patches at the south-west corner of the window",
+   "nisar": "GUNW pairs, see events.json"
+  },
+  {
+   "id": "big-grass-coh-2026",
+   "type": "fire",
+   "date": "2026-07-23",
+   "where": "Owyhee uplands, Oregon/Idaho, USA",
+   "facts": [
+    "Big Grass Fire, about 579,000 acres (NIFC via search summary)"
+   ],
+   "sources": [
+    "https://www.idahonews.com/"
+   ],
+   "processed": true,
+   "verdict": "not detected",
+   "verdict_reason": "0.2 km2 in the disc",
+   "nisar": "GUNW pairs, see events.json"
+  },
+  {
+   "id": "atacama-west-2026",
+   "type": "storm",
+   "date": "2026-08",
+   "where": "Atacama Desert, Antofagasta region, Chile",
+   "facts": [
+    "back-to-back winter storms in August 2026 gave rare snow from the Andes to near the Pacific coast; Landsat 6 and 14 Aug, MODIS 19 Aug; mudflows and flash flooding in parts of northern Chile (NASA Earth Observatory)"
+   ],
+   "sources": [
+    "https://science.nasa.gov/earth/earth-observatory/rare-widespread-snow-in-the-atacama-desert/"
+   ],
+   "processed": true,
+   "verdict": "clear",
+   "verdict_reason": "desc 26 Jul-19 Aug vs 2-14 Jul: coherence 0.76 -> 0.41, 5,952 km2 lost in the window; asc 16-28 Aug 0.82 -> 0.62",
+   "nisar": "GUNW pairs, see events.json"
+  },
+  {
+   "id": "polo-arizona-2026",
+   "type": "storm",
+   "date": "2026-09-29",
+   "where": "between Tucson and Phoenix, Arizona, USA",
+   "facts": [
+    "flood event ramped up 28 Sep, remnants of Hurricane Polo on 29 Sep, lasting into 2 Oct; flooding on I-10 between Tucson and Phoenix and in washes (weather.com)"
+   ],
+   "sources": [
+    "https://weather.com/2026/10/02/forecast/regional/hurricane-polo-southwest-plains-flash-flooding"
+   ],
+   "processed": true,
+   "verdict": "not detected",
+   "verdict_reason": "7-9 km2 in the disc",
+   "nisar": "GUNW pairs, see events.json"
+  },
+  {
+   "id": "klyuchevskoy-aug-2026",
+   "type": "volcano",
+   "date": "2026-08-16",
+   "where": "Klyuchevskoy and Bezymianny, Kamchatka, Russia",
+   "facts": [
+    "new eruption with lava fountaining from 15-18 Aug; collapses in the Apakhonchichsky drainage (Watchers 13-19 Aug)"
+   ],
+   "sources": [
+    "https://watchers.news/2026/08/22/the-weekly-volcanic-activity-report-august-13-19-2026/"
+   ],
+   "processed": true,
+   "verdict": "not detected",
+   "verdict_reason": "drainage lines only",
+   "nisar": "GUNW pairs, see events.json"
+  },
+  {
+   "id": "krasheninnikov-2026",
+   "type": "volcano",
+   "date": "2026-10-05",
+   "where": "Krasheninnikov, Kamchatka, Russia",
+   "facts": [
+    "lava flows on the ENE and E flanks of the Northern Cone, 22-28 Oct (Watchers)"
+   ],
+   "sources": [
+    "https://watchers.news/2026/10/30/the-weekly-volcanic-activity-report-october-22-28-2026/"
+   ],
+   "processed": true,
+   "verdict": "not detected",
+   "verdict_reason": "August pair nothing; October pair snow",
+   "nisar": "GUNW pairs, see events.json"
+  },
+  {
+   "id": "nyamulagira-2026",
+   "type": "volcano",
+   "date": "2026-08",
+   "where": "Nyamulagira, DR Congo",
+   "facts": [
+    "active lava flows on the NNW, NW and SW flanks, SW flow about 2.8 km (Watchers 13-19 Aug)"
+   ],
+   "sources": [
+    "https://watchers.news/2026/08/22/the-weekly-volcanic-activity-report-august-13-19-2026/"
+   ],
+   "processed": true,
+   "verdict": "not detected",
+   "verdict_reason": "patches not at the crater, differ between looks",
+   "nisar": "GUNW pairs, see events.json"
+  },
+  {
+   "id": "chillan-2026",
+   "type": "volcano",
+   "date": "2026-09-29",
+   "where": "Nevados de Chillan, Chile",
+   "facts": [
+    "new lava flow first visible 29 Sep, moving south-west (Watchers 8-14 Oct)"
+   ],
+   "sources": [
+    "https://watchers.news/2026/10/16/the-weekly-volcanic-activity-report-october-8-14-2026/"
+   ],
+   "processed": true,
+   "verdict": "not detected",
+   "verdict_reason": "control pairs decorrelated (snow)",
+   "nisar": "GUNW pairs, see events.json"
+  },
+  {
+   "id": "lewotolok-2026",
+   "type": "volcano",
+   "date": "2026-08-18",
+   "where": "Lewotolok, Indonesia",
+   "facts": [
+    "lava over the crater rim, 400 m down the S flank on 18 Aug, 1.2 km by evening (Watchers 13-19 Aug)"
+   ],
+   "sources": [
+    "https://watchers.news/2026/08/22/the-weekly-volcanic-activity-report-august-13-19-2026/"
+   ],
+   "processed": true,
+   "verdict": "not detected",
+   "verdict_reason": "no comparable ground",
+   "nisar": "GUNW pairs, see events.json"
+  },
+  {
+   "id": "semeru-2026",
+   "type": "volcano",
+   "date": "2026-07-18",
+   "where": "Semeru, East Java, Indonesia",
+   "facts": [
+    "PDC 3.5 km down the SE flank after an eruption on 18 Jul (Watchers 16-22 Jul)"
+   ],
+   "sources": [
+    "https://watchers.news/2026/07/25/the-weekly-volcanic-activity-report-july-16-22-2026/"
+   ],
+   "processed": true,
+   "verdict": "not detected",
+   "verdict_reason": "forest",
+   "nisar": "GUNW pairs, see events.json"
+  },
+  {
+   "id": "fuego-2026",
+   "type": "volcano",
+   "date": "2026-08-04",
+   "where": "Fuego, Guatemala",
+   "facts": [
+    "pyroclastic density currents in a stronger phase 3-5 Aug altered the crater (Watchers 6-12 Aug)"
+   ],
+   "sources": [
+    "https://watchers.news/2026/08/15/the-weekly-volcanic-activity-report-august-6-12-2026/"
+   ],
+   "processed": true,
+   "verdict": "not detected",
+   "verdict_reason": "31 km2 of comparable ground",
+   "nisar": "GUNW pairs, see events.json"
+  },
+  {
+   "id": "hanjia-landslide-2026",
+   "type": "landslide",
+   "date": "2026-07-17",
+   "where": "Hanjia, Pengshui, Chongqing, China",
+   "facts": [
+    "large rockslope failure on the banks of the Wujiang River at 09:08 local, 17 Jul; no size given (Landslide Blog)"
+   ],
+   "sources": [
+    "https://eos.org/thelandslideblog/17-july-2026-landslide-at-hanjia-1"
+   ],
+   "processed": true,
+   "verdict": "not detected",
+   "verdict_reason": "no patch",
+   "nisar": "GUNW pairs, see events.json"
+  },
+  {
+   "id": "isaias-2026",
+   "type": "storm",
+   "date": "2026-10-10",
+   "where": "Florida Panhandle and south Alabama",
+   "facts": [
+    "Hurricane Isaias, category 2 landfall near Destin, 10 Oct 01:30 UTC (Wikipedia 2026 Atlantic season)"
+   ],
+   "sources": [
+    "https://en.wikipedia.org/wiki/2026_Atlantic_hurricane_season"
+   ],
+   "processed": true,
+   "verdict": "not detected",
+   "verdict_reason": "not above the null pair",
+   "nisar": "GUNW pairs, see events.json"
+  },
+  {
+   "id": "noul-2026",
+   "type": "storm",
+   "date": "2026-07-25",
+   "where": "Huidong, Guangdong, China",
+   "facts": [
+    "Typhoon Noul made landfall at Huidong early 26 Jul (CST), category 2 equivalent (Wikipedia 2026 Pacific typhoon season)"
+   ],
+   "sources": [
+    "https://en.wikipedia.org/wiki/2026_Pacific_typhoon_season"
+   ],
+   "processed": true,
+   "verdict": "not detected",
+   "verdict_reason": "wet-season decorrelation everywhere",
+   "nisar": "GUNW pairs, see events.json"
+  },
+  {
+   "id": "mahanadi-coh-2026",
+   "type": "flood",
+   "date": "2026-07-31",
+   "where": "Mahanadi delta, Odisha, India",
+   "facts": [
+    "Mahanadi swelling, Hirakud gates open (Deccan Chronicle 31 Jul)"
+   ],
+   "sources": [
+    "https://www.deccanchronicle.com/amp/nation/mahanadi-swells-flood-threat-looms-large-in-odisha-several-breaches-reported-1975582"
+   ],
+   "processed": true,
+   "verdict": "not detected",
+   "verdict_reason": "window coherence 0.07-0.08",
+   "nisar": "GUNW pairs, see events.json"
+  },
+  {
+   "id": "terai-coh-2026",
+   "type": "flood",
+   "date": "2026-09-24",
+   "where": "eastern Uttar Pradesh and the Nepal Terai",
+   "facts": [
+    "flooding from a depression 21-27 Sep (newsonair, see docs/research/events-2026.md)"
+   ],
+   "sources": [
+    "https://newsonair.gov.in/"
+   ],
+   "processed": true,
+   "verdict": "not detected",
+   "verdict_reason": "loss not above background",
+   "nisar": "GUNW pairs, see events.json"
+  },
+  {
+   "id": "chaophraya-coh-2026",
+   "type": "flood",
+   "date": "2026-09-30",
+   "where": "Chao Phraya plain, Thailand",
+   "facts": [
+    "flooding late Sep to Oct (The Nation, see docs/research/events-2026.md)"
+   ],
+   "sources": [
+    "https://www.nationthailand.com/"
+   ],
+   "processed": true,
+   "verdict": "not detected",
+   "verdict_reason": "loss equal inside and outside",
+   "nisar": "GUNW pairs, see events.json"
   }
  ]
 }
