@@ -10,6 +10,7 @@ export const km = (v) => Math.round(v).toLocaleString('en')
 
 // The clearest layers come first; the rest sit under "More layers". The full label is still shown above the legend.
 export const PRIMARY = ['water', 'when', 'change', 'hh']
+const PRIMARY_COH = ['coh', 'coh_change']
 export const SHORT = {
   water: 'Water and flooded vegetation',
   when: 'When it changed',
@@ -28,6 +29,8 @@ export const SHORT = {
   east_cm: 'East-west, approximate',
   up_cm: 'Vertical, approximate',
   coherence: 'Coherence',
+  coh: 'Coherence',
+  coh_loss: 'Where it changed completely',
 }
 // A layer id without a short name falls back to the manifest label, cut at a word boundary when it is long.
 export function shortLabel(l) {
@@ -46,13 +49,31 @@ export function fmtVal(v, unit) {
 // "63.4 %" is written "63.4%": a percent sign sits against its number.
 export const withUnit = (v, unit) => (unit === '%' ? `${fmtVal(v, unit)}%` : `${fmtVal(v, unit)}${unit ? ` ${unit}` : ''}`)
 
-export function splitLayers(layers, event) {
+// Layers that are the story of a place, not just extras: the coherence pair (Ararat) and the opening layer a manifest names (fire places).
+export function splitLayers(layers, event, promote = []) {
   if (event) return { main: layers, more: [] }
-  const first = PRIMARY.map((id) => layers.find((l) => l.id === id)).filter(Boolean)
-  return { main: first, more: layers.filter((l) => !PRIMARY.includes(l.id)) }
+  const ids = [...PRIMARY, ...PRIMARY_COH, ...promote]
+  const first = [...new Set(ids)].map((id) => layers.find((l) => l.id === id)).filter(Boolean)
+  return { main: first, more: layers.filter((l) => !first.includes(l)) }
 }
 export const isEvent = (m) => m?.kind === 'event' && !!m.event
-export const defaultLayer = (m) => (isEvent(m) ? (m.layers.find((l) => l.id === 'fringes') || m.layers[0]) : (m.layers.find((l) => l.id === 'water') || m.layers[0])).id
+export const eventType = (m) => (isEvent(m) ? m.event.type || 'earthquake' : null)
+// The opening layer: the manifest's own choice when it names a real layer; else fringes (or coh_loss, else the first layer) for an event, water (else the first layer) for a season.
+export function defaultLayer(m) {
+  const has = (id) => m.layers.find((l) => l.id === id)
+  const pick = (m.defaultLayer && has(m.defaultLayer)) || (isEvent(m) ? has('fringes') || has('coh_loss') : has('water')) || m.layers[0]
+  return pick.id
+}
+// A place whose story is not open water: the manifest says "none" and gives its own note.
+export const noHeadline = (m) => m?.headline === 'none'
+// A view is too noisy to use when its control pair moves nearly as much as the event pair.
+export const noisyView = (v) => Number.isFinite(v?.p2p_cm) && Number.isFinite(v?.control_p2p_cm) && v.control_p2p_cm >= 0.8 * v.p2p_cm
+// Ground-motion cycle of the fringes, read from the manifest's own legend text ("one colour cycle = 5 cm ...").
+export function fringeCycle(layers) {
+  const u = layers?.find((l) => l.id === 'fringes')?.legend?.unit
+  const x = /=\s*([\d.]+)\s*cm/.exec(u || '')
+  return x ? x[1] : null
+}
 
 // Peak open-water area over the season, from the timeseries facts.
 export function peakWater(ts) {
@@ -69,30 +90,54 @@ export const shortDate = (d) => { const x = new Date(d); return `${x.getUTCDate(
 export const dayMon = (d) => { const x = new Date(d); return `${x.getUTCDate()} ${MON[x.getUTCMonth()]}` }
 export const utcStamp = (d) => { const x = new Date(d); return `${shortDate(d)}, ${two(x.getUTCHours())}:${two(x.getUTCMinutes())} UTC` }
 
-// A place as the globe and the lists see it: a season of passes or an earthquake.
+// A place as the globe and the lists see it: a season of passes or a one-off event (earthquake, volcano, landslide).
 export const centre = (b) => [(b[0] + b[2]) / 2, (b[1] + b[3]) / 2]
-export const makePlace = (m, ts) => ({ id: m.id, name: m.name, lngLat: centre(m.bounds), peak: peakWater(ts), kind: isEvent(m) ? 'event' : 'season', event: isEvent(m) ? m.event : null })
+export const categoryOf = (m) => m.category || (isEvent(m) ? eventType(m) : 'other')
+const dayOf = (t) => String(t).slice(0, 10)
+function span(m) {
+  const ds = isEvent(m) ? [m.event.time, ...eventViews(m.event).flatMap((v) => [v.before, v.after])].filter(Boolean).map(dayOf) : m.dates || []
+  return ds.length ? [ds.reduce((a, b) => (b < a ? b : a)), ds.reduce((a, b) => (b > a ? b : a))] : null
+}
+export const makePlace = (m, ts) => ({
+  id: m.id, name: m.name, lngLat: centre(m.bounds), kind: isEvent(m) ? 'event' : 'season', event: isEvent(m) ? m.event : null,
+  category: categoryOf(m), noWater: noHeadline(m), note: noHeadline(m) ? m.headlineNote || null : null, span: span(m),
+  peak: noHeadline(m) ? null : peakWater(ts),
+})
 export const magnitude = (e) => (Number.isFinite(e?.magnitude) ? e.magnitude.toFixed(1) : null)
 const cmOf = (x) => (Number.isFinite(x) ? km(x) : null)
-// Tooltip / summary text for an earthquake. The motion clause is left out when the first view has no number.
+// Tooltip / summary text for an event. An earthquake: magnitude and how far the ground moved (first usable view). Other events: the manifest's own summary.
 export function eventTip(p) {
-  const e = p.event, mag = magnitude(e)
+  const e = p.event, mag = magnitude(e), quake = (e.type || 'earthquake') === 'earthquake'
   const head = `${p.name.split(',')[0]}${mag ? `, M${mag}` : ''}`
-  const cm = cmOf(e.views?.[0]?.p2p_cm)
-  const rest = [e.time ? shortDate(e.time) : null, cm ? `ground moved ≈ ${cm} cm along the radar's line of sight` : null].filter(Boolean).join(' · ')
+  const usable = (e.views || []).find((v) => Number.isFinite(v.p2p_cm) && !noisyView(v))
+  const cm = quake ? cmOf(usable?.p2p_cm) : null
+  const rest = [e.time ? shortDate(e.time) : null, cm ? `ground moved ≈ ${cm} cm along the radar's line of sight` : null, !quake ? e.summary : null].filter(Boolean).join(' · ')
   return { head, rest }
 }
-export const eventSummary = (p) => [magnitude(p.event) && `M${magnitude(p.event)}`, p.event.time && shortDate(p.event.time)].filter(Boolean).join(' · ')
-export const placeSummary = (p) => (p.kind === 'event' ? eventSummary(p) : p.peak?.v >= 1 ? `${km(p.peak.v)} km² peak water` : 'no open water mapped')
-export const groupPlaces = (places) => [
-  { key: 'season', title: 'A season of water', items: places.filter((p) => p.kind !== 'event') },
-  { key: 'event', title: 'Earthquakes', items: places.filter((p) => p.kind === 'event') },
-].filter((g) => g.items.length)
-export const countPlaces = (places) => ({ seasons: places.filter((p) => p.kind !== 'event').length, quakes: places.filter((p) => p.kind === 'event').length })
-export function landingText(places) {
-  const { seasons, quakes } = countPlaces(places)
-  const s = `${seasons} place${seasons === 1 ? '' : 's'} through a season`
-  return `NISAR watched ${quakes ? `${s}, and ${quakes} earthquake${quakes === 1 ? '' : 's'}` : s} between June and October 2026.`
+export const eventSummary = (p) => [magnitude(p.event) && `M${magnitude(p.event)}`, p.event.time && shortDate(p.event.time), !magnitude(p.event) && p.event.summary].filter(Boolean).join(' · ')
+export const placeSummary = (p) => (p.kind === 'event' ? eventSummary(p) : p.note ? p.note : p.peak?.v >= 1 ? `${km(p.peak.v)} km² peak water` : 'no open water mapped')
+
+// Classes: id order and labels come from summary.json when it loads, else from here. An unknown id is Title-cased and goes last.
+export const CLASS_ORDER = ['flood', 'lake', 'wetland', 'land', 'fire', 'earthquake', 'volcano', 'landslide']
+export const CLASS_LABEL = { flood: 'Floods', lake: 'Lakes', wetland: 'Wetlands and deltas', land: 'Farmland and forest', fire: 'Wildfires', earthquake: 'Earthquakes', volcano: 'Volcanoes', landslide: 'Landslides' }
+const titleCase = (s) => String(s).replace(/[-_]+/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())
+export function classList(places, summary) {
+  const ids = [...new Set(places.map((p) => p.category))]
+  const label = (id) => summary?.find((c) => c.id === id)?.label || CLASS_LABEL[id] || titleCase(id)
+  const order = [...(summary?.map((c) => c.id) || []), ...CLASS_ORDER]
+  const rank = (id) => { const i = order.indexOf(id); return i < 0 ? order.length : i }
+  return ids.sort((a, b) => rank(a) - rank(b) || a.localeCompare(b)).map((id) => ({ id, label: label(id), n: places.filter((p) => p.category === id).length }))
+}
+export const groupPlaces = (places, summary) => classList(places, summary).map((c) => ({ key: c.id, title: c.label, items: places.filter((p) => p.category === c.id) }))
+const WATER_CLASSES = ['flood', 'lake', 'wetland', 'land']
+const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+export function landingText(places, summary) {
+  const cs = classList(places, summary)
+  const n = places.length
+  const days = places.flatMap((p) => p.span || []).sort()
+  const [a, b] = days.length ? [new Date(days[0]).getUTCMonth(), new Date(days[days.length - 1]).getUTCMonth()] : [null, null]
+  const when = a == null ? '' : a === b ? ` in ${MONTHS[a]} 2026` : ` between ${MONTHS[a]} and ${MONTHS[b]} 2026`
+  return `NISAR watched ${n} place${n === 1 ? '' : 's'}${when}: ${cs.map((c) => `${c.label.toLowerCase()} (${c.n})`).join(', ')}.`
 }
 // What the two passes and the earthquake look like on the bar: "19 Oct → ⚡ 22 Oct → 31 Oct".
 export const eventViews = (e) => (e?.views || []).filter((v) => v.before && v.after)
@@ -111,15 +156,24 @@ export function distanceKm([lng1, lat1], [lng2, lat2]) {
 }
 export const nearestPlace = (places, pos) => places.reduce((a, b) => (distanceKm(pos, b.lngLat) < distanceKm(pos, a.lngLat) ? b : a))
 
-// Dot class on the globe, from the peak open-water area.
+// Dot style on the globe: water places by their peak open water (as before), earthquakes a ring, every other class its own colour and shape.
 export function dotKind(peak) {
   if (peak == null || peak.v < 1) return 'land'
   return peak.v >= 1000 ? 'big' : 'some'
 }
-export const DOT_COLOR = { big: '#4aa8ff', some: '#35c7b8', land: '#f2b84b', quake: '#ff4f8b' }
+export const DOT_COLOR = { big: '#4aa8ff', some: '#35c7b8', land: '#f2b84b', quake: '#ff4f8b', fire: '#ff7a1a', volcano: '#c77dff', landslide: '#b98b5e', other: '#a9b4c0' }
+export const SHAPE_CLASSES = ['fire', 'volcano', 'landslide', 'other'] // drawn as a shape; the rest are circles / the earthquake ring
+export const SHAPE = { fire: 'diamond', volcano: 'triangle', landslide: 'square', other: 'hexagon' }
+// The style key of a place: 'big' | 'some' | 'land' (water classes), 'quake', or its class (fire, volcano, landslide, other).
+export function placeStyle(p) {
+  if (p.kind === 'event' && (p.event?.type || 'earthquake') === 'earthquake') return 'quake'
+  if (WATER_CLASSES.includes(p.category) && p.kind !== 'event') return dotKind(p.peak)
+  return DOT_COLOR[p.category] && p.category !== 'earthquake' ? p.category : 'other'
+}
 export const dotRadius = (peak) => 4 + 2.4 * Math.log10(1 + (peak?.v || 0))
 // Earthquake dots grow with magnitude (M6.8 is about 9 px, M7.7 about 11 px).
 export const quakeRadius = (mag) => 5 + 2.2 * Math.max(0, (Number.isFinite(mag) ? mag : 6) - 5)
+export const placeRadius = (p) => (p.kind === 'event' ? (placeStyle(p) === 'quake' ? quakeRadius(p.event?.magnitude) : 8) : SHAPE_CLASSES.includes(placeStyle(p)) ? 8 : dotRadius(p.peak))
 
 // Link state. Format: #/<place>?layer=<id>&date=<YYYY-MM-DD>[&compare&split=<2-98>&other=<YYYY-MM-DD>]; theme is a normal query parameter (?theme=a|b|c).
 export function parseHash(h = location.hash) {

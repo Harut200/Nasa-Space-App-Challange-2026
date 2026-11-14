@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import './parts.css'
 import { placeStats, thumbUrl, openWater, fmtDate, fmtNum, fmtSigned } from './util.js'
+import { goodViews } from '../data.js'
 
 export { placeStats, thumbUrl }
 
@@ -29,110 +30,133 @@ const SORTS = [
   { id: 'water', label: 'Most water' },
   { id: 'az', label: 'A–Z' },
 ]
+const plain = (t) => String(t).replace(/(\d) (m|km|cm)\b/g, '$1 $2')
+const cap = (s) => (s ? s[0].toUpperCase() + s.slice(1) : s)
 
-export default function PlaceGallery({ places, currentId, onPick, base = import.meta.env.BASE_URL + 'data/' }) {
+// What a season card shows, from summary.json when there, else from the loaded manifest and timeseries.
+function seasonData(e) {
+  const s = e.s, m = e.m
+  if (s) {
+    const h = s.headline
+    if (!h) return { note: s.note || m?.headlineNote || null, name: s.name }
+    const sp = (s.spark || []).filter(finite)
+    if (h.unit === '%') return { name: s.name, spark: s.spark, pct: sp.length ? [sp[0], sp[sp.length - 1]] : null, label: h.label }
+    return { name: s.name, spark: s.spark, peak: finite(h.value) ? h.value : null, peakDate: h.date, delta: s.change?.delta ?? null, first: s.change?.first ?? null, pctChange: s.change?.pct ?? null }
+  }
+  const ts = e.m.ts
+  if (m.headline === 'none') return { note: m.headlineNote || null, name: m.name }
+  const st = placeStats(ts), f = openWater(ts?.facts)
+  const pf = (ts?.facts || []).find((x) => x.unit === '%' && (x.values || []).some(finite))
+  const pv = pf && (st.peak ?? 0) < 1 ? pf.values.filter(finite) : null
+  if (pv) return { name: m.name, spark: pf.values, pct: [pv[0], pv[pv.length - 1]], label: pf.label }
+  return { name: m.name, spark: f?.values, peak: st.peak, peakDate: st.peakDate, delta: st.delta, first: st.first, pctChange: st.pct }
+}
+
+// A picture that prefers the small prepared thumbnail and falls back to the overlay frame.
+function Pic({ e, base }) {
+  const [step, setStep] = useState(0)
+  const alt = e.m ? thumbUrl({ ...e.m, id: e.id }, base) : null
+  const own = e.s?.thumb ? base + e.s.thumb : null
+  const src = step === 0 && own ? own : alt
+  if (!src || step > 1) return null
+  return <img src={src} alt="" width="240" height="160" loading="lazy" decoding="async" onError={(ev) => { if (step === 0 && own && alt) setStep(1); else ev.currentTarget.style.visibility = 'hidden' }} />
+}
+
+function SeasonCard({ e, d, cur, onPick, base }) {
+  const flat = d.delta != null && Math.abs(d.delta) < Math.max(1, (d.first || 0) * 0.005)
+  return (
+    <button type="button" className={'pt-card' + (cur ? ' pt-card-cur' : '')} data-id={e.id} aria-current={cur ? 'true' : undefined} onClick={() => onPick && onPick(e.id)}>
+      <span className="pt-card-img"><Pic e={e} base={base} /></span>
+      <span className="pt-card-name">{plain(d.name || e.id)}</span>
+      {d.note ? (
+        <span className="pt-card-m pt-card-fine">{d.note}</span>
+      ) : d.pct ? (
+        <>
+          <Spark values={d.spark} />
+          <span className="pt-card-row"><span className="pt-card-k">Changed</span><span>{fmtNum(d.pct[0], 0)} % → {fmtNum(d.pct[1], 0)} %</span></span>
+          <span className="pt-card-m pt-card-fine">{d.label}</span>
+        </>
+      ) : (
+        <>
+          <Spark values={d.spark} />
+          <span className="pt-card-row">
+            <span className="pt-card-k">Peak</span>
+            <span>{d.peak != null ? <>{fmtNum(d.peak)} km²{d.peakDate && d.peak > 0 ? <span className="pt-card-m"> · {fmtDate(d.peakDate)}</span> : null}</> : '–'}</span>
+          </span>
+          <span className="pt-card-row">
+            <span className="pt-card-k">Change</span>
+            <span className={flat || d.delta == null ? 'pt-card-m' : d.delta > 0 ? 'pt-card-up' : 'pt-card-down'}>
+              {d.delta == null ? '–' : flat ? 'Steady' : <>{fmtSigned(d.delta)}&nbsp;km²{d.pctChange != null ? <span className="pt-nw"> ({fmtSigned(d.pctChange, Math.abs(d.pctChange) < 10 ? 1 : 0)}&nbsp;%)</span> : ''}</>}
+            </span>
+          </span>
+        </>
+      )}
+    </button>
+  )
+}
+
+// Events: magnitude only where there is one; the ground-motion figure only from a view that is not too noisy (needs the manifest).
+function EventCard({ e, cur, onPick, base }) {
+  const ev = e.m?.event, h = e.s?.headline || {}
+  const type = ev?.type || e.s?.eventType || e.category
+  const mag = Number(ev ? ev.magnitude : h.value)
+  const hasMag = (ev ? ev.magnitude : h.value) != null && Number.isFinite(mag)
+  const time = ev?.time || h.date
+  const summary = ev ? ev.summary : h.summary
+  const cmv = ev ? goodViews(ev)[0]?.p2p_cm : null
+  const name = e.m?.name || e.s?.name || e.id
+  return (
+    <button type="button" className={'pt-card' + (cur ? ' pt-card-cur' : '')} data-id={e.id} aria-current={cur ? 'true' : undefined} onClick={() => onPick && onPick(e.id)}>
+      <span className="pt-card-img"><Pic e={e} base={base} /></span>
+      <span className="pt-card-name">{plain(name)}</span>
+      <span className="pt-card-row">
+        <span className="pt-card-k">{hasMag ? `M ${mag.toFixed(1)}` : cap(String(type).replace(/[-_]/g, ' '))}</span>
+        <span className="pt-card-m">{time ? `${fmtDate(time)} ${String(time).slice(0, 4)}` : ''}</span>
+      </span>
+      {summary && !hasMag && <span className="pt-card-row"><span className="pt-card-up">{summary}</span></span>}
+      {cmv != null && Number.isFinite(cmv) && (
+        <span className="pt-card-row">
+          <span className="pt-card-k">Ground motion</span>
+          <span className="pt-card-up">≈ {fmtNum(cmv)} cm</span>
+        </span>
+      )}
+    </button>
+  )
+}
+
+export default function PlaceGallery({ classes, entries, currentId, onPick, base = import.meta.env.BASE_URL + 'data/' }) {
   const [sort, setSort] = useState('change')
-  const rows = useMemo(() => (places || []).map((p) => ({ p, s: placeStats(p.timeseries) })), [places])
-  const sorted = useMemo(() => {
-    const a = [...rows]
-    const name = (r) => r.p.manifest?.name || r.p.id
-    if (sort === 'az') a.sort((x, y) => name(x).localeCompare(name(y)))
-    else if (sort === 'water') a.sort((x, y) => (y.s.peak ?? -1) - (x.s.peak ?? -1) || name(x).localeCompare(name(y)))
-    else a.sort((x, y) => Math.abs(y.s.delta ?? 0) - Math.abs(x.s.delta ?? 0) || name(x).localeCompare(name(y)))
-    return a
-  }, [rows, sort])
-
-  const isQ = (p) => p.manifest?.kind === 'event' && !!p.manifest?.event
-  const seasons = sorted.filter(({ p }) => !isQ(p))
-  const quakes = useMemo(() => rows.filter(({ p }) => isQ(p)).sort((x, y) => String(y.p.manifest.event.time).localeCompare(String(x.p.manifest.event.time))), [rows])
+  const rows = useMemo(() => (entries || []).map((e) => ({ e, d: e.event ? null : seasonData(e) })), [entries])
+  const groups = useMemo(() => (classes || []).map((c) => {
+    const list = rows.filter((r) => r.e.category === c.id)
+    const name = (r) => r.e.s?.name || r.e.m?.name || r.e.id
+    if (list.every((r) => r.e.event)) list.sort((x, y) => String(y.e.m?.event?.time || y.e.s?.headline?.date || '').localeCompare(String(x.e.m?.event?.time || x.e.s?.headline?.date || '')))
+    else if (sort === 'az') list.sort((x, y) => name(x).localeCompare(name(y)))
+    else if (sort === 'water') list.sort((x, y) => (y.d?.peak ?? -1) - (x.d?.peak ?? -1) || name(x).localeCompare(name(y)))
+    else list.sort((x, y) => Math.abs(y.d?.delta ?? 0) - Math.abs(x.d?.delta ?? 0) || name(x).localeCompare(name(y)))
+    return { ...c, list }
+  }), [classes, rows, sort])
+  const hasSeasons = rows.some((r) => !r.e.event && !r.d.note)
 
   return (
     <section className="pt-gal" aria-label="Places">
-      {seasons.length > 0 && (
-        <>
-          <h3 className="pt-gal-h">Seasons of water <span className="pt-gal-n mono">{seasons.length}</span></h3>
-          <div className="pt-gal-bar" role="group" aria-label="Sort seasons of water">
-            {SORTS.map((o) => (
-              <button key={o.id} type="button" className="pt-gal-sort" aria-pressed={sort === o.id} onClick={() => setSort(o.id)}>{o.label}</button>
-            ))}
-          </div>
-          <div className="pt-gal-grid">
-            {seasons.map(({ p, s }) => {
-              const m = p.manifest || {}
-              const url = thumbUrl({ ...m, id: m.id || p.id }, base)
-              const f = openWater(p.timeseries?.facts)
-              const cur = p.id === currentId
-              // a place with almost no open water but a "%" figure (the share of valley floor that changed) leads with that figure
-              const pf = (p.timeseries?.facts || []).find((x) => x.unit === '%' && (x.values || []).some(finite))
-              const pv = pf && (s.peak ?? 0) < 1 ? pf.values.filter(finite) : null
-              const flat = s.delta != null && Math.abs(s.delta) < Math.max(1, (s.first || 0) * 0.005)
-              return (
-                <button key={p.id} type="button" className={'pt-card' + (cur ? ' pt-card-cur' : '')} aria-current={cur ? 'true' : undefined} onClick={() => onPick && onPick(p.id)}>
-                  <span className="pt-card-img">
-                    {url ? <img src={url} alt="" loading="lazy" decoding="async" onError={(e) => { e.currentTarget.style.visibility = 'hidden' }} /> : null}
-                  </span>
-                  <span className="pt-card-name">{(m.name || p.id).replace(/(\d) (m|km|cm)\b/g, '$1\u00a0$2')}</span>
-                  <Spark values={pv ? pf.values : f?.values} />
-                  {pv ? (
-                    <>
-                      <span className="pt-card-row">
-                        <span className="pt-card-k">Changed</span>
-                        <span>{fmtNum(pv[0], 0)} % → {fmtNum(pv[pv.length - 1], 0)} %</span>
-                      </span>
-                      <span className="pt-card-m pt-card-fine">{pf.label}</span>
-                    </>
-                  ) : (
-                    <>
-                      <span className="pt-card-row">
-                        <span className="pt-card-k">Peak</span>
-                        <span>{s.peak != null ? <>{fmtNum(s.peak)} km²{s.peakDate && s.peak > 0 ? <span className="pt-card-m"> · {fmtDate(s.peakDate)}</span> : null}</> : '–'}</span>
-                      </span>
-                      <span className="pt-card-row">
-                        <span className="pt-card-k">Change</span>
-                        <span className={flat || s.delta == null ? 'pt-card-m' : s.delta > 0 ? 'pt-card-up' : 'pt-card-down'}>
-                          {s.delta == null ? '–' : flat ? 'Steady' : <>{fmtSigned(s.delta)}&nbsp;km²{s.pct != null ? <span className="pt-nw"> ({fmtSigned(s.pct, Math.abs(s.pct) < 10 ? 1 : 0)}&nbsp;%)</span> : ''}</>}
-                        </span>
-                      </span>
-                    </>
-                  )}
-                </button>
-              )
-            })}
-          </div>
-        </>
+      {hasSeasons && (
+        <div className="pt-gal-bar" role="group" aria-label="Sort the seasons of water">
+          {SORTS.map((o) => (
+            <button key={o.id} type="button" className="pt-gal-sort" aria-pressed={sort === o.id} onClick={() => setSort(o.id)}>{o.label}</button>
+          ))}
+        </div>
       )}
-      {quakes.length > 0 && (
-        <>
-          <h3 className="pt-gal-h pt-gal-h2">Earthquakes <span className="pt-gal-n mono">{quakes.length}</span></h3>
+      {groups.map((g, gi) => (
+        <div key={g.id} data-class={g.id}>
+          <h3 className={'pt-gal-h' + (gi ? ' pt-gal-h2' : '')}>{g.label} <span className="pt-gal-n mono">{g.list.length}</span></h3>
           <div className="pt-gal-grid">
-            {quakes.map(({ p }) => {
-              const m = p.manifest, e = m.event
-              const url = thumbUrl({ ...m, id: m.id || p.id }, base)
-              const cur = p.id === currentId
-              const cmv = e.views?.[0]?.p2p_cm
-              const mag = Number(e.magnitude)
-              return (
-                <button key={p.id} type="button" className={'pt-card' + (cur ? ' pt-card-cur' : '')} aria-current={cur ? 'true' : undefined} onClick={() => onPick && onPick(p.id)}>
-                  <span className="pt-card-img">
-                    {url ? <img src={url} alt="" loading="lazy" decoding="async" onError={(e2) => { e2.currentTarget.style.visibility = 'hidden' }} /> : null}
-                  </span>
-                  <span className="pt-card-name">{(m.name || p.id).replace(/(\d) (m|km|cm)\b/g, '$1\u00a0$2')}</span>
-                  <span className="pt-card-row">
-                    <span className="pt-card-k">{Number.isFinite(mag) ? `M ${mag.toFixed(1)}` : 'Earthquake'}</span>
-                    <span className="pt-card-m">{e.time ? `${fmtDate(e.time)} ${String(e.time).slice(0, 4)}` : ''}</span>
-                  </span>
-                  {cmv != null && Number.isFinite(cmv) && (
-                    <span className="pt-card-row">
-                      <span className="pt-card-k">Ground motion</span>
-                      <span className="pt-card-up">≈ {fmtNum(cmv)} cm</span>
-                    </span>
-                  )}
-                </button>
-              )
-            })}
+            {g.list.map(({ e, d }) => (e.event
+              ? <EventCard key={e.id} e={e} cur={e.id === currentId} onPick={onPick} base={base} />
+              : <SeasonCard key={e.id} e={e} d={d} cur={e.id === currentId} onPick={onPick} base={base} />))}
           </div>
-        </>
-      )}
+        </div>
+      ))}
     </section>
   )
 }

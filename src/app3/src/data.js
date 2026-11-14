@@ -48,10 +48,20 @@ function buildPlace(m, ts0) {
   const waterMax = water ? Math.max(...water.values.filter((v) => v != null), 0) : 0
   let primary
   if (m.kind === 'event') primary = { kind: 'event', label: '', unit: '', values: [] }
+  else if (m.headline === 'none') primary = null
   else if (pct && waterMax < 1) primary = { kind: 'pct', label: pct.label, unit: '%', values: pct.values }
   else if (water && Math.max(...water.values) > 0) primary = { kind: 'water', label: 'Open water', unit: 'km²', values: water.values, lo: water.lo, hi: water.hi }
   else if (flood && Math.max(...flood.values) > 0) primary = { kind: 'flood', label: 'Flooded vegetation', unit: 'km²', values: flood.values }
   else {
+    const s = ts.series.find((x) => x.spot === spotFocus) || ts.series[0]
+    const hv = (s ? s.hh : []).filter((v) => v != null)
+    const db = ts.unit === 'dB'
+    const spotName = m.spots.find((p) => p.id === s?.spot)?.label || 'first spot'
+    primary = db
+      ? { kind: 'hh', label: `HH backscatter, ${spotName}`, unit: 'dB', values: s ? s.hh : [], fixedMin: Math.floor(Math.min(0, ...hv) / 5) * 5, fixedMax: Math.ceil(Math.max(-1e9, ...hv, -5) / 5) * 5 }
+      : { kind: 'hh', label: `HH brightness, ${spotName}`, unit: 'relative brightness', values: s ? s.hh : [], fixedMin: 0, fixedMax: Math.max(100, Math.ceil(Math.max(0, ...hv) / 20) * 20) }
+  }
+  if (!primary) {
     const s = ts.series.find((x) => x.spot === spotFocus) || ts.series[0]
     const hv = (s ? s.hh : []).filter((v) => v != null)
     const db = ts.unit === 'dB'
@@ -81,7 +91,7 @@ export const capWord = (n) => { const w = numWord(n); return w[0].toUpperCase() 
 export const isCalibrated = (p) => !!p && p.source === 'gamma0'
 export const dataNotice = (p) => (!p || isEvent(p) ? null : isCalibrated(p) ? 'Calibrated NISAR data, provisional calibration.' : 'Preview images, about 180 m per pixel, not calibrated: patterns and timing are reliable, exact areas are not.')
 // The layer a place opens on in Explore.
-export const defaultLayer = (p) => (isEvent(p) ? (p.layers.some((l) => l.id === 'fringes') ? 'fringes' : p.layers[0]?.id) : p.primary.kind === 'pct' && p.layers.some((l) => l.id === 'coh') ? 'coh' : 'water')
+export const defaultLayer = (p) => (p.defaultLayer && p.layers.some((l) => l.id === p.defaultLayer) ? p.defaultLayer : isEvent(p) ? (p.layers.some((l) => l.id === 'fringes') ? 'fringes' : p.layers[0]?.id) : p.primary.kind === 'pct' && p.layers.some((l) => l.id === 'coh') ? 'coh' : 'water')
 // First pass that has a value for the primary series (Ararat has no change figure for the first pass).
 export const startIndex = (p) => { const i = p.primary.values.findIndex((v) => v != null); return i < 0 ? 0 : i }
 const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
@@ -120,6 +130,7 @@ export const dotSize = (p) => (isEvent(p) ? 5 + 2.2 * Math.max(0, (magOf(p.event
 // The real headline number of a place: short (for lists and cards) and long (for the globe tooltip).
 export function headline(p) {
   if (p._h) return p._h
+  if (p.headline === 'none') return { short: 'radar echo', tag: 'changed', long: p.headlineNote || 'Radar echo changed' }
   if (isEvent(p)) {
     const e = p.event, m = magOf(e), v0 = e.views?.[0], cmv = finite(v0?.p2p_cm) ? v0.p2p_cm : null
     const t = typeInfo(eventType(p))
@@ -170,6 +181,7 @@ const CLASS_LIST = [
   { id: 'wetland', label: 'Wetlands and deltas', color: '#5fd6a4', shape: 'dot', desc: 'Marsh, channels and floodplains' },
   { id: 'land', label: 'Farmland and forest', color: '#e3b54f', shape: 'dot', desc: 'Fields and forest edges changing' },
   { id: 'season', label: 'Seasons of water', color: '#4aa8ff', shape: 'dot', desc: 'A season of radar passes over water and land' },
+  { id: 'fire', label: 'Wildfires', color: '#ff5a36', shape: 'flame', desc: 'Forest burned and the radar echo changed' },
   { id: 'earthquake', label: 'Earthquakes', color: '#ff4f8b', shape: 'ring', desc: 'The ground itself moved between two passes' },
   { id: 'volcano', label: 'Volcanoes', color: '#ff8a3d', shape: 'triangle', desc: 'Fresh lava or ash changed the surface' },
   { id: 'landslide', label: 'Landslides', color: '#b58cff', shape: 'square', desc: 'A slope failed and the surface changed' },
@@ -188,15 +200,15 @@ export const classColor = (p) => classInfo(classOf(p)).color
 // ---------- summary.json: one small request that is enough for the landing globe, the class chips, the counts and the search ----------
 export const loadSummary = () => getJson(`${BASE}data/summary.json`).then((j) => j.places || []).catch(() => [])
 export function stubFromSummary(s) {
-  const h = s.headline || {}, ev = s.kind === 'event'
+  const h = s.headline || {}, ev = s.kind === 'event', none = !s.headline && s.note
   const v = Number.isFinite(h.value) ? h.value : null
-  const hl = ev
+  const hl = none ? { short: 'radar echo', tag: 'changed', long: s.note } : ev
     ? { short: Number.isFinite(h.p2p_cm) ? `≈ ${fmtKm(h.p2p_cm)} cm` : v != null ? `M ${v.toFixed(1)}` : 'event', tag: v != null ? `M ${v.toFixed(1)}` : 'event', long: [`${cap(s.eventType || 'event')}${v != null ? `, M ${v.toFixed(1)}` : ''}`, h.date ? dmy(h.date) : '', Number.isFinite(h.p2p_cm) ? `ground moved ≈ ${fmtKm(h.p2p_cm)} cm along the radar’s line of sight` : ''].filter(Boolean).join(' · ') }
     : h.unit === 'km²' && v != null && v >= 1
       ? { short: `${fmtKm(v)} km²`, tag: String(h.label || 'open water').toLowerCase(), long: `${fmtKm(v)} km² ${String(h.label || 'open water').toLowerCase()} at its peak${h.date ? ` (${fmtDate(h.date)})` : ''}` }
       : h.unit === '%' && v != null ? { short: `${fmtKm(v)} %`, tag: 'changed', long: `Up to ${fmtKm(v)} % ${String(h.label || '').toLowerCase()}` }
         : { short: 'no open water', tag: 'land surface', long: 'No open water mapped here: a land-surface story' }
-  const p = { id: s.id, name: s.name, kind: s.kind, category: s.category, bounds: s.bounds, source: s.source, calibrated: s.source === 'gamma0', _stub: true, _h: hl,
+  const p = { id: s.id, name: s.name, kind: s.kind, category: s.category, bounds: s.bounds, source: s.source, headline: none ? 'none' : undefined, defaultLayer: s.defaultLayer, calibrated: s.source === 'gamma0', _stub: true, _h: hl,
     peak: v, dates: [], flood: null, primary: { kind: h.unit === 'km²' ? 'water' : h.unit === '%' ? 'pct' : 'hh', values: [], label: h.label || '' },
     event: ev ? { type: s.eventType || 'event', magnitude: v, time: h.date, place: h.label, views: [{ p2p_cm: h.p2p_cm }] } : null }
   p._hay = `${s.searchText || ''} ${s.name} ${classInfo(classOf(p)).label} ${classOf(p)}${p.calibrated ? ' calibrated' : ''}`.toLowerCase()

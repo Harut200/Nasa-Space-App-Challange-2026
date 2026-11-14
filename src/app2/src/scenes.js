@@ -1,4 +1,4 @@
-import { fmtDate, fmtKm, fmtSigned, fmtUTC, isEvent, isZeroChange, startIndex } from './data.js'
+import { cycleCm, defaultLayer, fmtDate, fmtDateLong, fmtKm, fmtSigned, fmtUTC, goodViews, isEvent, isNoisy, isQuake, isZeroChange, startIndex } from './data.js'
 
 // split after . ! ? only where a space follows, so "about 0.3" stays whole
 const sentences = (t, n) => String(t).trim().split(/(?<=[.!?])\s+/).slice(0, n).join(' ')
@@ -28,7 +28,11 @@ export function buildScenes(p) {
   }
   // places with no visible open water show the radar itself (or, where there is one, the coherence) instead of an empty water layer
   const emptyWater = P.kind === 'hh' || P.kind === 'pct' || Math.max(...vals.filter((v) => v != null), 0) < 1
-  const wl = pct && has('coh') ? 'coh' : emptyWater ? 'hh' : 'water'
+  // wildfires: no open-water series; every scene runs on the layer the manifest names and the big text is its headline note
+  const none = P.kind === 'none'
+  const dl = none ? defaultLayer(p) : null
+  const wl = none ? dl : pct && has('coh') ? 'coh' : emptyWater ? 'hh' : 'water'
+  const noteStat = (idx) => ({ big: p.headlineNote || p.name, text: true, unit: '', label: '', sub: `pass ${idx + 1} of ${n}, ${fmtDate(p.dates[idx])}` })
   const sureText = [
     p.calibrated ? 'Calibrated NISAR data, provisional calibration.' : 'These are free preview images at about 180 m per pixel, and they are not calibrated.',
     p.calibrated ? 'Treat the numbers as a careful measurement of this season, not a finished product.' : 'Timing and patterns are reliable; exact areas are not.',
@@ -42,14 +46,15 @@ export function buildScenes(p) {
   })
   scenes.push({
     key: 'see', kicker: 'What you see', title: 'The season plays', layer: wl, at: first, play: true, text: sentences(p.story.see, 3), full: p.story.see,
-    stat: live,
+    stat: none ? noteStat : live,
   })
   const gained = vals[last] != null && vals[0] != null ? vals[last] - vals[0] : null
   const settled = pct && has('coh_change')
   scenes.push({
-    key: 'physics', kicker: 'What is happening', title: settled ? 'Where the fields settled' : 'When each place changed', layer: settled ? 'coh_change' : 'when', at: last,
+    key: 'physics', kicker: 'What is happening', title: settled ? 'Where the fields settled' : none ? 'What the radar saw' : 'When each place changed', layer: none ? dl : settled ? 'coh_change' : 'when', at: last,
     text: settled ? sentences(p.story.lband, 3) : sentences(p.story.physics, 3), full: settled ? p.story.lband : p.story.physics,
     stat: () => {
+      if (none) return noteStat(last)
       if (pct) {
         const a = vals[first], z = vals[last]
         return a != null && z != null && first !== last ? { big: `${fmtKm(a)} → ${fmtKm(z)}`, unit: '%', label: `${lower}, first pair to last pair`, sub: `${fmtDate(p.dates[first])} to ${fmtDate(p.dates[last])}`, text: true } : passStat
@@ -69,9 +74,10 @@ export function buildScenes(p) {
   const wmax = p.water ? Math.max(...p.water.values.filter((v) => v != null), 0) : 0
   const cohCmp = pct && has('coh') && p.layers.find((l) => l.id === 'coh').dates?.length > 1
   scenes.push({
-    key: 'lband', kicker: 'Why radar sees it', title: cohCmp ? 'Before and after, in coherence' : 'Before and after, in L-band', layer: cohCmp ? 'coh' : 'hh', at: last, compare: true, focus: cohCmp ? undefined : focus?.id,
+    key: 'lband', kicker: 'Why radar sees it', title: cohCmp ? 'Before and after, in coherence' : 'Before and after, in L-band', layer: none ? dl : cohCmp ? 'coh' : 'hh', at: last, compare: true, focus: cohCmp ? undefined : focus?.id,
     text: cohCmp ? sentences(p.story.physics, 3) : sentences(p.story.lband, 3), full: cohCmp ? p.story.physics : p.story.lband,
     stat: () => {
+      if (none) return noteStat(last)
       if (cohCmp) return p.water ? { big: wmax, unit: 'km²', label: 'open water found by the brightness map on every pass, probably too little', sub: '' } : passStat
       return fpeak >= 1
         ? { big: fpeak, unit: 'km²', label: `possible flooded vegetation at its peak, ${fmtDate(p.dates[fi])}`, sub: '' }
@@ -80,7 +86,7 @@ export function buildScenes(p) {
   })
   scenes.push({
     key: 'people', kicker: 'Why it matters', title: 'People and place', layer: wl, at: last, text: sentences(p.story.people, 3), full: p.story.people,
-    stat: live,
+    stat: none ? noteStat : live,
   })
   scenes.push({
     key: 'sure', kicker: 'Honestly', title: 'How sure are we?', layer: wl, at: last, sheet: true,
@@ -93,33 +99,86 @@ export function buildScenes(p) {
 const dayOf = (iso) => String(iso).slice(0, 10)
 const cm = (v) => `≈ ${v} cm`
 const viewName = (v) => `${v.label}, track ${v.track}`
+const NOISY = 'too noisy to use'
+// The clock time only when it is a recorded one (an inferred date carries a time_note and a placeholder 00:00).
+const whenText = (e) => {
+  const t = String(e.time), clock = t.slice(11, 16)
+  return !e.time_note && clock && clock !== '00:00' ? fmtUTC(t) : fmtDateLong(dayOf(t))
+}
 
-// An earthquake is one beat: five to six scenes, built only from the manifest (event, story, layers, legends).
+// Events are one beat. Earthquakes: five to seven scenes. Volcanoes, landslides: four. Built only from the manifest.
 function buildEventScenes(p) {
+  return isQuake(p) ? buildQuakeScenes(p) : buildChangeScenes(p)
+}
+
+// A volcano or a landslide: where the surface changed completely between two passes. No magnitude, no motion in centimetres.
+function buildChangeScenes(p) {
   const e = p.event
   const nm = p.name.split(',')[0]
   const views = e.views || []
-  const v0 = views[0]
+  const has = (id) => p.layers.some((l) => l.id === id)
+  const lossLayer = has('coh_loss') ? 'coh_loss' : null
+  const cohLayer = has('coherence') ? 'coherence' : null
+  const title = e.title || p.name
+  const summary = e.summary ? { big: e.summary, unit: '', label: `${nm}: the area of the two-pass comparison where the radar picture no longer matches`, sub: '', text: true } : { big: String(views.length), unit: '', label: views.length === 1 ? 'radar pair across the event' : 'radar pairs across the event', sub: '' }
+  const L = p.layers.find((l) => l.id === cohLayer)?.legend
+  const scenes = []
+  scenes.push({
+    key: 'beat', kicker: 'One beat', title: 'One beat', layer: null, compare: false, focusLL: e.lngLat,
+    text: `A season has many beats. This event is one.${e.place ? ` It happened at ${e.place}.` : ''}${e.time_note ? ` Date note: ${e.time_note}.` : ''}`.replace(/\.\./g, '.'),
+    hint: 'The star marks the event site. The map shows bare terrain: no radar layer yet.',
+    stat: () => ({ big: title, unit: '', label: `${e.place || nm}, ${whenText(e)}`, sub: e.time_note ? 'date inferred, see the note' : '', text: true }),
+  })
+  scenes.push({
+    key: 'before-after', kicker: 'Before and after', title: 'Before and after', layer: lossLayer || cohLayer, compare: false, strip: true,
+    text: sentences(p.story.see, 3), full: p.story.see,
+    stat: () => summary,
+  })
+  scenes.push({
+    key: 'fringes', kicker: 'Reading it', title: 'Reading the coherence', layer: cohLayer || lossLayer, legend: true, compare: false,
+    text: sentences(p.story.physics, 3), full: [p.story.physics, p.story.lband].filter(Boolean).join(' '),
+    stat: () => (L && L.type === 'ramp' ? { big: `${fmtKm(L.min)} to ${fmtKm(L.max)}`, unit: '', label: L.unit || 'coherence', sub: 'the layer shown on the map', text: true } : summary),
+  })
+  scenes.push({
+    key: 'people', kicker: 'Why it matters', title: 'People and place', layer: lossLayer || cohLayer, compare: false, sheet: true,
+    text: sentences(p.story.people, 3), full: p.story.people,
+    note: 'Honestly: provisional data. This shows where the surface changed, not what it is made of or how thick it is.',
+    stat: () => summary,
+  })
+  return scenes
+}
+
+// An earthquake is one beat: five to seven scenes, built only from the manifest (event, story, layers, legends).
+function buildQuakeScenes(p) {
+  const e = p.event
+  const nm = p.name.split(',')[0]
+  const views = e.views || []
+  const good = goodViews(e) // a view whose control pair is as big as its own signal gives no number
+  const noisy = views.filter(isNoisy)
+  const v0 = good[0] || views[0]
   const has = (id) => p.layers.some((l) => l.id === id)
   const lposLayer = ['los_cm', 'los_asc_cm', 'los_desc_cm'].find(has) || (has('fringes') ? 'fringes' : null)
   const bothLooks = has('los_asc_cm') && has('los_desc_cm')
   const nLooks = new Set(views.map((v) => v.label)).size
   const ev = fmtDate(dayOf(e.time))
   const between = v0 && dayOf(v0.before) < dayOf(e.time) && dayOf(e.time) < dayOf(v0.after)
-  const mag = `M ${Number(e.magnitude).toFixed(1)}`
-  const main = v0 && v0.p2p_cm != null ? { big: `≈ ${v0.p2p_cm}`, unit: 'cm', label: 'ground motion along the radar’s line of sight',
-    sub: views.length > 1 ? views.map((v) => `${v.label}, track ${v.track}: ${v.p2p_cm != null ? cm(v.p2p_cm) : 'not measured'}`).join(' · ') : `peak to peak, ${viewName(v0)}` }
-    : { big: String(views.length), unit: '', label: views.length === 1 ? 'radar pair across the earthquake' : 'radar pairs across the earthquake', sub: '' }
+  const mag = e.magnitude != null && Number.isFinite(Number(e.magnitude)) ? `M ${Number(e.magnitude).toFixed(1)}` : 'Earthquake'
+  const cyc = cycleCm(p)
+  const depth = e.depth_km != null && Number.isFinite(Number(e.depth_km)) ? Number(e.depth_km) : null
+  const perView = (v) => (isNoisy(v) ? NOISY : v.p2p_cm != null ? cm(v.p2p_cm) : 'not measured')
+  const main = good.length ? { big: `≈ ${good[0].p2p_cm}`, unit: 'cm', label: 'ground motion along the radar’s line of sight',
+    sub: views.length > 1 ? views.map((v) => `${v.label}, track ${v.track}: ${perView(v)}`).join(' · ') : `peak to peak, ${viewName(good[0])}` }
+    : { big: String(views.length), unit: '', label: views.length === 1 ? 'radar pair across the earthquake' : 'radar pairs across the earthquake', sub: noisy.length ? `${noisy.map(viewName).join(', ')}: ${NOISY}` : '' }
   const scenes = []
   scenes.push({
     key: 'beat', kicker: 'One beat', title: 'One beat', layer: null, compare: false, focusLL: e.lngLat,
-    text: `A season has many beats. An earthquake is one. It struck ${e.place}, at a depth of about ${Math.round(e.depth_km)} km (USGS).`,
+    text: `A season has many beats. An earthquake is one. It struck ${e.place}${depth != null ? `, at a depth of about ${Math.round(depth)} km (USGS)` : ''}.`,
     hint: 'The star marks the USGS epicentre. The map shows bare terrain: no radar layer yet.',
-    stat: () => ({ big: mag, unit: '', label: `${nm}, ${fmtUTC(e.time)}`, sub: `depth ${e.depth_km} km` }),
+    stat: () => ({ big: mag, unit: '', label: `${nm}, ${fmtUTC(e.time)}`, sub: depth != null ? `depth ${depth} km` : '' }),
   })
   scenes.push({
     key: 'before-after', kicker: 'Before and after', title: 'Before and after', layer: has('fringes') ? 'fringes' : lposLayer, compare: false, strip: true,
-    text: `${views.length > 1 ? 'Each pair is' : 'The pair is'} two passes of the same viewing direction${between ? `: one before the earthquake (${fmtDate(dayOf(v0.before))}), one after (${fmtDate(dayOf(v0.after))}). The earthquake struck on ${ev}, between them` : ''}.${nLooks > 1 ? ' The pairs look from two viewing directions, ascending and descending.' : ''} ${has('fringes') ? 'The coloured bands are fringes: each full colour cycle is 10 cm of ground motion toward or away from the satellite.' : ''}`.replace(/\s+/g, ' ').trim(),
+    text: `${views.length > 1 ? 'Each pair is' : 'The pair is'} two passes of the same viewing direction${between ? `: one before the earthquake (${fmtDate(dayOf(v0.before))}), one after (${fmtDate(dayOf(v0.after))}). The earthquake struck on ${ev}, between them` : ''}.${nLooks > 1 ? ' The pairs look from two viewing directions, ascending and descending.' : ''} ${has('fringes') && cyc ? `The coloured bands are fringes: each full colour cycle is ${cyc} cm of ground motion toward or away from the satellite.` : ''}`.replace(/\s+/g, ' ').trim(),
     stat: () => main,
   })
   const lo = p.layers.find((l) => l.id === lposLayer)
@@ -131,23 +190,28 @@ function buildEventScenes(p) {
   })
   if (bothLooks) {
     const a = views.find((v) => v.label === 'ascending'), d = views.find((v) => v.label === 'descending')
+    const both = a && d && a.p2p_cm != null && d.p2p_cm != null && !isNoisy(a) && !isNoisy(d)
     scenes.push({
       key: 'looks', kicker: 'Two directions', title: 'Ascending and descending', layer: 'los_desc_cm', compare: true, cmpLayer: 'los_asc_cm', legend: true,
       cmpTags: ['Ascending', 'Descending'],
-      text: 'The satellite sees the same ground from two sides, on its ascending and descending tracks. The same movement can then look different in size, or even have the opposite sign.',
+      text: `The satellite sees the same ground from two sides, on its ascending and descending tracks. The same movement can then look different in size, or even have the opposite sign.${noisy.length ? ` One of the two pairs is ${NOISY} (${noisy.map(viewName).join(', ')}), so only the other gives a number.` : ''}`,
       hint: `Drag the handle on the map: ascending on the left, descending on the right.${has('east_cm') ? ' Explore also has approximate east-west and vertical layers, labelled as approximate.' : ''}`,
-      stat: () => (a && d && a.p2p_cm != null && d.p2p_cm != null ? { big: `${a.p2p_cm} / ${d.p2p_cm}`, unit: 'cm', label: 'peak to peak, ascending / descending', sub: `tracks ${a.track} / ${d.track}` } : main),
+      stat: () => (both ? { big: `${a.p2p_cm} / ${d.p2p_cm}`, unit: 'cm', label: 'peak to peak, ascending / descending', sub: `tracks ${a.track} / ${d.track}` } : main),
     })
   }
-  const ctl = views.filter((v) => v.control_p2p_cm != null)
-  if (ctl.length) {
+  const ctl = views.filter((v) => v.control_p2p_cm != null && !isNoisy(v))
+  const ctlNoisy = noisy.filter((v) => v.control_p2p_cm != null)
+  if (ctl.length || ctlNoisy.length) {
     const c0 = ctl[0]
+    const noisyTxt = ctlNoisy.length ? ` ${ctlNoisy.map(viewName).join('; ')}: ${NOISY}, because the control pair shows nearly as much motion as the earthquake pair.` : ''
     scenes.push({
       key: 'control', kicker: 'The control', title: 'The control', layer: has('fringes') ? 'fringes' : lposLayer, compare: false,
-      text: ctl.length === 1
-        ? `As a check, we measured the same way on a pair of the same track from before the earthquake. It shows about ${c0.control_p2p_cm} cm, against about ${c0.p2p_cm ?? 'the'} cm across the earthquake. No control image is shown here, only the number.`
-        : `As a check, we measured the same way on pairs of the same tracks from before the earthquake. ${ctl.map((v) => `${v.label}, track ${v.track}: about ${v.control_p2p_cm} cm${v.p2p_cm != null ? ` (across the earthquake: about ${v.p2p_cm} cm)` : ''}`).join('; ')}. No control images are shown here, only the numbers.`,
-      stat: () => ({ big: `≈ ${c0.control_p2p_cm}`, unit: 'cm', label: 'the same track before the earthquake', sub: ctl.length > 1 ? ctl.map((v) => `${v.label}, track ${v.track}: ${cm(v.control_p2p_cm)}`).join(' · ') : `peak to peak, ${viewName(c0)}` }),
+      text: (ctl.length === 0 ? 'As a check, we measured the same way on a pair from before the earthquake.'
+        : ctl.length === 1
+          ? `As a check, we measured the same way on a pair of the same track from before the earthquake. It shows about ${c0.control_p2p_cm} cm, against about ${c0.p2p_cm ?? 'the'} cm across the earthquake. No control image is shown here, only the number.`
+          : `As a check, we measured the same way on pairs of the same tracks from before the earthquake. ${ctl.map((v) => `${v.label}, track ${v.track}: about ${v.control_p2p_cm} cm${v.p2p_cm != null ? ` (across the earthquake: about ${v.p2p_cm} cm)` : ''}`).join('; ')}. No control images are shown here, only the numbers.`) + noisyTxt,
+      stat: () => (c0 ? { big: `≈ ${c0.control_p2p_cm}`, unit: 'cm', label: 'the same track before the earthquake', sub: ctl.length > 1 ? ctl.map((v) => `${v.label}, track ${v.track}: ${cm(v.control_p2p_cm)}`).join(' · ') : `peak to peak, ${viewName(c0)}` }
+        : { big: 'Too noisy', unit: '', label: 'the control pair shows nearly as much motion as the earthquake pair', sub: ctlNoisy.map(viewName).join(' · '), text: true }),
     })
   }
   const looks = new Set(views.map((v) => v.label)).size

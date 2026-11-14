@@ -1,5 +1,5 @@
 import { lazy, Suspense, useCallback, useEffect, useMemo, useState } from 'react'
-import { getJson, makePlace, isEvent, nearestPlace, distanceKm, parseHash, km, words, dayMonth, defaultLayer, currentTheme, basemapMode, DATA } from './meta.js'
+import { getJson, makePlace, isEvent, eventType, nearestPlace, distanceKm, parseHash, km, words, dayMonth, defaultLayer, currentTheme, basemapMode, DATA } from './meta.js'
 import { nearest, frame } from './data.js'
 import { Landing, PlaceUI, COLORS } from './Panels.jsx'
 import About from './About.jsx'
@@ -30,10 +30,12 @@ export default function App() {
   const [imagery, setImagery] = useState(true)
   const [v, setV] = useState(null)
   const [maps, setMaps] = useState({})
+  const [summary, setSummary] = useState(null) // summary.json: class labels and order (optional; the manifests alone are enough)
 
   useEffect(() => {
     getJson('index.json').then((idx) => Promise.all(idx.areas.map((a) => getJson(`${a}/manifest.json`)))).then(setManifests).catch((e) => setError(e.message))
   }, [])
+  useEffect(() => { getJson('summary.json').then((s) => setSummary(Array.isArray(s?.categories) ? s.categories : null)).catch(() => {}) }, [])
   useEffect(() => {
     if (!manifests) return
     Promise.all(manifests.map((m) => getJson(`${m.id}/timeseries.json`).catch(() => null).then((ts) => [m.id, ts]))).then((l) => setSeries(Object.fromEntries(l)))
@@ -57,6 +59,7 @@ export default function App() {
   const date = m && v ? m.dates[v.dateIndex] ?? null : null
   const n = m?.dates.length || 0
   const ev = isEvent(m)
+  const quake = ev && eventType(m) === 'earthquake'
   // Compare only makes sense on a dated layer: on a whole-season layer both sides would be the same image.
   // An earthquake has no second date: its compare is the layer against the bare satellite image ("reveal").
   const cmp = !!(v?.compare && (layer?.dates || ev))
@@ -146,13 +149,13 @@ export default function App() {
         <MapView mode={mode} bounds={m.bounds} url={ev ? null : frame(DATA, m.id, layer, m.dates[v.otherIndex]).url} opacity={v.opacity} onMap={setB} epicentre={ev ? m.event.lngLat : null}
           style={{ clipPath: `inset(${extent.top - 1}px 0 ${innerHeight - extent.top - extent.height}px ${extent.left + (extent.width * v.split) / 100}px)` }} />
       )}
-      {cmp && extent && <Divider rect={extent} split={v.split} onSplit={(s) => patch({ split: s })} left={ev ? 'Ground motion' : dayMonth(shown)} right={ev ? 'Satellite only' : dayMonth(frame(DATA, m.id, layer, m.dates[v.otherIndex]).shown)} label={ev ? 'Drag to reveal the satellite image beneath the ground-motion layer' : undefined} />}
+      {cmp && extent && <Divider rect={extent} split={v.split} onSplit={(s) => patch({ split: s })} left={ev ? (quake ? 'Ground motion' : 'Surface change') : dayMonth(shown)} right={ev ? 'Satellite only' : dayMonth(frame(DATA, m.id, layer, m.dates[v.otherIndex]).shown)} label={ev ? `Drag to reveal the satellite image beneath the ${quake ? 'ground-motion' : 'surface-change'} layer` : undefined} />}
       {!imagery && mode === 'natural' && <p className="glass imagery-note" role="status">Satellite imagery unavailable. Showing the radar data only.</p>}
       {placeId && v ? (
-        <PlaceUI m={m} ts={series[m.id]} v={v} patch={patch} places={places} layer={layer} date={date} preview={m.source === 'preview'} otherDates={other} note={note}
+        <PlaceUI m={m} ts={series[m.id]} v={v} patch={patch} places={places} summary={summary} layer={layer} date={date} preview={m.source === 'preview'} otherDates={other} note={note}
           onBack={() => go(null)} onPlace={go} onRandom={random} onAbout={() => setAboutOpen(true)} />
       ) : (
-        <Landing places={places} tip={tip} selected={selected} onOpen={go} onRandom={random} onNear={nearMe} near={near} onAbout={() => setAboutOpen(true)} />
+        <Landing places={places} summary={summary} tip={tip} selected={selected} onOpen={go} onRandom={random} onNear={nearMe} near={near} onAbout={() => setAboutOpen(true)} />
       )}
       <About open={aboutOpen} hasEvents={manifests.some(isEvent)} onClose={() => setAboutOpen(false)} manifest={m} theme={theme} onTheme={setTheme} />
     </div>

@@ -21,6 +21,7 @@ export default function TimelineChart({ place, index, onScrub, showFlood = true 
   const [hover, setHover] = useState(null)
   const [drag, setDrag] = useState(false)
   const P = place.primary
+  const none = P.kind === 'none' // no series: only the pass beats and the outage
   const dates = place.dates
   const M = { l: 46, r: 18, t: 20, b: 30 }
   const iw = w - M.l - M.r, ih = h - M.t - M.b
@@ -29,19 +30,19 @@ export default function TimelineChart({ place, index, onScrub, showFlood = true 
     const t0 = dayNum(dates[0]), t1 = dayNum(dates[dates.length - 1])
     const x = (d) => M.l + ((dayNum(d) - t0) / (t1 - t0)) * iw
     const lo = P.fixedMin ?? 0
-    const top = P.fixedMax ?? niceMax(Math.max(...P.values.filter((v) => v != null), ...(P.hi || []).filter((v) => v != null)) * 1.05)
-    const y = (v) => M.t + ih - ((v - lo) / (top - lo)) * ih
+    const top = none ? 1 : P.fixedMax ?? niceMax(Math.max(...P.values.filter((v) => v != null), ...(P.hi || []).filter((v) => v != null)) * 1.05)
+    const y = (v) => (none ? M.t + ih * 0.62 : M.t + ih - ((v - lo) / (top - lo)) * ih)
     const flood = showFlood && P.kind === 'water' && place.flood && Math.max(...place.flood.values) >= 0.04 * top ? place.flood : null
     return { x, y, top, lo, flood, t0, t1 }
-  }, [dates, P, place.flood, iw, ih, showFlood])
+  }, [dates, P, place.flood, iw, ih, showFlood, none])
 
-  const pts = dates.map((d, i) => (P.values[i] == null ? null : { i, d, x: g.x(d), y: g.y(P.values[i]), v: P.values[i] }))
+  const pts = dates.map((d, i) => (none ? { i, d, x: g.x(d), y: g.y(0), v: null } : P.values[i] == null ? null : { i, d, x: g.x(d), y: g.y(P.values[i]), v: P.values[i] }))
   // dash the line where passes are far apart (an outage between them)
   const seg = []
-  for (let i = 1; i < pts.length; i++) if (pts[i] && pts[i - 1]) seg.push({ a: pts[i - 1], b: pts[i], gap: dayNum(dates[i]) - dayNum(dates[i - 1]) > 20 })
+  for (let i = 1; i < pts.length; i++) if (!none && pts[i] && pts[i - 1]) seg.push({ a: pts[i - 1], b: pts[i], gap: dayNum(dates[i]) - dayNum(dates[i - 1]) > 20 })
   const band = P.lo && P.hi ? pts.filter(Boolean) : null
   const bandPath = band && 'M' + band.map((p) => `${p.x},${g.y(P.hi[p.i])}`).join('L') + 'L' + [...band].reverse().map((p) => `${p.x},${g.y(P.lo[p.i])}`).join('L') + 'Z'
-  const ticks = [0, 0.5, 1].map((f) => g.lo + f * (g.top - g.lo))
+  const ticks = none ? [] : [0, 0.5, 1].map((f) => g.lo + f * (g.top - g.lo))
 
   const at = (clientX) => {
     const r = box.current.getBoundingClientRect()
@@ -61,7 +62,7 @@ export default function TimelineChart({ place, index, onScrub, showFlood = true 
       onPointerDown={(e) => { setDrag(true); e.currentTarget.setPointerCapture(e.pointerId); onScrub(at(e.clientX)) }}
       onPointerMove={(e) => { const i = at(e.clientX); setHover(i); if (drag) onScrub(i) }}
       onPointerUp={() => setDrag(false)} onPointerLeave={() => { setHover(null) }}>
-      {size && <svg width={w} height={h} role="img" aria-label={`${P.label}${P.unit ? `, in ${P.unit},` : ''} over the ${dates.length} radar passes. Drag to move through time.`}>
+      {size && <svg width={w} height={h} role="img" aria-label={none ? `The ${dates.length} radar passes, one beat each. Drag to move through time.` : `${P.label}${P.unit ? `, in ${P.unit},` : ''} over the ${dates.length} radar passes. Drag to move through time.`}>
         <defs>
           <pattern id="rest" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
             <rect width="7" height="7" fill="none" /><line x1="0" y1="0" x2="0" y2="7" stroke="var(--ink-3)" strokeWidth="1.2" opacity=".5" />
@@ -73,7 +74,8 @@ export default function TimelineChart({ place, index, onScrub, showFlood = true 
             <text x={M.l - 8} y={g.y(tv) + 4} textAnchor="end" className="ax">{fmtKm(tv)}</text>
           </g>
         ))}
-        <text x={M.l + 6} y={M.t - 7} textAnchor="start" className="ax unit">{P.unit}</text>
+        {!none && <text x={M.l + 6} y={M.t - 7} textAnchor="start" className="ax unit">{P.unit}</text>}
+        {none && <line x1={M.l} x2={w - M.r} y1={g.y(0)} y2={g.y(0)} stroke="var(--grid)" strokeWidth="1.5" />}
         {band && <g className="ax"><rect x={w - M.r - 124} y={M.t - 14} width="14" height="8" rx="2" fill="var(--water)" opacity=".4" /><text x={w - M.r - 104} y={M.t - 6} className="ax">plausible range</text></g>}
         {place.gaps.map(([a, b], i) => {
           const x0 = Math.max(M.l, g.x(a)), x1 = Math.min(w - M.r, g.x(b))
@@ -117,12 +119,12 @@ export default function TimelineChart({ place, index, onScrub, showFlood = true 
           </g>
         )}
         {!cur && <line x1={g.x(dates[index])} x2={g.x(dates[index])} y1={M.t} y2={M.t + ih} stroke="var(--accent)" strokeWidth="1.5" />}
-        {cur && <text x={cur.x > w - 120 ? cur.x - 14 : cur.x + 14} y={Math.max(M.t + 12, Math.min(h - M.b - 6, cur.y - 12))} textAnchor={cur.x > w - 120 ? 'end' : 'start'} className="dl" fill="var(--ink)">{fmtVal(P, cur.v)}</text>}
+        {cur && !none && <text x={cur.x > w - 120 ? cur.x - 14 : cur.x + 14} y={Math.max(M.t + 12, Math.min(h - M.b - 6, cur.y - 12))} textAnchor={cur.x > w - 120 ? 'end' : 'start'} className="dl" fill="var(--ink)">{fmtVal(P, cur.v)}</text>}
       </svg>}
       {hp && hv !== index && (
         <div className="tip" style={{ left: Math.min(w - 170, Math.max(0, hp.x - 80)), top: Math.max(0, hp.y - 70) }}>
           <b>{fmtDateLong(hp.d)}</b>
-          <span>{fmtVal(P, hp.v)}{P.lo ? ` (${fmtKm(P.lo[hp.i])}–${fmtKm(P.hi[hp.i])})` : ''}</span>
+          <span>{none ? `Pass ${hv + 1} of ${dates.length}` : fmtVal(P, hp.v)}{P.lo ? ` (${fmtKm(P.lo[hp.i])}–${fmtKm(P.hi[hp.i])})` : ''}</span>
           {q(hv) && <em>{q(hv).quality === 'fail' ? 'Flagged pass' : 'Caution'}</em>}
         </div>
       )}

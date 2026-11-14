@@ -310,3 +310,14 @@ input[type='checkbox'] { accent-color: var(--accent-2); width: 1.1rem; height: 1
   .ev-view { min-width: 0; flex-basis: 100%; font-size: 0.78rem; }
   .evbar .ev-pass { margin-bottom: 4px; gap: 0 14px; }
 }
+
+/* classes: shaped dot keys, noisy views, event notes */
+.legend-dots i.shape-key { border-radius: 0; width: 11px; height: 11px; }
+.legend-dots i.shape-key.diamond { clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); }
+.legend-dots i.shape-key.triangle { clip-path: polygon(50% 0, 100% 90%, 0 90%); }
+.legend-dots i.shape-key.square { width: 9px; height: 9px; }
+.legend-dots i.shape-key.hexagon { clip-path: polygon(50% 0, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%); }
+.ev-head .hl-motion.noisy, .evbar .ev-pass.noisy { color: var(--muted); opacity: 0.7; }
+.ev-head .hl-motion.noisy { font-size: 1rem; font-style: italic; }
+.hl-note { margin-top: 3px; font-size: var(--fs-0); font-weight: 400; color: var(--muted); }
+.hl-actions a.chip { text-decoration: none; display: inline-flex; align-items: center; }

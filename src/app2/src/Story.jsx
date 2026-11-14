@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import { fmtDate, isEvent, startIndex, tidy } from './data.js'
+import { firstLabel, fmtDate, isEvent, startIndex, tidy } from './data.js'
 import { EventStrip } from './EventParts.jsx'
 import { Icon, Num } from './ui.jsx'
 
@@ -7,7 +7,7 @@ function Stat({ s }) {
   const num = typeof s.big === 'number'
   return (
     <div className="stat">
-      <div className={`statbig ${s.text ? 'txt' : ''}`}>
+      <div className={`statbig ${s.text ? 'txt' : ''} ${s.text && String(s.big).length > 16 ? 'long' : ''}`}>
         {s.sign && <span className="sign">{s.sign}</span>}
         {num ? (s.dec ? s.big.toFixed(s.dec) : <Num value={s.big} />) : s.big}
         {s.unit && <small>{s.unit}</small>}
@@ -43,7 +43,7 @@ export default function Story({ place, scenes, n, index, playing, setPlaying, on
         {ev && sc.strip && <EventStrip event={place.event} />}
         {sc.note && <p className="hint mono">{sc.note}</p>}
         {ev && sc.hint && <p className="hint mono">{sc.hint}</p>}
-        {!ev && sc.compare && <p className="hint mono">Drag the handle on the map: {sc.layer === 'coh' ? 'first pair' : 'first pass'} on the left, {fmtDate(place.dates[index])} on the right.</p>}
+        {!ev && sc.compare && <p className="hint mono">Drag the handle on the map: {firstLabel(place, place.layers.find((l) => l.id === sc.layer)).toLowerCase()} on the left, {fmtDate(place.dates[index])} on the right.</p>}
         {!ev && sc.focus && <p className="hint mono">Zoomed to {place.spots.find((s) => s.id === sc.focus)?.label}, the spot where radar brightness changed most.</p>}
         {missing && <p className="hint mono">No image for this pass in this layer.</p>}
       </div>

@@ -40,6 +40,7 @@ function drawIcon(shape, color) {
     if (shape === 'ring' || shape === 'dot') x.arc(32, 32, 15, 0, 7)
     else if (shape === 'triangle') { x.moveTo(32, 10); x.lineTo(55, 52); x.lineTo(9, 52); x.closePath() }
     else if (shape === 'square') x.roundRect(12, 12, 40, 40, 6)
+    else if (shape === 'flame') { x.moveTo(32, 6); x.bezierCurveTo(34, 18, 52, 26, 52, 42); x.arc(32, 42, 20, 0, Math.PI, false); x.bezierCurveTo(12, 34, 20, 30, 24, 22); x.bezierCurveTo(26, 28, 29, 29, 32, 30); x.bezierCurveTo(26, 22, 30, 14, 32, 6) }
     else if (shape === 'drop') { x.moveTo(32, 8); x.bezierCurveTo(26, 22, 14, 30, 14, 41); x.arc(32, 41, 18, Math.PI, 0, true); x.bezierCurveTo(50, 30, 38, 22, 32, 8) }
     else { x.moveTo(32, 7); x.lineTo(57, 32); x.lineTo(32, 57); x.lineTo(7, 32); x.closePath() }
   }

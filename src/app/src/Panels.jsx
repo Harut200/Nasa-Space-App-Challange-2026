@@ -1,5 +1,5 @@
 import { Chart, Strip } from './Charts.jsx'
-import { words, dayMonth, dayMon, km, shortLabel, splitLayers, DOT_COLOR, useTween, isEvent, eventTip, placeSummary, groupPlaces, landingText, countPlaces, eventViews, viewMotion, viewControl, viewingNote, magnitude, utcStamp, fmtVal, withUnit } from './meta.js'
+import { words, dayMonth, dayMon, km, shortLabel, splitLayers, DOT_COLOR, useTween, isEvent, eventTip, placeSummary, groupPlaces, landingText, classList, placeStyle, SHAPE, SHAPE_CLASSES, eventType, noisyView, fringeCycle, eventViews, viewMotion, viewControl, viewingNote, magnitude, utcStamp, fmtVal, withUnit } from './meta.js'
 
 export const COLORS = ['#ff6b6b', '#5aa9ff', '#5ad17a', '#ffb347', '#c792ff', '#f0e442', '#5fd4c4']
 const STORY = [['see', 'What you see'], ['physics', 'What is happening'], ['lband', 'Why radar shows it'], ['people', 'Why it matters']]
@@ -16,16 +16,24 @@ export function Fact({ p }) {
       <strong className="tip-name">{p.name}</strong>
       {p.peak && p.peak.v >= 1
         ? <span className="tip-num"><b>{km(p.peak.v)} km²</b> open water at its peak ({dayMonth(p.peak.date)})</span>
-        : <span className="tip-num">No open water mapped here: a land-surface story</span>}
+        : <span className="tip-num">{p.note || 'No open water mapped here: a land-surface story'}</span>}
     </>
   )
 }
 
-export function Landing({ places, tip, selected, onOpen, onRandom, onNear, near, onAbout }) {
+function DotKey({ style }) {
+  if (style === 'quake') return <i className="quake-key" style={{ borderColor: DOT_COLOR.quake, background: DOT_COLOR.quake }} />
+  if (SHAPE_CLASSES.includes(style)) return <i className={`shape-key ${SHAPE[style]}`} style={{ background: DOT_COLOR[style] }} />
+  return <i style={{ background: DOT_COLOR[style] }} />
+}
+
+export function Landing({ places, summary, tip, selected, onOpen, onRandom, onNear, near, onAbout }) {
   const tp = places.find((p) => p.id === tip?.id)
   const sel = places.find((p) => p.id === selected)
-  const firstSeason = places.find((p) => p.kind !== 'event'), firstQuake = places.find((p) => p.kind === 'event')
-  const { quakes } = countPlaces(places)
+  const firstSeason = places.find((p) => p.kind !== 'event'), firstQuake = places.find((p) => p.kind === 'event' && eventType({ kind: 'event', event: p.event }) === 'earthquake')
+  const styles = new Set(places.map(placeStyle))
+  const cls = classList(places, summary)
+  const label = (id) => cls.find((c) => c.id === id)?.label
   return (
     <div className="ui landing">
       <header className="top">
@@ -35,12 +43,13 @@ export function Landing({ places, tip, selected, onOpen, onRandom, onNear, near,
       {tip && tp && <div className="glass tip" style={{ left: tip.x, top: tip.y }} role="tooltip"><Fact p={tp} /></div>}
       <section className="glass dock" aria-label="Start">
         {sel && <div className="sheet-tip" role="dialog" aria-label={sel.name}><Fact p={sel} /><button className="btn solid" onClick={() => onOpen(sel.id)}>Open this place</button></div>}
-        <p className="lede">Press play on a season of radar. {landingText(places)} Pick a dot on the globe.</p>
+        <p className="lede">Press play on a season of radar. {landingText(places, summary)} Pick a dot on the globe.</p>
         <div className="legend-dots" aria-label="Dot legend">
-          <span><i style={{ background: DOT_COLOR.big }} />Over 1,000 km² of open water at peak</span>
-          <span><i style={{ background: DOT_COLOR.some }} />Smaller water</span>
-          <span><i style={{ background: DOT_COLOR.land }} />No open water mapped</span>
-          {quakes > 0 && <span><i className="quake-key" style={{ borderColor: DOT_COLOR.quake, background: DOT_COLOR.quake }} />Earthquake: ground moved</span>}
+          {styles.has('big') && <span><DotKey style="big" />Water: over 1,000 km² of open water at peak</span>}
+          {styles.has('some') && <span><DotKey style="some" />Water: smaller</span>}
+          {styles.has('land') && <span><DotKey style="land" />Land: no open water mapped</span>}
+          {styles.has('quake') && <span><DotKey style="quake" />Earthquake: ground moved</span>}
+          {['fire', 'volcano', 'landslide', 'other'].filter((k) => styles.has(k)).map((k) => <span key={k}><DotKey style={k} />{k === 'other' ? 'Other' : label(k)}</span>)}
           <span className="faint">Bigger dot: more water, or a stronger earthquake</span>
         </div>
         <div className="row">
@@ -74,57 +83,71 @@ function Legend({ legend }) {
   )
 }
 
-// Earthquake headline: magnitude (strongest), how far the ground moved (second), then the line-of-sight and control clauses, then where and when.
+// Event headline. An earthquake: magnitude (strongest), how far the ground moved (second), the line-of-sight and control clauses, then where and when.
+// Volcano, landslide and others: the manifest's own summary sentence, then where and when. A view whose control is as large as its signal is greyed out.
 function EventHeadline({ e, onStory, reveal, onReveal, revealOn }) {
+  const quake = (e.type || 'earthquake') === 'earthquake'
   const views = eventViews(e).filter((v) => viewMotion(v)), many = views.length > 1
   const tag = (v) => `${v.label[0].toUpperCase() + v.label.slice(1)}, track ${v.track}`
-  const ctl = views.filter((v) => viewControl(v))
+  const good = views.filter((v) => !noisyView(v)), ctl = good.filter((v) => viewControl(v))
   const mag = magnitude(e)
+  const when = [e.time && utcStamp(e.time), Number.isFinite(e.depth_km) && `depth ${e.depth_km} km`].filter(Boolean).join(' · ')
   return (
     <div className="glass headline ev-head" aria-label="Headline number">
-      <p className="hl-num"><span>{mag ? `M ${mag}` : 'Earthquake'}</span></p>
-      {views.map((v) => (
-        <p className="hl-motion" key={v.id}>{many && <small>{tag(v)}</small>}<b>{viewMotion(v)}</b> ground motion</p>
-      ))}
-      {views.length > 0 && (
+      {quake ? <p className="hl-num"><span>{mag ? `M ${mag}` : 'Earthquake'}</span></p> : <p className="hl-label hl-big">{e.summary || e.title}</p>}
+      {quake && views.map((v) => (noisyView(v)
+        ? <p className="hl-motion noisy" key={v.id}>{many && <small>{tag(v)}</small>}too noisy to use</p>
+        : <p className="hl-motion" key={v.id}>{many && <small>{tag(v)}</small>}<b>{viewMotion(v)}</b> ground motion</p>))}
+      {quake && good.length > 0 && (
         <p className="hl-clause">along the radar's line of sight{ctl.length > 0 && ` · same track before the earthquake: ${ctl.map((v) => `${many ? `track ${v.track} ` : ''}${viewControl(v)}`).join('; ')}`}</p>
       )}
-      <p className="hl-label">{e.place && <span className="hl-where">{e.place}</span>}<span className="nw">{[e.time && utcStamp(e.time), Number.isFinite(e.depth_km) && `depth ${e.depth_km} km`].filter(Boolean).join(' · ')}</span></p>
+      <p className="hl-label">{e.place && <span className="hl-where">{e.place}</span>}<span className="nw">{when}</span>{e.time_note && <span className="hl-where hl-note">Date: {e.time_note}</span>}</p>
       <div className="hl-actions">
         <button className="chip" onClick={onStory}>Story</button>
         {reveal && <button className="chip" aria-pressed={revealOn} onClick={onReveal}>Reveal</button>}
+        {e.source_url && <a className="chip" href={e.source_url} target="_blank" rel="noreferrer">Source</a>}
       </div>
     </div>
   )
 }
 
-function EventBar({ e }) {
+const MIDDLE = { earthquake: ['⚡', 'earthquake'], volcano: ['', 'eruption'], landslide: ['', 'collapse'] }
+function EventBar({ e, layers }) {
   const views = eventViews(e), many = views.length > 1
+  const type = e.type || 'earthquake', quake = type === 'earthquake'
+  const [icon, word] = MIDDLE[type] || ['', 'event']
+  const cycle = fringeCycle(layers)
+  const noisy = views.filter(noisyView)
   return (
     <section aria-label="Before and after" className="glass timeline evbar">
       {views.map((v) => (
-        <p className="ev-pass" key={v.id}>
+        <p className={`ev-pass${noisyView(v) ? ' noisy' : ''}`} key={v.id}>
           {many && <span className="ev-view">{v.label[0].toUpperCase() + v.label.slice(1)}, track {v.track}</span>}
-          <span className="ev-dates"><b>{dayMon(v.before)}</b><i aria-hidden="true">→</i><b className="ev-quake"><span aria-hidden="true">⚡</span> {e.time ? dayMon(e.time) : 'earthquake'}</b><i aria-hidden="true">→</i><b>{dayMon(v.after)}</b></span>
-          <span className="ev-cap">before · earthquake · after</span>
+          <span className="ev-dates"><b>{dayMon(v.before)}</b><i aria-hidden="true">→</i><b className="ev-quake">{icon && <span aria-hidden="true">{icon} </span>}{e.time ? dayMon(e.time) : word}</b><i aria-hidden="true">→</i><b>{dayMon(v.after)}</b></span>
+          <span className="ev-cap">before · {word} · after</span>
         </p>
       ))}
-      <p className="status">Two radar passes, one before and one after. Each full colour cycle in the fringes is 10 cm of ground motion toward or away from the satellite.</p>
-      <p className="notice">{viewingNote(e)}</p>
+      <p className="status">{quake
+        ? `Two radar passes, one before and one after.${cycle ? ` Each full colour cycle in the fringes is ${cycle} cm of ground motion toward or away from the satellite.` : ''}`
+        : 'Two radar passes, one before and one after. Where the surface changed completely, the radar no longer recognises it.'}</p>
+      {noisy.length > 0 && <p className="notice">{noisy.map((v) => `Track ${v.track}`).join(', ')}: the same track before the earthquake moved nearly as much as the earthquake pair, so {noisy.length > 1 ? 'those views are' : 'that view is'} too noisy to use.</p>}
+      <p className="notice">{quake ? viewingNote(e) : 'Provisional data: this shows where the surface changed, not what it is made of or how thick it is.'}</p>
     </section>
   )
 }
 
-export function PlaceUI({ m, ts, v, patch, places, layer, date, preview, otherDates, note, onBack, onPlace, onRandom, onAbout }) {
+export function PlaceUI({ m, ts, v, patch, places, summary, layer, date, preview, otherDates, note, onBack, onPlace, onRandom, onAbout }) {
   const n = m.dates.length
   const ev = isEvent(m)
-  const { main, more } = splitLayers(m.layers, ev)
+  const { main, more } = splitLayers(m.layers, ev, m.defaultLayer ? [m.defaultLayer] : [])
   const di = ts?.dates.indexOf(date)
   const facts = (ts?.facts || NONE).map((f) => ({ ...f, v: f.values[di], lo: f.lo?.[di], hi: f.hi?.[di] })).filter((f) => f.v != null)
   const head = facts[0]
   const flood = facts.find((f) => f.label === 'Flooded vegetation')
   const shownV = useTween(head?.v)
-  const noWater = head?.label === 'Open water' && !(places.find((p) => p.id === m.id)?.peak?.v >= 1) // same rule as the globe tooltip
+  const none = m.headline === 'none' // a place whose story is not water: no open-water number, the manifest's own note instead
+  const noWater = none || (head?.label === 'Open water' && !(places.find((p) => p.id === m.id)?.peak?.v >= 1)) // same rule as the globe tooltip
+  const pct = !none && facts.find((f) => f.unit === '%') // a land place with a % story (Ararat): that number leads
   const quality = m.quality?.[date]
   const idx = places.findIndex((p) => p.id === m.id)
   const hop = (d) => onPlace(places[(idx + d + places.length) % places.length].id)
@@ -151,7 +174,7 @@ export function PlaceUI({ m, ts, v, patch, places, layer, date, preview, otherDa
           <>
             <button className="scrim" tabIndex={-1} aria-label="Close the list" onClick={() => patch({ list: false })} />
             <ul className="glass drawer" role="menu">
-              {groupPlaces(places).map((g) => [
+              {groupPlaces(places, summary).map((g) => [
                 <li key={g.key} role="presentation" className="grp">{g.title}</li>,
                 ...g.items.map((p) => <li key={p.id}><button role="menuitem" aria-current={p.id === m.id} onClick={() => { patch({ list: false }); onPlace(p.id) }}>
                   <span>{p.name}</span><small>{placeSummary(p)}</small></button></li>),
@@ -164,9 +187,14 @@ export function PlaceUI({ m, ts, v, patch, places, layer, date, preview, otherDa
       {!v.sheet && ev && <EventHeadline e={m.event} onStory={() => patch({ sheet: 'story' })} reveal={ev} revealOn={!!v.compare} onReveal={() => patch({ compare: !v.compare })} />}
       {!v.sheet && !ev && (
         <div className="glass headline" aria-label="Headline number">
-          {head && noWater ? (
+          {noWater && pct ? (
             <>
-              <p className="hl-label hl-big">No open water mapped here: a land-surface story</p>
+              <p className="hl-num"><span>{fmtVal(pct.v, pct.unit)}</span><small>{pct.unit === '%' ? '' : ' '}{pct.unit}</small></p>
+              <p className="hl-label">{pct.label.toLowerCase()} · {words(date)}</p>
+            </>
+          ) : none || (head && noWater) ? (
+            <>
+              <p className="hl-label hl-big">{(none && m.headlineNote) || 'No open water mapped here: a land-surface story'}</p>
               <p className="hl-sub">{words(date)}</p>
             </>
           ) : head ? (
@@ -253,7 +281,7 @@ export function PlaceUI({ m, ts, v, patch, places, layer, date, preview, otherDa
         </aside>
       )}
 
-      {ev ? <EventBar e={m.event} /> : (
+      {ev ? <EventBar e={m.event} layers={m.layers} /> : (
       <section aria-label="Timeline" className="glass timeline">
         <div className="timeline-head">
           <button className="btn solid play" onClick={() => patch({ playing: !v.playing, touched: true, ...(!v.playing && v.dateIndex >= n - 1 ? { dateIndex: 0 } : {}) })} disabled={n < 2} aria-label={v.playing ? 'Pause' : 'Play'}>

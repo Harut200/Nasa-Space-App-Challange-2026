@@ -14,6 +14,13 @@ const MODES = [
   { id: 'change', label: 'Change', hint: 'Brightness change since the first pass' },
   { id: 'hh', label: 'Radar', hint: 'The radar image itself (HH)' },
 ]
+// Places with no open-water story (wildfires): the change and the radar lead, water goes under "More".
+const BURN = [
+  { id: 'change', label: 'Change', hint: 'Brightness change since the first pass' },
+  { id: 'hv', label: 'Radar HV', hint: 'The cross-polarised radar image (HV)' },
+  { id: 'hh', label: 'Radar HH', hint: 'The radar image itself (HH)' },
+  { id: 'when', label: 'When it changed', hint: 'The pass on which each place changed for good' },
+]
 
 const niceStep = (span) => { const p = Math.pow(10, Math.floor(Math.log10(span / 3))); const f = span / 3 / p; return (f <= 1 ? 1 : f <= 2 ? 2 : f <= 5 ? 5 : 10) * p }
 
@@ -62,8 +69,9 @@ export default function Explore({ place, layerId, layer, setLayer, index, setInd
   const v = P.values[index]
   const n = place.dates.length
   const avail = (id) => place.layers.some((l) => l.id === id)
+  const none = P.kind === 'none'
   const lead = P.kind === 'pct' ? COH : []
-  const modes = [...lead, ...MODES].filter((m) => avail(m.id))
+  const modes = [...lead, ...(none ? BURN : MODES)].filter((m) => avail(m.id))
   const isMain = modes.some((m) => m.id === layerId)
   const rest = place.layers.filter((l) => !modes.some((m) => m.id === l.id))
   const q = place.quality[place.dates[index]]
@@ -107,8 +115,8 @@ export default function Explore({ place, layerId, layer, setLayer, index, setInd
           </div>
           <div className="readout">
             <span className="mono date">{fmtDateLong(place.dates[index])} · pass {index + 1} of {n}</span>
-            <strong>{v != null ? <><Num value={v} /> <small>{unit}</small></> : '—'}</strong>
-            <span className="mono dim">{P.label}{P.lo && v != null ? ` · range ${fmtKm(P.lo[index])}–${fmtKm(P.hi[index])}` : ''}{v == null && P.kind === 'pct' ? ' · the first pass has no earlier pass to compare with' : ''}</span>
+            {none ? <strong className="note-text">{P.label}</strong> : <strong>{v != null ? <><Num value={v} /> <small>{unit}</small></> : '—'}</strong>}
+            <span className="mono dim">{none ? 'one beat per radar pass' : P.label}{P.lo && v != null ? ` · range ${fmtKm(P.lo[index])}–${fmtKm(P.hi[index])}` : ''}{v == null && P.kind === 'pct' ? ' · the first pass has no earlier pass to compare with' : ''}</span>
           </div>
           {q && <div className={`pill q-${q.quality}`} title={tidy(q.quality_note)} role="status">{q.quality === 'fail' ? 'Flagged pass' : 'Caution'}: {tidy(q.quality_note.split(';')[0])}</div>}
         </div>

@@ -28,7 +28,8 @@ export function buildScenes(p) {
   }
   // places with no visible open water show the radar itself (or, where there is one, the coherence) instead of an empty water layer
   const emptyWater = P.kind === 'hh' || P.kind === 'pct' || Math.max(...vals.filter((v) => v != null), 0) < 1
-  const wl = pct && has('coh') ? 'coh' : emptyWater ? 'hh' : 'water'
+  const dl = p.headline === 'none' && p.defaultLayer && has(p.defaultLayer) ? p.defaultLayer : null // fire places: the story is on the layer the manifest names, not on water
+  const wl = dl || (pct && has('coh') ? 'coh' : emptyWater ? 'hh' : 'water')
   const sureText = [
     p.calibrated ? 'Calibrated NISAR data, provisional calibration.' : 'These are free preview images at about 180 m per pixel, and they are not calibrated.',
     p.calibrated ? 'Treat the numbers as a careful measurement of this season, not a finished product.' : 'Timing and patterns are reliable; exact areas are not.',
@@ -69,7 +70,7 @@ export function buildScenes(p) {
   const wmax = p.water ? Math.max(...p.water.values.filter((v) => v != null), 0) : 0
   const cohCmp = pct && has('coh') && p.layers.find((l) => l.id === 'coh').dates?.length > 1
   scenes.push({
-    key: 'lband', kicker: 'Why radar sees it', title: cohCmp ? 'Before and after, in coherence' : 'Before and after, in L-band', layer: cohCmp ? 'coh' : 'hh', at: last, compare: true, focus: cohCmp ? undefined : focus?.id,
+    key: 'lband', kicker: 'Why radar sees it', title: cohCmp ? 'Before and after, in coherence' : 'Before and after, in L-band', layer: dl || (cohCmp ? 'coh' : 'hh'), at: last, compare: true, focus: cohCmp ? undefined : focus?.id,
     text: cohCmp ? sentences(p.story.physics, 3) : sentences(p.story.lband, 3), full: cohCmp ? p.story.physics : p.story.lband,
     stat: () => {
       if (cohCmp) return p.water ? { big: wmax, unit: 'km²', label: 'open water found by the brightness map on every pass, probably too little', sub: '' } : passStat

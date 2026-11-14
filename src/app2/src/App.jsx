@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { FLAGSHIP, defaultLayer, fmtDate, frameUrl, isDated, isEvent, loadIndex, loadPlace, startIndex } from './data.js'
+import { FLAGSHIP, defaultLayer, firstLabel, fmtDate, frameUrl, isDated, isEvent, isQuake, loadIndex, loadPlace, loadSummary, startIndex } from './data.js'
 import { useRoute } from './route.js'
 import { buildScenes } from './scenes.js'
 import MapStage from './MapStage.jsx'
@@ -23,6 +23,7 @@ export default function App() {
   const [ids, setIds] = useState([])
   const [places, setPlaces] = useState({}) // id -> built place
   const [failed, setFailed] = useState(false)
+  const [summary, setSummary] = useState(null) // summary.json: classes, counts, thumbnails (null until it arrives, or if it is missing)
   const [indexState, setIndexRaw] = useState(0)
   const [playing, setPlaying] = useState(false)
   const [opacity, setOpacity] = useState(0.92)
@@ -35,6 +36,7 @@ export default function App() {
 
   // index and places
   useEffect(() => { loadIndex().then(setIds).catch(() => setFailed(true)) }, [])
+  useEffect(() => { loadSummary().then((j) => setSummary(j && Array.isArray(j.places) ? j : null)) }, [])
   const ensure = useCallback((id) => loadPlace(id).then((p) => setPlaces((c) => (c[id] ? c : { ...c, [id]: p }))).catch(() => {}), [])
   useEffect(() => { ensure(route.place || FLAGSHIP) }, [route.place, ensure])
   useEffect(() => { // everything else in the background, one at a time
@@ -124,7 +126,7 @@ export default function App() {
 
   const cmpTags = !cmpOn ? null : ev
     ? (scene?.cmpTags || ['Bare terrain', layer?.label.split(/ \(|:/)[0] || 'Layer'])
-    : [`${layer?.id === 'coh' ? 'First pair' : 'First pass'} · ${firstOfLayer ? fmtDate(firstOfLayer) : ''}`, date ? fmtDate(date) : '']
+    : [`${firstLabel(place, layer)} · ${firstOfLayer ? fmtDate(firstOfLayer) : ''}`, date ? fmtDate(date) : '']
 
   // Camera
   const focusSpot = scene?.focus ? place?.spots.find((s) => s.id === scene.focus) : scene?.focusLL ? { id: 'epicentre', lngLat: scene.focusLL } : null
@@ -186,9 +188,9 @@ export default function App() {
     <div className={`app mode-${mode} ${phone ? 'phone' : ''} ${ev && !heroPlace ? 'ev' : ''}`}>
       <MapStage
         bounds={bounds} url={mode === 'places' ? null : url} opacity={opacity} padding={padding} camera={camera}
-        spots={(ev ? place.spots.filter((s) => s.id !== 'epicentre') : place?.spots) || []} showSpots={!!place && !heroPlace && spotsOn} activeSpot={activeSpot}
+        spots={(ev ? place.spots.filter((s) => s.id !== 'epicentre' && s.lngLat.join() !== place.event.lngLat?.join()) : place?.spots) || []} showSpots={!!place && !heroPlace && spotsOn} activeSpot={activeSpot}
         onSpot={(id) => { if (mode === 'explore' || mode === 'story') setActiveSpot((a) => (a === id ? null : id)) }}
-        interactive={!heroPlace} star={ev && !heroPlace ? place.event.lngLat : null}
+        interactive={!heroPlace} star={ev && !heroPlace ? place.event.lngLat : null} starLabel={ev && !isQuake(place) ? 'Event site' : 'Epicentre'}
         compare={{ on: cmpOn, split: cmp.split, url: cmpUrl, tags: cmpTags }} onSplit={(s) => setCmp((c) => ({ ...c, split: s }))}
       />
       <div className={`veil ${heroPlace ? 'hero' : ''}`} aria-hidden="true" />
@@ -210,19 +212,19 @@ export default function App() {
         <button className="chip" onClick={() => setSheet(true)} title="How sure are we? (?)">{Icon.info}<span>How sure are we?</span></button>
       </header>
 
-      {mode === 'open' && <Opening place={shownPlace} index={index} onWatch={() => openPlace(FLAGSHIP)} onFeel={quakeId ? () => openPlace(quakeId) : null} onChoose={() => go({ place: null, mode: 'places' })} />}
-      {mode === 'places' && <Gallery places={places} ids={ids} current={placeId} onPick={(id) => openPlace(id)} onClose={() => go({ place: null, mode: 'open' })} />}
+      {mode === 'open' && <Opening place={shownPlace} summary={summary} total={ids.length} index={index} onWatch={() => openPlace(FLAGSHIP)} onFeel={quakeId ? () => openPlace(quakeId) : null} onChoose={() => go({ place: null, mode: 'places' })} />}
+      {mode === 'places' && <Gallery places={places} ids={ids} summary={summary} current={placeId} onPick={(id) => openPlace(id)} onClose={() => go({ place: null, mode: 'open' })} />}
       {mode === 'story' && place && scene && (
-        <Story place={place} scenes={scenes} n={sceneN} index={index} playing={playing} setPlaying={setPlaying} phone={phone}
+        <Story key={place.id} place={place} scenes={scenes} n={sceneN} index={index} playing={playing} setPlaying={setPlaying} phone={phone}
           onScene={setScene} onIndex={(i) => { setPlaying(false); setIndex(i) }} onSheet={() => setSheet(true)}
           onExplore={() => go({ mode: 'explore', layer: null, date: null })} missing={missing} />
       )}
       {mode === 'explore' && place && ev && (
-        <EventExplore place={place} layerId={layerId} layer={layer} setLayer={setLayer} opacity={opacity} setOpacity={setOpacity} cmp={cmp} setCmp={setCmp}
+        <EventExplore key={place.id} place={place} layerId={layerId} layer={layer} setLayer={setLayer} opacity={opacity} setOpacity={setOpacity} cmp={cmp} setCmp={setCmp}
           spotsOn={spotsOn} setSpotsOn={setSpotsOn} setActiveSpot={setActiveSpot} phone={phone} />
       )}
       {mode === 'explore' && place && !ev && (
-        <Explore place={place} layerId={layerId} layer={layer} setLayer={setLayer} index={index} setIndex={(i) => { setPlaying(false); setIndex(i) }}
+        <Explore key={place.id} place={place} layerId={layerId} layer={layer} setLayer={setLayer} index={index} setIndex={(i) => { setPlaying(false); setIndex(i) }}
           playing={playing} setPlaying={setPlaying} opacity={opacity} setOpacity={setOpacity} cmp={cmp} setCmp={setCmp} cmpAvailable={cmpAvailable}
           spotsOn={spotsOn} setSpotsOn={setSpotsOn} activeSpot={activeSpot} setActiveSpot={setActiveSpot} missing={missing} dated={dated} phone={phone} />
       )}

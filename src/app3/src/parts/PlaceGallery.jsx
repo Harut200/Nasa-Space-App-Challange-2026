@@ -47,13 +47,16 @@ function SeasonCard({ r, currentId, onPick, base }) {
   const cur = p.id === currentId
   const pf = (p.timeseries?.facts || []).find((x) => x.unit === '%' && (x.values || []).some(finite))
   const pv = pf && (s.peak ?? 0) < 1 ? pf.values.filter(finite) : null
+  const none = m.headline === 'none'
   const flat = s.delta != null && Math.abs(s.delta) < Math.max(1, (s.first || 0) * 0.005)
   return (
     <button type="button" data-id={p.id} className={'pt-card' + (cur ? ' pt-card-cur' : '')} aria-current={cur ? 'true' : undefined} onClick={() => onPick && onPick(p.id)}>
       <span className="pt-card-img"><Pic id={p.id} manifest={m} base={base} /></span>
-      <span className="pt-card-name">{plain(m.name || p.id)}</span>
-      <Spark values={pv ? pf.values : f?.values} />
-      {pv ? (
+      <span className="pt-card-name" title={m.name || p.id}>{plain(m.name || p.id)}</span>
+      {!none && <Spark values={pv ? pf.values : f?.values} />}
+      {none ? (
+        <span className="pt-card-row"><span className="pt-card-m">{m.headlineNote || 'Radar echo changed'}</span></span>
+      ) : pv ? (
         <span className="pt-card-row"><span>{fmtNum(pv[0], 0)} % → {fmtNum(pv[pv.length - 1], 0)} %</span><span className="pt-card-m">{pf.label}</span></span>
       ) : (
         <span className="pt-card-row">
@@ -74,7 +77,7 @@ function EventCard({ p, currentId, onPick, base }) {
   return (
     <button type="button" data-id={p.id} className={'pt-card' + (cur ? ' pt-card-cur' : '')} aria-current={cur ? 'true' : undefined} onClick={() => onPick && onPick(p.id)}>
       <span className="pt-card-img"><Pic id={p.id} manifest={m} base={base} /></span>
-      <span className="pt-card-name">{plain(m.name || p.id)}</span>
+      <span className="pt-card-name" title={m.name || p.id}>{plain(m.name || p.id)}</span>
       <span className="pt-card-row">
         <span>{label}{e.time ? <span className="pt-card-m"> · {fmtDate(e.time)}</span> : null}</span>
         {cmv != null && Number.isFinite(cmv) ? <span className="pt-card-up">≈ {fmtNum(cmv)} cm</span> : <span />}

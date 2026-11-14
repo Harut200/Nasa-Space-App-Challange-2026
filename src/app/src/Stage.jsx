@@ -3,7 +3,7 @@ import * as maplibregl from 'maplibre-gl'
 import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?url'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import { styleFor, IMAGERY_SOURCES } from './basemap.js'
-import { dotKind, dotRadius, quakeRadius, DOT_COLOR, DATA, coords } from './meta.js'
+import { placeStyle, placeRadius, DOT_COLOR, SHAPE_CLASSES, DATA, coords } from './meta.js'
 import { frame } from './data.js'
 import { withoutGrey, GREY_BACKGROUND } from './transparent.js'
 
@@ -15,6 +15,22 @@ const wide = () => innerWidth >= 900
 const FLY = (t) => t * t * (3 - 2 * t) // one calm ease for every flight (in and out)
 // Dots shrink when the globe is small, so neighbouring places (Tonle Sap / Mekong, Sevan / Ararat) stay apart. `extra` adds a ring offset.
 const scaled = (extra = 0) => ['interpolate', ['linear'], ['zoom'], 1, ['+', ['max', 3.4, ['*', ['get', 'r'], 0.45]], extra * 0.6], 4, ['+', ['get', 'r'], extra]]
+const features = (places) => ({ type: 'FeatureCollection', features: places.map((p) => ({ type: 'Feature', properties: { id: p.id, r: placeRadius(p), kind: placeStyle(p) }, geometry: { type: 'Point', coordinates: p.lngLat } })) })
+// Shaped dots (fire, volcano, landslide, other classes) are small white-and-colour glyphs: an SDF image painted in the class colour.
+function glyph(shape) {
+  const n = 64, c = document.createElement('canvas')
+  c.width = c.height = n
+  const x = c.getContext('2d'), h = n / 2
+  x.fillStyle = '#fff'
+  x.beginPath()
+  const pts = { diamond: [[h, 3], [n - 3, h], [h, n - 3], [3, h]], triangle: [[h, 4], [n - 3, n - 8], [3, n - 8]], square: [[8, 8], [n - 8, 8], [n - 8, n - 8], [8, n - 8]], hexagon: [[h, 3], [n - 6, h / 2 + 8], [n - 6, h + h / 2 - 8], [h, n - 3], [6, h + h / 2 - 8], [6, h / 2 + 8]] }[shape]
+  pts.forEach(([a, b], i) => (i ? x.lineTo(a, b) : x.moveTo(a, b)))
+  x.closePath(); x.fill()
+  return x.getImageData(0, 0, n, n)
+}
+const SHAPES = ['diamond', 'triangle', 'square', 'hexagon']
+// Glyph size follows the dot radius at each zoom (the glyph fills about 56 of its 64 px).
+const glyphSize = (extra = 0) => ['interpolate', ['linear'], ['zoom'], 1, ['/', ['+', ['*', ['max', 3.4, ['*', ['get', 'r'], 0.45]], 2.3], extra * 1.2], 56], 4, ['/', ['+', ['*', ['get', 'r'], 2.3], extra * 1.2], 56]]
 const HIT = 16 // px: how far from a dot's centre a click still counts
 
 // The one map of the app: a globe when zoomed out, the place when zoomed in, our radar frames draped on top.
@@ -59,14 +75,20 @@ export default function Stage({ mode, places, view, manifest, layer, date, opaci
     onMap?.(m)
     let wired = false
     m.on('style.load', () => {
-      m.addSource('places', { type: 'geojson', data: { type: 'FeatureCollection', features: live.current.places.map((p) => ({ type: 'Feature', properties: { id: p.id, r: p.kind === 'event' ? quakeRadius(p.event?.magnitude) : dotRadius(p.peak), kind: p.kind === 'event' ? 'quake' : dotKind(p.peak) }, geometry: { type: 'Point', coordinates: p.lngLat } })) } })
-      const color = ['match', ['get', 'kind'], 'big', DOT_COLOR.big, 'some', DOT_COLOR.some, 'quake', DOT_COLOR.quake, DOT_COLOR.land]
+      m.addSource('places', { type: 'geojson', data: features(live.current.places) })
+      for (const sh of SHAPES) if (!m.hasImage(`g-${sh}`)) m.addImage(`g-${sh}`, glyph(sh), { sdf: true })
+      const color = ['match', ['get', 'kind'], 'big', DOT_COLOR.big, 'some', DOT_COLOR.some, 'quake', DOT_COLOR.quake, 'fire', DOT_COLOR.fire, 'volcano', DOT_COLOR.volcano, 'landslide', DOT_COLOR.landslide, 'other', DOT_COLOR.other, DOT_COLOR.land]
+      const shaped = ['in', ['get', 'kind'], ['literal', SHAPE_CLASSES]]
+      const shapeOf = ['match', ['get', 'kind'], 'fire', 'g-diamond', 'volcano', 'g-triangle', 'landslide', 'g-square', 'g-hexagon']
       const vis = live.current.view === 'globe' ? 'visible' : 'none'
       // Earthquakes get a pulsing ring so they read differently from water places even at a glance.
       m.addLayer({ id: 'quake-ring', type: 'circle', source: 'places', filter: ['==', ['get', 'kind'], 'quake'], layout: { visibility: vis }, paint: { 'circle-radius': scaled(6), 'circle-color': 'rgba(0,0,0,0)', 'circle-stroke-color': DOT_COLOR.quake, 'circle-stroke-width': 2, 'circle-stroke-opacity': 0.8 } })
       m.addLayer({ id: 'quake-static', type: 'circle', source: 'places', filter: ['==', ['get', 'kind'], 'quake'], layout: { visibility: vis }, paint: { 'circle-radius': scaled(4), 'circle-color': 'rgba(0,0,0,0)', 'circle-stroke-color': '#fff', 'circle-stroke-width': 1.5, 'circle-stroke-opacity': 0.9 } })
       m.addLayer({ id: 'halo', type: 'circle', source: 'places', layout: { visibility: vis, 'circle-sort-key': ['-', 0, ['get', 'r']] }, paint: { 'circle-radius': scaled(8), 'circle-color': color, 'circle-opacity': 0.22, 'circle-blur': 0.7 } })
-      m.addLayer({ id: 'dots', type: 'circle', source: 'places', layout: { visibility: vis, 'circle-sort-key': ['-', 0, ['get', 'r']] }, paint: { 'circle-radius': scaled(), 'circle-color': color, 'circle-opacity': 0.95, 'circle-stroke-color': '#fff', 'circle-stroke-width': 1.5 } })
+      m.addLayer({ id: 'dots', type: 'circle', source: 'places', layout: { visibility: vis, 'circle-sort-key': ['-', 0, ['get', 'r']] }, paint: { 'circle-radius': scaled(), 'circle-color': color, 'circle-opacity': ['case', shaped, 0, 0.95], 'circle-stroke-color': '#fff', 'circle-stroke-width': 1.5, 'circle-stroke-opacity': ['case', shaped, 0, 1] } })
+      // A white outline glyph under, the coloured glyph over; the invisible circle above still takes the hover and click.
+      m.addLayer({ id: 'shape-edge', type: 'symbol', source: 'places', filter: shaped, layout: { visibility: vis, 'icon-image': shapeOf, 'icon-size': glyphSize(3), 'icon-allow-overlap': true, 'icon-ignore-placement': true }, paint: { 'icon-color': '#ffffff' } })
+      m.addLayer({ id: 'shape', type: 'symbol', source: 'places', filter: shaped, layout: { visibility: vis, 'icon-image': shapeOf, 'icon-size': glyphSize(), 'icon-allow-overlap': true, 'icon-ignore-placement': true }, paint: { 'icon-color': color } })
       m.addLayer({ id: 'hover-ring', type: 'circle', source: 'places', filter: ['==', ['get', 'id'], ''], layout: { visibility: vis }, paint: { 'circle-radius': scaled(4), 'circle-color': 'rgba(0,0,0,0)', 'circle-stroke-color': '#fff', 'circle-stroke-width': 2, 'circle-stroke-opacity': 0.95 } })
       if (!wired) {
         wired = true
@@ -155,11 +177,18 @@ export default function Stage({ mode, places, view, manifest, layer, date, opaci
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [view, manifest?.id])
 
+  // Dots follow the data: the places can gain their numbers after the map has started.
+  const placesKey = places.map((p) => `${p.id}:${placeStyle(p)}:${Math.round(placeRadius(p) * 10)}`).join('|')
+  useEffect(() => {
+    const src = styleVer && map.current.getSource('places')
+    if (src) src.setData(features(live.current.places))
+  }, [placesKey, styleVer])
+
   // Dots only on the globe.
   useEffect(() => {
     const m = map.current
     if (!styleVer) return
-    for (const id of ['halo', 'dots', 'quake-ring', 'quake-static', 'hover-ring']) m.setLayoutProperty(id, 'visibility', view === 'globe' ? 'visible' : 'none')
+    for (const id of ['halo', 'dots', 'shape-edge', 'shape', 'quake-ring', 'quake-static', 'hover-ring']) m.setLayoutProperty(id, 'visibility', view === 'globe' ? 'visible' : 'none')
   }, [view, styleVer])
 
   // Random / Near me: fly to a place and open it.

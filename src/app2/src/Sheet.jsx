@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { tidy, fmtDate, fmtDateLong, fmtKm, fmtVal, isEvent } from './data.js'
+import { tidy, fmtDate, fmtDateLong, fmtKm, fmtVal, goodViews, isEvent, isNoisy, isQuake } from './data.js'
 import { Icon } from './ui.jsx'
 
 // "How sure are we?": always reachable, never in the way.
@@ -64,7 +64,9 @@ export default function Sheet({ open, onClose, place, pass }) {
 function EventSheet({ onClose, place, sheetRef }) {
   const e = place.event
   const views = e.views || []
-  const ctl = views.filter((v) => v.control_p2p_cm != null)
+  if (!isQuake(place)) return <ChangeSheet onClose={onClose} place={place} sheetRef={sheetRef} />
+  const good = goodViews(e), noisy = views.filter(isNoisy)
+  const ctl = views.filter((v) => v.control_p2p_cm != null && !isNoisy(v))
   const looks = new Set(views.map((v) => v.label)).size
   return (
     <div className="sheet-back" onClick={onClose}>
@@ -77,7 +79,8 @@ function EventSheet({ onClose, place, sheetRef }) {
         <section>
           <h3>Line of sight only</h3>
           <p>A radar measures movement along its line of sight, toward or away from the satellite, not up, down or sideways. {looks > 1 ? `Here we have two viewing directions (${views.map((v) => `${v.label}, track ${v.track}`).join('; ')}).` : `Here we have one viewing direction (${views[0] ? `${views[0].label}, track ${views[0].track}` : 'one track'}).`} The sign convention (which colour is toward the satellite) follows the interferogram definition we assumed; the product guide does not confirm it. The results are not validated against GNSS (GPS) measurements.</p>
-          {views.some((v) => v.p2p_cm != null) && <p>The “peak-to-peak” numbers ({views.filter((v) => v.p2p_cm != null).map((v) => `${v.label}, track ${v.track}: ≈ ${v.p2p_cm} cm`).join('; ')}) are the span from the most to the least line-of-sight change near the epicentre, not a single displacement of the fault.</p>}
+          {good.length > 0 && <p>The “peak-to-peak” numbers ({good.map((v) => `${v.label}, track ${v.track}: ≈ ${v.p2p_cm} cm`).join('; ')}) are the span from the most to the least line-of-sight change near the epicentre, not a single displacement of the fault.</p>}
+          {noisy.length > 0 && <p>{noisy.map((v) => `${v.label}, track ${v.track}`).join('; ')}: too noisy to use. The control pair from before the earthquake shows nearly as much motion as the earthquake pair, so we give no number for it.</p>}
         </section>
         {ctl.length > 0 && (
           <section>
@@ -92,6 +95,40 @@ function EventSheet({ onClose, place, sheetRef }) {
         <section>
           <h3>Credits</h3>
           <p>Earthquake locations, magnitudes and mechanisms: USGS Earthquake Hazards Program. Ground-motion maps: NISAR L2 GUNW interferograms (NASA/JPL-Caltech and ISRO, via ASF DAAC), provisional.</p>
+          <p className="fine">Earth imagery: NASA GIBS, Blue Marble Shaded Relief with Bathymetry (wide views), and Sentinel-2 cloudless by EOX IT Services GmbH (Contains modified Copernicus Sentinel data 2020; CC BY-NC-SA 4.0) for close views, both when online; the radar layers work without them.</p>
+        </section>
+        <section>
+          <h3>Use of AI</h3>
+          <p>AI tools (Claude) were used for research, planning documents, code, analysis and first drafts of the story text. The team chose the challenge approach and the places, reviewed the results and edited the text.</p>
+        </section>
+      </aside>
+    </div>
+  )
+}
+
+// Volcanoes and landslides: where the surface changed completely, nothing about what it is made of.
+function ChangeSheet({ onClose, place, sheetRef }) {
+  const e = place.event
+  const views = e.views || []
+  const layers = place.layers.filter((l) => l.id === 'coh_loss' || l.id === 'coherence')
+  return (
+    <div className="sheet-back" onClick={onClose}>
+      <aside className="sheet" role="dialog" aria-modal="true" aria-label="How sure are we?" onClick={(ev) => ev.stopPropagation()} ref={sheetRef} tabIndex={-1}>
+        <div className="row"><h2>How sure are we?</h2><button className="icon-btn" onClick={onClose} aria-label="Close">{Icon.close}</button></div>
+        <section>
+          <h3>Provisional data</h3>
+          <p>Provisional data: this shows where the surface changed, not what it is made of or how thick it is.</p>
+        </section>
+        <section>
+          <h3>What the map shows</h3>
+          <p>{e.summary ? `${e.title || place.name}: ${e.summary}. ` : ''}{views.length ? `The change is measured between two radar passes (${views.map((v) => `${v.label}, track ${v.track}: ${fmtDate(String(v.before).slice(0, 10))} and ${fmtDate(String(v.after).slice(0, 10))}`).join('; ')}).` : ''}</p>
+          {layers.length > 0 && <ul className="qlist">{layers.map((l) => <li key={l.id}><b>{l.label}</b>{l.legend?.type === 'classes' && l.legend.items?.[0] ? <span>{l.legend.items[0].label}</span> : null}</li>)}</ul>}
+          {e.time_note && <p className="fine">Date note: {e.time_note}.</p>}
+        </section>
+        <section>
+          <h3>Credits</h3>
+          <p>{place.credits || 'NISAR data: NASA/JPL-Caltech and ISRO, distributed by ASF DAAC.'}</p>
+          {e.source_url && <p className="fine">Event source: {e.source_url}</p>}
           <p className="fine">Earth imagery: NASA GIBS, Blue Marble Shaded Relief with Bathymetry (wide views), and Sentinel-2 cloudless by EOX IT Services GmbH (Contains modified Copernicus Sentinel data 2020; CC BY-NC-SA 4.0) for close views, both when online; the radar layers work without them.</p>
         </section>
         <section>

@@ -10,6 +10,7 @@ export function KindIcon({ place, shape: sh, color, size = 16 }) {
   let shape
   if (t.shape === 'ring') shape = <><circle cx="12" cy="12" r="5.2" fill={c} stroke="#fff" strokeWidth="1.6" /><circle cx="12" cy="12" r="9.6" fill="none" stroke={c} strokeWidth="1.8" /></>
   else if (t.shape === 'triangle') shape = <path d="M12 3.5 21 20H3z" fill={c} stroke="#fff" strokeWidth="1.6" strokeLinejoin="round" />
+  else if (t.shape === 'flame') shape = <path d="M12 2.5c.6 3.4 5.8 6 5.8 11.2a5.8 5.8 0 0 1-11.6 0c0-2.2 1-3.6 2.2-4.6.2 1.4.9 2.2 1.8 2.6C9.4 8.2 10.6 5.4 12 2.5z" fill={c} stroke="#fff" strokeWidth="1.5" strokeLinejoin="round" />
   else if (t.shape === 'square') shape = <rect x="4.5" y="4.5" width="15" height="15" rx="2.5" fill={c} stroke="#fff" strokeWidth="1.6" />
   else if (t.shape === 'diamond') shape = <path d="M12 2.5 21.5 12 12 21.5 2.5 12z" fill={c} stroke="#fff" strokeWidth="1.6" strokeLinejoin="round" />
   else shape = <circle cx="12" cy="12" r="7" fill={c} stroke="#fff" strokeWidth="1.6" />
@@ -76,7 +77,7 @@ export function ResultList({ results, active, setActive, onPick, q, onClear, id 
           <li key={p.id} role="option" aria-selected={i === active} className={i === active ? 'on' : ''} data-id={p.id}
             onMouseEnter={() => setActive(i)} onMouseDown={(e) => e.preventDefault()} onClick={() => onPick(p)}>
             <KindIcon place={p} />
-            <span className="r-name"><b>{p.name}</b><small className="mono">{kindLabel(p)}</small></span>
+            <span className="r-name"><b title={p.name}>{p.name}</b><small className="mono">{kindLabel(p)}</small></span>
             <span className="r-num mono">{h.short}<small>{h.tag}</small></span>
           </li>,
         ]

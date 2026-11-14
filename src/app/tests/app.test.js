@@ -83,10 +83,10 @@ const places = manifests.map((m) => meta.makePlace(m, null))
 const BAD = /NaN|undefined|null|Infinity/
 
 test('event places: data shape, layers on disk, helpers survive dates: []', () => {
-  assert.ok(events.length >= 4)
+  assert.ok(events.length >= 9)
   for (const m of events) {
     assert.deepEqual(m.dates, [])
-    assert.equal(meta.defaultLayer(m), 'fringes')
+    assert.equal(meta.defaultLayer(m), m.layers.some((l) => l.id === 'fringes') ? 'fringes' : m.layers.some((l) => l.id === 'coh_loss') ? 'coh_loss' : m.layers[0].id)
     for (const l of m.layers) assert.ok(fs.existsSync(path.join(root, 'public', frame('data/', m.id, l, undefined).url)), `${m.id} ${l.id}`)
     assert.equal(meta.splitLayers(m.layers, true).main.length, m.layers.length)
     assert.ok(meta.eventViews(m.event).length >= 1)
@@ -106,15 +106,40 @@ test('event places: tooltip text, grouping, counts, summaries', () => {
     assert.ok(!BAD.test(t), `${p.id}: ${t}`)
   }
   const g = meta.groupPlaces(places)
-  assert.deepEqual(g.map((x) => x.title), ['A season of water', 'Earthquakes'])
-  assert.equal(g[0].items.length + g[1].items.length, places.length)
-  assert.ok(g[1].items.every((p) => p.kind === 'event'))
-  assert.deepEqual(meta.groupPlaces(places.filter((p) => p.kind === 'event')).map((x) => x.key), ['event'])
-  const { seasons, quakes } = meta.countPlaces(places)
-  assert.equal(quakes, events.length)
-  assert.equal(meta.landingText(places), `NISAR watched ${seasons} places through a season, and ${quakes} earthquakes between June and October 2026.`)
-  assert.equal(meta.landingText(places.slice(0, 3)), 'NISAR watched 3 places through a season between June and October 2026.')
+  assert.deepEqual(g.map((x) => x.key), ['flood', 'lake', 'wetland', 'land', 'fire', 'earthquake', 'volcano', 'landslide'])
+  assert.equal(g.reduce((n, x) => n + x.items.length, 0), places.length)
+  assert.ok(g.find((x) => x.key === 'earthquake').items.every((p) => p.kind === 'event'))
+  assert.equal(meta.groupPlaces(places, [{ id: 'volcano', label: 'Volcano places' }])[0].title, 'Volcano places')
+  assert.deepEqual(meta.groupPlaces(places.filter((p) => p.kind === 'event')).map((x) => x.key), ['earthquake', 'volcano', 'landslide'])
+  const unknown = [{ ...places[0], category: 'glacier-lake' }, ...places]
+  assert.equal(meta.groupPlaces(unknown).at(-1).title, 'Glacier Lake')
+  const counts = meta.classList(places).map((c) => `${c.label.toLowerCase()} (${c.n})`).join(', ')
+  assert.equal(meta.landingText(places), `NISAR watched ${places.length} places between June and October 2026: ${counts}.`)
+  assert.equal(meta.landingText(places.slice(0, 1)), 'NISAR watched 1 place between June and October 2026: floods (1).')
   assert.equal(meta.eventSummary(tibet), 'M7.0 · 22 Oct 2026')
+})
+
+test('event types: volcano and landslide wording, noisy view rule, fringe cycle, fire and headline-none places', () => {
+  const kil = places.find((p) => p.id === 'kilauea-ep55-2026')
+  assert.deepEqual(meta.eventTip(kil), { head: 'Kilauea summit eruption', rest: '17 Oct 2026 · ≈ 10.2 km² of surface changed completely' })
+  assert.ok(!/ M\d|ground moved/.test(meta.eventTip(kil).head + meta.eventTip(kil).rest))
+  const ven = readManifest('venezuela-m75-2026').event.views
+  assert.equal(meta.noisyView(ven[0]), false)
+  assert.equal(meta.noisyView(ven[1]), true)
+  assert.equal(meta.noisyView({ p2p_cm: 10, control_p2p_cm: 8 }), true)
+  assert.equal(meta.noisyView({ p2p_cm: 10, control_p2p_cm: null }), false)
+  assert.equal(meta.fringeCycle(readManifest('qaidam-m56-2026').layers), '5')
+  assert.equal(meta.fringeCycle(readManifest('tibet-m70-2026').layers), '10')
+  assert.equal(meta.fringeCycle([{ id: 'coherence' }]), null)
+  const fire = manifests.find((m) => m.id === 'thunder-bay-36-2026'), fp = places.find((p) => p.id === fire.id)
+  assert.equal(fp.peak, null)
+  assert.equal(meta.placeSummary(fp), fire.headlineNote)
+  assert.match(html(h(Fact, { p: fp })), new RegExp(fire.headlineNote))
+  assert.equal(meta.defaultLayer(fire), fire.defaultLayer)
+  const ararat = manifests.find((m) => m.id === 'ararat')
+  assert.deepEqual(meta.splitLayers(ararat.layers, false).main.map((l) => l.id), ['water', 'when', 'change', 'hh', 'coh', 'coh_change'])
+  assert.ok(meta.splitLayers(fire.layers, false, [fire.defaultLayer]).main.some((l) => l.id === fire.defaultLayer))
+  for (const p of places) assert.ok(['big', 'some', 'land', 'quake', 'fire', 'volcano', 'landslide', 'other'].includes(meta.placeStyle(p)), p.id)
 })
 
 test('event places: before/after and honesty text, no NaN', () => {

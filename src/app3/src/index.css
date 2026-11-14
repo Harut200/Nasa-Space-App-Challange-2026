@@ -717,3 +717,19 @@ button:active:not(:disabled):not(.handle):not(.globe-hit):not(.beat):not(.spot) 
 .phone .landing-line { bottom: 72px; font-size: 11.5px; }
 .phone .opening-note { bottom: 12px; }
 .phone .switcher { margin-left: 0; }
+
+/* ===================== hardening: no overlaps, readable sizes ===================== */
+.results li { grid-template-columns: 22px minmax(0, 1fr) auto; }
+.r-name small, .r-num small, .ev-name, .ev-d b { font-size: 11px; }
+.r-num { white-space: nowrap; }
+.sw-name { min-width: 0; flex: 0 1 auto; }
+.switcher { min-width: 0; flex: 0 1 auto; }
+.sw-text { max-width: 100%; }
+.pt-card-name { overflow: hidden; }
+.stat-label, .stat-sub { overflow-wrap: anywhere; }
+.r-name b { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.r-name small { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.stat-label { margin-top: 12px; }
+.ev-fig { gap: 8px; }
+.sw-text { display: block; }
+.r-name { min-width: 0; }
