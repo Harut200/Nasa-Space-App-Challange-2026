@@ -10,3 +10,6 @@ __pycache__/
 .venv/
 *.pt
 dist/
+
+# symlink to the first app's packages
+src/app2/node_modules
