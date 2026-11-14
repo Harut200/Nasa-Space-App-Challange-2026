@@ -37,15 +37,15 @@ export function EventStrip({ event }) {
   )
 }
 
-const SHORT = { fringes: 'Fringes', los_cm: 'Displacement', los_asc_cm: 'Displacement · ascending', los_desc_cm: 'Displacement · descending', coherence: 'Coherence' }
-const ORDER = ['fringes', 'los_cm', 'los_asc_cm', 'los_desc_cm', 'coherence']
+const SHORT = { fringes: 'Fringes', los_cm: 'Displacement', los_asc_cm: 'Displacement · ascending', los_desc_cm: 'Displacement · descending', coherence: 'Coherence', coh_loss: 'Where it changed' }
+const ORDER = ['fringes', 'los_cm', 'los_asc_cm', 'los_desc_cm', 'coherence', 'coh_loss']
 const HINT = {
   fringes: 'One colour cycle is 10 cm of line-of-sight change',
   los_cm: 'Ground motion along the radar line of sight, in cm', los_asc_cm: 'Line-of-sight motion, ascending track', los_desc_cm: 'Line-of-sight motion, descending track',
-  coherence: 'How comparable the two passes are',
+  coherence: 'How comparable the two passes are', coh_loss: 'Comparable before, not comparable across the event',
 }
 
-export function EventExplore({ place, layerId, layer, setLayer, opacity, setOpacity, cmp, setCmp, spotsOn, setSpotsOn, setActiveSpot, phone }) {
+export function EventExplore({ onHow, place, layerId, layer, setLayer, opacity, setOpacity, cmp, setCmp, spotsOn, setSpotsOn, setActiveSpot, phone }) {
   const [more, setMore] = useState(false)
   const [slider, setSlider] = useState(false)
   const modes = ORDER.filter((id) => place.layers.some((l) => l.id === id))
@@ -71,9 +71,10 @@ export function EventExplore({ place, layerId, layer, setLayer, opacity, setOpac
           <output>{Math.round(opacity * 100)}%</output></label>)}
         <div className="toggles tools">
           <button className={`chip ${slider ? 'on' : ''}`} aria-pressed={slider} onClick={() => setSlider((x) => !x)} title="Overlay strength" aria-label="Overlay strength">{Icon.layers}<span className="tl">Overlay</span></button>
-          <button className={`chip ${cmp.on ? 'on' : ''}`} aria-pressed={cmp.on} onClick={() => setCmp((c) => ({ ...c, on: !c.on }))} title="Drag the handle: bare terrain | this layer (C)">{Icon.split}<span className="tl">Compare</span></button>
+          <button className={`chip ${cmp.on ? 'on' : ''}`} aria-pressed={cmp.on} onClick={() => setCmp((c) => ({ ...c, on: !c.on }))} title="Drag the handle: before the event | across it (C)">{Icon.split}<span className="tl">Compare</span></button>
           <button className={`chip ${spotsOn ? 'on' : ''}`} aria-pressed={spotsOn} onClick={() => { setSpotsOn((x) => !x); setActiveSpot(null) }}>{Icon.pin}<span className="tl">Spots</span></button>
         </div>
+        {onHow && <button className="linkish how-link" onClick={onHow} title="How we found it ( E )">How we found it</button>}
       </aside>
       <Legend key={layer?.id} layer={layer} phone={phone} />
       <section className="dock panel ev-dock" aria-label="Before and after">

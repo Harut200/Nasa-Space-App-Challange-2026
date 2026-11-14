@@ -116,6 +116,7 @@ export default function Explore({ place, layerId, layer, setLayer, index, setInd
           <div className="readout">
             <span className="mono date">{fmtDateLong(place.dates[index])} · pass {index + 1} of {n}</span>
             {none ? <strong className="note-text">{P.label}</strong> : <strong>{v != null ? <><Num value={v} /> <small>{unit}</small></> : '—'}</strong>}
+            {place.caution && <span className="caution">{place.caution}</span>}
             <span className="mono dim">{none ? 'one beat per radar pass' : P.label}{P.lo && v != null ? ` · range ${fmtKm(P.lo[index])}–${fmtKm(P.hi[index])}` : ''}{v == null && P.kind === 'pct' ? ' · the first pass has no earlier pass to compare with' : ''}</span>
           </div>
           {q && <div className={`pill q-${q.quality}`} title={tidy(q.quality_note)} role="status">{q.quality === 'fail' ? 'Flagged pass' : 'Caution'}: {tidy(q.quality_note.split(';')[0])}</div>}

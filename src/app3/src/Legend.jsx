@@ -8,8 +8,8 @@ const short = (t) => String(t).split(/[:,(]/)[0].trim()
 
 // Legend for the layer on show, from manifest.layers[].legend. One quiet line of dots and words; opens to the full text.
 // With `water`, clicking the blue or the green entry shows only that class; clicking it again shows both.
-export default function Legend({ layer, phone, strip, only, water }) {
-  const [open, setOpen] = useState(false)
+export default function Legend({ layer, phone, strip, only, water, open0 }) {
+  const [open, setOpen] = useState(!!open0 && !!layer && layer.legend?.type !== 'classes')
   if (!layer) return null
   const L = layer.legend || {}
   const grad = L.colors ? `linear-gradient(90deg, ${L.colors.map((c) => (c === '#00000000' ? '#2a2f3a' : c)).join(',')})` : null
@@ -22,7 +22,7 @@ export default function Legend({ layer, phone, strip, only, water }) {
       ? <li className={`${off ? 'off' : ''} pick`}><button type="button" onClick={() => pick(it.color)} aria-pressed={water.show === k} title={`${it.label}. ${water.show === k ? 'Click to show both again' : 'Click to show only this'}`}>{inner}</button></li>
       : <li className={off ? 'off' : ''} title={it.label}>{inner}</li>
   }
-  if (!open && L.type === 'classes') {
+  if (!open && L.type === 'classes' && !phone) {
     return (
       <div className={`legend line ${strip ? 'strip' : ''}`} role="group" aria-label={`Legend: ${layer.label}`}>
         <ul>{L.items.map((it) => <Item key={it.label} it={it} />)}</ul>

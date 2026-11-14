@@ -46,6 +46,7 @@ export function buildScenes(p) {
   })
   scenes.push({
     key: 'see', kicker: 'What you see', title: 'The season plays', layer: wl, at: first, play: true, text: sentences(p.story.see, 3), full: p.story.see,
+    note: !none && p.headlineNote ? p.headlineNote : undefined, // a caption the data adds beside the numbers (sevan, pantanal, sudd)
     stat: none ? noteStat : live,
   })
   const gained = vals[last] != null && vals[0] != null ? vals[last] - vals[0] : null

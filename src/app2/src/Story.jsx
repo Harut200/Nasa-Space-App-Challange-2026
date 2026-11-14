@@ -35,6 +35,7 @@ export default function Story({ place, scenes, n, index, playing, setPlaying, on
         <div className="kicker mono"><span>{sc.kicker}</span><span>{n} / {scenes.length}</span></div>
         <h2>{sc.title}</h2>
         <Stat s={stat} />
+        {place.caution && !ev && <p className="caution" role="note">{place.caution}</p>}
         <p className="body">{tidy(expanded ? sc.full : sc.text)}</p>
         <div className="links">
           {sc.full && sc.full !== sc.text && <button className="linkish" onClick={() => setOpen(expanded ? null : sc.key)} aria-expanded={expanded}>{expanded ? 'Show less' : 'Read the full passage'}</button>}

@@ -35,6 +35,12 @@ const cap = (s) => (s ? s[0].toUpperCase() + s.slice(1) : s)
 
 // What a season card shows, from summary.json when there, else from the loaded manifest and timeseries.
 function seasonData(e) {
+  const d = seasonCore(e)
+  const caution = e.s?.caution || e.m?.caution || null
+  const cap = e.s ? e.s.note : e.m?.headlineNote // a note beside a headline is a caption; with no headline it is the card text itself
+  return { ...d, caution, caption: !d.note && cap ? cap : null }
+}
+function seasonCore(e) {
   const s = e.s, m = e.m
   if (s) {
     const h = s.headline
@@ -67,7 +73,8 @@ function SeasonCard({ e, d, cur, onPick, base }) {
   return (
     <button type="button" className={'pt-card' + (cur ? ' pt-card-cur' : '')} data-id={e.id} aria-current={cur ? 'true' : undefined} onClick={() => onPick && onPick(e.id)}>
       <span className="pt-card-img"><Pic e={e} base={base} /></span>
-      <span className="pt-card-name">{plain(d.name || e.id)}</span>
+      <span className="pt-card-name">{plain(d.name || e.id)}{d.caution && <span className="pt-card-caution" title={d.caution} aria-label={`Caution: ${d.caution}`}> ⚠︎</span>}</span>
+      {d.caption && <span className="pt-card-m pt-card-fine">{d.caption}</span>}
       {d.note ? (
         <span className="pt-card-m pt-card-fine">{d.note}</span>
       ) : d.pct ? (

@@ -1,9 +1,11 @@
 import { useLayoutEffect, useRef, useState } from 'react'
 import { fmtDate, isEvent, startIndex, tidy } from './data.js'
 import { EventStrip } from './EventParts.jsx'
+import EvidenceChart from './EvidenceChart.jsx'
 import { Icon, Num } from './ui.jsx'
 
-function Stat({ s }) {
+export function Stat({ s }) {
+  if (!s) return null
   const num = typeof s.big === 'number'
   return (
     <div className="stat">
@@ -18,7 +20,7 @@ function Stat({ s }) {
   )
 }
 
-export default function Story({ place, scenes, n, index, playing, setPlaying, onScene, onIndex, onSheet, onExplore, missing }) {
+export default function Story({ place, scenes, n, index, playing, setPlaying, onScene, onIndex, onSheet, onExplore, onHow, missing }) {
   const sc = scenes[n - 1]
   const [open, setOpen] = useState(null)
   const [peek, setPeek] = useState(false)
@@ -64,13 +66,16 @@ export default function Story({ place, scenes, n, index, playing, setPlaying, on
           <div className="kicker mono"><span>{sc.kicker}</span><span className="roll" key={n}>{n} / {scenes.length}</span></div>
           <h2>{sc.title}</h2>
         </div>
-        <Stat key={`${stat.unit || ''}${stat.text ? 't' : ''}${typeof stat.big === 'number' ? 'n' : 's'}`} s={stat} />
+        <Stat key={`${stat?.unit || ''}${stat?.text ? 't' : ''}${typeof stat?.big === 'number' ? 'n' : 's'}`} s={stat} />
+        {place.caution && sc.caution && <p className="caution" role="note">{place.caution}</p>}
         <div className="swap rest" key={`${sc.key}-b`}>
         <p className="body">{tidy(expanded ? sc.full : sc.text)}</p>
         <div className="links">
           {sc.full && sc.full !== sc.text && <button className="linkish" onClick={() => setOpen(expanded ? null : sc.key)} aria-expanded={expanded}>{expanded ? 'Show less' : 'Read the full passage'}</button>}
           {sc.sheet && <button className="linkish" onClick={onSheet}>Open the caveats</button>}
+          {onHow && <button className="linkish how-link" onClick={onHow} title="How we found it ( E )">How we found it</button>}
         </div>
+        {sc.chart && <EvidenceChart place={place} index={index} onScrub={onIndex} compact />}
         {ev && sc.strip && <EventStrip event={place.event} />}
         {sc.note && <p className="hint mono">{sc.note}</p>}
         {ev && sc.hint && <p className="hint mono">{sc.hint}</p>}
@@ -79,7 +84,7 @@ export default function Story({ place, scenes, n, index, playing, setPlaying, on
         {missing && <p className="hint mono">No image for this pass in this layer.</p>}
         </div>
       </div>
-      {!ev && <div className="beats-wrap">
+      {!ev && sc.beats !== false && <div className="beats-wrap">
         <div className="beats" role="group" aria-label="Radar passes">
           <button className="play sm" onClick={() => { if (!playing && index >= place.dates.length - 1) onIndex(startIndex(place)); setPlaying(!playing) }} aria-label={playing ? 'Pause' : 'Play the passes'}>{playing ? Icon.pause : Icon.play}</button>
           {place.dates.map((d, i) => (

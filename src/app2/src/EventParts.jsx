@@ -73,7 +73,7 @@ export function EventExplore({ place, layerId, layer, setLayer, opacity, setOpac
           <input type="range" min="0" max="100" value={Math.round(opacity * 100)} onChange={(e) => setOpacity(+e.target.value / 100)} onPointerUp={(e) => e.currentTarget.blur()} aria-label="Overlay opacity" />
           <output>{Math.round(opacity * 100)}%</output></label>
         <div className="toggles">
-          <button className={`chip ${cmp.on ? 'on' : ''}`} aria-pressed={cmp.on} onClick={() => setCmp((c) => ({ ...c, on: !c.on }))} title="Drag the handle: bare terrain | this layer (C)">{Icon.split}<span>Compare</span></button>
+          <button className={`chip ${cmp.on ? 'on' : ''}`} aria-pressed={cmp.on} onClick={() => setCmp((c) => ({ ...c, on: !c.on }))} title="Drag the handle: before | after where the data has a before pair, else bare terrain | this layer (C)">{Icon.split}<span>Compare</span></button>
           <button className={`chip ${spotsOn ? 'on' : ''}`} aria-pressed={spotsOn} onClick={() => { setSpotsOn((x) => !x); setActiveSpot(null) }}>{Icon.pin}<span>Spots</span></button>
         </div>
       </aside>

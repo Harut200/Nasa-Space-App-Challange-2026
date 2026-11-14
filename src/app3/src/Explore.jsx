@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { tidy, dataNotice, fmtDate, fmtDateLong, fmtKm } from './data.js'
 import TimelineChart from './TimelineChart.jsx'
+import EvidenceChart from './EvidenceChart.jsx'
 import Legend from './Legend.jsx'
 import { Icon, Num } from './ui.jsx'
 
@@ -56,15 +57,23 @@ function SpotCard({ place, spotId, index, onClose }) {
   )
 }
 
-export default function Explore({ place, layerId, layer, setLayer, index, setIndex, playing, setPlaying, opacity, setOpacity, cmp, setCmp, cmpAvailable, spotsOn, setSpotsOn, activeSpot, setActiveSpot, missing, dated, phone, water }) {
+export default function Explore({ place, layerId, layer, setLayer, index, setIndex, playing, setPlaying, opacity, setOpacity, cmp, setCmp, cmpAvailable, onHow, spotsOn, setSpotsOn, activeSpot, setActiveSpot, missing, dated, phone, water }) {
   const [more, setMore] = useState(false)
   const [slider, setSlider] = useState(false)
+  const [chartSel, setChartSel] = useState(null)
   const P = place.primary
   const v = P.values[index]
   const n = place.dates.length
   const avail = (id) => place.layers.some((l) => l.id === id)
   const lead = P.kind === 'pct' ? COH : []
-  const modes = [...lead, ...MODES].filter((m) => avail(m.id))
+  const E = place.evi
+  const evModes = E ? [[E.before, 'Before', 'The radar image before'], [E.after, 'After', 'The radar image after'], [E.diff, 'Difference', 'After minus before'], [E.mask, 'Changed area', 'Where the echo changed']].filter(([id]) => id && avail(id)).map(([id, label, hint]) => ({ id, label, hint: place.layers.find((l) => l.id === id)?.label || hint })) : []
+  const modes = [...evModes, ...lead, ...MODES].filter((m, i, a) => avail(m.id) && a.findIndex((x) => x.id === m.id) === i)
+  // the chart: the two evidence series when the place has them; a switch only where a second curve (water or coherence) is also worth showing
+  const hasEcho = !!(E && E.inside && E.outside)
+  const other = hasEcho && (P.kind === 'water' || P.kind === 'flood' || P.kind === 'pct')
+  const chart = hasEcho && (!other || chartSel !== 'other') ? 'echo' : 'main'
+  const f1 = (v) => (v == null ? '—' : v.toFixed(1))
   const isMain = modes.some((m) => m.id === layerId)
   const rest = place.layers.filter((l) => !modes.some((m) => m.id === l.id))
   const q = place.quality[place.dates[index]]
@@ -93,14 +102,15 @@ export default function Explore({ place, layerId, layer, setLayer, index, setInd
           <button className={`chip ${cmp.on && cmpAvailable ? 'on' : ''}`} disabled={!cmpAvailable} aria-pressed={cmp.on && cmpAvailable} onClick={() => setCmp((c) => ({ ...c, on: !c.on }))} title={cmpAvailable ? 'Drag the handle: first pass | current pass (C)' : 'Compare needs a layer with several passes'}>{Icon.split}<span className="tl">Compare</span></button>
           <button className={`chip ${spotsOn ? 'on' : ''}`} aria-pressed={spotsOn} onClick={() => { setSpotsOn((x) => !x); setActiveSpot(null) }}>{Icon.pin}<span className="tl">Spots</span></button>
         </div>
+        {onHow && <button className="linkish how-link" onClick={onHow} title="How we found it ( E )">How we found it</button>}
       </aside>
 
       {activeSpot && <SpotCard place={place} spotId={activeSpot} index={index} onClose={() => setActiveSpot(null)} />}
       <Legend key={layer?.id} layer={layer} phone={phone} only={water?.only} water={water} />
       {missing && <div className="pill note" role="status">{layerId === 'change' ? 'The first pass is the reference, so it has no change image.' : layerId === 'coh' ? 'The first pass has no earlier pass to pair with, so it has no coherence image.' : 'This layer has no image for this pass.'}</div>}
-      {layer && !dated && <div className="pill note" role="status">This layer covers the whole season, so the timeline does not change it.</div>}
+      {layer && !dated && !(E && [E.before, E.after, E.diff, E.mask].includes(layerId)) && <div className="pill note" role="status">This layer covers the whole season, so the timeline does not change it.</div>}
 
-      <section className="dock panel" aria-label="Timeline">
+      <section className={`dock panel ${place.caution ? 'has-caution' : ''}`} aria-label="Timeline">
         <div className="dock-head">
           <div className="transport">
             <button className="icon-btn" onClick={() => setIndex(index - 1)} disabled={index === 0} aria-label="Previous pass">{Icon.prev}</button>
@@ -109,12 +119,19 @@ export default function Explore({ place, layerId, layer, setLayer, index, setInd
           </div>
           <div className="readout">
             <span className="mono date">{fmtDateLong(place.dates[index])} · pass {index + 1} of {n}</span>
-            <strong>{v != null ? <><Num value={v} /> <small>{unit}</small></> : '—'}</strong>
-            <span className="mono dim">{P.label}{P.lo && v != null ? ` · range ${fmtKm(P.lo[index])}–${fmtKm(P.hi[index])}` : ''}{v == null && P.kind === 'pct' ? ' · the first pass has no earlier pass to compare with' : ''}</span>
+            {chart === 'echo'
+              ? <><strong>{f1(E.inside[index])} <small>inside</small></strong><span className="mono dim">outside {f1(E.outside[index])} · radar echo, {E.labels[0].toLowerCase().includes('burn') ? 'inside and outside the burn' : 'inside and outside the changed patch'}</span></>
+              : <><strong>{v != null ? <><Num value={v} /> <small>{unit}</small></> : '—'}</strong>
+                <span className="mono dim">{P.label}{P.lo && v != null ? ` · range ${fmtKm(P.lo[index])}–${fmtKm(P.hi[index])}` : ''}{v == null && P.kind === 'pct' ? ' · the first pass has no earlier pass to compare with' : ''}</span></>}
+            {place.caution && <span className="caution" role="note">{place.caution}</span>}
           </div>
           {q && <div className={`pill q-${q.quality}`} title={tidy(q.quality_note)} role="status">{q.quality === 'fail' ? 'Flagged pass' : 'Caution'}: {tidy(q.quality_note.split(';')[0])}</div>}
         </div>
-        <div className="chart-wrap"><TimelineChart place={place} index={index} onScrub={setIndex} /></div>
+        {other && <div className="seg chart-seg" role="tablist" aria-label="Curve">
+          <button role="tab" aria-selected={chart === 'echo'} className={chart === 'echo' ? 'on' : ''} onClick={() => setChartSel('echo')}>Radar echo</button>
+          <button role="tab" aria-selected={chart !== 'echo'} className={chart !== 'echo' ? 'on' : ''} onClick={() => setChartSel('other')}>{P.kind === 'pct' ? 'Coherence' : 'Water'}</button>
+        </div>}
+        <div className="chart-wrap">{chart === 'echo' ? <EvidenceChart place={place} index={index} onScrub={setIndex} /> : <TimelineChart place={place} index={index} onScrub={setIndex} />}</div>
       </section>
     </>
   )

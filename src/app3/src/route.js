@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from 'react'
 // #/globe[?q=<search>]                            the full globe
 // #/places[?q=<search>]                           the gallery
 // #/<place>?mode=story|explore&scene=N&layer=<id>&date=YYYY-MM-DD[&cmp=1][&from=home|globe|places][&globe=1]
+//     how=1[&step=N] opens "How we found it" over the place
 //     globe=1 keeps the place underneath and shows the expanded globe on top of it (the mini globe, grown).
 export function parse(hash = location.hash) {
   const h = hash.replace(/^#\/?/, '')
@@ -18,7 +19,7 @@ export function parse(hash = location.hash) {
   if (seg === 'places') return { place: null, mode: 'places', q: search, cls }
   const mode = p.get('mode') === 'explore' ? 'explore' : 'story'
   const from = ['home', 'globe', 'places'].includes(p.get('from')) ? p.get('from') : 'home'
-  return { place: seg, mode, scene: Math.max(1, parseInt(p.get('scene') || '1', 10) || 1), layer: p.get('layer') || null, date: p.get('date') || null, cmp: p.get('cmp') === '1', from, globe: p.get('globe') === '1', q: search, cls }
+  return { place: seg, mode, scene: Math.max(1, parseInt(p.get('scene') || '1', 10) || 1), layer: p.get('layer') || null, date: p.get('date') || null, cmp: p.get('cmp') === '1', from, globe: p.get('globe') === '1', how: p.get('how') === '1', step: Math.max(1, parseInt(p.get('step') || '1', 10) || 1), q: search, cls }
 }
 export function build(r) {
   const qp = new URLSearchParams()
@@ -35,6 +36,7 @@ export function build(r) {
   if (r.mode === 'explore' && r.cmp) p.set('cmp', '1')
   if (r.from && r.from !== 'home') p.set('from', r.from)
   if (r.globe) p.set('globe', '1')
+  if (r.how) { p.set('how', '1'); if (r.step > 1) p.set('step', String(r.step)) }
   if (r.cls) p.set('class', r.cls)
   return `#/${r.place}?${p}`
 }

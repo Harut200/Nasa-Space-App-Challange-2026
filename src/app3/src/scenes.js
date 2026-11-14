@@ -1,4 +1,5 @@
-import { eventType, fmtDate, fmtKm, fmtSigned, fmtUTC, isEvent, isZeroChange, magOf, startIndex, typeInfo } from './data.js'
+import { defaultIndex, defaultLayer, eventType, fmtDate, fmtKm, fmtSigned, fmtUTC, isEvent, isZeroChange, magOf, startIndex, typeInfo } from './data.js'
+import { evidenceSteps } from './evidence.js'
 
 // split after . ! ? only where a space follows, so "about 0.3" stays whole
 const sentences = (t, n) => String(t).trim().split(/(?<=[.!?])\s+/).slice(0, n).join(' ')
@@ -6,6 +7,7 @@ const sentences = (t, n) => String(t).trim().split(/(?<=[.!?])\s+/).slice(0, n).
 // Four to six scenes per place, built only from the manifest story parts, facts and spots.
 export function buildScenes(p) {
   if (isEvent(p)) return buildEventScenes(p)
+  if (p.evi && evidenceSteps(p).length >= 3) return buildEvidenceScenes(p)
   const n = p.dates.length, last = n - 1
   const nm = p.name.split(',')[0]
   const P = p.primary
@@ -35,9 +37,10 @@ export function buildScenes(p) {
     p.calibrated ? 'Treat the numbers as a careful measurement of this season, not a finished product.' : 'Timing and patterns are reliable; exact areas are not.',
     P.lo && P.hi ? 'Every number here comes with its range, and every caveat is one click away.' : 'Every caveat is one click away.',
   ].join(' ')
+  const named = p.defaultLayer && has(p.defaultLayer) ? p.defaultLayer : null // a place that names its opening layer opens on it
   const scenes = []
   scenes.push({
-    key: 'overture', kicker: 'Overture', title: nm, layer: pct && has('coh') ? 'coh' : 'hh', at: pct ? first : 0, compare: false,
+    key: 'overture', kicker: 'Overture', title: nm, layer: named ? p.defaultLayer : pct && has('coh') ? 'coh' : 'hh', at: named ? (defaultIndex(p) ?? (named === 'water' || named === 'hh' ? first : last)) : pct ? first : 0, compare: false, caution: true,
     text: `${n} passes of the NISAR L-band radar between ${fmtDate(p.dates[0])} and ${fmtDate(p.dates[last])}. Each pass is one beat.${gap ? ` The instrument was off from ${fmtDate(gap[0])} to ${fmtDate(gap[1])}, so the score has a rest.` : ''}`,
     stat: () => passStat,
   })
@@ -84,9 +87,28 @@ export function buildScenes(p) {
     stat: live,
   })
   scenes.push({
-    key: 'sure', kicker: 'Honestly', title: 'How sure are we?', layer: wl, at: last, sheet: true,
+    key: 'sure', kicker: 'Honestly', title: 'How sure are we?', layer: wl, at: last, sheet: true, caution: true,
     text: sureText,
     stat: () => (P.lo && P.hi ? { big: `${fmtKm(P.lo[last])}–${fmtKm(P.hi[last])}`, unit: 'km²', label: `plausible range for ${P.label.toLowerCase()} on ${fmtDate(p.dates[last])}`, sub: '', text: true } : passStat),
+  })
+  return scenes
+}
+
+// Places with evidence: the story is how we found the change. Overture on the layer the manifest names, then one scene per step.
+function buildEvidenceScenes(p) {
+  const nm = p.name.split(',')[0]
+  const st = p.evi.stats || {}
+  const steps = evidenceSteps(p)
+  const di = defaultIndex(p)
+  const scenes = [{
+    key: 'overture', kicker: 'The change', title: nm, layer: p.defaultLayer && p.layers.some((l) => l.id === p.defaultLayer) ? p.defaultLayer : p.layers.some((l) => l.id === p.evi.diff) ? p.evi.diff : defaultLayer(p), at: di ?? Math.max(0, p.dates.length - 1), compare: false, beats: false, caution: true,
+    text: p.headlineNote || sentences(p.story.see, 2), full: p.headlineNote ? sentences(p.story.see, 3) : undefined,
+    stat: () => (Number.isFinite(st.area_km2) ? { big: st.area_km2, unit: 'km²', label: st.area_label || 'area of changed radar echo', sub: '' } : { big: String(p.dates.length), unit: '', label: 'radar passes', sub: `${fmtDate(p.dates[0])} → ${fmtDate(p.dates.at(-1))}` }),
+  }]
+  steps.forEach((s, i) => scenes.push({ key: s.key, kicker: `Step ${i + 1}`, title: s.title, layer: s.layer, at: di ?? Math.max(0, p.dates.length - 1), compare: false, chart: s.chart, beats: false, text: s.text, stat: () => s.stat }))
+  scenes.push({
+    key: 'people', kicker: 'Why it matters', title: 'People and place', layer: p.evi.diff && p.layers.some((l) => l.id === p.evi.diff) ? p.evi.diff : steps[0].layer, at: di ?? 0, compare: false, beats: false, sheet: true, caution: true,
+    text: sentences(p.story.people || p.story.see, 3), full: p.story.people, stat: () => null,
   })
   return scenes
 }
@@ -115,9 +137,9 @@ function buildEventScenes(p) {
     : { big: String(views.length), unit: '', label: views.length === 1 ? 'radar pair across the earthquake' : 'radar pairs across the earthquake', sub: '' }
   const scenes = []
   scenes.push({
-    key: 'beat', kicker: 'One beat', title: 'One beat', layer: null, compare: false, focusLL: Array.isArray(e.lngLat) ? e.lngLat : undefined,
+    key: 'beat', kicker: 'One beat', title: 'One beat', layer: defaultLayer(p), legend: false, compare: false, focusLL: Array.isArray(e.lngLat) ? e.lngLat : undefined,
     text: `A season has many beats. ${tLabel === 'Earthquake' ? 'An earthquake' : `A ${tLabel.toLowerCase()}`} is one.${e.place ? ` It struck ${e.place}` : ''}${depth != null ? `, at a depth of about ${Math.round(depth)} km (USGS)` : ''}.`,
-    hint: 'The star marks the USGS epicentre. The map shows bare terrain: no radar layer yet.',
+    hint: 'The star marks the USGS epicentre.',
     stat: () => ({ big: mag, unit: '', label: e.time ? `${nm}, ${fmtUTC(e.time)}` : nm, sub: depth != null ? `depth ${depth} km` : '' }),
   })
   scenes.push({

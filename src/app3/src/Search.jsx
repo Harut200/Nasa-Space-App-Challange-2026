@@ -77,7 +77,7 @@ export function ResultList({ results, active, setActive, onPick, q, onClear, id 
           <li key={p.id} role="option" aria-selected={i === active} className={i === active ? 'on' : ''} data-id={p.id}
             onMouseEnter={() => setActive(i)} onMouseDown={(e) => e.preventDefault()} onClick={() => onPick(p)}>
             <KindIcon place={p} />
-            <span className="r-name"><b title={p.name}>{p.name}</b><small className="mono">{kindLabel(p)}</small></span>
+            <span className="r-name"><b title={p.name}>{p.name}</b><small className="mono" title={kindLabel(p)}>{kindLabel(p)}</small></span>
             <span className="r-num mono">{h.short}<small>{h.tag}</small></span>
           </li>,
         ]

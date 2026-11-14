@@ -11,6 +11,28 @@ export function waterClasses(layer) {
   const find = (re, fb) => items.find((it) => re.test(it.label))?.color || fb
   return { blue: find(/^open water/i, FALLBACK.blue), green: find(/under vegetation|flooded veg/i, FALLBACK.green), items }
 }
+// A thin outline of a mask image (the edge of its opaque area), redrawn in the browser; the data files are never touched.
+const oc = new Map()
+export function outlineOf(url) {
+  if (!oc.has(url)) {
+    oc.set(url, fetch(url).then((r) => r.blob()).then(createImageBitmap).then((img) => {
+      const w = img.width, h = img.height, c = document.createElement('canvas')
+      c.width = w; c.height = h
+      const x = c.getContext('2d', { willReadFrequently: true })
+      x.drawImage(img, 0, 0)
+      const src = x.getImageData(0, 0, w, h).data, out = x.createImageData(w, h), o = out.data
+      const on = (i, j) => i >= 0 && j >= 0 && i < w && j < h && src[(j * w + i) * 4 + 3] > 40
+      const R = Math.max(1, Math.round(Math.max(w, h) / 600))
+      for (let j = 0; j < h; j++) for (let i = 0; i < w; i++) {
+        if (!on(i, j)) continue
+        if (!on(i - R, j) || !on(i + R, j) || !on(i, j - R) || !on(i, j + R)) { const k = (j * w + i) * 4; o[k] = 255; o[k + 1] = 255; o[k + 2] = 255; o[k + 3] = 235 }
+      }
+      x.putImageData(out, 0, 0)
+      return new Promise((res) => c.toBlob((b) => res(URL.createObjectURL(b)), 'image/png'))
+    }).catch(() => null))
+  }
+  return oc.get(url)
+}
 export const hasWaterClasses = (layer) => layer?.id === 'water' && layer?.legend?.type === 'classes'
 
 export function onlyClass(url, color, tol = 70) {

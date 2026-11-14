@@ -1,7 +1,10 @@
 import { Suspense, lazy, useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { FLAGSHIP, centreOf, classInfo, classOf, defaultLayer, fmtDate, frameUrl, isDated, isEvent, loadIndex, loadPlace, loadSummary, startIndex, stubFromSummary } from './data.js'
+import { FLAGSHIP, centreOf, classInfo, classOf, defaultIndex, defaultLayer, eventType, fmtDate, frameUrl, isDated, isEvent, loadIndex, loadPlace, loadSummary, startIndex, stubFromSummary } from './data.js'
 import { useRoute } from './route.js'
 import { buildScenes } from './scenes.js'
+import { buildHow } from './how.js'
+import { rng } from './evidence.js'
+import Explainer from './Explainer.jsx'
 import { hasWaterClasses, onlyClass, waterClasses } from './water.js'
 const MapStage = lazy(() => import('./MapStage.jsx')) // MapLibre loads after the home page is interactive
 const GlobeMap = lazy(() => import('./GlobeMap.jsx'))
@@ -97,7 +100,12 @@ export default function App() {
   const globeFull = mode === 'globe' || (inPlace && !!route.globe)
   const scenes = useMemo(() => (place ? buildScenes(place) : []), [place])
   const sceneN = Math.min(Math.max(1, route.scene || 1), scenes.length || 1)
+  const howSteps = useMemo(() => (place ? buildHow(place) : []), [place])
+  const how = !!route.how && inPlace && !globeFull && howSteps.length > 0
+  const howN = Math.min(Math.max(1, route.step || 1), howSteps.length || 1)
+  const hstep = how ? howSteps[howN - 1] : null
   const scene = mode === 'story' ? scenes[sceneN - 1] : null
+  const driver = hstep || scene // what drives the map: an explainer step, else the story scene
 
   const ev = isEvent(place)
   const nDates = place?.dates.length || 1
@@ -105,11 +113,11 @@ export default function App() {
   const setIndex = useCallback((i) => setIndexRaw(Math.max(0, Math.min(nDates - 1, i))), [nDates])
 
   // Layer on show
-  const layerId = mode === 'story' ? scene?.layer : mode === 'explore' ? (route.layer && place?.layers.some((l) => l.id === route.layer) ? route.layer : place ? defaultLayer(place) : 'water') : 'water'
+  const layerId = hstep ? hstep.layer : mode === 'story' ? scene?.layer : mode === 'explore' ? (route.layer && place?.layers.some((l) => l.id === route.layer) ? route.layer : place?.evi && cmp.on && place.layers.some((l) => l.id === place.evi.after) ? place.evi.after : place ? defaultLayer(place) : 'water') : 'water'
   const layer = place?.layers.find((l) => l.id === layerId)
 
   // Reset the playhead when place / scene / mode changes
-  const sceneKey = `${placeId}|${mode}|${mode === 'story' ? sceneN : ''}`
+  const sceneKey = `${placeId}|${mode}|${how ? `h${howN}` : mode === 'story' ? sceneN : ''}`
   const firstApply = useRef(true)
   const scrub = useRef(0), playTimer = useRef(0), lastPlace = useRef(null), indexRef = useRef(0)
   const applying = useRef(null) // explore playhead index just applied from the URL / defaults; the URL sync waits for it
@@ -117,9 +125,10 @@ export default function App() {
     if (!place) return
     setActiveSpot(null); setWaterShow('both')
     const keepCmp = firstApply.current && !!route.cmp
-    if (mode === 'story' && scene) {
+    if (driver && (mode === 'story' || how)) {
+      const scene = driver
       const dated = route.date && place.dates.includes(route.date) && firstApply.current ? place.dates.indexOf(route.date) : null
-      const target = dated ?? (scene.at ?? 0)
+      const target = Math.min(dated ?? (scene.at ?? (how ? indexRef.current : 0)), Math.max(0, place.dates.length - 1))
       // a step that changes the date runs through the passes in between (a 400-600 ms scrub), then playback starts after a short beat
       clearInterval(scrub.current)
       const fromI = Math.min(indexRef.current, place.dates.length - 1)
@@ -133,10 +142,10 @@ export default function App() {
       clearTimeout(playTimer.current)
       setPlaying(false)
       if (scene.play && !reducedMotion() && dated == null && !isEvent(place)) playTimer.current = setTimeout(() => setPlaying(true), beat)
-      if (scene.compare) setCmp((c) => ({ ...c, on: true })); else setCmp((c) => ({ ...c, on: false }))
+      if (scene.compare || scene.cmpLayer) setCmp((c) => ({ ...c, on: true })); else setCmp((c) => ({ ...c, on: false }))
     } else if (mode === 'explore') {
       clearInterval(scrub.current); clearTimeout(playTimer.current); lastPlace.current = placeId
-      const di = route.date ? place.dates.indexOf(route.date) : -1
+      const di = route.date ? place.dates.indexOf(route.date) : defaultIndex(place) ?? -1
       applying.current = di >= 0 ? di : Math.max(0, place.dates.length - 1)
       setIndexRaw(applying.current)
       setPlaying(false)
@@ -180,10 +189,16 @@ export default function App() {
   const dated = place ? isDated(place, layerId) : false
   const firstOfLayer = layer?.dates?.[0]
   // seasons: first pass vs now. Earthquakes: the layer vs bare terrain (explore) or ascending vs descending (story)
-  const cmpAvailable = ev ? !!layer : !!(layer?.dates && layer.dates.length > 1)
+  // evidence places: Compare is "before | this layer"; events: the true pre-event partner of the layer on show, else bare terrain
+  const evCmp = !!place?.evi && !!layer && !layer.dates
+  const pair = ev && layer ? (place.event.before_after || []).find((b) => b.after === layerId && place.layers.some((l) => l.id === b.before)) : null
+  const cmpAvailable = ev ? !!layer : evCmp || !!(layer?.dates && layer.dates.length > 1)
   const cmpOn = cmp.on && cmpAvailable && mode !== 'open'
-  const cmpLayerId = ev ? (mode === 'story' ? scene?.cmpLayer : null) : layerId
-  const rawCmp = cmpOn && cmpLayerId ? frameUrl(place, cmpLayerId, firstOfLayer) : null
+  const cmpLayerId = driver?.cmpLayer ?? (ev ? pair?.before ?? null : evCmp ? place.evi.before : layerId)
+  const cmpFirst = place?.layers.find((l) => l.id === cmpLayerId)?.dates?.[0]
+  const rawCmp = cmpOn && cmpLayerId ? frameUrl(place, cmpLayerId, cmpFirst) : null
+
+  const outlineUrl = place?.evi?.mask && layerId === place.evi.diff && inPlace && !cmpOn && place.layers.some((l) => l.id === place.evi.mask) ? frameUrl(place, place.evi.mask) : null
 
   // Blue only / green only on the water layer
   const wc = hasWaterClasses(layer) && inPlace ? waterClasses(layer) : null
@@ -204,12 +219,13 @@ export default function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [layerKey, inPlace])
 
-  const cmpTags = !cmpOn ? null : ev
-    ? (scene?.cmpTags || ['Bare terrain', layer?.label.split(/ \(|:/)[0] || 'Layer'])
-    : [`${layer?.id === 'coh' ? 'First pair' : 'First pass'} · ${firstOfLayer ? fmtDate(firstOfLayer) : ''}`, date ? fmtDate(date) : '']
+  const stt = place?.evi?.stats || {}
+  const cmpTags = !cmpOn ? null : driver?.cmpTags ? driver.cmpTags : ev
+    ? (scene?.cmpTags || (pair ? [`Before · ${rng(pair.before_dates)}`, `Across the event · ${rng(pair.after_dates)}`] : ['Bare terrain', layer?.label.split(/ \(|:/)[0] || 'Layer']))
+    : evCmp ? [`Before · ${rng(stt.before_dates)}`, `After · ${rng(stt.after_dates)}`] : [`${layer?.id === 'coh' ? 'First pair' : 'First pass'} · ${firstOfLayer ? fmtDate(firstOfLayer) : ''}`, date ? fmtDate(date) : '']
 
   // A compare step: the divider slides in from the edge, rests at the centre, then drifts left and right once to show it can be dragged.
-  const cmpStep = mode === 'story' && cmpOn
+  const cmpStep = (mode === 'story' || how) && cmpOn
   useEffect(() => {
     if (!cmpStep || reducedMotion()) return
     let raf, stopped = false
@@ -231,12 +247,13 @@ export default function App() {
     const stop = () => { stopped = true; cancelAnimationFrame(raf) }
     window.addEventListener('pointerdown', stop, { once: true })
     return () => { stop(); window.removeEventListener('pointerdown', stop) }
-  }, [cmpStep, sceneN, placeId])
+  }, [cmpStep, sceneN, howN, how, placeId])
 
   // Camera: the free area is what the panels, the timeline and the legend leave. Fit the whole radar footprint into it.
-  const focusSpot = scene?.focus ? place?.spots.find((s) => s.id === scene.focus) : scene?.focusLL ? { id: 'epicentre', lngLat: scene.focusLL } : null
+  const fscene = how ? null : scene
+  const focusSpot = fscene?.focus ? place?.spots.find((s) => s.id === fscene.focus) : fscene?.focusLL ? { id: 'epicentre', lngLat: fscene.focusLL } : null
   const dockH = Math.min(290, Math.round(height * (height <= 800 ? 0.36 : 0.38)))
-  const storyLegend = mode === 'story' && !!layer?.legend && (!ev || !!scene?.legend)
+  const storyLegend = (mode === 'story' || how) && !!layer?.legend && (!ev || how || !!scene?.legend)
   const padding = mode === 'places' || mode === 'globe' ? { top: 60, bottom: 60, left: 40, right: 40 }
     : mode === 'open' ? (phone ? { top: 150, bottom: 400, left: 20, right: 20 } : { top: 72, bottom: height <= 760 ? 240 : 272, left: Math.round(width * 0.46), right: 40 })
     : phone ? { top: mode === 'story' ? 116 : 250, left: 20, right: 20, bottom: mode === 'story' ? 380 : 300 }
@@ -281,7 +298,7 @@ export default function App() {
     setInfo(false); setSelected(null)
     const want = inPlace && !route.globe ? route.cls : fromList ? kind : ''
     const cls = want && (places[id] || stubs[id]) && classOf(places[id] || stubs[id]) === want ? want : ''
-    go({ place: id, mode: m, scene: 1, layer: null, date: null, cmp: false, from, globe: false, q: '', cls })
+    go({ place: id, mode: m, scene: 1, layer: null, date: null, cmp: false, how: false, step: 1, from, globe: false, q: '', cls })
   }, [go, origin, inPlace, route.globe, route.cls, fromList, kind, places, stubs])
   const goHome = () => { setInfo(false); setSelected(null); go({ place: null, mode: 'open', q: '', globe: false }) }
   const goPlaces = () => { setInfo(false); go({ place: null, mode: 'places', globe: false, q: '', cls: '' }) }
@@ -326,7 +343,9 @@ export default function App() {
   }
   const setScene = (n) => go({ scene: Math.max(1, Math.min(scenes.length, n)), date: null }, false)
   const setLayer = (l) => go({ layer: l }, false)
-  const setMode = (m) => go(m === 'story' ? { mode: 'story', scene: 1, layer: null, date: null } : { mode: 'explore', layer: null, date: null })
+  const setMode = (m) => go(m === 'story' ? { mode: 'story', scene: 1, layer: null, date: null, how: false, step: 1 } : { mode: 'explore', layer: null, date: null, how: false, step: 1 })
+  const setHow = (on) => go(on ? { how: true, step: 1 } : { how: false, step: 1 }, false)
+  const setStep = (n) => go({ how: true, step: Math.max(1, Math.min(howSteps.length, n)) }, false)
   const setQ = useCallback((v) => { setQRaw(v); if (mode === 'globe' || mode === 'places') go({ q: v }, false) }, [mode, go])
   useEffect(() => { if (mode === 'globe' || mode === 'places') { setQRaw(route.q || ''); setKindRaw(route.cls || 'all') } }, [route.q, route.cls, mode])
   const setKind = useCallback((v) => { setKindRaw(v); if (mode === 'globe' || mode === 'places') go({ cls: v === 'all' ? '' : v }, false) }, [mode, go])
@@ -348,6 +367,7 @@ export default function App() {
       if (k === 'Escape') {
         if (searchSheet) setSearchSheet(false)
         else if (sheet) setSheet(false)
+        else if (how) setHow(false)
         else if (about) setAbout(false)
         else if (info) setInfo(false)
         else if (selected) setSelected(null)
@@ -382,6 +402,12 @@ export default function App() {
       if (!place) return
       if (k === '[' || k === ']' || (e.shiftKey && (k === 'ArrowLeft' || k === 'ArrowRight'))) { e.preventDefault(); hop(k === '[' || k === 'ArrowLeft' ? -1 : 1); return }
       if (k === 'i' || k === 'I') { setInfo((x) => !x); return }
+      if ((k === 'e' || k === 'E') && howSteps.length) { setHow(!how); return }
+      if (how) {
+        const r = k === 'ArrowRight' || k === 'PageDown', l = k === 'ArrowLeft' || k === 'PageUp'
+        if (r || l) { e.preventDefault(); setStep(howN + (r ? 1 : -1)) }
+        return
+      }
       if (ev) { // earthquakes have one pass: no playhead, so these keys do nothing
         if (k === ' ' || k === '0' || /^[1-9]$/.test(k)) { if (k === ' ') e.preventDefault(); return }
         if ((k === 'ArrowRight' || k === 'PageDown' || k === 'ArrowLeft' || k === 'PageUp') && mode !== 'story') { e.preventDefault(); return }
@@ -440,6 +466,8 @@ export default function App() {
         spots={(ev ? place.spots.filter((s) => s.id !== 'epicentre') : place?.spots) || []} showSpots={!!place && inPlace && spotsOn} activeSpot={activeSpot}
         onSpot={(id) => { if (inPlace) setActiveSpot((a) => (a === id ? null : id)) }}
         interactive={inPlace} star={ev && inPlace && Array.isArray(place.event.lngLat) ? place.event.lngLat : null}
+        outline={outlineUrl}
+        ring={ev && inPlace && Array.isArray(place.event.lngLat) && Number(place.event.radius_km) > 0 ? { lngLat: place.event.lngLat, km: Number(place.event.radius_km) } : null}
         compare={{ on: cmpOn, split: cmp.split, url: cmpUrl, tags: cmpTags }} onSplit={(s) => setCmp((c) => ({ ...c, split: s }))}
       /></Suspense>
       <div className={`veil ${heroPlace ? 'hero' : ''}`} aria-hidden="true" />
@@ -452,22 +480,23 @@ export default function App() {
       {mode === 'open' && <Home place={shownPlace} index={index} list={list} onWatch={() => openPlace(FLAGSHIP, 'story', 'home')} onChoose={goPlaces} onFeel={quakePick ? () => openPlace(quakePick, 'story', 'home') : null} />}
       {mode === 'places' && <Gallery places={places} ids={galIds} total={ids.length} current={placeId} onPick={(id) => openPlace(id, 'story', 'places')} onClose={goBack}
         filter={<GalleryFilter places={list} shown={galShown} q={q} setQ={setQ} kind={kind} setKind={setKind} onPick={(p) => openPlace(p.id, 'story', 'places')} />} />}
-      {!diving && mode === 'story' && place && scene && (
+      {!diving && how && place && hstep && <Explainer place={place} steps={howSteps} n={howN} index={index} onStep={setStep} onIndex={(i) => { setPlaying(false); setIndex(i) }} onClose={() => setHow(false)} />}
+      {!diving && !how && mode === 'story' && place && scene && (
         <Story place={place} scenes={scenes} n={sceneN} index={index} playing={playing} setPlaying={setPlaying} phone={phone}
           onScene={setScene} onIndex={(i) => { setPlaying(false); setIndex(i) }} onSheet={() => setSheet(true)}
-          onExplore={() => setMode('explore')} missing={missing} />
+          onExplore={() => setMode('explore')} onHow={howSteps.length ? () => setHow(true) : null} missing={missing} />
       )}
-      {!diving && mode === 'explore' && place && ev && (
+      {!diving && !how && mode === 'explore' && place && ev && (
         <EventExplore place={place} layerId={layerId} layer={layer} setLayer={setLayer} opacity={opacity} setOpacity={setOpacity} cmp={cmp} setCmp={setCmp}
-          spotsOn={spotsOn} setSpotsOn={setSpotsOn} setActiveSpot={setActiveSpot} phone={phone} />
+          spotsOn={spotsOn} setSpotsOn={setSpotsOn} setActiveSpot={setActiveSpot} phone={phone} onHow={howSteps.length ? () => setHow(true) : null} />
       )}
-      {!diving && mode === 'explore' && place && !ev && (
-        <Explore place={place} layerId={layerId} layer={layer} setLayer={setLayer} index={index} setIndex={(i) => { setPlaying(false); setIndex(i) }}
-          playing={playing} setPlaying={setPlaying} opacity={opacity} setOpacity={setOpacity} cmp={cmp} setCmp={setCmp} cmpAvailable={cmpAvailable}
+      {!diving && !how && mode === 'explore' && place && !ev && (
+        <Explore key={place.id} place={place} layerId={layerId} layer={layer} setLayer={setLayer} index={index} setIndex={(i) => { setPlaying(false); setIndex(i) }}
+          playing={playing} setPlaying={setPlaying} opacity={opacity} setOpacity={setOpacity} cmp={cmp} setCmp={setCmp} cmpAvailable={cmpAvailable} onHow={howSteps.length ? () => setHow(true) : null}
           spotsOn={spotsOn} setSpotsOn={setSpotsOn} activeSpot={activeSpot} setActiveSpot={setActiveSpot} missing={missing} dated={dated} phone={phone}
           water={wc ? { show: waterShow, setShow: setWaterShow, only, blue: wc.blue, green: wc.green } : null} />
       )}
-      {!diving && storyLegend && layer && <Legend key={layer.id} layer={layer} phone={phone} strip only={only} water={wc ? { show: waterShow, setShow: setWaterShow, blue: wc.blue, green: wc.green } : null} />}
+      {!diving && storyLegend && layer && <Legend key={layer.id} layer={layer} phone={phone} strip open0={!!place?.evi} only={only} water={wc ? { show: waterShow, setShow: setWaterShow, blue: wc.blue, green: wc.green } : null} />}
       {!place && inPlace && <div className="loading" role="status"><img src={`${import.meta.env.BASE_URL}brand/mark.svg`} width="32" height="32" alt="" /><span>Loading…</span></div>}
       {info && inPlace && place && !globeFull && <InfoPanel place={place} onClose={() => setInfo(false)} onSheet={() => { setSheet(true) }} />}
       <Sheet open={sheet} onClose={() => setSheet(false)} place={place || shownPlace} pass={pass} onAbout={() => { setSheet(false); setAbout(true) }} />

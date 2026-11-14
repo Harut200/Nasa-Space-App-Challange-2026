@@ -72,7 +72,19 @@ function buildPlace(m, ts0) {
   }
   const vals = primary.values.filter((v) => v != null)
   const change = vals.length ? Math.max(...vals) - Math.min(...vals) : 0
-  return { ...m, calibrated: m.source === 'gamma0', ts, facts, water, flood, going, primary, change, spotFocus,
+  // Evidence (manifest.evidence): the plain steps, the two series by their labels, the numbers behind them.
+  let evi = null
+  const E = m.evidence
+  if (E && typeof E === 'object') {
+    const [la, lb] = E.series || []
+    const fa = find(la), fb = find(lb)
+    evi = { kind: E.kind, before: E.before, after: E.after, diff: E.diff, mask: E.mask || null, stats: E.stats || {},
+      steps: (E.steps || []).map((t) => String(t).replace(/^\s*\d+\.\s*/, '')), labels: [la, lb],
+      inside: fa ? fa.values : null, outside: fb ? fb.values : null, unit: fa?.unit || '' }
+  }
+  // A burn scar is not water: no water or flooded-vegetation layers for wildfires (the class names would misread the scar).
+  const layers = String(m.category).toLowerCase() === 'fire' ? (m.layers || []).filter((l) => !['water', 'classes', 'when'].includes(l.id)) : m.layers
+  return { ...m, layers, evi, calibrated: m.source === 'gamma0', ts, facts, water, flood, going, primary, change, spotFocus,
     quality: m.quality || {}, gaps: m.gaps || [], spots: m.spots || [],
     peak: vals.length ? Math.max(...vals) : 0, totalFlood: sum(flood?.values || []) }
 }
@@ -91,7 +103,15 @@ export const capWord = (n) => { const w = numWord(n); return w[0].toUpperCase() 
 export const isCalibrated = (p) => !!p && p.source === 'gamma0'
 export const dataNotice = (p) => (!p || isEvent(p) ? null : isCalibrated(p) ? 'Calibrated NISAR data, provisional calibration.' : 'Preview images, about 180 m per pixel, not calibrated: patterns and timing are reliable, exact areas are not.')
 // The layer a place opens on in Explore.
-export const defaultLayer = (p) => (p.defaultLayer && p.layers.some((l) => l.id === p.defaultLayer) ? p.defaultLayer : isEvent(p) ? (p.layers.some((l) => l.id === 'fringes') ? 'fringes' : p.layers[0]?.id) : p.primary.kind === 'pct' && p.layers.some((l) => l.id === 'coh') ? 'coh' : 'water')
+export const defaultLayer = (p) => {
+  const has = (id) => p.layers.some((l) => l.id === id)
+  if (p.defaultLayer && has(p.defaultLayer)) return p.defaultLayer
+  if (isEvent(p)) return has('fringes') ? 'fringes' : p.layers[0]?.id
+  if (p.primary.kind === 'pct' && has('coh')) return 'coh'
+  return has('water') ? 'water' : p.layers[0]?.id
+}
+// The pass a place opens on when the manifest names one (defaultDate), else null.
+export const defaultIndex = (p) => { const i = p.defaultDate ? p.dates.indexOf(p.defaultDate) : -1; return i >= 0 ? i : null }
 // First pass that has a value for the primary series (Ararat has no change figure for the first pass).
 export const startIndex = (p) => { const i = p.primary.values.findIndex((v) => v != null); return i < 0 ? 0 : i }
 const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
@@ -208,7 +228,7 @@ export function stubFromSummary(s) {
       ? { short: `${fmtKm(v)} km²`, tag: String(h.label || 'open water').toLowerCase(), long: `${fmtKm(v)} km² ${String(h.label || 'open water').toLowerCase()} at its peak${h.date ? ` (${fmtDate(h.date)})` : ''}` }
       : h.unit === '%' && v != null ? { short: `${fmtKm(v)} %`, tag: 'changed', long: `Up to ${fmtKm(v)} % ${String(h.label || '').toLowerCase()}` }
         : { short: 'no open water', tag: 'land surface', long: 'No open water mapped here: a land-surface story' }
-  const p = { id: s.id, name: s.name, kind: s.kind, category: s.category, bounds: s.bounds, source: s.source, headline: none ? 'none' : undefined, defaultLayer: s.defaultLayer, calibrated: s.source === 'gamma0', _stub: true, _h: hl,
+  const p = { id: s.id, name: s.name, kind: s.kind, category: s.category, bounds: s.bounds, source: s.source, headline: none ? 'none' : undefined, defaultLayer: s.defaultLayer, defaultDate: s.defaultDate, caution: s.caution, calibrated: s.source === 'gamma0', _stub: true, _h: hl,
     peak: v, dates: [], flood: null, primary: { kind: h.unit === 'km²' ? 'water' : h.unit === '%' ? 'pct' : 'hh', values: [], label: h.label || '' },
     event: ev ? { type: s.eventType || 'event', magnitude: v, time: h.date, place: h.label, views: [{ p2p_cm: h.p2p_cm }] } : null }
   p._hay = `${s.searchText || ''} ${s.name} ${classInfo(classOf(p)).label} ${classOf(p)}${p.calibrated ? ' calibrated' : ''}`.toLowerCase()

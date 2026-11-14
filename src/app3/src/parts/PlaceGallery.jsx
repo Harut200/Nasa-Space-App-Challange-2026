@@ -52,7 +52,7 @@ function SeasonCard({ r, currentId, onPick, base, leaving }) {
   return (
     <button type="button" data-id={p.id} className={'pt-card' + (cur ? ' pt-card-cur' : '') + (leaving ? ' leaving' : '')} aria-current={cur ? 'true' : undefined} onClick={() => onPick && onPick(p.id)}>
       <span className="pt-card-img"><Pic id={p.id} manifest={m} base={base} /></span>
-      <span className="pt-card-name" title={m.name || p.id}>{plain(m.name || p.id)}</span>
+      <span className="pt-card-name" title={m.name || p.id}>{plain(m.name || p.id)}{m.caution && <span className="pt-caution" title={m.caution} role="img" aria-label={`Caution: ${m.caution}`}>!</span>}</span>
       {!none && <Spark values={pv ? pf.values : f?.values} />}
       {none ? (
         <span className="pt-card-row"><span className="pt-card-m">{m.headlineNote || 'Radar echo changed'}</span></span>

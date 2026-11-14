@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react'
 import * as maplibregl from 'maplibre-gl'
 import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?url'
 import 'maplibre-gl/dist/maplibre-gl.css'
+import { outlineOf } from './water.js'
 
 maplibregl.setWorkerUrl(workerUrl)
 
@@ -67,13 +68,41 @@ function crossfade(st, m, url, bounds, opacity) {
  * props: bounds, url, opacity, padding, camera ({key, focus:[lng,lat], zoomBoost}), spots, activeSpot, onSpot,
  *        interactive, compare {on, split, url}
  */
-export default function MapStage({ bounds, url, opacity = 0.9, padding, camera, spots = [], showSpots, activeSpot, onSpot, interactive = true, star, compare, onSplit, onReady }) {
+export default function MapStage({ bounds, url, opacity = 0.9, padding, camera, spots = [], showSpots, activeSpot, onSpot, interactive = true, star, compare, onSplit, onReady, outline, ring }) {
   const el = useRef(null), el2 = useRef(null)
   const map = useRef(null), map2 = useRef(null)
   const st = useRef({ token: 0, active: 'a', ready: false, token2: 0, active2: 'a' })
   const latest = useRef({})
-  latest.current = { bounds, url, opacity, padding, camera }
+  latest.current = { bounds, url, opacity, padding, camera, outline }
   const markers = useRef(new Map())
+
+  // the mask outline on top of the difference image
+  const applyOutline = () => {
+    const m = map.current, { outline: ou, bounds: bb } = latest.current
+    if (!m || !st.current.ready || !m.getSource('outline')) return
+    const tok = (st.current.otok = (st.current.otok || 0) + 1)
+    if (!ou) { m.setPaintProperty('outline', 'raster-opacity', 0); return }
+    outlineOf(ou).then((u) => { if (!u || tok !== st.current.otok || !map.current) return; m.getSource('outline').updateImage({ url: u, coordinates: quad(bb) }); m.setPaintProperty('outline', 'raster-opacity', 1) })
+  }
+  useEffect(() => { applyOutline() }, [outline, bounds.join()]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  // radius ring around the epicentre (events): a dashed circle of event.radius_km
+  const ringKey = ring ? `${ring.lngLat.join()}|${ring.km}` : ''
+  useEffect(() => {
+    const m = map.current
+    const put = () => {
+      if (!m.getStyle()) return
+      if (m.getLayer('ring')) m.removeLayer('ring')
+      if (m.getSource('ring')) m.removeSource('ring')
+      if (!ring) return
+      const [lng, lat] = ring.lngLat, pts = []
+      for (let i = 0; i <= 72; i++) { const a = (i / 72) * 2 * Math.PI; pts.push([lng + (ring.km / (111.32 * Math.cos((lat * Math.PI) / 180))) * Math.cos(a), lat + (ring.km / 110.57) * Math.sin(a)]) }
+      m.addSource('ring', { type: 'geojson', data: { type: 'Feature', geometry: { type: 'LineString', coordinates: pts } } })
+      m.addLayer({ id: 'ring', type: 'line', source: 'ring', paint: { 'line-color': '#ffffff', 'line-width': 1.6, 'line-opacity': 0.85, 'line-dasharray': [2, 2] } })
+    }
+    if (m.isStyleLoaded() && st.current.ready) put(); else m.once('load', put)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ringKey])
 
   // build the main map once
   useEffect(() => {
@@ -91,9 +120,10 @@ export default function MapStage({ bounds, url, opacity = 0.9, padding, camera, 
       el.current.querySelector('.maplibregl-ctrl-attrib')?.classList.remove('maplibregl-compact-show') // credits stay one tap away (the info button and the sheet)
       el.current.querySelector('.maplibregl-ctrl-attrib')?.removeAttribute('open')
       const { bounds: b, url: u, opacity: o } = latest.current
-      addSlots(m, ['sar-a', 'sar-b'], b, o)
+      addSlots(m, ['sar-a', 'sar-b', 'outline'], b, o)
       st.current.ready = true
       crossfade(st.current, m, u, b, o)
+      applyOutline()
       onReady?.(m)
     })
     const ro = new ResizeObserver(() => { m.resize(); map2.current?.resize() })
@@ -116,6 +146,13 @@ export default function MapStage({ bounds, url, opacity = 0.9, padding, camera, 
     if (!st.current.ready) return
     ;['sar-a', 'sar-b'].forEach((n) => m.getSource(n)?.setCoordinates?.(quad(bounds)))
     crossfade(st.current, m, url, bounds, opacity)
+    // watchdog: a slow or dropped image load must never leave the map bare
+    const t = setTimeout(() => {
+      const L = latest.current
+      if (!map.current || L.url !== url || !url) return
+      if (!(Number(m.getPaintProperty(`sar-${st.current.active}`, 'raster-opacity')) > 0)) crossfade(st.current, m, url, L.bounds, L.opacity)
+    }, 2200)
+    return () => clearTimeout(t)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [url, bkey])
   useEffect(() => {

@@ -79,7 +79,8 @@ export default function App() {
       if (scene.compare) setCmp((c) => ({ ...c, on: true })); else setCmp((c) => ({ ...c, on: false }))
     } else if (mode === 'explore') {
       const di = route.date ? place.dates.indexOf(route.date) : -1
-      applying.current = di >= 0 ? di : Math.max(0, place.dates.length - 1)
+      const dd = place.defaultDate ? place.dates.indexOf(place.defaultDate) : -1 // the manifest's chosen opening pass
+      applying.current = di >= 0 ? di : dd >= 0 ? dd : Math.max(0, place.dates.length - 1)
       setIndexRaw(applying.current)
       setPlaying(false)
       setCmp((c) => ({ ...c, on: keepCmp }))
@@ -121,11 +122,14 @@ export default function App() {
   // seasons: first pass vs now. Earthquakes: the layer vs bare terrain (explore) or ascending vs descending (story)
   const cmpAvailable = ev ? !!layer : !!(layer?.dates && layer.dates.length > 1)
   const cmpOn = cmp.on && cmpAvailable && mode !== 'open'
-  const cmpLayerId = ev ? (mode === 'story' ? scene?.cmpLayer : null) : layerId
+  // earthquakes and other events: in Explore, the layer's own "before" pairing when the manifest has one (event.before_after), else bare terrain
+  const pair = ev && mode === 'explore' ? (place.event.before_after || []).find((b) => b.after === layerId && place.layers.some((l) => l.id === b.before)) : null
+  const cmpLayerId = ev ? (mode === 'story' ? scene?.cmpLayer : pair?.before ?? null) : layerId
   const cmpUrl = cmpOn && cmpLayerId ? frameUrl(place, cmpLayerId, firstOfLayer) : null
 
+  const span = (d) => (d?.length ? `${fmtDate(d[0])}–${fmtDate(d[d.length - 1])}` : '')
   const cmpTags = !cmpOn ? null : ev
-    ? (scene?.cmpTags || ['Bare terrain', layer?.label.split(/ \(|:/)[0] || 'Layer'])
+    ? (scene?.cmpTags || (pair ? [`Before · ${span(pair.before_dates)}`, `After · ${span(pair.after_dates)}`] : null) || ['Bare terrain', layer?.label.split(/ \(|:/)[0] || 'Layer'])
     : [`${firstLabel(place, layer)} · ${firstOfLayer ? fmtDate(firstOfLayer) : ''}`, date ? fmtDate(date) : '']
 
   // Camera

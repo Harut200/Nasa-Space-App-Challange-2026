@@ -854,3 +854,74 @@ button:active:not(:disabled):not(.handle):not(.globe-hit):not(.beat):not(.spot) 
   .phone .mode-story > .legend.line, .phone.mode-story > .legend.line { top: auto; bottom: 8px; left: calc(min(46vw, 420px) + 16px); right: 8px; }
 }
 @media (max-width: 380px) { .phone .topbar .brand-logo { width: 24px; height: 24px; } .phone .chip.back { padding: 0 6px; } .phone .topbar .seg button { padding: 0 7px; } }
+
+.phone .chips { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; }
+.phone .chips .fchip { flex: none; }
+.phone .chips .class-desc { display: none; }
+.globe-panel .chips { flex: none; }
+.phone .globe-panel.expanded { max-height: 62vh; }
+.phone .globe-panel .results li { grid-template-columns: 22px minmax(0, 1fr) auto; }
+.phone .r-num small { display: none; }
+
+.credit { bottom: 44px; }
+@media (max-height: 520px) {
+  :root { --mini: 72px; }
+  .chips { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+  .chips .fchip { flex: none; }
+}
+@media (max-height: 520px) and (min-width: 760px) {
+  .dock.panel { left: calc(var(--mini) + 28px); }
+  .legend { right: 12px; }
+}
+@media (max-height: 520px) and (orientation: landscape) {
+  .phone .story { top: 108px; }
+  .phone .layers { top: 108px; }
+  .phone .switcher-row { top: calc(58px + env(safe-area-inset-top, 0px)); }
+}
+.mode-story > .legend { left: var(--story-w, 524px); }
+@media (max-height: 520px) {
+  .legend, .ev .legend { bottom: calc(min(190px, 42vh) + 8px); }
+  .phone .mode-story > .legend, .phone.mode-story > .legend { top: auto; bottom: 8px; left: calc(min(46vw, 420px) + 16px); right: 8px; max-width: none; }
+}
+
+/* evidence, caution, "how we found it" */
+.caution { margin: 0 0 12px; padding: 1px 0 1px 10px; border-left: 2px solid var(--warn); color: #f3cf7a; font-size: 13.5px; line-height: 1.45; text-wrap: pretty; }
+.how .body.caution { font-size: 15px; }
+.readout .caution { margin: 6px 0 0; font-size: 12.5px; max-width: 62ch; }
+.how-link { align-self: flex-start; margin-top: 6px; color: var(--ink-2); font-size: 13px; text-decoration-color: rgba(255,255,255,.3); }
+.how-link:hover { color: var(--ink); }
+.layers .how-link { margin: 10px 0 0 2px; flex: none; }
+.app:not(.phone) .story.how { bottom: auto; max-height: calc(100vh - 78px - var(--mini) - 36px); }
+.story.how .story-in { flex: 1 1 auto; }
+.how-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex: none; }
+.how-head .kicker { flex: 1; }
+.how .stat { padding: 12px 0; }
+.how .statbig { font-size: clamp(36px, 3.6vw, 48px); }
+.how .statbig.txt { font-size: clamp(30px, 3vw, 40px); }
+.how h2 { margin: 10px 0 12px; }
+.ev-wrap { display: flex; flex-direction: column; width: 100%; height: 100%; min-height: 0; }
+.ev-wrap .chart { flex: 1; min-height: 0; height: auto; }
+.ev-wrap.compact { height: auto; margin-top: 10px; }
+.ev-wrap.compact .chart { flex: none; height: 170px; touch-action: pan-y; }
+.ev-key { display: flex; flex-wrap: wrap; gap: 2px 14px; color: var(--ink-2); font-size: 11.5px; padding: 2px 0 0 40px; }
+.ev-key i { display: inline-block; width: 14px; height: 3px; border-radius: 2px; margin-right: 6px; vertical-align: middle; }
+.ev-key i.dash { background: none; border-top: 2px dashed var(--ink-2); height: 0; }
+.ev-key .ex { color: var(--warn); margin-right: 5px; font-weight: 700; }
+.chart-seg { align-self: flex-start; margin: 4px 0 0 0 !important; }
+.chart-seg button { min-height: 28px !important; font-size: 12.5px; }
+.dock .ev-wrap .chart { cursor: ew-resize; }
+.pt-caution { display: inline-grid; place-items: center; width: 15px; height: 15px; margin-left: 7px; border-radius: 50%; border: 1.5px solid var(--warn); color: var(--warn); font: 700 10px/1 var(--mono); vertical-align: 2px; }
+.mode-story > .legend { right: auto; width: max-content; max-width: min(460px, calc(100vw - 548px)); }
+.phone.mode-story > .legend, .phone .mode-story > .legend { max-width: none; }
+.phone .divider .cmp-tag { top: 22%; margin-top: 32px; }
+.phone .dock .ev-key { display: none; }
+.phone .dock.panel.has-caution { height: 330px; }
+.phone .readout .caution { font-size: 11.5px; margin-top: 4px; }
+.phone:has(.dock.has-caution) .legend { bottom: 346px; }
+@keyframes pillfade { 0%, 80% { opacity: 1; } 100% { opacity: 0; visibility: hidden; } }
+.pill.note { animation: pillfade 5s var(--ease) forwards; pointer-events: none; }
+.phone .pill.note:not([role="status"]) { display: none; }
+.phone .layers ~ .pill.note { display: none; }
+.quake-star svg { animation: starpulse 2.4s var(--ease) infinite; transform-origin: 50% 50%; }
+@keyframes starpulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.14); } }
+@media (prefers-reduced-motion: reduce) { .quake-star svg { animation: none; } }
