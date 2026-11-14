@@ -112,7 +112,7 @@ test('event places: tooltip text, grouping, counts, summaries', () => {
   assert.equal(g.reduce((n, x) => n + x.items.length, 0), places.length)
   assert.ok(g.find((x) => x.key === 'earthquake').items.every((p) => p.kind === 'event'))
   assert.equal(meta.groupPlaces(places, [{ id: 'volcano', label: 'Volcano places' }])[0].title, 'Volcano places')
-  assert.deepEqual(meta.groupPlaces(places.filter((p) => p.kind === 'event')).map((x) => x.key), ['fire', 'earthquake', 'volcano', 'landslide'])
+  assert.deepEqual(meta.groupPlaces(places.filter((p) => p.kind === 'event')).map((x) => x.key), ['fire', 'earthquake', 'volcano', 'landslide', 'storm'])
   const unknown = [{ ...places[0], category: 'glacier-lake' }, ...places]
   assert.equal(meta.groupPlaces(unknown).at(-1).title, 'Glacier Lake')
   const counts = meta.classList(places).map((c) => `${c.label.toLowerCase()} (${c.n})`).join(', ')

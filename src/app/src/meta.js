@@ -152,8 +152,8 @@ export const eventSummary = (p) => [magnitude(p.event) && `M${magnitude(p.event)
 export const placeSummary = (p) => (p.kind === 'event' ? eventSummary(p) : p.note ? p.note : p.peak?.v >= 1 ? `${km(p.peak.v)} km² peak water` : 'no open water mapped')
 
 // Classes: id order and labels come from summary.json when it loads, else from here. An unknown id is Title-cased and goes last.
-export const CLASS_ORDER = ['flood', 'lake', 'wetland', 'land', 'fire', 'earthquake', 'volcano', 'landslide']
-export const CLASS_LABEL = { flood: 'Floods', lake: 'Lakes', wetland: 'Wetlands and deltas', land: 'Farmland and forest', fire: 'Wildfires', earthquake: 'Earthquakes', volcano: 'Volcanoes', landslide: 'Landslides' }
+export const CLASS_ORDER = ['flood', 'lake', 'wetland', 'land', 'fire', 'earthquake', 'volcano', 'landslide', 'storm']
+export const CLASS_LABEL = { flood: 'Floods', lake: 'Lakes', wetland: 'Wetlands and deltas', land: 'Farmland', fire: 'Wildfires', earthquake: 'Earthquakes', volcano: 'Volcanoes', landslide: 'Landslides', storm: 'Storms' }
 const titleCase = (s) => String(s).replace(/[-_]+/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())
 export function classList(places, summary) {
   const ids = [...new Set(places.map((p) => p.category))]

@@ -136,7 +136,7 @@ export const firstLabel = (place, layer) => (layer?.id === 'coh' ? 'First pair' 
 // ---- classes (gallery sections) ----
 const cap = (s) => (s ? s[0].toUpperCase() + s.slice(1) : s)
 // Display order and labels when summary.json is not available; with it, its `categories` list decides both.
-const CLASS_FALLBACK = [['flood', 'Floods'], ['lake', 'Lakes'], ['wetland', 'Wetlands and deltas'], ['land', 'Farmland and forest'], ['fire', 'Wildfires'], ['earthquake', 'Earthquakes'], ['volcano', 'Volcanoes'], ['landslide', 'Landslides']]
+const CLASS_FALLBACK = [['flood', 'Floods'], ['lake', 'Lakes'], ['wetland', 'Wetlands and deltas'], ['land', 'Farmland'], ['fire', 'Wildfires'], ['earthquake', 'Earthquakes'], ['volcano', 'Volcanoes'], ['landslide', 'Landslides']]
 export const categoryOf = (p) => String((isEvent(p) ? p.event.type : null) || p.category || 'other').toLowerCase()
 // [{id, label, n}] for the places in `entries` (each {id, category}), in the data's own order; unknown ids Title-cased after the known ones.
 export function classList(entries, summary) {
