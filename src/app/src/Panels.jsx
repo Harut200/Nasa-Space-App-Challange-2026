@@ -1,5 +1,5 @@
 import { Chart, Strip } from './Charts.jsx'
-import { words, dayMonth, dayMon, km, shortLabel, splitLayers, DOT_COLOR, useTween, isEvent, eventTip, placeSummary, groupPlaces, landingText, classList, placeStyle, SHAPE, SHAPE_CLASSES, eventType, noisyView, fringeCycle, eventViews, viewMotion, viewControl, viewingNote, magnitude, utcStamp, fmtVal, withUnit } from './meta.js'
+import { words, dayMonth, dayMon, km, shortLabel, splitLayers, DOT_COLOR, BRAND, useTween, isEvent, eventTip, placeSummary, groupPlaces, landingText, classList, placeStyle, SHAPE, SHAPE_CLASSES, eventType, noisyView, fringeCycle, eventViews, viewMotion, viewControl, viewingNote, magnitude, utcStamp, fmtVal, withUnit } from './meta.js'
 
 export const COLORS = ['#ff6b6b', '#5aa9ff', '#5ad17a', '#ffb347', '#c792ff', '#f0e442', '#5fd4c4']
 const STORY = [['see', 'What you see'], ['physics', 'What is happening'], ['lband', 'Why radar shows it'], ['people', 'Why it matters']]
@@ -37,7 +37,7 @@ export function Landing({ places, summary, tip, selected, onOpen, onRandom, onNe
   return (
     <div className="ui landing">
       <header className="top">
-        <div className="glass brand"><span className="logo" aria-hidden="true" /><h1>Dancing with the SARs</h1></div>
+        <div className="glass brand"><img className="logo" src={`${BRAND}mark.svg`} width="24" height="24" alt="Constellation" /><h1>Dancing with the SARs</h1></div>
         <button className="glass btn" onClick={onAbout}>About</button>
       </header>
       {tip && tp && <div className="glass tip" style={{ left: tip.x, top: tip.y }} role="tooltip"><Fact p={tp} /></div>}
@@ -94,7 +94,7 @@ function EventHeadline({ e, onStory, reveal, onReveal, revealOn }) {
   const when = [e.time && utcStamp(e.time), Number.isFinite(e.depth_km) && `depth ${e.depth_km} km`].filter(Boolean).join(' · ')
   return (
     <div className="glass headline ev-head" aria-label="Headline number">
-      {quake ? <p className="hl-num"><span>{mag ? `M ${mag}` : 'Earthquake'}</span></p> : <p className="hl-label hl-big">{e.summary || e.title}</p>}
+      {quake ? <p className="hl-num"><span>{mag ? `M ${mag}` : 'Earthquake'}</span></p> : <p className="hl-summary">{e.summary || e.title}</p>}
       {quake && views.map((v) => (noisyView(v)
         ? <p className="hl-motion noisy" key={v.id}>{many && <small>{tag(v)}</small>}too noisy to use</p>
         : <p className="hl-motion" key={v.id}>{many && <small>{tag(v)}</small>}<b>{viewMotion(v)}</b> ground motion</p>))}

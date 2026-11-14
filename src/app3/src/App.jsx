@@ -242,6 +242,35 @@ export default function App() {
     : phone ? { top: mode === 'story' ? 116 : 250, left: 20, right: 20, bottom: mode === 'story' ? 380 : 300 }
     : mode === 'story' ? { top: 74, bottom: storyLegend ? 126 : 70, left: 524, right: 44 }
     : { top: 74, bottom: dockH + 84, left: 240, right: 40 }
+  // The free area is measured from the real panel rectangles (and re-measured when they resize), so the footprint stays clear at any window size.
+  const [measured, setMeasured] = useState(null)
+  useEffect(() => {
+    if (!inPlace || diving) { setMeasured(null); return }
+    let timer = 0
+    const run = () => {
+      const vw = innerWidth, vh = innerHeight
+      const R = (s) => { const e = document.querySelector(s); if (!e) return null; const r = e.getBoundingClientRect(); return r.width > 1 && r.height > 1 ? r : null }
+      let left = 24, right = 24, bottom = 24
+      let top = (phone ? 112 : 70) + 8
+      for (const s of ['.story', '.layers', '.spot-card']) {
+        const r = R(s); if (!r) continue
+        if (r.width > vw * 0.7 && r.top < vh / 3) top = Math.max(top, r.bottom + 10)
+        else if (r.width > vw * 0.7) bottom = Math.max(bottom, vh - r.top + 14)
+        else if (r.left + r.width / 2 < vw / 2) left = Math.max(left, r.right + 24)
+        else right = Math.max(right, vw - r.left + 24)
+      }
+      for (const s of ['.dock', '.legend']) { const r = R(s); if (r) bottom = Math.max(bottom, vh - r.top + 14) }
+      const next = { top, left: Math.round(left), right: Math.round(right), bottom: Math.round(bottom) }
+      setMeasured((m) => (m && Math.abs(m.left - next.left) < 6 && Math.abs(m.right - next.right) < 6 && Math.abs(m.bottom - next.bottom) < 6 && m.top === next.top ? m : next))
+    }
+    const later = () => { clearTimeout(timer); timer = setTimeout(run, 140) }
+    later()
+    const ro = new ResizeObserver(later)
+    const watch = () => document.querySelectorAll('.story, .layers, .dock, .legend, .spot-card').forEach((e) => ro.observe(e))
+    const t2 = setTimeout(watch, 200)
+    window.addEventListener('resize', later)
+    return () => { clearTimeout(timer); clearTimeout(t2); ro.disconnect(); window.removeEventListener('resize', later) }
+  }, [inPlace, diving, phone, mode, sceneN, placeId, layerId, width, height])
   const camera = { key: focusSpot ? focusSpot.id : 'fit', focus: focusSpot?.lngLat, zoomBoost: 1.25, duration: mode === 'story' ? 1000 : 1500 }
 
   // ---- navigation ----
@@ -407,7 +436,7 @@ export default function App() {
   return (
     <div className={`app mode-${mode} ${diving ? 'diving' : ''} ${phone ? 'phone' : ''} ${ev && inPlace ? 'ev' : ''} ${globeFull ? 'globe-on' : ''}`}>
       <Suspense fallback={null}><MapStage
-        bounds={bounds} url={mode === 'places' || mode === 'globe' || mode === 'open' ? null : url} opacity={opacity} padding={padding} camera={camera}
+        bounds={bounds} url={mode === 'places' || mode === 'globe' || mode === 'open' ? null : url} opacity={opacity} padding={inPlace && measured ? measured : padding} camera={camera}
         spots={(ev ? place.spots.filter((s) => s.id !== 'epicentre') : place?.spots) || []} showSpots={!!place && inPlace && spotsOn} activeSpot={activeSpot}
         onSpot={(id) => { if (inPlace) setActiveSpot((a) => (a === id ? null : id)) }}
         interactive={inPlace} star={ev && inPlace && Array.isArray(place.event.lngLat) ? place.event.lngLat : null}
@@ -439,7 +468,7 @@ export default function App() {
           water={wc ? { show: waterShow, setShow: setWaterShow, only, blue: wc.blue, green: wc.green } : null} />
       )}
       {!diving && storyLegend && layer && <Legend key={layer.id} layer={layer} phone={phone} strip only={only} water={wc ? { show: waterShow, setShow: setWaterShow, blue: wc.blue, green: wc.green } : null} />}
-      {!place && inPlace && <div className="loading" role="status">Loading…</div>}
+      {!place && inPlace && <div className="loading" role="status"><img src={`${import.meta.env.BASE_URL}brand/mark.svg`} width="32" height="32" alt="" /><span>Loading…</span></div>}
       {info && inPlace && place && !globeFull && <InfoPanel place={place} onClose={() => setInfo(false)} onSheet={() => { setSheet(true) }} />}
       <Sheet open={sheet} onClose={() => setSheet(false)} place={place || shownPlace} pass={pass} onAbout={() => { setSheet(false); setAbout(true) }} />
       <About open={about} onClose={() => setAbout(false)} />

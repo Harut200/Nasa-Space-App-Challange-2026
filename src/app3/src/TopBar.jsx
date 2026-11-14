@@ -26,7 +26,7 @@ export default function TopBar({ view, phone, place, placeIndex, count, mode, fr
   const backText = backOverride || (inPlace ? BACK_LABEL[from] || 'Home' : 'Home')
   const brand = (
     <button className="brand" onClick={onHome} aria-label="Dancing with the SARs: home" title="Home">
-      <span className="brand-mark" aria-hidden="true" />
+      <img className="brand-logo" src={`${import.meta.env.BASE_URL}brand/mark.svg`} width="28" height="28" alt="Constellation" />
       {!phone && !inPlace && <span className="brand-text">Dancing <em>with the SARs</em></span>}
     </button>
   )

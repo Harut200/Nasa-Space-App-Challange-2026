@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { FLAGSHIP, defaultLayer, firstLabel, fmtDate, frameUrl, isDated, isEvent, isQuake, loadIndex, loadPlace, loadSummary, startIndex } from './data.js'
+import { BASE, FLAGSHIP, defaultLayer, firstLabel, fmtDate, frameUrl, isDated, isEvent, isQuake, loadIndex, loadPlace, loadSummary, startIndex } from './data.js'
 import { useRoute } from './route.js'
 import { buildScenes } from './scenes.js'
 import MapStage from './MapStage.jsx'
@@ -197,7 +197,7 @@ export default function App() {
 
       <header className="topbar">
         <button className="brand" onClick={() => go({ place: null, mode: 'open' })} aria-label="Dancing with the SARs, back to the opening">
-          <span className="brand-mark" aria-hidden="true" /> <span>Dancing <em>with the SARs</em></span>
+          <img className="brand-mark" src={`${BASE}brand/mark.svg`} width="26" height="26" alt="Constellation" /> <span>Dancing <em>with the SARs</em></span>
         </button>
         {!heroPlace && place && (
           <nav className="crumbs" aria-label="Place and view">

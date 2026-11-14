@@ -733,3 +733,124 @@ button:active:not(:disabled):not(.handle):not(.globe-hit):not(.beat):not(.spot) 
 .ev-fig { gap: 8px; }
 .sw-text { display: block; }
 .r-name { min-width: 0; }
+.phone .dock.panel { left: 8px; right: 8px; bottom: 8px; padding: 14px 12px 6px; height: 250px; border-radius: 16px; background: linear-gradient(0deg, rgba(6,8,12,.96), rgba(6,8,12,.82)); }
+
+/* ===================== any screen: safe areas, touch, contrast, fallbacks ===================== */
+.pt-card.leaving { opacity: 0; transform: scale(.97); transition: opacity .18s var(--e-out), transform .18s var(--e-out); pointer-events: none; }
+.gallery { overflow-x: hidden; overscroll-behavior: contain; }
+.sheet, .search-sheet, .story-in, .results, .menu-pop, .info { overscroll-behavior: contain; }
+.topbar { top: calc(14px + env(safe-area-inset-top, 0px)); left: calc(18px + env(safe-area-inset-left, 0px)); right: calc(18px + env(safe-area-inset-right, 0px)); }
+.phone .topbar { top: calc(10px + env(safe-area-inset-top, 0px)); left: calc(10px + env(safe-area-inset-left, 0px)); right: calc(10px + env(safe-area-inset-right, 0px)); }
+.phone .switcher-row { top: calc(58px + env(safe-area-inset-top, 0px)); }
+.phone .story { bottom: calc(8px + env(safe-area-inset-bottom, 0px)); }
+.phone .dock.panel { bottom: calc(8px + env(safe-area-inset-bottom, 0px)); }
+.sheet-grip { display: none; }
+.phone .sheet-grip { display: block; all: unset; box-sizing: border-box; cursor: pointer; width: 100%; height: 26px; margin: -8px 0 0; flex: none; }
+.phone .sheet-grip { display: grid; place-items: center; }
+.phone .sheet-grip i { width: 40px; height: 4px; border-radius: 2px; background: rgba(255,255,255,.3); }
+.phone .story.peek { max-height: 150px; }
+.phone .story.peek .stat, .phone .story.peek .swap.rest, .phone .story.peek .beats-wrap, .phone .story.peek .swap.head h2 { display: none; }
+.globe-fallback { position: absolute; inset: 0; z-index: 6; overflow: auto; padding: 90px 24px 24px 24px; background: #06080c; color: var(--ink-2); }
+.globe-fallback ul { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 4px; }
+.globe-fallback button { all: unset; cursor: pointer; display: block; padding: 8px 4px; color: var(--ink); }
+.globe-fallback button:hover { color: var(--accent); }
+@media (pointer: coarse) {
+  .icon-btn { width: 44px; height: 44px; }
+  .chip, .fchip, .seg button, .btn, .modes button, .more button, .sw-name, .linkish, .legend-title, .legend li.pick button, .menu-pop button, .results li { min-height: 44px; }
+  .toggles.tools .chip { width: 44px; min-height: 44px; }
+  .search-field input, input[type=search] { font-size: 16px; }
+  .legend-more { width: 44px; height: 44px; line-height: 44px; }
+  .dots button { height: 44px; }
+}
+@media (max-width: 759px) { .search-field input { font-size: 16px; } }
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .panel, .panel-like, .chip, .seg, .legend, .globe-tip, .story, .search-sheet { background: rgba(9,13,19,.96); }
+}
+@media (prefers-contrast: more) {
+  :root { --line: rgba(255,255,255,.45); --ink-3: #c9cfda; --ink-2: #e6e1d4; }
+  .icon-btn, .chip, .fchip, .btn, .seg { border: 1px solid rgba(255,255,255,.55); }
+  .story, .panel, .search-pop { background: rgba(5,7,10,.97); }
+}
+@media (forced-colors: active) {
+  .btn, .icon-btn, .chip, .fchip, .seg button, .sw-name, .modes button { border: 1px solid ButtonText; forced-color-adjust: auto; }
+  .story, .panel, .legend { border: 1px solid CanvasText; }
+}
+/* big screens: type and panels scale with the viewport up to a cap; the title block stays readable */
+.story { width: clamp(440px, 27vw, 640px); }
+.body { font-size: clamp(16.5px, 0.55vw + 10px, 22px); }
+.story h2 { font-size: clamp(32px, 1.1vw + 22px, 52px); }
+.opening-copy { max-width: min(760px, 43vw); }
+@media (min-width: 1900px) { .opening h1 { font-size: clamp(120px, 6.4vw, 190px); } .lede { font-size: clamp(21px, 1.15vw, 28px); } .eyebrow { font-size: 14px; } .btn.big { font-size: 20px; min-height: 60px; } }
+@media (min-width: 2400px) { .readout strong { font-size: 56px; } .layers { width: 260px; } .modes button { font-size: 17px; min-height: 42px; } .chart .ax { font-size: 14px; } }
+/* short screens: panels shrink, the corner globe gets smaller */
+@media (max-height: 640px) and (min-width: 760px) {
+  :root { --mini: clamp(84px, 16vh, 120px); }
+  .story { padding: 14px 18px 10px; }
+  .statbig { font-size: 44px; }
+  .story h2 { font-size: 26px; margin: 6px 0 6px; }
+  .body { font-size: 14.5px; line-height: 1.45; }
+  .dock.panel { height: min(220px, 40vh); }
+  .readout strong { font-size: 30px; }
+  .layers .modes button { min-height: 30px; font-size: 13.5px; }
+}
+/* landscape phones: side by side, nothing taller than the screen */
+@media (max-height: 520px) and (orientation: landscape) {
+  .phone .story { left: 8px; right: auto; width: min(46vw, 420px); top: 56px; bottom: 8px; max-height: none; }
+  .phone .layers { top: 56px; left: 8px; right: auto; width: min(30vw, 240px); }
+  .phone .modes { grid-template-columns: 1fr; }
+  .phone .dock.panel { left: auto; width: min(58vw, 560px); height: 190px; }
+  .phone .switcher-row { right: auto; width: min(46vw, 420px); }
+  .phone .sheet-grip { display: none; }
+}
+
+/* brand */
+.brand-logo { display: block; width: 28px; height: 28px; flex: none; }
+.brand { gap: 10px; }
+.credit { position: absolute; z-index: 6; right: 24px; bottom: 14px; margin: 0; display: flex; align-items: center; gap: 10px; color: var(--ink-3); font-size: 11px; pointer-events: none; }
+.credit img { display: block; }
+.phone .credit { display: none; }
+.about-lockup { margin: 0 0 4px; }
+.loading { display: grid; justify-items: center; gap: 10px; }
+@media (max-width: 380px) { .phone .topbar .seg button { padding: 0 8px; font-size: 12.5px; } .phone .topbar { gap: 2px; } .phone .story-nav { flex-wrap: wrap; gap: 6px; } .phone .dots button { width: 18px; margin-right: 2px; } .phone .landing-line { font-size: 10.5px; } }
+.story-nav { flex-wrap: wrap; }
+.dot-ind { transform: translateX(calc(var(--n, 0) * var(--step, 28px))); }
+@media (max-width: 380px) { .dots { --step: 20px; } .dot-ind { width: 14px; } }
+
+/* ===================== hardening round 2 ===================== */
+.mode-story > .legend.line { max-width: calc(100vw - var(--story-w, 524px) - 24px); }
+.mode-story > .legend.line ul { flex-wrap: wrap; }
+.phone .mode-story > .legend.line, .phone.mode-story > .legend.line { max-width: none; }
+.eyebrow { margin-bottom: clamp(14px, 3.2vh, 40px); }
+.opening h1 { padding-top: .06em; }
+.globe-panel.expanded { display: flex; flex-direction: column; max-height: calc(100vh - 90px); max-height: calc(100dvh - 90px); }
+.globe-panel .panel-list { min-height: 0; overflow: hidden; }
+.gp-actions { flex: none; }
+.count { position: static; }
+@media (max-height: 660px) {
+  .opening { align-items: flex-start; padding-top: 64px; }
+  .opening-copy { margin-top: 0; }
+  .opening h1 { font-size: clamp(40px, 10.5vh, 120px); margin-bottom: 10px; }
+  .lede { font-size: 14px; margin-bottom: 12px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .eyebrow { margin-bottom: 8px; font-size: 11px; }
+  .landing-line { bottom: 38px; }
+  .opening-note { bottom: 12px; }
+  .credit { display: none; }
+}
+@media (max-height: 520px) { .lede, .eyebrow { display: none; } .landing-line { display: none; } }
+@media (max-height: 520px) and (min-width: 760px) {
+  .layers { left: 12px; top: 58px; width: calc(100vw - 24px); display: flex; flex-wrap: wrap; align-items: center; gap: 2px 14px; padding: 0; }
+  .layers .modes { display: flex; flex-wrap: wrap; }
+  .modes button { min-height: 30px; font-size: 13px; padding: 0 8px 0 4px; }
+  .toggles.tools { margin: 0; }
+  .toggles.tools .chip { min-height: 32px; width: 32px; }
+  .dock.panel { left: 12px; right: 12px; height: min(190px, 42vh); padding-top: 8px; }
+  .readout strong { font-size: 26px; }
+  .story { top: 58px; width: min(46vw, 420px); }
+  .legend { bottom: calc(min(190px, 42vh) + 8px); }
+  :root { --story-w: calc(min(46vw, 420px) + 36px); }
+}
+@media (max-height: 520px) and (orientation: landscape) {
+  .phone .legend { bottom: 204px; right: 8px; }
+  .phone .mode-story > .legend.line, .phone.mode-story > .legend.line { top: auto; bottom: 8px; left: calc(min(46vw, 420px) + 16px); right: 8px; }
+}
+@media (max-width: 380px) { .phone .topbar .brand-logo { width: 24px; height: 24px; } .phone .chip.back { padding: 0 6px; } .phone .topbar .seg button { padding: 0 7px; } }

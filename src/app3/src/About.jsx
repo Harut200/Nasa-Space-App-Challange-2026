@@ -12,6 +12,8 @@ export default function About({ open, onClose }) {
       <aside className="sheet" role="dialog" aria-modal="true" aria-label="About" onClick={(e) => e.stopPropagation()} ref={ref} tabIndex={-1}>
         <div className="row"><h2>About</h2><button className="icon-btn" onClick={onClose} aria-label="Close">{Icon.close}</button></div>
         <section>
+          <p className="about-lockup"><img src={`${import.meta.env.BASE_URL}brand/lockup.svg`} height="32" width="152" alt="Constellation" /></p>
+          <p className="fine">Team Constellation · NASA Space Apps 2026</p>
           <p>Dancing with the SARs shows how the surface of the Earth changed in 2026, seen by the NISAR L-band radar. Radar sees through cloud and at night, so no pass is lost to weather.</p>
           <p>There are two kinds of places. <b>Seasons of water</b> have about ten dated passes: watch lakes and floodplains fill and empty, open water in blue and water under vegetation in green. <b>Events</b>, such as earthquakes, have one pass before and one after, and show how far the ground moved along the radar’s line of sight.</p>
         </section>

@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { tidy, fmtDate, fmtDateLong, fmtKm, fmtVal, goodViews, isEvent, isNoisy, isQuake } from './data.js'
+import { BASE, tidy, fmtDate, fmtDateLong, fmtKm, fmtVal, goodViews, isEvent, isNoisy, isQuake } from './data.js'
 import { Icon } from './ui.jsx'
 
 // "How sure are we?": always reachable, never in the way.
@@ -53,6 +53,10 @@ export default function Sheet({ open, onClose, place, pass }) {
           <p className="fine">Earth imagery: NASA GIBS, Blue Marble Shaded Relief with Bathymetry (wide views), and Sentinel-2 cloudless by EOX IT Services GmbH (Contains modified Copernicus Sentinel data 2020; CC BY-NC-SA 4.0) for close views, both when online; the radar layers work without them. Story figures are sourced in docs/research/story-sources.md in the project repository.</p>
         </section>
         <section>
+          <h3>Team</h3>
+          <p className="sheet-team"><img src={`${BASE}brand/lockup.svg`} height="26" alt="Constellation" /><span>Team Constellation · NASA Space Apps 2026</span></p>
+        </section>
+        <section>
           <h3>Use of AI</h3>
           <p>AI tools (Claude) were used for research, planning documents, code, analysis and first drafts of the story text. The team chose the challenge approach and the places, reviewed the results and edited the text.</p>
         </section>
@@ -98,6 +102,10 @@ function EventSheet({ onClose, place, sheetRef }) {
           <p className="fine">Earth imagery: NASA GIBS, Blue Marble Shaded Relief with Bathymetry (wide views), and Sentinel-2 cloudless by EOX IT Services GmbH (Contains modified Copernicus Sentinel data 2020; CC BY-NC-SA 4.0) for close views, both when online; the radar layers work without them.</p>
         </section>
         <section>
+          <h3>Team</h3>
+          <p className="sheet-team"><img src={`${BASE}brand/lockup.svg`} height="26" alt="Constellation" /><span>Team Constellation · NASA Space Apps 2026</span></p>
+        </section>
+        <section>
           <h3>Use of AI</h3>
           <p>AI tools (Claude) were used for research, planning documents, code, analysis and first drafts of the story text. The team chose the challenge approach and the places, reviewed the results and edited the text.</p>
         </section>
@@ -130,6 +138,10 @@ function ChangeSheet({ onClose, place, sheetRef }) {
           <p>{place.credits || 'NISAR data: NASA/JPL-Caltech and ISRO, distributed by ASF DAAC.'}</p>
           {e.source_url && <p className="fine">Event source: {e.source_url}</p>}
           <p className="fine">Earth imagery: NASA GIBS, Blue Marble Shaded Relief with Bathymetry (wide views), and Sentinel-2 cloudless by EOX IT Services GmbH (Contains modified Copernicus Sentinel data 2020; CC BY-NC-SA 4.0) for close views, both when online; the radar layers work without them.</p>
+        </section>
+        <section>
+          <h3>Team</h3>
+          <p className="sheet-team"><img src={`${BASE}brand/lockup.svg`} height="26" alt="Constellation" /><span>Team Constellation · NASA Space Apps 2026</span></p>
         </section>
         <section>
           <h3>Use of AI</h3>

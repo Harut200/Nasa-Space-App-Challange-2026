@@ -41,7 +41,7 @@ function Pic({ id, manifest, base }) {
   return <img src={src} alt="" width="240" height="160" loading="lazy" decoding="async" onError={(e) => { if (step === 0 && alt) setStep(1); else e.currentTarget.style.visibility = 'hidden' }} />
 }
 
-function SeasonCard({ r, currentId, onPick, base }) {
+function SeasonCard({ r, currentId, onPick, base, leaving }) {
   const { p, s } = r, m = p.manifest || {}
   const f = openWater(p.timeseries?.facts)
   const cur = p.id === currentId
@@ -50,7 +50,7 @@ function SeasonCard({ r, currentId, onPick, base }) {
   const none = m.headline === 'none'
   const flat = s.delta != null && Math.abs(s.delta) < Math.max(1, (s.first || 0) * 0.005)
   return (
-    <button type="button" data-id={p.id} className={'pt-card' + (cur ? ' pt-card-cur' : '')} aria-current={cur ? 'true' : undefined} onClick={() => onPick && onPick(p.id)}>
+    <button type="button" data-id={p.id} className={'pt-card' + (cur ? ' pt-card-cur' : '') + (leaving ? ' leaving' : '')} aria-current={cur ? 'true' : undefined} onClick={() => onPick && onPick(p.id)}>
       <span className="pt-card-img"><Pic id={p.id} manifest={m} base={base} /></span>
       <span className="pt-card-name" title={m.name || p.id}>{plain(m.name || p.id)}</span>
       {!none && <Spark values={pv ? pf.values : f?.values} />}
@@ -68,14 +68,14 @@ function SeasonCard({ r, currentId, onPick, base }) {
   )
 }
 
-function EventCard({ p, currentId, onPick, base }) {
+function EventCard({ p, currentId, onPick, base, leaving }) {
   const m = p.manifest, e = m.event
   const cur = p.id === currentId
   const cmv = e.views?.[0]?.p2p_cm
   const mag = Number(e.magnitude)
   const label = Number.isFinite(mag) && e.magnitude != null ? `M ${mag.toFixed(1)}` : classInfo(classOf(m)).label.replace(/(es|s)$/, '')
   return (
-    <button type="button" data-id={p.id} className={'pt-card' + (cur ? ' pt-card-cur' : '')} aria-current={cur ? 'true' : undefined} onClick={() => onPick && onPick(p.id)}>
+    <button type="button" data-id={p.id} className={'pt-card' + (cur ? ' pt-card-cur' : '') + (leaving ? ' leaving' : '')} aria-current={cur ? 'true' : undefined} onClick={() => onPick && onPick(p.id)}>
       <span className="pt-card-img"><Pic id={p.id} manifest={m} base={base} /></span>
       <span className="pt-card-name" title={m.name || p.id}>{plain(m.name || p.id)}</span>
       <span className="pt-card-row">
@@ -88,7 +88,20 @@ function EventCard({ p, currentId, onPick, base }) {
 
 export default function PlaceGallery({ places, currentId, onPick, base = import.meta.env.BASE_URL + 'data/' }) {
   const [sort, setSort] = useState('change')
-  const rows = useMemo(() => (places || []).map((p) => ({ p, s: placeStats(p.timeseries) })), [places])
+  const target = useMemo(() => (places || []).map((p) => ({ p, s: placeStats(p.timeseries) })), [places])
+  // a card that leaves fades out first (180 ms); only then do the others glide into their new places
+  const [rows, setRows] = useState(target)
+  const [gone, setGone] = useState(() => new Set())
+  useLayoutEffect(() => {
+    const keep = new Set(target.map((r) => r.p.id))
+    const removed = rows.filter((r) => !keep.has(r.p.id))
+    if (!removed.length) { setRows(target); setGone(new Set()); return }
+    setRows((cur) => [...target, ...cur.filter((r) => !keep.has(r.p.id))])
+    setGone(new Set(removed.map((r) => r.p.id)))
+    const t = setTimeout(() => { setRows(target); setGone(new Set()) }, window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ? 0 : 190)
+    return () => clearTimeout(t)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [target])
   const name = (r) => r.p.manifest?.name || r.p.id
   const sortRows = (list, isEv) => {
     const a = [...list]
@@ -106,7 +119,7 @@ export default function PlaceGallery({ places, currentId, onPick, base = import.
   const root = useRef(null), last = useRef(new Map())
   useLayoutEffect(() => {
     const els = [...root.current.querySelectorAll('[data-id]')], now = new Map()
-    const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
+    const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches || gone.size > 0
     for (const el of els) {
       const b = el.getBoundingClientRect(); now.set(el.dataset.id, b)
       const o = last.current.get(el.dataset.id)
@@ -128,7 +141,7 @@ export default function PlaceGallery({ places, currentId, onPick, base = import.
             )}
           </div>
           <div className="pt-gal-grid">
-            {g.list.map((r) => (r.p.manifest.event ? <EventCard key={r.p.id} p={r.p} currentId={currentId} onPick={onPick} base={base} /> : <SeasonCard key={r.p.id} r={r} currentId={currentId} onPick={onPick} base={base} />))}
+            {g.list.map((r) => (r.p.manifest.event ? <EventCard key={r.p.id} leaving={gone.has(r.p.id)} p={r.p} currentId={currentId} onPick={onPick} base={base} /> : <SeasonCard key={r.p.id} leaving={gone.has(r.p.id)} r={r} currentId={currentId} onPick={onPick} base={base} />))}
           </div>
         </div>
       ))}

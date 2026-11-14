@@ -66,6 +66,7 @@ export default function GlobeMap({ mode, places, currentId, matchIds, paused, ph
   const live = useRef({})
   const [tip, setTip] = useState(null)
   const [ready, setReady] = useState(0)
+  const [noGL, setNoGL] = useState(false)
   const fit = useRef({ until: 0 })
   const prevMode = useRef('hidden')
   live.current = { places, mode, currentId, matchIds, paused, onOpen, onDive, onDiveEnd, onSelect, tipOn: !!tip }
@@ -84,7 +85,8 @@ export default function GlobeMap({ mode, places, currentId, matchIds, paused, ph
 
   // build the map once
   useEffect(() => {
-    const m = new maplibregl.Map({ container: el.current, style: style(), center: [88, 24], zoom: 0.5, maxPitch: 0, dragRotate: false, pitchWithRotate: false, attributionControl: false, fadeDuration: 0, pixelRatio: Math.min(devicePixelRatio, 2) })
+    let m
+    try { m = new maplibregl.Map({ container: el.current, style: style(), center: [88, 24], zoom: 0.5, maxPitch: 0, dragRotate: false, pitchWithRotate: false, attributionControl: false, fadeDuration: 0, pixelRatio: Math.min(devicePixelRatio, 2) }) } catch { setNoGL(true); return }
     map.current = m
     if (STILL) window.__globe = m
     m.touchZoomRotate.disableRotation()
@@ -263,6 +265,12 @@ export default function GlobeMap({ mode, places, currentId, matchIds, paused, ph
   return (
     <div ref={shell} className={`globe-shell ${mode} ${phase || ''}`} aria-hidden={mode === 'hidden' ? 'true' : undefined}>
       <div ref={el} className="globe-canvas" />
+      {noGL && (
+        <div className="globe-fallback" role="group" aria-label="Places">
+          <p className="mono">The 3D globe needs WebGL, which this browser does not offer. Pick a place:</p>
+          <ul>{places.slice(0, 40).map((p) => <li key={p.id}><button onClick={() => onOpen(p.id)}>{p.name}</button></li>)}</ul>
+        </div>
+      )}
       {mode === 'mini' && <button className="globe-hit" onClick={onExpand} aria-label="Open the globe: where on Earth this place is" title="Open the globe (G)" />}
       {BIG(mode) && tp && (
         <div className="globe-tip" style={{ left: Math.min(tip.x + 16, Math.max(8, w - 320)), top: tip.y }} role="tooltip">

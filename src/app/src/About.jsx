@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { THEMES, applyTheme, REPO } from './meta.js'
+import { THEMES, applyTheme, REPO, BRAND } from './meta.js'
 
 export default function About({ open, onClose, manifest, theme, onTheme, hasEvents }) {
   const ref = useRef(null)
@@ -11,6 +11,8 @@ export default function About({ open, onClose, manifest, theme, onTheme, hasEven
   const pick = (t) => { onTheme(t); applyTheme(t) }
   return (
     <dialog ref={ref} className="about" onClose={onClose} onClick={(e) => e.target === ref.current && onClose()}>
+      <img className="about-lockup" src={`${BRAND}lockup.svg`} width="134" height="40" alt="Constellation" />
+      <p className="muted about-team">Team Constellation · NASA Space Apps 2026</p>
       <h2>About</h2>
       <p>This app shows how the Earth's surface changed between June and October 2026, seen by the NISAR radar satellite. Pick a place, press play, and watch water, forest and fields change from one pass to the next. Radar sees through cloud and at night, so no pass is lost to weather.</p>
       <p>Between 27 July and 10 August the instrument was off, so there are no passes then. The timeline shows that gap.</p>

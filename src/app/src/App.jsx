@@ -1,5 +1,5 @@
 import { lazy, Suspense, useCallback, useEffect, useMemo, useState } from 'react'
-import { getJson, makePlace, isEvent, eventType, nearestPlace, distanceKm, parseHash, km, words, dayMonth, defaultLayer, currentTheme, basemapMode, DATA } from './meta.js'
+import { getJson, makePlace, isEvent, eventType, nearestPlace, distanceKm, parseHash, km, words, dayMonth, defaultLayer, currentTheme, basemapMode, DATA, BRAND } from './meta.js'
 import { nearest, frame } from './data.js'
 import { Landing, PlaceUI, COLORS } from './Panels.jsx'
 import About from './About.jsx'
@@ -60,6 +60,10 @@ export default function App() {
   const n = m?.dates.length || 0
   const ev = isEvent(m)
   const quake = ev && eventType(m) === 'earthquake'
+  // An event layer that has a "before" twin (manifest event.before_after) is revealed against that twin; any other layer against the bare satellite image.
+  const pair = ev && layer ? (m.event.before_after || []).find((p) => (p.after === layer.id || p.before === layer.id) && m.layers.some((l) => l.id === (p.after === layer.id ? p.before : p.after))) : null
+  const twin = pair ? m.layers.find((l) => l.id === (pair.after === layer.id ? pair.before : pair.after)) : null
+  const isAfter = !pair || pair.after === layer.id
   // Compare only makes sense on a dated layer: on a whole-season layer both sides would be the same image.
   // An earthquake has no second date: its compare is the layer against the bare satellite image ("reveal").
   const cmp = !!(v?.compare && (layer?.dates || ev))
@@ -115,8 +119,8 @@ export default function App() {
   const setA = useCallback((x) => setMaps((s) => ({ ...s, a: x })), [setMaps])
   const setB = useCallback((x) => setMaps((s) => ({ ...s, b: x })), [setMaps])
 
-  if (error) return <p role="alert" className="splash">Could not load the data: {error}. Reload the page to try again.</p>
-  if (!manifests) return <p className="splash"><span className="spin" /> Loading</p>
+  if (error) return <p role="alert" className="splash"><img className="splash-mark" src={`${BRAND}mark.svg`} width="28" height="28" alt="Constellation" />Could not load the data: {error}. Reload the page to try again.</p>
+  if (!manifests) return <p className="splash"><img className="splash-mark" src={`${BRAND}mark.svg`} width="28" height="28" alt="Constellation" /><span><span className="spin" /> Loading</span></p>
 
   const random = () => {
     const pool = places.filter((p) => p.id !== placeId)
@@ -141,15 +145,15 @@ export default function App() {
 
   return (
     <div className={`app view-${placeId ? 'place' : 'globe'}`}>
-      <Suspense fallback={<p className="splash"><span className="spin" /> Loading</p>}>
+      <Suspense fallback={<p className="splash"><img className="splash-mark" src={`${BRAND}mark.svg`} width="28" height="28" alt="Constellation" /><span><span className="spin" /> Loading</span></p>}>
         <Stage mode={mode} places={places} view={placeId ? 'place' : 'globe'} manifest={m} layer={layer} date={date} opacity={v?.opacity ?? 1} spots={ev || cmp ? null : m?.spots} epicentre={ev ? m.event.lngLat : null} colors={COLORS}
           onOpen={go} onHover={setTip} onSelect={setSelected} target={target} onMap={setA} onImagery={setImagery} />
       </Suspense>
       {cmp && m && layer && extent && (
-        <MapView mode={mode} bounds={m.bounds} url={ev ? null : frame(DATA, m.id, layer, m.dates[v.otherIndex]).url} opacity={v.opacity} onMap={setB} epicentre={ev ? m.event.lngLat : null}
+        <MapView key={twin?.id || 'bare'} mode={mode} bounds={m.bounds} url={ev ? (twin ? frame(DATA, m.id, twin, undefined).url : null) : frame(DATA, m.id, layer, m.dates[v.otherIndex]).url} opacity={v.opacity} onMap={setB} epicentre={ev ? m.event.lngLat : null}
           style={{ clipPath: `inset(${extent.top - 1}px 0 ${innerHeight - extent.top - extent.height}px ${extent.left + (extent.width * v.split) / 100}px)` }} />
       )}
-      {cmp && extent && <Divider rect={extent} split={v.split} onSplit={(s) => patch({ split: s })} left={ev ? (quake ? 'Ground motion' : 'Surface change') : dayMonth(shown)} right={ev ? 'Satellite only' : dayMonth(frame(DATA, m.id, layer, m.dates[v.otherIndex]).shown)} label={ev ? `Drag to reveal the satellite image beneath the ${quake ? 'ground-motion' : 'surface-change'} layer` : undefined} />}
+      {cmp && extent && <Divider rect={extent} split={v.split} onSplit={(s) => patch({ split: s })} left={ev ? (twin ? (isAfter ? 'After' : 'Before') : quake ? 'Ground motion' : 'Surface change') : dayMonth(shown)} right={ev ? (twin ? (isAfter ? 'Before' : 'After') : 'Satellite only') : dayMonth(frame(DATA, m.id, layer, m.dates[v.otherIndex]).shown)} label={ev ? twin ? 'Drag to compare the layer before and after the event' : `Drag to reveal the satellite image beneath the ${quake ? 'ground-motion' : 'surface-change'} layer` : undefined} />}
       {!imagery && mode === 'natural' && <p className="glass imagery-note" role="status">Satellite imagery unavailable. Showing the radar data only.</p>}
       {placeId && v ? (
         <PlaceUI m={m} ts={series[m.id]} v={v} patch={patch} places={places} summary={summary} layer={layer} date={date} preview={m.source === 'preview'} otherDates={other} note={note}

@@ -46,7 +46,9 @@ button:disabled { cursor: default; opacity: .4; }
 .spacer { flex: 1; pointer-events: none !important; }
 .brand { display: flex; align-items: center; gap: 10px; background: none; border: 0; padding: 6px 4px; font-family: var(--serif); font-size: 22px; letter-spacing: .01em; }
 .brand em { color: var(--accent); }
-.brand-mark { width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--accent); box-shadow: 0 0 0 4px rgba(255,106,61,.18), inset 0 0 0 3px var(--bg), inset 0 0 0 5px var(--accent); }
+.brand-mark { width: 26px; height: 26px; display: block; }
+.sheet-team { display: flex; align-items: center; gap: 12px; margin: 10px 0 0; color: var(--ink-3); font-size: 12.5px; }
+.sheet-team img { height: 26px; width: auto; }
 .crumbs { display: flex; gap: 10px; align-items: center; }
 .chip { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 14px; border-radius: 999px; background: var(--glass); backdrop-filter: blur(14px); border: 1px solid var(--line); font-size: 14px; transition: background .2s, border-color .2s; }
 .chip:hover:not(:disabled) { border-color: rgba(255,255,255,.28); }

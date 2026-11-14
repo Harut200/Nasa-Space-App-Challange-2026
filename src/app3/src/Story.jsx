@@ -21,6 +21,7 @@ function Stat({ s }) {
 export default function Story({ place, scenes, n, index, playing, setPlaying, onScene, onIndex, onSheet, onExplore, missing }) {
   const sc = scenes[n - 1]
   const [open, setOpen] = useState(null)
+  const [peek, setPeek] = useState(false)
   const touch = useRef(null)
   // Step-transition controller: knows the step we come from, the direction and how fast steps arrive.
   // Phases (CSS, from the motion tokens): old text out ~160 ms, new text in staggered from ~140 ms, the stat counts or cross-fades, the dot indicator slides.
@@ -47,9 +48,10 @@ export default function Story({ place, scenes, n, index, playing, setPlaying, on
   const ev = isEvent(place)
   const q = ev ? null : place.quality[place.dates[index]]
   return (
-    <section className="panel story" aria-label="Story" aria-live="polite"
+    <section className={`panel story ${peek ? 'peek' : ''}`} aria-label="Story" aria-live="polite"
       onTouchStart={(e) => { touch.current = e.touches[0].clientX }}
       onTouchEnd={(e) => { const dx = e.changedTouches[0].clientX - (touch.current ?? 0); if (Math.abs(dx) > 70) onScene(n + (dx < 0 ? 1 : -1)) }}>
+      <button className="sheet-grip" onClick={() => setPeek((x) => !x)} aria-expanded={!peek} aria-label={peek ? 'Show the story text' : 'Show more of the map'}><i /></button>
       <div className={`story-in ${mv.fast ? 'fast' : ''}`} style={{ '--dir': mv.dir }}>
         {leaving && (
           <div className="swap leaving" key={`leave-${leaving.key}`} aria-hidden="true">

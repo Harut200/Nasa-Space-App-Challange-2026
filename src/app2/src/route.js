@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 // #/<place>?mode=story|explore&scene=N&layer=<id>&date=YYYY-MM-DD[&cmp=1]     #/  (opening)     #/places  (gallery)
 export function parse(hash = location.hash) {
@@ -24,17 +24,20 @@ export function build(r) {
 
 export function useRoute() {
   const [route, setRoute] = useState(parse)
+  const seen = useRef(location.hash) // the hash this hook last knew; a patch computed for an older route must not overwrite a newer navigation
   useEffect(() => {
-    const on = () => setRoute(parse())
+    const on = () => { seen.current = location.hash; setRoute(parse()) }
     window.addEventListener('hashchange', on)
     return () => window.removeEventListener('hashchange', on)
   }, [])
   // push: new history entry (place or mode changes); otherwise replace (scrubbing, scenes)
   const go = useCallback((patch, push = true) => {
     setRoute((cur) => {
+      if (location.hash !== seen.current && !push) return cur // the address moved on (back, a typed link): drop this late patch
       const next = { ...cur, ...patch }
       const url = build(next)
       if (url !== location.hash) { push ? history.pushState(null, '', url) : history.replaceState(null, '', url) }
+      seen.current = location.hash
       return next
     })
   }, [])

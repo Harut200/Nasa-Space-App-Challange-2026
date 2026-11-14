@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 // Presentation helpers. Every number comes from manifests/timeseries; this file only orders and renames.
 export const DATA = import.meta.env.BASE_URL + 'data/'
+export const BRAND = import.meta.env.BASE_URL + 'brand/'
 export const REPO = 'https://github.com/Harut200/Nasa-Space-App-Challange-2026'
 
 export const getJson = (path) => fetch(DATA + path).then((r) => (r.ok ? r.json() : Promise.reject(new Error(`${path}: ${r.status}`))))

@@ -9,6 +9,7 @@ export default class ErrorBoundary extends Component {
     if (!this.state.err) return this.props.children
     return (
       <div className="fatal" role="alert">
+        <img src={`${import.meta.env.BASE_URL}brand/mark.svg`} width="40" height="40" alt="Constellation" style={{ justifySelf: 'center' }} />
         <h1>Something went off beat.</h1>
         <p>The app hit an unexpected error. Your data is fine.</p>
         <button className="btn primary" onClick={() => { location.hash = '#/'; location.reload() }}>Start again</button>

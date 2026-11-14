@@ -11,6 +11,7 @@ export default function Home({ place, index, list, onWatch, onFeel, onChoose }) 
   return (
     <>
       <Opening place={place} index={index} onWatch={onWatch} onFeel={onFeel} onChoose={onChoose} bare />
+      <p className="credit"><img src={`${import.meta.env.BASE_URL}brand/lockup.svg`} height="22" width="104" alt="Constellation" /><span className="mono">Team Constellation · NASA Space Apps 2026</span></p>
       {total > 0 && (
         <p className="landing-line">
           <button onClick={onChoose} aria-label="Choose a place">
