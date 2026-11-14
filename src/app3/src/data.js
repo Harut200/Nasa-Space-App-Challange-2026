@@ -133,6 +133,7 @@ const TYPES = {
   landslide: { label: 'Landslide', plural: 'Landslides', color: '#b58cff', shape: 'square' },
   flood: { label: 'Flood', plural: 'Floods', color: '#5fd9ff', shape: 'drop' },
   wildfire: { label: 'Wildfire', plural: 'Wildfires', color: '#ffb02e', shape: 'triangle' },
+  storm: { label: 'Storm', plural: 'Storms', color: '#9db4cc', shape: 'diamond' },
 }
 export const SEASON = { label: 'Season of water', plural: 'Seasons of water', color: '#4aa8ff', shape: 'dot' }
 export const eventType = (p) => (isEvent(p) ? String(p.event.type || 'event').trim().toLowerCase() || 'event' : null)
@@ -199,15 +200,18 @@ const CLASS_LIST = [
   { id: 'flood', label: 'Floods', color: '#4aa8ff', shape: 'dot', desc: 'Water spreading over land through the season' },
   { id: 'lake', label: 'Lakes', color: '#35c7b8', shape: 'dot', desc: 'Water bodies that hold steady or shrink' },
   { id: 'wetland', label: 'Wetlands and deltas', color: '#5fd6a4', shape: 'dot', desc: 'Marsh, channels and floodplains' },
-  { id: 'land', label: 'Farmland and forest', color: '#e3b54f', shape: 'dot', desc: 'Fields and forest edges changing' },
+  { id: 'land', label: 'Farmland', color: '#e3b54f', shape: 'dot', desc: 'Fields and forest edges changing' },
   { id: 'season', label: 'Seasons of water', color: '#4aa8ff', shape: 'dot', desc: 'A season of radar passes over water and land' },
   { id: 'fire', label: 'Wildfires', color: '#ff5a36', shape: 'flame', desc: 'Forest burned and the radar echo changed' },
   { id: 'earthquake', label: 'Earthquakes', color: '#ff4f8b', shape: 'ring', desc: 'The ground itself moved between two passes' },
   { id: 'volcano', label: 'Volcanoes', color: '#ff8a3d', shape: 'triangle', desc: 'Fresh lava or ash changed the surface' },
   { id: 'landslide', label: 'Landslides', color: '#b58cff', shape: 'square', desc: 'A slope failed and the surface changed' },
+  { id: 'storm', label: 'Storms', color: '#9db4cc', shape: 'diamond', desc: 'Snow and rain changed the desert surface' },
 ]
+// labels the data itself gives to its classes (summary.json), used for any class this file does not know yet
+let DATA_LABELS = {}
 export const classOf = (p) => (isEvent(p) ? eventType(p) : String(p.category || 'season').toLowerCase())
-export const classInfo = (id) => CLASS_LIST.find((c) => c.id === id) || { id, label: cap(String(id).replace(/[-_]/g, ' ')) + (id.endsWith('s') ? '' : 's'), color: '#e6e0cf', shape: 'diamond', desc: '' }
+export const classInfo = (id) => CLASS_LIST.find((c) => c.id === id) || { id, label: DATA_LABELS[id] || cap(String(id).replace(/[-_]/g, ' ')) + (String(id).endsWith('s') ? '' : 's'), color: '#aab4c0', shape: 'diamond', desc: '' }
 // the classes present in the data, in display order, with counts
 export function classesIn(places) {
   const n = new Map()
@@ -218,7 +222,7 @@ export function classesIn(places) {
 export const classColor = (p) => classInfo(classOf(p)).color
 
 // ---------- summary.json: one small request that is enough for the landing globe, the class chips, the counts and the search ----------
-export const loadSummary = () => getJson(`${BASE}data/summary.json`).then((j) => j.places || []).catch(() => [])
+export const loadSummary = () => getJson(`${BASE}data/summary.json`).then((j) => { DATA_LABELS = Object.fromEntries((j.categories || []).filter((c) => c && c.id && c.label).map((c) => [c.id, c.label])); return j.places || [] }).catch(() => [])
 export function stubFromSummary(s) {
   const h = s.headline || {}, ev = s.kind === 'event', none = !s.headline && s.note
   const v = Number.isFinite(h.value) ? h.value : null

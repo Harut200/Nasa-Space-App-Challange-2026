@@ -182,5 +182,9 @@ function buildEventScenes(p) {
     note: `Honestly: provisional data · ${looks > 1 ? 'two viewing directions' : 'one viewing direction'} · line of sight only · sign convention unconfirmed · not validated against GNSS.`,
     stat: () => main,
   })
+  if (tLabel !== 'Earthquake') { // the wording above is written for earthquakes; other event types (storm, ...) say their own name
+    const w = tLabel.toLowerCase(), fix = (t) => (typeof t === 'string' ? t.replace(/\ban earthquake\b/gi, `a ${w}`).replace(/\bearthquakes\b/g, `${w}s`).replace(/\bearthquake\b/g, w) : t)
+    return scenes.map((sc) => ({ ...sc, text: fix(sc.text), full: fix(sc.full), hint: fix(sc.hint), note: sc.key === 'people' ? 'Honestly: provisional data · lost coherence shows that the surface changed, not why · not a damage map.' : sc.note, stat: (...a) => { const st = sc.stat(...a); return st ? { ...st, label: fix(st.label) } : st } }))
+  }
   return scenes
 }

@@ -169,7 +169,7 @@ export default function GlobeMap({ mode, places, currentId, matchIds, paused, ph
     let m
     try { m = new maplibregl.Map({ container: el.current, style: style(), center: [88, 24], zoom: 0.5, maxPitch: 0, dragRotate: false, pitchWithRotate: false, attributionControl: false, fadeDuration: 0, pixelRatio: Math.min(devicePixelRatio, 2) }) } catch { setNoGL(true); return }
     map.current = m
-    if (STILL) { window.__globe = m; window.__live = live }
+    if (STILL) { window.__globe = m }
     m.touchZoomRotate.disableRotation()
     m.getCanvas().tabIndex = -1
     m.addControl(new maplibregl.AttributionControl({ compact: true }), 'bottom-right')
@@ -289,7 +289,7 @@ export default function GlobeMap({ mode, places, currentId, matchIds, paused, ph
     raf = requestAnimationFrame(tick)
     // while the shell grows or shrinks, keep the whole globe in view
     const ro = new ResizeObserver(() => {
-      m.resize()
+      { const cv = m.getCanvas(); if (cv.clientWidth !== shell.current.clientWidth || cv.clientHeight !== shell.current.clientHeight) m.resize() }
       if (performance.now() < fit.current.until) m.jumpTo({ zoom: idleZoom() })
     })
     ro.observe(shell.current)
@@ -335,7 +335,7 @@ export default function GlobeMap({ mode, places, currentId, matchIds, paused, ph
     m.getCanvas().style.cursor = mini ? 'pointer' : ''
     if (mini) setTip(null)
     m.stop()
-    m.resize() // synchronously: the canvas has its new size in this very frame
+    { const cv = m.getCanvas(); if (cv.clientWidth !== shell.current.clientWidth || cv.clientHeight !== shell.current.clientHeight) m.resize() } // synchronously, and only when the size really changed: the canvas has its new size in this very frame
     m.setPadding(pads())
     const here = placeLL(currentId)
     if (mini) m.jumpTo({ center: here || m.getCenter(), zoom: idleZoom() })

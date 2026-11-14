@@ -59,7 +59,7 @@ function eventHow(p) {
   // volcanoes, landslides: coherence before, coherence across, where it was lost
   const km = String(e.summary || '').match(/[\d.,]+\s*km²/)?.[0]
   const b = ba.find((x) => has(x.before)) || null
-  const label = type === 'volcano' ? 'eruption' : type === 'landslide' ? 'landslide' : type === 'fire' ? 'fire' : 'event'
+  const label = type === 'volcano' ? 'eruption' : type === 'landslide' ? 'landslide' : type === 'fire' ? 'fire' : type === 'storm' ? 'storm' : 'event'
   if (b) out.push({
     key: 'intact', title: 'First, a pair from before', layer: b.before,
     text: `Coherence says how comparable two passes are: bright means the surface looked the same both times. Here is a pair from before the ${label} (${range(b.before_dates)}): the surface is mostly intact.`,
@@ -75,7 +75,7 @@ function eventHow(p) {
   })
   out.push({
     key: 'claims', title: 'What this does not say', layer: has('coh_loss') ? 'coh_loss' : 'coherence',
-    text: `Lost coherence shows that the surface changed, not what it changed into: ${type === 'volcano' ? 'fresh lava or ash' : type === 'fire' ? 'burnt ground' : 'fresh debris'} and also vegetation, snow or wetness can do it. It is not a damage map and says nothing about casualties.`,
+    text: `Lost coherence shows that the surface changed, not what it changed into: ${type === 'volcano' ? 'fresh lava or ash' : type === 'fire' ? 'burnt ground' : type === 'storm' ? 'rain-wet or snow-covered ground' : 'fresh debris'} and also vegetation, snow or wetness can do it. It is not a damage map and says nothing about casualties.`,
   })
   return out.filter((s) => s.layer)
 }
