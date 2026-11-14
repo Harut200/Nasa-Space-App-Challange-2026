@@ -23,5 +23,6 @@
     "2026-09-30",
     "2026-10-12"
   ],
-  "water_source": "fusion2"
+  "water_source": "fusion2",
+  "category": "flood"
 }

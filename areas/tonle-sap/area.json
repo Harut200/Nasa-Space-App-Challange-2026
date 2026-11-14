@@ -16,5 +16,6 @@
     "arrival",
     "choreo"
   ],
-  "water_source": "fusion2"
+  "water_source": "fusion2",
+  "category": "flood"
 }

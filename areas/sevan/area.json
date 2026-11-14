@@ -11,5 +11,6 @@
   "frame": 22,
   "direction": "ascending",
   "pixel_m": 30,
-  "water_source": "fusion2"
+  "water_source": "fusion2",
+  "category": "lake"
 }

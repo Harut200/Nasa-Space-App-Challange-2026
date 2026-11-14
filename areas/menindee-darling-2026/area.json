@@ -1,0 +1,27 @@
+{
+  "id": "menindee-darling-2026",
+  "name": "Darling River at Menindee, Australia",
+  "bbox": [
+    142.0,
+    -33.2,
+    143.6,
+    -32.12
+  ],
+  "track": 74,
+  "frame": 105,
+  "direction": "descending",
+  "pixel_m": 100,
+  "mode": "20+5",
+  "dates": [
+    "2026-06-19",
+    "2026-07-01",
+    "2026-07-13",
+    "2026-07-25",
+    "2026-08-18",
+    "2026-08-30",
+    "2026-09-11",
+    "2026-10-05",
+    "2026-10-17"
+  ],
+  "water_source": "fusion2"
+}
