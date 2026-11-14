@@ -169,7 +169,7 @@ export default function GlobeMap({ mode, places, currentId, matchIds, paused, ph
     let m
     try { m = new maplibregl.Map({ container: el.current, style: style(), center: [88, 24], zoom: 0.5, maxPitch: 0, dragRotate: false, pitchWithRotate: false, attributionControl: false, fadeDuration: 0, pixelRatio: Math.min(devicePixelRatio, 2) }) } catch { setNoGL(true); return }
     map.current = m
-    if (STILL) window.__globe = m
+    if (STILL) { window.__globe = m; window.__live = live }
     m.touchZoomRotate.disableRotation()
     m.getCanvas().tabIndex = -1
     m.addControl(new maplibregl.AttributionControl({ compact: true }), 'bottom-right')

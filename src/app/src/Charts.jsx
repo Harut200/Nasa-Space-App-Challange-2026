@@ -49,7 +49,7 @@ export function Strip({ dates, gaps, index, onPick, quality }) {
   )
 }
 
-export function Chart({ ts, pol: wanted, gaps, index, onPick, colors, spots }) {
+export function Chart({ ts, pol: wanted, gaps, index, onPick, colors, spots, title }) {
   const H = 180, L = 40, R = 8
   const f = frac(ts.dates)
   const x = (d) => L + f(d) * (W - L - R)
@@ -63,12 +63,12 @@ export function Chart({ ts, pol: wanted, gaps, index, onPick, colors, spots }) {
   const unit = ts.unit || 'dB'
   const lo = Math.min(...all), hi = Math.max(...all)
   const y = (v) => H - 22 - ((v - lo) / (hi - lo || 1)) * (H - 40)
-  const label = (id) => spots.find((s) => s.id === id)?.label || id
+  const label = (id) => (spots || []).find((s) => s.id === id)?.label || id
   const fmt = (v) => (Math.abs(hi - lo) >= 10 ? v.toFixed(0) : v.toFixed(1)).replace(/^-(?=\d)/, '\u2212')
   return (
     <figure className="chart-figure">
       <figcaption>
-        <strong>Average {pol.toUpperCase()} brightness at each spot</strong>
+        <strong>{title || `Average ${pol.toUpperCase()} brightness at each spot`}</strong>
         <span className="chart-unit">{unit}</span>
         <ul className="chart-keys">
           {ts.series.map((s, i) => (

@@ -190,11 +190,13 @@ export default function MapStage({ bounds, url, opacity = 0.9, padding, camera, 
     } else if (placeChanged && dur) {
       // another place: pull back along the great circle and come in again; the picture is held until arrival
       const cam = m.cameraForBounds(bb, { padding: pad })
+      const km = cam ? m.getCenter().distanceTo(cam.center) / 1000 : 0
+      const fd = Math.round(Math.min(2000, 800 + Math.sqrt(km) * 22)) // a hop next door is short, one across the world takes a breath longer
       const arrive = () => { clearTimeout(tm); m.off('moveend', arrive); setFlying(false) }
-      const tm = setTimeout(arrive, Math.min(2200, dur + 500) + 600)
+      const tm = setTimeout(arrive, fd + 600)
       if (cam) {
         m.once('moveend', arrive)
-        m.flyTo({ center: cam.center, zoom: Math.min(cam.zoom, 11), duration: Math.min(2200, dur + 500), curve: 1.5, speed: 1, easing: EASE, essential: true })
+        m.flyTo({ center: cam.center, zoom: Math.min(cam.zoom, 11), duration: fd, curve: 1.5, easing: EASE, essential: true })
       } else { setFlying(false); m.fitBounds(bb, { padding: pad, duration: dur, maxZoom: 11, easing: EASE }) }
     } else {
       setFlying(false)

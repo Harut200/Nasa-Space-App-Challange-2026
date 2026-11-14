@@ -1,5 +1,5 @@
 import { Chart, Strip } from './Charts.jsx'
-import { words, dayMonth, dayMon, km, shortLabel, splitLayers, DOT_COLOR, BRAND, useTween, isEvent, eventTip, placeSummary, groupPlaces, landingText, classList, placeStyle, SHAPE, SHAPE_CLASSES, eventType, noisyView, fringeCycle, eventViews, viewMotion, viewControl, viewingNote, magnitude, utcStamp, fmtVal, withUnit } from './meta.js'
+import { words, dayMonth, dayMon, km, shortLabel, splitLayers, evidenceLayerIds, evidenceSteps, evidenceOf, isEvidenceFact, compareTwin, compareName, noisyLayer, cautionOf, DOT_COLOR, BRAND, useTween, isEvent, eventTip, placeSummary, groupPlaces, landingText, classList, placeStyle, SHAPE, SHAPE_CLASSES, eventType, noisyView, fringeCycle, eventViews, viewMotion, viewControl, viewingNote, magnitude, utcStamp, fmtVal, withUnit } from './meta.js'
 
 export const COLORS = ['#ff6b6b', '#5aa9ff', '#5ad17a', '#ffb347', '#c792ff', '#f0e442', '#5fd4c4']
 const STORY = [['see', 'What you see'], ['physics', 'What is happening'], ['lband', 'Why radar shows it'], ['people', 'Why it matters']]
@@ -9,7 +9,7 @@ const GREY = ['hh', 'hv', 'rgb'] // grey radar images start a little see-through
 export function Fact({ p }) {
   if (p.kind === 'event') {
     const { head, rest } = eventTip(p)
-    return <><strong className="tip-name">{head}</strong>{rest && <span className="tip-num">{rest}</span>}</>
+    return <><strong className="tip-name">{head}</strong>{rest && <span className="tip-num">{rest}</span>}{p.caution && <span className="tip-caution">{p.caution}</span>}</>
   }
   return (
     <>
@@ -17,6 +17,7 @@ export function Fact({ p }) {
       {p.peak && p.peak.v >= 1
         ? <span className="tip-num"><b>{km(p.peak.v)} km²</b> open water at its peak ({dayMonth(p.peak.date)})</span>
         : <span className="tip-num">{p.note || 'No open water mapped here: a land-surface story'}</span>}
+      {p.caution && <span className="tip-caution">{p.caution}</span>}
     </>
   )
 }
@@ -85,7 +86,7 @@ function Legend({ legend }) {
 
 // Event headline. An earthquake: magnitude (strongest), how far the ground moved (second), the line-of-sight and control clauses, then where and when.
 // Volcano, landslide and others: the manifest's own summary sentence, then where and when. A view whose control is as large as its signal is greyed out.
-function EventHeadline({ e, onStory, reveal, onReveal, revealOn }) {
+function EventHeadline({ e, caution, onStory, reveal, onReveal, revealOn }) {
   const quake = (e.type || 'earthquake') === 'earthquake'
   const views = eventViews(e).filter((v) => viewMotion(v)), many = views.length > 1
   const tag = (v) => `${v.label[0].toUpperCase() + v.label.slice(1)}, track ${v.track}`
@@ -102,6 +103,7 @@ function EventHeadline({ e, onStory, reveal, onReveal, revealOn }) {
         <p className="hl-clause">along the radar's line of sight{ctl.length > 0 && ` · same track before the earthquake: ${ctl.map((v) => `${many ? `track ${v.track} ` : ''}${viewControl(v)}`).join('; ')}`}</p>
       )}
       <p className="hl-label">{e.place && <span className="hl-where">{e.place}</span>}<span className="nw">{when}</span>{e.time_note && <span className="hl-where hl-note">Date: {e.time_note}</span>}</p>
+      {caution && <p className="caution">{caution}</p>}
       <div className="hl-actions">
         <button className="chip" onClick={onStory}>Story</button>
         {reveal && <button className="chip" aria-pressed={revealOn} onClick={onReveal}>Reveal</button>}
@@ -111,7 +113,7 @@ function EventHeadline({ e, onStory, reveal, onReveal, revealOn }) {
   )
 }
 
-const MIDDLE = { earthquake: ['⚡', 'earthquake'], volcano: ['', 'eruption'], landslide: ['', 'collapse'] }
+const MIDDLE = { earthquake: ['⚡', 'earthquake'], volcano: ['', 'eruption'], landslide: ['', 'collapse'], fire: ['', 'fire'] }
 function EventBar({ e, layers }) {
   const views = eventViews(e), many = views.length > 1
   const type = e.type || 'earthquake', quake = type === 'earthquake'
@@ -139,22 +141,31 @@ function EventBar({ e, layers }) {
 export function PlaceUI({ m, ts, v, patch, places, summary, layer, date, preview, otherDates, note, onBack, onPlace, onRandom, onAbout }) {
   const n = m.dates.length
   const ev = isEvent(m)
-  const { main, more } = splitLayers(m.layers, ev, m.defaultLayer ? [m.defaultLayer] : [])
+  const evIds = evidenceLayerIds(m), evi = evidenceOf(m)
+  const { main, more } = splitLayers(m.layers, ev, [...evIds, ...(m.defaultLayer ? [m.defaultLayer] : [])], evIds.length > 0)
   const di = ts?.dates.indexOf(date)
-  const facts = (ts?.facts || NONE).map((f) => ({ ...f, v: f.values[di], lo: f.lo?.[di], hi: f.hi?.[di] })).filter((f) => f.v != null)
-  const head = facts[0]
-  const flood = facts.find((f) => f.label === 'Flooded vegetation')
-  const shownV = useTween(head?.v)
   const none = m.headline === 'none' // a place whose story is not water: no open-water number, the manifest's own note instead
+  const noWaterNumbers = none || m.category === 'fire' // a fire place never shows a water number
+  const allFacts = (ts?.facts || NONE).map((f) => ({ ...f, v: f.values[di], lo: f.lo?.[di], hi: f.hi?.[di] })).filter((f) => f.v != null)
+  const facts = noWaterNumbers ? allFacts.filter((f) => isEvidenceFact(m, f) || !/water|vegetation|going under/i.test(f.label)) : allFacts
+  const waterFacts = facts.filter((f) => !isEvidenceFact(m, f)) // the headline is a water (or land) number; the evidence series have their own chart
+  const head = waterFacts[0]
+  const twin = compareTwin(m, layer)
+  const canCompare = !!(layer.dates || twin)
+  const caution = cautionOf(m)
+  const evSeries = evi && ts ? evi.series.map((lab) => ts.facts?.find((f) => f.label === lab)).filter(Boolean) : []
+  const evTs = evSeries.length === 2 ? { dates: ts.dates, unit: evSeries[0].unit, series: evSeries.map((f, i) => ({ spot: `e${i}`, ev: f.values })) } : null
+  const flood = waterFacts.find((f) => f.label === 'Flooded vegetation')
+  const shownV = useTween(head?.v)
   const noWater = none || (head?.label === 'Open water' && !(places.find((p) => p.id === m.id)?.peak?.v >= 1)) // same rule as the globe tooltip
-  const pct = !none && facts.find((f) => f.unit === '%') // a land place with a % story (Ararat): that number leads
+  const pct = !none && waterFacts.find((f) => f.unit === '%') // a land place with a % story (Ararat): that number leads
   const quality = m.quality?.[date]
   const idx = places.findIndex((p) => p.id === m.id)
   const hop = (d) => onPlace(places[(idx + d + places.length) % places.length].id)
   const rng = (f) => (f.lo != null ? `range ${fmtVal(f.lo, f.unit)}–${fmtVal(f.hi, f.unit)}` : null)
   const pick = (i) => patch({ dateIndex: i, playing: false, touched: true })
   const step = (d) => pick(Math.min(n - 1, Math.max(0, v.dateIndex + d)))
-  const chip = (l) => <button key={l.id} className="chip" title={l.label} aria-pressed={l.id === layer.id} onClick={() => patch({ layerId: l.id, touched: true, ...(ev ? {} : { opacity: GREY.includes(l.id) ? 0.8 : 0.9 }), ...(l.dates || ev ? {} : { compare: false }) })}>{shortLabel(l)}</button>
+  const chip = (l) => <button key={l.id} className="chip" title={l.label} aria-pressed={l.id === layer.id} onClick={() => patch({ layerId: l.id, touched: true, ...(ev ? {} : { opacity: GREY.includes(l.id) ? 0.8 : 0.9 }), ...(l.dates || ev || compareTwin(m, l) ? {} : { compare: false }) })}>{shortLabel(l)}{noisyLayer(m, l) && <small className="chip-flag"> · too noisy</small>}</button>
 
   return (
     <div className={`ui place${ev ? ` ev ev${Math.min(2, eventViews(m.event).length)}` : ''}`}>
@@ -177,14 +188,14 @@ export function PlaceUI({ m, ts, v, patch, places, summary, layer, date, preview
               {groupPlaces(places, summary).map((g) => [
                 <li key={g.key} role="presentation" className="grp">{g.title}</li>,
                 ...g.items.map((p) => <li key={p.id}><button role="menuitem" aria-current={p.id === m.id} onClick={() => { patch({ list: false }); onPlace(p.id) }}>
-                  <span>{p.name}</span><small>{placeSummary(p)}</small></button></li>),
+                  <span>{p.name}{p.caution && <i className="caution-dot" title={p.caution} role="img" aria-label="Caution: read with care" />}</span><small>{placeSummary(p)}</small></button></li>),
               ])}
             </ul>
           </>
         )}
       </header>
 
-      {!v.sheet && ev && <EventHeadline e={m.event} onStory={() => patch({ sheet: 'story' })} reveal={ev} revealOn={!!v.compare} onReveal={() => patch({ compare: !v.compare })} />}
+      {!v.sheet && ev && <EventHeadline e={m.event} caution={caution} onStory={() => patch({ sheet: 'story' })} reveal={ev} revealOn={!!v.compare} onReveal={() => patch({ compare: !v.compare })} />}
       {!v.sheet && !ev && (
         <div className="glass headline" aria-label="Headline number">
           {noWater && pct ? (
@@ -204,10 +215,12 @@ export function PlaceUI({ m, ts, v, patch, places, summary, layer, date, preview
               {(rng(head) || flood) && <p className="hl-sub">{[rng(head), flood && `${withUnit(flood.v, flood.unit)} flooded vegetation`].filter(Boolean).join(' · ')}</p>}
             </>
           ) : <p className="hl-label">{words(date)}</p>}
+          {!none && m.headlineNote && <p className="hl-note">{m.headlineNote}</p>}
+          {caution && <p className="caution">{caution}</p>}
           <div className="hl-actions">
             <button className="chip" onClick={() => patch({ sheet: 'story' })}>Story</button>
-            {ts?.series?.length > 0 && <button className="chip" onClick={() => patch({ sheet: 'curves' })}>Curves</button>}
-            <button className="chip" onClick={() => patch({ sheet: 'compare', compare: !!layer.dates })}>Compare</button>
+            {(ts?.series?.length > 0 || evTs) && <button className="chip" onClick={() => patch({ sheet: 'curves' })}>Curves</button>}
+            <button className="chip" onClick={() => patch({ sheet: 'compare', compare: canCompare })}>Compare</button>
           </div>
         </div>
       )}
@@ -226,6 +239,7 @@ export function PlaceUI({ m, ts, v, patch, places, summary, layer, date, preview
               </details>
             )}
             {layer.label !== shortLabel(layer) && <p className="layer-full">{layer.label}</p>}
+            {noisyLayer(m, layer) && <p className="layer-full">Too noisy to use: the same track before the earthquake moved nearly as much as the earthquake pair.</p>}
             <Legend legend={layer.legend} />
             <label className="opacity">{ev ? 'Layer opacity' : 'Radar opacity'}
               <input type="range" min="0.15" max="1" step="0.05" value={v.opacity} onChange={(e) => patch({ opacity: +e.target.value })} aria-label="Radar layer opacity" />
@@ -238,7 +252,7 @@ export function PlaceUI({ m, ts, v, patch, places, summary, layer, date, preview
         <aside className="glass side-sheet" aria-label="Details">
           <div className="sheet-head">
             <div className="tabs" role="tablist">
-              {(ev ? [['story', 'Story']] : [['story', 'Story'], ['curves', 'Curves'], ['compare', 'Compare']]).map(([k, t]) => <button key={k} role="tab" aria-selected={v.sheet === k} onClick={() => patch({ sheet: k, compare: k === 'compare' ? !!layer.dates : v.compare })}>{t}</button>)}
+              {(ev ? [['story', 'Story']] : [['story', 'Story'], ['curves', 'Curves'], ['compare', 'Compare']]).map(([k, t]) => <button key={k} role="tab" aria-selected={v.sheet === k} onClick={() => patch({ sheet: k, compare: k === 'compare' ? canCompare : v.compare })}>{t}</button>)}
             </div>
             <button className="btn plain icon" onClick={() => patch({ sheet: null })} aria-label="Close details">×</button>
           </div>
@@ -249,6 +263,10 @@ export function PlaceUI({ m, ts, v, patch, places, summary, layer, date, preview
                 {STORY.some(([k]) => m.story?.[k])
                   ? STORY.map(([k, title]) => m.story[k] && <div key={k}><h3>{title}</h3><p>{m.story[k]}</p></div>)
                   : <p className="muted">The story for this place is not written yet. Press Play and watch the image change.</p>}
+                {evi && evidenceSteps(m).length > 0 && (
+                  <div className="how"><h3>How we found it</h3><ol>{evidenceSteps(m).map((t, i) => <li key={i}>{t}</li>)}</ol></div>
+                )}
+                {caution && <p className="caution">{caution}</p>}
                 <p className="credit">{m.credits}</p>
               </div>
             )}
@@ -259,22 +277,25 @@ export function PlaceUI({ m, ts, v, patch, places, summary, layer, date, preview
                     {facts.map((f) => <div key={f.label}><dt>{f.label}</dt><dd>{f.lo != null ? '≈ ' : ''}{fmtVal(f.v, f.unit)}{f.unit === '%' ? '' : ' '}<span>{f.unit}{f.lo != null && ` (range ${fmtVal(f.lo, f.unit)}–${fmtVal(f.hi, f.unit)})`}</span></dd></div>)}
                   </dl>
                 )}
-                {ts?.series?.length > 0
+                {caution && <p className="caution">{caution}</p>}
+                {evTs && <Chart ts={evTs} pol="ev" title="Radar echo inside and outside the changed patch" gaps={m.gaps} index={Math.max(0, ts.dates.indexOf(date))} colors={COLORS} spots={evi.series.map((label, i) => ({ id: `e${i}`, label }))} onPick={(j) => pick(Math.max(0, m.dates.indexOf(ts.dates[j])))} />}
+                {evTs ? null : ts?.series?.length > 0
                   ? <Chart ts={ts} pol={layer.id === 'hv' ? 'hv' : 'hh'} gaps={m.gaps} index={Math.max(0, ts.dates.indexOf(date))} colors={COLORS} spots={m.spots} onPick={(j) => pick(Math.max(0, m.dates.indexOf(ts.dates[j])))} />
                   : <p className="muted">No curves for this place.</p>}
               </div>
             )}
             {v.sheet === 'compare' && (
               <div className="compare">
-                <label className="check"><input type="checkbox" disabled={!layer.dates} checked={!!(v.compare && layer.dates)} onChange={(e) => patch({ compare: e.target.checked })} /> Compare two dates</label>
-                {!layer.dates && <p className="status">Compare is off: this layer is one image for the whole season, so both sides would look the same. Pick a dated layer (for example Water and flooded vegetation) to compare.</p>}
-                <p className="muted">Left: {words(date)} (the timeline)</p>
+                <label className="check"><input type="checkbox" disabled={!canCompare} checked={!!(v.compare && canCompare)} onChange={(e) => patch({ compare: e.target.checked })} /> {twin ? 'Compare before and after' : 'Compare two dates'}</label>
+                {!canCompare && <p className="status">Compare is off: this layer is one image for the whole season, so both sides would look the same. Pick a dated layer (for example Water and flooded vegetation) to compare.</p>}
+                {twin && <p className="muted">Left: {compareName(m, layer)}. Right: {compareName(m, twin)}. Drag the round handle on the map to move the divider.</p>}
+                {!twin && <><p className="muted">Left: {words(date)} (the timeline)</p>
                 <label className="field">Right
                   <select value={v.otherIndex} onChange={(e) => patch({ otherIndex: +e.target.value })}>
                     {m.dates.map((d, i) => <option key={d} value={i}>{words(d)}</option>)}
                   </select>
-                </label>
-                {v.compare && layer.dates && <p className="muted">Right: {otherDates}. Drag the round handle on the map to move the divider.</p>}
+                </label></>}
+                {!twin && v.compare && layer.dates && <p className="muted">Right: {otherDates}. Drag the round handle on the map to move the divider.</p>}
               </div>
             )}
           </div>

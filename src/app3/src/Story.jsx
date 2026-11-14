@@ -1,8 +1,8 @@
-import { useLayoutEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { fmtDate, isEvent, startIndex, tidy } from './data.js'
 import { EventStrip } from './EventParts.jsx'
 import EvidenceChart from './EvidenceChart.jsx'
-import { Icon, Num } from './ui.jsx'
+import { Icon, Num, useStepMotion } from './ui.jsx'
 
 export function Stat({ s }) {
   if (!s) return null
@@ -20,30 +20,12 @@ export function Stat({ s }) {
   )
 }
 
-export default function Story({ place, scenes, n, index, playing, setPlaying, onScene, onIndex, onSheet, onExplore, onHow, missing }) {
+export default function Story({ place, scenes, n, index, playing, setPlaying, onScene, onIndex, onSheet, onExplore, onHow, missing, emptyPass }) {
   const sc = scenes[n - 1]
   const [open, setOpen] = useState(null)
   const [peek, setPeek] = useState(false)
   const touch = useRef(null)
-  // Step-transition controller: knows the step we come from, the direction and how fast steps arrive.
-  // Phases (CSS, from the motion tokens): old text out ~160 ms, new text in staggered from ~140 ms, the stat counts or cross-fades, the dot indicator slides.
-  const prev = useRef(null)
-  const [leaving, setLeaving] = useState(null)
-  const [mv, setMv] = useState({ dir: 1, fast: false })
-  useLayoutEffect(() => {
-    const p = prev.current, now = performance.now()
-    if (p && p.key !== sc.key && p.place === place.id) {
-      const fast = now - p.at < 420
-      setMv({ dir: n >= p.n ? 1 : -1, fast })
-      setLeaving({ key: p.key, kicker: p.kicker, n: p.n, title: p.title, text: p.text })
-      const t = setTimeout(() => setLeaving(null), fast ? 110 : 190)
-      prev.current = { key: sc.key, n, kicker: sc.kicker, title: sc.title, text: sc.text, at: now, place: place.id }
-      return () => clearTimeout(t)
-    }
-    prev.current = { key: sc.key, n, kicker: sc.kicker, title: sc.title, text: sc.text, at: p && p.place === place.id ? p.at : now, place: place.id }
-    setLeaving(null)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sc.key, place.id])
+  const { leaving, mv } = useStepMotion(sc.key, { n, kicker: sc.kicker, title: sc.title, text: sc.text }, place.id)
   const stat = sc.stat(index)
   const expanded = open === sc.key
   const last = n === scenes.length
@@ -56,19 +38,19 @@ export default function Story({ place, scenes, n, index, playing, setPlaying, on
       <button className="sheet-grip" onClick={() => setPeek((x) => !x)} aria-expanded={!peek} aria-label={peek ? 'Show the story text' : 'Show more of the map'}><i /></button>
       <div className={`story-in ${mv.fast ? 'fast' : ''}`} style={{ '--dir': mv.dir }}>
         {leaving && (
-          <div className="swap leaving" key={`leave-${leaving.key}`} aria-hidden="true">
+          <div className="swap leaving" key={`leave-${leaving.n}`} aria-hidden="true">
             <div className="kicker mono"><span>{leaving.kicker}</span><span>{leaving.n} / {scenes.length}</span></div>
             <h2>{leaving.title}</h2>
             <p className="body">{tidy(leaving.text)}</p>
           </div>
         )}
-        <div className="swap head" key={sc.key}>
+        <div className="swap head" key={`${place.id}-${sc.key}`}>
           <div className="kicker mono"><span>{sc.kicker}</span><span className="roll" key={n}>{n} / {scenes.length}</span></div>
           <h2>{sc.title}</h2>
         </div>
-        <Stat key={`${stat?.unit || ''}${stat?.text ? 't' : ''}${typeof stat?.big === 'number' ? 'n' : 's'}`} s={stat} />
+        <Stat key={`${place.id}${stat?.unit || ''}${stat?.text ? 't' : ''}${typeof stat?.big === 'number' ? 'n' : 's'}`} s={stat} />
         {place.caution && sc.caution && <p className="caution" role="note">{place.caution}</p>}
-        <div className="swap rest" key={`${sc.key}-b`}>
+        <div className="swap rest" key={`${place.id}-${sc.key}-b`}>
         <p className="body">{tidy(expanded ? sc.full : sc.text)}</p>
         <div className="links">
           {sc.full && sc.full !== sc.text && <button className="linkish" onClick={() => setOpen(expanded ? null : sc.key)} aria-expanded={expanded}>{expanded ? 'Show less' : 'Read the full passage'}</button>}
@@ -77,11 +59,13 @@ export default function Story({ place, scenes, n, index, playing, setPlaying, on
         </div>
         {sc.chart && <EvidenceChart place={place} index={index} onScrub={onIndex} compact />}
         {ev && sc.strip && <EventStrip event={place.event} />}
+        {sc.cap && <p className="cap-note">{sc.cap}</p>}
         {sc.note && <p className="hint mono">{sc.note}</p>}
         {ev && sc.hint && <p className="hint mono">{sc.hint}</p>}
         {!ev && sc.compare && <p className="hint mono">Drag the handle on the map: {sc.layer === 'coh' ? 'first pair' : 'first pass'} on the left, {fmtDate(place.dates[index])} on the right.</p>}
         {!ev && sc.focus && <p className="hint mono">Zoomed to {place.spots.find((s) => s.id === sc.focus)?.label}, the spot where radar brightness changed most.</p>}
         {missing && <p className="hint mono">No image for this pass in this layer.</p>}
+        {emptyPass && !missing && <p className="hint mono">No open water on this pass.</p>}
         </div>
       </div>
       {!ev && sc.beats !== false && <div className="beats-wrap">

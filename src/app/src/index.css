@@ -328,3 +328,12 @@ input[type='checkbox'] { accent-color: var(--accent-2); width: 1.1rem; height: 1
 .about-team { margin-top: 0.3rem; font-size: 0.8rem; }
 .ev-head .hl-summary { font-size: 1.3rem; font-weight: 600; line-height: 1.2; letter-spacing: -0.01em; text-wrap: balance; }
 @media (max-width: 899px) { .ev-head .hl-summary { font-size: 1.1rem; } }
+
+/* caution lines, evidence story, flagged layers */
+.caution, .tip-caution { margin-top: 8px; padding-left: 9px; border-left: 2px solid var(--warn); color: var(--warn); font-size: var(--fs-0); font-weight: 400; line-height: 1.35; text-wrap: pretty; }
+.tip-caution { display: block; max-width: 36ch; }
+.caution-dot { display: inline-block; width: 7px; height: 7px; margin-left: 8px; border-radius: 50%; background: var(--warn); vertical-align: middle; }
+.story .caution { font-size: 0.8rem; margin-top: 1rem; }
+.how ol { margin: 0.2rem 0 0; padding-left: 1.2rem; }
+.how li { margin-bottom: 0.35rem; font-size: 0.9rem; line-height: 1.4; }
+.chip-flag { font-size: 0.8em; opacity: 0.75; }

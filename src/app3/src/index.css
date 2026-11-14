@@ -940,3 +940,32 @@ button:active:not(:disabled):not(.handle):not(.globe-hit):not(.beat):not(.spot) 
 .app.dv-reveal .stage-map { animation: stagein .75s var(--e-out) both; }
 @keyframes stagein { from { transform: scale(var(--dive-s, .86)); } to { transform: none; } }
 @media (prefers-reduced-motion: reduce) { .app.dv-reveal .stage-map { animation: none; } .diving.dv-dissolve .stage-map { transition: opacity .2s; } }
+
+/* ===================== motion: steps ===================== */
+/* Old text out ~150 ms, new text in from ~150 ms in short staggers (all done by ~560 ms); a fast skip drops the stagger. */
+.story-in .swap > *, .story-in > .stat { animation: stepin 260ms var(--e-out) both; animation-delay: 130ms; }
+.story-in .swap.head > h2 { animation-delay: 150ms; }
+.story-in > .stat { animation-delay: 190ms; }
+.story-in .swap.rest > :nth-child(1) { animation-delay: 230ms; }
+.story-in .swap.rest > :nth-child(2) { animation-delay: 270ms; }
+.story-in .swap.rest > :nth-child(n+3) { animation-delay: 300ms; }
+.story-in .swap.head > .kicker { animation-delay: 130ms; }
+.story-in.fast .swap > *, .story-in.fast > .stat { animation-duration: 140ms; animation-delay: 0ms !important; }
+.how-in .swap.head > h2 { animation-delay: 140ms; }
+/* the evidence curve draws once when its step comes in; the dots and the other curve follow */
+.ev-chart path[data-draw] { stroke-dasharray: 1; stroke-dashoffset: 1; animation: drawline 620ms var(--e-out) 260ms forwards; }
+.ev-chart path[data-fadein], .ev-chart circle, .ev-chart rect { animation: fade-in 320ms ease 420ms both; }
+@keyframes drawline { to { stroke-dashoffset: 0; } }
+.story-in.fast .ev-chart path[data-draw] { animation-delay: 0ms; animation-duration: 260ms; }
+@media (prefers-reduced-motion: reduce) { .ev-chart path[data-draw] { animation: none; stroke-dashoffset: 0; } .ev-chart path[data-fadein], .ev-chart circle, .ev-chart rect { animation: none; } }
+.cap-note { margin: 10px 0 0; color: var(--ink-2); font-size: 13.5px; line-height: 1.5; text-wrap: pretty; padding-left: 10px; border-left: 2px solid var(--line); }
+
+/* phone: the explainer is a low sheet, the map evidence stays in view */
+.phone .story.how { max-height: min(45vh, 380px); padding: 12px 16px 8px; }
+.phone .story.how .story-in { min-height: 0; }
+.phone .story.how h2 { font-size: 26px; margin: 6px 0 8px; }
+.phone .story.how .stat { padding: 6px 0 8px; }
+.phone .story.how .statbig { font-size: 40px; }
+.phone .story.how .ev-wrap.compact .chart { height: 120px !important; }
+.phone .story.how .body { font-size: 14.5px; line-height: 1.45; }
+.phone .story.how .story-nav { margin-top: 2px; padding-top: 2px; }

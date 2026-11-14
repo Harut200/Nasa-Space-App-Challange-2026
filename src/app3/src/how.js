@@ -85,8 +85,11 @@ function seasonHow(p) {
   const has = (id) => p.layers.some((l) => l.id === id)
   const water = has('water') && P.kind !== 'pct'
   const wl = water ? 'water' : has('coh') ? 'coh' : 'hh'
-  const first = P.kind === 'pct' ? startIndex(p) : 0
   const vals = P.values
+  // a first pass with no open water at all is an empty picture: open on the first pass that has some
+  const bare = water && P.unit === 'km²' && vals[0] != null && vals[0] < 0.5
+  const firstWet = bare ? vals.findIndex((v) => v != null && v >= 1) : -1
+  const first = P.kind === 'pct' ? startIndex(p) : firstWet > 0 ? firstWet : 0
   let peak = -1
   vals.forEach((v, i) => { if (v != null && (peak < 0 || v > vals[peak])) peak = i })
   const di = defaultIndex(p)
@@ -94,7 +97,7 @@ function seasonHow(p) {
   const out = []
   const unit = P.unit === 'km²' ? ' km²' : P.unit === '%' ? ' %' : ''
   out.push({ key: 'first', title: P.kind === 'pct' ? 'The first pair' : 'The first pass', layer: wl, at: first,
-    text: P.kind === 'pct' ? `Coherence on ${fmtDate(p.dates[first])}: dark where the ground changed between passes.` : `${fmtDate(p.dates[first])}, the first pass: ${water ? 'the water as the radar sees it at the start' : 'the radar image at the start'}.`,
+    text: P.kind === 'pct' ? `Coherence on ${fmtDate(p.dates[first])}: dark where the ground changed between passes.` : firstWet > 0 ? `No open water on the first pass (${fmtDate(p.dates[0])}). ${fmtDate(p.dates[first])} is the first pass that shows some.` : `${fmtDate(p.dates[first])}, the first pass: ${water ? 'the water as the radar sees it at the start' : 'the radar image at the start'}.`,
     stat: vals[first] != null && P.kind !== 'hh' ? { big: vals[first], unit: P.unit === 'km²' ? 'km²' : P.unit === '%' ? '%' : '', label: P.label, sub: '' } : null })
   if (at2 !== first) out.push({ key: 'peak', title: di != null ? `The pass on ${fmtDate(p.dates[at2])}` : 'The peak', layer: wl, at: at2,
     text: di != null ? `${fmtDate(p.dates[at2])}: the pass the place opens on.` : `${fmtDate(p.dates[at2])}: the pass with the most ${P.label.toLowerCase()}.`,

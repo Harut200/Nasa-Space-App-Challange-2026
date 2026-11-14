@@ -1,5 +1,5 @@
 import { lazy, Suspense, useCallback, useEffect, useMemo, useState } from 'react'
-import { getJson, makePlace, isEvent, eventType, nearestPlace, distanceKm, parseHash, km, words, dayMonth, defaultLayer, currentTheme, basemapMode, DATA, BRAND } from './meta.js'
+import { getJson, makePlace, isEvent, eventType, nearestPlace, distanceKm, parseHash, km, words, dayMonth, defaultLayer, defaultDateIndex, compareTwin, compareName, currentTheme, basemapMode, DATA, BRAND } from './meta.js'
 import { nearest, frame } from './data.js'
 import { Landing, PlaceUI, COLORS } from './Panels.jsx'
 import About from './About.jsx'
@@ -11,8 +11,10 @@ const reduced = matchMedia('(prefers-reduced-motion: reduce)')
 // A compare link opens the Compare tab, so the mode can be turned off again.
 const initial = (m, link, theme) => {
   const ev = isEvent(m)
-  const idx = link.date && m.dates.length ? m.dates.indexOf(nearest(m.dates, link.date)) : 0 // a date a place does not have snaps to its nearest pass
-  return { id: m.id, dateIndex: idx, layerId: m.layers.some((l) => l.id === link.layer) ? link.layer : defaultLayer(m), playing: false, touched: ev || !!link.date, // an earthquake has nothing to play
+  const idx = link.date && m.dates.length ? m.dates.indexOf(nearest(m.dates, link.date)) : defaultDateIndex(m) // a date a place does not have snaps to its nearest pass; no date in the link: the manifest's defaultDate
+  const layerId = m.layers.some((l) => l.id === link.layer) ? link.layer : defaultLayer(m)
+  const opens = m.layers.find((l) => l.id === layerId)
+  return { id: m.id, dateIndex: idx, layerId, playing: false, touched: ev || !!link.date || !!m.defaultDate || !opens?.dates, // a whole-season layer or a named date has nothing to play // an earthquake has nothing to play
     compare: link.compare, otherIndex: link.other && m.dates.includes(link.other) ? m.dates.indexOf(link.other) : 0, split: link.split, opacity: theme === 'earth' ? 0.9 : 1, sheet: link.compare && !ev ? 'compare' : null, list: false, layersOpen: innerWidth >= 900 }
 }
 
@@ -66,7 +68,8 @@ export default function App() {
   const isAfter = !pair || pair.after === layer.id
   // Compare only makes sense on a dated layer: on a whole-season layer both sides would be the same image.
   // An earthquake has no second date: its compare is the layer against the bare satellite image ("reveal").
-  const cmp = !!(v?.compare && (layer?.dates || ev))
+  const cmpTwin = !ev && layer ? compareTwin(m, layer) : null // evidence layer against its before/after twin
+  const cmp = !!(v?.compare && (layer?.dates || ev || cmpTwin))
   const extent = useExtent(cmp ? maps.a : null, m?.bounds)
 
   // A link for the place that is already open (pasted or edited in the same tab) changes its layer and date instead of being ignored.
@@ -94,10 +97,10 @@ export default function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [placeId])
   // The address always describes the view, compare included, so a reload or a pasted link comes back the same. The divider is debounced while it is dragged.
-  const cmpKey = cmp ? `${Math.round(v.split)}|${ev ? '' : m.dates[v.otherIndex]}` : ''
+  const cmpKey = cmp ? `${Math.round(v.split)}|${ev || cmpTwin ? '' : m.dates[v.otherIndex]}` : ''
   useEffect(() => {
     if (!(v && m && layer)) return
-    const q = { layer: layer.id, ...(date ? { date } : {}), ...(cmp ? { compare: '1', split: String(Math.round(v.split)), ...(ev ? {} : { other: m.dates[v.otherIndex] }) } : {}) }
+    const q = { layer: layer.id, ...(date ? { date } : {}), ...(cmp ? { compare: '1', split: String(Math.round(v.split)), ...(ev || cmpTwin ? {} : { other: m.dates[v.otherIndex] }) } : {}) }
     const t = setTimeout(() => history.replaceState(null, '', `${location.pathname}${location.search}#/${m.id}?${new URLSearchParams(q)}`), cmp ? 200 : 0)
     return () => clearTimeout(t)
   }, [v?.id, v?.layerId, v?.dateIndex, cmpKey]) // eslint-disable-line react-hooks/exhaustive-deps
@@ -139,7 +142,7 @@ export default function App() {
   }
 
   const shown = m && layer?.dates ? frame(DATA, m.id, layer, date).shown : null
-  const other = m && v && !ev ? (layer?.dates ? words(frame(DATA, m.id, layer, m.dates[v.otherIndex]).shown) : 'whole season') : null
+  const other = m && v && !ev && !cmpTwin ? (layer?.dates ? words(frame(DATA, m.id, layer, m.dates[v.otherIndex]).shown) : 'whole season') : null
   const note = shown && shown !== date ? `No “${layer.label}” image for ${words(date)}. Showing the nearest one, ${words(shown)}.` : null
   const mode = basemapMode(theme)
 
@@ -150,10 +153,10 @@ export default function App() {
           onOpen={go} onHover={setTip} onSelect={setSelected} target={target} onMap={setA} onImagery={setImagery} />
       </Suspense>
       {cmp && m && layer && extent && (
-        <MapView key={twin?.id || 'bare'} mode={mode} bounds={m.bounds} url={ev ? (twin ? frame(DATA, m.id, twin, undefined).url : null) : frame(DATA, m.id, layer, m.dates[v.otherIndex]).url} opacity={v.opacity} onMap={setB} epicentre={ev ? m.event.lngLat : null}
+        <MapView key={cmpTwin?.id || twin?.id || 'bare'} mode={mode} bounds={m.bounds} url={ev ? (twin ? frame(DATA, m.id, twin, undefined).url : null) : cmpTwin ? frame(DATA, m.id, cmpTwin, undefined).url : frame(DATA, m.id, layer, m.dates[v.otherIndex]).url} opacity={v.opacity} onMap={setB} epicentre={ev ? m.event.lngLat : null}
           style={{ clipPath: `inset(${extent.top - 1}px 0 ${innerHeight - extent.top - extent.height}px ${extent.left + (extent.width * v.split) / 100}px)` }} />
       )}
-      {cmp && extent && <Divider rect={extent} split={v.split} onSplit={(s) => patch({ split: s })} left={ev ? (twin ? (isAfter ? 'After' : 'Before') : quake ? 'Ground motion' : 'Surface change') : dayMonth(shown)} right={ev ? (twin ? (isAfter ? 'Before' : 'After') : 'Satellite only') : dayMonth(frame(DATA, m.id, layer, m.dates[v.otherIndex]).shown)} label={ev ? twin ? 'Drag to compare the layer before and after the event' : `Drag to reveal the satellite image beneath the ${quake ? 'ground-motion' : 'surface-change'} layer` : undefined} />}
+      {cmp && extent && <Divider rect={extent} split={v.split} onSplit={(s) => patch({ split: s })} left={cmpTwin ? compareName(m, layer) : ev ? (twin ? (isAfter ? 'After' : 'Before') : quake ? 'Ground motion' : 'Surface change') : dayMonth(shown)} right={cmpTwin ? compareName(m, cmpTwin) : ev ? (twin ? (isAfter ? 'Before' : 'After') : 'Satellite only') : dayMonth(frame(DATA, m.id, layer, m.dates[v.otherIndex]).shown)} label={cmpTwin ? `Drag to compare ${compareName(m, layer).toLowerCase()} and ${compareName(m, cmpTwin).toLowerCase()}` : ev ? twin ? 'Drag to compare the layer before and after the event' : `Drag to reveal the satellite image beneath the ${quake ? 'ground-motion' : 'surface-change'} layer` : undefined} />}
       {!imagery && mode === 'natural' && <p className="glass imagery-note" role="status">Satellite imagery unavailable. Showing the radar data only.</p>}
       {placeId && v ? (
         <PlaceUI m={m} ts={series[m.id]} v={v} patch={patch} places={places} summary={summary} layer={layer} date={date} preview={m.source === 'preview'} otherDates={other} note={note}

@@ -106,15 +106,18 @@ test('event places: tooltip text, grouping, counts, summaries', () => {
     assert.ok(!BAD.test(t), `${p.id}: ${t}`)
   }
   const g = meta.groupPlaces(places)
-  assert.deepEqual(g.map((x) => x.key), ['flood', 'lake', 'wetland', 'land', 'fire', 'earthquake', 'volcano', 'landslide'])
+  const summary = JSON.parse(fs.readFileSync(path.join(pub, 'summary.json'), 'utf8')).categories
+  assert.deepEqual(g.map((x) => x.key), [...new Set(places.map((p) => p.category))].sort((a, b) => summary.findIndex((c) => c.id === a) - summary.findIndex((c) => c.id === b)))
+  for (const p of places) assert.ok(summary.some((c) => c.id === p.category), p.id) // every class in use is named in summary.json
   assert.equal(g.reduce((n, x) => n + x.items.length, 0), places.length)
   assert.ok(g.find((x) => x.key === 'earthquake').items.every((p) => p.kind === 'event'))
   assert.equal(meta.groupPlaces(places, [{ id: 'volcano', label: 'Volcano places' }])[0].title, 'Volcano places')
-  assert.deepEqual(meta.groupPlaces(places.filter((p) => p.kind === 'event')).map((x) => x.key), ['earthquake', 'volcano', 'landslide'])
+  assert.deepEqual(meta.groupPlaces(places.filter((p) => p.kind === 'event')).map((x) => x.key), ['fire', 'earthquake', 'volcano', 'landslide'])
   const unknown = [{ ...places[0], category: 'glacier-lake' }, ...places]
   assert.equal(meta.groupPlaces(unknown).at(-1).title, 'Glacier Lake')
   const counts = meta.classList(places).map((c) => `${c.label.toLowerCase()} (${c.n})`).join(', ')
   assert.equal(meta.landingText(places), `NISAR watched ${places.length} places between June and October 2026: ${counts}.`)
+  assert.equal(places.length, idxAreas.length)
   assert.equal(meta.landingText(places.slice(0, 1)), 'NISAR watched 1 place between June and October 2026: floods (1).')
   assert.equal(meta.eventSummary(tibet), 'M7.0 · 22 Oct 2026')
 })
@@ -134,7 +137,7 @@ test('event types: volcano and landslide wording, noisy view rule, fringe cycle,
   const fire = manifests.find((m) => m.id === 'thunder-bay-36-2026'), fp = places.find((p) => p.id === fire.id)
   assert.equal(fp.peak, null)
   assert.equal(meta.placeSummary(fp), fire.headlineNote)
-  assert.match(html(h(Fact, { p: fp })), new RegExp(fire.headlineNote))
+  assert.ok(html(h(Fact, { p: fp })).includes(fire.headlineNote.replace(/&/g, '&amp;')))
   assert.equal(meta.defaultLayer(fire), fire.defaultLayer)
   const ararat = manifests.find((m) => m.id === 'ararat')
   assert.deepEqual(meta.splitLayers(ararat.layers, false).main.map((l) => l.id), ['water', 'when', 'change', 'hh', 'coh', 'coh_change'])
@@ -203,4 +206,72 @@ test('calibrated place (dB, negative values, axis not from 0) and a % fact with 
   assert.equal(html(h(Chart, { ts: noData, pol: 'hh', gaps: [], index: 0, onPick: noop, colors: ['#f00'], spots: [] })), '')
   const peak = meta.peakWater({ dates: ['a', 'b'], facts: [{ label: 'Open water', unit: '%', values: [null, 12.5] }] })
   assert.deepEqual(peak, { v: 12.5, date: 'b', unit: '%' })
+})
+
+// ---- data refresh: caution, evidence, default layer and date, fire events ----
+test('caution: on every place that has one, in the tooltip, never dropped', () => {
+  const withC = manifests.filter((m) => m.caution)
+  assert.ok(withC.length >= 5)
+  for (const m of withC) {
+    const p = places.find((x) => x.id === m.id)
+    assert.equal(p.caution, m.caution)
+    assert.ok(html(h(Fact, { p })).includes(m.caution.replace(/'/g, '&#x27;')), m.id)
+  }
+  assert.equal(places.find((p) => p.id === 'sevan').caution, null)
+})
+
+test('opening layer and date come from the manifest; every default layer is a real layer', () => {
+  for (const m of manifests) {
+    assert.ok(m.layers.some((l) => l.id === meta.defaultLayer(m)), m.id)
+    if (m.defaultDate) assert.equal(meta.defaultDateIndex(m), m.dates.indexOf(m.defaultDate), m.id)
+  }
+  assert.equal(meta.defaultLayer(manifests.find((m) => m.id === 'okavango')), 'ev_diff')
+  assert.equal(meta.defaultLayer(manifests.find((m) => m.id === 'poyang')), 'change')
+  const poy = manifests.find((m) => m.id === 'poyang')
+  assert.equal(poy.dates[meta.defaultDateIndex(poy)], '2026-09-27')
+  assert.equal(meta.defaultDateIndex(manifests.find((m) => m.id === 'sevan')), 0)
+})
+
+test('evidence places: layers, steps without their numbers, twin for compare, chart series', () => {
+  const ev = manifests.filter((m) => m.evidence)
+  assert.ok(ev.length >= 5)
+  for (const m of ev) {
+    const ids = meta.evidenceLayerIds(m)
+    assert.ok(ids.includes(m.evidence.before) && ids.includes(m.evidence.after) && ids.includes(m.evidence.diff), m.id)
+    assert.equal(ids.includes(m.evidence.mask), !!m.evidence.mask)
+    const steps = meta.evidenceSteps(m)
+    assert.equal(steps.length, 5)
+    assert.ok(steps.every((t, i) => t === m.evidence.steps[i].replace(/^\d+\. /, '')))
+    assert.equal(meta.compareTwin(m, m.layers.find((l) => l.id === m.evidence.after)).id, m.evidence.before)
+    assert.equal(meta.compareTwin(m, m.layers.find((l) => l.id === m.evidence.before)).id, m.evidence.after)
+    assert.equal(meta.compareTwin(m, m.layers.find((l) => l.id === 'hh')), null)
+    const ts = JSON.parse(fs.readFileSync(path.join(pub, m.id, 'timeseries.json'), 'utf8'))
+    for (const lab of m.evidence.series) assert.ok(ts.facts.some((f) => f.label === lab), `${m.id}: ${lab}`)
+    const { main } = meta.splitLayers(m.layers, false, ids, true)
+    assert.ok(ids.every((id) => main.some((l) => l.id === id)))
+    for (const l of m.layers) assert.ok(l.label && l.legend, `${m.id} ${l.id}`)
+  }
+  assert.equal(meta.compareTwin(manifests.find((m) => m.id === 'sevan'), { id: 'hh' }), null)
+})
+
+test('fire places: no water numbers; event fire places are treated like volcano events', () => {
+  for (const p of places.filter((x) => x.category === 'fire')) {
+    assert.equal(p.peak, null, p.id)
+    assert.ok(!/km² (peak|open)|open water/i.test(html(h(Fact, { p })) + meta.placeSummary(p)), p.id)
+  }
+  const gir = places.find((p) => p.id === 'gironde-coh-2026')
+  assert.equal(gir.kind, 'event'); assert.equal(gir.category, 'fire'); assert.equal(meta.placeStyle(gir), 'fire')
+  const tip = meta.eventTip(gir)
+  assert.ok(!/ M\d|ground moved| cm/.test(tip.head + tip.rest), tip.rest)
+  assert.equal(meta.classList(places, JSON.parse(fs.readFileSync(path.join(pub, 'summary.json'), 'utf8')).categories).find((c) => c.id === 'fire').label, 'Wildfires')
+  assert.equal(meta.fmtVal(44.78, 'relative brightness (0–100, uncalibrated)'), '44.8')
+})
+
+test('venezuela m75: the view whose control is at least 0.8 x its signal is too noisy, the other is not', () => {
+  const m = readManifest('venezuela-m75-2026')
+  const noisy = m.event.views.filter(meta.noisyView).map((v) => v.label)
+  assert.deepEqual(noisy, ['ascending'])
+  assert.equal(meta.noisyLayer(m, m.layers.find((l) => l.id === 'los_asc_cm')), true)
+  assert.equal(meta.noisyLayer(m, m.layers.find((l) => l.id === 'los_desc_cm')), false)
+  assert.ok(!meta.eventTip(places.find((p) => p.id === m.id)).rest.includes('66'))
 })

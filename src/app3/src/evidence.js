@@ -15,11 +15,11 @@ export function evidenceSteps(p) {
   const steps = []
   if (has(e.before)) steps.push({
     key: 'before', title: burn ? 'Before the fire' : 'Before', text: T[0], layer: e.before,
-    stat: { big: String((st.before_dates || []).length || ''), unit: '', label: 'passes, combined into one image', sub: rng(st.before_dates) },
+    stat: { big: String((st.before_dates || []).length || ''), unit: '', label: (st.before_dates || []).length === 1 ? 'pass, used as the image' : 'passes, combined into one image', sub: rng(st.before_dates) },
   })
   if (has(e.after)) steps.push({
     key: 'after', title: burn ? 'After the fire' : 'After', text: T[1], layer: e.after,
-    stat: { big: String((st.after_dates || []).length || ''), unit: '', label: 'passes, combined into one image', sub: [rng(st.after_dates), (st.excluded_dates || []).length ? `left out: ${st.excluded_dates.map(fmtDate).join(', ')}` : ''].filter(Boolean).join(' · ') },
+    stat: { big: String((st.after_dates || []).length || ''), unit: '', label: (st.after_dates || []).length === 1 ? 'pass, used as the image' : 'passes, combined into one image', sub: [rng(st.after_dates), (st.excluded_dates || []).length ? `left out: ${st.excluded_dates.map(fmtDate).join(', ')}` : ''].filter(Boolean).join(' · ') },
   })
   if (diffLayer) steps.push({
     key: 'diff', title: 'What changed', text: T[2], layer: diffLayer,

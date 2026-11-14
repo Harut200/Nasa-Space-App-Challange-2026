@@ -79,8 +79,8 @@ export default function EvidenceChart({ place, index, onScrub, compact }) {
         {gb && <g><rect x={gb.x0} y={M.t} width={gb.x1 - gb.x0} height={ih} fill="var(--water)" opacity=".13" /><text x={gb.x0 + 4} y={M.t - 8} className="ax">before</text></g>}
         {ga && <g><rect x={ga.x0} y={M.t} width={ga.x1 - ga.x0} height={ih} fill="var(--accent)" opacity=".11" /><text x={ga.x0 + 4} y={M.t - 8} className="ax">after</text></g>}
         {place.gaps.map(([a, b], i) => { const x0 = Math.max(M.l, g.x(a)), x1 = Math.min(w - M.r, g.x(b)); return x1 > x0 ? <rect key={i} x={x0} y={M.t} width={Math.max(2, x1 - x0)} height={ih} fill={`url(#rest${uid})`} /> : null })}
-        <path d={B.d} fill="none" stroke="var(--ink-2)" strokeWidth="2.2" strokeLinejoin="round" strokeDasharray="5 4" />
-        <path d={A.d} fill="none" stroke="var(--accent)" strokeWidth="2.6" strokeLinejoin="round" />
+        <path data-fadein d={B.d} fill="none" stroke="var(--ink-2)" strokeWidth="2.2" strokeLinejoin="round" strokeDasharray="5 4" />
+        <path data-draw pathLength="1" d={A.d} fill="none" stroke="var(--accent)" strokeWidth="2.6" strokeLinejoin="round" />
         {B.pts.map((p) => <circle key={p[2]} cx={p[0]} cy={p[1]} r="3" fill="var(--ink-2)" />)}
         {A.pts.map((p) => <circle key={p[2]} cx={p[0]} cy={p[1]} r={p[2] === index ? 5 : 3.5} fill="var(--accent)" stroke="var(--surface)" strokeWidth="1.5" />)}
         {dates.map((d, i) => excl.has(d) && <g key={d}><circle cx={g.x(d)} cy={M.t + ih - 6} r="4.5" fill="none" stroke="var(--warn)" strokeWidth="1.6" /><path d={`M${g.x(d) - 2.5},${M.t + ih - 8.5}l5,5m0,-5l-5,5`} stroke="var(--warn)" strokeWidth="1.4" /></g>)}

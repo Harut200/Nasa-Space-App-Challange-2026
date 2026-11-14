@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { nearest } from './data.js'
 // Presentation helpers. Every number comes from manifests/timeseries; this file only orders and renames.
 export const DATA = import.meta.env.BASE_URL + 'data/'
 export const BRAND = import.meta.env.BASE_URL + 'brand/'
@@ -32,6 +33,14 @@ export const SHORT = {
   coherence: 'Coherence',
   coh: 'Coherence',
   coh_loss: 'Where it changed completely',
+  ev_before: 'Before',
+  ev_after: 'After',
+  ev_diff: 'Echo change',
+  ev_mask: 'Changed patch',
+  burn_before: 'Before the fire',
+  burn_after: 'After the fire',
+  burn_diff: 'Echo change after the fire',
+  burn_scar: 'Changed patch',
 }
 // A layer id without a short name falls back to the manifest label, cut at a word boundary when it is long.
 export function shortLabel(l) {
@@ -44,16 +53,17 @@ export function shortLabel(l) {
 // A number for display: whole numbers for areas, one decimal for a percentage or a dB value; a real minus sign.
 export function fmtVal(v, unit) {
   if (!Number.isFinite(v)) return ''
-  const t = unit === '%' || unit === 'dB' ? v.toFixed(1) : km(v)
+  const t = unit === '%' || unit === 'dB' || /^relative brightness/.test(unit || '') ? v.toFixed(1) : km(v)
   return t.replace(/^-(?=\d)/, '\u2212')
 }
 // "63.4 %" is written "63.4%": a percent sign sits against its number.
 export const withUnit = (v, unit) => (unit === '%' ? `${fmtVal(v, unit)}%` : `${fmtVal(v, unit)}${unit ? ` ${unit}` : ''}`)
 
 // Layers that are the story of a place, not just extras: the coherence pair (Ararat) and the opening layer a manifest names (fire places).
-export function splitLayers(layers, event, promote = []) {
+// `lead`: the promoted layers come first (the evidence layers of a place that has a "How we found it" story).
+export function splitLayers(layers, event, promote = [], lead = false) {
   if (event) return { main: layers, more: [] }
-  const ids = [...PRIMARY, ...PRIMARY_COH, ...promote]
+  const ids = lead ? [...promote, ...PRIMARY, ...PRIMARY_COH] : [...PRIMARY, ...PRIMARY_COH, ...promote]
   const first = [...new Set(ids)].map((id) => layers.find((l) => l.id === id)).filter(Boolean)
   return { main: first, more: layers.filter((l) => !first.includes(l)) }
 }
@@ -65,7 +75,30 @@ export function defaultLayer(m) {
   const pick = (m.defaultLayer && has(m.defaultLayer)) || (isEvent(m) ? has('fringes') || has('coh_loss') : has('water')) || m.layers[0]
   return pick.id
 }
+// The evidence block of a place found by before/after (fire season places and the ev_* places): layer ids, series labels and the five sentences, leading "1. " removed.
+export const evidenceOf = (m) => (m?.evidence && Array.isArray(m.evidence.steps) ? m.evidence : null)
+export const evidenceLayerIds = (m) => { const e = evidenceOf(m); return e ? [e.before, e.after, e.diff, e.mask].filter((id) => id && m.layers.some((l) => l.id === id)) : [] }
+export const evidenceSteps = (m) => (evidenceOf(m)?.steps || []).map((t) => String(t).replace(/^\s*\d+\.\s*/, ''))
+// A fact that belongs to the evidence chart (the inside/outside echo series and their difference), not to the water headline.
+export const isEvidenceFact = (m, f) => { const e = evidenceOf(m); return !!e && (e.series.includes(f.label) || f.label === 'Difference') }
+// Compare for a season place that has no dated layer on screen: the evidence layer against its twin (after/diff/patch against before, before against after).
+export function compareTwin(m, layer) {
+  const e = evidenceOf(m)
+  if (!e || !layer || isEvent(m) || !evidenceLayerIds(m).includes(layer.id)) return null
+  return m.layers.find((l) => l.id === (layer.id === e.before ? e.after : e.before)) || null
+}
+export const compareName = (m, l) => { const e = evidenceOf(m); return l.id === e?.before ? 'Before' : l.id === e?.after ? 'After' : shortLabel(l) }
+// The caution line of a place: shown wherever its headline number is, never hidden.
+export const cautionOf = (m) => (typeof m?.caution === 'string' && m.caution.trim() ? m.caution.trim() : null)
+// A view of a quake place (ascending / descending) whose control is as big as its signal; its layer is marked too.
+export function noisyLayer(m, l) {
+  if (!isEvent(m)) return false
+  const dir = /(^|_)asc(_|$)/.test(l.id) ? 'ascending' : /(^|_)desc(_|$)/.test(l.id) ? 'descending' : null
+  return !!dir && (m.event.views || []).some((v) => v.label === dir && noisyView(v))
+}
 // A place whose story is not open water: the manifest says "none" and gives its own note.
+// The date a dated opening layer shows: the manifest's defaultDate snapped to a pass the place really has.
+export const defaultDateIndex = (m) => (m.defaultDate && m.dates.length ? m.dates.indexOf(nearest(m.dates, m.defaultDate)) : 0)
 export const noHeadline = (m) => m?.headline === 'none'
 // A view is too noisy to use when its control pair moves nearly as much as the event pair.
 export const noisyView = (v) => Number.isFinite(v?.p2p_cm) && Number.isFinite(v?.control_p2p_cm) && v.control_p2p_cm >= 0.8 * v.p2p_cm
@@ -101,7 +134,7 @@ function span(m) {
 }
 export const makePlace = (m, ts) => ({
   id: m.id, name: m.name, lngLat: centre(m.bounds), kind: isEvent(m) ? 'event' : 'season', event: isEvent(m) ? m.event : null,
-  category: categoryOf(m), noWater: noHeadline(m), note: noHeadline(m) ? m.headlineNote || null : null, span: span(m),
+  category: categoryOf(m), noWater: noHeadline(m), note: noHeadline(m) ? m.headlineNote || null : null, caption: noHeadline(m) ? null : m.headlineNote || null, caution: cautionOf(m), span: span(m),
   peak: noHeadline(m) ? null : peakWater(ts),
 })
 export const magnitude = (e) => (Number.isFinite(e?.magnitude) ? e.magnitude.toFixed(1) : null)

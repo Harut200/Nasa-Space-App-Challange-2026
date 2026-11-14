@@ -42,7 +42,7 @@ export function buildScenes(p) {
   scenes.push({
     key: 'overture', kicker: 'Overture', title: nm, layer: named ? p.defaultLayer : pct && has('coh') ? 'coh' : 'hh', at: named ? (defaultIndex(p) ?? (named === 'water' || named === 'hh' ? first : last)) : pct ? first : 0, compare: false, caution: true,
     text: `${n} passes of the NISAR L-band radar between ${fmtDate(p.dates[0])} and ${fmtDate(p.dates[last])}. Each pass is one beat.${gap ? ` The instrument was off from ${fmtDate(gap[0])} to ${fmtDate(gap[1])}, so the score has a rest.` : ''}`,
-    stat: () => passStat,
+    stat: () => passStat, cap: p.headlineNote || undefined,
   })
   scenes.push({
     key: 'see', kicker: 'What you see', title: 'The season plays', layer: wl, at: first, play: true, text: sentences(p.story.see, 3), full: p.story.see,

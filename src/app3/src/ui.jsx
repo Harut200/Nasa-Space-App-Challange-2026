@@ -1,12 +1,12 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { fmtKm } from './data.js'
 
 export const reducedMotion = () => window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
 
 // Smoothly counts toward a new value (instant with reduced motion).
-export function useCountUp(target, ms = 650) {
-  const [v, setV] = useState(target)
-  const from = useRef(target)
+export function useCountUp(target, ms = 560, enter = false) {
+  const [v, setV] = useState(enter && target != null && !reducedMotion() ? 0 : target) // enter: the first value counts up from zero, once
+  const from = useRef(enter && target != null && !reducedMotion() ? 0 : target)
   useEffect(() => {
     if (target == null || reducedMotion()) { setV(target); from.current = target; return }
     const a = from.current ?? target, t0 = performance.now()
@@ -23,7 +23,29 @@ export function useCountUp(target, ms = 650) {
   return v
 }
 
-export const Num = ({ value }) => { const v = useCountUp(value); return <>{fmtKm(v)}</> }
+export const Num = ({ value }) => { const v = useCountUp(value, 560, true); return <>{fmtKm(v)}</> }
+
+// Step transition: remembers the step we come from, the direction and how fast steps arrive, so the old text can fade out while the new comes in.
+// snap = what the old step looked like ({ n, ... }); group = the thing the steps belong to (a place); steps of another group just come in.
+export function useStepMotion(key, snap, group) {
+  const prev = useRef(null)
+  const [leaving, setLeaving] = useState(null)
+  const [mv, setMv] = useState({ dir: 1, fast: false })
+  useLayoutEffect(() => {
+    const p = prev.current, now = performance.now()
+    if (p && p.key !== key && p.group === group) {
+      setMv({ dir: snap.n >= p.snap.n ? 1 : -1, fast: now - p.at < 420 })
+      setLeaving(p.snap)
+      const t = setTimeout(() => setLeaving(null), now - p.at < 420 ? 110 : 170)
+      prev.current = { key, snap, group, at: now }
+      return () => clearTimeout(t)
+    }
+    prev.current = { key, snap, group, at: p && p.group === group ? p.at : now }
+    setLeaving(null)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [key, group])
+  return { leaving, mv }
+}
 
 // A small, dismissible hint for the keyboard; remembered for the visit when storage allows.
 export function KeyHint({ text }) {

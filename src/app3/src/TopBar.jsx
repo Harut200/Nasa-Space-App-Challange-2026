@@ -8,7 +8,7 @@ export function Switcher({ place, index, count, prevName, nextName, onPrev, onNe
       <button className="icon-btn quiet" onClick={onPrev} aria-label={`Previous place${prevName ? `: ${prevName}` : ''}`} title={prevName ? `Previous: ${prevName}  ( [ )` : 'Previous place ( [ )'}>{Icon.prev}</button>
       <button className="sw-name" onClick={onName} title={`${place.name} · place ${index + 1} of ${count} · open the list ( / )`} aria-label={`${place.name}, place ${index + 1} of ${count}. Open the list of places.`}>
         <KindIcon place={place} size={14} />
-        <span className="sw-text">{place.name}</span>
+        <span className="sw-text">{place.name.split(":")[0]}</span>
       </button>
       <button className="icon-btn quiet" onClick={onNext} aria-label={`Next place${nextName ? `: ${nextName}` : ''}`} title={nextName ? `Next: ${nextName}  ( ] )` : 'Next place ( ] )'}>{Icon.next}</button>
       <button className="icon-btn quiet sw-rand" onClick={onRandom} aria-label="Random place" title="A random place ( R )">{Icon.dice}</button>
