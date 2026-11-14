@@ -182,6 +182,19 @@ def area_range(area, T):
     return {"lo": [round(float(v)) for v in d["water_km2_lo"]], "hi": [round(float(v)) for v in d["water_km2_hi"]]}
 
 
+def fused_range(area, T, valid, km2):
+    """Open-water area where the fused probability exceeds 0.75 (low) and 0.25 (high), per date."""
+    fp = ROOT / "data/processed" / area / "fusion2/products.pt"
+    if not fp.exists():
+        return {}
+    p = torch.load(fp, map_location="cpu", weights_only=False).get("p_water")
+    v = valid.cpu()
+    if p is None or tuple(p.shape) != tuple(v.shape):
+        return {}
+    area_at = lambda q: [round(float(((p[t].float() > q) & v[t]).sum()) * km2) for t in range(T)]
+    return {"lo": area_at(0.75), "hi": area_at(0.25)}
+
+
 def extra_layers(area, prod, grid, dates, valid, when_cols, cls_legend):
     """Whole-season layers built by the analysis modules; each is added only if its product exists."""
     H, W, T = grid.h, grid.w, len(dates)
@@ -377,7 +390,7 @@ def run(area, source="auto", dev=None):
     km = lambda m: [round(float((m[t] & valid[t]).sum()) * km2, 1) for t in range(T)]
     ts = {"dates": dates, "unit": "dB" if source == "gamma0" else PREVIEW_UNIT, "series": series,
           "facts": [dict({"label": "Open water", "unit": "km²", "values": km(o["water"])},
-                         **(area_range(area, T) if water_src == "math" else {})),
+                         **(area_range(area, T) if water_src == "math" else fused_range(area, T, valid, km2) if water_src == "fusion2" else {})),
                     {"label": "Flooded vegetation", "unit": "km²", "values": km(o["flooded_veg"])}]
                    + ([{"label": "of which going under", "unit": "km²", "values": km(o["flooded_veg"] & (o["fv_state"] == 2))}]
                       if "fv_state" in o else [])}
