@@ -1,0 +1,317 @@
+........................................................................ [ 32%]
+........................................................................ [ 64%]
+........................................................................ [ 96%]
+.......                                                                  [100%]
+=============================== warnings summary ===============================
+tests/test_graphdet.py::test_laplacian_matches_hand_computed
+  <repo>/scripts/detect/graphdet.py:139: UserWarning: Sparse invariant checks are implicitly disabled. Memory errors (e.g. SEGFAULT) will occur when operating on a sparse tensor which violates the invariants, but checks incur performance overhead. To silence this warning, explicitly opt in or out. See `torch.sparse.check_sparse_tensor_invariants.__doc__` for guidance.  (Triggered internally at <ci>/aten/src/ATen/Context.cpp:923.)
+    Wm = torch.sparse_coo_tensor(torch.stack([torch.cat(rows), torch.cat(cols)]), torch.cat(vals), (n, n))
+
+tests/test_pipeline.py::test_pipeline
+tests/test_pipeline.py::test_pipeline
+tests/test_pipeline.py::test_pipeline
+tests/test_pipeline.py::test_pipeline
+tests/test_pipeline.py::test_pipeline
+tests/test_pipeline.py::test_pipeline
+  <repo>/tests/test_pipeline.py:122: PendingDeprecationWarning: Use `@` matmul instead of `*` mul operator for matrix multiplication
+    mx, my = r.transform * (cx, cy)
+
+tests/test_pipeline.py::test_pipeline
+  <repo>/tests/test_pipeline.py:179: PendingDeprecationWarning: Use `@` matmul instead of `*` mul operator for matrix multiplication
+    lon, lat = (v[0] for v in transform("EPSG:32648", "EPSG:4326", *[[v] for v in tf * (3050, 1050)]))
+
+tests/test_unmix.py::test_decoder_reproduces_hand_computed_mixture
+  <repo>/tests/test_unmix.py:32: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+  Consider using tensor.detach() first. (Triggered internally at <ci>/torch/csrc/autograd/generated/python_variable_methods.cpp:821.)
+    assert abs(float(out[c]) - b) < 2e-3, (c, float(out[c]), b)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+==================================== PASSES ====================================
+_____________________________________ test _____________________________________
+----------------------------- Captured stdout call -----------------------------
+ok
+________________________________ test_pipeline _________________________________
+----------------------------- Captured stdout call -----------------------------
+  hh: read (1310, 1288) in 0.0s
+  hv: read (1310, 1288) in 0.0s
+2026-07-13: read 0.0s, valid hh=88% hv=88%
+  hh: read (1048, 1031) in 0.0s
+  hv: read (1048, 1031) in 0.0s
+2026-07-25: read 0.0s, valid hh=88% hv=88%
+  hh: read (1332, 1311) in 0.0s
+  hv: read (1332, 1311) in 0.0s
+2026-08-18: read 0.0s, valid hh=88% hv=88%
+pipeline ok
+------------------------------ Captured log call -------------------------------
+WARNING  rasterio._env:__init__.py:377 CPLE_IllegalArg in 2026-07-13.tif: BLOCKXSIZE can only be used with TILED=YES
+WARNING  rasterio._env:__init__.py:377 CPLE_IllegalArg in 2026-07-25.tif: BLOCKXSIZE can only be used with TILED=YES
+WARNING  rasterio._env:__init__.py:377 CPLE_IllegalArg in 2026-07-25.tif: BLOCKXSIZE can only be used with TILED=YES
+WARNING  rasterio._env:__init__.py:377 CPLE_IllegalArg in 2026-08-18.tif: BLOCKXSIZE can only be used with TILED=YES
+WARNING  rasterio._env:__init__.py:377 CPLE_IllegalArg in 2026-08-18.tif: BLOCKXSIZE can only be used with TILED=YES
+WARNING  rasterio._env:__init__.py:377 CPLE_IllegalArg in rgb.tif: BLOCKXSIZE can only be used with TILED=YES
+WARNING  rasterio._env:__init__.py:377 CPLE_IllegalArg in 2026-07-13.tif: BLOCKXSIZE can only be used with TILED=YES
+WARNING  rasterio._env:__init__.py:377 CPLE_IllegalArg in 2026-07-25.tif: BLOCKXSIZE can only be used with TILED=YES
+WARNING  rasterio._env:__init__.py:377 CPLE_IllegalArg in 2026-08-18.tif: BLOCKXSIZE can only be used with TILED=YES
+_______________________________ test_search_live _______________________________
+----------------------------- Captured stdout call -----------------------------
+dropped duplicate on 2026-06-19: NISAR_L2_PR_GCOV_023_083_A_008_4005_DHDH_A_20260619T223637_20260619T223644_P05023_N_P_J_001
+dropped duplicate on 2026-06-19: NISAR_L2_PR_GCOV_023_083_A_008_4005_DHDH_A_20260619T223707_20260619T223711_P05023_N_P_J_001
+dropped duplicate on 2026-07-01: NISAR_L2_PR_GCOV_024_083_A_008_4005_DHDH_A_20260701T223636_20260701T223643_P05023_N_P_J_001
+dropped duplicate on 2026-07-01: NISAR_L2_PR_GCOV_024_083_A_008_4005_DHDH_A_20260701T223706_20260701T223711_P05023_N_P_J_001
+dropped duplicate on 2026-07-13: NISAR_L2_PR_GCOV_025_083_A_008_4005_DHDH_A_20260713T223636_20260713T223642_P05023_N_P_J_001
+dropped duplicate on 2026-07-13: NISAR_L2_PR_GCOV_025_083_A_008_4005_DHDH_A_20260713T223705_20260713T223710_P05023_N_P_J_001
+dropped duplicate on 2026-07-25: NISAR_L2_PR_GCOV_026_083_A_008_4005_DHDH_A_20260725T223635_20260725T223642_P05023_N_P_J_001
+dropped duplicate on 2026-07-25: NISAR_L2_PR_GCOV_026_083_A_008_4005_DHDH_A_20260725T223705_20260725T223709_P05023_N_P_J_001
+dropped duplicate on 2026-08-18: NISAR_L2_PR_GCOV_028_083_A_008_4005_DHDH_A_20260818T223634_20260818T223641_P05023_N_P_J_001
+dropped duplicate on 2026-08-18: NISAR_L2_PR_GCOV_028_083_A_008_4005_DHDH_A_20260818T223704_20260818T223708_P05023_N_P_J_001
+dropped duplicate on 2026-08-30: NISAR_L2_PR_GCOV_029_083_A_008_4005_DHDH_A_20260830T223633_20260830T223640_P05023_N_P_J_001
+dropped duplicate on 2026-08-30: NISAR_L2_PR_GCOV_029_083_A_008_4005_DHDH_A_20260830T223704_20260830T223708_P05023_N_P_J_001
+dropped duplicate on 2026-09-11: NISAR_L2_PR_GCOV_030_083_A_008_4005_DHDH_A_20260911T223633_20260911T223640_P05023_N_P_J_001
+dropped duplicate on 2026-09-11: NISAR_L2_PR_GCOV_030_083_A_008_4005_DHDH_A_20260911T223703_20260911T223708_P05023_N_P_J_001
+dropped duplicate on 2026-09-23: NISAR_L2_PR_GCOV_031_083_A_008_4005_DHDH_A_20260923T223633_20260923T223640_P05023_N_P_J_001
+dropped duplicate on 2026-09-23: NISAR_L2_PR_GCOV_031_083_A_008_4005_DHDH_A_20260923T223703_20260923T223708_P05023_N_P_J_001
+dropped duplicate on 2026-10-05: NISAR_L2_PR_GCOV_032_083_A_008_4005_DHDH_A_20261005T223633_20261005T223641_P05023_N_P_J_001
+dropped duplicate on 2026-10-05: NISAR_L2_PR_GCOV_032_083_A_008_4005_DHDH_A_20261005T223704_20261005T223708_P05023_N_P_J_001
+dropped duplicate on 2026-10-17: NISAR_L2_PR_GCOV_033_083_A_008_4005_DHDH_A_20261017T223633_20261017T223641_P05023_N_P_J_001
+dropped duplicate on 2026-10-17: NISAR_L2_PR_GCOV_033_083_A_008_4005_DHDH_A_20261017T223704_20261017T223708_P05023_N_P_J_001
+10 passes -> <repo>/data/raw/tonle-sap/passes.json
+search ok: 10 passes 2026-06-19 .. 2026-10-17
+________________________________ test_run_demo _________________________________
+----------------------------- Captured stdout call -----------------------------
+  terrain mask: not built for this area
+  water source: math
+demo: source=gamma0 grid=500x500 dates=6 spots=0 change_pol=hh
+  open water km2: [12.5, 50.1, 112.8, 200.7, 314.0, 452.1]
+  flooded veg km2: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+___________________________ test_run_gamma0_db_path ____________________________
+----------------------------- Captured stdout call -----------------------------
+  terrain mask: not built for this area
+  water source: math
+gtest-cal: source=gamma0 grid=100x100 dates=4 spots=2 change_pol=hh
+  open water km2: [1.2, 5.1, 11.4, 20.5]
+  flooded veg km2: [0.0, 0.0, 0.0, 0.0]
+=========================== short test summary info ============================
+PASSED tests/test_add_area.py::test_point_in_poly_and_box_inside
+PASSED tests/test_add_area.py::test_parse_wkt_drops_closing_point
+PASSED tests/test_add_area.py::test_box_share
+PASSED tests/test_add_area.py::test_largest_subbox_fits_and_respects_min_side
+PASSED tests/test_add_area.py::test_largest_subbox_inside_every_date
+PASSED tests/test_add_area.py::test_grouping_counts_full_dual_pol_single_mode
+PASSED tests/test_add_area.py::test_choose_prefers_inside_then_most_dates
+PASSED tests/test_add_area.py::test_choose_shrinks_when_nothing_contains_box
+PASSED tests/test_add_area.py::test_choose_fails_cleanly
+PASSED tests/test_add_area.py::test_suspect_previews_flags_small_files
+PASSED tests/test_calibrated.py::test_db_conversion_and_power_domain_filter
+PASSED tests/test_calibrated.py::test_synthetic_scene_shapes_and_levels
+PASSED tests/test_calibrated.py::test_water_detected_at_every_enl
+PASSED tests/test_calibrated.py::test_flooded_vegetation_db_rule
+PASSED tests/test_calibrated.py::test_gamma_null_is_calibrated
+PASSED tests/test_calibrated.py::test_enl_estimators
+PASSED tests/test_calibrated.py::test_refine_shore_restores_band
+PASSED tests/test_calibrated.py::test_cond_quantile_patch_restored
+PASSED tests/test_calibrated.py::test_pair_test_exact_matches_lr
+PASSED tests/test_calibrated.py::test_run_pipeline_gamma0_dropin
+PASSED tests/test_calibrated.py::test_hist_valley_and_seeded_equiv
+PASSED tests/test_crossscene.py::test_stretch_invariance_seeded_vs_fixed
+PASSED tests/test_crossscene.py::test_no_water_scene
+PASSED tests/test_crossscene.py::test_windy_date_found_via_stable_seeds
+PASSED tests/test_crossscene.py::test_knobs_independent_of_scene_size
+PASSED tests/test_crossscene.py::test_dead_corner_is_not_water
+PASSED tests/test_crossscene.py::test_valley_and_relative_units
+PASSED tests/test_deep_ae.py::test_shapes_odd_sizes[hw0]
+PASSED tests/test_deep_ae.py::test_shapes_odd_sizes[hw1]
+PASSED tests/test_deep_ae.py::test_shapes_odd_sizes[hw2]
+PASSED tests/test_deep_ae.py::test_rgb_and_skip_variants
+PASSED tests/test_deep_ae.py::test_runs_on_device[cpu]
+PASSED tests/test_deep_ae.py::test_runs_on_device[mps]
+PASSED tests/test_deep_ae.py::test_embedding_depends_on_input
+PASSED tests/test_deep_ae.py::test_gmm_recovers_mixture
+PASSED tests/test_deep_ae.py::test_ari_nmi_basics
+PASSED tests/test_deep_ae.py::test_tiny_training_decreases_loss
+PASSED tests/test_despeckle.py::test_n2n_reduces_error_and_beats_boxcar_on_edges
+PASSED tests/test_despeckle.py::test_blindspot_hides_centre_pixel
+PASSED tests/test_despeckle.py::test_multitemporal_cannot_see_target_noise
+PASSED tests/test_despeckle.py::test_posterior_is_between_prior_and_observation
+PASSED tests/test_despeckle.py::test_denoise_preserves_mean_and_invalid
+PASSED tests/test_despeckle.py::test_noise_tools
+PASSED tests/test_detect.py::test_water_area_tracks_disc
+PASSED tests/test_detect.py::test_change_date_in_annuli
+PASSED tests/test_detect.py::test_far_pixels_stable
+PASSED tests/test_detect.py::test_ring_is_flooded_vegetation
+PASSED tests/test_detect.py::test_otsu_and_morphology
+PASSED tests/test_events.py::test_coherence_loss_area_and_control
+PASSED tests/test_events.py::test_no_event_no_loss
+PASSED tests/test_events.py::test_control_already_incoherent_is_not_counted
+PASSED tests/test_events.py::test_min_cluster_removes_speckle
+PASSED tests/test_events.py::test_nan_coherence_ignored
+PASSED tests/test_events.py::test_job_file_has_two_pairs_and_no_server_details
+PASSED tests/test_events.py::test_config_ids_unique_and_views_have_pairs
+PASSED tests/test_events.py::test_drop_rule_follows_partial_loss_and_clusters_rank_by_area
+PASSED tests/test_export.py::test
+PASSED tests/test_floodveg.py::test_ring_patch_found_town_crop_not
+PASSED tests/test_floodveg.py::test_area_tolerance_and_shapes
+PASSED tests/test_floodveg.py::test_global_offset_invariance
+PASSED tests/test_foundation.py::test_adapt_in_channels_zero_keeps_pretrained
+PASSED tests/test_foundation.py::test_adapt_in_channels_mean_scale
+PASSED tests/test_foundation.py::test_pseudo_db_and_change_rule
+PASSED tests/test_foundation.py::test_ai4g_unet_shapes
+PASSED tests/test_foundation.py::test_swin_encoder_and_head_shapes
+PASSED tests/test_foundation.py::test_alos2_normalise
+PASSED tests/test_foundation.py::test_alos2_input_centres_scene_median
+PASSED tests/test_foundation.py::test_alos2_seg_small_shapes
+PASSED tests/test_fusion.py::test_weights_favour_good_copy_gets_no_extra_credit_useless_zero
+PASSED tests/test_fusion.py::test_fused_is_better_calibrated_than_any_expert
+PASSED tests/test_fusion.py::test_two_value_mapping_is_balanced_posterior
+PASSED tests/test_fusion.py::test_markov_smoothing_removes_windy_flip_keeps_real_change
+PASSED tests/test_fusion.py::test_space_smoothing_stays_in_footprint
+PASSED tests/test_fusion.py::test_admission_rejects_expert_that_adds_nothing
+PASSED tests/test_fusion.py::test_admission_rejects_accuracy_loss_even_if_weakness_improves
+PASSED tests/test_fusion.py::test_admission_accepts_real_improvement_and_rejects_slow_module
+PASSED tests/test_fusion.py::test_end_to_end_useless_expert_gets_zero_weight_on_synthetic_samples
+PASSED tests/test_fusion2.py::test_lake_flicker_stays_water
+PASSED tests/test_fusion2.py::test_floodplain_becomes_water_on_its_date
+PASSED tests/test_fusion2.py::test_vegetation_passes_through_middle_state
+PASSED tests/test_fusion2.py::test_evidence_dependent_transition_only_on_flagged_interval
+PASSED tests/test_fusion2.py::test_gap_expands_to_two_steps
+PASSED tests/test_fusion2.py::test_exact_copy_gets_no_extra_credit
+PASSED tests/test_fusion2.py::test_no_flood_eaten_guard
+PASSED tests/test_fusion2.py::test_core_series
+PASSED tests/test_fusion2.py::test_seeded_expert_refuses_other_dates
+PASSED tests/test_fusion2.py::test_regime_map_reference_free
+PASSED tests/test_gmm.py::test_em_recovers_three_components
+PASSED tests/test_gmm.py::test_logpdf_matches_scipy_and_bic_prefers_true_k
+PASSED tests/test_gmm.py::test_em_one_component_is_closed_form
+PASSED tests/test_gmm.py::test_forward_backward_and_viterbi_match_brute_force
+PASSED tests/test_gmm.py::test_phantom_slot_equals_squared_transition
+PASSED tests/test_gmm.py::test_viterbi_known_path
+PASSED tests/test_gmm.py::test_synthetic_scene_hmm_keeps_windy_lake_and_finds_ring_sequence
+PASSED tests/test_graphdet.py::test_laplacian_matches_hand_computed
+PASSED tests/test_graphdet.py::test_random_walker_matches_dense_solve
+PASSED tests/test_graphdet.py::test_eigenvectors_match_scipy
+PASSED tests/test_graphdet.py::test_graph_keeps_windy_lake_and_rejects_blob
+PASSED tests/test_graphdet.py::test_tv_cut_relaxation_beats_threshold_energy
+PASSED tests/test_graphdet.py::test_structural_change_invariant_to_global_gain
+PASSED tests/test_graphdet.py::test_heat_filter_preserves_constants_and_smooths
+PASSED tests/test_graphdet.py::test_ls_periodogram_recovers_amplitude
+PASSED tests/test_hydro.py::test_occurrence_reproduces_height_order
+PASSED tests/test_hydro.py::test_expected_extent_recovers_true_set_and_dry_season_bias
+PASSED tests/test_hydro.py::test_level_for_exceedance_inverts
+PASSED tests/test_hydro.py::test_occ_hist_fraction
+PASSED tests/test_hydro.py::test_bathtub_respects_connectivity
+PASSED tests/test_hydro.py::test_calibration_recovers_known_threshold
+PASSED tests/test_insar.py::test_phase_to_los_value_and_sign
+PASSED tests/test_insar.py::test_ramp_removal_recovers_bowl
+PASSED tests/test_insar.py::test_height_regressor_removes_stratified_delay
+PASSED tests/test_insar.py::test_stacking_noise_falls_as_one_over_sqrt_n
+PASSED tests/test_insar.py::test_chain_and_linear_rate
+PASSED tests/test_insar.py::test_coherence_change_separates_water_from_harvest
+PASSED tests/test_insar.py::test_stability_flags_single_pair_signal
+PASSED tests/test_insar.py::test_noise_vs_distance_grows_with_distance
+PASSED tests/test_insar.py::test_reduced_transfer_format_roundtrip
+PASSED tests/test_insar.py::test_reduced_v2_format_roundtrip
+PASSED tests/test_insar_layers.py::test_idempotent_and_layers_added
+PASSED tests/test_insar_layers.py::test_legend_shape
+PASSED tests/test_insar_layers.py::test_fact_null_first_and_values
+PASSED tests/test_insar_layers.py::test_grid_match_and_transparency
+PASSED tests/test_insar_layers.py::test_dates_must_be_passes
+PASSED tests/test_novel.py::test_edt_matches_scipy
+PASSED tests/test_novel.py::test_isotonic_first_wet_and_violations
+PASSED tests/test_novel.py::test_arrival_time_recovered_on_cone
+PASSED tests/test_novel.py::test_leave_one_date_out_beats_naive
+PASSED tests/test_novel.py::test_height_order_matches_cone
+PASSED tests/test_novel.py::test_static_scene_has_no_front
+PASSED tests/test_novel.py::test_logistic_fit_recovers_step_through_gap
+PASSED tests/test_novel.py::test_static_series_has_no_amplitude
+PASSED tests/test_opera.py::test_classify_s1_codes
+PASSED tests/test_opera.py::test_classify_hls_codes_and_unknown_is_invalid
+PASSED tests/test_opera.py::test_block_fraction_and_majority
+PASSED tests/test_opera.py::test_block_fraction_all_invalid_is_nan_and_not_water
+PASSED tests/test_opera.py::test_confusion_metrics_known_case
+PASSED tests/test_opera.py::test_confusion_respects_domain
+PASSED tests/test_opera.py::test_perfect_and_disjoint
+PASSED tests/test_opera.py::test_bootstrap_interval_contains_point_estimate
+PASSED tests/test_opera.py::test_parse_title_and_pick_window
+PASSED tests/test_opera.py::test_composite_nearest_valid_pixel_wins
+PASSED tests/test_optimize.py::test_class_map_exact_colours_and_alpha
+PASSED tests/test_optimize.py::test_grey_lossy_keeps_alpha_and_size
+PASSED tests/test_optimize.py::test_idempotent
+PASSED tests/test_optimize.py::test_never_bigger_and_thumbs
+PASSED tests/test_optimize.py::test_summary_schema
+PASSED tests/test_optimize.py::test_event_summary
+PASSED tests/test_pipeline.py::test_pipeline
+PASSED tests/test_pipeline.py::test_search_live
+PASSED tests/test_qc.py::test_robust_z_and_local
+PASSED tests/test_qc.py::test_clean_stack_all_ok
+PASSED tests/test_qc.py::test_hv_gain_flagged_on_hv_only
+PASSED tests/test_qc.py::test_shift_flagged_without_alignment
+PASSED tests/test_qc.py::test_across_track_ramp_is_gradient
+PASSED tests/test_qc.py::test_growing_flood_not_flagged
+PASSED tests/test_qc.py::test_fixed_blob_reported_as_mark
+PASSED tests/test_qc.py::test_hh_only_pass_reported_missing_hv
+PASSED tests/test_qc.py::test_hh_only_detected_from_data_alone
+PASSED tests/test_qc.py::test_metadata_mode_crid_and_cadence
+PASSED tests/test_qc.py::test_apply_qc_neutralises_failed_channel_and_date
+PASSED tests/test_quake.py::test_phase_to_cm_one_cycle_is_half_wavelength
+PASSED tests/test_quake.py::test_rewrap_interval
+PASSED tests/test_quake.py::test_ramp_removal_keeps_central_signal
+PASSED tests/test_quake.py::test_ramp_far_ignores_nan_and_quadric
+PASSED tests/test_quake.py::test_largest_component
+PASSED tests/test_quake.py::test_events_config_complete
+PASSED tests/test_quake.py::test_job_for_and_no_server_in_repo_config
+PASSED tests/test_quake.py::test_decompose_east_up_synthetic
+PASSED tests/test_remote_extract.py::test_utm_matches_rasterio
+PASSED tests/test_remote_extract.py::test_extraction
+PASSED tests/test_remote_extract.py::test_b4_report
+PASSED tests/test_remote_extract.py::test_blocks_cover_exactly
+PASSED tests/test_run.py::test_run_demo
+PASSED tests/test_run_gamma0.py::test_run_gamma0_db_path
+PASSED tests/test_stats_change.py::test_no_change_is_calibrated[1]
+PASSED tests/test_stats_change.py::test_no_change_is_calibrated[2]
+PASSED tests/test_stats_change.py::test_step_change_detected_with_right_date
+PASSED tests/test_stats_change.py::test_two_changes_found
+PASSED tests/test_stats_change.py::test_enl_estimators[4.0]
+PASSED tests/test_stats_change.py::test_enl_estimators[10.0]
+PASSED tests/test_stats_change.py::test_enl_estimators[30.0]
+PASSED tests/test_stats_change.py::test_pairwise_matches_scipy
+PASSED tests/test_stats_change.py::test_special_functions
+PASSED tests/test_stats_change.py::test_empirical_null_and_omnibus_scipy
+PASSED tests/test_subpixel.py::test_power_mixing_recovers_true_fraction
+PASSED tests/test_subpixel.py::test_area_beats_hard_and_half_pixel
+PASSED tests/test_subpixel.py::test_power_domain_beats_log_domain
+PASSED tests/test_subpixel.py::test_fractions_are_hard_away_from_shore
+PASSED tests/test_subpixel.py::test_contract_and_channels
+PASSED tests/test_subpixel.py::test_contour_points_straight_edge
+PASSED tests/test_subpixel.py::test_half_pixel_rule
+PASSED tests/test_supervised.py::test_labels_ignore_band
+PASSED tests/test_supervised.py::test_normalisation_gain_invariant
+PASSED tests/test_supervised.py::test_qc_drop_and_impute
+PASSED tests/test_supervised.py::test_reported_variant_ignores_hv
+PASSED tests/test_supervised.py::test_weak_land_loss_only_with_weight
+PASSED tests/test_supervised.py::test_tiny_training_generalises_to_unseen_scene
+PASSED tests/test_terrain.py::test_slope_aspect_plane
+PASSED tests/test_terrain.py::test_local_incidence_flat_and_faces
+PASSED tests/test_terrain.py::test_mask_on_synthetic_scene
+PASSED tests/test_terrain.py::test_p90_finds_small_steep_slopes
+PASSED tests/test_ttransformer.py::test_shapes_and_param_count
+PASSED tests/test_ttransformer.py::test_query_unobserved_day
+PASSED tests/test_ttransformer.py::test_no_leakage_from_hidden_input[False]
+PASSED tests/test_ttransformer.py::test_no_leakage_from_hidden_input[True]
+PASSED tests/test_ttransformer.py::test_time_encoding_distinguishes_gaps
+PASSED tests/test_ttransformer.py::test_hidden_patterns_include_adjacent_pairs
+PASSED tests/test_ttransformer.py::test_synthetic_training_beats_persistence
+PASSED tests/test_ttransformer.py::test_interp_prior_is_linear_interpolation
+PASSED tests/test_tune.py::test_label_masks_shapes_and_bands
+PASSED tests/test_tune.py::test_split_masks_disjoint_with_buffer
+PASSED tests/test_tune.py::test_water_fast_equals_ops
+PASSED tests/test_tune.py::test_block_bootstrap_ci_contains_truth_and_shrinks
+PASSED tests/test_tune.py::test_objective_peaks_at_true_threshold
+PASSED tests/test_tune.py::test_avg_rank_ties
+PASSED tests/test_unmix.py::test_decoder_reproduces_hand_computed_mixture
+PASSED tests/test_unmix.py::test_fractions_nonnegative_and_sum_to_one
+PASSED tests/test_unmix.py::test_power_mixing_differs_from_log_mixing
+PASSED tests/test_unmix.py::test_short_training_beats_per_pixel_fraction_and_flags_constant_dark_pixels
+PASSED tests/test_unmix.py::test_synthetic_study_dark_land_is_land
+PASSED tests/test_unmix.py::test_terrain_prior_moves_water_to_land
+PASSED tests/test_unmix.py::test_noise_floor_map_follows_a_swath_gradient
+PASSED tests/test_unmix.py::test_impute_bad_channel_uses_other_dates
+223 passed, 9 warnings in 124.61s (0:02:04)

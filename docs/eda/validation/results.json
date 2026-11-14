@@ -1,0 +1,1686 @@
+{
+ "generated": "2026-11-14T11:30:26",
+ "reference": {
+  "dataset": "JRC Global Surface Water v1.4 (1984-2021)",
+  "citation": "Pekel, Cottam, Gorelick, Belward (2016) Nature 540:418-422",
+  "attribution": "Source: EC JRC/Google",
+  "url_pattern": "https://storage.googleapis.com/global-surface-water/downloads2021/<product>/<product>_<tile>v1_4_2021.tif",
+  "nodata": 255
+ },
+ "method": {
+  "resampling": "exact area-weighted average of 30 m pixels onto our grid (no-data excluded)",
+  "ref_binary_rule": "our pixel counts as reference water if >= 50 % of its area is covered",
+  "domain": "our common radar footprint and >= 50 % valid reference",
+  "late_season": "water on any of the last 3 dates"
+ },
+ "published_sevan_km2": 1242.0,
+ "areas": {
+  "tonle-sap": {
+   "area": "tonle-sap",
+   "bounds": [
+    103.4,
+    11.8,
+    105.2,
+    13.6
+   ],
+   "km2_per_px": 0.03266007149339352,
+   "dates": [
+    "2026-06-19",
+    "2026-07-01",
+    "2026-07-13",
+    "2026-07-25",
+    "2026-08-18",
+    "2026-08-30",
+    "2026-09-11",
+    "2026-09-23",
+    "2026-10-05",
+    "2026-10-17"
+   ],
+   "grid": [
+    1105,
+    1078
+   ],
+   "reference_access": {
+    "occurrence": "cache",
+    "extent": "cache",
+    "seasonality": "cache"
+   },
+   "domain_km2": 36035.6,
+   "ref_nodata_in_footprint_km2": 0.0,
+   "ref_km2_in_domain": {
+    "occ_ge90_fraction_weighted": 1667.1,
+    "occ_ge75_fraction_weighted": 2589.8,
+    "max_extent_fraction_weighted": 11156.9,
+    "seasonality12_2021_fraction_weighted": 2364.9
+   },
+   "ref_km2_whole_box": {
+    "occ_ge90_fraction_weighted": 1719.6,
+    "max_extent_fraction_weighted": 12117.7
+   },
+   "permanent": {
+    "occ_ge75": {
+     "tp_km2": 2160.0,
+     "fp_km2": 13.4,
+     "fn_km2": 406.4,
+     "tn_km2": 33455.8,
+     "ours_km2": 2173.4,
+     "ref_km2": 2566.4,
+     "iou": 0.8373,
+     "precision": 0.9938,
+     "recall": 0.8417
+    },
+    "occ_ge90": {
+     "tp_km2": 1488.4,
+     "fp_km2": 685.0,
+     "fn_km2": 173.2,
+     "tn_km2": 33689.0,
+     "ours_km2": 2173.4,
+     "ref_km2": 1661.5,
+     "iou": 0.6343,
+     "precision": 0.6848,
+     "recall": 0.8958,
+     "boundary": {
+      "disagree_km2": 858.2,
+      "disagree_within_1px_share": 0.349,
+      "disagree_within_2px_share": 0.4745,
+      "excl_1px_band": {
+       "iou": 0.6951,
+       "precision": 0.7097,
+       "recall": 0.9714,
+       "fp_km2": 521.3,
+       "fn_km2": 37.5
+      }
+     }
+    },
+    "occ_ge95": {
+     "tp_km2": 297.1,
+     "fp_km2": 1876.4,
+     "fn_km2": 74.4,
+     "tn_km2": 33787.8,
+     "ours_km2": 2173.4,
+     "ref_km2": 371.4,
+     "iou": 0.1322,
+     "precision": 0.1367,
+     "recall": 0.7998
+    },
+    "seasonality12_2021": {
+     "tp_km2": 2134.6,
+     "fp_km2": 38.8,
+     "fn_km2": 207.1,
+     "tn_km2": 33655.0,
+     "ours_km2": 2173.4,
+     "ref_km2": 2341.7,
+     "iou": 0.8967,
+     "precision": 0.9821,
+     "recall": 0.9115
+    }
+   },
+   "vs_max_extent": {
+    "permanent_class": {
+     "km2": 2173.4,
+     "share_inside_max_extent": 1.0,
+     "mean_extent_cover": 1.0,
+     "outside_km2": 0.0
+    },
+    "seasonal_open_water_class": {
+     "km2": 1778.4,
+     "share_inside_max_extent": 0.9605,
+     "mean_extent_cover": 0.956,
+     "outside_km2": 70.3
+    },
+    "flooded_veg_class": {
+     "km2": 491.9,
+     "share_inside_max_extent": 0.2755,
+     "mean_extent_cover": 0.2936,
+     "outside_km2": 356.4
+    },
+    "flooded_veg_any_date": {
+     "km2": 1461.0,
+     "share_inside_max_extent": 0.3957,
+     "mean_extent_cover": 0.406,
+     "outside_km2": 882.8
+    },
+    "other_change_class": {
+     "km2": 7188.5,
+     "share_inside_max_extent": 0.5826,
+     "mean_extent_cover": 0.5745,
+     "outside_km2": 3000.4
+    },
+    "last_date_water": {
+     "km2": 3836.7,
+     "share_inside_max_extent": 0.9885,
+     "mean_extent_cover": 0.9858,
+     "outside_km2": 44.2
+    },
+    "late_season_water_last3": {
+     "km2": 4548.1,
+     "share_inside_max_extent": 0.9795,
+     "mean_extent_cover": 0.9761,
+     "outside_km2": 93.4
+    },
+    "any_date_water": {
+     "km2": 4745.9,
+     "share_inside_max_extent": 0.9624,
+     "mean_extent_cover": 0.9593,
+     "outside_km2": 178.3
+    }
+   },
+   "late_outside_max_extent": {
+    "km2": 93.4,
+    "share_within_10px_of_frame_edge": 0.0,
+    "share_within_1px_of_ref_water": 0.9514,
+    "share_within_3px_of_ref_water": 0.9997,
+    "share_far_from_ref_water_gt3px": 0.0003,
+    "n_clusters": 284,
+    "largest_clusters": [
+     {
+      "km2": 8.2,
+      "lon": 104.673,
+      "lat": 12.649,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": true
+     },
+     {
+      "km2": 5.0,
+      "lon": 105.084,
+      "lat": 12.174,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": true
+     },
+     {
+      "km2": 4.6,
+      "lon": 103.45,
+      "lat": 13.559,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": true
+     },
+     {
+      "km2": 4.4,
+      "lon": 104.04,
+      "lat": 12.725,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": true
+     },
+     {
+      "km2": 3.8,
+      "lon": 105.015,
+      "lat": 12.112,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": true
+     },
+     {
+      "km2": 3.6,
+      "lon": 103.598,
+      "lat": 12.573,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": true
+     }
+    ]
+   },
+   "occ_by_class": {
+    "stable": {
+     "km2": 24403.4,
+     "share_by_occ_bin": {
+      "0": 0.8762,
+      "1-10": 0.0845,
+      "10-25": 0.0304,
+      "25-50": 0.0064,
+      "50-75": 0.0012,
+      "75-90": 0.0006,
+      "90-100": 0.0007
+     },
+     "median_occ": 0.0,
+     "mean_occ": 1.2
+    },
+    "permanent water": {
+     "km2": 2173.4,
+     "share_by_occ_bin": {
+      "0": 0.0,
+      "1-10": 0.0012,
+      "10-25": 0.0018,
+      "25-50": 0.0022,
+      "50-75": 0.0014,
+      "75-90": 0.378,
+      "90-100": 0.6154
+     },
+     "median_occ": 90.8,
+     "mean_occ": 90.7
+    },
+    "seasonal open water": {
+     "km2": 1778.4,
+     "share_by_occ_bin": {
+      "0": 0.039,
+      "1-10": 0.1317,
+      "10-25": 0.3738,
+      "25-50": 0.2097,
+      "50-75": 0.0727,
+      "75-90": 0.1066,
+      "90-100": 0.0665
+     },
+     "median_occ": 22.6,
+     "mean_occ": 34.0
+    },
+    "flooded vegetation": {
+     "km2": 491.9,
+     "share_by_occ_bin": {
+      "0": 0.7218,
+      "1-10": 0.2475,
+      "10-25": 0.0299,
+      "25-50": 0.0007,
+      "50-75": 0.0,
+      "75-90": 0.0,
+      "90-100": 0.0
+     },
+     "median_occ": 0.1,
+     "mean_occ": 1.4
+    },
+    "other change": {
+     "km2": 7188.5,
+     "share_by_occ_bin": {
+      "0": 0.3974,
+      "1-10": 0.2719,
+      "10-25": 0.2277,
+      "25-50": 0.0864,
+      "50-75": 0.0131,
+      "75-90": 0.0028,
+      "90-100": 0.0007
+     },
+     "median_occ": 3.5,
+     "mean_occ": 9.1
+    },
+    "last-date water": {
+     "km2": 3836.7,
+     "share_by_occ_bin": {
+      "0": 0.0115,
+      "1-10": 0.0589,
+      "10-25": 0.1675,
+      "25-50": 0.0938,
+      "50-75": 0.0343,
+      "75-90": 0.2595,
+      "90-100": 0.3746
+     },
+     "median_occ": 88.3,
+     "mean_occ": 66.1
+    }
+   },
+   "per_date": [
+    {
+     "date": "2026-06-19",
+     "water_km2": 2234.0,
+     "fraction_of_max_extent_area": 0.2002,
+     "share_inside_max_extent": 0.9984
+    },
+    {
+     "date": "2026-07-01",
+     "water_km2": 2297.0,
+     "fraction_of_max_extent_area": 0.2059,
+     "share_inside_max_extent": 0.9764
+    },
+    {
+     "date": "2026-07-13",
+     "water_km2": 2310.0,
+     "fraction_of_max_extent_area": 0.207,
+     "share_inside_max_extent": 0.9953
+    },
+    {
+     "date": "2026-07-25",
+     "water_km2": 2421.4,
+     "fraction_of_max_extent_area": 0.217,
+     "share_inside_max_extent": 0.9842
+    },
+    {
+     "date": "2026-08-18",
+     "water_km2": 2802.5,
+     "fraction_of_max_extent_area": 0.2512,
+     "share_inside_max_extent": 0.9853
+    },
+    {
+     "date": "2026-08-30",
+     "water_km2": 2954.2,
+     "fraction_of_max_extent_area": 0.2648,
+     "share_inside_max_extent": 0.9965
+    },
+    {
+     "date": "2026-09-11",
+     "water_km2": 3147.4,
+     "fraction_of_max_extent_area": 0.2821,
+     "share_inside_max_extent": 0.9946
+    },
+    {
+     "date": "2026-09-23",
+     "water_km2": 3522.4,
+     "fraction_of_max_extent_area": 0.3157,
+     "share_inside_max_extent": 0.9869
+    },
+    {
+     "date": "2026-10-05",
+     "water_km2": 3541.0,
+     "fraction_of_max_extent_area": 0.3174,
+     "share_inside_max_extent": 0.9913
+    },
+    {
+     "date": "2026-10-17",
+     "water_km2": 3836.7,
+     "fraction_of_max_extent_area": 0.3439,
+     "share_inside_max_extent": 0.9885
+    }
+   ],
+   "permanent_outside_max_extent": {
+    "km2": 0.0
+   },
+   "seasonal_outside_max_extent": {
+    "km2": 70.3,
+    "share_within_10px_of_frame_edge": 0.0,
+    "share_within_1px_of_ref_water": 0.7269,
+    "share_within_3px_of_ref_water": 0.8992,
+    "share_far_from_ref_water_gt3px": 0.1008,
+    "n_clusters": 157,
+    "largest_clusters": [
+     {
+      "km2": 13.3,
+      "lon": 103.523,
+      "lat": 12.651,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": true
+     },
+     {
+      "km2": 4.1,
+      "lon": 104.04,
+      "lat": 12.726,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": true
+     },
+     {
+      "km2": 2.9,
+      "lon": 104.652,
+      "lat": 12.569,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": true
+     },
+     {
+      "km2": 2.9,
+      "lon": 104.662,
+      "lat": 12.651,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": true
+     },
+     {
+      "km2": 2.7,
+      "lon": 103.561,
+      "lat": 12.698,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": true
+     },
+     {
+      "km2": 2.7,
+      "lon": 103.431,
+      "lat": 12.87,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": true
+     }
+    ]
+   },
+   "flooded_veg_outside_max_extent": {
+    "km2": 882.8,
+    "share_within_10px_of_frame_edge": 0.0009,
+    "share_within_1px_of_ref_water": 0.8016,
+    "share_within_3px_of_ref_water": 0.9375,
+    "share_far_from_ref_water_gt3px": 0.0625,
+    "n_clusters": 1067,
+    "largest_clusters": [
+     {
+      "km2": 279.6,
+      "lon": 103.504,
+      "lat": 13.057,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": true
+     },
+     {
+      "km2": 130.0,
+      "lon": 103.79,
+      "lat": 12.815,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": true
+     },
+     {
+      "km2": 26.5,
+      "lon": 104.697,
+      "lat": 12.563,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": true
+     },
+     {
+      "km2": 21.8,
+      "lon": 104.18,
+      "lat": 13.035,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": true
+     },
+     {
+      "km2": 18.9,
+      "lon": 104.554,
+      "lat": 12.654,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": true
+     },
+     {
+      "km2": 18.0,
+      "lon": 104.075,
+      "lat": 12.731,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": true
+     }
+    ]
+   },
+   "shift_test": {
+    "compared": "permanent class vs occurrence >= 75 %",
+    "iou_unshifted": 0.8373,
+    "best_shift_px_dy_dx": [
+     -1,
+     -1
+    ],
+    "best_iou": 0.8381
+   },
+   "first_vs_lowwater_occ_ge90": {
+    "tp_km2": 1489.5,
+    "fp_km2": 744.6,
+    "fn_km2": 172.1,
+    "tn_km2": 33629.5,
+    "ours_km2": 2234.0,
+    "ref_km2": 1661.5,
+    "iou": 0.619,
+    "precision": 0.6667,
+    "recall": 0.8965
+   },
+   "first_vs_lowwater_occ_ge75": {
+    "tp_km2": 2169.8,
+    "fp_km2": 64.2,
+    "fn_km2": 396.6,
+    "tn_km2": 33404.9,
+    "ours_km2": 2234.0,
+    "ref_km2": 2566.4,
+    "iou": 0.8248,
+    "precision": 0.9712,
+    "recall": 0.8455
+   },
+   "last_vs_max_extent": {
+    "tp_km2": 3792.5,
+    "fp_km2": 44.2,
+    "fn_km2": 7329.2,
+    "tn_km2": 24869.7,
+    "ours_km2": 3836.7,
+    "ref_km2": 11121.6,
+    "iou": 0.3396,
+    "precision": 0.9885,
+    "recall": 0.341,
+    "boundary": {
+     "disagree_km2": 7373.4,
+     "disagree_within_1px_share": 0.3877,
+     "disagree_within_2px_share": 0.5963,
+     "excl_1px_band": {
+      "iou": 0.3877,
+      "precision": 0.9979,
+      "recall": 0.3881,
+      "fp_km2": 6.1,
+      "fn_km2": 4508.4
+     }
+    }
+   },
+   "first_vs_max_extent": {
+    "tp_km2": 2230.5,
+    "fp_km2": 3.6,
+    "fn_km2": 8891.1,
+    "tn_km2": 24910.4,
+    "ours_km2": 2234.0,
+    "ref_km2": 11121.6,
+    "iou": 0.2005,
+    "precision": 0.9984,
+    "recall": 0.2006
+   }
+  },
+  "sevan": {
+   "area": "sevan",
+   "bounds": [
+    44.9,
+    40.1,
+    45.7,
+    40.7
+   ],
+   "km2_per_px": 0.033866386800863735,
+   "dates": [
+    "2026-06-20",
+    "2026-07-02",
+    "2026-07-14",
+    "2026-07-26",
+    "2026-08-19",
+    "2026-08-31",
+    "2026-09-12",
+    "2026-09-24",
+    "2026-10-06",
+    "2026-10-18"
+   ],
+   "grid": [
+    362,
+    367
+   ],
+   "reference_access": {
+    "occurrence": "cache",
+    "extent": "cache",
+    "seasonality": "cache"
+   },
+   "domain_km2": 4499.3,
+   "ref_nodata_in_footprint_km2": 0.0,
+   "ref_km2_in_domain": {
+    "occ_ge90_fraction_weighted": 1239.7,
+    "occ_ge75_fraction_weighted": 1247.8,
+    "max_extent_fraction_weighted": 1263.3,
+    "seasonality12_2021_fraction_weighted": 1259.7
+   },
+   "ref_km2_whole_box": {
+    "occ_ge90_fraction_weighted": 1239.7,
+    "max_extent_fraction_weighted": 1263.3
+   },
+   "permanent": {
+    "occ_ge75": {
+     "tp_km2": 1189.0,
+     "fp_km2": 15.3,
+     "fn_km2": 58.4,
+     "tn_km2": 3236.5,
+     "ours_km2": 1204.4,
+     "ref_km2": 1247.4,
+     "iou": 0.9416,
+     "precision": 0.9873,
+     "recall": 0.9532
+    },
+    "occ_ge90": {
+     "tp_km2": 1185.2,
+     "fp_km2": 19.2,
+     "fn_km2": 54.2,
+     "tn_km2": 3240.8,
+     "ours_km2": 1204.4,
+     "ref_km2": 1239.3,
+     "iou": 0.9417,
+     "precision": 0.9841,
+     "recall": 0.9563,
+     "boundary": {
+      "disagree_km2": 73.4,
+      "disagree_within_1px_share": 0.699,
+      "disagree_within_2px_share": 0.7927,
+      "excl_1px_band": {
+       "iou": 0.9804,
+       "precision": 0.9987,
+       "recall": 0.9816,
+       "fp_km2": 1.4,
+       "fn_km2": 20.7
+      }
+     }
+    },
+    "occ_ge95": {
+     "tp_km2": 1182.7,
+     "fp_km2": 21.6,
+     "fn_km2": 52.1,
+     "tn_km2": 3242.8,
+     "ours_km2": 1204.4,
+     "ref_km2": 1234.8,
+     "iou": 0.9413,
+     "precision": 0.9821,
+     "recall": 0.9578
+    },
+    "seasonality12_2021": {
+     "tp_km2": 1193.4,
+     "fp_km2": 10.9,
+     "fn_km2": 66.4,
+     "tn_km2": 3228.5,
+     "ours_km2": 1204.4,
+     "ref_km2": 1259.9,
+     "iou": 0.9391,
+     "precision": 0.9909,
+     "recall": 0.9473
+    }
+   },
+   "vs_max_extent": {
+    "permanent_class": {
+     "km2": 1204.4,
+     "share_inside_max_extent": 0.9909,
+     "mean_extent_cover": 0.9906,
+     "outside_km2": 10.9
+    },
+    "seasonal_open_water_class": {
+     "km2": 125.0,
+     "share_inside_max_extent": 0.3427,
+     "mean_extent_cover": 0.3393,
+     "outside_km2": 82.2
+    },
+    "flooded_veg_class": {
+     "km2": 0.2,
+     "share_inside_max_extent": 0.0,
+     "mean_extent_cover": 0.0,
+     "outside_km2": 0.2
+    },
+    "flooded_veg_any_date": {
+     "km2": 7.9,
+     "share_inside_max_extent": 0.0345,
+     "mean_extent_cover": 0.029,
+     "outside_km2": 7.6
+    },
+    "other_change_class": {
+     "km2": 31.4,
+     "share_inside_max_extent": 0.0194,
+     "mean_extent_cover": 0.0182,
+     "outside_km2": 30.8
+    },
+    "last_date_water": {
+     "km2": 1304.0,
+     "share_inside_max_extent": 0.9438,
+     "mean_extent_cover": 0.9433,
+     "outside_km2": 73.3
+    },
+    "late_season_water_last3": {
+     "km2": 1363.2,
+     "share_inside_max_extent": 0.9071,
+     "mean_extent_cover": 0.9065,
+     "outside_km2": 126.7
+    },
+    "any_date_water": {
+     "km2": 1389.4,
+     "share_inside_max_extent": 0.8916,
+     "mean_extent_cover": 0.891,
+     "outside_km2": 150.7
+    }
+   },
+   "late_outside_max_extent": {
+    "km2": 126.7,
+    "share_within_10px_of_frame_edge": 0.0,
+    "share_within_1px_of_ref_water": 0.0072,
+    "share_within_3px_of_ref_water": 0.039,
+    "share_far_from_ref_water_gt3px": 0.961,
+    "n_clusters": 78,
+    "largest_clusters": [
+     {
+      "km2": 16.8,
+      "lon": 45.667,
+      "lat": 40.286,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": false
+     },
+     {
+      "km2": 10.2,
+      "lon": 45.142,
+      "lat": 40.115,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": false
+     },
+     {
+      "km2": 9.1,
+      "lon": 45.119,
+      "lat": 40.2,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": false
+     },
+     {
+      "km2": 8.6,
+      "lon": 45.197,
+      "lat": 40.369,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": false
+     },
+     {
+      "km2": 8.4,
+      "lon": 45.128,
+      "lat": 40.173,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": false
+     },
+     {
+      "km2": 6.8,
+      "lon": 45.083,
+      "lat": 40.299,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": false
+     }
+    ]
+   },
+   "occ_by_class": {
+    "stable": {
+     "km2": 3138.3,
+     "share_by_occ_bin": {
+      "0": 0.9841,
+      "1-10": 0.0038,
+      "10-25": 0.0028,
+      "25-50": 0.0029,
+      "50-75": 0.0029,
+      "75-90": 0.0015,
+      "90-100": 0.0021
+     },
+     "median_occ": 0.0,
+     "mean_occ": 0.7
+    },
+    "permanent water": {
+     "km2": 1204.4,
+     "share_by_occ_bin": {
+      "0": 0.009,
+      "1-10": 0.0,
+      "10-25": 0.0001,
+      "25-50": 0.0007,
+      "50-75": 0.0035,
+      "75-90": 0.0046,
+      "90-100": 0.9821
+     },
+     "median_occ": 98.1,
+     "mean_occ": 96.9
+    },
+    "seasonal open water": {
+     "km2": 125.0,
+     "share_by_occ_bin": {
+      "0": 0.6535,
+      "1-10": 0.0011,
+      "10-25": 0.0024,
+      "25-50": 0.0079,
+      "50-75": 0.0111,
+      "75-90": 0.006,
+      "90-100": 0.3181
+     },
+     "median_occ": 0.0,
+     "mean_occ": 32.5
+    },
+    "flooded vegetation": {
+     "km2": 0.2,
+     "share_by_occ_bin": {
+      "0": 1.0,
+      "1-10": 0.0,
+      "10-25": 0.0,
+      "25-50": 0.0,
+      "50-75": 0.0,
+      "75-90": 0.0,
+      "90-100": 0.0
+     },
+     "median_occ": 0.0,
+     "mean_occ": 0.0
+    },
+    "other change": {
+     "km2": 31.4,
+     "share_by_occ_bin": {
+      "0": 0.9709,
+      "1-10": 0.0075,
+      "10-25": 0.0065,
+      "25-50": 0.0108,
+      "50-75": 0.0043,
+      "75-90": 0.0,
+      "90-100": 0.0
+     },
+     "median_occ": 0.0,
+     "mean_occ": 0.8
+    },
+    "last-date water": {
+     "km2": 1304.0,
+     "share_by_occ_bin": {
+      "0": 0.056,
+      "1-10": 0.0,
+      "10-25": 0.0001,
+      "25-50": 0.001,
+      "50-75": 0.0038,
+      "75-90": 0.0045,
+      "90-100": 0.9345
+     },
+     "median_occ": 98.0,
+     "mean_occ": 92.3
+    }
+   },
+   "per_date": [
+    {
+     "date": "2026-06-20",
+     "water_km2": 1245.3,
+     "fraction_of_max_extent_area": 0.9858,
+     "share_inside_max_extent": 0.9877
+    },
+    {
+     "date": "2026-07-02",
+     "water_km2": 1235.0,
+     "fraction_of_max_extent_area": 0.9776,
+     "share_inside_max_extent": 0.9843
+    },
+    {
+     "date": "2026-07-14",
+     "water_km2": 1234.8,
+     "fraction_of_max_extent_area": 0.9775,
+     "share_inside_max_extent": 0.9866
+    },
+    {
+     "date": "2026-07-26",
+     "water_km2": 1283.8,
+     "fraction_of_max_extent_area": 1.0162,
+     "share_inside_max_extent": 0.9587
+    },
+    {
+     "date": "2026-08-19",
+     "water_km2": 1260.6,
+     "fraction_of_max_extent_area": 0.9979,
+     "share_inside_max_extent": 0.9728
+    },
+    {
+     "date": "2026-08-31",
+     "water_km2": 1236.1,
+     "fraction_of_max_extent_area": 0.9785,
+     "share_inside_max_extent": 0.9646
+    },
+    {
+     "date": "2026-09-12",
+     "water_km2": 1197.1,
+     "fraction_of_max_extent_area": 0.9476,
+     "share_inside_max_extent": 0.9629
+    },
+    {
+     "date": "2026-09-24",
+     "water_km2": 1279.2,
+     "fraction_of_max_extent_area": 1.0126,
+     "share_inside_max_extent": 0.955
+    },
+    {
+     "date": "2026-10-06",
+     "water_km2": 1329.1,
+     "fraction_of_max_extent_area": 1.0521,
+     "share_inside_max_extent": 0.9284
+    },
+    {
+     "date": "2026-10-18",
+     "water_km2": 1304.0,
+     "fraction_of_max_extent_area": 1.0322,
+     "share_inside_max_extent": 0.9438
+    }
+   ],
+   "permanent_outside_max_extent": {
+    "km2": 10.9,
+    "share_within_10px_of_frame_edge": 0.0,
+    "share_within_1px_of_ref_water": 0.0093,
+    "share_within_3px_of_ref_water": 0.0404,
+    "share_far_from_ref_water_gt3px": 0.9596,
+    "n_clusters": 16,
+    "largest_clusters": [
+     {
+      "km2": 5.1,
+      "lon": 45.197,
+      "lat": 40.374,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": false
+     },
+     {
+      "km2": 1.3,
+      "lon": 45.693,
+      "lat": 40.25,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": false
+     },
+     {
+      "km2": 0.9,
+      "lon": 45.133,
+      "lat": 40.119,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": false
+     },
+     {
+      "km2": 0.8,
+      "lon": 45.697,
+      "lat": 40.232,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": false
+     },
+     {
+      "km2": 0.7,
+      "lon": 45.146,
+      "lat": 40.375,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": false
+     },
+     {
+      "km2": 0.5,
+      "lon": 45.159,
+      "lat": 40.169,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": false
+     }
+    ]
+   },
+   "seasonal_outside_max_extent": {
+    "km2": 82.2,
+    "share_within_10px_of_frame_edge": 0.0,
+    "share_within_1px_of_ref_water": 0.0087,
+    "share_within_3px_of_ref_water": 0.0371,
+    "share_far_from_ref_water_gt3px": 0.9629,
+    "n_clusters": 92,
+    "largest_clusters": [
+     {
+      "km2": 18.0,
+      "lon": 45.662,
+      "lat": 40.29,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": false
+     },
+     {
+      "km2": 5.4,
+      "lon": 45.181,
+      "lat": 40.329,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": false
+     },
+     {
+      "km2": 4.8,
+      "lon": 45.084,
+      "lat": 40.299,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": false
+     },
+     {
+      "km2": 3.8,
+      "lon": 45.132,
+      "lat": 40.207,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": false
+     },
+     {
+      "km2": 3.7,
+      "lon": 45.176,
+      "lat": 40.275,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": false
+     },
+     {
+      "km2": 3.6,
+      "lon": 45.134,
+      "lat": 40.123,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": false
+     }
+    ]
+   },
+   "flooded_veg_outside_max_extent": {
+    "km2": 7.6,
+    "share_within_10px_of_frame_edge": 0.0,
+    "share_within_1px_of_ref_water": 0.0223,
+    "share_within_3px_of_ref_water": 0.1071,
+    "share_far_from_ref_water_gt3px": 0.8929,
+    "n_clusters": 31,
+    "largest_clusters": [
+     {
+      "km2": 0.6,
+      "lon": 45.075,
+      "lat": 40.344,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": false
+     },
+     {
+      "km2": 0.5,
+      "lon": 45.208,
+      "lat": 40.369,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": false
+     },
+     {
+      "km2": 0.4,
+      "lon": 45.268,
+      "lat": 40.511,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": false
+     },
+     {
+      "km2": 0.4,
+      "lon": 45.134,
+      "lat": 40.695,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": false
+     },
+     {
+      "km2": 0.4,
+      "lon": 45.03,
+      "lat": 40.287,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": false
+     },
+     {
+      "km2": 0.4,
+      "lon": 45.296,
+      "lat": 40.515,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": false
+     }
+    ]
+   },
+   "shift_test": {
+    "compared": "permanent class vs occurrence >= 75 %",
+    "iou_unshifted": 0.9416,
+    "best_shift_px_dy_dx": [
+     0,
+     0
+    ],
+    "best_iou": 0.9416
+   },
+   "first_vs_lowwater_occ_ge90": {
+    "tp_km2": 1221.0,
+    "fp_km2": 24.3,
+    "fn_km2": 18.4,
+    "tn_km2": 3235.6,
+    "ours_km2": 1245.3,
+    "ref_km2": 1239.3,
+    "iou": 0.9662,
+    "precision": 0.9804,
+    "recall": 0.9852
+   },
+   "first_vs_lowwater_occ_ge75": {
+    "tp_km2": 1225.0,
+    "fp_km2": 20.3,
+    "fn_km2": 22.4,
+    "tn_km2": 3231.6,
+    "ours_km2": 1245.3,
+    "ref_km2": 1247.4,
+    "iou": 0.9663,
+    "precision": 0.9837,
+    "recall": 0.982
+   },
+   "last_vs_max_extent": {
+    "tp_km2": 1230.7,
+    "fp_km2": 73.3,
+    "fn_km2": 32.3,
+    "tn_km2": 3163.0,
+    "ours_km2": 1304.0,
+    "ref_km2": 1263.0,
+    "iou": 0.921,
+    "precision": 0.9438,
+    "recall": 0.9744,
+    "boundary": {
+     "disagree_km2": 105.6,
+     "disagree_within_1px_share": 0.8508,
+     "disagree_within_2px_share": 0.9894,
+     "excl_1px_band": {
+      "iou": 0.9868,
+      "precision": 0.9872,
+      "recall": 0.9996,
+      "fp_km2": 15.3,
+      "fn_km2": 0.5
+     }
+    }
+   },
+   "first_vs_max_extent": {
+    "tp_km2": 1230.0,
+    "fp_km2": 15.3,
+    "fn_km2": 33.0,
+    "tn_km2": 3221.0,
+    "ours_km2": 1245.3,
+    "ref_km2": 1263.0,
+    "iou": 0.9622,
+    "precision": 0.9877,
+    "recall": 0.9739
+   }
+  },
+  "ararat": {
+   "area": "ararat",
+   "bounds": [
+    44.0,
+    39.8,
+    44.8,
+    40.3
+   ],
+   "km2_per_px": 0.03400424704665131,
+   "dates": [
+    "2026-06-20",
+    "2026-07-02",
+    "2026-07-14",
+    "2026-07-26",
+    "2026-08-19",
+    "2026-08-31",
+    "2026-09-12",
+    "2026-09-24",
+    "2026-10-06",
+    "2026-10-18"
+   ],
+   "grid": [
+    302,
+    367
+   ],
+   "reference_access": {
+    "occurrence": "cache",
+    "extent": "cache",
+    "seasonality": "cache"
+   },
+   "domain_km2": 3768.8,
+   "ref_nodata_in_footprint_km2": 0.0,
+   "ref_km2_in_domain": {
+    "occ_ge90_fraction_weighted": 1.3,
+    "occ_ge75_fraction_weighted": 2.7,
+    "max_extent_fraction_weighted": 35.9,
+    "seasonality12_2021_fraction_weighted": 5.9
+   },
+   "ref_km2_whole_box": {
+    "occ_ge90_fraction_weighted": 1.3,
+    "max_extent_fraction_weighted": 35.9
+   },
+   "permanent": {
+    "occ_ge75": {
+     "tp_km2": 0.0,
+     "fp_km2": 8.9,
+     "fn_km2": 1.9,
+     "tn_km2": 3758.0,
+     "ours_km2": 8.9,
+     "ref_km2": 1.9,
+     "iou": 0.0,
+     "precision": 0.0,
+     "recall": 0.0
+    },
+    "occ_ge90": {
+     "tp_km2": 0.0,
+     "fp_km2": 8.9,
+     "fn_km2": 1.1,
+     "tn_km2": 3758.8,
+     "ours_km2": 8.9,
+     "ref_km2": 1.1,
+     "iou": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "boundary": {
+      "disagree_km2": 10.0,
+      "disagree_within_1px_share": 0.8776,
+      "disagree_within_2px_share": 0.9864,
+      "excl_1px_band": {
+       "iou": 0.0,
+       "precision": 0.0,
+       "recall": 0.0,
+       "fp_km2": 1.2,
+       "fn_km2": 0.0
+      }
+     }
+    },
+    "occ_ge95": {
+     "tp_km2": 0.0,
+     "fp_km2": 8.9,
+     "fn_km2": 0.9,
+     "tn_km2": 3759.1,
+     "ours_km2": 8.9,
+     "ref_km2": 0.9,
+     "iou": 0.0,
+     "precision": 0.0,
+     "recall": 0.0
+    },
+    "seasonality12_2021": {
+     "tp_km2": 0.0,
+     "fp_km2": 8.9,
+     "fn_km2": 4.1,
+     "tn_km2": 3755.8,
+     "ours_km2": 8.9,
+     "ref_km2": 4.1,
+     "iou": 0.0,
+     "precision": 0.0,
+     "recall": 0.0
+    }
+   },
+   "vs_max_extent": {
+    "permanent_class": {
+     "km2": 8.9,
+     "share_inside_max_extent": 0.0038,
+     "mean_extent_cover": 0.0023,
+     "outside_km2": 8.9
+    },
+    "seasonal_open_water_class": {
+     "km2": 17.9,
+     "share_inside_max_extent": 0.0209,
+     "mean_extent_cover": 0.0206,
+     "outside_km2": 17.5
+    },
+    "flooded_veg_class": {
+     "km2": 4.7,
+     "share_inside_max_extent": 0.0,
+     "mean_extent_cover": 0.0037,
+     "outside_km2": 4.7
+    },
+    "flooded_veg_any_date": {
+     "km2": 38.9,
+     "share_inside_max_extent": 0.028,
+     "mean_extent_cover": 0.0263,
+     "outside_km2": 37.8
+    },
+    "other_change_class": {
+     "km2": 12.9,
+     "share_inside_max_extent": 0.0343,
+     "mean_extent_cover": 0.0343,
+     "outside_km2": 12.4
+    },
+    "last_date_water": {
+     "km2": 18.2,
+     "share_inside_max_extent": 0.0019,
+     "mean_extent_cover": 0.0018,
+     "outside_km2": 18.1
+    },
+    "late_season_water_last3": {
+     "km2": 31.4,
+     "share_inside_max_extent": 0.0271,
+     "mean_extent_cover": 0.0265,
+     "outside_km2": 30.5
+    },
+    "any_date_water": {
+     "km2": 34.9,
+     "share_inside_max_extent": 0.0273,
+     "mean_extent_cover": 0.0268,
+     "outside_km2": 34.0
+    }
+   },
+   "late_outside_max_extent": {
+    "km2": 30.5,
+    "share_within_10px_of_frame_edge": 0.0,
+    "share_within_1px_of_ref_water": 0.0256,
+    "share_within_3px_of_ref_water": 0.0646,
+    "share_far_from_ref_water_gt3px": 0.9354,
+    "n_clusters": 31,
+    "largest_clusters": [
+     {
+      "km2": 7.2,
+      "lon": 44.686,
+      "lat": 39.963,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": false
+     },
+     {
+      "km2": 5.9,
+      "lon": 44.763,
+      "lat": 40.286,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": false
+     },
+     {
+      "km2": 2.5,
+      "lon": 44.693,
+      "lat": 40.174,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": false
+     },
+     {
+      "km2": 1.9,
+      "lon": 44.761,
+      "lat": 40.194,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": false
+     },
+     {
+      "km2": 1.6,
+      "lon": 44.75,
+      "lat": 40.182,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": true
+     },
+     {
+      "km2": 1.2,
+      "lon": 44.554,
+      "lat": 39.804,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": false
+     }
+    ]
+   },
+   "occ_by_class": {
+    "stable": {
+     "km2": 3724.4,
+     "share_by_occ_bin": {
+      "0": 0.9829,
+      "1-10": 0.0103,
+      "10-25": 0.0042,
+      "25-50": 0.002,
+      "50-75": 0.0004,
+      "75-90": 0.0001,
+      "90-100": 0.0001
+     },
+     "median_occ": 0.0,
+     "mean_occ": 0.2
+    },
+    "permanent water": {
+     "km2": 8.9,
+     "share_by_occ_bin": {
+      "0": 0.9962,
+      "1-10": 0.0,
+      "10-25": 0.0038,
+      "25-50": 0.0,
+      "50-75": 0.0,
+      "75-90": 0.0,
+      "90-100": 0.0
+     },
+     "median_occ": 0.0,
+     "mean_occ": 0.1
+    },
+    "seasonal open water": {
+     "km2": 17.9,
+     "share_by_occ_bin": {
+      "0": 0.9753,
+      "1-10": 0.0,
+      "10-25": 0.0076,
+      "25-50": 0.0038,
+      "50-75": 0.0038,
+      "75-90": 0.0,
+      "90-100": 0.0095
+     },
+     "median_occ": 0.0,
+     "mean_occ": 1.4
+    },
+    "flooded vegetation": {
+     "km2": 4.7,
+     "share_by_occ_bin": {
+      "0": 1.0,
+      "1-10": 0.0,
+      "10-25": 0.0,
+      "25-50": 0.0,
+      "50-75": 0.0,
+      "75-90": 0.0,
+      "90-100": 0.0
+     },
+     "median_occ": 0.0,
+     "mean_occ": 0.0
+    },
+    "other change": {
+     "km2": 12.9,
+     "share_by_occ_bin": {
+      "0": 0.9551,
+      "1-10": 0.0158,
+      "10-25": 0.0237,
+      "25-50": 0.0026,
+      "50-75": 0.0026,
+      "75-90": 0.0,
+      "90-100": 0.0
+     },
+     "median_occ": 0.0,
+     "mean_occ": 0.7
+    },
+    "last-date water": {
+     "km2": 18.2,
+     "share_by_occ_bin": {
+      "0": 0.9963,
+      "1-10": 0.0,
+      "10-25": 0.0037,
+      "25-50": 0.0,
+      "50-75": 0.0,
+      "75-90": 0.0,
+      "90-100": 0.0
+     },
+     "median_occ": 0.0,
+     "mean_occ": 0.1
+    }
+   },
+   "per_date": [
+    {
+     "date": "2026-06-20",
+     "water_km2": 10.6,
+     "fraction_of_max_extent_area": 0.2952,
+     "share_inside_max_extent": 0.0288
+    },
+    {
+     "date": "2026-07-02",
+     "water_km2": 10.5,
+     "fraction_of_max_extent_area": 0.2923,
+     "share_inside_max_extent": 0.0194
+    },
+    {
+     "date": "2026-07-14",
+     "water_km2": 10.0,
+     "fraction_of_max_extent_area": 0.2791,
+     "share_inside_max_extent": 0.0034
+    },
+    {
+     "date": "2026-07-26",
+     "water_km2": 15.2,
+     "fraction_of_max_extent_area": 0.422,
+     "share_inside_max_extent": 0.0022
+    },
+    {
+     "date": "2026-08-19",
+     "water_km2": 19.8,
+     "fraction_of_max_extent_area": 0.5506,
+     "share_inside_max_extent": 0.0017
+    },
+    {
+     "date": "2026-08-31",
+     "water_km2": 21.7,
+     "fraction_of_max_extent_area": 0.6036,
+     "share_inside_max_extent": 0.0031
+    },
+    {
+     "date": "2026-09-12",
+     "water_km2": 21.3,
+     "fraction_of_max_extent_area": 0.5913,
+     "share_inside_max_extent": 0.0032
+    },
+    {
+     "date": "2026-09-24",
+     "water_km2": 19.7,
+     "fraction_of_max_extent_area": 0.5478,
+     "share_inside_max_extent": 0.0104
+    },
+    {
+     "date": "2026-10-06",
+     "water_km2": 30.6,
+     "fraction_of_max_extent_area": 0.8506,
+     "share_inside_max_extent": 0.0278
+    },
+    {
+     "date": "2026-10-18",
+     "water_km2": 18.2,
+     "fraction_of_max_extent_area": 0.5052,
+     "share_inside_max_extent": 0.0019
+    }
+   ],
+   "permanent_outside_max_extent": {
+    "km2": 8.9,
+    "share_within_10px_of_frame_edge": 0.0,
+    "share_within_1px_of_ref_water": 0.0038,
+    "share_within_3px_of_ref_water": 0.0192,
+    "share_far_from_ref_water_gt3px": 0.9808,
+    "n_clusters": 15,
+    "largest_clusters": [
+     {
+      "km2": 4.0,
+      "lon": 44.68,
+      "lat": 39.961,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": false
+     },
+     {
+      "km2": 0.5,
+      "lon": 44.723,
+      "lat": 39.955,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": false
+     },
+     {
+      "km2": 0.5,
+      "lon": 44.793,
+      "lat": 39.951,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": false
+     },
+     {
+      "km2": 0.5,
+      "lon": 44.773,
+      "lat": 40.01,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": false
+     },
+     {
+      "km2": 0.4,
+      "lon": 44.761,
+      "lat": 40.183,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": false
+     },
+     {
+      "km2": 0.4,
+      "lon": 44.725,
+      "lat": 39.895,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": false
+     }
+    ]
+   },
+   "seasonal_outside_max_extent": {
+    "km2": 17.5,
+    "share_within_10px_of_frame_edge": 0.0,
+    "share_within_1px_of_ref_water": 0.0271,
+    "share_within_3px_of_ref_water": 0.062,
+    "share_far_from_ref_water_gt3px": 0.938,
+    "n_clusters": 55,
+    "largest_clusters": [
+     {
+      "km2": 5.5,
+      "lon": 44.763,
+      "lat": 40.286,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": false
+     },
+     {
+      "km2": 2.4,
+      "lon": 44.693,
+      "lat": 40.174,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": false
+     },
+     {
+      "km2": 1.6,
+      "lon": 44.763,
+      "lat": 40.194,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": false
+     },
+     {
+      "km2": 1.1,
+      "lon": 44.745,
+      "lat": 40.182,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": true
+     },
+     {
+      "km2": 0.6,
+      "lon": 44.693,
+      "lat": 39.963,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": false
+     },
+     {
+      "km2": 0.5,
+      "lon": 44.724,
+      "lat": 40.291,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": false
+     }
+    ]
+   },
+   "flooded_veg_outside_max_extent": {
+    "km2": 37.8,
+    "share_within_10px_of_frame_edge": 0.0,
+    "share_within_1px_of_ref_water": 0.0558,
+    "share_within_3px_of_ref_water": 0.1969,
+    "share_far_from_ref_water_gt3px": 0.8031,
+    "n_clusters": 85,
+    "largest_clusters": [
+     {
+      "km2": 3.5,
+      "lon": 44.271,
+      "lat": 39.964,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": false
+     },
+     {
+      "km2": 3.0,
+      "lon": 44.268,
+      "lat": 39.983,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": false
+     },
+     {
+      "km2": 2.4,
+      "lon": 44.314,
+      "lat": 39.881,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": false
+     },
+     {
+      "km2": 1.8,
+      "lon": 44.235,
+      "lat": 40.007,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": false
+     },
+     {
+      "km2": 1.3,
+      "lon": 44.343,
+      "lat": 40.02,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": true
+     },
+     {
+      "km2": 1.2,
+      "lon": 44.007,
+      "lat": 39.985,
+      "within_10px_of_frame_edge": false,
+      "touches_ref_water_within_1px": false
+     }
+    ]
+   },
+   "shift_test": {
+    "compared": "any-date water vs max extent",
+    "iou_unshifted": 0.0155,
+    "best_shift_px_dy_dx": [
+     -4,
+     -4
+    ],
+    "best_iou": 0.0211
+   },
+   "first_vs_lowwater_occ_ge90": {
+    "tp_km2": 0.2,
+    "fp_km2": 10.4,
+    "fn_km2": 0.9,
+    "tn_km2": 3757.3,
+    "ours_km2": 10.6,
+    "ref_km2": 1.1,
+    "iou": 0.0178,
+    "precision": 0.0192,
+    "recall": 0.1875
+   },
+   "first_vs_lowwater_occ_ge75": {
+    "tp_km2": 0.2,
+    "fp_km2": 10.4,
+    "fn_km2": 1.6,
+    "tn_km2": 3756.6,
+    "ours_km2": 10.6,
+    "ref_km2": 1.9,
+    "iou": 0.0194,
+    "precision": 0.0224,
+    "recall": 0.1273
+   },
+   "last_vs_max_extent": {
+    "tp_km2": 0.0,
+    "fp_km2": 18.1,
+    "fn_km2": 27.5,
+    "tn_km2": 3723.2,
+    "ours_km2": 18.2,
+    "ref_km2": 27.5,
+    "iou": 0.0007,
+    "precision": 0.0019,
+    "recall": 0.0012,
+    "boundary": {
+     "disagree_km2": 45.6,
+     "disagree_within_1px_share": 0.818,
+     "disagree_within_2px_share": 0.9724,
+     "excl_1px_band": {
+      "iou": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "fp_km2": 3.5,
+      "fn_km2": 4.8
+     }
+    }
+   },
+   "first_vs_max_extent": {
+    "tp_km2": 0.3,
+    "fp_km2": 10.3,
+    "fn_km2": 27.2,
+    "tn_km2": 3731.0,
+    "ours_km2": 10.6,
+    "ref_km2": 27.5,
+    "iou": 0.0081,
+    "precision": 0.0288,
+    "recall": 0.0111
+   }
+  }
+ }
+}

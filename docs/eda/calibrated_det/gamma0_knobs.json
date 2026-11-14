@@ -1,0 +1,119 @@
+{
+ "generated": "2026-11-14T18:21:09",
+ "from_area": "tonle-sap-cal",
+ "dates_used": [
+  "2026-06-19",
+  "2026-07-01",
+  "2026-07-13",
+  "2026-07-25",
+  "2026-08-18",
+  "2026-08-30",
+  "2026-09-11",
+  "2026-09-23",
+  "2026-10-05",
+  "2026-10-17"
+ ],
+ "water_rule_source": "tuned (budgeted search)",
+ "KNOBS_gamma0": {
+  "box": 3,
+  "quegan": true,
+  "normalise": false,
+  "norm_mode": "offset",
+  "stable_frac": 0.2,
+  "water_hh_strong": -20.15,
+  "water_hh_weak": -15.66,
+  "water_hv_max": -24.0,
+  "perm_frac": 0.9,
+  "seasonal_min_dates": 2,
+  "n_ref": 2,
+  "fv_hh_rise": 3.0,
+  "fv_hv_rise_max": 1.5,
+  "fv_min_dates": 2,
+  "change_step_min": 3.0,
+  "persist_frac": 0.8,
+  "change_t_min": 5.0,
+  "min_blob_px": 9,
+  "wind_frac": 0.7,
+  "nodata_floor": null,
+  "edge_erode_px": 2,
+  "common_footprint": true,
+  "open_k": 0,
+  "untested": false,
+  "refine_px": 2,
+  "hv_w": 0.0
+ },
+ "reasons": {
+  "water_hh_strong": "seed: about 1 dB below the median of calm lake water (-19.5 dB HH, 3x3 filtered, 19 Jun); lower values leave windy dates without seeds",
+  "water_hh_weak": "growth limit: inside [-17.7, -15.0] dB = [95 % of calm lake, 1 % of never-wet land]; the floodplain histogram valley sits at -17 dB on calm dates",
+  "water_hv_max": "HV of the lake sits at the noise floor (-25.8 dB, NESZ about -27 dB); -24 dB keeps wind-roughened water (HV barely changes) and rejects dark fields (HV -16 dB)",
+  "box": "3x3 Quegan at 80 m (240 m); the data already average 16 x ~9.5 looks (measured ENL 60-100); 7 blurs shores",
+  "quegan": "multi-temporal filter in linear power (unbiased); never average in dB",
+  "min_blob_px": "9 px = 0.06 km2 at 80 m",
+  "refine_px": "2-px shoreline refinement on the unfiltered HH: power-domain filtering shrinks shores by ~1 px",
+  "open_k": "0: an opening of 3 deletes every channel narrower than 240 m",
+  "normalise": "False: stable upland forest varies by 0.16 dB (HH) / 0.09 dB (HV) std between dates",
+  "edge_erode_px": "2 px of swath edge removed",
+  "fv_hh_rise": "simple ops rule only (kept for comparison); the app should use fv_db (FV_KNOBS_db)"
+ },
+ "water_test_strip": {
+  "recall_perm": 0.99,
+  "fpr_never": 0.0,
+  "spec_never": 1.0,
+  "fp_km2_per_date": 2.048,
+  "balanced_acc": 0.995,
+  "iou": 0.983,
+  "rank_rho": 0.626
+ },
+ "FV_KNOBS_db": {
+  "db_rise_min": 1.0,
+  "db_k_sigma": 3.0,
+  "db_hh_drop_max": 1.0,
+  "db_hh_min": -14.0,
+  "abs_margin": 0.5,
+  "sub_drop": 1.5,
+  "tau": 0.3,
+  "town_std_max": 0.5,
+  "null_dist_px": 45,
+  "near_px": 22,
+  "decay_px": 11.25,
+  "max_px": 68,
+  "abs_dist_px": 4,
+  "sub_dist_px": 2,
+  "min_blob_px": 20
+ },
+ "FV_KNOBS_db_note": "distances in px for 80 m; calibrated.fv_knobs(pixel_m) scales them",
+ "HV_BINS_DB": [
+  -36.0,
+  -6.0
+ ],
+ "SEEDED_DB": {
+  "s_weak": 0.25,
+  "s_strong": 0.1,
+  "s_seed_keep": 0.45
+ },
+ "stats_change": {
+  "enl_used": [
+   77.947,
+   99.195
+  ],
+  "enl_note": "spatial ENL on the calm lake core, per channel",
+  "null": "theoretical chi2 at the measured ENL; NOT at nominal level over 10 dates on stable forest (17 % at alpha 0.01; pairs ~1 %): add a minimum effect size, see calibrated.md section 7b"
+ },
+ "DISPLAY_gamma0": {
+  "grey": {
+   "hh": [
+    -25,
+    -3
+   ],
+   "hv": [
+    -30,
+    -8
+   ]
+  },
+  "change": {
+   "thr": 1.5,
+   "full": 6.0
+  }
+ },
+ "mode_note": "These water thresholds are for the 20+5 MHz GCOV mode (Tonle Sap, noise floor ~-27 dB HV). The 40+5 MHz Armenia product has a ~7-8 dB higher floor: Lake Sevan sits at HH -15.3 / HV -17 dB and these knobs find 0 km2. Sevan-level HH-only diagnostic: strong -15.5 / weak -14.0, HV guard off -> 1,210-1,239 km2 (target 1,242) with 26-60 km2/date false water. Use mode-specific knobs."
+}

@@ -1,0 +1,37 @@
+{
+  "story": {
+    "see": "On 28 July 2026 a magnitude 6.8 earthquake struck the Kumamoto region of Japan (USGS: 32.62 N, 130.66 E, depth about 12 km). The map shows how far the ground moved along the radar's line of sight between two NISAR passes of the ascending track, 21 July and 14 August. That pair is 24 days long and bridges a pause in NISAR's acquisitions, so it also contains any aftershock and slow movement of those weeks. Blue is ground that moved toward the satellite, red away from it. In the fringe layer, one colour cycle is 10 cm. Grey speckle and black are where the passes could not be compared (dense vegetation, water, the ground next to the rupture).",
+    "physics": "The US Geological Survey's moment tensor shows strike-slip faulting on a shallow fault. Within 30 km of the epicentre the line-of-sight change spans about 38 cm from the most red to the most blue pixels (0.5th to 99.5th percentile), mostly as a red lobe east and north-east of the epicentre of up to about 26 cm of movement away from the satellite, with a smaller blue lobe of about 11 cm on the other side. Strike-slip faulting of this size is expected to move the ground by tens of centimetres near the fault. Fault position and mechanism come from USGS; our map does not by itself tell which fault plane moved.",
+    "lband": "NISAR's L-band radar has a wavelength of about 24 cm, so one full colour cycle means about 12 cm of ground movement along the line of sight (we show 10 cm cycles). L-band keeps coherence over vegetation better than shorter wavelengths, and here about 58 per cent of the window stays usable over 24 days. A pair of the same track and frame before the event (9 to 21 July) shows no such lobes: its far-field noise is about 2 cm. The products are PROVISIONAL, from one look direction only, and the sign convention (blue = toward the satellite) follows the interferogram definition we assumed, not a statement in the product guide.",
+    "people": "This is a measurement of ground movement, not of damage. We did not look at reports of damage or casualties. Maps like this show where the ground moved and by how much, which feeds hazard models. From one look direction we see only one component of the motion, so uplift and sideways movement are mixed together; the descending track's pair was too decorrelated to use."
+  },
+  "spots": [
+    {
+      "id": "epicentre",
+      "label": "USGS epicentre",
+      "lngLat": [
+        130.6601,
+        32.6177
+      ],
+      "radius_m": 3000
+    },
+    {
+      "id": "toward-lobe",
+      "label": "Strongest movement toward the satellite (blue)",
+      "lngLat": [
+        130.668,
+        32.5584
+      ],
+      "radius_m": 3000
+    },
+    {
+      "id": "away-lobe",
+      "label": "Strongest movement away from the satellite (red)",
+      "lngLat": [
+        130.7739,
+        32.6551
+      ],
+      "radius_m": 3000
+    }
+  ]
+}

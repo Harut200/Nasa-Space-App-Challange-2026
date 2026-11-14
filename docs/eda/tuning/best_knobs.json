@@ -1,0 +1,56 @@
+{
+ "_note": "Recommended KNOBS['preview'] overrides from scripts/detect/tune.py (see docs/eda/tuning.md). Valid ONLY for the uncalibrated ASF previews; re-run the procedure on calibrated gamma0.",
+ "_old_values": {
+  "water_hh_strong": 0.06,
+  "water_hh_weak": 0.12,
+  "water_hv_max": 0.35,
+  "box": 3,
+  "quegan": true,
+  "min_blob_px": 4
+ },
+ "_decision": "KEEP the old values: the tuned candidate failed the TEST adoption gate (J_test new 1.08753 vs old 1.09001; worse in ['sevan', 'ararat'])",
+ "_tuned_candidate": {
+  "water_hh_strong": 0.2086,
+  "water_hh_weak": 0.2137,
+  "water_hv_max": 1.0,
+  "box": 3,
+  "quegan": false,
+  "min_blob_px": 16
+ },
+ "water_hh_strong": {
+  "value": 0.06,
+  "old": 0.06,
+  "tuned_candidate": 0.2086,
+  "comment": "seed threshold on filtered HH (display brightness); tuned on TUNE strips, chosen on VAL"
+ },
+ "water_hh_weak": {
+  "value": 0.12,
+  "old": 0.12,
+  "tuned_candidate": 0.2137,
+  "comment": "grow threshold (hysteresis); constrained >= strong"
+ },
+ "water_hv_max": {
+  "value": 0.35,
+  "old": 0.35,
+  "tuned_candidate": 1.0,
+  "comment": "HV must be below this"
+ },
+ "box": {
+  "value": 3,
+  "old": 3,
+  "tuned_candidate": 3,
+  "comment": "speckle-filter window (px)"
+ },
+ "quegan": {
+  "value": true,
+  "old": true,
+  "tuned_candidate": false,
+  "comment": "multi-temporal Quegan filter on/off"
+ },
+ "min_blob_px": {
+  "value": 4,
+  "old": 4,
+  "tuned_candidate": 16,
+  "comment": "drop water components smaller than this"
+ }
+}

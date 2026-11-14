@@ -1,0 +1,26 @@
+{
+  "id": "big-grass-fire-2026",
+  "name": "Big Grass Fire, Oregon-Idaho",
+  "bbox": [
+    -118.2,
+    42.0,
+    -116.76,
+    43.4
+  ],
+  "track": 5,
+  "frame": 23,
+  "direction": "ascending",
+  "pixel_m": 100,
+  "mode": "40+5",
+  "dates": [
+    "2026-06-26",
+    "2026-07-08",
+    "2026-07-20",
+    "2026-08-13",
+    "2026-08-25",
+    "2026-09-06",
+    "2026-09-30",
+    "2026-10-12"
+  ],
+  "water_source": "fusion2"
+}

@@ -1,0 +1,30 @@
+{
+  "id": "inner-niger",
+  "name": "Inner Niger Delta, Mali",
+  "bbox": [
+    -5.0,
+    14.02,
+    -3.74,
+    15.58
+  ],
+  "track": 145,
+  "frame": 9,
+  "direction": "ascending",
+  "pixel_m": 100,
+  "mode": "20+5",
+  "dates": [
+    "2026-06-24",
+    "2026-07-18",
+    "2026-08-11",
+    "2026-08-23",
+    "2026-09-04",
+    "2026-09-16",
+    "2026-09-28",
+    "2026-10-10"
+  ],
+  "excluded_dates": [
+    "2026-07-06"
+  ],
+  "water_source": "fusion2",
+  "category": "flood"
+}

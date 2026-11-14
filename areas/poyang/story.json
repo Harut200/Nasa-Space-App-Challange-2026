@@ -1,0 +1,15 @@
+{
+  "story": {
+    "see": "On 5 July the lake is one wide black sheet. From August it pulls back: the western and southern lake bed turns grey, then bright, and winding channels and separate pools appear inside the old lake. The 'when' layer dates most of this to August and September. The mapped open-water area changes little (about 3,300 km² in early July, about 3,200 km² in October), so the draining shows mainly as brighter ground. Green 'possible water under vegetation' patches on the drained edges may be wet grass and fields.",
+    "physics": "Poyang is China's largest freshwater lake and is fed by rivers and connected to the Yangtze. It swells in the summer wet season and shrinks in autumn and winter to channels, pools and grassy mudflats. Its area changes dramatically between seasons; in early 2012 drought and the Three Gorges Dam reduced it to about 200 km².",
+    "lband": "Calm lake water mirrors L-band radar away and looks black in HH. As the water retreats, wet mud and grass scatter the signal back, so the lake bed brightens. Where grass still stands in shallow water, the water-to-stem double bounce makes it glow, which our detector marks as possible water under vegetation.",
+    "people": "The lake provides habitat for half a million migratory birds, and up to 90% of the critically endangered Siberian crane winter there, on the very mudflats and grasslands that appear as the water drops in autumn. Its level also matters for fishing, farming and the cities around it, including Nanchang."
+  },
+  "spots": [
+    {"id": "open-lake", "label": "Open lake (water all season)", "lngLat": [116.2, 29.2], "radius_m": 1500},
+    {"id": "western-lake-bed", "label": "Western lake bed (exposed from August)", "lngLat": [116.05, 29.15], "radius_m": 1000},
+    {"id": "southern-floodplain", "label": "Southern floodplain (drains after July)", "lngLat": [116.3, 29.0], "radius_m": 1000},
+    {"id": "eastern-fields", "label": "Low fields east of the lake (wet from September)", "lngLat": [116.836, 28.928], "radius_m": 800},
+    {"id": "nanchang", "label": "Nanchang city (bright reference)", "lngLat": [115.9, 28.68], "radius_m": 1200}
+  ]
+}

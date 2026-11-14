@@ -1,0 +1,46 @@
+{
+  "story": {
+    "see": "Our box covers the northern half of the lake. The open lake is black all season. From late July the western and northern shores brighten as the water edge pulls back; the 'when' layer dates this to August and September. On 18 October the pool south of the causeway brightens too, but one date cannot rule out wind.",
+    "physics": "Lake Urmia is a salt lake with no outlet: it gains water from rivers and rain and loses it only by evaporation. Every summer it shrinks. Over decades, drought, river dams and pumping of groundwater for farms have cut its inflow, so the lake has shrunk dramatically and left wide salt flats.",
+    "lband": "Calm brine mirrors L-band radar away and looks black in HH. Exposed mud and salt crust are rougher and send more signal back, so a retreating shoreline turns brighter. Caution: smooth, wet salt flats can also look almost as dark as water, so our water layer probably includes some wet flats at the edges.",
+    "people": "Once about 6,000 km² and among the largest salt lakes on Earth, Lake Urmia had shrunk to 10% of its former size by late 2017, and NASA images showed it almost entirely dried up in September 2025. In 2018 trees were planted to slow the wind that carries salt particles from the exposed bed."
+  },
+  "spots": [
+    {
+      "id": "open-lake",
+      "label": "Open lake (dark all season)",
+      "lngLat": [
+        45.5,
+        38.0
+      ],
+      "radius_m": 1500
+    },
+    {
+      "id": "west-shore",
+      "label": "Western shore (water edge pulls back)",
+      "lngLat": [
+        45.1,
+        38.0
+      ],
+      "radius_m": 1000
+    },
+    {
+      "id": "south-of-causeway",
+      "label": "Pool south of the causeway",
+      "lngLat": [
+        45.3,
+        37.78
+      ],
+      "radius_m": 1000
+    },
+    {
+      "id": "eslami-island",
+      "label": "Eslami island (land reference)",
+      "lngLat": [
+        45.55,
+        37.85
+      ],
+      "radius_m": 1200
+    }
+  ]
+}

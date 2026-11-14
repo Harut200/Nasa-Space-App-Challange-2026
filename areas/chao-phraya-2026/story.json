@@ -1,0 +1,40 @@
+{
+  "story": {
+    "see": "Watch the Chao Phraya plain north of Bangkok from late June to mid-October. Mapped open water stays near 850 to 990 square kilometres through early September, then jumps to about 1,930 square kilometres on 30 September. Most of the new water appears between the 18 and 30 September passes and is still there on 12 October.",
+    "physics": "Thai reports put about 4.3 billion cubic metres of runoff through Nakhon Sawan by early October, with peak flow near 2,600 cubic metres per second, against 15 billion and 4,600 in the 2011 flood. Embankments and diversion channels steer the water into low-lying riverside districts such as Sena, Bang Ban and Phak Hai, which act as retention zones to protect the capital.",
+    "lband": "Calm floodwater is dark to radar, so open flooded fields stand out against land. The roughly 900 square kilometres of water we map before the flood probably includes wet rice fields and ponds, which also look dark, so read the jump as the flood on top of that. About 8 in 10 of the new water falls inside the largest extent the JRC long-term water record has ever shown here. These are 180 metre preview images, so thin canals and villages are not resolved.",
+    "people": "Ayutthaya's riverside villages sit on land that authorities deliberately let flood to protect Bangkok, and residents told AFP the area has flooded six years in a row. A Thai flood expert said in early October that 2026 was not a repeat of 2011. The radar sees how widely and how long water stood on the plain, which is what river gauges at single points cannot show."
+  },
+  "spots": [
+    {
+      "id": "pasak-reservoir",
+      "label": "Pa Sak reservoir (stays water)",
+      "lngLat": [101.058, 14.951],
+      "radius_m": 2500
+    },
+    {
+      "id": "sena-phak-hai",
+      "label": "West of Sena and Bang Ban",
+      "lngLat": [100.318, 14.396],
+      "radius_m": 3000
+    },
+    {
+      "id": "sena",
+      "label": "Sena district",
+      "lngLat": [100.404, 14.327],
+      "radius_m": 3000
+    },
+    {
+      "id": "north-of-ayutthaya",
+      "label": "Flooded plain north of Ayutthaya",
+      "lngLat": [100.627, 14.646],
+      "radius_m": 3000
+    },
+    {
+      "id": "chai-nat-singburi",
+      "label": "Plain between Chai Nat and Sing Buri",
+      "lngLat": [100.341, 15.117],
+      "radius_m": 3000
+    }
+  ]
+}

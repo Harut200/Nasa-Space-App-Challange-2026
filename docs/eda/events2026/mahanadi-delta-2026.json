@@ -1,0 +1,62 @@
+{
+ "area": "mahanadi-delta-2026",
+ "dates": [
+  "2026-06-27",
+  "2026-08-14",
+  "2026-08-26",
+  "2026-09-19",
+  "2026-10-01",
+  "2026-10-13"
+ ],
+ "baseline": "2026-06-27",
+ "event": "2026-08-14",
+ "domain_km2": 14687,
+ "water_km2": [
+  138,
+  404,
+  420,
+  294,
+  324,
+  237
+ ],
+ "jrc_occ90_km2": 85,
+ "jrc_maxextent_km2": 1331,
+ "baseline_vs_occ90": {
+  "tp_km2": 59.9,
+  "fp_km2": 77.6,
+  "fn_km2": 25.0,
+  "tn_km2": 14524.7,
+  "ours_km2": 137.5,
+  "ref_km2": 84.9,
+  "iou": 0.3688,
+  "precision": 0.4358,
+  "recall": 0.706
+ },
+ "baseline_vs_maxext": {
+  "tp_km2": 120.4,
+  "fp_km2": 17.1,
+  "fn_km2": 1210.9,
+  "tn_km2": 13338.8,
+  "ours_km2": 137.5,
+  "ref_km2": 1331.3,
+  "iou": 0.0893,
+  "precision": 0.8754,
+  "recall": 0.0904
+ },
+ "event_vs_maxext": {
+  "tp_km2": 299.1,
+  "fp_km2": 104.6,
+  "fn_km2": 1032.2,
+  "tn_km2": 13251.4,
+  "ours_km2": 403.7,
+  "ref_km2": 1331.3,
+  "iou": 0.2083,
+  "precision": 0.741,
+  "recall": 0.2247
+ },
+ "new_km2": 269,
+ "lost_km2": 3,
+ "new_inside_jrc_maxextent_share": 0.67,
+ "new_on_jrc_occ_gt0_share": 0.834,
+ "first_to_baseline_change_km2": 0
+}

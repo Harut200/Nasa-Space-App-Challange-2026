@@ -1,0 +1,295 @@
+{
+  "id": "bangladesh-haor",
+  "name": "Haor wetlands, Bangladesh",
+  "bounds": [
+    90.6,
+    24.1998190148284,
+    91.49973776460733,
+    25.279999999999994
+  ],
+  "dates": [
+    "2026-06-18",
+    "2026-06-30",
+    "2026-07-12",
+    "2026-07-24",
+    "2026-08-17",
+    "2026-08-29",
+    "2026-09-10",
+    "2026-09-22",
+    "2026-10-04",
+    "2026-10-16"
+  ],
+  "gaps": [
+    [
+      "2026-07-27",
+      "2026-08-10"
+    ]
+  ],
+  "layers": [
+    {
+      "id": "hh",
+      "label": "HH brightness (preview)",
+      "dates": [
+        "2026-06-18",
+        "2026-06-30",
+        "2026-07-12",
+        "2026-07-24",
+        "2026-08-17",
+        "2026-08-29",
+        "2026-09-10",
+        "2026-09-22",
+        "2026-10-04",
+        "2026-10-16"
+      ],
+      "legend": {
+        "type": "ramp",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": 0,
+        "max": 100,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    },
+    {
+      "id": "water",
+      "label": "Water and flooded vegetation",
+      "dates": [
+        "2026-06-18",
+        "2026-06-30",
+        "2026-07-12",
+        "2026-07-24",
+        "2026-08-17",
+        "2026-08-29",
+        "2026-09-10",
+        "2026-09-22",
+        "2026-10-04",
+        "2026-10-16"
+      ],
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#2f6fde",
+            "label": "Open water"
+          },
+          {
+            "color": "#35b04a",
+            "label": "Possible water under vegetation"
+          },
+          {
+            "color": "#7fd3c4",
+            "label": "Going under: vegetation submerging, or part open water"
+          },
+          {
+            "color": "#f28e2b",
+            "label": "Usually water, not today (rain or wind?)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "when",
+      "label": "When it changed for good",
+      "dates": null,
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#440154",
+            "label": "30 Jun"
+          },
+          {
+            "color": "#472d7b",
+            "label": "12 Jul"
+          },
+          {
+            "color": "#3b528b",
+            "label": "24 Jul"
+          },
+          {
+            "color": "#2c728e",
+            "label": "17 Aug"
+          },
+          {
+            "color": "#21918c",
+            "label": "29 Aug"
+          },
+          {
+            "color": "#28ae80",
+            "label": "10 Sep"
+          },
+          {
+            "color": "#5ec962",
+            "label": "22 Sep"
+          },
+          {
+            "color": "#addc30",
+            "label": "4 Oct"
+          },
+          {
+            "color": "#fde725",
+            "label": "16 Oct"
+          }
+        ]
+      }
+    },
+    {
+      "id": "classes",
+      "label": "Season classes",
+      "dates": null,
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#08306b",
+            "label": "Permanent water"
+          },
+          {
+            "color": "#4292c6",
+            "label": "Seasonal open water"
+          },
+          {
+            "color": "#41ab5d",
+            "label": "Flooded vegetation"
+          },
+          {
+            "color": "#9ecae1",
+            "label": "Got darker, not open water (wetter ground, shallow or partial flooding)"
+          },
+          {
+            "color": "#c994c7",
+            "label": "Got brighter (growing crops and other causes)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "change",
+      "label": "Change since first pass (HH)",
+      "dates": [
+        "2026-06-30",
+        "2026-07-12",
+        "2026-07-24",
+        "2026-08-17",
+        "2026-08-29",
+        "2026-09-10",
+        "2026-09-22",
+        "2026-10-04",
+        "2026-10-16"
+      ],
+      "legend": {
+        "type": "diverging",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": -35,
+        "max": 35,
+        "colors": [
+          "#2166ac",
+          "#00000000",
+          "#b2182b"
+        ],
+        "labels": [
+          "darker: new water, cleared forest",
+          "brighter: flooded vegetation, growth"
+        ]
+      }
+    },
+    {
+      "id": "rgb",
+      "label": "Three-date composite",
+      "dates": null,
+      "legend": {
+        "type": "text",
+        "text": "HH: red = 18 Jun, green = 29 Aug, blue = 16 Oct. Grey = no change."
+      }
+    },
+    {
+      "id": "hv",
+      "label": "HV brightness (preview)",
+      "dates": [
+        "2026-06-18",
+        "2026-06-30",
+        "2026-07-12",
+        "2026-07-24",
+        "2026-08-17",
+        "2026-08-29",
+        "2026-09-10",
+        "2026-09-22",
+        "2026-10-04",
+        "2026-10-16"
+      ],
+      "legend": {
+        "type": "ramp",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": 0,
+        "max": 100,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    }
+  ],
+  "story": {
+    "see": "The central haor basin is a dark sheet of open water on our first image, 18 June, and stays dark all season. On 30 June the surface looks rougher (orange), possibly from wind. From late September the western margins turn bright as water drains and fields green up; the 'when' layer dates most of that change to late September and October.",
+    "physics": "Haors are bowl-shaped backswamps in north-eastern Bangladesh. Monsoon rivers spill into them and they stay flooded for months, from about July to November. As the water recedes the exposed mud is planted with boro rice in the dry season, and the open water shrinks back to the deepest beels.",
+    "lband": "Calm open water reflects L-band (24 cm) radar away, so it looks black in HH. As water drains and plants grow, the signal scatters back and the ground brightens. Where shallow water still stands under young plants, the signal bounces water-to-stem and back; our water layer marks such margins green as possible water under vegetation in October.",
+    "people": "The haors support major fisheries and the boro rice crop, which early flash floods often damage. On 13 July 2026 Bangladesh's flood warning centre said the Kushiyara was above danger level at Markuli in Sunamganj and flooding could worsen. NISAR passed on 12 and 24 July; no passes exist from 27 July to 10 August."
+  },
+  "spots": [
+    {
+      "id": "central-haor",
+      "label": "Central haor (water all season)",
+      "lngLat": [
+        91.225,
+        24.803
+      ]
+    },
+    {
+      "id": "haor-edge",
+      "label": "Haor edge (water in July, then shallows)",
+      "lngLat": [
+        91.1,
+        24.7
+      ]
+    },
+    {
+      "id": "western-margin",
+      "label": "Western margin (drains and greens up)",
+      "lngLat": [
+        90.75,
+        24.6
+      ]
+    },
+    {
+      "id": "sunamganj",
+      "label": "Sunamganj town (built-up reference)",
+      "lngLat": [
+        91.395,
+        25.066
+      ]
+    },
+    {
+      "id": "northern-border",
+      "label": "Northern border land (dry reference)",
+      "lngLat": [
+        90.961,
+        25.231
+      ]
+    }
+  ],
+  "credits": "NISAR GCOV preview images: NASA/JPL-Caltech and ISRO, distributed by ASF DAAC. Uncalibrated previews at about 180 m; values are display brightness, not backscatter.",
+  "source": "preview",
+  "quality": {
+    "2026-06-30": {
+      "quality": "warn",
+      "quality_note": "HH stable-land brightness +6% vs the other dates; HH brightness change across the swath -0.342 vs usual -0.220; HH 0.0% of pixels at the display floor vs usual 6.8%",
+      "channels": [
+        "HH",
+        "HV"
+      ]
+    }
+  },
+  "category": "flood"
+}

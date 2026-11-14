@@ -1,0 +1,32 @@
+{
+  "id": "avila-burgohondo-fire-2026",
+  "name": "Burgohondo fire, Avila, Spain",
+  "bbox": [
+    -5.6,
+    39.8,
+    -4.0,
+    40.9
+  ],
+  "track": 23,
+  "frame": 68,
+  "direction": "descending",
+  "pixel_m": 100,
+  "mode": "20+5",
+  "dates": [
+    "2026-06-27",
+    "2026-07-09",
+    "2026-07-21",
+    "2026-08-26",
+    "2026-09-19",
+    "2026-10-01",
+    "2026-10-13"
+  ],
+  "water_source": "fusion2",
+  "excluded_dates": [
+    "2026-09-07"
+  ],
+  "category": "fire",
+  "default_layer": "hv",
+  "headline": "none",
+  "headline_note": "Cross-polarised radar echo darker where the fire burned"
+}

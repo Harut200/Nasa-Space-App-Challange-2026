@@ -1,0 +1,14 @@
+{
+  "id": "kumamoto-m68-2026",
+  "name": "Kumamoto earthquake, M6.8, 28 Jul 2026",
+  "bbox": [
+    130.0,
+    32.0,
+    131.3,
+    33.2
+  ],
+  "track": 24,
+  "frame": 18,
+  "direction": "ascending",
+  "pixel_m": 80
+}

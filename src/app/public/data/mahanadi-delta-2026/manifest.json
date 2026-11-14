@@ -1,0 +1,274 @@
+{
+  "id": "mahanadi-delta-2026",
+  "name": "Mahanadi delta, Odisha",
+  "bounds": [
+    85.19999999999999,
+    20.0200826242998,
+    86.50039122922729,
+    20.999999999999993
+  ],
+  "dates": [
+    "2026-06-27",
+    "2026-08-14",
+    "2026-08-26",
+    "2026-09-19",
+    "2026-10-01",
+    "2026-10-13"
+  ],
+  "gaps": [
+    [
+      "2026-07-27",
+      "2026-08-10"
+    ]
+  ],
+  "layers": [
+    {
+      "id": "hh",
+      "label": "HH brightness (preview)",
+      "dates": [
+        "2026-06-27",
+        "2026-08-14",
+        "2026-08-26",
+        "2026-09-19",
+        "2026-10-01",
+        "2026-10-13"
+      ],
+      "legend": {
+        "type": "ramp",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": 0,
+        "max": 100,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    },
+    {
+      "id": "water",
+      "label": "Water and flooded vegetation",
+      "dates": [
+        "2026-06-27",
+        "2026-08-14",
+        "2026-08-26",
+        "2026-09-19",
+        "2026-10-01",
+        "2026-10-13"
+      ],
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#2f6fde",
+            "label": "Open water"
+          },
+          {
+            "color": "#35b04a",
+            "label": "Possible water under vegetation"
+          },
+          {
+            "color": "#7fd3c4",
+            "label": "Going under: vegetation submerging, or part open water"
+          },
+          {
+            "color": "#f28e2b",
+            "label": "Usually water, not today (rain or wind?)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "when",
+      "label": "When it changed for good",
+      "dates": null,
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#440154",
+            "label": "14 Aug"
+          },
+          {
+            "color": "#3b528b",
+            "label": "26 Aug"
+          },
+          {
+            "color": "#21918c",
+            "label": "19 Sep"
+          },
+          {
+            "color": "#5ec962",
+            "label": "1 Oct"
+          },
+          {
+            "color": "#fde725",
+            "label": "13 Oct"
+          }
+        ]
+      }
+    },
+    {
+      "id": "classes",
+      "label": "Season classes",
+      "dates": null,
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#08306b",
+            "label": "Permanent water"
+          },
+          {
+            "color": "#4292c6",
+            "label": "Seasonal open water"
+          },
+          {
+            "color": "#41ab5d",
+            "label": "Flooded vegetation"
+          },
+          {
+            "color": "#9ecae1",
+            "label": "Got darker, not open water (wetter ground, shallow or partial flooding)"
+          },
+          {
+            "color": "#c994c7",
+            "label": "Got brighter (growing crops and other causes)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "change",
+      "label": "Change since first pass (HH)",
+      "dates": [
+        "2026-08-14",
+        "2026-08-26",
+        "2026-09-19",
+        "2026-10-01",
+        "2026-10-13"
+      ],
+      "legend": {
+        "type": "diverging",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": -35,
+        "max": 35,
+        "colors": [
+          "#2166ac",
+          "#00000000",
+          "#b2182b"
+        ],
+        "labels": [
+          "darker: new water, cleared forest",
+          "brighter: flooded vegetation, growth"
+        ]
+      }
+    },
+    {
+      "id": "rgb",
+      "label": "Three-date composite",
+      "dates": null,
+      "legend": {
+        "type": "text",
+        "text": "HH: red = 27 Jun, green = 19 Sep, blue = 13 Oct. Grey = no change."
+      }
+    },
+    {
+      "id": "hv",
+      "label": "HV brightness (preview)",
+      "dates": [
+        "2026-06-27",
+        "2026-08-14",
+        "2026-08-26",
+        "2026-09-19",
+        "2026-10-01",
+        "2026-10-13"
+      ],
+      "legend": {
+        "type": "ramp",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": 0,
+        "max": 100,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    }
+  ],
+  "story": {
+    "see": "Compare the Mahanadi delta on 27 June with 14 August. Mapped open water is about 140 square kilometres before the flood and about 400 on 14 August, the first usable pass after the peak. It is still about 420 on 26 August and only falls to about 290 by 19 September and about 240 by 13 October.",
+    "physics": "A deep depression over the Bay of Bengal brought heavy rain to Odisha in late July. Upstream, Hirakud dam opened 22 gates and Chhattisgarh opened 64 of the 66 gates of the Kalama barrage. Officials expected more than 9.5 lakh cubic feet per second to pass Mundali near Cuttack. The peak fell on 31 July, inside the satellite's 27 July to 10 August outage.",
+    "lband": "The flood peak itself was not imaged, and two July previews are damaged and left out. What the radar sees is standing water afterwards: new dark pools on farmland, mostly in the floodplain south-west, east and north of Cuttack. About two thirds of the new water lies inside the largest extent the JRC long-term water record has ever shown here. Wet rice fields also look dark in the monsoon, so some of this is normal season.",
+    "people": "Officials reported embankment breaches that submerged farmland at Jodum in Cuttack district and seven breaches in Jajpur district. Floods were reported across 20 of Odisha's 30 districts. The radar cannot count harm. It shows how long water stayed on the delta plain after the river fell."
+  },
+  "spots": [
+    {
+      "id": "southwest-pools",
+      "label": "Floodplain pools south-west of Cuttack",
+      "lngLat": [
+        85.552,
+        20.312
+      ]
+    },
+    {
+      "id": "eastern-delta",
+      "label": "Eastern delta floodplain",
+      "lngLat": [
+        86.425,
+        20.541
+      ]
+    },
+    {
+      "id": "northeast-plain",
+      "label": "North-eastern floodplain",
+      "lngLat": [
+        86.27,
+        20.86
+      ]
+    },
+    {
+      "id": "northern-plain",
+      "label": "Northern floodplain",
+      "lngLat": [
+        85.633,
+        20.811
+      ]
+    },
+    {
+      "id": "coastal-lagoon",
+      "label": "Coastal water (stays water)",
+      "lngLat": [
+        86.47,
+        20.056
+      ]
+    }
+  ],
+  "credits": "NISAR GCOV preview images: NASA/JPL-Caltech and ISRO, distributed by ASF DAAC. Uncalibrated previews at about 180 m; values are display brightness, not backscatter.",
+  "source": "preview",
+  "quality": {
+    "2026-06-27": {
+      "quality": "warn",
+      "quality_note": "HH line artefact (stripe z 11 vs usual 7; RFI?); HV stable-land brightness -6% vs the other dates; HV brightness change across the swath -0.130 vs usual -0.263",
+      "channels": [
+        "HH",
+        "HV"
+      ]
+    },
+    "2026-09-19": {
+      "quality": "warn",
+      "quality_note": "1 pass(es) missing, not explained by the outage or the area config (2026-09-07)",
+      "channels": [
+        "HH",
+        "HV"
+      ]
+    },
+    "2026-10-13": {
+      "quality": "warn",
+      "quality_note": "HH-HV over stable land +0.003 vs usual +0.071 (departure in HH)",
+      "channels": [
+        "HH"
+      ]
+    }
+  },
+  "category": "flood"
+}

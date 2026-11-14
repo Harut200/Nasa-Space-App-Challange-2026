@@ -1,0 +1,524 @@
+[
+ {
+  "id": "langtang-collapse-2026",
+  "type": "landslide",
+  "title": "Langtang Lirung rock-ice collapse, 26 Aug 2026",
+  "time": "2026-08-26T02:52:00Z",
+  "lat": 28.322,
+  "lon": 85.477,
+  "place": "Langtang Lirung, Nepal-China border",
+  "window": [
+   85.1,
+   28.05,
+   85.85,
+   28.6
+  ],
+  "heights": [
+   1000,
+   6500
+  ],
+  "radius_km": 20,
+  "far_km": 40,
+  "gmin": 0.35,
+  "source_url": "https://en.wikipedia.org/wiki/2026_Nepal%E2%80%93Tibet_floods",
+  "views": {
+   "asc": {
+    "track": 98,
+    "frame": 16,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260819_20260831",
+     "granule": "NISAR_L2_PR_GUNW_028_098_A_016_029_4000_SH_20260819T233918_20260819T233953_20260831T233918_20260831T233952_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260714_20260726",
+     "granule": "NISAR_L2_PR_GUNW_025_098_A_016_026_4000_SH_20260714T233920_20260714T233954_20260726T233919_20260726T233954_P05023_N_F_J_001"
+    }
+   },
+   "desc": {
+    "track": 48,
+    "frame": 74,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260816_20260828",
+     "granule": "NISAR_L2_PR_GUNW_028_048_D_074_029_2000_SH_20260816T125812_20260816T125846_20260828T125812_20260828T125846_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260711_20260723",
+     "granule": "NISAR_L2_PR_GUNW_025_048_D_074_026_2000_SH_20260711T125814_20260711T125848_20260723T125813_20260723T125848_P05023_N_F_J_001"
+    }
+   }
+  },
+  "loss_lo": 0.4,
+  "loss_drop": 0.3,
+  "min_px": 20,
+  "verdict": "clear",
+  "export_deformation": false,
+  "primary_view": "asc",
+  "export_views": [
+   "asc"
+  ],
+  "site_label": "Collapse deposit (centre of the coherence loss)",
+  "story": {
+   "see": "On 26 August 2026 a huge piece of the north face of Langtang Lirung, on the Nepal-China border, collapsed. The seismic signal was recorded at 02:52 UTC (USGS and GFZ, as summarised on Wikipedia). The orange patch is where the radar picture between NISAR's 19 and 31 August passes changed completely compared with an earlier quiet pair (14 to 26 July): the surface was rearranged, so the two passes can no longer be compared there. In the coherence layer a thin dark line also runs from the patch down the valley to the south-west.",
+   "physics": "A rock-ice avalanche throws a huge mass of debris onto the valley floor, burying and churning the surface. Radar does not see the rock itself; it sees that the tiny details of the ground no longer match. The loss of coherence is concentrated in about 8 square kilometres around 28.32 N, 85.48 E, a few kilometres from the location given in published descriptions of the event (north of Langtang Lirung). ICIMOD's preliminary estimate of the detached volume is 132 million cubic metres; we do not measure volume.",
+   "lband": "NISAR's L-band radar has a wavelength of about 24 cm, so it keeps its grip on snow, rock and soil that shorter wavelengths lose within days. That is why this mountain scene is mostly well matched between passes and the collapse stands out so sharply. In the same pair taken 5 weeks earlier on the same track nothing like this exists. The descending track (16 to 28 August) shows the same patch at the same place.",
+   "people": "This map shows where the ground surface changed, not damage. We did not look at reports of damage or casualties. Steep mountain geometry distorts radar images, so we only claim the loss of coherence, not the size of the deposit or the path of the flood."
+  },
+  "extra_spots": [
+   {
+    "id": "source",
+    "label": "Largest patch of lost coherence (about 8 km2)",
+    "lngLat": [
+     85.477,
+     28.322
+    ],
+    "radius_m": 3000
+   },
+   {
+    "id": "summit",
+    "label": "Langtang Lirung summit",
+    "lngLat": [
+     85.516,
+     28.257
+    ],
+    "radius_m": 2000
+   }
+  ],
+  "verdict_reason": "8.5 km2 patch at 28.32 N 85.48 E, 4.7x the next largest, both look directions"
+ },
+ {
+  "id": "kilauea-ep55-2026",
+  "type": "volcano",
+  "title": "Kilauea summit eruption, episode 55, 17 Oct 2026",
+  "time": "2026-10-17T13:19:00Z",
+  "lat": 19.407,
+  "lon": -155.281,
+  "place": "Halemaumau, Kilauea summit, Hawaii",
+  "window": [
+   -155.42,
+   19.3,
+   -155.14,
+   19.52
+  ],
+  "heights": [
+   0,
+   1500
+  ],
+  "radius_km": 4,
+  "far_km": 8,
+  "gmin": 0.35,
+  "source_url": "https://www.usgs.gov/volcanoes/kilauea/recent-eruption",
+  "views": {
+   "asc": {
+    "track": 151,
+    "frame": 11,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20261010_20261022",
+     "granule": "NISAR_L2_UR_GUNW_032_151_A_011_033_4000_SH_20261010T155040_20261010T155057_20261022T155040_20261022T155057_P05023_F_P_J_001"
+    },
+    "control": {
+     "pair": "20260928_20261010",
+     "granule": "NISAR_L2_PR_GUNW_031_151_A_011_032_4000_SH_20260928T155040_20260928T155057_20261010T155040_20261010T155057_P05023_N_P_J_001"
+    }
+   },
+   "desc": {
+    "track": 72,
+    "frame": 79,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20261017_20261029",
+     "granule": "NISAR_L2_UR_GUNW_033_072_D_079_034_4000_SH_20261017T045813_20261017T045833_20261029T045813_20261029T045833_P05023_F_P_J_001"
+    },
+    "control": {
+     "pair": "20261005_20261017",
+     "granule": "NISAR_L2_PR_GUNW_032_072_D_079_033_4000_SH_20261005T045813_20261005T045833_20261017T045813_20261017T045833_P05023_N_P_J_001"
+    }
+   }
+  },
+  "loss_lo": 0.35,
+  "loss_drop": 0.25,
+  "min_px": 12,
+  "verdict": "clear",
+  "export_deformation": false,
+  "primary_view": "asc",
+  "export_views": [
+   "asc"
+  ],
+  "site_label": "Halemaumau crater (USGS eruption site)",
+  "story": {
+   "see": "Kilauea's summit has been erupting in short bursts called episodes. Episode 55 was on 17 October 2026: about 6 hours of lava fountaining up to 220 m high, with lava also overflowing the vents beforehand (USGS Hawaiian Volcano Observatory, preliminary). The orange area is where the radar picture between NISAR's 10 and 22 October passes no longer matches the quieter pair before it (28 September to 10 October). It covers the crater and a band to the south-west.",
+   "physics": "Fresh lava and the ash and fine glass it throws out have a completely different surface from what the radar saw before, so the radar echoes no longer match. About 8 square kilometres within 4 km of the crater lost coherence (10 in the largest connected patch); the south-west band lies in the direction the trade winds usually carry ash, but we cannot tell lava from fallout. HVO reports 7 million cubic metres of lava for this episode; we do not measure volume.",
+   "lband": "NISAR's L-band radar has a wavelength of about 24 cm. Over most of this volcano it keeps a good match between passes, so a patch that loses it stands out. The earlier pair has no such patch outside the crater, and over the rest of the map less than 0.5 % of the comparable ground behaves like this. Ground motion (fringes) is not used here: the signal within 4 km is no larger than the noise of the earlier pair.",
+   "people": "This map shows where the surface changed, not damage. We did not look at reports of damage or casualties. Other episodes (53 on 12 August, 54 on 25 August) fall in other pairs and could be shown the same way."
+  },
+  "extra_spots": [
+   {
+    "id": "loss-centre",
+    "label": "Centre of the largest patch of lost coherence",
+    "lngLat": [
+     -155.295,
+     19.3925
+    ],
+    "radius_m": 3000
+   }
+  ],
+  "verdict_reason": "10.2 km2 patch in and south-west of Halemaumau, 8.4 km2 within 4 km vs background p95 0.44 km2 (ascending only; descending pair too noisy)"
+ },
+ {
+  "id": "etna-valle-del-bove-2026",
+  "type": "volcano",
+  "title": "Etna eruption and Valle del Bove lava field, Jul-Aug 2026",
+  "time": "2026-08-06T00:00:00Z",
+  "lat": 37.7505,
+  "lon": 15.0286,
+  "place": "Mount Etna, Sicily, Italy",
+  "window": [
+   14.82,
+   37.55,
+   15.28,
+   37.95
+  ],
+  "heights": [
+   0,
+   3400
+  ],
+  "radius_km": 9,
+  "far_km": 18,
+  "gmin": 0.35,
+  "source_url": "https://www.euronews.com/2026/08/13/etna-eruption-enters-seventh-day-in-phenomenon-unseen-since-the-1970s",
+  "views": {
+   "asc": {
+    "track": 43,
+    "frame": 21,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260723_20260816",
+     "granule": "NISAR_L2_PR_GUNW_026_043_A_021_028_2000_SH_20260723T040829_20260723T040904_20260816T040828_20260816T040903_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260629_20260723",
+     "granule": "NISAR_L2_PR_GUNW_024_043_A_021_026_2000_SH_20260629T040831_20260629T040905_20260723T040829_20260723T040904_P05023_N_F_J_001"
+    }
+   },
+   "desc": {
+    "track": 51,
+    "frame": 69,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260723_20260816",
+     "granule": "NISAR_L2_PR_GUNW_026_051_D_069_028_2000_SH_20260723T175503_20260723T175538_20260816T175502_20260816T175537_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260711_20260723",
+     "granule": "NISAR_L2_PR_GUNW_025_051_D_069_026_2000_SH_20260711T175504_20260711T175539_20260723T175503_20260723T175538_P05023_N_F_J_001"
+    }
+   }
+  },
+  "loss_lo": 0.35,
+  "loss_drop": 0.25,
+  "min_px": 20,
+  "deformation": false,
+  "verdict": "clear",
+  "export_deformation": false,
+  "primary_view": "asc",
+  "export_views": [
+   "asc"
+  ],
+  "site_label": "Etna summit area, lava field",
+  "story": {
+   "see": "Mount Etna in Sicily had a week of lava fountains and lava flows in early August 2026; on 13 August it was in its seventh day, with several vents feeding a lava field in the Valle del Bove (Euronews, citing INGV). The orange patch is where the radar picture between NISAR's 23 July and 16 August passes changed completely compared with the 24 days before (29 June to 23 July). It is a strip about 5 km long running east from the summit craters.",
+   "physics": "Fresh lava has a completely new surface, so the radar no longer matches the earlier picture there. The patch covers about 2.5 square kilometres (3.2 in the whole window); in the whole rest of the 40 km window almost nothing behaves like this. The pair spans 24 days, so it includes the 30 July summit paroxysm as well as the August lava, and we cannot separate them. Older flows already dark before 23 July are not counted.",
+   "lband": "NISAR's L-band radar has a wavelength of about 24 cm. Over most of Etna it keeps a good match between passes, which makes new lava, which scrambles the surface, easy to pick out. The control pair of equal length (29 June to 23 July) shows no such patch. The descending track (23 July to 16 August) shows the same strip, about 2 km2, at the same place.",
+   "people": "This map shows where the surface changed, not damage or the full extent of the lava, which can be thinner or hidden from the radar by steep slopes. We did not look at reports of damage. The product is provisional."
+  },
+  "extra_spots": [
+   {
+    "id": "summit",
+    "label": "Etna summit craters",
+    "lngLat": [
+     14.9993,
+     37.751
+    ],
+    "radius_m": 2000
+   }
+  ],
+  "verdict_reason": "2.5 km2 strip east of the summit craters in the ascending pair; 1.2 + 1.0 km2 at the same place in the descending pair; 0.02 % of comparable ground elsewhere",
+  "time_note": "start of the August eruption inferred from 'seventh day' on 13 Aug (Euronews); the 24-day pair also holds the 30 Jul paroxysm"
+ },
+ {
+  "id": "brits-tailings-2026",
+  "type": "tailings failure",
+  "title": "Tailings dam failure near Brits, South Africa, 13 Aug 2026",
+  "time": "2026-08-13T00:00:00Z",
+  "lat": -25.652,
+  "lon": 27.852,
+  "place": "near Brits, North West, South Africa",
+  "window": [
+   27.65,
+   -25.85,
+   28.05,
+   -25.45
+  ],
+  "heights": [
+   800,
+   1800
+  ],
+  "radius_km": 6,
+  "far_km": 12,
+  "gmin": 0.35,
+  "source_url": "https://eos.org/thelandslideblog/dikwena-tsf-1",
+  "views": {
+   "asc": {
+    "track": 143,
+    "frame": 165,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260811_20260823",
+     "granule": "NISAR_L2_PR_GUNW_027_143_A_165_028_4000_SH_20260811T035852_20260811T035933_20260823T035852_20260823T035933_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260706_20260718",
+     "granule": "NISAR_L2_PR_GUNW_024_143_A_165_025_4000_SH_20260706T035857_20260706T035934_20260718T035853_20260718T035934_P05023_N_F_J_001"
+    }
+   },
+   "desc": {
+    "track": 21,
+    "frame": 101,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260721_20260814",
+     "granule": "NISAR_L2_PR_GUNW_026_021_D_101_028_4000_SH_20260721T161625_20260721T161700_20260814T161624_20260814T161658_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260709_20260721",
+     "granule": "NISAR_L2_PR_GUNW_025_021_D_101_026_4000_SH_20260709T161626_20260709T161700_20260721T161625_20260721T161700_P05023_N_F_J_001"
+    }
+   }
+  },
+  "loss_lo": 0.35,
+  "loss_drop": 0.25,
+  "min_px": 12,
+  "deformation": false,
+  "verdict": "marginal",
+  "verdict_reason": "0.58 km2 patch within 1 km of the published failure point, same pixel in both look directions, but comparable to field-scale background patches (asc next largest 0.27 km2; desc 0.51 km2 elsewhere)"
+ },
+ {
+  "id": "budhi-gandaki-landslide-2026",
+  "type": "landslide",
+  "title": "Budhi Gandaki landslide and dam breach, 11 Oct 2026",
+  "time": "2026-10-10T22:37:00Z",
+  "lat": 28.4755,
+  "lon": 84.9644,
+  "place": "Budhi Gandaki, Gorkha, Nepal",
+  "window": [
+   84.7,
+   28.25,
+   85.25,
+   28.7
+  ],
+  "heights": [
+   1000,
+   6500
+  ],
+  "radius_km": 12,
+  "far_km": 24,
+  "gmin": 0.35,
+  "source_url": "https://eos.org/thelandslideblog/the-11-october-2026-landslide-and-debris-flow-flood-on-the-budhi-gandaki-river-in-gorkha-district-nepal",
+  "views": {
+   "asc": {
+    "track": 98,
+    "frame": 16,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20261006_20261018",
+     "granule": "NISAR_L2_PR_GUNW_032_098_A_016_033_4000_SH_20261006T233918_20261006T233952_20261018T233918_20261018T233952_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260924_20261006",
+     "granule": "NISAR_L2_PR_GUNW_031_098_A_016_032_4000_SH_20260924T233918_20260924T233952_20261006T233918_20261006T233952_P05023_N_F_J_001"
+    }
+   },
+   "desc": {
+    "track": 48,
+    "frame": 74,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20261003_20261015",
+     "granule": "NISAR_L2_PR_GUNW_032_048_D_074_033_2000_SH_20261003T125812_20261003T125846_20261015T125812_20261015T125846_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260921_20261003",
+     "granule": "NISAR_L2_PR_GUNW_031_048_D_074_032_2000_SH_20260921T125811_20260921T125846_20261003T125812_20261003T125846_P05023_N_F_J_001"
+    }
+   }
+  },
+  "loss_lo": 0.35,
+  "loss_drop": 0.25,
+  "min_px": 12,
+  "deformation": false,
+  "verdict": "not detected",
+  "verdict_reason": "control pair mean coherence 0.24-0.30 (monsoon-end vegetation); no patch at the published place, largest patches 0.7-1.4 km2 elsewhere; landslide size unpublished"
+ },
+ {
+  "id": "ambrym-2026",
+  "type": "volcano",
+  "title": "Ambrym eruption, Sep 2026",
+  "time": "2026-09-19T00:00:00Z",
+  "lat": -16.25,
+  "lon": 168.12,
+  "place": "Ambrym, Vanuatu",
+  "window": [
+   167.95,
+   -16.45,
+   168.3,
+   -16.05
+  ],
+  "heights": [
+   0,
+   1500
+  ],
+  "radius_km": 8,
+  "far_km": 14,
+  "gmin": 0.35,
+  "source_url": "https://volcano.si.edu/reports_weekly.cfm/volcano.cfm?vn=357070",
+  "views": {
+   "desc": {
+    "track": 1,
+    "frame": 97,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260918_20260930",
+     "granule": "NISAR_L2_PR_GUNW_031_001_D_097_032_2000_SH_20260918T065628_20260918T065702_20260930T065628_20260930T065702_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260906_20260918",
+     "granule": "NISAR_L2_PR_GUNW_030_001_D_097_031_2000_SH_20260906T065628_20260906T065702_20260918T065628_20260918T065702_P05023_F_F_J_001"
+    }
+   }
+  },
+  "loss_lo": 0.35,
+  "loss_drop": 0.25,
+  "min_px": 12,
+  "deformation": false,
+  "verdict": "marginal",
+  "verdict_reason": "1.9 km2 patch in the caldera, 3.5x the next largest, but similar fragments scatter over the vegetated island and mean coherence is about 0.2"
+ },
+ {
+  "id": "kaligandaki-lete-2026",
+  "type": "landslide",
+  "title": "Kali Gandaki landslide at Lete, 27 Sep 2026",
+  "time": "2026-09-27T00:00:00Z",
+  "lat": 28.631,
+  "lon": 83.612,
+  "place": "Lete, Mustang, Nepal",
+  "window": [
+   83.35,
+   28.4,
+   83.9,
+   28.85
+  ],
+  "heights": [
+   1500,
+   6500
+  ],
+  "radius_km": 10,
+  "far_km": 20,
+  "gmin": 0.35,
+  "loss_lo": 0.35,
+  "loss_drop": 0.25,
+  "min_px": 12,
+  "deformation": false,
+  "source_url": "https://eos.org/thelandslideblog/kaligandaki-river-landslide-1",
+  "views": {
+   "asc": {
+    "track": 26,
+    "frame": 16,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260919_20261001",
+     "granule": "NISAR_L2_PR_GUNW_031_026_A_016_032_4000_SH_20260919T234737_20260919T234812_20261001T234737_20261001T234812_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260814_20260826",
+     "granule": "NISAR_L2_PR_GUNW_028_026_A_016_029_4000_SH_20260814T234737_20260814T234812_20260826T234737_20260826T234812_P05023_N_F_J_001"
+    }
+   },
+   "desc": {
+    "track": 149,
+    "frame": 74,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260916_20260928",
+     "granule": "NISAR_L2_PR_GUNW_030_149_D_074_031_2000_SH_20260916T130631_20260916T130705_20260928T130631_20260928T130706_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260904_20260916",
+     "granule": "NISAR_L2_PR_GUNW_029_149_D_074_030_2000_SH_20260904T130631_20260904T130706_20260916T130631_20260916T130705_P05023_N_F_J_001"
+    }
+   }
+  },
+  "verdict": "not detected (decorrelated)",
+  "verdict_reason": "31-48 % of comparable ground loses coherence everywhere in the window (rain or snow in late September); nothing stands out at Lete"
+ },
+ {
+  "id": "kilauea-ep54-2026",
+  "type": "volcano",
+  "title": "Kilauea summit eruption, episode 54, 25 Aug 2026",
+  "time": "2026-08-25T20:30:00Z",
+  "lat": 19.407,
+  "lon": -155.281,
+  "place": "Halemaumau, Kilauea summit, Hawaii",
+  "window": [
+   -155.42,
+   19.3,
+   -155.14,
+   19.52
+  ],
+  "heights": [
+   0,
+   1500
+  ],
+  "radius_km": 4,
+  "far_km": 8,
+  "gmin": 0.35,
+  "loss_lo": 0.35,
+  "loss_drop": 0.25,
+  "min_px": 12,
+  "deformation": false,
+  "source_url": "https://www.usgs.gov/volcanoes/kilauea/recent-eruption",
+  "views": {
+   "asc": {
+    "track": 151,
+    "frame": 11,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260823_20260904",
+     "granule": "NISAR_L2_PR_GUNW_028_151_A_011_029_4000_SH_20260823T155040_20260823T155057_20260904T155039_20260904T155057_P05023_N_P_J_001"
+    },
+    "control": {
+     "pair": "20260904_20260916",
+     "granule": "NISAR_L2_PR_GUNW_029_151_A_011_030_4000_SH_20260904T155039_20260904T155057_20260916T155039_20260916T155057_P05023_N_P_J_001"
+    },
+    "control_after_event": true
+   }
+  },
+  "verdict": "marginal",
+  "verdict_reason": "0.3 km2 patch at the crater, above the background (p95 0.1 km2), but the control pair is after the event so the crater floor is already dark in it"
+ }
+]

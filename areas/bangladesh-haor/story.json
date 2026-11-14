@@ -1,0 +1,55 @@
+{
+  "story": {
+    "see": "The central haor basin is a dark sheet of open water on our first image, 18 June, and stays dark all season. On 30 June the surface looks rougher (orange), possibly from wind. From late September the western margins turn bright as water drains and fields green up; the 'when' layer dates most of that change to late September and October.",
+    "physics": "Haors are bowl-shaped backswamps in north-eastern Bangladesh. Monsoon rivers spill into them and they stay flooded for months, from about July to November. As the water recedes the exposed mud is planted with boro rice in the dry season, and the open water shrinks back to the deepest beels.",
+    "lband": "Calm open water reflects L-band (24 cm) radar away, so it looks black in HH. As water drains and plants grow, the signal scatters back and the ground brightens. Where shallow water still stands under young plants, the signal bounces water-to-stem and back; our water layer marks such margins green as possible water under vegetation in October.",
+    "people": "The haors support major fisheries and the boro rice crop, which early flash floods often damage. On 13 July 2026 Bangladesh's flood warning centre said the Kushiyara was above danger level at Markuli in Sunamganj and flooding could worsen. NISAR passed on 12 and 24 July; no passes exist from 27 July to 10 August."
+  },
+  "spots": [
+    {
+      "id": "central-haor",
+      "label": "Central haor (water all season)",
+      "lngLat": [
+        91.225,
+        24.803
+      ],
+      "radius_m": 1500
+    },
+    {
+      "id": "haor-edge",
+      "label": "Haor edge (water in July, then shallows)",
+      "lngLat": [
+        91.1,
+        24.7
+      ],
+      "radius_m": 1000
+    },
+    {
+      "id": "western-margin",
+      "label": "Western margin (drains and greens up)",
+      "lngLat": [
+        90.75,
+        24.6
+      ],
+      "radius_m": 1200
+    },
+    {
+      "id": "sunamganj",
+      "label": "Sunamganj town (built-up reference)",
+      "lngLat": [
+        91.395,
+        25.066
+      ],
+      "radius_m": 800
+    },
+    {
+      "id": "northern-border",
+      "label": "Northern border land (dry reference)",
+      "lngLat": [
+        90.961,
+        25.231
+      ],
+      "radius_m": 1000
+    }
+  ]
+}

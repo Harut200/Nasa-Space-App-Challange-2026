@@ -1,0 +1,96 @@
+{
+  "id": "kilauea-ep55-2026",
+  "name": "Kilauea summit eruption, episode 55, 17 Oct 2026",
+  "bounds": [
+    -155.42,
+    19.30000971243801,
+    -155.13999142746843,
+    19.519999999999996
+  ],
+  "dates": [],
+  "gaps": [],
+  "layers": [
+    {
+      "id": "coherence",
+      "label": "Radar coherence (how comparable the two passes are)",
+      "dates": null,
+      "legend": {
+        "type": "ramp",
+        "unit": "coherence 0-1",
+        "min": 0,
+        "max": 1,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    },
+    {
+      "id": "coh_loss",
+      "label": "Where the radar picture changed completely between the passes",
+      "dates": null,
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#ff5a00",
+            "label": "was comparable before (control pair), not comparable in the event pair"
+          }
+        ]
+      }
+    }
+  ],
+  "story": {
+    "see": "Kilauea's summit has been erupting in short bursts called episodes. Episode 55 was on 17 October 2026: about 6 hours of lava fountaining up to 220 m high, with lava also overflowing the vents beforehand (USGS Hawaiian Volcano Observatory, preliminary). The orange area is where the radar picture between NISAR's 10 and 22 October passes no longer matches the quieter pair before it (28 September to 10 October). It covers the crater and a band to the south-west.",
+    "physics": "Fresh lava and the ash and fine glass it throws out have a completely different surface from what the radar saw before, so the radar echoes no longer match. About 8 square kilometres within 4 km of the crater lost coherence (10 in the largest connected patch); the south-west band lies in the direction the trade winds usually carry ash, but we cannot tell lava from fallout. HVO reports 7 million cubic metres of lava for this episode; we do not measure volume.",
+    "lband": "NISAR's L-band radar has a wavelength of about 24 cm. Over most of this volcano it keeps a good match between passes, so a patch that loses it stands out. The earlier pair has no such patch outside the crater, and over the rest of the map less than 0.5 % of the comparable ground behaves like this. Ground motion (fringes) is not used here: the signal within 4 km is no larger than the noise of the earlier pair.",
+    "people": "This map shows where the surface changed, not damage. We did not look at reports of damage or casualties. Other episodes (53 on 12 August, 54 on 25 August) fall in other pairs and could be shown the same way."
+  },
+  "spots": [
+    {
+      "id": "site",
+      "label": "Halemaumau crater (USGS eruption site)",
+      "lngLat": [
+        -155.281,
+        19.407
+      ]
+    },
+    {
+      "id": "loss-centre",
+      "label": "Centre of the largest patch of lost coherence",
+      "lngLat": [
+        -155.295,
+        19.3925
+      ]
+    }
+  ],
+  "credits": "NISAR data: NASA/JPL-Caltech and ISRO, distributed by ASF DAAC. PROVISIONAL calibration.",
+  "source": null,
+  "kind": "event",
+  "event": {
+    "type": "volcano",
+    "title": "Kilauea summit eruption, episode 55, 17 Oct 2026",
+    "time": "2026-10-17T13:19:00Z",
+    "time_note": null,
+    "lngLat": [
+      -155.281,
+      19.407
+    ],
+    "place": "Halemaumau, Kilauea summit, Hawaii",
+    "summary": "\u2248 10.2 km\u00b2 of surface changed completely",
+    "radius_km": 4,
+    "source_url": "https://www.usgs.gov/volcanoes/kilauea/recent-eruption",
+    "views": [
+      {
+        "id": "asc",
+        "label": "ascending",
+        "track": 151,
+        "before": "2026-10-10",
+        "after": "2026-10-22",
+        "p2p_cm": null,
+        "control_p2p_cm": null
+      }
+    ]
+  },
+  "category": "volcano"
+}

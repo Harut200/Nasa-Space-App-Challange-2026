@@ -1,9 +1,21 @@
 {
   "id": "tonle-sap",
   "name": "Tonle Sap, Cambodia",
-  "bbox": [103.6, 12.5, 104.6, 13.4],
+  "bbox": [
+    103.4,
+    11.8,
+    105.2,
+    13.6
+  ],
   "track": 83,
   "frame": 8,
   "direction": "ascending",
-  "pixel_m": 40
+  "pixel_m": 80,
+  "extra_layers": [
+    "sig",
+    "arrival",
+    "choreo"
+  ],
+  "water_source": "fusion2",
+  "category": "flood"
 }

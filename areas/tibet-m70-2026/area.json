@@ -1,0 +1,9 @@
+{
+  "id": "tibet-m70-2026",
+  "name": "Tibet earthquake, M7.0, 22 Oct 2026",
+  "bbox": [93.0, 31.7, 94.6, 33.0],
+  "track": 112,
+  "frame": 18,
+  "direction": "ascending",
+  "pixel_m": 150
+}

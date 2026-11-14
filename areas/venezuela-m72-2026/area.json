@@ -1,0 +1,14 @@
+{
+  "id": "venezuela-m72-2026",
+  "name": "Venezuela earthquake, M7.2, 24 Jun 2026",
+  "bbox": [
+    -69.3,
+    9.9,
+    -66.7,
+    10.95
+  ],
+  "track": 162,
+  "frame": 7,
+  "direction": "ascending and descending",
+  "pixel_m": 80
+}

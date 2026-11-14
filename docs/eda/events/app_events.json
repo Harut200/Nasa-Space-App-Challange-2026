@@ -1,0 +1,105 @@
+[
+ {
+  "id": "langtang-collapse-2026",
+  "type": "landslide",
+  "title": "Langtang Lirung rock-ice collapse, 26 Aug 2026",
+  "time": "2026-08-26T02:52:00Z",
+  "lat": 28.322,
+  "lon": 85.477,
+  "place": "Langtang Lirung, Nepal-China border",
+  "summary_number": "≈ 8.5 km² of surface changed completely",
+  "radius_km": 20,
+  "views": [
+   {
+    "id": "asc",
+    "label": "ascending",
+    "track": 98,
+    "before": "2026-08-19",
+    "after": "2026-08-31",
+    "p2p_cm": null,
+    "control_p2p_cm": null,
+    "exported": true
+   },
+   {
+    "id": "desc",
+    "label": "descending",
+    "track": 48,
+    "before": "2026-08-16",
+    "after": "2026-08-28",
+    "p2p_cm": null,
+    "control_p2p_cm": null,
+    "exported": false
+   }
+  ],
+  "source_url": "https://en.wikipedia.org/wiki/2026_Nepal%E2%80%93Tibet_floods"
+ },
+ {
+  "id": "kilauea-ep55-2026",
+  "type": "volcano",
+  "title": "Kilauea summit eruption, episode 55, 17 Oct 2026",
+  "time": "2026-10-17T13:19:00Z",
+  "lat": 19.407,
+  "lon": -155.281,
+  "place": "Halemaumau, Kilauea summit, Hawaii",
+  "summary_number": "≈ 10.2 km² of surface changed completely",
+  "radius_km": 4,
+  "views": [
+   {
+    "id": "asc",
+    "label": "ascending",
+    "track": 151,
+    "before": "2026-10-10",
+    "after": "2026-10-22",
+    "p2p_cm": null,
+    "control_p2p_cm": null,
+    "exported": true
+   },
+   {
+    "id": "desc",
+    "label": "descending",
+    "track": 72,
+    "before": "2026-10-17",
+    "after": "2026-10-29",
+    "p2p_cm": null,
+    "control_p2p_cm": null,
+    "exported": false
+   }
+  ],
+  "source_url": "https://www.usgs.gov/volcanoes/kilauea/recent-eruption"
+ },
+ {
+  "id": "etna-valle-del-bove-2026",
+  "type": "volcano",
+  "title": "Etna eruption and Valle del Bove lava field, Jul-Aug 2026",
+  "time": "2026-08-06T00:00:00Z",
+  "lat": 37.7505,
+  "lon": 15.0286,
+  "place": "Mount Etna, Sicily, Italy",
+  "summary_number": "≈ 2.5 km² of surface changed completely",
+  "radius_km": 9,
+  "views": [
+   {
+    "id": "asc",
+    "label": "ascending",
+    "track": 43,
+    "before": "2026-07-23",
+    "after": "2026-08-16",
+    "p2p_cm": null,
+    "control_p2p_cm": null,
+    "exported": true
+   },
+   {
+    "id": "desc",
+    "label": "descending",
+    "track": 51,
+    "before": "2026-07-23",
+    "after": "2026-08-16",
+    "p2p_cm": null,
+    "control_p2p_cm": null,
+    "exported": false
+   }
+  ],
+  "source_url": "https://www.euronews.com/2026/08/13/etna-eruption-enters-seventh-day-in-phenomenon-unseen-since-the-1970s",
+  "time_note": "start of the August eruption inferred from 'seventh day' on 13 Aug (Euronews); the 24-day pair also holds the 30 Jul paroxysm"
+ }
+]

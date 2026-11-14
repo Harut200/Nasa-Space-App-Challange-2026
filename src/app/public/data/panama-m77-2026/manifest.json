@@ -1,0 +1,169 @@
+{
+  "id": "panama-m77-2026",
+  "name": "Panama earthquake, M7.7, 9 Oct 2026",
+  "bounds": [
+    -81.9,
+    6.999492852077442,
+    -80.10034376817954,
+    8.2
+  ],
+  "dates": [],
+  "gaps": [],
+  "layers": [
+    {
+      "id": "los_asc_cm",
+      "label": "Ground motion along the line of sight, ascending pass (cm)",
+      "dates": null,
+      "legend": {
+        "type": "diverging",
+        "unit": "cm",
+        "min": -60.0,
+        "max": 60.0,
+        "colors": [
+          "#67001f",
+          "#f7f7f7",
+          "#053061"
+        ],
+        "labels": [
+          "red: ground moved away from the satellite",
+          "blue: ground moved toward the satellite (sign convention not confirmed by the product guide)"
+        ]
+      }
+    },
+    {
+      "id": "los_desc_cm",
+      "label": "Ground motion along the line of sight, descending pass (cm)",
+      "dates": null,
+      "legend": {
+        "type": "diverging",
+        "unit": "cm",
+        "min": -60.0,
+        "max": 60.0,
+        "colors": [
+          "#67001f",
+          "#f7f7f7",
+          "#053061"
+        ],
+        "labels": [
+          "red: ground moved away from the satellite",
+          "blue: ground moved toward the satellite (sign convention not confirmed by the product guide)"
+        ]
+      }
+    },
+    {
+      "id": "fringes",
+      "label": "Fringes (one colour cycle = 10 cm)",
+      "dates": null,
+      "legend": {
+        "type": "ramp",
+        "unit": "one colour cycle = 10 cm of line-of-sight change",
+        "min": 0,
+        "max": 10.0,
+        "colors": [
+          "#e2d9e2",
+          "#95b5c7",
+          "#6276ba",
+          "#592a8f",
+          "#2f1436",
+          "#741e4f",
+          "#b25652",
+          "#cca389",
+          "#e2d9e2"
+        ]
+      }
+    },
+    {
+      "id": "coherence",
+      "label": "Radar coherence (how comparable the two passes are)",
+      "dates": null,
+      "legend": {
+        "type": "ramp",
+        "unit": "coherence 0-1",
+        "min": 0,
+        "max": 1,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    }
+  ],
+  "story": {
+    "see": "On 9 October 2026 a magnitude 7.7 earthquake struck 10 km west-south-west of Pitaloza Arriba, Panama (USGS: 7.61 N, 80.76 W, depth about 14 km). USGS lists a magnitude 6.6 aftershock about 2.5 hours later 75 km to the west, and the pairs below also include later aftershocks. The map shows how far the ground moved along the radar's line of sight between two NISAR passes of the descending track, 2 and 14 October. A second layer shows the ascending track (5 to 17 October). Blue is ground that moved toward the satellite, red away from it. In the fringe layer, one colour cycle is 10 cm; about a dozen fringes surround the epicentre. Grey speckle and black are where the passes could not be compared (vegetation, water, steep fault zone) or where the data frame ends.",
+    "physics": "The US Geological Survey's moment tensor shows strike-slip faulting, and its finite-fault model has a peak slip of about 11 m. Within 60 km of the epicentre the line-of-sight change spans about 130 cm in the descending view (0.5th to 99.5th percentile) and about 85 cm in the ascending view. The two look directions see opposite signs (red on the ascending track, blue on the descending one), which is what mostly horizontal motion looks like from opposite sides, but the two frames cover different areas and the far field is short, so we do not separate east-west from vertical motion. Fault position and mechanism come from USGS; our map alone does not tell which fault plane moved.",
+    "lband": "NISAR's L-band radar has a wavelength of about 24 cm, so one full colour cycle means about 12 cm of ground movement along the line of sight (we show 10 cm cycles). The same tracks two to four weeks earlier (descending 20 Sep to 2 Oct, ascending 30 Aug to 11 Sep) show only a smooth gradient of about 10 to 20 cm across the scene, from the atmosphere, and no fringes. The products are PROVISIONAL, and the sign convention (blue = toward the satellite) follows the interferogram definition we assumed, not a statement in the product guide.",
+    "people": "This is a measurement of ground movement, not of damage. We did not look at reports of damage or casualties. Maps like this show where the ground moved and by how much, which feeds hazard models. The pairs span several days after the shaking, so they include aftershock movement, and the data frames cover only the part of the area east and south of the epicentre."
+  },
+  "spots": [
+    {
+      "id": "epicentre",
+      "label": "USGS epicentre",
+      "lngLat": [
+        -80.7566,
+        7.6069
+      ]
+    },
+    {
+      "id": "toward-lobe",
+      "label": "Strongest movement toward the satellite (blue)",
+      "lngLat": [
+        -80.6262,
+        7.5141
+      ]
+    },
+    {
+      "id": "away-lobe",
+      "label": "Strongest movement away from the satellite (red)",
+      "lngLat": [
+        -80.6839,
+        7.9331
+      ]
+    },
+    {
+      "id": "usgs-us6000u19w",
+      "label": "USGS epicentre of the M6.6 event",
+      "lngLat": [
+        -81.4515,
+        7.676
+      ]
+    }
+  ],
+  "credits": "NISAR data: NASA/JPL-Caltech and ISRO, distributed by ASF DAAC. PROVISIONAL calibration.",
+  "source": null,
+  "kind": "event",
+  "event": {
+    "type": "earthquake",
+    "magnitude": 7.7,
+    "time": "2026-10-09T17:56:05Z",
+    "depth_km": 13.5,
+    "lngLat": [
+      -80.7566,
+      7.6069
+    ],
+    "place": "10 km WSW of Pitaloza Arriba, Panama",
+    "mechanism": "strike slip (nodal planes 25/75/-155 and 288/66/-17); USGS finite-fault Mw 7.66",
+    "usgs_id": "us6000u18k",
+    "radius_km": 60,
+    "views": [
+      {
+        "id": "desc40",
+        "label": "descending",
+        "track": 40,
+        "before": "2026-10-02",
+        "after": "2026-10-14",
+        "p2p_cm": 133,
+        "control_p2p_cm": 21
+      },
+      {
+        "id": "asc",
+        "label": "ascending",
+        "track": 76,
+        "before": "2026-10-05",
+        "after": "2026-10-17",
+        "p2p_cm": 85,
+        "control_p2p_cm": 15
+      }
+    ]
+  },
+  "category": "earthquake"
+}

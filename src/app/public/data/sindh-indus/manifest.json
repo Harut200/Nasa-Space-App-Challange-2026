@@ -1,0 +1,286 @@
+{
+  "id": "sindh-indus",
+  "name": "Indus plain, Sindh, Pakistan",
+  "bounds": [
+    67.91999999999999,
+    26.000460381993992,
+    69.00080698872952,
+    27.519999999999992
+  ],
+  "dates": [
+    "2026-06-17",
+    "2026-06-29",
+    "2026-07-11",
+    "2026-07-23",
+    "2026-08-16",
+    "2026-08-28",
+    "2026-09-09",
+    "2026-09-21",
+    "2026-10-03",
+    "2026-10-15"
+  ],
+  "gaps": [
+    [
+      "2026-07-27",
+      "2026-08-10"
+    ]
+  ],
+  "layers": [
+    {
+      "id": "hh",
+      "label": "HH brightness (preview)",
+      "dates": [
+        "2026-06-17",
+        "2026-06-29",
+        "2026-07-11",
+        "2026-07-23",
+        "2026-08-16",
+        "2026-08-28",
+        "2026-09-09",
+        "2026-09-21",
+        "2026-10-03",
+        "2026-10-15"
+      ],
+      "legend": {
+        "type": "ramp",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": 0,
+        "max": 100,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    },
+    {
+      "id": "water",
+      "label": "Water and flooded vegetation",
+      "dates": [
+        "2026-06-17",
+        "2026-06-29",
+        "2026-07-11",
+        "2026-07-23",
+        "2026-08-16",
+        "2026-08-28",
+        "2026-09-09",
+        "2026-09-21",
+        "2026-10-03",
+        "2026-10-15"
+      ],
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#2f6fde",
+            "label": "Open water"
+          },
+          {
+            "color": "#35b04a",
+            "label": "Possible water under vegetation"
+          },
+          {
+            "color": "#7fd3c4",
+            "label": "Going under: vegetation submerging, or part open water"
+          },
+          {
+            "color": "#f28e2b",
+            "label": "Usually water, not today (rain or wind?)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "when",
+      "label": "When it changed for good",
+      "dates": null,
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#440154",
+            "label": "29 Jun"
+          },
+          {
+            "color": "#472d7b",
+            "label": "11 Jul"
+          },
+          {
+            "color": "#3b528b",
+            "label": "23 Jul"
+          },
+          {
+            "color": "#2c728e",
+            "label": "16 Aug"
+          },
+          {
+            "color": "#21918c",
+            "label": "28 Aug"
+          },
+          {
+            "color": "#28ae80",
+            "label": "9 Sep"
+          },
+          {
+            "color": "#5ec962",
+            "label": "21 Sep"
+          },
+          {
+            "color": "#addc30",
+            "label": "3 Oct"
+          },
+          {
+            "color": "#fde725",
+            "label": "15 Oct"
+          }
+        ]
+      }
+    },
+    {
+      "id": "classes",
+      "label": "Season classes",
+      "dates": null,
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#08306b",
+            "label": "Permanent water"
+          },
+          {
+            "color": "#4292c6",
+            "label": "Seasonal open water"
+          },
+          {
+            "color": "#41ab5d",
+            "label": "Flooded vegetation"
+          },
+          {
+            "color": "#9ecae1",
+            "label": "Got darker, not open water (wetter ground, shallow or partial flooding)"
+          },
+          {
+            "color": "#c994c7",
+            "label": "Got brighter (growing crops and other causes)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "change",
+      "label": "Change since first pass (HH)",
+      "dates": [
+        "2026-06-29",
+        "2026-07-11",
+        "2026-07-23",
+        "2026-08-16",
+        "2026-08-28",
+        "2026-09-09",
+        "2026-09-21",
+        "2026-10-03",
+        "2026-10-15"
+      ],
+      "legend": {
+        "type": "diverging",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": -35,
+        "max": 35,
+        "colors": [
+          "#2166ac",
+          "#00000000",
+          "#b2182b"
+        ],
+        "labels": [
+          "darker: new water, cleared forest",
+          "brighter: flooded vegetation, growth"
+        ]
+      }
+    },
+    {
+      "id": "rgb",
+      "label": "Three-date composite",
+      "dates": null,
+      "legend": {
+        "type": "text",
+        "text": "HH: red = 17 Jun, green = 28 Aug, blue = 15 Oct. Grey = no change."
+      }
+    },
+    {
+      "id": "hv",
+      "label": "HV brightness (preview)",
+      "dates": [
+        "2026-06-17",
+        "2026-06-29",
+        "2026-07-11",
+        "2026-07-23",
+        "2026-08-16",
+        "2026-08-28",
+        "2026-09-09",
+        "2026-09-21",
+        "2026-10-03",
+        "2026-10-15"
+      ],
+      "legend": {
+        "type": "ramp",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": 0,
+        "max": 100,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    }
+  ],
+  "story": {
+    "see": "No flood shows on this stretch of the Indus in 2026: the river channel stays the same. The change is farming. West of the river, fields darken in late July and August, then become very bright in September and October. A dark sand desert east of the river stays dark all season and is correctly not called water. The thin Indus channel is not picked up by our water layer at this resolution.",
+    "physics": "Sindh is mostly arid; farming depends on the Indus and its canals. In the monsoon season many fields west of the river are flooded to grow rice. Once the paddies are planted the crop grows tall and dense through autumn until harvest.",
+    "lband": "A newly flooded paddy mirrors the radar and turns dark in HH. As rice grows, the signal bounces between water and stems and back to the satellite, so the same fields become very bright. HV rises too as leaves fill in. The dark-then-bright pattern is a crop calendar written in radar.",
+    "people": "Sindh had 55.7 million people in the 2023 census. Rice and other irrigated crops along the Indus feed the province and its cities. Seeing when fields are flooded and how the crop develops helps track water use and harvest timing across a whole province at once."
+  },
+  "spots": [
+    {
+      "id": "rice-west",
+      "label": "Rice fields west of the Indus",
+      "lngLat": [
+        68.0,
+        27.3
+      ]
+    },
+    {
+      "id": "rice-north",
+      "label": "Rice fields near the north edge",
+      "lngLat": [
+        68.094,
+        27.405
+      ]
+    },
+    {
+      "id": "stable-land",
+      "label": "Farmland and settlements (stable)",
+      "lngLat": [
+        68.3,
+        26.8
+      ]
+    },
+    {
+      "id": "sand-desert",
+      "label": "Sand desert east of the Indus (dark but dry)",
+      "lngLat": [
+        68.757,
+        26.571
+      ]
+    }
+  ],
+  "credits": "NISAR GCOV preview images: NASA/JPL-Caltech and ISRO, distributed by ASF DAAC. Uncalibrated previews at about 180 m; values are display brightness, not backscatter.",
+  "source": "preview",
+  "quality": {
+    "2026-07-23": {
+      "quality": "warn",
+      "quality_note": "HH brightness change across the swath -0.160 vs usual -0.209",
+      "channels": [
+        "HH"
+      ]
+    }
+  },
+  "category": "land"
+}

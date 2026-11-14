@@ -1,0 +1,64 @@
+{
+  "story": {
+    "see": "Follow Tonle Sap from June to October. The lake level was already rising in early July, while the mapped open water spread more clearly later in the season. The choreography colours show when the radar echo shifted and how large the shift was.",
+    "physics": "In the wet season, the Mekong can flow back up the Tonle Sap River. Sentinel-6 measured a lake-level rise of about 1.3 metres between 2 and 12 July. Across our ten passes, mapped open-water area and altimeter height had a rank correlation of 0.98, although their peaks fell on different dates.",
+    "lband": "Calm water often reflects radar away and looks dark. We expected flooded trees to brighten. Some patches instead lost more cross-polarized echo while retaining a strong horizontal echo, and others darkened in both channels. We flag possible flooded vegetation. A darkening patch can contain submerged plants or a mix of land and open water.",
+    "people": "Seasonal flooding connects the lake with forests where fish feed and shelter. The Prek Toal Ramsar site covers about 21,300 hectares. Seeing the flood spread across this landscape helps explain why the timing of the wet season matters to communities that fish here."
+  },
+  "spots": [
+    {
+      "id": "lake-core",
+      "label": "Open lake (stays water)",
+      "lngLat": [
+        104.1,
+        12.8
+      ],
+      "radius_m": 1500
+    },
+    {
+      "id": "prek-toal",
+      "label": "Prek Toal flooded forest",
+      "lngLat": [
+        103.7,
+        13.1
+      ],
+      "radius_m": 1200
+    },
+    {
+      "id": "chong-kneas",
+      "label": "Chong Kneas floating village",
+      "lngLat": [
+        103.84,
+        13.27
+      ],
+      "radius_m": 1000
+    },
+    {
+      "id": "southeast-corridor",
+      "label": "South-east flood corridor",
+      "lngLat": [
+        104.85,
+        12.0
+      ],
+      "radius_m": 1200
+    },
+    {
+      "id": "kampong-luong",
+      "label": "Kampong Luong area",
+      "lngLat": [
+        104.2083,
+        12.5732
+      ],
+      "radius_m": 1000
+    },
+    {
+      "id": "upland-forest",
+      "label": "Stable radar reference",
+      "lngLat": [
+        104.01,
+        12.04
+      ],
+      "radius_m": 1000
+    }
+  ]
+}

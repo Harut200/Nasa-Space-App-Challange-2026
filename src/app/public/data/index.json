@@ -1,5 +1,35 @@
 {
   "areas": [
-    "demo"
+    "tonle-sap",
+    "tonle-sap-cal",
+    "inner-niger",
+    "poyang",
+    "sevan",
+    "bangladesh-haor",
+    "okavango",
+    "ararat",
+    "urmia",
+    "sindh-indus",
+    "mekong-delta",
+    "rondonia",
+    "nile-delta",
+    "sudd",
+    "pantanal",
+    "lake-chad",
+    "tibet-m70-2026",
+    "venezuela-m72-2026",
+    "kumamoto-m68-2026",
+    "panama-m77-2026",
+    "chao-phraya-2026",
+    "langtang-collapse-2026",
+    "kilauea-ep55-2026",
+    "etna-valle-del-bove-2026",
+    "venezuela-m75-2026",
+    "qaidam-m56-2026",
+    "mahanadi-delta-2026",
+    "up-terai-2026",
+    "thunder-bay-36-2026",
+    "la-mierla-fire-2026",
+    "avila-burgohondo-fire-2026"
   ]
 }

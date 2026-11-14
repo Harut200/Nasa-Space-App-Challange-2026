@@ -1,0 +1,1886 @@
+# HDF5 anatomy of two NISAR products, read remotely on 2026-11-14 with scripts/ingest/remote_products.py anatomy
+# @attr lines are HDF5 attributes; fill = HDF5 fill value (the _FillValue attribute is the one that marks no-data)
+
+########## GUNW: NISAR_L2_PR_GUNW_..._085_A_022_..._20260620T020411_..._20260702T..._P05023 (track 85 frame 22 ascending, 12-day pair)
+complex64/
+science/
+science/LSAR/
+science/LSAR/GUNW/
+science/LSAR/GUNW/grids/
+science/LSAR/GUNW/grids/frequencyA/
+science/LSAR/GUNW/grids/frequencyA/centerFrequency: shape=() dtype=float64 chunks=None comp=None fill=0.0
+    value=np.float64(1239000000.0)
+    @description = Center frequency of the processed image in hertz
+    @units = hertz
+science/LSAR/GUNW/grids/frequencyA/listOfPolarizations: shape=(1,) dtype=|S2 chunks=None comp=None
+    value=['HH']
+    @description = List of processed polarization layers with frequency A
+science/LSAR/GUNW/grids/frequencyA/pixelOffsets/
+science/LSAR/GUNW/grids/frequencyA/pixelOffsets/HH/
+science/LSAR/GUNW/grids/frequencyA/pixelOffsets/HH/alongTrackOffset: shape=(4392, 4446) dtype=float32 chunks=(512, 512) comp=gzip fill=0.0
+    @_FillValue = [nan]
+    @description = Along-track offset
+    @grid_mapping = projection
+    @max_value = [1.254921793937683]
+    @mean_value = [0.43603968620300293]
+    @min_value = [-9.681025505065918]
+    @sample_stddev = [0.350706547498703]
+    @units = meters
+science/LSAR/GUNW/grids/frequencyA/pixelOffsets/HH/correlationSurfacePeak: shape=(4392, 4446) dtype=float32 chunks=(512, 512) comp=gzip fill=0.0
+    @_FillValue = [nan]
+    @description = Normalized cross-correlation surface peak
+    @grid_mapping = projection
+    @max_value = [0.9915227890014648]
+    @mean_value = [0.426179975271225]
+    @min_value = [-0.051015034317970276]
+    @sample_stddev = [0.22686725854873657]
+    @units = 1
+science/LSAR/GUNW/grids/frequencyA/pixelOffsets/HH/projection: shape=() dtype=uint32 chunks=None comp=None fill=0
+    value=np.uint32(32638)
+    @description = Product map grid projection: EPSG code, with additional projection information as HDF5 Attributes
+    @ellipsoid = WGS84
+    @epsg_code = [32638]
+    @false_easting = [500000.0]
+    @false_northing = [0.0]
+    @grid_mapping_name = transverse_mercator
+    @inverse_flattening = [298.257223563]
+    @latitude_of_projection_origin = [0.0]
+    @longitude_of_central_meridian = [45.0]
+    @longitude_of_projection_origin = [0.0]
+    @scale_factor_at_central_meridian = [0.9996]
+    @semi_major_axis = [6378137.0]
+    @spatial_ref = PROJCS["WGS 84 / UTM zone 38N",GEOGCS["WGS 84",DATUM["WGS_1984",SPHEROID["WGS 84",6378137,298.257223563,AUTHORITY["EPSG","7030"]],AUTHORITY["EPSG","6326"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["degree",0.0174532925199433,AUTHORITY["EPSG","9122"]],AUTHORITY["EPSG","4326"]],PROJECTION["Transverse_Mercator"],PARAMETER["latitude_of_origin",0],PARAMETER["central_meridi
+    @utm_zone_number = [38]
+science/LSAR/GUNW/grids/frequencyA/pixelOffsets/HH/slantRangeOffset: shape=(4392, 4446) dtype=float32 chunks=(512, 512) comp=gzip fill=0.0
+    @_FillValue = [nan]
+    @description = Slant range offset
+    @grid_mapping = projection
+    @max_value = [4.075796604156494]
+    @mean_value = [0.6078024506568909]
+    @min_value = [-0.2901678681373596]
+    @sample_stddev = [0.10625965893268585]
+    @units = meters
+science/LSAR/GUNW/grids/frequencyA/pixelOffsets/HH/xCoordinateSpacing: shape=() dtype=float64 chunks=None comp=None fill=0.0
+    value=np.float64(80.0)
+    @description = Nominal spacing in meters between consecutive pixels
+    @long_name = X coordinates spacing
+    @units = meters
+science/LSAR/GUNW/grids/frequencyA/pixelOffsets/HH/xCoordinates: shape=(4446,) dtype=float64 chunks=None comp=None fill=0.0
+    @description = X coordinates in specified projection
+    @long_name = X coordinate of projection
+    @standard_name = ['projection_x_coordinate']
+    @units = meters
+science/LSAR/GUNW/grids/frequencyA/pixelOffsets/HH/yCoordinateSpacing: shape=() dtype=float64 chunks=None comp=None fill=0.0
+    value=np.float64(-80.0)
+    @description = Nominal spacing in meters between consecutive lines
+    @long_name = Y coordinates spacing
+    @units = meters
+science/LSAR/GUNW/grids/frequencyA/pixelOffsets/HH/yCoordinates: shape=(4392,) dtype=float64 chunks=None comp=None fill=0.0
+    @description = Y coordinates in specified projection
+    @long_name = Y coordinate of projection
+    @standard_name = ['projection_y_coordinate']
+    @units = meters
+science/LSAR/GUNW/grids/frequencyA/pixelOffsets/mask: shape=(4392, 4446) dtype=uint32 chunks=(512, 512) comp=gzip fill=0
+    @_FillValue = [255]
+    @description = Combination of a water mask, a mask of subswaths of valid samples, and data anomalies in the reference RSLC and the geometrically coregistered secondary RSLC. Each pixel value is encoded as a 32-bit unsigned integer. Bits 0-7 represent subswath encoding, where the most significant digit represents the water flag of that pixel in the reference RSLC, where 1 is water and 0 is non-
+    @disclaimer = Water Mask for the NASA-ISRO NISAR mission version 0.5, derived through analysis and processing of multiple input datasets, referenced to the WGS84 ellipsoid. Water mask derived at the Jet Propulsion Laboratory, California Institute of Technology, under contract with NASA, using multiple open datasets: JRC Global Surface Water v1.3 (Pekel et al 2016, Nature 540, 418-422,  EC JRC/
+    @grid_mapping = projection
+    @percentage_water = [2.052529565471757]
+    @valid_min = [0]
+science/LSAR/GUNW/grids/frequencyA/pixelOffsets/projection: shape=() dtype=uint32 chunks=None comp=None fill=0
+    value=np.uint32(32638)
+    @description = Product map grid projection: EPSG code, with additional projection information as HDF5 Attributes
+    @ellipsoid = WGS84
+    @epsg_code = [32638]
+    @false_easting = [500000.0]
+    @false_northing = [0.0]
+    @grid_mapping_name = transverse_mercator
+    @inverse_flattening = [298.257223563]
+    @latitude_of_projection_origin = [0.0]
+    @longitude_of_central_meridian = [45.0]
+    @longitude_of_projection_origin = [0.0]
+    @scale_factor_at_central_meridian = [0.9996]
+    @semi_major_axis = [6378137.0]
+    @spatial_ref = PROJCS["WGS 84 / UTM zone 38N",GEOGCS["WGS 84",DATUM["WGS_1984",SPHEROID["WGS 84",6378137,298.257223563,AUTHORITY["EPSG","7030"]],AUTHORITY["EPSG","6326"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["degree",0.0174532925199433,AUTHORITY["EPSG","9122"]],AUTHORITY["EPSG","4326"]],PROJECTION["Transverse_Mercator"],PARAMETER["latitude_of_origin",0],PARAMETER["central_meridi
+    @utm_zone_number = [38]
+science/LSAR/GUNW/grids/frequencyA/pixelOffsets/xCoordinateSpacing: shape=() dtype=float64 chunks=None comp=None fill=0.0
+    value=np.float64(80.0)
+    @description = Nominal spacing in meters between consecutive pixels
+    @long_name = X coordinates spacing
+    @units = meters
+science/LSAR/GUNW/grids/frequencyA/pixelOffsets/xCoordinates: shape=(4446,) dtype=float64 chunks=None comp=None fill=0.0
+    @description = X coordinates in specified projection
+    @long_name = X coordinate of projection
+    @standard_name = ['projection_x_coordinate']
+    @units = meters
+science/LSAR/GUNW/grids/frequencyA/pixelOffsets/yCoordinateSpacing: shape=() dtype=float64 chunks=None comp=None fill=0.0
+    value=np.float64(-80.0)
+    @description = Nominal spacing in meters between consecutive lines
+    @long_name = Y coordinates spacing
+    @units = meters
+science/LSAR/GUNW/grids/frequencyA/pixelOffsets/yCoordinates: shape=(4392,) dtype=float64 chunks=None comp=None fill=0.0
+    @description = Y coordinates in specified projection
+    @long_name = Y coordinate of projection
+    @standard_name = ['projection_y_coordinate']
+    @units = meters
+science/LSAR/GUNW/grids/frequencyA/unwrappedInterferogram/
+science/LSAR/GUNW/grids/frequencyA/unwrappedInterferogram/HH/
+science/LSAR/GUNW/grids/frequencyA/unwrappedInterferogram/HH/coherenceMagnitude: shape=(4392, 4446) dtype=float32 chunks=(512, 512) comp=gzip fill=0.0
+    @_FillValue = [nan]
+    @description = Coherence magnitude between HH layers
+    @grid_mapping = projection
+    @max_value = [0.996435284614563]
+    @mean_value = [0.42967385053634644]
+    @min_value = [0.001509782043285668]
+    @sample_stddev = [0.20783692598342896]
+    @units = 1
+science/LSAR/GUNW/grids/frequencyA/unwrappedInterferogram/HH/connectedComponents: shape=(4392, 4446) dtype=uint16 chunks=(512, 512) comp=gzip fill=0
+    @_FillValue = [65535]
+    @description = Connected components for HH layer
+    @grid_mapping = projection
+    @units = 1
+science/LSAR/GUNW/grids/frequencyA/unwrappedInterferogram/HH/ionospherePhaseScreen: shape=(4392, 4446) dtype=float32 chunks=(512, 512) comp=gzip fill=0.0
+    @_FillValue = [nan]
+    @description = Ionosphere phase screen
+    @grid_mapping = projection
+    @max_value = [-7.989749908447266]
+    @mean_value = [-20.512474060058594]
+    @min_value = [-26.427745819091797]
+    @sample_stddev = [4.224246501922607]
+    @units = radians
+science/LSAR/GUNW/grids/frequencyA/unwrappedInterferogram/HH/ionospherePhaseScreenUncertainty: shape=(4392, 4446) dtype=float32 chunks=(512, 512) comp=gzip fill=0.0
+    @_FillValue = [nan]
+    @description = Uncertainty of the ionosphere phase screen
+    @grid_mapping = projection
+    @max_value = [3.304532527923584]
+    @mean_value = [1.3261338472366333]
+    @min_value = [0.6121500134468079]
+    @sample_stddev = [0.341655433177948]
+    @units = radians
+science/LSAR/GUNW/grids/frequencyA/unwrappedInterferogram/HH/projection: shape=() dtype=uint32 chunks=None comp=None fill=0
+    value=np.uint32(32638)
+    @description = Product map grid projection: EPSG code, with additional projection information as HDF5 Attributes
+    @ellipsoid = WGS84
+    @epsg_code = [32638]
+    @false_easting = [500000.0]
+    @false_northing = [0.0]
+    @grid_mapping_name = transverse_mercator
+    @inverse_flattening = [298.257223563]
+    @latitude_of_projection_origin = [0.0]
+    @longitude_of_central_meridian = [45.0]
+    @longitude_of_projection_origin = [0.0]
+    @scale_factor_at_central_meridian = [0.9996]
+    @semi_major_axis = [6378137.0]
+    @spatial_ref = PROJCS["WGS 84 / UTM zone 38N",GEOGCS["WGS 84",DATUM["WGS_1984",SPHEROID["WGS 84",6378137,298.257223563,AUTHORITY["EPSG","7030"]],AUTHORITY["EPSG","6326"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["degree",0.0174532925199433,AUTHORITY["EPSG","9122"]],AUTHORITY["EPSG","4326"]],PROJECTION["Transverse_Mercator"],PARAMETER["latitude_of_origin",0],PARAMETER["central_meridi
+    @utm_zone_number = [38]
+science/LSAR/GUNW/grids/frequencyA/unwrappedInterferogram/HH/unwrappedPhase: shape=(4392, 4446) dtype=float32 chunks=(512, 512) comp=gzip fill=0.0
+    @_FillValue = [nan]
+    @description = Unwrapped interferogram between HH layers
+    @grid_mapping = projection
+    @max_value = [6.171778678894043]
+    @mean_value = [-10.050134658813477]
+    @min_value = [-31.57210922241211]
+    @sample_stddev = [4.95315408706665]
+    @units = radians
+science/LSAR/GUNW/grids/frequencyA/unwrappedInterferogram/HH/xCoordinateSpacing: shape=() dtype=float64 chunks=None comp=None fill=0.0
+    value=np.float64(80.0)
+    @description = Nominal spacing in meters between consecutive pixels
+    @long_name = X coordinates spacing
+    @units = meters
+science/LSAR/GUNW/grids/frequencyA/unwrappedInterferogram/HH/xCoordinates: shape=(4446,) dtype=float64 chunks=None comp=None fill=0.0
+    @description = X coordinates in specified projection
+    @long_name = X coordinate of projection
+    @standard_name = ['projection_x_coordinate']
+    @units = meters
+science/LSAR/GUNW/grids/frequencyA/unwrappedInterferogram/HH/yCoordinateSpacing: shape=() dtype=float64 chunks=None comp=None fill=0.0
+    value=np.float64(-80.0)
+    @description = Nominal spacing in meters between consecutive lines
+    @long_name = Y coordinates spacing
+    @units = meters
+science/LSAR/GUNW/grids/frequencyA/unwrappedInterferogram/HH/yCoordinates: shape=(4392,) dtype=float64 chunks=None comp=None fill=0.0
+    @description = Y coordinates in specified projection
+    @long_name = Y coordinate of projection
+    @standard_name = ['projection_y_coordinate']
+    @units = meters
+science/LSAR/GUNW/grids/frequencyA/unwrappedInterferogram/mask: shape=(4392, 4446) dtype=uint32 chunks=(512, 512) comp=gzip fill=0
+    @_FillValue = [255]
+    @description = Combination of a water mask, a mask of subswaths of valid samples, and data anomalies in the reference RSLC and the geometrically coregistered secondary RSLC. Each pixel value is encoded as a 32-bit unsigned integer. Bits 0-7 represent subswath encoding, where the most significant digit represents the water flag of that pixel in the reference RSLC, where 1 is water and 0 is non-
+    @disclaimer = Water Mask for the NASA-ISRO NISAR mission version 0.5, derived through analysis and processing of multiple input datasets, referenced to the WGS84 ellipsoid. Water mask derived at the Jet Propulsion Laboratory, California Institute of Technology, under contract with NASA, using multiple open datasets: JRC Global Surface Water v1.3 (Pekel et al 2016, Nature 540, 418-422,  EC JRC/
+    @grid_mapping = projection
+    @percentage_water = [2.052529565471757]
+    @valid_min = [0]
+science/LSAR/GUNW/grids/frequencyA/unwrappedInterferogram/projection: shape=() dtype=uint32 chunks=None comp=None fill=0
+    value=np.uint32(32638)
+    @description = Product map grid projection: EPSG code, with additional projection information as HDF5 Attributes
+    @ellipsoid = WGS84
+    @epsg_code = [32638]
+    @false_easting = [500000.0]
+    @false_northing = [0.0]
+    @grid_mapping_name = transverse_mercator
+    @inverse_flattening = [298.257223563]
+    @latitude_of_projection_origin = [0.0]
+    @longitude_of_central_meridian = [45.0]
+    @longitude_of_projection_origin = [0.0]
+    @scale_factor_at_central_meridian = [0.9996]
+    @semi_major_axis = [6378137.0]
+    @spatial_ref = PROJCS["WGS 84 / UTM zone 38N",GEOGCS["WGS 84",DATUM["WGS_1984",SPHEROID["WGS 84",6378137,298.257223563,AUTHORITY["EPSG","7030"]],AUTHORITY["EPSG","6326"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["degree",0.0174532925199433,AUTHORITY["EPSG","9122"]],AUTHORITY["EPSG","4326"]],PROJECTION["Transverse_Mercator"],PARAMETER["latitude_of_origin",0],PARAMETER["central_meridi
+    @utm_zone_number = [38]
+science/LSAR/GUNW/grids/frequencyA/unwrappedInterferogram/xCoordinateSpacing: shape=() dtype=float64 chunks=None comp=None fill=0.0
+    value=np.float64(80.0)
+    @description = Nominal spacing in meters between consecutive pixels
+    @long_name = X coordinates spacing
+    @units = meters
+science/LSAR/GUNW/grids/frequencyA/unwrappedInterferogram/xCoordinates: shape=(4446,) dtype=float64 chunks=None comp=None fill=0.0
+    @description = X coordinates in specified projection
+    @long_name = X coordinate of projection
+    @standard_name = ['projection_x_coordinate']
+    @units = meters
+science/LSAR/GUNW/grids/frequencyA/unwrappedInterferogram/yCoordinateSpacing: shape=() dtype=float64 chunks=None comp=None fill=0.0
+    value=np.float64(-80.0)
+    @description = Nominal spacing in meters between consecutive lines
+    @long_name = Y coordinates spacing
+    @units = meters
+science/LSAR/GUNW/grids/frequencyA/unwrappedInterferogram/yCoordinates: shape=(4392,) dtype=float64 chunks=None comp=None fill=0.0
+    @description = Y coordinates in specified projection
+    @long_name = Y coordinate of projection
+    @standard_name = ['projection_y_coordinate']
+    @units = meters
+science/LSAR/GUNW/grids/frequencyA/wrappedInterferogram/
+science/LSAR/GUNW/grids/frequencyA/wrappedInterferogram/HH/
+science/LSAR/GUNW/grids/frequencyA/wrappedInterferogram/HH/coherenceMagnitude: shape=(17568, 17784) dtype=float32 chunks=(512, 512) comp=gzip fill=0.0
+    @_FillValue = [nan]
+    @description = Coherence magnitude between HH layers
+    @grid_mapping = projection
+    @max_value = [0.9993816614151001]
+    @mean_value = [0.26342150568962097]
+    @min_value = [0.0]
+    @sample_stddev = [0.27667027711868286]
+    @units = 1
+science/LSAR/GUNW/grids/frequencyA/wrappedInterferogram/HH/projection: shape=() dtype=uint32 chunks=None comp=None fill=0
+    value=np.uint32(32638)
+    @description = Product map grid projection: EPSG code, with additional projection information as HDF5 Attributes
+    @ellipsoid = WGS84
+    @epsg_code = [32638]
+    @false_easting = [500000.0]
+    @false_northing = [0.0]
+    @grid_mapping_name = transverse_mercator
+    @inverse_flattening = [298.257223563]
+    @latitude_of_projection_origin = [0.0]
+    @longitude_of_central_meridian = [45.0]
+    @longitude_of_projection_origin = [0.0]
+    @scale_factor_at_central_meridian = [0.9996]
+    @semi_major_axis = [6378137.0]
+    @spatial_ref = PROJCS["WGS 84 / UTM zone 38N",GEOGCS["WGS 84",DATUM["WGS_1984",SPHEROID["WGS 84",6378137,298.257223563,AUTHORITY["EPSG","7030"]],AUTHORITY["EPSG","6326"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["degree",0.0174532925199433,AUTHORITY["EPSG","9122"]],AUTHORITY["EPSG","4326"]],PROJECTION["Transverse_Mercator"],PARAMETER["latitude_of_origin",0],PARAMETER["central_meridi
+    @utm_zone_number = [38]
+science/LSAR/GUNW/grids/frequencyA/wrappedInterferogram/HH/wrappedInterferogram: shape=(17568, 17784) dtype=complex64 chunks=(512, 512) comp=gzip fill=0j
+    @_FillValue = [(nan+nanj)]
+    @description = Complex wrapped interferogram between HH layers
+    @grid_mapping = projection
+    @units = 1
+science/LSAR/GUNW/grids/frequencyA/wrappedInterferogram/HH/xCoordinateSpacing: shape=() dtype=float64 chunks=None comp=None fill=0.0
+    value=np.float64(20.0)
+    @description = Nominal spacing in meters between consecutive pixels
+    @long_name = X coordinates spacing
+    @units = meters
+science/LSAR/GUNW/grids/frequencyA/wrappedInterferogram/HH/xCoordinates: shape=(17784,) dtype=float64 chunks=None comp=None fill=0.0
+    @description = X coordinates in specified projection
+    @long_name = X coordinate of projection
+    @standard_name = ['projection_x_coordinate']
+    @units = meters
+science/LSAR/GUNW/grids/frequencyA/wrappedInterferogram/HH/yCoordinateSpacing: shape=() dtype=float64 chunks=None comp=None fill=0.0
+    value=np.float64(-20.0)
+    @description = Nominal spacing in meters between consecutive lines
+    @long_name = Y coordinates spacing
+    @units = meters
+science/LSAR/GUNW/grids/frequencyA/wrappedInterferogram/HH/yCoordinates: shape=(17568,) dtype=float64 chunks=None comp=None fill=0.0
+    @description = Y coordinates in specified projection
+    @long_name = Y coordinate of projection
+    @standard_name = ['projection_y_coordinate']
+    @units = meters
+science/LSAR/GUNW/grids/frequencyA/wrappedInterferogram/mask: shape=(17568, 17784) dtype=uint32 chunks=(512, 512) comp=gzip fill=0
+    @_FillValue = [255]
+    @description = Combination of a water mask, a mask of subswaths of valid samples, and data anomalies in the reference RSLC and the geometrically coregistered secondary RSLC. Each pixel value is encoded as a 32-bit unsigned integer. Bits 0-7 represent subswath encoding, where the most significant digit represents the water flag of that pixel in the reference RSLC, where 1 is water and 0 is non-
+    @disclaimer = Water Mask for the NASA-ISRO NISAR mission version 0.5, derived through analysis and processing of multiple input datasets, referenced to the WGS84 ellipsoid. Water mask derived at the Jet Propulsion Laboratory, California Institute of Technology, under contract with NASA, using multiple open datasets: JRC Global Surface Water v1.3 (Pekel et al 2016, Nature 540, 418-422,  EC JRC/
+    @grid_mapping = projection
+    @percentage_water = [2.0711750631131562]
+    @valid_min = [0]
+science/LSAR/GUNW/grids/frequencyA/wrappedInterferogram/projection: shape=() dtype=uint32 chunks=None comp=None fill=0
+    value=np.uint32(32638)
+    @description = Product map grid projection: EPSG code, with additional projection information as HDF5 Attributes
+    @ellipsoid = WGS84
+    @epsg_code = [32638]
+    @false_easting = [500000.0]
+    @false_northing = [0.0]
+    @grid_mapping_name = transverse_mercator
+    @inverse_flattening = [298.257223563]
+    @latitude_of_projection_origin = [0.0]
+    @longitude_of_central_meridian = [45.0]
+    @longitude_of_projection_origin = [0.0]
+    @scale_factor_at_central_meridian = [0.9996]
+    @semi_major_axis = [6378137.0]
+    @spatial_ref = PROJCS["WGS 84 / UTM zone 38N",GEOGCS["WGS 84",DATUM["WGS_1984",SPHEROID["WGS 84",6378137,298.257223563,AUTHORITY["EPSG","7030"]],AUTHORITY["EPSG","6326"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["degree",0.0174532925199433,AUTHORITY["EPSG","9122"]],AUTHORITY["EPSG","4326"]],PROJECTION["Transverse_Mercator"],PARAMETER["latitude_of_origin",0],PARAMETER["central_meridi
+    @utm_zone_number = [38]
+science/LSAR/GUNW/grids/frequencyA/wrappedInterferogram/xCoordinateSpacing: shape=() dtype=float64 chunks=None comp=None fill=0.0
+    value=np.float64(20.0)
+    @description = Nominal spacing in meters between consecutive pixels
+    @long_name = X coordinates spacing
+    @units = meters
+science/LSAR/GUNW/grids/frequencyA/wrappedInterferogram/xCoordinates: shape=(17784,) dtype=float64 chunks=None comp=None fill=0.0
+    @description = X coordinates in specified projection
+    @long_name = X coordinate of projection
+    @standard_name = ['projection_x_coordinate']
+    @units = meters
+science/LSAR/GUNW/grids/frequencyA/wrappedInterferogram/yCoordinateSpacing: shape=() dtype=float64 chunks=None comp=None fill=0.0
+    value=np.float64(-20.0)
+    @description = Nominal spacing in meters between consecutive lines
+    @long_name = Y coordinates spacing
+    @units = meters
+science/LSAR/GUNW/grids/frequencyA/wrappedInterferogram/yCoordinates: shape=(17568,) dtype=float64 chunks=None comp=None fill=0.0
+    @description = Y coordinates in specified projection
+    @long_name = Y coordinate of projection
+    @standard_name = ['projection_y_coordinate']
+    @units = meters
+science/LSAR/GUNW/metadata/
+science/LSAR/GUNW/metadata/attitude/
+science/LSAR/GUNW/metadata/attitude/reference/
+science/LSAR/GUNW/metadata/attitude/reference/attitudeType: shape=() dtype=|S10 chunks=None comp=None
+    value='Custom'
+    @description = Attitude type, either "FRP", "NRP", "PRP, or "Custom", where "FRP" stands for Forecast Radar Pointing, "NRP" is Near Real-time Pointing, and "PRP" is Precise Radar Pointing
+science/LSAR/GUNW/metadata/attitude/reference/eulerAngles: shape=(136, 3) dtype=float64 chunks=None comp=None fill=0.0
+    @description = Attitude Euler angles (roll, pitch, yaw)
+    @units = degrees
+science/LSAR/GUNW/metadata/attitude/reference/quaternions: shape=(136, 4) dtype=float64 chunks=None comp=None fill=0.0
+    @description = Attitude quaternions (q0, q1, q2, q3)
+    @units = 1
+science/LSAR/GUNW/metadata/attitude/reference/time: shape=(136,) dtype=float64 chunks=None comp=None fill=0.0
+    @description = Time vector record. This record contains the time since UTC epoch corresponding to attitude and quaternion records
+    @units = seconds since 2026-06-20T00:00:00
+science/LSAR/GUNW/metadata/attitude/secondary/
+science/LSAR/GUNW/metadata/attitude/secondary/attitudeType: shape=() dtype=|S10 chunks=None comp=None
+    value='Custom'
+    @description = Attitude type, either "FRP", "NRP", "PRP, or "Custom", where "FRP" stands for Forecast Radar Pointing, "NRP" is Near Real-time Pointing, and "PRP" is Precise Radar Pointing
+science/LSAR/GUNW/metadata/attitude/secondary/eulerAngles: shape=(136, 3) dtype=float64 chunks=None comp=None fill=0.0
+    @description = Attitude Euler angles (roll, pitch, yaw)
+    @units = degrees
+science/LSAR/GUNW/metadata/attitude/secondary/quaternions: shape=(136, 4) dtype=float64 chunks=None comp=None fill=0.0
+    @description = Attitude quaternions (q0, q1, q2, q3)
+    @units = 1
+science/LSAR/GUNW/metadata/attitude/secondary/time: shape=(136,) dtype=float64 chunks=None comp=None fill=0.0
+    @description = Time vector record. This record contains the time since UTC epoch corresponding to attitude and quaternion records
+    @units = seconds since 2026-07-02T00:00:00
+science/LSAR/GUNW/metadata/orbit/
+science/LSAR/GUNW/metadata/orbit/reference/
+science/LSAR/GUNW/metadata/orbit/reference/interpMethod: shape=() dtype=|S7 chunks=None comp=None
+    value='Hermite'
+    @description = Orbit interpolation method, either "Hermite" or "Legendre"
+science/LSAR/GUNW/metadata/orbit/reference/orbitType: shape=() dtype=|S3 chunks=None comp=None
+    value='MOE'
+    @description = Orbit product type, either "FOE", "NOE", "MOE", "POE", or "Custom", where "FOE" stands for Forecast Orbit Ephemeris, "NOE" is Near real-time Orbit Ephemeris, "MOE" is Medium precision Orbit Ephemeris, and "POE" is Precise Orbit Ephemeris
+science/LSAR/GUNW/metadata/orbit/reference/position: shape=(36, 3) dtype=float64 chunks=None comp=None fill=0.0
+    @description = Position vector record. This record contains the platform position data with respect to WGS84 G1762 reference frame
+    @units = meters
+science/LSAR/GUNW/metadata/orbit/reference/time: shape=(36,) dtype=float64 chunks=None comp=None fill=0.0
+    @description = Time vector record. This record contains the time since UTC epoch corresponding to position and velocity records
+    @units = seconds since 2026-06-20T00:00:00
+science/LSAR/GUNW/metadata/orbit/reference/velocity: shape=(36, 3) dtype=float64 chunks=None comp=None fill=0.0
+    @description = Velocity vector record. This record contains the platform velocity data with respect to WGS84 G1762 reference frame
+    @units = meters / second
+science/LSAR/GUNW/metadata/orbit/secondary/
+science/LSAR/GUNW/metadata/orbit/secondary/interpMethod: shape=() dtype=|S7 chunks=None comp=None
+    value='Hermite'
+    @description = Orbit interpolation method, either "Hermite" or "Legendre"
+science/LSAR/GUNW/metadata/orbit/secondary/orbitType: shape=() dtype=|S3 chunks=None comp=None
+    value='MOE'
+    @description = Orbit product type, either "FOE", "NOE", "MOE", "POE", or "Custom", where "FOE" stands for Forecast Orbit Ephemeris, "NOE" is Near real-time Orbit Ephemeris, "MOE" is Medium precision Orbit Ephemeris, and "POE" is Precise Orbit Ephemeris
+science/LSAR/GUNW/metadata/orbit/secondary/position: shape=(36, 3) dtype=float64 chunks=None comp=None fill=0.0
+    @description = Position vector record. This record contains the platform position data with respect to WGS84 G1762 reference frame
+    @units = meters
+science/LSAR/GUNW/metadata/orbit/secondary/time: shape=(36,) dtype=float64 chunks=None comp=None fill=0.0
+    @description = Time vector record. This record contains the time since UTC epoch corresponding to position and velocity records
+    @units = seconds since 2026-07-02T00:00:00
+science/LSAR/GUNW/metadata/orbit/secondary/velocity: shape=(36, 3) dtype=float64 chunks=None comp=None fill=0.0
+    @description = Velocity vector record. This record contains the platform velocity data with respect to WGS84 G1762 reference frame
+    @units = meters / second
+science/LSAR/GUNW/metadata/orbit/temporalBaseline: shape=() dtype=uint16 chunks=None comp=None fill=0
+    value=np.uint16(11)
+    @description = Time interval between reference and secondary RSLCs
+    @units = days
+science/LSAR/GUNW/metadata/processingInformation/
+science/LSAR/GUNW/metadata/processingInformation/algorithms/
+science/LSAR/GUNW/metadata/processingInformation/algorithms/coregistration/
+science/LSAR/GUNW/metadata/processingInformation/algorithms/coregistration/coregistrationMethod: shape=() dtype=|S93 chunks=None comp=None
+    value='Coarse geometry coregistration with DEM and orbit ephemeris with cross-correlation refinement'
+    @description = RSLC coregistration method
+science/LSAR/GUNW/metadata/processingInformation/algorithms/coregistration/crossCorrelation: shape=() dtype=|S9 chunks=None comp=None
+    value='frequency'
+    @description = Cross-correlation algorithm for sub-pixel offsets computation
+science/LSAR/GUNW/metadata/processingInformation/algorithms/coregistration/crossCorrelationFilling: shape=() dtype=|S13 chunks=None comp=None
+    value='fill_smoothed'
+    @description = Outliers data filling algorithm for cross-correlation offsets
+science/LSAR/GUNW/metadata/processingInformation/algorithms/coregistration/crossCorrelationFilterKernel: shape=() dtype=|S6 chunks=None comp=None
+    value='boxcar'
+    @description = Filtering algorithm for cross-correlation offsets
+science/LSAR/GUNW/metadata/processingInformation/algorithms/coregistration/crossCorrelationOutliers: shape=() dtype=|S13 chunks=None comp=None
+    value='median_filter'
+    @description = Outliers identification algorithm
+science/LSAR/GUNW/metadata/processingInformation/algorithms/coregistration/geometryCoregistration: shape=() dtype=|S54 chunks=None comp=None
+    value='Range doppler to geogrid then geogrid to range doppler'
+    @description = Geometry coregistration algorithm
+science/LSAR/GUNW/metadata/processingInformation/algorithms/coregistration/resampling: shape=() dtype=|S4 chunks=None comp=None
+    value='sinc'
+    @description = Secondary RSLC resampling algorithm
+science/LSAR/GUNW/metadata/processingInformation/algorithms/geocoding/
+science/LSAR/GUNW/metadata/processingInformation/algorithms/geocoding/complexGeocodingInterpolation: shape=() dtype=|S8 chunks=None comp=None
+    value='BILINEAR'
+    @description = Geocoding interpolation algorithm for complex-valued datasets
+science/LSAR/GUNW/metadata/processingInformation/algorithms/geocoding/demInterpolation: shape=() dtype=|S9 chunks=None comp=None
+    value='biquintic'
+    @description = DEM interpolation algorithm
+science/LSAR/GUNW/metadata/processingInformation/algorithms/geocoding/floatingGeocodingInterpolation: shape=() dtype=|S8 chunks=None comp=None
+    value='BILINEAR'
+    @description = Geocoding interpolation algorithm for floating point datasets
+science/LSAR/GUNW/metadata/processingInformation/algorithms/geocoding/integerGeocodingInterpolation: shape=() dtype=|S7 chunks=None comp=None
+    value='nearest'
+    @description = Geocoding interpolation algorithm for integer datasets
+science/LSAR/GUNW/metadata/processingInformation/algorithms/interferogramFormation/
+science/LSAR/GUNW/metadata/processingInformation/algorithms/interferogramFormation/flatteningMethod: shape=() dtype=|S21 chunks=None comp=None
+    value='With geometry offsets'
+    @description = Algorithm used to flatten the wrapped interferogram
+science/LSAR/GUNW/metadata/processingInformation/algorithms/interferogramFormation/multilooking: shape=() dtype=|S38 chunks=None comp=None
+    value='Spatial moving average with decimation'
+    @description = Multilooking algorithm
+science/LSAR/GUNW/metadata/processingInformation/algorithms/interferogramFormation/wrappedInterferogramFiltering: shape=() dtype=|S9 chunks=None comp=None
+    value='no_filter'
+    @description = Algorithm used to filter the wrapped interferogram prior to phase unwrapping
+science/LSAR/GUNW/metadata/processingInformation/algorithms/ionosphereEstimation/
+science/LSAR/GUNW/metadata/processingInformation/algorithms/ionosphereEstimation/ionosphereAlgorithm: shape=() dtype=|S132 chunks=None comp=None
+    value='Range split-spectrum with sub-band interferograms from the main band and the difference of the main and side band of the input RSLCs'
+    @description = Algorithm used to estimate ionosphere phase screen
+science/LSAR/GUNW/metadata/processingInformation/algorithms/ionosphereEstimation/ionosphereFilling: shape=() dtype=|S7 chunks=None comp=None
+    value='nearest'
+    @description = Outliers data filling algorithm for ionosphere phase estimation
+science/LSAR/GUNW/metadata/processingInformation/algorithms/ionosphereEstimation/ionosphereFiltering: shape=() dtype=|S42 chunks=None comp=None
+    value='Iterative gaussian filter with 1 filtering'
+    @description = Filtering algorithm for ionosphere phase screen computation
+science/LSAR/GUNW/metadata/processingInformation/algorithms/ionosphereEstimation/ionosphereOutliers: shape=(2,) dtype=object chunks=None comp=None
+    value=['coherence', 'subswath_mask']
+    @description = Algorithm identifying outliers in unfiltered ionosphere phase screen
+science/LSAR/GUNW/metadata/processingInformation/algorithms/ionosphereEstimation/unwrappingErrorCorrection: shape=() dtype=|S4 chunks=None comp=None
+    value='True'
+    @description = Algorithm correcting unwrapping errors in sub-band unwrapped interferograms
+science/LSAR/GUNW/metadata/processingInformation/algorithms/softwareVersion: shape=() dtype=|S7 chunks=None comp=None
+    value='0.25.16'
+    @description = Software version used for processing
+science/LSAR/GUNW/metadata/processingInformation/algorithms/unwrapping/
+science/LSAR/GUNW/metadata/processingInformation/algorithms/unwrapping/costMode: shape=() dtype=|S6 chunks=None comp=None
+    value='smooth'
+    @description = Cost mode algorithm for phase unwrapping
+science/LSAR/GUNW/metadata/processingInformation/algorithms/unwrapping/preprocessing/
+science/LSAR/GUNW/metadata/processingInformation/algorithms/unwrapping/preprocessing/wrappedPhaseFilling: shape=() dtype=|S21 chunks=None comp=None
+    value='distance_interpolator'
+    @description = Outliers data filling algorithm for phase unwrapping preprocessing
+science/LSAR/GUNW/metadata/processingInformation/algorithms/unwrapping/preprocessing/wrappedPhaseOutliers: shape=() dtype=|S13 chunks=None comp=None
+    value='subswath_mask'
+    @description = Algorithm identifying outliers in the wrapped interferogram
+science/LSAR/GUNW/metadata/processingInformation/algorithms/unwrapping/unwrappingAlgorithm: shape=() dtype=|S6 chunks=None comp=None
+    value='snaphu'
+    @description = Algorithm used for phase unwrapping
+science/LSAR/GUNW/metadata/processingInformation/algorithms/unwrapping/unwrappingInitializer: shape=() dtype=|S3 chunks=None comp=None
+    value='mcf'
+    @description = Algorithm used to initialize phase unwrapping
+science/LSAR/GUNW/metadata/processingInformation/inputs/
+science/LSAR/GUNW/metadata/processingInformation/inputs/configFiles: shape=() dtype=|S4 chunks=None comp=None
+    value='None'
+    @description = List of input config files used
+science/LSAR/GUNW/metadata/processingInformation/inputs/demSource: shape=() dtype=|S1120 chunks=None comp=None
+    value='Digital Elevation Model (DEM) for the NASA-ISRO NISAR mission, version 1.2, based on the Copernicus DEM 30-m (2023_1), referenced to the WGS84 ellipsoid. This digital elevation model (DEM) was prepared at the Jet Propulsion Laboratory, California Institute of Technology, under contract wi
+    @description = Description of the input digital elevation model (DEM)
+science/LSAR/GUNW/metadata/processingInformation/inputs/l1ReferenceSlcGranules: shape=(1,) dtype=|S94 chunks=None comp=None
+    value=['NISAR_L1_PR_RSLC_023_085_A_022_4005_DHDH_A_20260620T020411_20260620T020449_P05023_N_F_J_001.h5']
+    @description = List of input reference L1 RSLC products used
+science/LSAR/GUNW/metadata/processingInformation/inputs/l1SecondarySlcGranules: shape=(1,) dtype=|S94 chunks=None comp=None
+    value=['NISAR_L1_PR_RSLC_024_085_A_022_4005_DHDH_A_20260702T020410_20260702T020448_P05023_N_F_J_001.h5']
+    @description = List of input secondary L1 RSLC products used
+science/LSAR/GUNW/metadata/processingInformation/inputs/orbitFiles: shape=(2,) dtype=|S237 chunks=None comp=None
+    value=['/data/work/jobs/2026/08/12/08/19/SCIFLO_INSAR__pcm_r05.02.2_pge_r05.02.3-network_pair_024_085_022_full_individual_L_40_DH_05_DH_0_state-config-20260810T205344.572722Z/NISAR_ANC_J_PR_MOE_20260621T132530_20260619T205942_20260621T025942.xml', '/data/work/jobs/2026/08/12/08/19/SCIFLO_INSAR__
+    @description = List of input orbit files used
+science/LSAR/GUNW/metadata/processingInformation/inputs/waterMaskSource: shape=() dtype=|S824 chunks=None comp=None
+    value='Water Mask for the NASA-ISRO NISAR mission version 0.5, derived through analysis and processing of multiple input datasets, referenced to the WGS84 ellipsoid. Water mask derived at the Jet Propulsion Laboratory, California Institute of Technology, under contract with NASA, using multiple 
+    @description = Description of the input water mask
+science/LSAR/GUNW/metadata/processingInformation/parameters/
+science/LSAR/GUNW/metadata/processingInformation/parameters/common/
+science/LSAR/GUNW/metadata/processingInformation/parameters/common/frequencyA/
+science/LSAR/GUNW/metadata/processingInformation/parameters/common/frequencyA/dopplerBandwidth: shape=() dtype=float64 chunks=None comp=None fill=0.0
+    value=np.float64(1260.5262536839518)
+    @description = Common Doppler bandwidth between reference and secondary RSLCs
+    @units = hertz
+science/LSAR/GUNW/metadata/processingInformation/parameters/common/frequencyA/dopplerCentroid: shape=(135, 109) dtype=float64 chunks=None comp=None fill=0.0
+    @description = 2D LUT of common Doppler centroid between reference and secondary RSLCs
+    @units = hertz
+science/LSAR/GUNW/metadata/processingInformation/parameters/geocoding/
+science/LSAR/GUNW/metadata/processingInformation/parameters/geocoding/azimuthIonosphericCorrectionApplied: shape=() dtype=|S4 chunks=None comp=None
+    value='True'
+    @description = Flag to indicate if the azimuth ionospheric correction is applied to improve geolocation
+science/LSAR/GUNW/metadata/processingInformation/parameters/geocoding/hydrostaticTroposphericCorrectionApplied: shape=() dtype=|S4 chunks=None comp=None
+    value='True'
+    @description = Flag to indicate if the hydrostatic tropospheric correction is applied to improve geolocation
+science/LSAR/GUNW/metadata/processingInformation/parameters/geocoding/rangeIonosphericCorrectionApplied: shape=() dtype=|S4 chunks=None comp=None
+    value='True'
+    @description = Flag to indicate if the range ionospheric correction is applied to improve geolocation
+science/LSAR/GUNW/metadata/processingInformation/parameters/geocoding/wetTroposphericCorrectionApplied: shape=() dtype=|S4 chunks=None comp=None
+    value='True'
+    @description = Flag to indicate if the wet tropospheric correction is applied to improve geolocation
+science/LSAR/GUNW/metadata/processingInformation/parameters/ionosphere/
+science/LSAR/GUNW/metadata/processingInformation/parameters/ionosphere/highBandBandwidth: shape=() dtype=float32 chunks=None comp=None fill=0.0
+    value=np.float32(nan)
+    @description = Slant range bandwidth of the high sub-band image
+    @units = hertz
+science/LSAR/GUNW/metadata/processingInformation/parameters/ionosphere/lowBandBandwidth: shape=() dtype=float32 chunks=None comp=None fill=0.0
+    value=np.float32(nan)
+    @description = Slant range bandwidth of the low sub-band image
+    @units = hertz
+science/LSAR/GUNW/metadata/processingInformation/parameters/pixelOffsets/
+science/LSAR/GUNW/metadata/processingInformation/parameters/pixelOffsets/frequencyA/
+science/LSAR/GUNW/metadata/processingInformation/parameters/pixelOffsets/frequencyA/alongTrackSearchWindowSize: shape=() dtype=uint32 chunks=None comp=None fill=0
+    value=np.uint32(64)
+    @description = Along-track cross-correlation search window size in pixels
+    @units = 1
+science/LSAR/GUNW/metadata/processingInformation/parameters/pixelOffsets/frequencyA/alongTrackSkipWindowSize: shape=() dtype=uint32 chunks=None comp=None fill=0
+    value=np.uint32(75)
+    @description = Along-track cross-correlation skip window size in pixels
+    @units = 1
+science/LSAR/GUNW/metadata/processingInformation/parameters/pixelOffsets/frequencyA/alongTrackWindowSize: shape=() dtype=uint32 chunks=None comp=None fill=0
+    value=np.uint32(96)
+    @description = Along-track cross-correlation window size in pixels
+    @units = 1
+science/LSAR/GUNW/metadata/processingInformation/parameters/pixelOffsets/frequencyA/correlationSurfaceOversampling: shape=() dtype=uint32 chunks=None comp=None fill=0
+    value=np.uint32(16)
+    @description = Oversampling factor of the cross-correlation surface
+    @units = 1
+science/LSAR/GUNW/metadata/processingInformation/parameters/pixelOffsets/frequencyA/isOffsetsBlendingApplied: shape=() dtype=|S4 chunks=None comp=None
+    value='None'
+    @description = Flag to indicate if pixel offsets are the results of blending multi-resolution layers of pixel offsets
+science/LSAR/GUNW/metadata/processingInformation/parameters/pixelOffsets/frequencyA/slantRangeSearchWindowSize: shape=() dtype=uint32 chunks=None comp=None fill=0
+    value=np.uint32(64)
+    @description = Slant range cross-correlation search window size in pixels
+    @units = 1
+science/LSAR/GUNW/metadata/processingInformation/parameters/pixelOffsets/frequencyA/slantRangeSkipWindowSize: shape=() dtype=uint32 chunks=None comp=None fill=0
+    value=np.uint32(75)
+    @description = Slant range cross-correlation skip window size in pixels
+    @units = 1
+science/LSAR/GUNW/metadata/processingInformation/parameters/pixelOffsets/frequencyA/slantRangeWindowSize: shape=() dtype=uint32 chunks=None comp=None fill=0
+    value=np.uint32(64)
+    @description = Slant range cross-correlation window size in pixels
+    @units = 1
+science/LSAR/GUNW/metadata/processingInformation/parameters/reference/
+science/LSAR/GUNW/metadata/processingInformation/parameters/reference/frequencyA/
+science/LSAR/GUNW/metadata/processingInformation/parameters/reference/frequencyA/azimuthBandwidth: shape=() dtype=float64 chunks=None comp=None fill=0.0
+    value=np.float64(1260.5262536839518)
+    @description = Processed azimuth bandwidth for reference RSLC
+    @units = hertz
+science/LSAR/GUNW/metadata/processingInformation/parameters/reference/frequencyA/dopplerCentroid: shape=(135, 109) dtype=float64 chunks=None comp=None fill=0.0
+    @description = 2D LUT of Doppler centroid for frequency A
+    @units = hertz
+science/LSAR/GUNW/metadata/processingInformation/parameters/reference/frequencyA/numberOfAzimuthLines: shape=() dtype=uint64 chunks=None comp=None fill=0
+    value=np.uint64(59280)
+    @description = Number of azimuth lines within the reference RSLC
+    @units = 1
+science/LSAR/GUNW/metadata/processingInformation/parameters/reference/frequencyA/numberOfRangeSamples: shape=() dtype=uint64 chunks=None comp=None fill=0
+    value=np.uint64(53484)
+    @description = Number of slant range samples for each azimuth line within the reference RSLC
+    @units = 1
+science/LSAR/GUNW/metadata/processingInformation/parameters/reference/frequencyA/rangeBandwidth: shape=() dtype=float64 chunks=None comp=None fill=0.0
+    value=np.float64(40000000.0)
+    @description = Processed slant range bandwidth for reference RSLC
+    @units = hertz
+science/LSAR/GUNW/metadata/processingInformation/parameters/reference/frequencyA/slantRangeSpacing: shape=() dtype=float64 chunks=None comp=None fill=0.0
+    value=np.float64(3.1228381041666666)
+    @description = ['Slant range spacing of reference RSLC']
+    @units = meters
+science/LSAR/GUNW/metadata/processingInformation/parameters/reference/frequencyA/slantRangeStart: shape=() dtype=float64 chunks=None comp=None fill=0.0
+    value=np.float64(884537.6473289999)
+    @description = Slant range start distance for the reference RSLC
+    @units = meters
+science/LSAR/GUNW/metadata/processingInformation/parameters/reference/frequencyA/zeroDopplerEndTime: shape=() dtype=|S29 chunks=None comp=None
+    value='2026-06-20T02:04:49.999342105'
+    @description = Azimuth stop time (in UTC) of the reference RSLC product in the format YYYY-mm-ddTHH:MM:SS.sssssssss
+science/LSAR/GUNW/metadata/processingInformation/parameters/reference/frequencyA/zeroDopplerStartTime: shape=() dtype=|S29 chunks=None comp=None
+    value='2026-06-20T02:04:11.000000000'
+    @description = Azimuth start time (in UTC) of the reference RSLC product in the format YYYY-mm-ddTHH:MM:SS.sssssssss
+science/LSAR/GUNW/metadata/processingInformation/parameters/reference/frequencyA/zeroDopplerTimeSpacing: shape=() dtype=float64 chunks=None comp=None fill=0.0
+    value=np.float64(0.0006578947368421052)
+    @description = Time interval in the along-track direction for reference RSLC raster layers
+    @units = seconds
+science/LSAR/GUNW/metadata/processingInformation/parameters/reference/isMixedMode: shape=() dtype=|S5 chunks=None comp=None
+    value='False'
+    @description = "True" if reference RSLC is a composite of data collected in multiple radar modes, "False" otherwise
+science/LSAR/GUNW/metadata/processingInformation/parameters/reference/referenceTerrainHeight: shape=(135,) dtype=float32 chunks=None comp=None fill=0.0
+    @description = Reference terrain height as a function of map coordinates for reference RSLC
+    @units = meters
+science/LSAR/GUNW/metadata/processingInformation/parameters/reference/rfiMitigation: shape=() dtype=|S9 chunks=None comp=None
+    value='tone-rank'
+    @description = Algorithm used for radio frequency interference (RFI) mitigation in the reference RSLC, either "ST-EVD" or "FDNF" (or "disabled" if no RFI mitigation was applied)
+science/LSAR/GUNW/metadata/processingInformation/parameters/reference/rfiMitigationApplied: shape=() dtype=|S4 chunks=None comp=None
+    value='True'
+    @description = Flag to indicate if radio frequency interference (RFI) mitigation was applied during the generation of the reference RSLC
+science/LSAR/GUNW/metadata/processingInformation/parameters/runConfigurationContents: shape=() dtype=|S22186 chunks=None comp=None
+    value="{'pge_name_group': {'pge_name': 'INSAR_L_PGE'}, 'input_file_group': {'reference_rslc_file': '/data/work/jobs/2026/08/12/08/19/SCIFLO_INSAR__pcm_r05.02.2_pge_r05.02.3-network_pair_024_085_022_full_individual_L_40_DH_05_DH_0_state-config-20260810T205344.572722Z/NISAR_L1_PR_RSLC_023_085_A_02
+    @description = Contents of the run configuration file with parameters used for processing
+science/LSAR/GUNW/metadata/processingInformation/parameters/secondary/
+science/LSAR/GUNW/metadata/processingInformation/parameters/secondary/frequencyA/
+science/LSAR/GUNW/metadata/processingInformation/parameters/secondary/frequencyA/azimuthBandwidth: shape=() dtype=float64 chunks=None comp=None fill=0.0
+    value=np.float64(1260.5210578380345)
+    @description = Processed azimuth bandwidth for secondary RSLC
+    @units = hertz
+science/LSAR/GUNW/metadata/processingInformation/parameters/secondary/frequencyA/dopplerCentroid: shape=(135, 109) dtype=float64 chunks=None comp=None fill=0.0
+    @description = 2D LUT of Doppler centroid for frequency A
+    @units = hertz
+science/LSAR/GUNW/metadata/processingInformation/parameters/secondary/frequencyA/numberOfAzimuthLines: shape=() dtype=uint64 chunks=None comp=None fill=0
+    value=np.uint64(59280)
+    @description = Number of azimuth lines within the secondary RSLC
+    @units = 1
+science/LSAR/GUNW/metadata/processingInformation/parameters/secondary/frequencyA/numberOfRangeSamples: shape=() dtype=uint64 chunks=None comp=None fill=0
+    value=np.uint64(53482)
+    @description = Number of slant range samples for each azimuth line within the secondary RSLC
+    @units = 1
+science/LSAR/GUNW/metadata/processingInformation/parameters/secondary/frequencyA/rangeBandwidth: shape=() dtype=float64 chunks=None comp=None fill=0.0
+    value=np.float64(40000000.0)
+    @description = Processed slant range bandwidth for secondary RSLC
+    @units = hertz
+science/LSAR/GUNW/metadata/processingInformation/parameters/secondary/frequencyA/slantRangeSpacing: shape=() dtype=float64 chunks=None comp=None fill=0.0
+    value=np.float64(3.1228381041666666)
+    @description = ['Slant range spacing of secondary RSLC']
+    @units = meters
+science/LSAR/GUNW/metadata/processingInformation/parameters/secondary/frequencyA/slantRangeStart: shape=() dtype=float64 chunks=None comp=None fill=0.0
+    value=np.float64(884537.6473289999)
+    @description = Slant range start distance for the secondary RSLC
+    @units = meters
+science/LSAR/GUNW/metadata/processingInformation/parameters/secondary/frequencyA/zeroDopplerEndTime: shape=() dtype=|S29 chunks=None comp=None
+    value='2026-07-02T02:04:48.999342105'
+    @description = Azimuth stop time (in UTC) of the secondary RSLC product in the format YYYY-mm-ddTHH:MM:SS.sssssssss
+science/LSAR/GUNW/metadata/processingInformation/parameters/secondary/frequencyA/zeroDopplerStartTime: shape=() dtype=|S29 chunks=None comp=None
+    value='2026-07-02T02:04:10.000000000'
+    @description = Azimuth start time (in UTC) of the secondary RSLC product in the format YYYY-mm-ddTHH:MM:SS.sssssssss
+science/LSAR/GUNW/metadata/processingInformation/parameters/secondary/frequencyA/zeroDopplerTimeSpacing: shape=() dtype=float64 chunks=None comp=None fill=0.0
+    value=np.float64(0.0006578947368421052)
+    @description = Time interval in the along-track direction for secondary RSLC raster layers
+    @units = seconds
+science/LSAR/GUNW/metadata/processingInformation/parameters/secondary/isMixedMode: shape=() dtype=|S5 chunks=None comp=None
+    value='False'
+    @description = "True" if secondary RSLC is a composite of data collected in multiple radar modes, "False" otherwise
+science/LSAR/GUNW/metadata/processingInformation/parameters/secondary/referenceTerrainHeight: shape=(135,) dtype=float32 chunks=None comp=None fill=0.0
+    @description = Reference terrain height as a function of map coordinates for secondary RSLC
+    @units = meters
+science/LSAR/GUNW/metadata/processingInformation/parameters/secondary/rfiMitigation: shape=() dtype=|S9 chunks=None comp=None
+    value='tone-rank'
+    @description = Algorithm used for radio frequency interference (RFI) mitigation in the secondary RSLC, either "ST-EVD" or "FDNF" (or "disabled" if no RFI mitigation was applied)
+science/LSAR/GUNW/metadata/processingInformation/parameters/secondary/rfiMitigationApplied: shape=() dtype=|S4 chunks=None comp=None
+    value='True'
+    @description = Flag to indicate if radio frequency interference (RFI) mitigation was applied during the generation of the secondary RSLC
+science/LSAR/GUNW/metadata/processingInformation/parameters/unwrappedInterferogram/
+science/LSAR/GUNW/metadata/processingInformation/parameters/unwrappedInterferogram/frequencyA/
+science/LSAR/GUNW/metadata/processingInformation/parameters/unwrappedInterferogram/frequencyA/azimuthBandwidth: shape=() dtype=float64 chunks=None comp=None fill=0.0
+    value=np.float64(1260.5262536839518)
+    @description = Processed azimuth bandwidth for frequency A interferometric layers
+    @units = hertz
+science/LSAR/GUNW/metadata/processingInformation/parameters/unwrappedInterferogram/frequencyA/commonBandAzimuthFilterApplied: shape=() dtype=|S5 chunks=None comp=None
+    value='False'
+    @description = Flag to indicate if common band azimuth filter has been applied
+science/LSAR/GUNW/metadata/processingInformation/parameters/unwrappedInterferogram/frequencyA/commonBandRangeFilterApplied: shape=() dtype=|S5 chunks=None comp=None
+    value='False'
+    @description = Flag to indicate if common band range filter has been applied
+science/LSAR/GUNW/metadata/processingInformation/parameters/unwrappedInterferogram/frequencyA/ellipsoidalFlatteningApplied: shape=() dtype=|S4 chunks=None comp=None
+    value='True'
+    @description = Flag to indicate if the interferometric phase has been flattened with respect to a zero height ellipsoid
+science/LSAR/GUNW/metadata/processingInformation/parameters/unwrappedInterferogram/frequencyA/numberOfAzimuthLooks: shape=() dtype=uint32 chunks=None comp=None fill=0
+    value=np.uint32(16)
+    @description = Number of looks applied in the along-track direction to form the unwrapped interferogram
+    @units = 1
+science/LSAR/GUNW/metadata/processingInformation/parameters/unwrappedInterferogram/frequencyA/numberOfRangeLooks: shape=() dtype=uint32 chunks=None comp=None fill=0
+    value=np.uint32(13)
+    @description = Number of looks applied in the slant range direction to form the unwrapped interferogram
+    @units = 1
+science/LSAR/GUNW/metadata/processingInformation/parameters/unwrappedInterferogram/frequencyA/rangeBandwidth: shape=() dtype=float64 chunks=None comp=None fill=0.0
+    value=np.float64(40000000.0)
+    @description = Processed slant range bandwidth for frequency A interferometric layers
+    @units = hertz
+science/LSAR/GUNW/metadata/processingInformation/parameters/unwrappedInterferogram/frequencyA/topographicFlatteningApplied: shape=() dtype=|S4 chunks=None comp=None
+    value='True'
+    @description = Flag to indicate if the interferometric phase has been flattened with respect to topographic height using a DEM
+science/LSAR/GUNW/metadata/processingInformation/parameters/wrappedInterferogram/
+science/LSAR/GUNW/metadata/processingInformation/parameters/wrappedInterferogram/frequencyA/
+science/LSAR/GUNW/metadata/processingInformation/parameters/wrappedInterferogram/frequencyA/azimuthBandwidth: shape=() dtype=float64 chunks=None comp=None fill=0.0
+    value=np.float64(1260.5262536839518)
+    @description = Processed azimuth bandwidth for frequency A interferometric layers
+    @units = hertz
+science/LSAR/GUNW/metadata/processingInformation/parameters/wrappedInterferogram/frequencyA/commonBandAzimuthFilterApplied: shape=() dtype=|S5 chunks=None comp=None
+    value='False'
+    @description = Flag to indicate if common band azimuth filter has been applied
+science/LSAR/GUNW/metadata/processingInformation/parameters/wrappedInterferogram/frequencyA/commonBandRangeFilterApplied: shape=() dtype=|S5 chunks=None comp=None
+    value='False'
+    @description = Flag to indicate if common band range filter has been applied
+science/LSAR/GUNW/metadata/processingInformation/parameters/wrappedInterferogram/frequencyA/ellipsoidalFlatteningApplied: shape=() dtype=|S4 chunks=None comp=None
+    value='True'
+    @description = Flag to indicate if the interferometric phase has been flattened with respect to a zero height ellipsoid
+science/LSAR/GUNW/metadata/processingInformation/parameters/wrappedInterferogram/frequencyA/numberOfAzimuthLooks: shape=() dtype=uint32 chunks=None comp=None fill=0
+    value=np.uint32(6)
+    @description = Number of looks applied in the along-track direction to form the wrapped interferogram
+    @units = 1
+science/LSAR/GUNW/metadata/processingInformation/parameters/wrappedInterferogram/frequencyA/numberOfRangeLooks: shape=() dtype=uint32 chunks=None comp=None fill=0
+    value=np.uint32(5)
+    @description = Number of looks applied in the slant range direction to form the wrapped interferogram
+    @units = 1
+science/LSAR/GUNW/metadata/processingInformation/parameters/wrappedInterferogram/frequencyA/rangeBandwidth: shape=() dtype=float64 chunks=None comp=None fill=0.0
+    value=np.float64(40000000.0)
+    @description = Processed slant range bandwidth for frequency A interferometric layers
+    @units = hertz
+science/LSAR/GUNW/metadata/processingInformation/parameters/wrappedInterferogram/frequencyA/topographicFlatteningApplied: shape=() dtype=|S4 chunks=None comp=None
+    value='True'
+    @description = Flag to indicate if the interferometric phase has been flattened with respect to topographic height using a DEM
+science/LSAR/GUNW/metadata/radarGrid/
+science/LSAR/GUNW/metadata/radarGrid/alongTrackUnitVectorX: shape=(20, 715, 723) dtype=float32 chunks=(1, 512, 512) comp=gzip fill=0.0
+    @_FillValue = [nan]
+    @description = East component of the along-track unit vector at the target location, expressed in the east-north-up (ENU) coordinate system and projected onto the horizontal plane (i.e., excluding the up component)
+    @grid_mapping = projection
+    @long_name = Along-track unit vector X
+    @units = 1
+    @valid_max = [1.0]
+    @valid_min = [-1.0]
+science/LSAR/GUNW/metadata/radarGrid/alongTrackUnitVectorY: shape=(20, 715, 723) dtype=float32 chunks=(1, 512, 512) comp=gzip fill=0.0
+    @_FillValue = [nan]
+    @description = North component of the along-track unit vector at the target location, expressed in the east-north-up (ENU) coordinate system and projected onto the horizontal plane (i.e., excluding the up component)
+    @grid_mapping = projection
+    @long_name = Along-track unit vector Y
+    @units = 1
+    @valid_max = [1.0]
+    @valid_min = [-1.0]
+science/LSAR/GUNW/metadata/radarGrid/elevationAngle: shape=(20, 715, 723) dtype=float32 chunks=(1, 512, 512) comp=gzip fill=0.0
+    @_FillValue = [nan]
+    @description = Elevation angle is defined as the angle between the LOS vector and the normal to the ellipsoid at the sensor
+    @grid_mapping = projection
+    @long_name = Elevation angle
+    @units = degrees
+    @valid_max = [90.0]
+    @valid_min = [0.0]
+science/LSAR/GUNW/metadata/radarGrid/groundTrackVelocity: shape=(20, 715, 723) dtype=float64 chunks=(1, 512, 512) comp=gzip fill=0.0
+    @_FillValue = [nan]
+    @description = Absolute value of the platform velocity scaled at the target height
+    @grid_mapping = projection
+    @long_name = Ground track velocity
+    @units = meters / second
+science/LSAR/GUNW/metadata/radarGrid/heightAboveEllipsoid: shape=(20,) dtype=float64 chunks=None comp=None fill=0.0
+    @description = Height values above WGS84 Ellipsoid corresponding to the radar grid
+    @standard_name = height_above_reference_ellipsoid
+    @units = meters
+science/LSAR/GUNW/metadata/radarGrid/hydrostaticTroposphericPhaseScreen: shape=(20, 715, 723) dtype=float64 chunks=(1, 512, 512) comp=gzip fill=0.0
+    @_FillValue = [nan]
+    @description = Hydrostatic component of the troposphere phase screen
+    @grid_mapping = projection
+    @units = radians
+science/LSAR/GUNW/metadata/radarGrid/incidenceAngle: shape=(20, 715, 723) dtype=float32 chunks=(1, 512, 512) comp=gzip fill=0.0
+    @_FillValue = [nan]
+    @description = Incidence angle is defined as the angle between the LOS vector and the normal to the ellipsoid at the target height
+    @grid_mapping = projection
+    @long_name = Incidence angle
+    @units = degrees
+    @valid_max = [90.0]
+    @valid_min = [0.0]
+science/LSAR/GUNW/metadata/radarGrid/losUnitVectorX: shape=(20, 715, 723) dtype=float32 chunks=(1, 512, 512) comp=gzip fill=0.0
+    @_FillValue = [nan]
+    @description = East component of the line-of-sight (LOS) unit vector, defined from the target to the sensor, expressed in the east-north-up (ENU) coordinate system with its origin at the target location
+    @grid_mapping = projection
+    @long_name = LOS unit vector X
+    @units = 1
+    @valid_max = [1.0]
+    @valid_min = [-1.0]
+science/LSAR/GUNW/metadata/radarGrid/losUnitVectorY: shape=(20, 715, 723) dtype=float32 chunks=(1, 512, 512) comp=gzip fill=0.0
+    @_FillValue = [nan]
+    @description = North component of the line-of-sight (LOS) unit vector, defined from the target to the sensor, expressed in the east-north-up (ENU) coordinate system with its origin at the target location
+    @grid_mapping = projection
+    @long_name = LOS unit vector Y
+    @units = 1
+    @valid_max = [1.0]
+    @valid_min = [-1.0]
+science/LSAR/GUNW/metadata/radarGrid/parallelBaseline: shape=(20, 715, 723) dtype=float32 chunks=(1, 512, 512) comp=None fill=0.0
+    @_FillValue = [nan]
+    @description = Parallel component of the InSAR baseline
+    @grid_mapping = projection
+    @long_name = Parallel baseline
+    @max_value = [-27.930461883544922]
+    @mean_value = [-35.15774917602539]
+    @min_value = [-41.82217788696289]
+    @sample_stddev = [3.3284614086151123]
+    @units = meters
+science/LSAR/GUNW/metadata/radarGrid/perpendicularBaseline: shape=(20, 715, 723) dtype=float32 chunks=(1, 512, 512) comp=None fill=0.0
+    @_FillValue = [nan]
+    @description = Perpendicular component of the InSAR baseline
+    @grid_mapping = projection
+    @long_name = Perpendicular baseline
+    @max_value = [-53.887977600097656]
+    @mean_value = [-58.745758056640625]
+    @min_value = [-63.90146255493164]
+    @sample_stddev = [2.158917188644409]
+    @units = meters
+science/LSAR/GUNW/metadata/radarGrid/projection: shape=() dtype=uint32 chunks=None comp=None fill=0
+    value=np.uint32(32638)
+    @description = Product map grid projection: EPSG code, with additional projection information as HDF5 Attributes
+    @ellipsoid = WGS84
+    @epsg_code = [32638]
+    @false_easting = [500000.0]
+    @false_northing = [0.0]
+    @grid_mapping_name = transverse_mercator
+    @inverse_flattening = [298.257223563]
+    @latitude_of_projection_origin = [0.0]
+    @longitude_of_central_meridian = [45.0]
+    @longitude_of_projection_origin = [0.0]
+    @scale_factor_at_central_meridian = [0.9996]
+    @semi_major_axis = [6378137.0]
+    @spatial_ref = PROJCS["WGS 84 / UTM zone 38N",GEOGCS["WGS 84",DATUM["WGS_1984",SPHEROID["WGS 84",6378137,298.257223563,AUTHORITY["EPSG","7030"]],AUTHORITY["EPSG","6326"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["degree",0.0174532925199433,AUTHORITY["EPSG","9122"]],AUTHORITY["EPSG","4326"]],PROJECTION["Transverse_Mercator"],PARAMETER["latitude_of_origin",0],PARAMETER["central_meridi
+    @utm_zone_number = [38]
+science/LSAR/GUNW/metadata/radarGrid/referenceSlantRange: shape=(20, 715, 723) dtype=float64 chunks=(1, 512, 512) comp=gzip fill=0.0
+    @_FillValue = [nan]
+    @description = Slant range of the reference RSLC in meters
+    @grid_mapping = projection
+    @long_name = Slant range
+    @units = meters
+science/LSAR/GUNW/metadata/radarGrid/referenceZeroDopplerAzimuthTime: shape=(20, 715, 723) dtype=float64 chunks=(1, 512, 512) comp=gzip fill=0.0
+    @_FillValue = [nan]
+    @description = Zero Doppler azimuth time in seconds since UTC epoch of the reference RSLC image
+    @grid_mapping = projection
+    @long_name = Zero Doppler azimuth time
+    @units = seconds since 2026-06-20T00:00:00
+science/LSAR/GUNW/metadata/radarGrid/secondarySlantRange: shape=(20, 715, 723) dtype=float64 chunks=(1, 512, 512) comp=gzip fill=0.0
+    @_FillValue = [nan]
+    @description = Slant range of the secondary RSLC in meters
+    @grid_mapping = projection
+    @long_name = Slant range
+    @units = meters
+science/LSAR/GUNW/metadata/radarGrid/secondaryZeroDopplerAzimuthTime: shape=(20, 715, 723) dtype=float64 chunks=(1, 512, 512) comp=gzip fill=0.0
+    @_FillValue = [nan]
+    @description = Zero Doppler azimuth time in seconds since UTC epoch of the secondary RSLC image
+    @grid_mapping = projection
+    @long_name = Zero Doppler azimuth time
+    @units = seconds since 2026-07-02T00:00:00
+science/LSAR/GUNW/metadata/radarGrid/slantRangeSolidEarthTidesPhase: shape=(20, 715, 723) dtype=float64 chunks=(1, 512, 512) comp=gzip fill=0.0
+    @_FillValue = [nan]
+    @description = Solid Earth tides phase along slant range direction
+    @grid_mapping = projection
+    @units = radians
+science/LSAR/GUNW/metadata/radarGrid/wetTroposphericPhaseScreen: shape=(20, 715, 723) dtype=float64 chunks=(1, 512, 512) comp=gzip fill=0.0
+    @_FillValue = [nan]
+    @description = Wet component of the troposphere phase screen
+    @grid_mapping = projection
+    @units = radians
+science/LSAR/GUNW/metadata/radarGrid/xCoordinates: shape=(723,) dtype=float64 chunks=None comp=None fill=0.0
+    @description = X coordinates in specified projection
+    @long_name = X coordinate of projection
+    @standard_name = ['projection_x_coordinate']
+    @units = meters
+science/LSAR/GUNW/metadata/radarGrid/yCoordinates: shape=(715,) dtype=float64 chunks=None comp=None fill=0.0
+    @description = Y coordinates in specified projection
+    @long_name = Y coordinate of projection
+    @standard_name = ['projection_y_coordinate']
+    @units = meters
+science/LSAR/identification/
+science/LSAR/identification/boundingPolygon: shape=() dtype=|S2085 chunks=None comp=None
+    value='POLYGON ((47.1405939929037 39.73031936512 336.542634034303,47.0508185830714 39.9585700306267 268.708526613805,46.9596376310458 40.1865513086518 249.960815429887,46.8670417591282 40.414260898962 279.906342497503,46.7766868474107 40.6425785106414 144.314514160124,46.6826698834656 40.8700876
+    @description = OGR compatible WKT representing the bounding polygon of the image. Horizontal coordinates are WGS84 longitude followed by latitude (both in degrees), and the vertical coordinate is the height above the WGS84 ellipsoid in meters. The first point corresponds to the start-time, near-range radar coordinate, and the perimeter is traversed in counterclockwise order on the map. This me
+    @epsg = 4326
+    @ogr_geometry = polygon
+science/LSAR/identification/compositeReleaseId: shape=() dtype=|S6 chunks=None comp=None
+    value='P05023'
+    @description = Unique version identifier of the science data production system
+science/LSAR/identification/diagnosticModeFlag: shape=() dtype=uint32 chunks=None comp=None fill=0
+    value=np.uint32(0)
+    @description = Indicates if the radar operation mode is a diagnostic mode (1-2) or DBFed science (0): 0, 1, or 2
+science/LSAR/identification/frameNumber: shape=() dtype=uint16 chunks=None comp=None fill=0
+    value=np.uint16(22)
+    @description = Frame number
+science/LSAR/identification/granuleId: shape=() dtype=|S123 chunks=None comp=None
+    value='NISAR_L2_PR_GUNW_023_085_A_022_024_4000_SH_20260620T020411_20260620T020449_20260702T020410_20260702T020448_P05023_N_F_J_001'
+    @description = Unique granule identification name
+science/LSAR/identification/instrumentName: shape=() dtype=|S5 chunks=None comp=None
+    value='L-SAR'
+    @description = Name of the instrument used to collect the remote sensing data provided in this product
+science/LSAR/identification/isDithered: shape=() dtype=|S4 chunks=None comp=None
+    value='True'
+    @description = "True" if the pulse timing was varied (dithered) during acquisition, "False" otherwise
+science/LSAR/identification/isFullFrame: shape=() dtype=|S4 chunks=None comp=None
+    value='True'
+    @description = "True" if the product fully covers a NISAR frame, "False" if partial coverage
+    @frameCoveragePercentage = [98.7942469640758]
+    @thresholdPercentage = [75.0]
+science/LSAR/identification/isGeocoded: shape=() dtype=|S4 chunks=None comp=None
+    value='True'
+    @description = Flag to indicate if the product data is in the radar geometry ("False") or in the map geometry ("True")
+science/LSAR/identification/isMixedMode: shape=() dtype=|S5 chunks=None comp=None
+    value='False'
+    @description = "True" if this product is generated from reference and secondary RSLCs with different range bandwidths, "False" otherwise
+science/LSAR/identification/isUrgentObservation: shape=() dtype=|S5 chunks=None comp=None
+    value='False'
+    @description = Flag indicating if observation is nominal ("False") or urgent ("True")
+science/LSAR/identification/listOfFrequencies: shape=(1,) dtype=|S1 chunks=None comp=None
+    value=['A']
+    @description = List of frequency layers available in the product
+science/LSAR/identification/lookDirection: shape=() dtype=|S4 chunks=None comp=None
+    value='Left'
+    @description = Look direction, either "Left" or "Right"
+science/LSAR/identification/missionId: shape=() dtype=|S5 chunks=None comp=None
+    value='NISAR'
+    @description = Mission identifier
+science/LSAR/identification/orbitPassDirection: shape=() dtype=|S9 chunks=None comp=None
+    value='Ascending'
+    @description = Orbit direction, either "Ascending" or "Descending"
+science/LSAR/identification/platformName: shape=() dtype=|S5 chunks=None comp=None
+    value='NISAR'
+    @description = Name of the platform used to collect the remote sensing data provided in this product
+science/LSAR/identification/processingCenter: shape=() dtype=|S3 chunks=None comp=None
+    value='JPL'
+    @description = Data processing center
+science/LSAR/identification/processingDateTime: shape=() dtype=|S19 chunks=None comp=None
+    value='2026-08-12T09:56:49'
+    @description = Processing date and time (in UTC) in the format YYYY-mm-ddTHH:MM:SS
+science/LSAR/identification/processingType: shape=() dtype=|S7 chunks=None comp=None
+    value='Nominal'
+    @description = Processing pipeline used to generate this granule. "Nominal": standard production system; "Urgent": time-sensitive processing in response to urgent response events; "Custom": user-initiated processing outside the nominal production system
+science/LSAR/identification/productDoi: shape=() dtype=|S19 chunks=None comp=None
+    value='10.5067/NIL2GUNW-P1'
+    @description = Digital Object Identifier (DOI) for the product
+science/LSAR/identification/productLevel: shape=() dtype=|S2 chunks=None comp=None
+    value='L2'
+    @description = Product level. "L0A": Unprocessed instrument data; "L0B": Reformatted, unprocessed instrument data; "L1": Processed instrument data in radar coordinates system; and "L2": Processed instrument data in geocoded coordinates system
+science/LSAR/identification/productSpecificationVersion: shape=() dtype=|S5 chunks=None comp=None
+    value='1.5.0'
+    @description = Product specification version which represents the schema of this product
+science/LSAR/identification/productType: shape=() dtype=|S4 chunks=None comp=None
+    value='GUNW'
+    @description = Product type
+science/LSAR/identification/productVersion: shape=() dtype=|S6 chunks=None comp=None
+    value='1.0.11'
+    @description = Product version which represents the structure of the product and the science content governed by the algorithm, input data, and processing parameters
+science/LSAR/identification/radarBand: shape=() dtype=|S1 chunks=None comp=None
+    value='L'
+    @description = Acquired frequency band, either "L" or "S"
+science/LSAR/identification/referenceAbsoluteOrbitNumber: shape=() dtype=uint32 chunks=None comp=None fill=0
+    value=np.uint32(4682)
+    @description = Absolute orbit number for the reference RSLC
+    @units = unitless
+science/LSAR/identification/referenceHasInputDataException: shape=() dtype=uint8 chunks=None comp=None fill=0
+    value=np.uint8(0)
+    @description = Indication of input reference RSLC data exceptions or anomalies. Zero when no known exception affects this product, otherwise the bitwise OR of exception codes (2: NISAR LSAR qFSP-H1 sample slip)
+science/LSAR/identification/referenceIsJointObservation: shape=() dtype=|S5 chunks=None comp=None
+    value='False'
+    @description = "True" if any portion of the reference RSLC was acquired in a joint observation mode (e.g., L-band and S-band simultaneously), "False" otherwise
+science/LSAR/identification/referenceListOfObservationModes: shape=(1,) dtype=|S15 chunks=None comp=None
+    value=['(NOT SPECIFIED)']
+    @description = List of observation modes of the L0B granules used to generate the reference RSLC (one mode per L0B)
+science/LSAR/identification/referencePlannedDatatakeId: shape=(1,) dtype=|S18 chunks=None comp=None
+    value=['dtid_2026171020116']
+    @description = List of planned datatakes included in the reference RSLC
+science/LSAR/identification/referencePlannedObservationId: shape=(1,) dtype=|S17 chunks=None comp=None
+    value=['oid_2026171020408']
+    @description = List of planned observations included in the reference RSLC
+science/LSAR/identification/referenceZeroDopplerEndTime: shape=() dtype=|S29 chunks=None comp=None
+    value='2026-06-20T02:04:49.999342105'
+    @description = Azimuth stop time (in UTC) of reference RSLC product in the format YYYY-mm-ddTHH:MM:SS.sssssssss
+science/LSAR/identification/referenceZeroDopplerStartTime: shape=() dtype=|S29 chunks=None comp=None
+    value='2026-06-20T02:04:11.000000000'
+    @description = Azimuth start time (in UTC) of reference RSLC product in the format YYYY-mm-ddTHH:MM:SS.sssssssss
+science/LSAR/identification/secondaryAbsoluteOrbitNumber: shape=() dtype=uint32 chunks=None comp=None fill=0
+    value=np.uint32(4855)
+    @description = Absolute orbit number for the secondary RSLC
+    @units = unitless
+science/LSAR/identification/secondaryHasInputDataException: shape=() dtype=uint8 chunks=None comp=None fill=0
+    value=np.uint8(0)
+    @description = Indication of input secondary RSLC data exceptions or anomalies. Zero when no known exception affects this product, otherwise the bitwise OR of exception codes (2: NISAR LSAR qFSP-H1 sample slip)
+science/LSAR/identification/secondaryIsJointObservation: shape=() dtype=|S5 chunks=None comp=None
+    value='False'
+    @description = "True" if any portion of the secondary RSLC was acquired in a joint observation mode (e.g., L-band and S-band simultaneously), "False" otherwise
+science/LSAR/identification/secondaryListOfObservationModes: shape=(1,) dtype=|S15 chunks=None comp=None
+    value=['(NOT SPECIFIED)']
+    @description = List of observation modes of the L0B granules used to generate the secondary RSLC (one mode per L0B)
+science/LSAR/identification/secondaryPlannedDatatakeId: shape=(1,) dtype=|S18 chunks=None comp=None
+    value=['dtid_2026183020116']
+    @description = List of planned datatakes included in the secondary RSLC
+science/LSAR/identification/secondaryPlannedObservationId: shape=(1,) dtype=|S17 chunks=None comp=None
+    value=['oid_2026183020408']
+    @description = List of planned observations included in the secondary RSLC
+science/LSAR/identification/secondaryZeroDopplerEndTime: shape=() dtype=|S29 chunks=None comp=None
+    value='2026-07-02T02:04:48.999342105'
+    @description = Azimuth stop time (in UTC) of secondary RSLC product in the format YYYY-mm-ddTHH:MM:SS.sssssssss
+science/LSAR/identification/secondaryZeroDopplerStartTime: shape=() dtype=|S29 chunks=None comp=None
+    value='2026-07-02T02:04:10.000000000'
+    @description = Azimuth start time (in UTC) of secondary RSLC product in the format YYYY-mm-ddTHH:MM:SS.sssssssss
+science/LSAR/identification/staticLayersDataAccess: shape=() dtype=|S193 chunks=None comp=None
+    value='https://nisar-services.earthdata.nasa.gov/redirect/NISAR_L2_STATIC/NISAR_L2_PR_GUNW_023_085_A_022_024_4000_SH_20260620T020411_20260620T020449_20260702T020410_20260702T020448_P05023_N_F_J_001.h5'
+    @description = Location of the static layers product associated with this product (URL or DOI)
+science/LSAR/identification/trackNumber: shape=() dtype=uint32 chunks=None comp=None fill=0
+    value=np.uint32(85)
+    @description = Track number
+
+########## SME2: NISAR_L3_PR_SME2_..._085_A_022_..._20260831 (track 85 frame 22)
+science/
+science/LSAR/
+science/LSAR/SME2/
+    @long_name = 200m soil moisture at EASE-Grid 2.0 projection
+science/LSAR/SME2/grids/
+science/LSAR/SME2/grids/EASEGridColumnIndex: shape=(2115,) dtype=int32 chunks=None comp=None fill=0
+    @description = EASE-Grid 2.0 column index
+    @long_name = EASE-Grid 2.0 column index
+    @units = 1
+science/LSAR/SME2/grids/EASEGridRowIndex: shape=(1620,) dtype=int32 chunks=None comp=None fill=0
+    @description = EASE-Grid 2.0 row index
+    @long_name = EASE-Grid 2.0 row index
+    @units = 1
+science/LSAR/SME2/grids/algorithmCandidates/
+    @long_name = Candidates algorithms
+science/LSAR/SME2/grids/algorithmCandidates/DSG/
+    @long_name = Disaggregation
+science/LSAR/SME2/grids/algorithmCandidates/DSG/algorithmParameterBeta: shape=(1620, 2115) dtype=float32 chunks=(512, 512) comp=gzip fill=0.0
+    @_FillValue = [-9999.0]
+    @description = Algorithm sensitivity parameter between soil moisture and SAR co-pol backscatter
+    @grid_mapping = projection
+    @long_name = Algorithm parameter beta
+    @max_value = [0.04540000110864639]
+    @mean_value = [0.03181891515851021]
+    @min_value = [0.028300000354647636]
+    @sample_stddev = [0.0061105587519705296]
+    @units = meter^3/decibel/meter^3
+science/LSAR/SME2/grids/algorithmCandidates/DSG/algorithmParameterGamma: shape=(1620, 2115) dtype=float32 chunks=(512, 512) comp=gzip fill=0.0
+    @_FillValue = [-9999.0]
+    @description = Algorithm heterogeneity parameter as described by the correlation between SAR cross-pol and co-pol backscatters
+    @grid_mapping = projection
+    @long_name = Algorithm parameter gamma
+    @max_value = [0.5]
+    @mean_value = [0.5]
+    @min_value = [0.5]
+    @sample_stddev = [0.0]
+    @units = 1
+science/LSAR/SME2/grids/algorithmCandidates/DSG/projection: shape=() dtype=uint32 chunks=None comp=None fill=0
+    value=np.uint32(6933)
+    @description = Product map grid projection: EPSG code, with additional projection information as HDF5 Attributes
+    @ellipsoid = WGS84
+    @epsg_code = [6933]
+    @false_easting = [0.0]
+    @false_northing = [0.0]
+    @grid_mapping_name = lambert_cylindrical_equal_area
+    @inverse_flattening = [298.2572326660156]
+    @latitude_of_projection_origin = [0.0]
+    @longitude_of_central_meridian = [0.0]
+    @longitude_of_projection_origin = [0.0]
+    @semi_major_axis = [6378137.0]
+    @spatial_ref = PROJCS["WGS 84 / NSIDC EASE-Grid 2.0 Global",GEOGCS["WGS 84",DATUM["WGS_1984",SPHEROID["WGS 84",6378137,298.257223563,AUTHORITY["EPSG","7030"]],AUTHORITY["EPSG","6326"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["degree",0.0174532925199433,AUTHORITY["EPSG","9122"]],AUTHORITY["EPSG","4326"]],PROJECTION["Cylindrical_Equal_Area"],PARAMETER["standard_parallel_1",30],PARAME
+    @standard_parallel = [30.0]
+science/LSAR/SME2/grids/algorithmCandidates/DSG/retrievalQualityFlag: shape=(1620, 2115) dtype=int16 chunks=(512, 512) comp=gzip fill=0
+    @_FillValue = [-9999]
+    @description = DSG retrieval quality flag while 0 means clear and non-zero means anomaly
+    @grid_mapping = projection
+    @long_name = Retrieval quality flag
+    @units = 1
+science/LSAR/SME2/grids/algorithmCandidates/DSG/soilMoisture: shape=(1620, 2115) dtype=float32 chunks=(512, 512) comp=gzip fill=0.0
+    @_FillValue = [-9999.0]
+    @description = DSG soil moisture
+    @grid_mapping = projection
+    @long_name = Soil moisture
+    @max_value = [0.6000000238418579]
+    @mean_value = [0.24599382281303406]
+    @min_value = [0.019999999552965164]
+    @sample_stddev = [0.06828544288873672]
+    @units = meter^3/meter^3
+science/LSAR/SME2/grids/algorithmCandidates/DSG/soilMoistureUncertainty: shape=(1620, 2115) dtype=float32 chunks=(512, 512) comp=gzip fill=0.0
+    @_FillValue = [-9999.0]
+    @description = DSG soil moisture uncertainty
+    @grid_mapping = projection
+    @long_name = Soil moisture uncertainty
+    @max_value = [0.06741015613079071]
+    @mean_value = [0.04013225808739662]
+    @min_value = [0.0400179922580719]
+    @sample_stddev = [0.0007886951789259911]
+    @units = meter^3/meter^3
+science/LSAR/SME2/grids/algorithmCandidates/DSG/xCoordinateSpacing: shape=() dtype=float64 chunks=None comp=None fill=0.0
+    value=np.float64(200.17900467012078)
+    @description = X coordinate spacing
+    @long_name = X coordinate spacing
+    @units = meters
+science/LSAR/SME2/grids/algorithmCandidates/DSG/xCoordinates: shape=(2115,) dtype=float64 chunks=None comp=None fill=0.0
+    @description = X coordinates in specified projection
+    @long_name = x coordinate of projection
+    @standard_name = projection_x_coordinate
+    @units = meters
+science/LSAR/SME2/grids/algorithmCandidates/DSG/yCoordinateSpacing: shape=() dtype=float64 chunks=None comp=None fill=0.0
+    value=np.float64(-200.17900467012078)
+    @description = Y coordinate spacing
+    @long_name = Y coordinate spacing
+    @units = meters
+science/LSAR/SME2/grids/algorithmCandidates/DSG/yCoordinates: shape=(1620,) dtype=float64 chunks=None comp=None fill=0.0
+    @description = Y coordinates in specified projection
+    @long_name = y coordinate of projection
+    @standard_name = projection_y_coordinate
+    @units = meters
+science/LSAR/SME2/grids/algorithmCandidates/PMI/
+    @long_name = Physical Model Inversion
+science/LSAR/SME2/grids/algorithmCandidates/PMI/cropType: shape=(1620, 2115) dtype=int8 chunks=(512, 512) comp=gzip fill=0
+    @_FillValue = [-127]
+    @description = PMI crop type
+    @grid_mapping = projection
+    @long_name = Crop type
+    @units = 1
+science/LSAR/SME2/grids/algorithmCandidates/PMI/dielectricConstant: shape=(1620, 2115) dtype=float32 chunks=(512, 512) comp=gzip fill=0.0
+    @_FillValue = [-9999.0]
+    @description = PMI dielectric constant
+    @grid_mapping = projection
+    @long_name = PMI retrieved real part dielectric constant
+    @max_value = [30.0]
+    @mean_value = [10.247560501098633]
+    @min_value = [3.0]
+    @sample_stddev = [3.4524576663970947]
+    @units = 1
+science/LSAR/SME2/grids/algorithmCandidates/PMI/projection: shape=() dtype=uint32 chunks=None comp=None fill=0
+    value=np.uint32(6933)
+    @description = Product map grid projection: EPSG code, with additional projection information as HDF5 Attributes
+    @ellipsoid = WGS84
+    @epsg_code = [6933]
+    @false_easting = [0.0]
+    @false_northing = [0.0]
+    @grid_mapping_name = lambert_cylindrical_equal_area
+    @inverse_flattening = [298.2572326660156]
+    @latitude_of_projection_origin = [0.0]
+    @longitude_of_central_meridian = [0.0]
+    @longitude_of_projection_origin = [0.0]
+    @semi_major_axis = [6378137.0]
+    @spatial_ref = PROJCS["WGS 84 / NSIDC EASE-Grid 2.0 Global",GEOGCS["WGS 84",DATUM["WGS_1984",SPHEROID["WGS 84",6378137,298.257223563,AUTHORITY["EPSG","7030"]],AUTHORITY["EPSG","6326"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["degree",0.0174532925199433,AUTHORITY["EPSG","9122"]],AUTHORITY["EPSG","4326"]],PROJECTION["Cylindrical_Equal_Area"],PARAMETER["standard_parallel_1",30],PARAME
+    @standard_parallel = [30.0]
+science/LSAR/SME2/grids/algorithmCandidates/PMI/retrievalQualityFlag: shape=(1620, 2115) dtype=int16 chunks=(512, 512) comp=gzip fill=0
+    @_FillValue = [-9999]
+    @description = PMI retrieval quality flag while 0 means clear and non-zero means anomaly
+    @grid_mapping = projection
+    @long_name = Retrieval quality flag
+    @units = 1
+science/LSAR/SME2/grids/algorithmCandidates/PMI/roughness: shape=(1620, 2115) dtype=float32 chunks=(512, 512) comp=gzip fill=0.0
+    @_FillValue = [-9999.0]
+    @description = PMI surface roughness
+    @grid_mapping = projection
+    @long_name = Surface roughness
+    @max_value = [0.021618686616420746]
+    @mean_value = [0.020076479762792587]
+    @min_value = [0.017589913681149483]
+    @sample_stddev = [0.001260828459635377]
+    @units = meters
+science/LSAR/SME2/grids/algorithmCandidates/PMI/soilMoisture: shape=(1620, 2115) dtype=float32 chunks=(512, 512) comp=gzip fill=0.0
+    @_FillValue = [-9999.0]
+    @description = PMI soil moisture
+    @grid_mapping = projection
+    @long_name = Soil moisture
+    @max_value = [0.49144163727760315]
+    @mean_value = [0.20609791576862335]
+    @min_value = [0.01933250203728676]
+    @sample_stddev = [0.06410625576972961]
+    @units = meter^3/meter^3
+science/LSAR/SME2/grids/algorithmCandidates/PMI/soilMoistureUncertainty: shape=(1620, 2115) dtype=float32 chunks=(512, 512) comp=gzip fill=0.0
+    @_FillValue = [-9999.0]
+    @description = PMI soil moisture uncertainty
+    @grid_mapping = projection
+    @long_name = Soil moisture uncertainty
+    @max_value = [0.8837248086929321]
+    @mean_value = [0.03222401812672615]
+    @min_value = [0.0171637162566185]
+    @sample_stddev = [0.006108040921390057]
+    @units = meter^3/meter^3
+science/LSAR/SME2/grids/algorithmCandidates/PMI/vegetationWaterContentHV: shape=(1620, 2115) dtype=float32 chunks=(512, 512) comp=gzip fill=0.0
+    @_FillValue = [-9999.0]
+    @description = PMI vegetation water content estimated from HV channel
+    @grid_mapping = projection
+    @long_name = Vegetation water content HV
+    @max_value = [-3.4028234663852886e+38]
+    @mean_value = [0.0]
+    @min_value = [3.4028234663852886e+38]
+    @sample_stddev = [0.0]
+    @units = kilogram/meter^2
+science/LSAR/SME2/grids/algorithmCandidates/PMI/vegetationWaterContentNDVI: shape=(1620, 2115) dtype=float32 chunks=(512, 512) comp=gzip fill=0.0
+    @_FillValue = [-9999.0]
+    @description = PMI vegetation water content estimated from NDVI
+    @grid_mapping = projection
+    @long_name = Vegetation water content NDVI
+    @max_value = [12.699999809265137]
+    @mean_value = [2.6053261756896973]
+    @min_value = [-12.800000190734863]
+    @sample_stddev = [3.1461243629455566]
+    @units = kilogram/meter^2
+science/LSAR/SME2/grids/algorithmCandidates/PMI/vegetationWaterContentRetrieved: shape=(1620, 2115) dtype=float32 chunks=(512, 512) comp=gzip fill=0.0
+    @_FillValue = [-9999.0]
+    @description = PMI retrieved vegetation water content
+    @grid_mapping = projection
+    @long_name = Vegetation water content retrieved
+    @max_value = [12.824373245239258]
+    @mean_value = [2.2709336280822754]
+    @min_value = [0.0]
+    @sample_stddev = [2.808612585067749]
+    @units = kilogram/meter^2
+science/LSAR/SME2/grids/algorithmCandidates/PMI/xCoordinateSpacing: shape=() dtype=float64 chunks=None comp=None fill=0.0
+    value=np.float64(200.17900467012078)
+    @description = X coordinate spacing
+    @long_name = X coordinate spacing
+    @units = meters
+science/LSAR/SME2/grids/algorithmCandidates/PMI/xCoordinates: shape=(2115,) dtype=float64 chunks=None comp=None fill=0.0
+    @description = X coordinates in specified projection
+    @long_name = x coordinate of projection
+    @standard_name = projection_x_coordinate
+    @units = meters
+science/LSAR/SME2/grids/algorithmCandidates/PMI/yCoordinateSpacing: shape=() dtype=float64 chunks=None comp=None fill=0.0
+    value=np.float64(-200.17900467012078)
+    @description = Y coordinate spacing
+    @long_name = Y coordinate spacing
+    @units = meters
+science/LSAR/SME2/grids/algorithmCandidates/PMI/yCoordinates: shape=(1620,) dtype=float64 chunks=None comp=None fill=0.0
+    @description = Y coordinates in specified projection
+    @long_name = y coordinate of projection
+    @standard_name = projection_y_coordinate
+    @units = meters
+science/LSAR/SME2/grids/algorithmCandidates/TSR/
+    @long_name = Time Series Ratio
+science/LSAR/SME2/grids/algorithmCandidates/TSR/algorithmParameterAlpha1: shape=(1620, 2115) dtype=float32 chunks=(512, 512) comp=gzip fill=0.0
+    @_FillValue = [-9999.0]
+    @description = Retrieved soil moisture for previous time series (T-12)
+    @grid_mapping = projection
+    @long_name = Algorithm parameter alpha1
+    @max_value = [0.33899998664855957]
+    @mean_value = [0.10450753569602966]
+    @min_value = [0.019999999552965164]
+    @sample_stddev = [0.03775743767619133]
+    @units = meter^3/meter^3
+science/LSAR/SME2/grids/algorithmCandidates/TSR/algorithmParameterAlpha1Uncertainty: shape=(1620, 2115) dtype=float32 chunks=(512, 512) comp=gzip fill=0.0
+    @_FillValue = [-9999.0]
+    @description = Retrieved soil moisture uncertainty for previous time series (T-12)
+    @grid_mapping = projection
+    @long_name = Algorithm parameter alpha1 uncertainty
+    @max_value = [0.6515387892723083]
+    @mean_value = [0.01995965652167797]
+    @min_value = [0.005508848000317812]
+    @sample_stddev = [0.00628912216052413]
+    @units = meter^3/meter^3
+science/LSAR/SME2/grids/algorithmCandidates/TSR/algorithmParameterAlpha2: shape=(1620, 2115) dtype=float32 chunks=(512, 512) comp=gzip fill=0.0
+    @_FillValue = [-9999.0]
+    @description = Retrieved soil moisture for previous time series (T-24)
+    @grid_mapping = projection
+    @long_name = Algorithm parameter alpha2
+    @max_value = [0.32100000977516174]
+    @mean_value = [0.09453469514846802]
+    @min_value = [0.019999999552965164]
+    @sample_stddev = [0.032356638461351395]
+    @units = meter^3/meter^3
+science/LSAR/SME2/grids/algorithmCandidates/TSR/algorithmParameterAlpha2Uncertainty: shape=(1620, 2115) dtype=float32 chunks=(512, 512) comp=gzip fill=0.0
+    @_FillValue = [-9999.0]
+    @description = Retrieved soil moisture uncertainty for previous time series (T-24)
+    @grid_mapping = projection
+    @long_name = Algorithm parameter alpha2 uncertainty
+    @max_value = [4.536830425262451]
+    @mean_value = [0.018705178052186966]
+    @min_value = [0.004100070800632238]
+    @sample_stddev = [0.006687201093882322]
+    @units = meter^3/meter^3
+science/LSAR/SME2/grids/algorithmCandidates/TSR/projection: shape=() dtype=uint32 chunks=None comp=None fill=0
+    value=np.uint32(6933)
+    @description = Product map grid projection: EPSG code, with additional projection information as HDF5 Attributes
+    @ellipsoid = WGS84
+    @epsg_code = [6933]
+    @false_easting = [0.0]
+    @false_northing = [0.0]
+    @grid_mapping_name = lambert_cylindrical_equal_area
+    @inverse_flattening = [298.2572326660156]
+    @latitude_of_projection_origin = [0.0]
+    @longitude_of_central_meridian = [0.0]
+    @longitude_of_projection_origin = [0.0]
+    @semi_major_axis = [6378137.0]
+    @spatial_ref = PROJCS["WGS 84 / NSIDC EASE-Grid 2.0 Global",GEOGCS["WGS 84",DATUM["WGS_1984",SPHEROID["WGS 84",6378137,298.257223563,AUTHORITY["EPSG","7030"]],AUTHORITY["EPSG","6326"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["degree",0.0174532925199433,AUTHORITY["EPSG","9122"]],AUTHORITY["EPSG","4326"]],PROJECTION["Cylindrical_Equal_Area"],PARAMETER["standard_parallel_1",30],PARAME
+    @standard_parallel = [30.0]
+science/LSAR/SME2/grids/algorithmCandidates/TSR/retrievalQualityFlag: shape=(1620, 2115) dtype=int16 chunks=(512, 512) comp=gzip fill=0
+    @_FillValue = [-9999]
+    @description = TSR retrieval quality flag while 0 means clear and non-zero means anomaly
+    @grid_mapping = projection
+    @long_name = Retrieval quality flag
+    @units = 1
+science/LSAR/SME2/grids/algorithmCandidates/TSR/soilMoisture: shape=(1620, 2115) dtype=float32 chunks=(512, 512) comp=gzip fill=0.0
+    @_FillValue = [-9999.0]
+    @description = TSR soil moisture
+    @grid_mapping = projection
+    @long_name = Soil moisture
+    @max_value = [0.39800000190734863]
+    @mean_value = [0.11695140600204468]
+    @min_value = [0.019999999552965164]
+    @sample_stddev = [0.03966446593403816]
+    @units = meter^3/meter^3
+science/LSAR/SME2/grids/algorithmCandidates/TSR/soilMoistureUncertainty: shape=(1620, 2115) dtype=float32 chunks=(512, 512) comp=gzip fill=0.0
+    @_FillValue = [-9999.0]
+    @description = TSR soil moisture uncertainty
+    @grid_mapping = projection
+    @long_name = Soil moisture uncertainty
+    @max_value = [1.307533621788025]
+    @mean_value = [0.02147618494927883]
+    @min_value = [0.006256509572267532]
+    @sample_stddev = [0.00730398902669549]
+    @units = meter^3/meter^3
+science/LSAR/SME2/grids/algorithmCandidates/TSR/xCoordinateSpacing: shape=() dtype=float64 chunks=None comp=None fill=0.0
+    value=np.float64(200.17900467012078)
+    @description = X coordinate spacing
+    @long_name = X coordinate spacing
+    @units = meters
+science/LSAR/SME2/grids/algorithmCandidates/TSR/xCoordinates: shape=(2115,) dtype=float64 chunks=None comp=None fill=0.0
+    @description = X coordinates in specified projection
+    @long_name = x coordinate of projection
+    @standard_name = projection_x_coordinate
+    @units = meters
+science/LSAR/SME2/grids/algorithmCandidates/TSR/yCoordinateSpacing: shape=() dtype=float64 chunks=None comp=None fill=0.0
+    value=np.float64(-200.17900467012078)
+    @description = Y coordinate spacing
+    @long_name = Y coordinate spacing
+    @units = meters
+science/LSAR/SME2/grids/algorithmCandidates/TSR/yCoordinates: shape=(1620,) dtype=float64 chunks=None comp=None fill=0.0
+    @description = Y coordinates in specified projection
+    @long_name = y coordinate of projection
+    @standard_name = projection_y_coordinate
+    @units = meters
+science/LSAR/SME2/grids/ancillaryData/
+science/LSAR/SME2/grids/ancillaryData/landCover: shape=(1620, 2115) dtype=int8 chunks=(512, 512) comp=gzip fill=0
+    @_FillValue = [-127]
+    @description = Land cover
+    @grid_mapping = projection
+    @long_name = Land cover
+    @units = 1
+science/LSAR/SME2/grids/ancillaryData/localIncidenceAngle: shape=(1620, 2115) dtype=float32 chunks=(512, 512) comp=gzip fill=0.0
+    @_FillValue = [-9999.0]
+    @description = Local incidence angle
+    @grid_mapping = projection
+    @long_name = Local incidence angle
+    @max_value = [92.92237854003906]
+    @mean_value = [42.31829833984375]
+    @min_value = [1.5330830812454224]
+    @sample_stddev = [10.458290100097656]
+    @units = degrees
+science/LSAR/SME2/grids/ancillaryData/localIncidenceAngleUncertainty: shape=(1620, 2115) dtype=float32 chunks=(512, 512) comp=gzip fill=0.0
+    @_FillValue = [-9999.0]
+    @description = Local incidence angle standard deviation
+    @grid_mapping = projection
+    @long_name = Local incidence angle standard deviation
+    @max_value = [37.94585037231445]
+    @mean_value = [3.949345111846924]
+    @min_value = [9.999999974752427e-07]
+    @sample_stddev = [3.9506165981292725]
+    @units = degrees
+science/LSAR/SME2/grids/ancillaryData/projection: shape=() dtype=uint32 chunks=None comp=None fill=0
+    value=np.uint32(6933)
+    @description = Product map grid projection: EPSG code, with additional projection information as HDF5 Attributes
+    @ellipsoid = WGS84
+    @epsg_code = [6933]
+    @false_easting = [0.0]
+    @false_northing = [0.0]
+    @grid_mapping_name = lambert_cylindrical_equal_area
+    @inverse_flattening = [298.2572326660156]
+    @latitude_of_projection_origin = [0.0]
+    @longitude_of_central_meridian = [0.0]
+    @longitude_of_projection_origin = [0.0]
+    @semi_major_axis = [6378137.0]
+    @spatial_ref = PROJCS["WGS 84 / NSIDC EASE-Grid 2.0 Global",GEOGCS["WGS 84",DATUM["WGS_1984",SPHEROID["WGS 84",6378137,298.257223563,AUTHORITY["EPSG","7030"]],AUTHORITY["EPSG","6326"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["degree",0.0174532925199433,AUTHORITY["EPSG","9122"]],AUTHORITY["EPSG","4326"]],PROJECTION["Cylindrical_Equal_Area"],PARAMETER["standard_parallel_1",30],PARAME
+    @standard_parallel = [30.0]
+science/LSAR/SME2/grids/ancillaryData/waterbodyFraction: shape=(1620, 2115) dtype=float32 chunks=(512, 512) comp=gzip fill=0.0
+    @_FillValue = [-9999.0]
+    @description = Water body fraction
+    @grid_mapping = projection
+    @long_name = Water body fraction
+    @max_value = [1.0]
+    @mean_value = [0.02057330124080181]
+    @min_value = [0.0]
+    @sample_stddev = [0.1351383626461029]
+    @units = 1
+science/LSAR/SME2/grids/ancillaryData/xCoordinateSpacing: shape=() dtype=float64 chunks=None comp=None fill=0.0
+    value=np.float64(200.17900467012078)
+    @description = X coordinate spacing
+    @long_name = X coordinate spacing
+    @units = meters
+science/LSAR/SME2/grids/ancillaryData/xCoordinates: shape=(2115,) dtype=float64 chunks=None comp=None fill=0.0
+    @description = X coordinates in specified projection
+    @long_name = x coordinate of projection
+    @standard_name = projection_x_coordinate
+    @units = meters
+science/LSAR/SME2/grids/ancillaryData/yCoordinateSpacing: shape=() dtype=float64 chunks=None comp=None fill=0.0
+    value=np.float64(-200.17900467012078)
+    @description = Y coordinate spacing
+    @long_name = Y coordinate spacing
+    @units = meters
+science/LSAR/SME2/grids/ancillaryData/yCoordinates: shape=(1620,) dtype=float64 chunks=None comp=None fill=0.0
+    @description = Y coordinates in specified projection
+    @long_name = y coordinate of projection
+    @standard_name = projection_y_coordinate
+    @units = meters
+science/LSAR/SME2/grids/latitude: shape=(1620,) dtype=float32 chunks=None comp=None fill=0.0
+    @description = Latitude
+    @long_name = Latitude
+    @units = degree_north
+science/LSAR/SME2/grids/longitude: shape=(2115,) dtype=float32 chunks=None comp=None fill=0.0
+    @description = Longitude
+    @long_name = Longitude
+    @units = degree_east
+science/LSAR/SME2/grids/projection: shape=() dtype=uint32 chunks=None comp=None fill=0
+    value=np.uint32(6933)
+    @description = Product map grid projection: EPSG code, with additional projection information as HDF5 Attributes
+    @ellipsoid = WGS84
+    @epsg_code = [6933]
+    @false_easting = [0.0]
+    @false_northing = [0.0]
+    @grid_mapping_name = lambert_cylindrical_equal_area
+    @inverse_flattening = [298.2572326660156]
+    @latitude_of_projection_origin = [0.0]
+    @longitude_of_central_meridian = [0.0]
+    @longitude_of_projection_origin = [0.0]
+    @semi_major_axis = [6378137.0]
+    @spatial_ref = PROJCS["WGS 84 / NSIDC EASE-Grid 2.0 Global",GEOGCS["WGS 84",DATUM["WGS_1984",SPHEROID["WGS 84",6378137,298.257223563,AUTHORITY["EPSG","7030"]],AUTHORITY["EPSG","6326"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["degree",0.0174532925199433,AUTHORITY["EPSG","9122"]],AUTHORITY["EPSG","4326"]],PROJECTION["Cylindrical_Equal_Area"],PARAMETER["standard_parallel_1",30],PARAME
+    @standard_parallel = [30.0]
+science/LSAR/SME2/grids/radarData/
+science/LSAR/SME2/grids/radarData/frequencyA/
+science/LSAR/SME2/grids/radarData/frequencyA/centerFrequency: shape=() dtype=float64 chunks=None comp=None fill=0.0
+    value=np.float64(1239000000.0)
+    @description = Center frequency of the processed source data image in hertz
+    @long_name = Center frequency
+    @units = hertz
+science/LSAR/SME2/grids/radarData/frequencyA/listOfPolarizations: shape=(2,) dtype=|S2 chunks=None comp=None
+    value=['HH', 'HV']
+    @description = List of processed polarization layers with frequency A
+    @long_name = List of polarizations
+science/LSAR/SME2/grids/radarData/frequencyA/noiseEquivalentBackscatterHH: shape=(1620, 2115) dtype=float32 chunks=(512, 512) comp=gzip fill=0.0
+    @_FillValue = [-9999.0]
+    @description = Noise equivalent sigma nought of HH polarization
+    @grid_mapping = projection
+    @long_name = Noise equivalent sigma nought
+    @max_value = [-11.383172035217285]
+    @mean_value = [-18.17279052734375]
+    @min_value = [-58.963775634765625]
+    @sample_stddev = [1.405638575553894]
+    @units = decibel
+science/LSAR/SME2/grids/radarData/frequencyA/noiseEquivalentBackscatterHV: shape=(1620, 2115) dtype=float32 chunks=(512, 512) comp=gzip fill=0.0
+    @_FillValue = [-9999.0]
+    @description = Noise equivalent sigma nought of HV polarization
+    @grid_mapping = projection
+    @long_name = Noise equivalent sigma nought
+    @max_value = [-10.085619926452637]
+    @mean_value = [-18.203367233276367]
+    @min_value = [-51.61040115356445]
+    @sample_stddev = [1.7633763551712036]
+    @units = decibel
+science/LSAR/SME2/grids/radarData/frequencyA/numberOfLooksHH: shape=(1620, 2115) dtype=int16 chunks=(512, 512) comp=gzip fill=0
+    @_FillValue = [-9999]
+    @description = Number of looks within the 200m EASE-Grid 2.0 cell
+    @grid_mapping = projection
+    @long_name = Number of looks
+    @max_value = [3641.0]
+    @mean_value = [1581.25146484375]
+    @min_value = [1.0]
+    @sample_stddev = [355.29010009765625]
+    @units = 1
+science/LSAR/SME2/grids/radarData/frequencyA/numberOfLooksHV: shape=(1620, 2115) dtype=int16 chunks=(512, 512) comp=gzip fill=0
+    @_FillValue = [-9999]
+    @description = Number of looks within the 200m EASE-Grid 2.0 cell
+    @grid_mapping = projection
+    @long_name = Number of looks
+    @max_value = [3596.0]
+    @mean_value = [1517.0230712890625]
+    @min_value = [1.0]
+    @sample_stddev = [378.6182861328125]
+    @units = 1
+science/LSAR/SME2/grids/radarData/frequencyA/projection: shape=() dtype=uint32 chunks=None comp=None fill=0
+    value=np.uint32(6933)
+    @description = Product map grid projection: EPSG code, with additional projection information as HDF5 Attributes
+    @ellipsoid = WGS84
+    @epsg_code = [6933]
+    @false_easting = [0.0]
+    @false_northing = [0.0]
+    @grid_mapping_name = lambert_cylindrical_equal_area
+    @inverse_flattening = [298.2572326660156]
+    @latitude_of_projection_origin = [0.0]
+    @longitude_of_central_meridian = [0.0]
+    @longitude_of_projection_origin = [0.0]
+    @semi_major_axis = [6378137.0]
+    @spatial_ref = PROJCS["WGS 84 / NSIDC EASE-Grid 2.0 Global",GEOGCS["WGS 84",DATUM["WGS_1984",SPHEROID["WGS 84",6378137,298.257223563,AUTHORITY["EPSG","7030"]],AUTHORITY["EPSG","6326"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["degree",0.0174532925199433,AUTHORITY["EPSG","9122"]],AUTHORITY["EPSG","4326"]],PROJECTION["Cylindrical_Equal_Area"],PARAMETER["standard_parallel_1",30],PARAME
+    @standard_parallel = [30.0]
+science/LSAR/SME2/grids/radarData/frequencyA/rangeBandwidth: shape=() dtype=float64 chunks=None comp=None fill=0.0
+    value=np.float64(40000000.0)
+    @description = Source data processed range bandwidth in hertz
+    @long_name = Range bandwidth
+    @units = hertz
+science/LSAR/SME2/grids/radarData/frequencyA/sigma0HH: shape=(1620, 2115) dtype=float32 chunks=(512, 512) comp=gzip fill=0.0
+    @_FillValue = [-9999.0]
+    @description = Sigma nought at HH polarization
+    @grid_mapping = projection
+    @long_name = Sigma0 HH
+    @max_value = [320.85968017578125]
+    @mean_value = [0.0908258855342865]
+    @min_value = [0.010528032667934895]
+    @sample_stddev = [0.40833768248558044]
+    @units = 1
+science/LSAR/SME2/grids/radarData/frequencyA/sigma0HV: shape=(1620, 2115) dtype=float32 chunks=(512, 512) comp=gzip fill=0.0
+    @_FillValue = [-9999.0]
+    @description = Sigma nought at HV polarization
+    @grid_mapping = projection
+    @long_name = Sigma0 HV
+    @max_value = [31.08036994934082]
+    @mean_value = [0.03791232407093048]
+    @min_value = [0.0025536688044667244]
+    @sample_stddev = [0.058355290442705154]
+    @units = 1
+science/LSAR/SME2/grids/radarData/frequencyA/xCoordinateSpacing: shape=() dtype=float64 chunks=None comp=None fill=0.0
+    value=np.float64(200.17900467012078)
+    @description = X coordinate spacing
+    @long_name = X coordinate spacing
+    @units = meters
+science/LSAR/SME2/grids/radarData/frequencyA/xCoordinates: shape=(2115,) dtype=float64 chunks=None comp=None fill=0.0
+    @description = X coordinates in specified projection
+    @long_name = x coordinate of projection
+    @standard_name = projection_x_coordinate
+    @units = meters
+science/LSAR/SME2/grids/radarData/frequencyA/yCoordinateSpacing: shape=() dtype=float64 chunks=None comp=None fill=0.0
+    value=np.float64(-200.17900467012078)
+    @description = Y coordinate spacing
+    @long_name = Y coordinate spacing
+    @units = meters
+science/LSAR/SME2/grids/radarData/frequencyA/yCoordinates: shape=(1620,) dtype=float64 chunks=None comp=None fill=0.0
+    @description = Y coordinates in specified projection
+    @long_name = y coordinate of projection
+    @standard_name = projection_y_coordinate
+    @units = meters
+science/LSAR/SME2/grids/radarData/frequencyB/
+science/LSAR/SME2/grids/radarData/frequencyB/centerFrequency: shape=() dtype=float64 chunks=None comp=None fill=0.0
+    value=np.float64(1293500000.0)
+    @description = Center frequency of the processed source data image in hertz
+    @long_name = Center frequency
+    @units = hertz
+science/LSAR/SME2/grids/radarData/frequencyB/listOfPolarizations: shape=(2,) dtype=|S2 chunks=None comp=None
+    value=['HH', 'HV']
+    @description = List of processed polarization layers with frequency B
+    @long_name = List of polarizations
+science/LSAR/SME2/grids/radarData/frequencyB/noiseEquivalentBackscatterHH: shape=(1620, 2115) dtype=float32 chunks=(512, 512) comp=gzip fill=0.0
+    @_FillValue = [-9999.0]
+    @description = Noise equivalent sigma nought of HH polarization
+    @grid_mapping = projection
+    @long_name = Noise equivalent sigma nought
+    @max_value = [-17.21489143371582]
+    @mean_value = [-23.99630355834961]
+    @min_value = [-60.447269439697266]
+    @sample_stddev = [1.3280880451202393]
+    @units = decibel
+science/LSAR/SME2/grids/radarData/frequencyB/noiseEquivalentBackscatterHV: shape=(1620, 2115) dtype=float32 chunks=(512, 512) comp=gzip fill=0.0
+    @_FillValue = [-9999.0]
+    @description = Noise equivalent sigma nought of HV polarization
+    @grid_mapping = projection
+    @long_name = Noise equivalent sigma nought
+    @max_value = [-16.99015235900879]
+    @mean_value = [-24.36707305908203]
+    @min_value = [-57.52788543701172]
+    @sample_stddev = [1.577486515045166]
+    @units = decibel
+science/LSAR/SME2/grids/radarData/frequencyB/numberOfLooksHH: shape=(1620, 2115) dtype=int16 chunks=(512, 512) comp=gzip fill=0
+    @_FillValue = [-9999]
+    @description = Number of looks within the 200m EASE-Grid 2.0 cell
+    @grid_mapping = projection
+    @long_name = Number of looks
+    @max_value = [663.0]
+    @mean_value = [173.93533325195312]
+    @min_value = [1.0]
+    @sample_stddev = [63.660072326660156]
+    @units = 1
+science/LSAR/SME2/grids/radarData/frequencyB/numberOfLooksHV: shape=(1620, 2115) dtype=int16 chunks=(512, 512) comp=gzip fill=0
+    @_FillValue = [-9999]
+    @description = Number of looks within the 200m EASE-Grid 2.0 cell
+    @grid_mapping = projection
+    @long_name = Number of looks
+    @max_value = [637.0]
+    @mean_value = [177.43807983398438]
+    @min_value = [1.0]
+    @sample_stddev = [67.7222900390625]
+    @units = 1
+science/LSAR/SME2/grids/radarData/frequencyB/projection: shape=() dtype=uint32 chunks=None comp=None fill=0
+    value=np.uint32(6933)
+    @description = Product map grid projection: EPSG code, with additional projection information as HDF5 Attributes
+    @ellipsoid = WGS84
+    @epsg_code = [6933]
+    @false_easting = [0.0]
+    @false_northing = [0.0]
+    @grid_mapping_name = lambert_cylindrical_equal_area
+    @inverse_flattening = [298.2572326660156]
+    @latitude_of_projection_origin = [0.0]
+    @longitude_of_central_meridian = [0.0]
+    @longitude_of_projection_origin = [0.0]
+    @semi_major_axis = [6378137.0]
+    @spatial_ref = PROJCS["WGS 84 / NSIDC EASE-Grid 2.0 Global",GEOGCS["WGS 84",DATUM["WGS_1984",SPHEROID["WGS 84",6378137,298.257223563,AUTHORITY["EPSG","7030"]],AUTHORITY["EPSG","6326"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["degree",0.0174532925199433,AUTHORITY["EPSG","9122"]],AUTHORITY["EPSG","4326"]],PROJECTION["Cylindrical_Equal_Area"],PARAMETER["standard_parallel_1",30],PARAME
+    @standard_parallel = [30.0]
+science/LSAR/SME2/grids/radarData/frequencyB/rangeBandwidth: shape=() dtype=float64 chunks=None comp=None fill=0.0
+    value=np.float64(5000000.0)
+    @description = Source data processed range bandwidth in hertz
+    @long_name = Range bandwidth
+    @units = hertz
+science/LSAR/SME2/grids/radarData/frequencyB/sigma0HH: shape=(1620, 2115) dtype=float32 chunks=(512, 512) comp=gzip fill=0.0
+    @_FillValue = [-9999.0]
+    @description = Sigma nought at HH polarization
+    @grid_mapping = projection
+    @long_name = Sigma0 HH
+    @max_value = [39.981990814208984]
+    @mean_value = [0.10424116998910904]
+    @min_value = [0.0039998614229261875]
+    @sample_stddev = [0.13461697101593018]
+    @units = 1
+science/LSAR/SME2/grids/radarData/frequencyB/sigma0HV: shape=(1620, 2115) dtype=float32 chunks=(512, 512) comp=gzip fill=0.0
+    @_FillValue = [-9999.0]
+    @description = Sigma nought at HV polarization
+    @grid_mapping = projection
+    @long_name = Sigma0 HV
+    @max_value = [1.2944390773773193]
+    @mean_value = [0.023493586108088493]
+    @min_value = [0.0019478969043120742]
+    @sample_stddev = [0.02128910832107067]
+    @units = 1
+science/LSAR/SME2/grids/radarData/frequencyB/xCoordinateSpacing: shape=() dtype=float64 chunks=None comp=None fill=0.0
+    value=np.float64(200.17900467012078)
+    @description = X coordinate spacing
+    @long_name = X coordinate spacing
+    @units = meters
+science/LSAR/SME2/grids/radarData/frequencyB/xCoordinates: shape=(2115,) dtype=float64 chunks=None comp=None fill=0.0
+    @description = X coordinates in specified projection
+    @long_name = x coordinate of projection
+    @standard_name = projection_x_coordinate
+    @units = meters
+science/LSAR/SME2/grids/radarData/frequencyB/yCoordinateSpacing: shape=() dtype=float64 chunks=None comp=None fill=0.0
+    value=np.float64(-200.17900467012078)
+    @description = Y coordinate spacing
+    @long_name = Y coordinate spacing
+    @units = meters
+science/LSAR/SME2/grids/radarData/frequencyB/yCoordinates: shape=(1620,) dtype=float64 chunks=None comp=None fill=0.0
+    @description = Y coordinates in specified projection
+    @long_name = y coordinate of projection
+    @standard_name = projection_y_coordinate
+    @units = meters
+science/LSAR/SME2/grids/radarData/listOfFrequencies: shape=(2,) dtype=|S1 chunks=None comp=None
+    value=['A', 'B']
+    @description = List of frequency layers available in the product
+    @long_name = List of frequencies
+science/LSAR/SME2/grids/retrievalQualityFlag: shape=(1620, 2115) dtype=int16 chunks=(512, 512) comp=gzip fill=0
+    @_FillValue = [-9999]
+    @description = Soil moisture retrieval quality flag. The least significant bit indicates whether the retrieval is recommended (0 = recommended, 1 = not recommended). The second bit indicates the use of the PMI algorithm (0 = not applied, 1 = applied). The third bit indicates the use of the TSR algorithm (0 = not applied, 1 = applied). The most significant bit indicates the use of the DSG algor
+    @grid_mapping = projection
+    @long_name = Retrieval quality flag
+    @units = 1
+science/LSAR/SME2/grids/soilMoisture: shape=(1620, 2115) dtype=float32 chunks=(512, 512) comp=gzip fill=0.0
+    @_FillValue = [-9999.0]
+    @description = Averaged soil moisture. If recommended retrievals are available, the average is computed using only the recommended retrievals. If no recommended retrievals are available, the average is computed using all retrievals
+    @grid_mapping = projection
+    @long_name = Soil moisture
+    @max_value = [0.6000000238418579]
+    @mean_value = [0.18699105083942413]
+    @min_value = [0.019999999552965164]
+    @sample_stddev = [0.036606937646865845]
+    @units = meter^3/meter^3
+science/LSAR/SME2/grids/soilMoistureUncertainty: shape=(1620, 2115) dtype=float32 chunks=(512, 512) comp=gzip fill=0.0
+    @_FillValue = [-9999.0]
+    @description = Avergaerd soil moisture uncertainty. If recommended retrievals are available, the average is computed using only the recommended retrievals. If no recommended retrievals are available, the average is computed using all retrievals
+    @grid_mapping = projection
+    @long_name = Soil moisture uncertainty
+    @max_value = [0.8837248086929321]
+    @mean_value = [0.03222959116101265]
+    @min_value = [0.008123831823468208]
+    @sample_stddev = [0.004780903924256563]
+    @units = meter^3/meter^3
+science/LSAR/SME2/grids/surfaceQualityFlag: shape=(1620, 2115) dtype=int16 chunks=(512, 512) comp=gzip fill=0
+    @_FillValue = [-9999]
+    @description = Surface quality flag
+    @grid_mapping = projection
+    @long_name = Surface quality flag
+    @units = 1
+science/LSAR/SME2/grids/xCoordinateSpacing: shape=() dtype=float64 chunks=None comp=None fill=0.0
+    value=np.float64(200.17900467012078)
+    @description = X coordinate spacing
+    @long_name = X coordinate spacing
+    @units = meters
+science/LSAR/SME2/grids/xCoordinates: shape=(2115,) dtype=float64 chunks=None comp=None fill=0.0
+    @description = X coordinates in specified projection
+    @long_name = x coordinate of projection
+    @standard_name = projection_x_coordinate
+    @units = meters
+science/LSAR/SME2/grids/yCoordinateSpacing: shape=() dtype=float64 chunks=None comp=None fill=0.0
+    value=np.float64(-200.17900467012078)
+    @description = Y coordinate spacing
+    @long_name = Y coordinate spacing
+    @units = meters
+science/LSAR/SME2/grids/yCoordinates: shape=(1620,) dtype=float64 chunks=None comp=None fill=0.0
+    @description = Y coordinates in specified projection
+    @long_name = y coordinate of projection
+    @standard_name = projection_y_coordinate
+    @units = meters
+science/LSAR/SME2/metadata/
+science/LSAR/SME2/metadata/processingInformation/
+science/LSAR/SME2/metadata/processingInformation/algorithms/
+science/LSAR/SME2/metadata/processingInformation/algorithms/DSGAlgorithmReference: shape=() dtype=|S547 chunks=None comp=None
+    value='Lal, P., Singh, G., Das, N.N., Entekhabi, D., Lohman, R., Colliander, A., Pandey, D.K., Setia, R.K., 2023. A multi-scale algorithm for the NISAR mission high-resolution soil moisture product. Remote Sensing of Environment 295, 113667. https://doi.org/10.1016/j.rse.2023.113667\nLal, P., Si
+    @description = Reference to the DSG algorithm applied
+    @long_name = Reference of the DSG algorithm
+science/LSAR/SME2/metadata/processingInformation/algorithms/PMIAlgorithmReference: shape=() dtype=|S543 chunks=None comp=None
+    value='Kim, S. B., and T. H. Liao, Robust retrieval of soil moisture and roughness at field scale across wide-ranging SAR incidence angles for soybean, wheat, forage and grass, Remote Sensing of Environment, 2021. https://doi.org/10.1016/j.rse.2021.112712\nKim, S.B., M. Moghaddam, L. Tsang, M. B
+    @description = Reference to the PMI algorithm applied
+    @long_name = Reference of the PMI algorithm
+science/LSAR/SME2/metadata/processingInformation/algorithms/TSRAlgorithmReference: shape=() dtype=|S1102 chunks=None comp=None
+    value='Mattia, F., Satalino, G., Pauwels, V. R. N., & Loew, A., 2009. Soil moisture retrieval through a merging of multi-temporal L-band SAR data and hydrologic modelling. Hydrology and Earth System Sciences, 13(3), 343-356. https://doi.org/10.5194/hess-13-343-2009\nBalenzano, A., Mattia, F., Sa
+    @description = Reference to the TSR algorithm applied
+    @long_name = Reference of the TSR algorithm
+science/LSAR/SME2/metadata/processingInformation/algorithms/aggregation: shape=() dtype=|S4 chunks=None comp=None
+    value='Mean'
+    @description = Aggregation method applied to GCOV sigma0 to generate the 200m EASE-Grid 2.0 product
+    @long_name = Aggregation method
+science/LSAR/SME2/metadata/processingInformation/algorithms/softwareVersion: shape=() dtype=|S5 chunks=None comp=None
+    value='0.4.2'
+    @description = Software version
+    @long_name = Software version
+science/LSAR/SME2/metadata/processingInformation/algorithms/spatialFilter: shape=() dtype=|S61 chunks=None comp=None
+    value='Spatial filter combining median and one sigma outlier removal'
+    @description = Spatial filter method applied to GCOV sigma0 within a 200m window size
+    @long_name = Spatial filter method
+science/LSAR/SME2/metadata/processingInformation/inputs/
+science/LSAR/SME2/metadata/processingInformation/inputs/configFiles: shape=(1,) dtype=|S13 chunks=None comp=None
+    value=['runconfig.txt']
+    @description = List of input config files used
+    @long_name = List of config files
+science/LSAR/SME2/metadata/processingInformation/inputs/l2GcovGranules: shape=(3,) dtype=|S94 chunks=None comp=None
+    value=['NISAR_L2_PR_GCOV_029_085_A_022_4005_DHDH_A_20260831T020407_20260831T020445_P05023_N_F_J_001.h5', 'NISAR_L3_PR_SME2_028_085_A_022_4005_DHDH_A_20260819T020408_20260819T020445_P05023_N_F_J_001.h5', 'NISAR_L3_PR_SME2_026_085_A_022_4005_DHDH_A_20260726T020409_20260726T020447_P05023_N_F_J_001.
+    @description = List of input L2 GCOV products used
+    @long_name = List of input L2 GCOV granules
+science/LSAR/SME2/metadata/processingInformation/parameters/
+science/LSAR/SME2/metadata/processingInformation/parameters/runConfigurationContents: shape=() dtype=|S3742 chunks=None comp=None
+    value='--Folder path to NISAR GCOV data\n/data/work/jobs/2026/09/02/05/14/SCIFLO_L3_SM__pcm_r05.02.2_pge_r05.02.3-l3_sm_029_085_022_full_individual_L_40_DH_05_DH_0_state-config-20260902T051410.994610Z/NISAR_L2_PR_GCOV_029_085_A_022_4005_DHDH_A_20260831T020407_20260831T020445_P05023_N_F_J_001.h5\
+    @description = Contents of the run configuration file with parameters used for processing
+    @long_name = Contents of the runconfig file
+science/LSAR/SME2/metadata/sourceData/
+science/LSAR/SME2/metadata/sourceData/processingDateTime: shape=() dtype=|S19 chunks=None comp=None
+    value='2026-09-02T04:59:01'
+    @description = Processing date and time (in UTC) in the format YYYY-mm-ddTHH:MM:SS
+science/LSAR/SME2/metadata/sourceData/processingInformation/
+science/LSAR/SME2/metadata/sourceData/processingInformation/algorithms/
+science/LSAR/SME2/metadata/sourceData/processingInformation/algorithms/demInterpolation: shape=() dtype=|S9 chunks=None comp=None
+    value='biquintic'
+    @description = DEM interpolation method
+science/LSAR/SME2/metadata/sourceData/processingInformation/algorithms/geocoding: shape=() dtype=|S92 chunks=None comp=None
+    value='Area-Based SAR Geocoding with Adaptive Multilooking (GEO-AP). DOI: 10.1109/TGRS.2022.3147472'
+    @description = Geocoding algorithm
+science/LSAR/SME2/metadata/sourceData/processingInformation/algorithms/geocodingAlgorithmReference: shape=() dtype=|S278 chunks=None comp=None
+    value='Gustavo H. X. Shiroma, Marco Lavalle, and Sean M. Buckley, "An Area-Based Projection Algorithm for SAR Radiometric Terrain Correction and Geocoding," in IEEE Transactions on Geoscience and Remote Sensing, vol. 60, pp. 1-23, 2022, Art no. 5222723, doi: 10.1109/TGRS.2022.3147472.'
+    @description = Reference to the geocoding algorithm applied (if applicable)
+science/LSAR/SME2/metadata/sourceData/processingInformation/algorithms/polarimetricSymmetrization: shape=() dtype=|S8 chunks=None comp=None
+    value='disabled'
+    @description = Polarimetric symmetrization algorithm
+science/LSAR/SME2/metadata/sourceData/processingInformation/algorithms/radiometricTerrainCorrection: shape=() dtype=|S86 chunks=None comp=None
+    value='Area-Based SAR Radiometric Terrain Correction (RTC-AP). DOI: 10.1109/TGRS.2022.3147472'
+    @description = Radiometric terrain correction (RTC) algorithm
+science/LSAR/SME2/metadata/sourceData/processingInformation/algorithms/radiometricTerrainCorrectionAlgorithmReference: shape=() dtype=|S278 chunks=None comp=None
+    value='Gustavo H. X. Shiroma, Marco Lavalle, and Sean M. Buckley, "An Area-Based Projection Algorithm for SAR Radiometric Terrain Correction and Geocoding," in IEEE Transactions on Geoscience and Remote Sensing, vol. 60, pp. 1-23, 2022, Art no. 5222723, doi: 10.1109/TGRS.2022.3147472.'
+    @description = Reference to the radiometric terrain correction (RTC) algorithm applied (if applicable)
+science/LSAR/SME2/metadata/sourceData/processingInformation/algorithms/softwareVersion: shape=() dtype=|S7 chunks=None comp=None
+    value='0.25.16'
+    @description = Software version used for processing
+science/LSAR/SME2/metadata/sourceData/productLevel: shape=() dtype=|S2 chunks=None comp=None
+    value='L2'
+    @description = Product level. "L0A": Unprocessed instrument data; "L0B": Reformatted, unprocessed instrument data; "L1": Processed instrument data in radar coordinates system; and "L2": Processed instrument data in geocoded coordinates system
+science/LSAR/SME2/metadata/sourceData/productVersion: shape=() dtype=|S6 chunks=None comp=None
+    value='1.0.11'
+    @description = Product version which represents the structure of the product and the science content governed by the algorithm, input data, and processing parameters
+science/LSAR/identification/
+science/LSAR/identification/absoluteOrbitNumber: shape=() dtype=uint32 chunks=None comp=None fill=0
+    value=np.uint32(5720)
+    @description = Absolute orbit number
+    @units = unitless
+science/LSAR/identification/boundingPolygon: shape=() dtype=|S2094 chunks=None comp=None
+    value='POLYGON ((47.1632429207855 39.6749567817346 316.123382413471,47.0723947168781 39.9029334176919 320.093018248783,46.9818554861444 40.1310513085455 272.059723597788,46.889145462331 40.3587168509454 317.337677364762,46.7991064689086 40.5870925512534 171.846053323498,46.7055770161348 40.81470
+    @description = OGR compatible WKT representing the bounding polygon of the image. Horizontal coordinates are WGS84 longitude followed by latitude (both in degrees), and the vertical coordinate is the height above the WGS84 ellipsoid in meters. The first point corresponds to the start-time, near-range radar coordinate, and the perimeter is traversed in counterclockwise order on the map. This me
+    @epsg = 4326
+    @ogr_geometry = polygon
+science/LSAR/identification/compositeReleaseId: shape=() dtype=|S6 chunks=None comp=None
+    value='P05023'
+    @description = Unique version identifier of the science data production system
+science/LSAR/identification/diagnosticModeFlag: shape=() dtype=uint32 chunks=None comp=None fill=0
+    value=np.uint32(0)
+    @description = Indicates if the radar operation mode is a diagnostic mode (1-2) or DBFed science (0): 0, 1, or 2
+science/LSAR/identification/frameNumber: shape=() dtype=uint16 chunks=None comp=None fill=0
+    value=np.uint16(22)
+    @description = Frame number
+science/LSAR/identification/granuleId: shape=() dtype=|S91 chunks=None comp=None
+    value='NISAR_L3_PR_SME2_029_085_A_022_4005_DHDH_A_20260831T020407_20260831T020445_P05023_N_F_J_001'
+    @description = Unique granule identification name
+science/LSAR/identification/instrumentName: shape=() dtype=|S4 chunks=None comp=None
+    value='LSAR'
+    @description = Name of the instrument used to collect the remote sensing data provided in this product
+science/LSAR/identification/isDithered: shape=() dtype=|S4 chunks=None comp=None
+    value='True'
+    @description = "True" if the pulse timing was varied (dithered) during acquisition, "False" otherwise.
+science/LSAR/identification/isFullFrame: shape=() dtype=|S4 chunks=None comp=None
+    value='True'
+    @description = "True" if the product fully covers a NISAR frame, "False" if partial coverage
+    @frameCoveragePercentage = [97.60918477823537]
+    @thresholdPercentage = [75.0]
+science/LSAR/identification/isGeocoded: shape=() dtype=|S4 chunks=None comp=None
+    value='True'
+    @description = Flag to indicate if the product data is in the radar geometry ("False") or in the map geometry ("True")
+science/LSAR/identification/isJointObservation: shape=() dtype=|S5 chunks=None comp=None
+    value='False'
+    @description = "True" if any portion of this product was acquired in a joint observation mode (e.g., L-band and S-band simultaneously), "False" otherwise
+science/LSAR/identification/isMixedMode: shape=() dtype=|S5 chunks=None comp=None
+    value='False'
+    @description = "True" if this product is a composite of data collected in multiple radar modes, "False" otherwise.
+science/LSAR/identification/isUrgentObservation: shape=() dtype=|S5 chunks=None comp=None
+    value='False'
+    @description = Flag indicating if observation is nominal ("False") or urgent ("True")
+science/LSAR/identification/lookDirection: shape=() dtype=|S4 chunks=None comp=None
+    value='Left'
+    @description = Look direction, either "Left" or "Right"
+science/LSAR/identification/missionId: shape=() dtype=|S5 chunks=None comp=None
+    value='NISAR'
+    @description = Mission identifier
+science/LSAR/identification/orbitPassDirection: shape=() dtype=|S9 chunks=None comp=None
+    value='Ascending'
+    @description = Orbit direction, either "Ascending" or "Descending"
+science/LSAR/identification/plannedDatatakeId: shape=(1,) dtype=|S18 chunks=None comp=None
+    value=['dtid_2026243020116']
+    @description = List of planned datatakes included in the product
+science/LSAR/identification/plannedObservationId: shape=(1,) dtype=|S17 chunks=None comp=None
+    value=['oid_2026243020408']
+    @description = List of planned observations included in the product
+science/LSAR/identification/platformName: shape=() dtype=|S5 chunks=None comp=None
+    value='NISAR'
+    @description = Name of the platform used to collect the remote sensing data provided in this product
+science/LSAR/identification/processingCenter: shape=() dtype=|S3 chunks=None comp=None
+    value='JPL'
+    @description = Data processing center
+science/LSAR/identification/processingDateTime: shape=() dtype=|S19 chunks=None comp=None
+    value='2026-09-02T05:23:02'
+    @description = Processing UTC date and time in the format YYYY-mm-ddTHH:MM:SS
+science/LSAR/identification/processingType: shape=() dtype=|S7 chunks=None comp=None
+    value='Nominal'
+    @description = Processing pipeline used to generate this granule. "Nominal": standard production system; "Urgent": time-sensitive processing in response to urgent response events; "Custom": user-initiated processing outside the nominal production system
+science/LSAR/identification/productDoi: shape=() dtype=|S19 chunks=None comp=None
+    value='10.5067/NIL3SME2-P1'
+    @description = Digital Object Identifier (DOI) for the product
+science/LSAR/identification/productLevel: shape=() dtype=|S2 chunks=None comp=None
+    value='L3'
+    @description = Product level
+science/LSAR/identification/productSpecificationVersion: shape=() dtype=|S5 chunks=None comp=None
+    value='1.0.2'
+    @description = Product specification version which represents the schema of this product
+science/LSAR/identification/productType: shape=() dtype=|S4 chunks=None comp=None
+    value='SME2'
+    @description = Product type
+science/LSAR/identification/productVersion: shape=() dtype=|S6 chunks=None comp=None
+    value='1.0.11'
+    @description = Product version which represents the structure of the product and the science content governed by the algorithm, input data, and processing parameters
+science/LSAR/identification/radarBand: shape=() dtype=|S1 chunks=None comp=None
+    value='L'
+    @description = Acquired frequency band, either "L" or "S"
+science/LSAR/identification/trackNumber: shape=() dtype=uint32 chunks=None comp=None fill=0
+    value=np.uint32(85)
+    @description = Track number
+science/LSAR/identification/zeroDopplerEndTime: shape=() dtype=|S19 chunks=None comp=None
+    value='2026-08-31T02:04:45'
+    @description = Azimuth stop time of the product
+science/LSAR/identification/zeroDopplerStartTime: shape=() dtype=|S19 chunks=None comp=None
+    value='2026-08-31T02:04:07'
+    @description = Azimuth start time of the product

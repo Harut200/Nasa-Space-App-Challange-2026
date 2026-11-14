@@ -1,0 +1,37 @@
+{
+  "story": {
+    "see": "On 24 June 2026 USGS lists a magnitude 7.5 earthquake 20 km west of Catia La Mar, Venezuela (10.60 N, 67.22 W, depth about 24 km), 38 seconds after a magnitude 7.2 about 146 km to the west. Both fall inside every NISAR pair we could use, so this map shows the combined movement of the sequence in the east. The map shows how far the ground moved along the radar's line of sight between two passes, 22 June and 4 July from the descending track, with a second layer from the ascending track (18 to 30 June). Blue is ground that moved toward the satellite, red away from it. In the fringe layer, one colour cycle is 10 cm. Grey speckle is where the passes could not be compared (forest, mountains, water).",
+    "physics": "The US Geological Survey's moment tensor for the M7.5 shows strike-slip faulting, in which the two sides of a near-vertical fault slide past each other horizontally. Within 60 km of the epicentre the descending map spans about 48 cm of line-of-sight change from the most red to the most blue pixels (0.5th to 99.5th percentile), in bands of fringes that run east to west along the coast. The ascending pass sees the opposite sign (mostly red along the coast, up to about 65 cm), which is what mostly horizontal motion looks like from opposite sides. The north of the epicentre is sea and the ascending frame only covers the east, so we see only part of the pattern. Fault position and mechanism come from USGS; our map does not by itself tell which fault plane moved.",
+    "lband": "NISAR's L-band radar has a wavelength of about 24 cm, so one full colour cycle means about 12 cm of ground movement along the line of sight (we show 10 cm cycles). The same tracks one pair earlier (10 to 22 June descending, 6 to 18 June ascending), with no event in them, show only smooth variations of about 10 cm (descending) with far-field noise of about 2 cm. Only 36 percent (descending) and 9 percent (ascending) of the pixels within 60 km are usable because of vegetation and steep terrain. The products are PROVISIONAL and the sign convention (blue = toward the satellite) follows the interferogram definition we assumed, not a statement in the product guide.",
+    "people": "This is a measurement of ground movement, not of damage. We did not look at reports of damage or casualties. Maps like this show where the ground moved and by how much, which feeds hazard models. The pairs span several days after the shaking, so they include any aftershock movement, and the M7.2 and M7.5 signals cannot be separated here."
+  },
+  "spots": [
+    {
+      "id": "epicentre",
+      "label": "USGS epicentre",
+      "lngLat": [
+        -67.2205,
+        10.5955
+      ],
+      "radius_m": 3000
+    },
+    {
+      "id": "toward-lobe",
+      "label": "Strongest movement toward the satellite (blue)",
+      "lngLat": [
+        -66.8544,
+        10.6011
+      ],
+      "radius_m": 3000
+    },
+    {
+      "id": "away-lobe",
+      "label": "Strongest movement away from the satellite (red)",
+      "lngLat": [
+        -67.6177,
+        10.2263
+      ],
+      "radius_m": 3000
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+ "area": "avila-burgohondo-fire-2026",
+ "method": "mean change in preview HV brightness (8-bit /255) inside 8 km discs, rank among all 8 km discs in the frame; largest patch of 9x9-smoothed HV change < -0.06",
+ "dates_used": ["2026-06-27","2026-07-09","2026-07-21","2026-08-26","2026-09-19","2026-10-01","2026-10-13"],
+ "excluded": {"2026-09-07": "corrupt preview (file size and HV change of -0.78)"},
+ "flag": {"2026-08-26": "QC: 1 pass missing (14 Aug), frame-wide HH/HV difference 4.8x usual; kept in data, not used for the evidence"},
+ "published": {"fire": "Burgohondo/Navaluenga, Avila", "navaluenga_lonlat": [-4.708, 40.41], "burnt_ha": {"26_Jul": 50000, "30_Jul": 55000}, "emergency_total_ha_26_Jul": 77000},
+ "HV_change_from_21_Jul_disc8km": {
+   "east_of_navaluenga_-4.646_40.381": {"19_Sep": -0.0588, "1_Oct": -0.0818, "13_Oct": -0.0817},
+   "eastern_part_-4.35_40.391": {"19_Sep": -0.0531, "1_Oct": -0.0731, "13_Oct": -0.0716}},
+ "percentile_among_all_discs": {"east_of_navaluenga": {"19_Sep": 0.04, "1_Oct": 0.03, "13_Oct": 0.12}, "eastern_part": {"19_Sep": 0.6, "1_Oct": 0.62, "13_Oct": 0.73}},
+ "control_disc_(9_Jul,_21_Jul_from_27_Jun)": [-0.0023, -0.0012],
+ "dark_patch_km2_below_-0.06": {"19_Sep": 359, "1_Oct": 551, "13_Oct": 520, "control": 0},
+ "note": "No area is claimed. Threshold dependent. Discs were found in the data; independent check is that the dark band starts at Navaluenga (published 40.41 N, 4.71 W) and runs east. Open water is zero throughout."
+}

@@ -1,0 +1,28 @@
+{
+  "story": {
+    "see": "Mount Etna in Sicily had a week of lava fountains and lava flows in early August 2026; on 13 August it was in its seventh day, with several vents feeding a lava field in the Valle del Bove (Euronews, citing INGV). The orange patch is where the radar picture between NISAR's 23 July and 16 August passes changed completely compared with the 24 days before (29 June to 23 July). It is a strip about 5 km long running east from the summit craters.",
+    "physics": "Fresh lava has a completely new surface, so the radar no longer matches the earlier picture there. The patch covers about 2.5 square kilometres (3.2 in the whole window); in the whole rest of the 40 km window almost nothing behaves like this. The pair spans 24 days, so it includes the 30 July summit paroxysm as well as the August lava, and we cannot separate them. Older flows already dark before 23 July are not counted.",
+    "lband": "NISAR's L-band radar has a wavelength of about 24 cm. Over most of Etna it keeps a good match between passes, which makes new lava, which scrambles the surface, easy to pick out. The control pair of equal length (29 June to 23 July) shows no such patch. The descending track (23 July to 16 August) shows the same strip, about 2 km2, at the same place.",
+    "people": "This map shows where the surface changed, not damage or the full extent of the lava, which can be thinner or hidden from the radar by steep slopes. We did not look at reports of damage. The product is provisional."
+  },
+  "spots": [
+    {
+      "id": "site",
+      "label": "Etna summit area, lava field",
+      "lngLat": [
+        15.0286,
+        37.7505
+      ],
+      "radius_m": 3000
+    },
+    {
+      "id": "summit",
+      "label": "Etna summit craters",
+      "lngLat": [
+        14.9993,
+        37.751
+      ],
+      "radius_m": 2000
+    }
+  ]
+}

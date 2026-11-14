@@ -1,0 +1,140 @@
+{
+  "id": "tibet-m70-2026",
+  "name": "Tibet earthquake, M7.0, 22 Oct 2026",
+  "bounds": [
+    93.0,
+    31.70058497825999,
+    94.60021700293018,
+    32.99999999999999
+  ],
+  "dates": [],
+  "gaps": [],
+  "layers": [
+    {
+      "id": "los_cm",
+      "label": "Ground motion along the line of sight (cm)",
+      "dates": null,
+      "legend": {
+        "type": "diverging",
+        "unit": "cm",
+        "min": -40.0,
+        "max": 40.0,
+        "colors": [
+          "#67001f",
+          "#f7f7f7",
+          "#053061"
+        ],
+        "labels": [
+          "red: ground moved away from the satellite",
+          "blue: ground moved toward the satellite (sign convention not confirmed by the product guide)"
+        ]
+      }
+    },
+    {
+      "id": "fringes",
+      "label": "Fringes (one colour cycle = 10 cm)",
+      "dates": null,
+      "legend": {
+        "type": "ramp",
+        "unit": "one colour cycle = 10 cm of line-of-sight change",
+        "min": 0,
+        "max": 10.0,
+        "colors": [
+          "#e2d9e2",
+          "#95b5c7",
+          "#6276ba",
+          "#592a8f",
+          "#2f1436",
+          "#741e4f",
+          "#b25652",
+          "#cca389",
+          "#e2d9e2"
+        ]
+      }
+    },
+    {
+      "id": "coherence",
+      "label": "Radar coherence (how comparable the two passes are)",
+      "dates": null,
+      "legend": {
+        "type": "ramp",
+        "unit": "coherence 0-1",
+        "min": 0,
+        "max": 1,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    }
+  ],
+  "story": {
+    "see": "On 22 October 2026 a magnitude 7.0 earthquake struck the Tibetan Plateau, about 189 km east-north-east of Nagqu (USGS: 32.34 N, 93.78 E, depth about 18 km). The map shows how far the ground moved along the radar's line of sight between two NISAR passes, 19 and 31 October. Blue is ground that moved toward the satellite, red away from it. In the fringe layer, one colour cycle is 10 cm. The speckled grey patch next to the epicentre is where the ground changed too much for the two passes to be compared.",
+    "physics": "The US Geological Survey's moment tensor shows normal faulting: the crust is pulled apart and one side drops. Seen from one direction, that gives two lobes of opposite sign on either side of the fault, which is what the map shows. Within 45 km of the epicentre the line-of-sight change spans about 1.3 m from the most red to the most blue pixels. Fault position and mechanism come from USGS; our map does not by itself tell which of its two possible fault planes moved.",
+    "lband": "NISAR's L-band radar has a wavelength of about 24 cm, so one full colour cycle means about 12 cm of ground movement along the line of sight (we show 10 cm cycles). The same track and frame, 7 to 19 October, before the quake, shows no such pattern: its far-field noise is about 0.7 cm. The products are PROVISIONAL, and the sign convention (blue = toward the satellite) follows the interferogram definition we assumed, not a statement in the product guide.",
+    "people": "This is a measurement of ground movement, not of damage. We did not look at reports of damage or casualties. Maps like this show where a fault moved and by how much, which feeds hazard models. From one look direction we see only one component of the motion, so uplift and sideways movement are mixed together."
+  },
+  "spots": [
+    {
+      "id": "epicentre",
+      "label": "USGS epicentre",
+      "lngLat": [
+        93.7837,
+        32.3376
+      ]
+    },
+    {
+      "id": "toward-lobe",
+      "label": "Lobe moving toward the satellite (blue)",
+      "lngLat": [
+        93.964,
+        32.374
+      ]
+    },
+    {
+      "id": "away-lobe",
+      "label": "Lobe moving away from the satellite (red)",
+      "lngLat": [
+        93.78,
+        32.38
+      ]
+    },
+    {
+      "id": "rupture-zone",
+      "label": "Grey patch: lost coherence",
+      "lngLat": [
+        93.91,
+        32.41
+      ]
+    }
+  ],
+  "credits": "NISAR data: NASA/JPL-Caltech and ISRO, distributed by ASF DAAC. PROVISIONAL calibration.",
+  "source": null,
+  "kind": "event",
+  "event": {
+    "type": "earthquake",
+    "magnitude": 7.0,
+    "time": "2026-10-22T14:33:40Z",
+    "depth_km": 17.2,
+    "lngLat": [
+      93.7837,
+      32.3376
+    ],
+    "place": "189 km ENE of Nagqu, China",
+    "mechanism": "normal faulting with some strike slip (nodal planes 175/57/-119 and 40/43/-54)",
+    "usgs_id": "us6000u43g",
+    "radius_km": 45,
+    "views": [
+      {
+        "id": "asc",
+        "label": "ascending",
+        "track": 112,
+        "before": "2026-10-19",
+        "after": "2026-10-31",
+        "p2p_cm": 127,
+        "control_p2p_cm": 5
+      }
+    ]
+  },
+  "category": "earthquake"
+}

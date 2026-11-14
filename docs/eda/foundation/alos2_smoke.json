@@ -1,0 +1,76 @@
+{
+ "device": "mps",
+ "free_memory_pct": 36,
+ "file_bytes": 351966554,
+ "sha256_ok": true,
+ "checkpoint": {
+  "n_tensors": 364,
+  "patch_embed.proj.weight": [
+   128,
+   1,
+   4,
+   4
+  ],
+  "absolute_pos_embed": [
+   1,
+   4096,
+   128
+  ],
+  "norm.weight": [
+   1024
+  ]
+ },
+ "load_s": 0.23,
+ "key_match": {
+  "missing": [],
+  "unexpected": [
+   "mask_token"
+  ]
+ },
+ "encoder_params": 87286520,
+ "patch": {
+  "area": "tonle-sap",
+  "date": "2026-09-23",
+  "rows": [
+   424,
+   680
+  ],
+  "cols": [
+   411,
+   667
+  ],
+  "hh_input_mean_std": [
+   -1.804,
+   1.431
+  ]
+ },
+ "forward_ms_256_b1": 71.0,
+ "forward_ms_256_b4": 219.8,
+ "feature_shapes": [
+  [
+   1,
+   128,
+   64,
+   64
+  ],
+  [
+   1,
+   256,
+   32,
+   32
+  ],
+  [
+   1,
+   512,
+   16,
+   16
+  ],
+  [
+   1,
+   1024,
+   8,
+   8
+  ]
+ ],
+ "mps_driver_mem_mb": 1361.8
+}

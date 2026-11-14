@@ -1,0 +1,14 @@
+{
+  "id": "etna-valle-del-bove-2026",
+  "name": "Etna eruption and Valle del Bove lava field, Jul-Aug 2026",
+  "bbox": [
+    14.82,
+    37.55,
+    15.28,
+    37.95
+  ],
+  "track": 43,
+  "frame": 21,
+  "direction": "ascending",
+  "pixel_m": 80
+}

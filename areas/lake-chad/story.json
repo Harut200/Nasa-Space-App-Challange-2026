@@ -1,0 +1,46 @@
+{
+  "story": {
+    "see": "Our box covers the southern part of Lake Chad, from the Nigerian shore to the Chari river mouth and Bol. Across ten passes from 21 June to 19 October the mapped open water grows gently, from about 1,440 to about 1,490 km², and levels off in October. Possible water under vegetation rises from almost nothing to about 50 km², with some uncertainty.",
+    "physics": "Rain in the Sahel falls mostly from July to September, and the Chari river, which supplies most of the lake's inflow, usually brings its flood at the end of the rainy season. The lake is shallow and edged with marsh, so a modest rise in water spreads across a wide area. The lake is far smaller than in the 1960s.",
+    "lband": "Open water is dark to L-band radar, which is why the lake is easy to outline. Reeds and swamp grass are rougher and can look different from open water, so water hiding under plants is hard to tell. Our 'possible water under vegetation' layer is an unvalidated flag, and the preview is about 180 m, so narrow channels are missed.",
+    "people": "NASA describes the lake's fresh water as the lifeblood of more than 30 million people in Chad, Cameroon, Nigeria and Niger, supporting fishing, irrigation and farming. A late-season rise matters for people who fish and farm along its shores. Our map shows the extent of water, not its depth."
+  },
+  "spots": [
+    {
+      "id": "chari-mouth",
+      "label": "Chari river mouth",
+      "lngLat": [
+        14.512,
+        12.978
+      ],
+      "radius_m": 1500
+    },
+    {
+      "id": "baga-sola",
+      "label": "Baga Sola (Chad shore)",
+      "lngLat": [
+        14.314,
+        13.536
+      ],
+      "radius_m": 1500
+    },
+    {
+      "id": "bol",
+      "label": "Bol (Chad, Lac Region capital)",
+      "lngLat": [
+        14.74,
+        13.46
+      ],
+      "radius_m": 1500
+    },
+    {
+      "id": "baga-nigeria",
+      "label": "Baga (Nigerian shore)",
+      "lngLat": [
+        13.857,
+        13.119
+      ],
+      "radius_m": 1500
+    }
+  ]
+}

@@ -1,0 +1,755 @@
+{
+ "runs": {
+  "pre_frozen": {
+   "pretrained": true,
+   "mode": "frozen",
+   "labels": "jrc",
+   "train": {
+    "steps": 500,
+    "seconds": 120.2,
+    "batch": 4,
+    "loss_first10": 0.3257,
+    "loss_last10": 0.0574,
+    "trainable_params": 160257
+   },
+   "free_memory_pct_before": 29,
+   "sevan": {
+    "recall_perm": 0.84533,
+    "spec_never": 0.97951,
+    "fp_km2_per_date": 59.68273,
+    "balanced_acc": 0.91242,
+    "iou": 0.8027,
+    "water_km2": [
+     1196.7,
+     1215.6,
+     1274.0,
+     1264.0,
+     1276.8,
+     1085.6,
+     1126.5,
+     1199.4,
+     1268.5,
+     1248.3
+    ],
+    "false_far_km2_per_date": [
+     70.8,
+     72.4,
+     57.3,
+     81.6,
+     64.8,
+     26.0,
+     62.6,
+     41.6,
+     49.2,
+     70.6
+    ],
+    "largest_body_km2": [
+     1196.7,
+     1215.6,
+     1274.0,
+     1262.1,
+     1276.5,
+     1085.4,
+     1126.5,
+     1198.3,
+     1266.0,
+     1248.3
+    ],
+    "largest_body_mae_km2": 50.4,
+    "windy": {
+     "2026-08-31": 1085.4,
+     "2026-09-12": 1126.5
+    },
+    "false_far_km2_late3": 73.7
+   },
+   "tonle_east": {
+    "recall_perm": 0.73061,
+    "spec_never": 0.98049,
+    "fp_km2_per_date": 57.02775,
+    "balanced_acc": 0.85555,
+    "iou": 0.01994,
+    "water_km2": [
+     133.0,
+     140.9,
+     138.3,
+     165.5,
+     343.6,
+     320.3,
+     353.6,
+     671.7,
+     451.4,
+     552.1
+    ],
+    "false_far_km2_per_date": [
+     53.5,
+     58.4,
+     58.8,
+     57.5,
+     60.3,
+     58.4,
+     59.0,
+     61.4,
+     59.6,
+     58.9
+    ],
+    "false_far_km2_late3": 63.3
+   },
+   "predict_s": 21.5
+  },
+  "rand_frozen": {
+   "pretrained": false,
+   "mode": "frozen",
+   "labels": "jrc",
+   "train": {
+    "steps": 516,
+    "seconds": 120.1,
+    "batch": 4,
+    "loss_first10": 0.386,
+    "loss_last10": 0.1134,
+    "trainable_params": 160257
+   },
+   "free_memory_pct_before": 64,
+   "sevan": {
+    "recall_perm": 0.35441,
+    "spec_never": 0.98962,
+    "fp_km2_per_date": 30.22236,
+    "balanced_acc": 0.67202,
+    "iou": 0.34513,
+    "water_km2": [
+     566.2,
+     569.9,
+     570.7,
+     613.8,
+     509.3,
+     379.6,
+     309.6,
+     262.7,
+     354.3,
+     328.6
+    ],
+    "false_far_km2_per_date": [
+     6.6,
+     17.2,
+     9.5,
+     43.3,
+     19.1,
+     6.8,
+     30.1,
+     40.0,
+     85.6,
+     43.9
+    ],
+    "largest_body_km2": [
+     564.0,
+     558.5,
+     564.9,
+     596.3,
+     501.6,
+     212.7,
+     221.7,
+     212.4,
+     279.8,
+     248.7
+    ],
+    "largest_body_mae_km2": 845.9,
+    "windy": {
+     "2026-08-31": 212.7,
+     "2026-09-12": 221.7
+    },
+    "false_far_km2_late3": 88.8
+   },
+   "tonle_east": {
+    "recall_perm": 0.98163,
+    "spec_never": 0.96213,
+    "fp_km2_per_date": 110.70458,
+    "balanced_acc": 0.97188,
+    "iou": 0.01399,
+    "water_km2": [
+     1578.1,
+     1442.9,
+     2138.4,
+     1230.4,
+     2565.9,
+     2428.6,
+     2918.2,
+     4416.6,
+     3777.5,
+     3550.1
+    ],
+    "false_far_km2_per_date": [
+     147.3,
+     111.4,
+     197.2,
+     133.3,
+     96.3,
+     71.0,
+     76.7,
+     156.1,
+     70.9,
+     60.2
+    ],
+    "false_far_km2_late3": 158.5
+   },
+   "predict_s": 20.6
+  },
+  "pre_last_lr1e-4_first_try": {
+   "pretrained": true,
+   "mode": "last",
+   "labels": "jrc",
+   "train": {
+    "steps": 400,
+    "seconds": 120.0,
+    "batch": 4,
+    "loss_first10": 0.2782,
+    "loss_last10": 0.0142,
+    "trainable_params": 25369153
+   },
+   "free_memory_pct_before": 51,
+   "sevan": {
+    "recall_perm": 0.23532,
+    "spec_never": 0.99465,
+    "fp_km2_per_date": 15.59547,
+    "balanced_acc": 0.61498,
+    "iou": 0.23209,
+    "water_km2": [
+     356.4,
+     331.6,
+     356.2,
+     408.4,
+     577.9,
+     271.8,
+     368.4,
+     343.7,
+     375.2,
+     378.7
+    ],
+    "false_far_km2_per_date": [
+     15.0,
+     17.6,
+     13.1,
+     28.5,
+     31.5,
+     4.0,
+     17.0,
+     9.8,
+     10.0,
+     9.5
+    ],
+    "largest_body_km2": [
+     284.2,
+     299.2,
+     309.2,
+     331.2,
+     457.2,
+     210.7,
+     345.6,
+     324.1,
+     289.6,
+     307.3
+    ],
+    "largest_body_mae_km2": 926.2,
+    "windy": {
+     "2026-08-31": 210.7,
+     "2026-09-12": 345.6
+    }
+   },
+   "tonle_east": {
+    "recall_perm": 0.42449,
+    "spec_never": 0.9663,
+    "fp_km2_per_date": 98.51584,
+    "balanced_acc": 0.69539,
+    "iou": 0.00679,
+    "water_km2": [
+     259.3,
+     252.8,
+     272.6,
+     257.0,
+     600.5,
+     517.0,
+     694.9,
+     1073.9,
+     532.8,
+     770.7
+    ],
+    "false_far_km2_per_date": [
+     101.8,
+     94.5,
+     102.8,
+     96.9,
+     97.6,
+     99.6,
+     101.1,
+     105.8,
+     102.0,
+     102.6
+    ]
+   },
+   "predict_s": 18.9
+  },
+  "pre_last": {
+   "pretrained": true,
+   "mode": "last",
+   "labels": "jrc",
+   "train": {
+    "steps": 363,
+    "seconds": 120.1,
+    "batch": 4,
+    "loss_first10": 0.3055,
+    "loss_last10": 0.0385,
+    "trainable_params": 25369153
+   },
+   "free_memory_pct_before": 77,
+   "sevan": {
+    "recall_perm": 0.33626,
+    "spec_never": 0.9893,
+    "fp_km2_per_date": 31.15369,
+    "balanced_acc": 0.66278,
+    "iou": 0.32719,
+    "water_km2": [
+     548.5,
+     532.4,
+     565.5,
+     603.4,
+     684.4,
+     525.0,
+     496.1,
+     535.3,
+     646.9,
+     564.9
+    ],
+    "false_far_km2_per_date": [
+     32.1,
+     40.2,
+     21.2,
+     58.3,
+     30.1,
+     13.8,
+     34.1,
+     13.0,
+     30.6,
+     38.1
+    ],
+    "largest_body_km2": [
+     389.0,
+     401.9,
+     448.2,
+     441.1,
+     684.1,
+     466.0,
+     357.4,
+     371.4,
+     332.5,
+     370.1
+    ],
+    "largest_body_mae_km2": 815.8,
+    "windy": {
+     "2026-08-31": 466.0,
+     "2026-09-12": 357.4
+    }
+   },
+   "tonle_east": {
+    "recall_perm": 0.79184,
+    "spec_never": 0.96679,
+    "fp_km2_per_date": 97.0788,
+    "balanced_acc": 0.87931,
+    "iou": 0.01284,
+    "water_km2": [
+     281.5,
+     265.7,
+     282.9,
+     370.4,
+     785.1,
+     700.1,
+     699.7,
+     1164.8,
+     912.5,
+     1078.6
+    ],
+    "false_far_km2_per_date": [
+     106.3,
+     98.8,
+     101.1,
+     98.9,
+     98.6,
+     95.0,
+     94.5,
+     107.8,
+     96.1,
+     96.5
+    ]
+   },
+   "predict_s": 27.4
+  },
+  "rand_last": {
+   "pretrained": false,
+   "mode": "last",
+   "labels": "jrc",
+   "train": {
+    "steps": 412,
+    "seconds": 120.2,
+    "batch": 4,
+    "loss_first10": 0.3877,
+    "loss_last10": 0.065,
+    "trainable_params": 25369153
+   },
+   "free_memory_pct_before": 54,
+   "sevan": {
+    "recall_perm": 0.00096,
+    "spec_never": 0.99628,
+    "fp_km2_per_date": 10.84063,
+    "balanced_acc": 0.49862,
+    "iou": 0.00096,
+    "water_km2": [
+     5.1,
+     19.9,
+     11.1,
+     39.5,
+     15.0,
+     5.5,
+     10.0,
+     8.4,
+     11.6,
+     9.2
+    ],
+    "false_far_km2_per_date": [
+     5.0,
+     11.9,
+     10.3,
+     23.9,
+     13.4,
+     4.6,
+     10.0,
+     8.4,
+     11.6,
+     9.2
+    ],
+    "largest_body_km2": [
+     4.0,
+     11.9,
+     10.3,
+     18.9,
+     13.4,
+     4.6,
+     9.7,
+     7.8,
+     10.1,
+     9.2
+    ],
+    "largest_body_mae_km2": 1232.0,
+    "windy": {
+     "2026-08-31": 4.6,
+     "2026-09-12": 9.7
+    }
+   },
+   "tonle_east": {
+    "recall_perm": 0.48776,
+    "spec_never": 0.97048,
+    "fp_km2_per_date": 86.27484,
+    "balanced_acc": 0.72912,
+    "iou": 0.00888,
+    "water_km2": [
+     804.0,
+     713.8,
+     1219.9,
+     692.1,
+     1545.0,
+     1151.1,
+     1277.1,
+     3297.3,
+     2300.2,
+     1589.8
+    ],
+    "false_far_km2_per_date": [
+     120.5,
+     96.1,
+     128.7,
+     100.6,
+     90.3,
+     60.1,
+     57.9,
+     104.1,
+     70.8,
+     49.1
+    ]
+   },
+   "predict_s": 21.0
+  },
+  "pre_last_mathlabels": {
+   "pretrained": true,
+   "mode": "last",
+   "labels": "math",
+   "train": {
+    "steps": 364,
+    "seconds": 120.1,
+    "batch": 4,
+    "loss_first10": 0.416,
+    "loss_last10": 0.0963,
+    "trainable_params": 25369153
+   },
+   "free_memory_pct_before": 60,
+   "sevan": {
+    "recall_perm": 0.08029,
+    "spec_never": 0.99794,
+    "fp_km2_per_date": 6.00451,
+    "balanced_acc": 0.53911,
+    "iou": 0.07986,
+    "water_km2": [
+     143.1,
+     138.4,
+     139.3,
+     163.7,
+     194.8,
+     116.4,
+     147.4,
+     168.0,
+     193.4,
+     173.3
+    ],
+    "false_far_km2_per_date": [
+     4.3,
+     5.8,
+     4.5,
+     9.8,
+     5.6,
+     3.4,
+     6.0,
+     6.6,
+     6.9,
+     7.2
+    ],
+    "largest_body_km2": [
+     34.1,
+     37.2,
+     36.8,
+     43.1,
+     87.7,
+     19.9,
+     66.2,
+     65.9,
+     43.7,
+     45.9
+    ],
+    "largest_body_mae_km2": 1193.9,
+    "windy": {
+     "2026-08-31": 19.9,
+     "2026-09-12": 66.2
+    }
+   },
+   "tonle_east": {
+    "recall_perm": 1.0,
+    "spec_never": 0.9925,
+    "fp_km2_per_date": 21.92471,
+    "balanced_acc": 0.99625,
+    "iou": 0.06803,
+    "water_km2": [
+     308.2,
+     295.0,
+     339.4,
+     266.4,
+     943.1,
+     897.1,
+     1182.9,
+     2227.2,
+     1749.7,
+     1711.3
+    ],
+    "false_far_km2_per_date": [
+     25.8,
+     17.0,
+     39.2,
+     18.4,
+     18.8,
+     16.8,
+     15.9,
+     42.0,
+     16.2,
+     15.0
+    ]
+   },
+   "predict_s": 27.6
+  }
+ },
+ "train_areas": [
+  "tonle-sap",
+  "ararat",
+  "bangladesh-haor",
+  "inner-niger",
+  "lake-chad",
+  "mekong-delta",
+  "pantanal",
+  "sindh-indus",
+  "sudd"
+ ],
+ "test": {
+  "sevan": "whole area, never seen",
+  "tonle-sap": "east columns >= 754 (patches trained on < 754)"
+ },
+ "baselines": {
+  "sevan": {
+   "math": {
+    "recall_perm": 0.98504,
+    "spec_never": 0.98521,
+    "fp_km2_per_date": 43.08143,
+    "balanced_acc": 0.98513,
+    "iou": 0.94867,
+    "water_km2": [
+     1245.3,
+     1235.0,
+     1234.8,
+     1283.8,
+     1260.6,
+     1236.1,
+     1197.1,
+     1279.2,
+     1329.1,
+     1304.0
+    ],
+    "false_far_km2_per_date": [
+     14.7,
+     18.1,
+     15.1,
+     49.3,
+     33.0,
+     40.4,
+     42.4,
+     55.0,
+     92.6,
+     70.3
+    ],
+    "largest_body_km2": [
+     1229.7,
+     1215.5,
+     1218.3,
+     1230.5,
+     1226.1,
+     1186.5,
+     1133.8,
+     1221.9,
+     1234.1,
+     1230.8
+    ],
+    "largest_body_mae_km2": 29.3,
+    "windy": {
+     "2026-08-31": 1186.5,
+     "2026-09-12": 1133.8
+    },
+    "false_far_km2_late3": 121.7
+   },
+   "math_terrain": {
+    "recall_perm": 0.98504,
+    "spec_never": 0.99457,
+    "fp_km2_per_date": 15.81899,
+    "balanced_acc": 0.98981,
+    "iou": 0.97137,
+    "water_km2": [
+     1239.0,
+     1226.9,
+     1228.3,
+     1252.8,
+     1240.6,
+     1210.5,
+     1176.4,
+     1244.8,
+     1251.6,
+     1255.2
+    ],
+    "false_far_km2_per_date": [
+     8.8,
+     10.4,
+     9.0,
+     19.3,
+     13.4,
+     15.3,
+     22.3,
+     21.3,
+     16.0,
+     22.4
+    ],
+    "largest_body_km2": [
+     1229.7,
+     1215.5,
+     1218.3,
+     1230.5,
+     1226.1,
+     1186.5,
+     1133.8,
+     1221.9,
+     1234.1,
+     1230.8
+    ],
+    "largest_body_mae_km2": 29.3,
+    "windy": {
+     "2026-08-31": 1186.5,
+     "2026-09-12": 1133.8
+    },
+    "false_far_km2_late3": 31.6
+   }
+  },
+  "tonle_east": {
+   "math": {
+    "recall_perm": 0.77143,
+    "spec_never": 0.99997,
+    "fp_km2_per_date": 0.09145,
+    "balanced_acc": 0.8857,
+    "iou": 0.72973,
+    "water_km2": [
+     69.1,
+     60.0,
+     64.7,
+     54.0,
+     273.9,
+     281.2,
+     327.5,
+     598.2,
+     483.7,
+     630.8
+    ],
+    "false_far_km2_per_date": [
+     0.0,
+     0.0,
+     0.5,
+     0.3,
+     0.0,
+     0.0,
+     0.0,
+     0.2,
+     0.0,
+     0.0
+    ],
+    "false_far_km2_late3": 0.2
+   },
+   "math_terrain": {
+    "recall_perm": 0.77143,
+    "spec_never": 0.99997,
+    "fp_km2_per_date": 0.09145,
+    "balanced_acc": 0.8857,
+    "iou": 0.72973,
+    "water_km2": [
+     69.1,
+     60.0,
+     64.7,
+     54.0,
+     273.9,
+     281.2,
+     327.5,
+     598.2,
+     483.7,
+     630.8
+    ],
+    "false_far_km2_per_date": [
+     0.0,
+     0.0,
+     0.5,
+     0.3,
+     0.0,
+     0.0,
+     0.0,
+     0.2,
+     0.0,
+     0.0
+    ],
+    "false_far_km2_late3": 0.2
+   }
+  }
+ }
+}

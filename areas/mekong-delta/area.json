@@ -1,0 +1,29 @@
+{
+  "id": "mekong-delta",
+  "name": "Mekong floodplain, Vietnam\u2013Cambodia",
+  "bbox": [
+    105.3,
+    10.2,
+    106.2,
+    11.5
+  ],
+  "track": 47,
+  "frame": 83,
+  "direction": "descending",
+  "pixel_m": 100,
+  "mode": "40+5",
+  "dates": [
+    "2026-06-17",
+    "2026-06-29",
+    "2026-07-11",
+    "2026-07-23",
+    "2026-08-16",
+    "2026-08-28",
+    "2026-09-09",
+    "2026-09-21",
+    "2026-10-03",
+    "2026-10-15"
+  ],
+  "water_source": "fusion2",
+  "category": "flood"
+}

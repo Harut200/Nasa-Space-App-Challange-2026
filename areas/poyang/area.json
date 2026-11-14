@@ -1,0 +1,30 @@
+{
+  "id": "poyang",
+  "name": "Poyang Lake, China",
+  "bbox": [
+    115.7,
+    28.5,
+    117.0,
+    29.66
+  ],
+  "track": 140,
+  "frame": 16,
+  "direction": "ascending",
+  "pixel_m": 100,
+  "mode": "20+5",
+  "dates": [
+    "2026-07-05",
+    "2026-07-17",
+    "2026-08-10",
+    "2026-09-03",
+    "2026-09-15",
+    "2026-09-27",
+    "2026-10-09"
+  ],
+  "excluded_dates": [
+    "2026-06-23",
+    "2026-08-22"
+  ],
+  "water_source": "fusion2",
+  "category": "lake"
+}
