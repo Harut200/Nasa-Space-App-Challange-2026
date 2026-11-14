@@ -1,0 +1,14 @@
+{
+  "id": "niebla-fire-2026",
+  "name": "Niebla fire, Huelva and Seville, Spain: forest surface changed, 21 Jul-14 Aug 2026",
+  "bbox": [
+    -6.95,
+    37.2,
+    -6.3,
+    37.75
+  ],
+  "track": 23,
+  "frame": 70,
+  "direction": "descending",
+  "pixel_m": 80
+}

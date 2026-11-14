@@ -1,0 +1,14 @@
+{
+  "id": "gironde-coh-2026",
+  "name": "Gironde megafire, France: forest surface changed, 17 Jul-10 Aug 2026",
+  "bbox": [
+    -1.45,
+    44.55,
+    -0.7,
+    45.1
+  ],
+  "track": 130,
+  "frame": 24,
+  "direction": "ascending",
+  "pixel_m": 80
+}

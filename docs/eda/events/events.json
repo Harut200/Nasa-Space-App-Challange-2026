@@ -1021,7 +1021,7 @@
   "summary_number": "\u2265 1,540 km\u00b2 of forest changed completely (window-limited)",
   "time_note": "fire started 12 Jul; pair 11-23 Jul; the control pair ends the day before",
   "site_label": "Published fire location (Wikipedia, 50.68 N 89.48 W)",
-  "verdict_reason": "sharp-edged patch of lost coherence 1,253 km2 connected (1,540 km2 in the window, cut by the window edge), in both look directions at the published fire; control coherence 0.66 -> 0.13 on those pixels; the same ground is coherent again in the 21 Sep-3 Oct pair",
+  "verdict_reason": "sharp-edged patch of lost coherence 1,253 km2 connected (1,540 km2 in the window, cut by the window edge), in both look directions at the published fire; control coherence 0.66 -> 0.13 on those pixels; the same ground is coherent again in the 21 Sep-3 Oct pair; null check: 29 Jun-11 Jul vs 17-29 Jun gives 11.7 km2 in the whole window",
   "extra_spots": [
    {
     "id": "patch",
@@ -1045,7 +1045,7 @@
   "story": {
    "see": "Thunder Bay 36 started on 12 July 2026 in Wabakimi Provincial Park, north-western Ontario, and was about 314,000 hectares (3,140 km2) on 29 July, the largest wildfire in the province's recorded history (Wikipedia, citing the provincial figures). The orange area is where the radar picture between NISAR's 11 and 23 July passes no longer matches the pair taken just before it (29 June to 11 July). It forms a sharp-edged blotch tens of kilometres across, far larger than the 40 x 40 km box the pair was cut to.",
    "physics": "A fire changes the ground the radar sees: leaves, twigs and the litter on the ground burn or fall, so the tiny details that made the echo repeatable disappear. In the window about 1,540 km2 lost coherence (the biggest connected patch is 1,253 km2), at 50.65 N 89.29 W, 14 km from the published fire point. The ascending pass (track 47) sees a similar patch where its swath covers the area. We do not measure the burned area: the patch is cut by the window and the fire kept growing after 23 July.",
-   "lband": "NISAR's L-band radar (wavelength about 24 cm) normally keeps a good match between two passes 12 days apart over boreal forest, which is why the control pair is largely bright. Lost coherence here has a hard, irregular outline, not the gentle gradient of rain or soil moisture. In the autumn pair (21 September to 3 October) the same ground is coherent again, so the map marks the change that happened inside 11 to 23 July. Rain on the ground in those days cannot be ruled out from coherence alone; the outline and the published fire place and date are what we rely on.",
+   "lband": "NISAR's L-band radar (wavelength about 24 cm) normally keeps a good match between two passes 12 days apart over boreal forest, which is why the control pair is largely bright. Lost coherence here has a hard, irregular outline, not the gentle gradient of rain or soil moisture. In the autumn pair (21 September to 3 October) the same ground is coherent again, so the map marks the change that happened inside 11 to 23 July. As a check, the same recipe applied to the pair before it (29 June to 11 July against 17 to 29 June) finds only 12 km2 in the whole window. Rain on the ground in those days cannot be ruled out from coherence alone; the outline and the published fire place and date are what we rely on.",
    "people": "This map shows where the surface changed, not damage. We did not look at reports of damage, evacuations or casualties. A second, independent look at this fire from the radar brightness is in the separate Thunder Bay 36 place."
   },
   "app_views": [
@@ -1132,13 +1132,14 @@
   ],
   "export_deformation": false,
   "app_views": [
-   "d_ign"
+   "d_ign",
+   "a_ign"
   ],
   "zoom_km": 14,
   "summary_number": "\u2248 150 km\u00b2 of ground changed completely (largest connected patch 44 km\u00b2)",
   "time_note": "fire began 16 Jul (The Local); pair 14-26 Jul; the control pair ends the day of 14 Jul, before it",
   "site_label": "La Mierla village (Wikipedia, 40.94 N 3.24 W)",
-  "verdict_reason": "87 km2 of lost coherence within 12 km (largest patch 43.6 km2, 149 km2 in the window) against a 95th percentile of 13.8 km2 in 98 equal random discs and 1.3 % of comparable ground outside; control 0.79 -> 0.27; the same ground is coherent again on 31 Aug-12 Sep",
+  "verdict_reason": "87 km2 of lost coherence within 12 km (largest patch 43.6 km2, 149 km2 in the window) against a 95th percentile of 13.8 km2 in 98 equal random discs and 1.3 % of comparable ground outside; control 0.79 -> 0.27; the same ground is coherent again on 31 Aug-12 Sep; ascending 7-19 Jul vs 25 Jun-7 Jul: 56 km2 within 12 km (largest patch 25.5 km2 at the same place) vs background p95 0.5 km2",
   "extra_spots": [
    {
     "id": "patch",
@@ -1161,7 +1162,7 @@
   ],
   "story": {
    "see": "The La Mierla fire began on 16 July 2026 in the province of Guadalajara, north of Madrid. By 20 July it had burned over 32,000 hectares and was called the second biggest wildfire in Spain this century and the largest in the history of Castilla-La Mancha (The Local). The orange area is where the radar picture between NISAR's 14 and 26 July passes no longer matches the pair taken just before it (2 to 14 July). It is a long band running north-north-east from the village of La Mierla.",
-   "physics": "Burning removes leaves, twigs and scrub, and what is left reflects the radar differently, so the passes cannot be compared there. About 150 km2 in the map lost coherence (87 km2 within 12 km of the centre, 44 km2 in the largest connected patch). Equal circles placed elsewhere in the same map lose at most 14 km2 (95th percentile of 98), and only about 1 % of the comparable ground outside the site changes like this. We do not measure the burned area: the patch only counts ground that was coherent before.",
+   "physics": "Burning removes leaves, twigs and scrub, and what is left reflects the radar differently, so the passes cannot be compared there. About 150 km2 in the map lost coherence (87 km2 within 12 km of the centre, 44 km2 in the largest connected patch). Equal circles placed elsewhere in the same map lose at most 14 km2 (95th percentile of 98), and only about 1 % of the comparable ground outside the site changes like this. We do not measure the burned area: the patch only counts ground that was coherent before. The ascending pass (7 to 19 July, control 25 June to 7 July) shows the same band: 56 km2 within 12 km against at most 0.5 km2 in equal circles elsewhere.",
    "lband": "NISAR's L-band radar has a wavelength of about 24 cm. Over this dry Mediterranean land the quiet pair before the fire is bright almost everywhere, so a burn stands out as a dark scar with a hard edge. In the pair of 31 August to 12 September the same ground is coherent again (nothing like this patch remains), so the map marks the change that happened inside 14 to 26 July. Dew or rain on the ground cannot be fully excluded from coherence alone; the shape, the place and the date are what we rely on.",
    "people": "This map shows where the surface changed, not damage. We did not look at reports of damage, evacuations or casualties."
   }
@@ -1261,12 +1262,13 @@
   ],
   "export_deformation": false,
   "app_views": [
-   "a_ign"
+   "a_ign",
+   "d_ign"
   ],
   "zoom_km": 22,
   "summary_number": "\u2248 216 km\u00b2 of ground changed completely (largest connected patch 99 km\u00b2)",
   "site_label": "Navaluenga (Wikipedia, 40.41 N 4.71 W)",
-  "verdict_reason": "137 km2 of lost coherence within 15 km (largest patch 98.8 km2, 216 km2 in the window) vs a 95th percentile of 49.6 km2 in 63 equal random discs and 1.4 % of comparable ground outside; control 0.81 -> 0.26; the pair 19-31 Aug (after the fire, same control) shows nothing (the scar is coherent again)",
+  "verdict_reason": "137 km2 of lost coherence within 15 km (largest patch 98.8 km2, 216 km2 in the window) vs a 95th percentile of 49.6 km2 in 63 equal random discs and 1.4 % of comparable ground outside; control 0.81 -> 0.26; the pair 19-31 Aug (after the fire, same control) shows nothing (the scar is coherent again); descending 21 Jul-26 Aug (36 days) vs 9-21 Jul: 196 km2 within 15 km, largest patch 197.5 km2 at 40.346 N 4.639 W, background p95 85 km2",
   "extra_spots": [
    {
     "id": "patch",
@@ -1298,7 +1300,7 @@
   ],
   "story": {
    "see": "The Burgohondo fire was declared on Wednesday 22 July 2026 in Burgohondo, province of Avila (eldiario.es). By 26 July Spain's environment minister put it at about 50,000 hectares and called it the largest forest fire in recent Spanish history; it was managed together with connected fronts in Madrid and Toledo (El Espanol). The orange area is where the radar picture between NISAR's 14 and 26 July passes no longer matches the pair taken just before it (2 to 14 July). It stretches east from Navaluenga.",
-   "physics": "Burning removes the leaves, twigs and scrub that gave the ground a repeatable radar echo, and what is left looks different to the radar, so the two passes cannot be compared there. About 216 km2 in the map lost coherence (137 km2 within 15 km of the centre, 99 km2 in the largest connected patch). Equal circles placed elsewhere in the same map lose at most 50 km2 (95th percentile of 63), and about 1 % of the comparable ground outside the site changes like this. We do not measure the burned area: only ground that was coherent before is counted, and the fire continued east beyond this map.",
+   "physics": "Burning removes the leaves, twigs and scrub that gave the ground a repeatable radar echo, and what is left looks different to the radar, so the two passes cannot be compared there. About 216 km2 in the map lost coherence (137 km2 within 15 km of the centre, 99 km2 in the largest connected patch). Equal circles placed elsewhere in the same map lose at most 50 km2 (95th percentile of 63), and about 1 % of the comparable ground outside the site changes like this. We do not measure the burned area: only ground that was coherent before is counted, and the fire continued east beyond this map. The descending pass (21 July to 26 August, 36 days, control 9 to 21 July) shows the same place: 196 km2 within 15 km, largest patch 198 km2.",
    "lband": "NISAR's L-band radar has a wavelength of about 24 cm. Over this dry land the quiet pair before the fire is bright almost everywhere, so a burn shows as a dark scar with hard edges. In the pair of 19 to 31 August, after the fire, the same ground is coherent again, so the map marks the change that happened inside 14 to 26 July. Dew or rain on the ground cannot be fully excluded from coherence alone; the shape, the place and the date are what we rely on.",
    "people": "This map shows where the surface changed, not damage. We did not look at reports of damage, evacuations or casualties."
   }
@@ -1306,10 +1308,10 @@
  {
   "id": "gironde-coh-2026",
   "type": "fire",
-  "title": "Gironde megafire scar by coherence, France, from about 22 Jul 2026",
+  "title": "Gironde megafire, France: forest surface changed, 17 Jul-10 Aug 2026",
   "time": "2026-07-22T00:00:00Z",
-  "lat": 44.87,
-  "lon": -1.09,
+  "lat": 44.85,
+  "lon": -1.04,
   "place": "Landes de Gascogne, Gironde, France",
   "window": [
    -1.45,
@@ -1322,9 +1324,9 @@
    150
   ],
   "radius_km": 12,
-  "far_km": 36,
+  "far_km": 24,
   "gmin": 0.35,
-  "source_url": "https://www.paris-match.be/",
+  "source_url": "https://www.parismatch.be/actualites/monde/2026/07/30/megafeu-en-gironde-lincendie-est-stabilise-et-la-meteo-favorable-PI3SAONZT5ELNDYIA5JBABKJAU/",
   "views": {
    "a_late": {
     "track": 130,
@@ -1370,12 +1372,43 @@
     }
    }
   },
-  "verdict": null,
+  "verdict": "clear",
   "deformation": false,
   "loss_hi": 0.5,
   "loss_lo": 0.45,
   "loss_drop": 0.3,
-  "min_px": 30
+  "min_px": 30,
+  "primary_view": "a_ign",
+  "export_views": [
+   "a_ign"
+  ],
+  "export_deformation": false,
+  "app_views": [
+   "a_ign",
+   "d_ign"
+  ],
+  "zoom_km": 22,
+  "summary_number": "\u2248 334 km\u00b2 of forest changed completely (largest connected patch 261 km\u00b2)",
+  "time_note": "fire began 22 Jul between Saumos and Le Porge (search summary of AFP/Reporterre); pair 17 Jul-10 Aug (24 days); the control pair ends 17 Jul",
+  "site_label": "Centre of the largest patch of lost coherence",
+  "verdict_reason": "ascending 24-day pair: 261 km2 connected patch at 44.847 N 1.040 W (334 km2 in the window, 203 km2 within 12 km vs 95th percentile 39.9 km2 of 39 equal random discs, 7 % of comparable ground outside); control 0.62 -> 0.16; descending 12-day pair 14-26 Jul: 31 km2 within 12 km (background p95 0.2 km2) at the same forest; the pair of 22 Aug-3 Sep shows nothing. Caveat: the ascending pair is 24 days against a 12-day control",
+  "extra_spots": [
+   {
+    "id": "reference",
+    "label": "Reference: stays coherent in both pairs",
+    "lngLat": [
+     -0.8,
+     44.85
+    ],
+    "radius_m": 4000
+   }
+  ],
+  "story": {
+   "see": "The Gironde megafire began on Wednesday 22 July 2026 between Saumos and Le Porge and crossed the pine forest towards Lacanau and Lege-Cap-Ferret; the prefecture gave 42,000 hectares burned on 30 July (AFP, via Paris Match Belgium). The orange area is where the radar picture between NISAR's 17 July and 10 August passes no longer matches the pair taken just before it (5 to 17 July). It is a single large patch in the forest, with the Atlantic and the Arcachon basin dark in both pictures.",
+   "physics": "Fire strips the pine canopy and the litter beneath it, and the radar echo of that ground stops repeating. About 334 km2 in the map lost coherence, 261 km2 in one connected patch. Equal circles placed elsewhere in the same map lose at most 40 km2 (95th percentile of 39). The descending pass (14 to 26 July, 12 days) shows a smaller patch at the same forest, 31 km2 within 12 km; its water- and marsh-rich surface keeps less coherence to begin with. We do not measure the burned area; only ground that was coherent before is counted.",
+   "lband": "NISAR's L-band radar has a wavelength of about 24 cm and sees through much of a forest canopy, so a burned forest changes its echo strongly. The pair is 24 days long against a 12-day control, which lowers coherence everywhere a little. In the pair of 22 August to 3 September, after the fire, nothing like this patch remains, so the map marks the change inside 17 July to 10 August. Rain or soil moisture cannot be fully excluded from coherence alone; the shape, the place and the date are what we rely on.",
+   "people": "This map shows where the surface changed, not damage. We did not look at reports of damage, evacuations or casualties."
+  }
  },
  {
   "id": "mahanadi-coh-2026",
@@ -1858,10 +1891,10 @@
  {
   "id": "niebla-fire-2026",
   "type": "fire",
-  "title": "Niebla fire (Huelva, Spain) by coherence, from 6 Aug 2026",
+  "title": "Niebla fire, Huelva and Seville, Spain: forest surface changed, 21 Jul-14 Aug 2026",
   "time": "2026-08-06T00:00:00Z",
-  "lat": 37.5,
-  "lon": -6.62,
+  "lat": 37.53,
+  "lon": -6.63,
   "place": "Niebla, Huelva and Seville provinces, Spain",
   "window": [
    -6.95,
@@ -1874,7 +1907,7 @@
    500
   ],
   "radius_km": 15,
-  "far_km": 45,
+  "far_km": 30,
   "gmin": 0.35,
   "source_url": "https://www.infobae.com/espana/2026/08/13/el-incendio-de-niebla-huelva-pierde-fuerza-tras-arrasar-31000-hectareas-y-dejar-a-700-vecinos-desalojados/",
   "views": {
@@ -1922,12 +1955,52 @@
     }
    }
   },
-  "verdict": null,
+  "verdict": "clear",
   "deformation": false,
   "loss_hi": 0.5,
   "loss_lo": 0.45,
   "loss_drop": 0.3,
-  "min_px": 30
+  "min_px": 30,
+  "primary_view": "d_ign",
+  "export_views": [
+   "d_ign"
+  ],
+  "export_deformation": false,
+  "app_views": [
+   "d_ign",
+   "a_ign"
+  ],
+  "zoom_km": 22,
+  "time_note": "fire declared on a Thursday, probably 6 Aug (Infobae, 13 Aug: 'el pasado jueves'); pair 21 Jul-14 Aug (24 days); the control pair ends 21 Jul",
+  "summary_number": "\u2248 218 km\u00b2 of ground changed completely (largest connected patch 50 km\u00b2)",
+  "site_label": "Centre of the largest patch of lost coherence",
+  "verdict_reason": "110 km2 of lost coherence within 15 km, 218 km2 in the window vs 95th percentile of 29 km2 in 6 equal random discs (small window) and 3 % of comparable ground outside; control 0.83 -> 0.33; sharp-edged scar. Caveat: 24-day event pair against a 12-day control; ascending same dates (15/21): 145 km2 within 15 km, largest patch 113.5 km2, background p95 6.6 km2; 14-26 Aug pair: 0.6 km2; the straight north edge (about 25 km) sits at 37.57-37.61 N in both look directions, so it is not a frame or burst seam; cause not identified",
+  "extra_spots": [
+   {
+    "id": "east",
+    "label": "Second large patch, 20 km to the east",
+    "lngLat": [
+     -6.4275,
+     37.564
+    ],
+    "radius_m": 5000
+   },
+   {
+    "id": "reference",
+    "label": "Reference: stays coherent in both pairs",
+    "lngLat": [
+     -6.8,
+     37.65
+    ],
+    "radius_m": 4000
+   }
+  ],
+  "story": {
+   "see": "The Niebla fire was declared on a Thursday, probably 6 August 2026, in the province of Huelva and crossed into Seville; by 13 August it had burned more than 31,000 hectares, with a perimeter of about 120 km (Infobae). The orange area is where the radar picture between NISAR's 21 July and 14 August passes no longer matches the pair taken just before it (9 to 21 July). It forms a wide sharp-edged block north-east of Niebla.",
+   "physics": "Burning removes the leaves, twigs and scrub that gave this dry hill country a repeatable radar echo. About 218 km2 in the map lost coherence (110 km2 within 15 km of the centre, 50 km2 in the largest connected piece). Equal circles placed elsewhere in the same map lose at most 29 km2. We do not measure the burned area: only ground that was coherent before is counted, and the scar continues outside the map. The ascending pass (same dates, track 15) shows the same block: 145 km2 within 15 km, 113 km2 in the largest piece, against at most 7 km2 in equal circles elsewhere. The pair of 14 to 26 August, after the fire, shows nothing (the scar is coherent again). The north edge of the scar is almost straight over about 25 km, at the same latitude (37.57 to 37.61 N) in both passes, so it is a feature of the ground and not of the radar frame; we did not identify what lies there (a road, a firebreak or the edge of the woodland).",
+   "lband": "NISAR's L-band radar has a wavelength of about 24 cm. Here the pair is 24 days long while the control is 12, which lowers coherence everywhere a little; the control is bright almost everywhere and the scar stays dark with hard edges. Rain or dew on the ground cannot be fully excluded from coherence alone; the shape, the place and the date are what we rely on.",
+   "people": "This map shows where the surface changed, not damage. We did not look at reports of damage, evacuations or casualties."
+  }
  },
  {
   "id": "big-grass-coh-2026",
@@ -2093,5 +2166,154 @@
   "loss_drop": 0.3,
   "min_px": 30,
   "time_note": "start time not given; reported from 14 Aug"
+ },
+ {
+  "id": "bald-range-fire-2026",
+  "type": "fire",
+  "title": "Bald Range fire, British Columbia: forest surface changed, 25 Jul-18 Aug 2026",
+  "time": "2026-08-07T00:00:00Z",
+  "lat": 49.62,
+  "lon": -119.82,
+  "place": "Summerland, South Okanagan, British Columbia, Canada",
+  "window": [
+   -120.1,
+   49.4,
+   -119.5,
+   49.9
+  ],
+  "heights": [
+   300,
+   2000
+  ],
+  "radius_km": 12,
+  "far_km": 24,
+  "gmin": 0.35,
+  "source_url": "https://watchers.news/2026/08/09/b-c-declares-provincial-emergency-as-out-of-control-bald-range-wildfire-grows-to-over-10-000-ha-25-000-acres/",
+  "views": {
+   "d_ign": {
+    "track": 172,
+    "frame": 63,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260720_20260813",
+     "granule": "NISAR_L2_PR_GUNW_025_172_D_063_027_4000_SH_20260720T031741_20260720T031816_20260813T031739_20260813T031815_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260708_20260720",
+     "granule": "NISAR_L2_PR_GUNW_024_172_D_063_025_4000_SH_20260708T031741_20260708T031817_20260720T031741_20260720T031816_P05023_N_F_J_001"
+    }
+   },
+   "a_ign": {
+    "track": 77,
+    "frame": 27,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260725_20260818",
+     "granule": "NISAR_L2_PR_GUNW_026_077_A_027_028_4000_SH_20260725T124757_20260725T124832_20260818T124756_20260818T124831_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260713_20260725",
+     "granule": "NISAR_L2_PR_GUNW_025_077_A_027_026_4000_SH_20260713T124758_20260713T124833_20260725T124757_20260725T124832_P05023_N_F_J_001"
+    }
+   }
+  },
+  "verdict": "clear",
+  "deformation": false,
+  "time_note": "first reported on the evening of 7 Aug (Watchers); pair 25 Jul-18 Aug (24 days); the control pair ends 25 Jul",
+  "loss_hi": 0.5,
+  "loss_lo": 0.45,
+  "loss_drop": 0.3,
+  "min_px": 30,
+  "primary_view": "a_ign",
+  "export_views": [
+   "a_ign"
+  ],
+  "export_deformation": false,
+  "app_views": [
+   "a_ign"
+  ],
+  "zoom_km": 15,
+  "summary_number": "\u2248 137 km\u00b2 of ground changed completely (one connected patch of 134 km\u00b2)",
+  "site_label": "Centre of the lost-coherence patch west of Summerland",
+  "verdict_reason": "131 km2 of lost coherence within 12 km, one connected patch of 133.6 km2 at 49.617 N 119.815 W (137 km2 in the window) vs 95th percentile of 0.66 km2 in 16 equal random discs and 0.25 % of comparable ground outside; control 0.78 -> 0.25. Caveat: 24-day event pair against a 12-day control",
+  "extra_spots": [
+   {
+    "id": "reference",
+    "label": "Reference: stays coherent in both pairs",
+    "lngLat": [
+     -119.95,
+     49.8
+    ],
+    "radius_m": 4000
+   }
+  ],
+  "story": {
+   "see": "The Bald Range fire was first reported on the evening of 7 August 2026 in the South Okanagan of British Columbia and grew explosively: about 10,341 hectares by 9 August, when the province had declared a state of emergency (Watchers, citing BC Wildfire Service). The orange area is where the radar picture between NISAR's 25 July and 18 August passes no longer matches the pair taken just before it (13 to 25 July). It is one compact patch of mountain forest west of Summerland.",
+   "physics": "Burning strips the trees and undergrowth that gave the slope a repeatable radar echo. About 137 km2 in the map lost coherence, almost all of it in one connected patch (134 km2). Equal circles placed elsewhere in the same map lose less than 1 km2, and only a quarter of one percent of the comparable ground outside the site changes like this. We do not measure the burned area: only ground that was coherent before is counted.",
+   "lband": "NISAR's L-band radar has a wavelength of about 24 cm. The pair is 24 days long against a 12-day control, which lowers coherence everywhere a little, but the control is bright across the mountains and the patch is dark with hard edges. Smoke does not matter to the radar. Rain or soil moisture cannot be fully excluded from coherence alone; the shape, the place and the date are what we rely on.",
+   "people": "This map shows where the surface changed, not damage. We did not look at reports of damage, evacuations or casualties."
+  }
+ },
+ {
+  "id": "rowe-creek-coh-2026",
+  "type": "fire",
+  "title": "Rowe Creek Complex, Oregon, from 15 Jul 2026",
+  "time": "2026-07-15T00:00:00Z",
+  "lat": 44.85,
+  "lon": -120.2,
+  "place": "south of Fossil, Wheeler County, Oregon, USA",
+  "window": [
+   -120.75,
+   44.45,
+   -119.7,
+   45.1
+  ],
+  "heights": [
+   300,
+   1500
+  ],
+  "radius_km": 20,
+  "far_km": 60,
+  "gmin": 0.35,
+  "source_url": "https://www.kptv.com/2026/08/02/thousands-firefighters-battle-growing-rowe-creek-complex-central-oregon/",
+  "views": {
+   "a_ign": {
+    "track": 106,
+    "frame": 24,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260715_20260727",
+     "granule": "NISAR_L2_PR_GUNW_025_106_A_024_026_4000_SH_20260715T130255_20260715T130330_20260727T130254_20260727T130329_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260703_20260715",
+     "granule": "NISAR_L2_PR_GUNW_024_106_A_024_025_4000_SH_20260703T130255_20260703T130330_20260715T130255_20260715T130330_P05023_N_F_J_001"
+    }
+   },
+   "d_ign": {
+    "track": 71,
+    "frame": 66,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260713_20260725",
+     "granule": "NISAR_L2_PR_GUNW_025_071_D_066_026_4000_SH_20260713T031104_20260713T031139_20260725T031103_20260725T031138_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260701_20260713",
+     "granule": "NISAR_L2_PR_GUNW_024_071_D_066_025_4000_SH_20260701T031104_20260701T031139_20260713T031104_20260713T031139_P05023_N_F_J_001"
+    }
+   }
+  },
+  "verdict": null,
+  "deformation": false,
+  "time_note": "lightning fires of 15-16 Jul (search summary); KPTV page opened gives >300,000 acres on 1 Aug",
+  "loss_hi": 0.5,
+  "loss_lo": 0.45,
+  "loss_drop": 0.3,
+  "min_px": 30
  }
 ]

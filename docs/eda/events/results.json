@@ -1727,9 +1727,73 @@
      "max": null
     },
     "incidence_deg_mean": 33.87160873413086
+   },
+   "d_null": {
+    "event": "Thunder Bay 36 fire, Ontario: forest surface changed over 1,500 km2, 11-23 July 2026",
+    "view": "d_null",
+    "track": 41,
+    "frame": 63,
+    "direction": "D",
+    "event_pair": "20260629_20260711",
+    "control_pair": "20260617_20260629",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 25,
+    "far_km": 50,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.5597326755523682,
+    "mean_coh_control_within_radius": 0.5927265286445618,
+    "mean_coh_event_whole_window": 0.5347632765769958,
+    "mean_coh_control_whole_window": 0.6144857406616211,
+    "coherence_loss": {
+     "loss_area_km2": 0.0,
+     "comparable_area_km2": 1662.2144,
+     "loss_fraction_inside": 0.0,
+     "loss_fraction_outside": 0.002533687790895911,
+     "comparable_px_inside": 259721,
+     "loss_area_km2_whole_window": 11.699200000000001
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 8.896,
+      "lon": -89.8755,
+      "lat": 50.5721,
+      "max_side_km": 5.6000000000000005
+     },
+     {
+      "area_km2": 0.6144000000000001,
+      "lon": -89.8486,
+      "lat": 50.5175,
+      "max_side_km": 1.52
+     },
+     {
+      "area_km2": 0.3008,
+      "lon": -89.8048,
+      "lat": 50.5222,
+      "max_side_km": 0.8
+     },
+     {
+      "area_km2": 0.3008,
+      "lon": -89.8507,
+      "lat": 50.6035,
+      "max_side_km": 0.88
+     },
+     {
+      "area_km2": 0.2752,
+      "lon": -89.8498,
+      "lat": 50.507,
+      "max_side_km": 1.12
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": null
    }
   },
-  "verdict": null
+  "verdict": "clear"
  },
  "la-mierla-coh-2026": {
   "event_id": "la-mierla-coh-2026",
@@ -1863,9 +1927,75 @@
      "max": 0.8192
     },
     "incidence_deg_mean": null
+   },
+   "a_ign": {
+    "event": "La Mierla fire, Guadalajara: forest and scrub surface changed, 14-26 July 2026",
+    "view": "a_ign",
+    "track": 159,
+    "frame": 22,
+    "direction": "A",
+    "event_pair": "20260707_20260719",
+    "control_pair": "20260625_20260707",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 12,
+    "far_km": 24,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.7006569504737854,
+    "mean_coh_control_within_radius": 0.8016613125801086,
+    "mean_coh_event_whole_window": 0.7833063006401062,
+    "mean_coh_control_whole_window": 0.7737038731575012,
+    "coherence_loss": {
+     "loss_area_km2": 55.904,
+     "comparable_area_km2": 433.79200000000003,
+     "loss_fraction_inside": 0.12887282384184126,
+     "loss_fraction_outside": 0.00306765291774864,
+     "comparable_px_inside": 67780,
+     "loss_area_km2_whole_window": 70.5792,
+     "mean_coh_control_at_loss_px": 0.8487486839294434,
+     "mean_coh_event_at_loss_px": 0.25068941712379456
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 25.5168,
+      "lon": -3.0904,
+      "lat": 41.0585,
+      "max_side_km": 8.08
+     },
+     {
+      "area_km2": 16.5184,
+      "lon": -3.1622,
+      "lat": 41.0186,
+      "max_side_km": 6.32
+     },
+     {
+      "area_km2": 12.928,
+      "lon": -3.2217,
+      "lat": 40.9669,
+      "max_side_km": 7.44
+     },
+     {
+      "area_km2": 4.6656,
+      "lon": -3.1531,
+      "lat": 41.0516,
+      "max_side_km": 4.88
+     },
+     {
+      "area_km2": 2.9056,
+      "lon": -3.0407,
+      "lat": 41.1179,
+      "max_side_km": 3.6
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 121,
+     "median": 0.0,
+     "p95": 0.49920000000000003,
+     "max": 4.8064
+    },
+    "incidence_deg_mean": 41.311004638671875
    }
   },
-  "verdict": null
+  "verdict": "clear"
  },
  "burgohondo-coh-2026": {
   "event_id": "burgohondo-coh-2026",
@@ -2053,9 +2183,75 @@
      "max": 54.048
     },
     "incidence_deg_mean": 40.640411376953125
+   },
+   "d_ign": {
+    "event": "Burgohondo fire, Avila: forest and scrub surface changed, 14-26 July 2026",
+    "view": "d_ign",
+    "track": 23,
+    "frame": 68,
+    "direction": "D",
+    "event_pair": "20260721_20260826",
+    "control_pair": "20260709_20260721",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 15,
+    "far_km": 30,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.5594714879989624,
+    "mean_coh_control_within_radius": 0.8241461515426636,
+    "mean_coh_event_whole_window": 0.6512752771377563,
+    "mean_coh_control_whole_window": 0.7921207547187805,
+    "coherence_loss": {
+     "loss_area_km2": 196.0128,
+     "comparable_area_km2": 694.7648,
+     "loss_fraction_inside": 0.2821282828375876,
+     "loss_fraction_outside": 0.039823255052778006,
+     "comparable_px_inside": 108557,
+     "loss_area_km2_whole_window": 429.61920000000003,
+     "mean_coh_control_at_loss_px": 0.8322159051895142,
+     "mean_coh_event_at_loss_px": 0.2517143785953522
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 197.52960000000002,
+      "lon": -4.6394,
+      "lat": 40.3459,
+      "max_side_km": 34.64
+     },
+     {
+      "area_km2": 62.156800000000004,
+      "lon": -4.3031,
+      "lat": 40.3648,
+      "max_side_km": 21.52
+     },
+     {
+      "area_km2": 20.0576,
+      "lon": -5.1242,
+      "lat": 40.5842,
+      "max_side_km": 9.44
+     },
+     {
+      "area_km2": 13.6768,
+      "lon": -4.4053,
+      "lat": 40.4574,
+      "max_side_km": 6.8
+     },
+     {
+      "area_km2": 9.8368,
+      "lon": -5.117,
+      "lat": 40.1857,
+      "max_side_km": 5.28
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 63,
+     "median": 23.328,
+     "p95": 85.19168,
+     "max": 102.5216
+    },
+    "incidence_deg_mean": 43.06556701660156
    }
   },
-  "verdict": null
+  "verdict": "clear"
  },
  "gironde-coh-2026": {
   "event_id": "gironde-coh-2026",
@@ -2125,6 +2321,960 @@
      "max": 3.2448
     },
     "incidence_deg_mean": 43.08988952636719
+   },
+   "a_ign": {
+    "event": "Gironde megafire scar by coherence, France, from about 22 Jul 2026",
+    "view": "a_ign",
+    "track": 130,
+    "frame": 24,
+    "direction": "A",
+    "event_pair": "20260717_20260810",
+    "control_pair": "20260705_20260717",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 12,
+    "far_km": 36,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.28453966975212097,
+    "mean_coh_control_within_radius": 0.5639136433601379,
+    "mean_coh_event_whole_window": 0.30627089738845825,
+    "mean_coh_control_whole_window": 0.39021560549736023,
+    "coherence_loss": {
+     "loss_area_km2": 203.27040000000002,
+     "comparable_area_km2": 352.9792,
+     "loss_fraction_inside": 0.5758707595235073,
+     "loss_fraction_outside": 0.0737537229274499,
+     "comparable_px_inside": 55153,
+     "loss_area_km2_whole_window": 333.86240000000004,
+     "mean_coh_control_at_loss_px": 0.6188653111457825,
+     "mean_coh_event_at_loss_px": 0.16287319362163544
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 260.8768,
+      "lon": -1.0405,
+      "lat": 44.8469,
+      "max_side_km": 32.08
+     },
+     {
+      "area_km2": 36.7488,
+      "lon": -1.1835,
+      "lat": 44.5632,
+      "max_side_km": 10.48
+     },
+     {
+      "area_km2": 4.0768,
+      "lon": -1.1516,
+      "lat": 45.0683,
+      "max_side_km": 4.4
+     },
+     {
+      "area_km2": 2.1696,
+      "lon": -0.8055,
+      "lat": 44.7398,
+      "max_side_km": 3.2800000000000002
+     },
+     {
+      "area_km2": 1.728,
+      "lon": -1.1482,
+      "lat": 45.1003,
+      "max_side_km": 2.56
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 39,
+     "median": 3.0464,
+     "p95": 39.90912,
+     "max": 40.0128
+    },
+    "incidence_deg_mean": 43.09263610839844
+   },
+   "d_ign": {
+    "event": "Gironde megafire scar by coherence, France, from about 22 Jul 2026",
+    "view": "d_ign",
+    "track": 95,
+    "frame": 66,
+    "direction": "D",
+    "event_pair": "20260714_20260726",
+    "control_pair": "20260702_20260714",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 12,
+    "far_km": 36,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.3389243185520172,
+    "mean_coh_control_within_radius": 0.4483002722263336,
+    "mean_coh_event_whole_window": 0.35339388251304626,
+    "mean_coh_control_whole_window": 0.3169642388820648,
+    "coherence_loss": {
+     "loss_area_km2": 31.270400000000002,
+     "comparable_area_km2": 182.70080000000002,
+     "loss_fraction_inside": 0.17115633866956248,
+     "loss_fraction_outside": 0.010673963047040606,
+     "comparable_px_inside": 28547,
+     "loss_area_km2_whole_window": 40.3584,
+     "mean_coh_control_at_loss_px": 0.6249643564224243,
+     "mean_coh_event_at_loss_px": 0.21022266149520874
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 8.16,
+      "lon": -1.2025,
+      "lat": 44.799,
+      "max_side_km": 5.04
+     },
+     {
+      "area_km2": 3.2832000000000003,
+      "lon": -1.0706,
+      "lat": 44.8816,
+      "max_side_km": 4.24
+     },
+     {
+      "area_km2": 1.8368,
+      "lon": -1.1633,
+      "lat": 44.8685,
+      "max_side_km": 2.64
+     },
+     {
+      "area_km2": 1.4464000000000001,
+      "lon": -0.9934,
+      "lat": 44.8241,
+      "max_side_km": 3.04
+     },
+     {
+      "area_km2": 1.2288000000000001,
+      "lon": -1.1916,
+      "lat": 44.7835,
+      "max_side_km": 2.0
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 14,
+     "median": 0.0,
+     "p95": 0.2048,
+     "max": 0.2048
+    },
+    "incidence_deg_mean": 40.38734817504883
+   }
+  },
+  "verdict": null
+ },
+ "mahanadi-coh-2026": {
+  "event_id": "mahanadi-coh-2026",
+  "views": {
+   "a_peak": {
+    "event": "Mahanadi flood by coherence, Odisha, late Jul 2026",
+    "view": "a_peak",
+    "track": 26,
+    "frame": 12,
+    "direction": "A",
+    "event_pair": "20260721_20260814",
+    "control_pair": "20260627_20260709",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 25,
+    "far_km": 75,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.07675471901893616,
+    "mean_coh_control_within_radius": 0.07311075925827026,
+    "mean_coh_event_whole_window": 0.07656386494636536,
+    "mean_coh_control_whole_window": 0.07295776158571243,
+    "coherence_loss": {
+     "loss_area_km2": 0.0,
+     "comparable_area_km2": 0.0,
+     "loss_fraction_inside": 0.0,
+     "loss_fraction_outside": 0.0,
+     "comparable_px_inside": 0,
+     "loss_area_km2_whole_window": 0.0
+    },
+    "largest_loss_clusters": [],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": 38.14713668823242
+   },
+   "a_after": {
+    "event": "Mahanadi flood by coherence, Odisha, late Jul 2026",
+    "view": "a_after",
+    "track": 26,
+    "frame": 12,
+    "direction": "A",
+    "event_pair": "20260814_20260826",
+    "control_pair": "20260627_20260709",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 25,
+    "far_km": 75,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.47752082347869873,
+    "mean_coh_control_within_radius": 0.07311075925827026,
+    "mean_coh_event_whole_window": 0.43321919441223145,
+    "mean_coh_control_whole_window": 0.07295776158571243,
+    "coherence_loss": {
+     "loss_area_km2": 0.0,
+     "comparable_area_km2": 0.0,
+     "loss_fraction_inside": 0.0,
+     "loss_fraction_outside": 0.0,
+     "comparable_px_inside": 0,
+     "loss_area_km2_whole_window": 0.0
+    },
+    "largest_loss_clusters": [],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": null
+   }
+  },
+  "verdict": null
+ },
+ "terai-coh-2026": {
+  "event_id": "terai-coh-2026",
+  "views": {
+   "a_ev": {
+    "event": "Terai/Uttar Pradesh flood by coherence, late Sep 2026",
+    "view": "a_ev",
+    "track": 26,
+    "frame": 15,
+    "direction": "A",
+    "event_pair": "20260919_20261001",
+    "control_pair": "20260814_20260826",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 25,
+    "far_km": 75,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.4462628960609436,
+    "mean_coh_control_within_radius": 0.5548037886619568,
+    "mean_coh_event_whole_window": 0.4329579770565033,
+    "mean_coh_control_whole_window": 0.5564659237861633,
+    "coherence_loss": {
+     "loss_area_km2": 112.94720000000001,
+     "comparable_area_km2": 1624.5632,
+     "loss_fraction_inside": 0.06952465745869413,
+     "loss_fraction_outside": 0.09223086330477784,
+     "comparable_px_inside": 253838,
+     "loss_area_km2_whole_window": 911.2704,
+     "mean_coh_control_at_loss_px": 0.5792406797409058,
+     "mean_coh_event_at_loss_px": 0.12681187689304352
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 77.8304,
+      "lon": 82.7859,
+      "lat": 27.4096,
+      "max_side_km": 24.32
+     },
+     {
+      "area_km2": 71.0464,
+      "lon": 83.3688,
+      "lat": 26.5944,
+      "max_side_km": 18.8
+     },
+     {
+      "area_km2": 37.702400000000004,
+      "lon": 82.4955,
+      "lat": 27.2471,
+      "max_side_km": 14.88
+     },
+     {
+      "area_km2": 27.820800000000002,
+      "lon": 83.1056,
+      "lat": 27.2751,
+      "max_side_km": 16.96
+     },
+     {
+      "area_km2": 27.5136,
+      "lon": 82.5359,
+      "lat": 27.4128,
+      "max_side_km": 15.36
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 5,
+     "median": 201.3248,
+     "p95": 218.44352,
+     "max": 219.80800000000002
+    },
+    "incidence_deg_mean": 43.06688690185547
+   },
+   "a_after": {
+    "event": "Terai/Uttar Pradesh flood by coherence, late Sep 2026",
+    "view": "a_after",
+    "track": 26,
+    "frame": 15,
+    "direction": "A",
+    "event_pair": "20261001_20261013",
+    "control_pair": "20260814_20260826",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 25,
+    "far_km": 75,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.4919557571411133,
+    "mean_coh_control_within_radius": 0.5548037886619568,
+    "mean_coh_event_whole_window": 0.48282167315483093,
+    "mean_coh_control_whole_window": 0.5564659237861633,
+    "coherence_loss": {
+     "loss_area_km2": 85.92,
+     "comparable_area_km2": 1624.5632,
+     "loss_fraction_inside": 0.05288806246503676,
+     "loss_fraction_outside": 0.06346167780937466,
+     "comparable_px_inside": 253838,
+     "loss_area_km2_whole_window": 635.2256,
+     "mean_coh_control_at_loss_px": 0.5838891267776489,
+     "mean_coh_event_at_loss_px": 0.1196335181593895
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 63.392,
+      "lon": 83.3643,
+      "lat": 26.5943,
+      "max_side_km": 15.52
+     },
+     {
+      "area_km2": 32.9664,
+      "lon": 82.4969,
+      "lat": 27.2488,
+      "max_side_km": 14.72
+     },
+     {
+      "area_km2": 32.1344,
+      "lon": 82.7715,
+      "lat": 27.4145,
+      "max_side_km": 13.84
+     },
+     {
+      "area_km2": 27.1936,
+      "lon": 83.1064,
+      "lat": 27.2756,
+      "max_side_km": 16.16
+     },
+     {
+      "area_km2": 25.1328,
+      "lon": 82.5706,
+      "lat": 27.2205,
+      "max_side_km": 13.44
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 5,
+     "median": 151.6608,
+     "p95": 166.51648,
+     "max": 168.0064
+    },
+    "incidence_deg_mean": null
+   }
+  },
+  "verdict": null
+ },
+ "lewotolok-2026": {
+  "event_id": "lewotolok-2026",
+  "views": {
+   "asc": {
+    "event": "Lewotolok lava flow, Indonesia, 18 Aug 2026",
+    "view": "asc",
+    "track": 67,
+    "frame": 173,
+    "direction": "A",
+    "event_pair": "20260817_20260829",
+    "control_pair": "20260712_20260724",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 4,
+    "far_km": 12,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.6088013052940369,
+    "mean_coh_control_within_radius": 0.49299630522727966,
+    "mean_coh_event_whole_window": 0.29484793543815613,
+    "mean_coh_control_whole_window": 0.27247607707977295,
+    "coherence_loss": {
+     "loss_area_km2": 0.3904,
+     "comparable_area_km2": 27.6992,
+     "loss_fraction_inside": 0.014094269870609981,
+     "loss_fraction_outside": 0.00046363074386977126,
+     "comparable_px_inside": 4328,
+     "loss_area_km2_whole_window": 0.5632,
+     "mean_coh_control_at_loss_px": 0.6639344096183777,
+     "mean_coh_event_at_loss_px": 0.22898361086845398
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 0.1792,
+      "lon": 123.5002,
+      "lat": -8.2799,
+      "max_side_km": 0.72
+     },
+     {
+      "area_km2": 0.13440000000000002,
+      "lon": 123.505,
+      "lat": -8.2792,
+      "max_side_km": 1.12
+     },
+     {
+      "area_km2": 0.0896,
+      "lon": 123.3333,
+      "lat": -8.2514,
+      "max_side_km": 0.4
+     },
+     {
+      "area_km2": 0.08320000000000001,
+      "lon": 123.6352,
+      "lat": -8.3421,
+      "max_side_km": 0.64
+     },
+     {
+      "area_km2": 0.07680000000000001,
+      "lon": 123.5119,
+      "lat": -8.2695,
+      "max_side_km": 0.56
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 84,
+     "median": 0.0,
+     "p95": 0.08320000000000001,
+     "max": 0.08320000000000001
+    },
+    "incidence_deg_mean": 39.696327209472656
+   },
+   "desc": {
+    "event": "Lewotolok lava flow, Indonesia, 18 Aug 2026",
+    "view": "desc",
+    "track": 75,
+    "frame": 93,
+    "direction": "D",
+    "event_pair": "20260818_20260830",
+    "control_pair": "20260713_20260725",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 4,
+    "far_km": 12,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.5689922571182251,
+    "mean_coh_control_within_radius": 0.5116288661956787,
+    "mean_coh_event_whole_window": 0.2923024296760559,
+    "mean_coh_control_whole_window": 0.28390616178512573,
+    "coherence_loss": {
+     "loss_area_km2": 0.18560000000000001,
+     "comparable_area_km2": 32.3328,
+     "loss_fraction_inside": 0.0057403008709422014,
+     "loss_fraction_outside": 0.00021333508377504635,
+     "comparable_px_inside": 5052,
+     "loss_area_km2_whole_window": 0.26880000000000004,
+     "mean_coh_control_at_loss_px": 0.6906207799911499,
+     "mean_coh_event_at_loss_px": 0.2165517508983612
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 0.10880000000000001,
+      "lon": 123.5125,
+      "lat": -8.2692,
+      "max_side_km": 0.88
+     },
+     {
+      "area_km2": 0.08320000000000001,
+      "lon": 123.3654,
+      "lat": -8.2791,
+      "max_side_km": 0.48
+     },
+     {
+      "area_km2": 0.07680000000000001,
+      "lon": 123.5051,
+      "lat": -8.2772,
+      "max_side_km": 0.8
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 86,
+     "median": 0.0,
+     "p95": 0.024,
+     "max": 0.08320000000000001
+    },
+    "incidence_deg_mean": 44.39714431762695
+   }
+  },
+  "verdict": null
+ },
+ "chaophraya-coh-2026": {
+  "event_id": "chaophraya-coh-2026",
+  "views": {
+   "d_ev": {
+    "event": "Chao Phraya flood by coherence, Thailand, late Sep-Oct 2026",
+    "view": "d_ev",
+    "track": 4,
+    "frame": 81,
+    "direction": "D",
+    "event_pair": "20260918_20260930",
+    "control_pair": "20260825_20260906",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 30,
+    "far_km": 90,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.305560827255249,
+    "mean_coh_control_within_radius": 0.36654773354530334,
+    "mean_coh_event_whole_window": 0.3286295533180237,
+    "mean_coh_control_whole_window": 0.3856007754802704,
+    "coherence_loss": {
+     "loss_area_km2": 178.4128,
+     "comparable_area_km2": 1144.608,
+     "loss_fraction_inside": 0.1558724034778719,
+     "loss_fraction_outside": 0.15764026156887168,
+     "comparable_px_inside": 178845,
+     "loss_area_km2_whole_window": 774.5664,
+     "mean_coh_control_at_loss_px": 0.5518717169761658,
+     "mean_coh_event_at_loss_px": 0.12192674726247787
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 80.0768,
+      "lon": 100.677,
+      "lat": 15.0701,
+      "max_side_km": 24.0
+     },
+     {
+      "area_km2": 31.6352,
+      "lon": 100.34,
+      "lat": 15.1163,
+      "max_side_km": 11.92
+     },
+     {
+      "area_km2": 28.6144,
+      "lon": 100.5198,
+      "lat": 15.1712,
+      "max_side_km": 12.72
+     },
+     {
+      "area_km2": 18.464000000000002,
+      "lon": 100.2389,
+      "lat": 15.1008,
+      "max_side_km": 8.96
+     },
+     {
+      "area_km2": 12.128,
+      "lon": 100.4068,
+      "lat": 15.029,
+      "max_side_km": 8.48
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": 37.97325134277344
+   },
+   "d_after": {
+    "event": "Chao Phraya flood by coherence, Thailand, late Sep-Oct 2026",
+    "view": "d_after",
+    "track": 4,
+    "frame": 81,
+    "direction": "D",
+    "event_pair": "20260930_20261012",
+    "control_pair": "20260825_20260906",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 30,
+    "far_km": 90,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.32654303312301636,
+    "mean_coh_control_within_radius": 0.36654773354530334,
+    "mean_coh_event_whole_window": 0.3485219180583954,
+    "mean_coh_control_whole_window": 0.3856007754802704,
+    "coherence_loss": {
+     "loss_area_km2": 174.89280000000002,
+     "comparable_area_km2": 1144.608,
+     "loss_fraction_inside": 0.15279711482009561,
+     "loss_fraction_outside": 0.13199784733692563,
+     "comparable_px_inside": 178845,
+     "loss_area_km2_whole_window": 674.0736,
+     "mean_coh_control_at_loss_px": 0.5614264011383057,
+     "mean_coh_event_at_loss_px": 0.12820975482463837
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 39.8848,
+      "lon": 100.6565,
+      "lat": 15.0584,
+      "max_side_km": 12.48
+     },
+     {
+      "area_km2": 27.5072,
+      "lon": 100.3381,
+      "lat": 15.115,
+      "max_side_km": 10.48
+     },
+     {
+      "area_km2": 10.214400000000001,
+      "lon": 100.0886,
+      "lat": 14.813,
+      "max_side_km": 5.5200000000000005
+     },
+     {
+      "area_km2": 9.7728,
+      "lon": 100.5607,
+      "lat": 14.9285,
+      "max_side_km": 7.44
+     },
+     {
+      "area_km2": 9.344000000000001,
+      "lon": 100.2506,
+      "lat": 15.0869,
+      "max_side_km": 6.24
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": null
+   }
+  },
+  "verdict": null
+ },
+ "niebla-fire-2026": {
+  "event_id": "niebla-fire-2026",
+  "views": {
+   "d_ign": {
+    "event": "Niebla fire (Huelva, Spain) by coherence, from 6 Aug 2026",
+    "view": "d_ign",
+    "track": 23,
+    "frame": 70,
+    "direction": "D",
+    "event_pair": "20260721_20260814",
+    "control_pair": "20260709_20260721",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 15,
+    "far_km": 45,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.6210191249847412,
+    "mean_coh_control_within_radius": 0.79720538854599,
+    "mean_coh_event_whole_window": 0.6901911497116089,
+    "mean_coh_control_whole_window": 0.7636032104492188,
+    "coherence_loss": {
+     "loss_area_km2": 109.632,
+     "comparable_area_km2": 667.9872,
+     "loss_fraction_inside": 0.16412290534908452,
+     "loss_fraction_outside": 0.0317937100113086,
+     "comparable_px_inside": 104373,
+     "loss_area_km2_whole_window": 217.952,
+     "mean_coh_control_at_loss_px": 0.8318391442298889,
+     "mean_coh_event_at_loss_px": 0.325143039226532
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 50.2912,
+      "lon": -6.6326,
+      "lat": 37.5276,
+      "max_side_km": 17.44
+     },
+     {
+      "area_km2": 44.8448,
+      "lon": -6.4275,
+      "lat": 37.564,
+      "max_side_km": 13.6
+     },
+     {
+      "area_km2": 15.7888,
+      "lon": -6.3241,
+      "lat": 37.5616,
+      "max_side_km": 7.68
+     },
+     {
+      "area_km2": 15.4304,
+      "lon": -6.5936,
+      "lat": 37.4878,
+      "max_side_km": 8.88
+     },
+     {
+      "area_km2": 11.4048,
+      "lon": -6.546,
+      "lat": 37.55,
+      "max_side_km": 7.12
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 6,
+     "median": 28.5888,
+     "p95": 29.3056,
+     "max": 29.5168
+    },
+    "incidence_deg_mean": 39.55228042602539
+   },
+   "a_ign": {
+    "event": "Niebla fire, Huelva and Seville, Spain: forest surface changed, 21 Jul-14 Aug 2026",
+    "view": "a_ign",
+    "track": 15,
+    "frame": 21,
+    "direction": "A",
+    "event_pair": "20260721_20260814",
+    "control_pair": "20260709_20260721",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 15,
+    "far_km": 30,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.6310423016548157,
+    "mean_coh_control_within_radius": 0.803338885307312,
+    "mean_coh_event_whole_window": 0.6841294169425964,
+    "mean_coh_control_whole_window": 0.758960485458374,
+    "coherence_loss": {
+     "loss_area_km2": 144.5504,
+     "comparable_area_km2": 692.4992000000001,
+     "loss_fraction_inside": 0.2087372808517324,
+     "loss_fraction_outside": 0.0335125171410228,
+     "comparable_px_inside": 108203,
+     "loss_area_km2_whole_window": 240.42880000000002,
+     "mean_coh_control_at_loss_px": 0.8132149577140808,
+     "mean_coh_event_at_loss_px": 0.3184197247028351
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 113.5232,
+      "lon": -6.604,
+      "lat": 37.5286,
+      "max_side_km": 20.16
+     },
+     {
+      "area_km2": 56.4864,
+      "lon": -6.431,
+      "lat": 37.5648,
+      "max_side_km": 15.040000000000001
+     },
+     {
+      "area_km2": 20.736,
+      "lon": -6.3238,
+      "lat": 37.5621,
+      "max_side_km": 8.16
+     },
+     {
+      "area_km2": 6.566400000000001,
+      "lon": -6.5179,
+      "lat": 37.502,
+      "max_side_km": 5.6000000000000005
+     },
+     {
+      "area_km2": 1.9584000000000001,
+      "lon": -6.861,
+      "lat": 37.2841,
+      "max_side_km": 3.2
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 8,
+     "median": 6.361600000000001,
+     "p95": 6.6470400000000005,
+     "max": 6.656000000000001
+    },
+    "incidence_deg_mean": 45.61082077026367
+   },
+   "a_after": {
+    "event": "Niebla fire, Huelva and Seville, Spain: forest surface changed, 21 Jul-14 Aug 2026",
+    "view": "a_after",
+    "track": 15,
+    "frame": 21,
+    "direction": "A",
+    "event_pair": "20260814_20260826",
+    "control_pair": "20260709_20260721",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 15,
+    "far_km": 30,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.8176333904266357,
+    "mean_coh_control_within_radius": 0.803338885307312,
+    "mean_coh_event_whole_window": 0.7843247652053833,
+    "mean_coh_control_whole_window": 0.758960485458374,
+    "coherence_loss": {
+     "loss_area_km2": 0.5760000000000001,
+     "comparable_area_km2": 692.4992000000001,
+     "loss_fraction_inside": 0.0008317699139580233,
+     "loss_fraction_outside": 0.00224563272653796,
+     "comparable_px_inside": 108203,
+     "loss_area_km2_whole_window": 6.8352,
+     "mean_coh_control_at_loss_px": 0.778711199760437,
+     "mean_coh_event_at_loss_px": 0.285955548286438
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 2.08,
+      "lon": -6.8611,
+      "lat": 37.2839,
+      "max_side_km": 3.2800000000000002
+     },
+     {
+      "area_km2": 0.7040000000000001,
+      "lon": -6.8777,
+      "lat": 37.2833,
+      "max_side_km": 1.76
+     },
+     {
+      "area_km2": 0.3776,
+      "lon": -6.509,
+      "lat": 37.5651,
+      "max_side_km": 0.8
+     },
+     {
+      "area_km2": 0.3584,
+      "lon": -6.8873,
+      "lat": 37.2877,
+      "max_side_km": 1.2
+     },
+     {
+      "area_km2": 0.33280000000000004,
+      "lon": -6.3268,
+      "lat": 37.5408,
+      "max_side_km": 0.96
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 8,
+     "median": 4.1728000000000005,
+     "p95": 4.1728000000000005,
+     "max": 4.1728000000000005
+    },
+    "incidence_deg_mean": null
+   }
+  },
+  "verdict": "clear"
+ },
+ "hautes-fagnes-fire-2026": {
+  "event_id": "hautes-fagnes-fire-2026",
+  "views": {
+   "a_ign": {
+    "event": "Hautes Fagnes (High Fens) fire, Belgium, from 14 Aug 2026",
+    "view": "a_ign",
+    "track": 144,
+    "frame": 27,
+    "direction": "A",
+    "event_pair": "20260811_20260823",
+    "control_pair": "20260706_20260718",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 10,
+    "far_km": 30,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.40694475173950195,
+    "mean_coh_control_within_radius": 0.6487939357757568,
+    "mean_coh_event_whole_window": 0.4250631630420685,
+    "mean_coh_control_whole_window": 0.5832196474075317,
+    "coherence_loss": {
+     "loss_area_km2": 82.464,
+     "comparable_area_km2": 280.064,
+     "loss_fraction_inside": 0.2944469835466179,
+     "loss_fraction_outside": 0.13548379903217894,
+     "comparable_px_inside": 43760,
+     "loss_area_km2_whole_window": 237.9968,
+     "mean_coh_control_at_loss_px": 0.6675458550453186,
+     "mean_coh_event_at_loss_px": 0.2557590901851654
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 45.2928,
+      "lon": 6.0828,
+      "lat": 50.5171,
+      "max_side_km": 10.72
+     },
+     {
+      "area_km2": 30.073600000000003,
+      "lon": 5.8624,
+      "lat": 50.3896,
+      "max_side_km": 12.48
+     },
+     {
+      "area_km2": 22.0864,
+      "lon": 6.1741,
+      "lat": 50.6134,
+      "max_side_km": 11.76
+     },
+     {
+      "area_km2": 12.102400000000001,
+      "lon": 5.8969,
+      "lat": 50.4698,
+      "max_side_km": 7.44
+     },
+     {
+      "area_km2": 11.148800000000001,
+      "lon": 6.3104,
+      "lat": 50.7215,
+      "max_side_km": 5.68
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 2,
+     "median": 51.0016,
+     "p95": 51.21472000000001,
+     "max": 51.238400000000006
+    },
+    "incidence_deg_mean": 42.827728271484375
+   }
+  },
+  "verdict": null
+ },
+ "bald-range-fire-2026": {
+  "event_id": "bald-range-fire-2026",
+  "views": {
+   "a_ign": {
+    "event": "Bald Range fire, British Columbia, from 7 Aug 2026",
+    "view": "a_ign",
+    "track": 77,
+    "frame": 27,
+    "direction": "A",
+    "event_pair": "20260725_20260818",
+    "control_pair": "20260713_20260725",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 12,
+    "far_km": 36,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.5325946807861328,
+    "mean_coh_control_within_radius": 0.7330757975578308,
+    "mean_coh_event_whole_window": 0.6762192845344543,
+    "mean_coh_control_whole_window": 0.7123757600784302,
+    "coherence_loss": {
+     "loss_area_km2": 131.0272,
+     "comparable_area_km2": 421.08160000000004,
+     "loss_fraction_inside": 0.31116819162841597,
+     "loss_fraction_outside": 0.0025427205071173243,
+     "comparable_px_inside": 65794,
+     "loss_area_km2_whole_window": 137.4144,
+     "mean_coh_control_at_loss_px": 0.7753894329071045,
+     "mean_coh_event_at_loss_px": 0.2534750998020172
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 133.6064,
+      "lon": -119.815,
+      "lat": 49.6174,
+      "max_side_km": 20.080000000000002
+     },
+     {
+      "area_km2": 1.1008,
+      "lon": -119.7774,
+      "lat": 49.5485,
+      "max_side_km": 2.08
+     },
+     {
+      "area_km2": 0.4224,
+      "lon": -119.7446,
+      "lat": 49.6727,
+      "max_side_km": 1.6
+     },
+     {
+      "area_km2": 0.3648,
+      "lon": -119.7229,
+      "lat": 49.6666,
+      "max_side_km": 1.12
+     },
+     {
+      "area_km2": 0.2944,
+      "lon": -119.7293,
+      "lat": 49.5461,
+      "max_side_km": 1.04
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 16,
+     "median": 0.08,
+     "p95": 0.6592,
+     "max": 0.6592
+    },
+    "incidence_deg_mean": 41.199951171875
    }
   },
   "verdict": null

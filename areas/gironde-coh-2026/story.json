@@ -1,0 +1,28 @@
+{
+  "story": {
+    "see": "The Gironde megafire began on Wednesday 22 July 2026 between Saumos and Le Porge and crossed the pine forest towards Lacanau and Lege-Cap-Ferret; the prefecture gave 42,000 hectares burned on 30 July (AFP, via Paris Match Belgium). The orange area is where the radar picture between NISAR's 17 July and 10 August passes no longer matches the pair taken just before it (5 to 17 July). It is a single large patch in the forest, with the Atlantic and the Arcachon basin dark in both pictures.",
+    "physics": "Fire strips the pine canopy and the litter beneath it, and the radar echo of that ground stops repeating. About 334 km2 in the map lost coherence, 261 km2 in one connected patch. Equal circles placed elsewhere in the same map lose at most 40 km2 (95th percentile of 39). The descending pass (14 to 26 July, 12 days) shows a smaller patch at the same forest, 31 km2 within 12 km; its water- and marsh-rich surface keeps less coherence to begin with. We do not measure the burned area; only ground that was coherent before is counted.",
+    "lband": "NISAR's L-band radar has a wavelength of about 24 cm and sees through much of a forest canopy, so a burned forest changes its echo strongly. The pair is 24 days long against a 12-day control, which lowers coherence everywhere a little. In the pair of 22 August to 3 September, after the fire, nothing like this patch remains, so the map marks the change inside 17 July to 10 August. Rain or soil moisture cannot be fully excluded from coherence alone; the shape, the place and the date are what we rely on.",
+    "people": "This map shows where the surface changed, not damage. We did not look at reports of damage, evacuations or casualties."
+  },
+  "spots": [
+    {
+      "id": "site",
+      "label": "Centre of the largest patch of lost coherence",
+      "lngLat": [
+        -1.04,
+        44.85
+      ],
+      "radius_m": 3000
+    },
+    {
+      "id": "reference",
+      "label": "Reference: stays coherent in both pairs",
+      "lngLat": [
+        -0.8,
+        44.85
+      ],
+      "radius_m": 4000
+    }
+  ]
+}

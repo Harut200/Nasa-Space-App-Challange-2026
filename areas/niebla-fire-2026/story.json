@@ -1,0 +1,37 @@
+{
+  "story": {
+    "see": "The Niebla fire was declared on a Thursday, probably 6 August 2026, in the province of Huelva and crossed into Seville; by 13 August it had burned more than 31,000 hectares, with a perimeter of about 120 km (Infobae). The orange area is where the radar picture between NISAR's 21 July and 14 August passes no longer matches the pair taken just before it (9 to 21 July). It forms a wide sharp-edged block north-east of Niebla.",
+    "physics": "Burning removes the leaves, twigs and scrub that gave this dry hill country a repeatable radar echo. About 218 km2 in the map lost coherence (110 km2 within 15 km of the centre, 50 km2 in the largest connected piece). Equal circles placed elsewhere in the same map lose at most 29 km2. We do not measure the burned area: only ground that was coherent before is counted, and the scar continues outside the map. The ascending pass (same dates, track 15) shows the same block: 145 km2 within 15 km, 113 km2 in the largest piece, against at most 7 km2 in equal circles elsewhere. The pair of 14 to 26 August, after the fire, shows nothing (the scar is coherent again). The north edge of the scar is almost straight over about 25 km, at the same latitude (37.57 to 37.61 N) in both passes, so it is a feature of the ground and not of the radar frame; we did not identify what lies there (a road, a firebreak or the edge of the woodland).",
+    "lband": "NISAR's L-band radar has a wavelength of about 24 cm. Here the pair is 24 days long while the control is 12, which lowers coherence everywhere a little; the control is bright almost everywhere and the scar stays dark with hard edges. Rain or dew on the ground cannot be fully excluded from coherence alone; the shape, the place and the date are what we rely on.",
+    "people": "This map shows where the surface changed, not damage. We did not look at reports of damage, evacuations or casualties."
+  },
+  "spots": [
+    {
+      "id": "site",
+      "label": "Centre of the largest patch of lost coherence",
+      "lngLat": [
+        -6.63,
+        37.53
+      ],
+      "radius_m": 3000
+    },
+    {
+      "id": "east",
+      "label": "Second large patch, 20 km to the east",
+      "lngLat": [
+        -6.4275,
+        37.564
+      ],
+      "radius_m": 5000
+    },
+    {
+      "id": "reference",
+      "label": "Reference: stays coherent in both pairs",
+      "lngLat": [
+        -6.8,
+        37.65
+      ],
+      "radius_m": 4000
+    }
+  ]
+}
