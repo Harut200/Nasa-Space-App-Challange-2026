@@ -7,5 +7,32 @@
     "2026-08-22",
     "2026-09-03"
   ],
-  "series": []
+  "unit": "dB",
+  "series": [],
+  "facts": [
+    {
+      "label": "Open water",
+      "unit": "km²",
+      "values": [
+        10.0,
+        44.9,
+        105.1,
+        190.2,
+        300.6,
+        435.7
+      ]
+    },
+    {
+      "label": "Flooded vegetation",
+      "unit": "km²",
+      "values": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  ]
 }

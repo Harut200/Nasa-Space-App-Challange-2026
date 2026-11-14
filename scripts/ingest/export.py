@@ -75,6 +75,9 @@ def export(area, root=ROOT):
         "spots": [{k: s[k] for k in ("id", "label", "lngLat")} for s in story.get("spots", [])],
         "credits": CREDITS,
     }
+    src_info = load(prod / "source.json")  # written by scripts/detect/run.py: says preview or gamma0
+    if src_info:
+        manifest.update(credits=src_info.get("credits", CREDITS), source=src_info.get("source"))
     (pub / area / "manifest.json").write_text(json.dumps(manifest, indent=2))
     shutil.copy(prod / "timeseries.json", pub / area / "timeseries.json")
     idx = load(pub / "index.json", {"areas": []})

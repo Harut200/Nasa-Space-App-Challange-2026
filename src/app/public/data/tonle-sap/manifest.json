@@ -1,0 +1,288 @@
+{
+  "id": "tonle-sap",
+  "name": "Tonle Sap, Cambodia",
+  "bounds": [
+    103.39999999999999,
+    11.800067946562462,
+    105.20007115475923,
+    13.599999999999994
+  ],
+  "dates": [
+    "2026-06-19",
+    "2026-07-01",
+    "2026-07-13",
+    "2026-07-25",
+    "2026-08-18",
+    "2026-08-30",
+    "2026-09-11",
+    "2026-09-23",
+    "2026-10-05",
+    "2026-10-17"
+  ],
+  "gaps": [
+    [
+      "2026-07-27",
+      "2026-08-10"
+    ]
+  ],
+  "layers": [
+    {
+      "id": "hh",
+      "label": "HH brightness (preview)",
+      "dates": [
+        "2026-06-19",
+        "2026-07-01",
+        "2026-07-13",
+        "2026-07-25",
+        "2026-08-18",
+        "2026-08-30",
+        "2026-09-11",
+        "2026-09-23",
+        "2026-10-05",
+        "2026-10-17"
+      ],
+      "legend": {
+        "type": "ramp",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": 0,
+        "max": 100,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    },
+    {
+      "id": "water",
+      "label": "Water and flooded vegetation",
+      "dates": [
+        "2026-06-19",
+        "2026-07-01",
+        "2026-07-13",
+        "2026-07-25",
+        "2026-08-18",
+        "2026-08-30",
+        "2026-09-11",
+        "2026-09-23",
+        "2026-10-05",
+        "2026-10-17"
+      ],
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#2f6fde",
+            "label": "Open water"
+          },
+          {
+            "color": "#35b04a",
+            "label": "Flooded vegetation"
+          },
+          {
+            "color": "#f28e2b",
+            "label": "Usually water, not today (wind?)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "when",
+      "label": "When it changed for good",
+      "dates": null,
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#440154",
+            "label": "1 Jul"
+          },
+          {
+            "color": "#472d7b",
+            "label": "13 Jul"
+          },
+          {
+            "color": "#3b528b",
+            "label": "25 Jul"
+          },
+          {
+            "color": "#2c728e",
+            "label": "18 Aug"
+          },
+          {
+            "color": "#21918c",
+            "label": "30 Aug"
+          },
+          {
+            "color": "#28ae80",
+            "label": "11 Sep"
+          },
+          {
+            "color": "#5ec962",
+            "label": "23 Sep"
+          },
+          {
+            "color": "#addc30",
+            "label": "5 Oct"
+          },
+          {
+            "color": "#fde725",
+            "label": "17 Oct"
+          }
+        ]
+      }
+    },
+    {
+      "id": "classes",
+      "label": "Season classes",
+      "dates": null,
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#08306b",
+            "label": "Permanent water"
+          },
+          {
+            "color": "#4292c6",
+            "label": "Seasonal open water"
+          },
+          {
+            "color": "#41ab5d",
+            "label": "Flooded vegetation"
+          },
+          {
+            "color": "#9ecae1",
+            "label": "Got darker, not open water (wetter ground, shallow or partial flooding)"
+          },
+          {
+            "color": "#c994c7",
+            "label": "Got brighter (growing crops and other causes)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "change",
+      "label": "Change since first pass (HH)",
+      "dates": [
+        "2026-07-01",
+        "2026-07-13",
+        "2026-07-25",
+        "2026-08-18",
+        "2026-08-30",
+        "2026-09-11",
+        "2026-09-23",
+        "2026-10-05",
+        "2026-10-17"
+      ],
+      "legend": {
+        "type": "diverging",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": -35,
+        "max": 35,
+        "colors": [
+          "#2166ac",
+          "#00000000",
+          "#b2182b"
+        ],
+        "labels": [
+          "darker: new water, cleared forest",
+          "brighter: flooded vegetation, growth"
+        ]
+      }
+    },
+    {
+      "id": "rgb",
+      "label": "Three-date composite",
+      "dates": null,
+      "legend": {
+        "type": "text",
+        "text": "HH: red = 19 Jun, green = 30 Aug, blue = 17 Oct. Grey = no change."
+      }
+    },
+    {
+      "id": "hv",
+      "label": "HV brightness (preview)",
+      "dates": [
+        "2026-06-19",
+        "2026-07-01",
+        "2026-07-13",
+        "2026-07-25",
+        "2026-08-18",
+        "2026-08-30",
+        "2026-09-11",
+        "2026-09-23",
+        "2026-10-05",
+        "2026-10-17"
+      ],
+      "legend": {
+        "type": "ramp",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": 0,
+        "max": 100,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    }
+  ],
+  "story": {
+    "see": "Open water barely grew from mid-June to late July, then spread steadily. The biggest jump came between 11 and 23 September. The flood moved like a wave: the river plain towards Phnom Penh went under first, the ring around the lake followed, the far north-west last. The flood arrived late in our images.",
+    "physics": "Calm water is a mirror for radar: it bounces the signal away, so it looks dark. Trees standing in water do the opposite. The signal bounces off the water, then the trunk, and straight back, so flooded forest glows. The lake grows from about 2,500 km\u00b2 to 10,000\u201316,000 km\u00b2 (Hydrology and Earth System Sciences, 2022).",
+    "lband": "NISAR's L-band radar has a 24 cm wavelength, long enough to slip between leaves and reach the water below. Shorter-wave radar stops at the treetops and misses flooding under trees. Our images show the forest ring on the west and north-west shore peaking around the end of August, then turning to open water as it deepens.",
+    "people": "More than a million people depend on this lake. Fish and other aquatic foods average about 63 kg per person each year, second only to rice (FAO). A smaller flood means less flooded forest, the nursery of the fishery. No radar passes exist from 27 July to 10 August, so the flood's first days are hidden."
+  },
+  "spots": [
+    {
+      "id": "lake-core",
+      "label": "Open lake (stays water)",
+      "lngLat": [
+        104.1,
+        12.8
+      ]
+    },
+    {
+      "id": "prek-toal",
+      "label": "Prek Toal flooded forest",
+      "lngLat": [
+        103.7,
+        13.1
+      ]
+    },
+    {
+      "id": "chong-kneas",
+      "label": "Chong Kneas floating village",
+      "lngLat": [
+        103.84,
+        13.27
+      ]
+    },
+    {
+      "id": "southeast-corridor",
+      "label": "South-east flood corridor",
+      "lngLat": [
+        104.85,
+        12.0
+      ]
+    },
+    {
+      "id": "kampong-luong",
+      "label": "Kampong Luong shore",
+      "lngLat": [
+        104.2,
+        12.25
+      ]
+    },
+    {
+      "id": "upland-forest",
+      "label": "Upland forest (dry reference)",
+      "lngLat": [
+        104.01,
+        12.04
+      ]
+    }
+  ],
+  "credits": "NISAR GCOV preview images: NASA/JPL-Caltech and ISRO, distributed by ASF DAAC. Uncalibrated previews at about 180 m; values are display brightness, not backscatter.",
+  "source": "preview"
+}

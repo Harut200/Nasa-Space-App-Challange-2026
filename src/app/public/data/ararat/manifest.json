@@ -1,0 +1,280 @@
+{
+  "id": "ararat",
+  "name": "Ararat Valley, Armenia",
+  "bounds": [
+    44.0,
+    39.799318784086104,
+    44.799665048324854,
+    40.29999999999999
+  ],
+  "dates": [
+    "2026-06-20",
+    "2026-07-02",
+    "2026-07-14",
+    "2026-07-26",
+    "2026-08-19",
+    "2026-08-31",
+    "2026-09-12",
+    "2026-09-24",
+    "2026-10-06",
+    "2026-10-18"
+  ],
+  "gaps": [
+    [
+      "2026-07-27",
+      "2026-08-10"
+    ]
+  ],
+  "layers": [
+    {
+      "id": "hh",
+      "label": "HH brightness (preview)",
+      "dates": [
+        "2026-06-20",
+        "2026-07-02",
+        "2026-07-14",
+        "2026-07-26",
+        "2026-08-19",
+        "2026-08-31",
+        "2026-09-12",
+        "2026-09-24",
+        "2026-10-06",
+        "2026-10-18"
+      ],
+      "legend": {
+        "type": "ramp",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": 0,
+        "max": 100,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    },
+    {
+      "id": "water",
+      "label": "Water and flooded vegetation",
+      "dates": [
+        "2026-06-20",
+        "2026-07-02",
+        "2026-07-14",
+        "2026-07-26",
+        "2026-08-19",
+        "2026-08-31",
+        "2026-09-12",
+        "2026-09-24",
+        "2026-10-06",
+        "2026-10-18"
+      ],
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#2f6fde",
+            "label": "Open water"
+          },
+          {
+            "color": "#35b04a",
+            "label": "Flooded vegetation"
+          },
+          {
+            "color": "#f28e2b",
+            "label": "Usually water, not today (wind?)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "when",
+      "label": "When it changed for good",
+      "dates": null,
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#440154",
+            "label": "2 Jul"
+          },
+          {
+            "color": "#472d7b",
+            "label": "14 Jul"
+          },
+          {
+            "color": "#3b528b",
+            "label": "26 Jul"
+          },
+          {
+            "color": "#2c728e",
+            "label": "19 Aug"
+          },
+          {
+            "color": "#21918c",
+            "label": "31 Aug"
+          },
+          {
+            "color": "#28ae80",
+            "label": "12 Sep"
+          },
+          {
+            "color": "#5ec962",
+            "label": "24 Sep"
+          },
+          {
+            "color": "#addc30",
+            "label": "6 Oct"
+          },
+          {
+            "color": "#fde725",
+            "label": "18 Oct"
+          }
+        ]
+      }
+    },
+    {
+      "id": "classes",
+      "label": "Season classes",
+      "dates": null,
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#08306b",
+            "label": "Permanent water"
+          },
+          {
+            "color": "#4292c6",
+            "label": "Seasonal open water"
+          },
+          {
+            "color": "#41ab5d",
+            "label": "Flooded vegetation"
+          },
+          {
+            "color": "#9ecae1",
+            "label": "Got darker, not open water (wetter ground, shallow or partial flooding)"
+          },
+          {
+            "color": "#c994c7",
+            "label": "Got brighter (growing crops and other causes)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "change",
+      "label": "Change since first pass (HH)",
+      "dates": [
+        "2026-07-02",
+        "2026-07-14",
+        "2026-07-26",
+        "2026-08-19",
+        "2026-08-31",
+        "2026-09-12",
+        "2026-09-24",
+        "2026-10-06",
+        "2026-10-18"
+      ],
+      "legend": {
+        "type": "diverging",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": -35,
+        "max": 35,
+        "colors": [
+          "#2166ac",
+          "#00000000",
+          "#b2182b"
+        ],
+        "labels": [
+          "darker: new water, cleared forest",
+          "brighter: flooded vegetation, growth"
+        ]
+      }
+    },
+    {
+      "id": "rgb",
+      "label": "Three-date composite",
+      "dates": null,
+      "legend": {
+        "type": "text",
+        "text": "HH: red = 20 Jun, green = 31 Aug, blue = 18 Oct. Grey = no change."
+      }
+    },
+    {
+      "id": "hv",
+      "label": "HV brightness (preview)",
+      "dates": [
+        "2026-06-20",
+        "2026-07-02",
+        "2026-07-14",
+        "2026-07-26",
+        "2026-08-19",
+        "2026-08-31",
+        "2026-09-12",
+        "2026-09-24",
+        "2026-10-06",
+        "2026-10-18"
+      ],
+      "legend": {
+        "type": "ramp",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": 0,
+        "max": 100,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    }
+  ],
+  "story": {
+    "see": "At this preview detail almost nothing changes in the Ararat Valley. Fields here are smaller than one pixel, about 180 m wide, so their changes blur together. That is a finding, not a failure: this is where full-resolution, calibrated NISAR data, planned next, is needed.",
+    "physics": "Radar brightness follows plant material and water. At full resolution a wheat field should turn darker after the June\u2013July harvest, irrigated plots should flicker brighter after watering, and fish ponds should show as dark rectangles with bright banks. These are expectations we have not yet tested.",
+    "lband": "NISAR's L-band radar has a 24 cm wavelength and passes through cloud, so a field can be watched every 12 days all season. Orchards and vineyards should stay steady, which makes them useful reference points. Our spots mark where to look once the sharper data arrives.",
+    "people": "Pressure in the valley's artesian aquifer has fallen by about two-thirds since the early 1980s (International Association of Hydrogeologists). More than 200 fish farms draw on it (Yale E360). Spotting dried-up ponds and watering patterns from space could help guard a shrinking water source."
+  },
+  "spots": [
+    {
+      "id": "masis-fields",
+      "label": "Masis fields",
+      "lngLat": [
+        44.43,
+        40.07
+      ]
+    },
+    {
+      "id": "fish-ponds",
+      "label": "Ararat-Vedi fish ponds",
+      "lngLat": [
+        44.6,
+        39.9
+      ]
+    },
+    {
+      "id": "vedi-vineyards",
+      "label": "Vedi vineyards",
+      "lngLat": [
+        44.73,
+        39.91
+      ]
+    },
+    {
+      "id": "aknalich",
+      "label": "Aknalich lake area",
+      "lngLat": [
+        44.18,
+        40.07
+      ]
+    },
+    {
+      "id": "yerevan",
+      "label": "Yerevan (stable city)",
+      "lngLat": [
+        44.51,
+        40.18
+      ]
+    }
+  ],
+  "credits": "NISAR GCOV preview images: NASA/JPL-Caltech and ISRO, distributed by ASF DAAC. Uncalibrated previews at about 180 m; values are display brightness, not backscatter.",
+  "source": "preview"
+}

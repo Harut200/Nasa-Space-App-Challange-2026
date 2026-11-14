@@ -3,7 +3,7 @@
   "name": "Demo (synthetic)",
   "bounds": [
     105.00000000000001,
-    12.663823380316394,
+    12.663823380316407,
     105.46142929087542,
     13.116327500357627
   ],
@@ -45,6 +45,130 @@
       }
     },
     {
+      "id": "water",
+      "label": "Water and flooded vegetation",
+      "dates": [
+        "2026-06-20",
+        "2026-07-02",
+        "2026-07-14",
+        "2026-08-10",
+        "2026-08-22",
+        "2026-09-03"
+      ],
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#2f6fde",
+            "label": "Open water"
+          },
+          {
+            "color": "#35b04a",
+            "label": "Flooded vegetation"
+          },
+          {
+            "color": "#f28e2b",
+            "label": "Usually water, not today (wind?)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "when",
+      "label": "When it changed for good",
+      "dates": null,
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#440154",
+            "label": "2 Jul"
+          },
+          {
+            "color": "#3b528b",
+            "label": "14 Jul"
+          },
+          {
+            "color": "#21918c",
+            "label": "10 Aug"
+          },
+          {
+            "color": "#5ec962",
+            "label": "22 Aug"
+          },
+          {
+            "color": "#fde725",
+            "label": "3 Sep"
+          }
+        ]
+      }
+    },
+    {
+      "id": "classes",
+      "label": "Season classes",
+      "dates": null,
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#08306b",
+            "label": "Permanent water"
+          },
+          {
+            "color": "#4292c6",
+            "label": "Seasonal open water"
+          },
+          {
+            "color": "#41ab5d",
+            "label": "Flooded vegetation"
+          },
+          {
+            "color": "#9ecae1",
+            "label": "Got darker, not open water (wetter ground, shallow or partial flooding)"
+          },
+          {
+            "color": "#c994c7",
+            "label": "Got brighter (growing crops and other causes)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "change",
+      "label": "Change since first pass (HH)",
+      "dates": [
+        "2026-07-02",
+        "2026-07-14",
+        "2026-08-10",
+        "2026-08-22",
+        "2026-09-03"
+      ],
+      "legend": {
+        "type": "diverging",
+        "unit": "dB",
+        "min": -8.0,
+        "max": 8.0,
+        "colors": [
+          "#2166ac",
+          "#00000000",
+          "#b2182b"
+        ],
+        "labels": [
+          "darker: new water, cleared forest",
+          "brighter: flooded vegetation, growth"
+        ]
+      }
+    },
+    {
+      "id": "rgb",
+      "label": "Three-date composite",
+      "dates": null,
+      "legend": {
+        "type": "text",
+        "text": "HH: red = 20 Jun, green = 10 Aug, blue = 3 Sep. Grey = no change."
+      }
+    },
+    {
       "id": "hv",
       "label": "HV backscatter",
       "dates": [
@@ -74,5 +198,6 @@
     "people": ""
   },
   "spots": [],
-  "credits": "NISAR data: NASA/JPL-Caltech and ISRO, distributed by ASF DAAC. PROVISIONAL calibration."
+  "credits": "NISAR data: NASA/JPL-Caltech and ISRO, distributed by ASF DAAC. PROVISIONAL calibration.",
+  "source": "gamma0"
 }
