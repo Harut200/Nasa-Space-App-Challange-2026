@@ -105,3 +105,15 @@ Coordinates are longitude, latitude. This is a source and map cross-check. Pendi
 - [Wikipedia: Bol, Chad](https://en.wikipedia.org/wiki/Bol,_Chad) supports 13.46 N, 14.74 E and the July to September rains.
 - [Wikipedia: Baga, Borno State](https://en.wikipedia.org/wiki/Baga,_Borno_State) supports 13.119 N, 13.857 E.
 - Our own numbers: `data/processed/lake-chad/products/timeseries.json` and `docs/eda/crossscene.md`, `docs/eda/fusion2.md`.
+
+
+## Chao Phraya plain, Thailand, 2026 flood (chao-phraya-2026)
+
+Opened 14 Nov 2026. Search summaries were not used as facts; the pages below were opened.
+
+- [The Nation (Thailand), 3 Oct 2026: "Flood expert sees no 2011 repeat as 2026 Nakhon Sawan runoff totals 4.3bn m³"](https://www.nationthailand.com/news/general/40071810) supports: about 4.3 billion m³ of accumulated water through Nakhon Sawan (estimate 4 to 5 billion) against 15 billion in 2011; peak flow through Nakhon Sawan about 2,600 m³/s against 4,600 m³/s in 2011; heaviest impacts expected in Suphan Buri, Nakhon Pathom and Phra Nakhon Si Ayutthaya, particularly low-lying Sena, Bang Ban and Phak Hai; inner Bangkok at virtually no risk in the most likely scenario. Quoted opinion of one expert (Seree Supratid, Rangsit University), not an official finding.
+- [Cambodianess / AFP photo story, 6 Oct 2026: "Deluge By Design: Thai Villages Flooded To Protect Capital"](https://cambodianess.com/article/deluge-by-design-thai-villages-flooded-to-protect-capital) supports: authorities deliberately let low-lying riverside communities in Ayutthaya (Bang Ban and nearby) flood as retention zones to protect Bangkok, the historic city and industrial zones; residents say the area has flooded six years in a row.
+- [Khaosod English, 4 Oct 2026](https://www.khaosodenglish.com/news/2026/10/04/ayutthaya-riverside-areas-warned-of-10cm-water-rise/) and [The Nation, 4 Oct 2026](https://www.nationthailand.com/news/general/40071788): river levels at Ayutthaya still rising early October (headline and search snippet only; page bodies not read).
+- Locations: [Wikipedia: Sena district](https://en.wikipedia.org/wiki/Sena_district) 14.327 N, 100.404 E; [Wikipedia: Bang Ban district](https://en.wikipedia.org/wiki/Bang_Ban_district) 14.374 N, 100.486 E; [Wikipedia: Pa Sak Jolasid Dam](https://en.wikipedia.org/wiki/Pa_Sak_Jolasid_Dam) dam at 14.861 N, 101.066 E (the reservoir lies north of it; the spot is the centre of the large water body in our map at 14.951 N, 101.058 E, identified by position only).
+- Not used (no casualty or displacement figures appear in the story): DDPM/Nation counts of people affected.
+- Our own numbers: `data/processed/chao-phraya-2026/products/timeseries.json`, `docs/eda/events2026/chao-phraya-2026.json` (JRC comparison), `docs/research/events-2026.md`.

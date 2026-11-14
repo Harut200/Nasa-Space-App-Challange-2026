@@ -1,0 +1,68 @@
+{
+ "area": "chao-phraya-2026",
+ "dates": [
+  "2026-06-26",
+  "2026-07-08",
+  "2026-07-20",
+  "2026-08-13",
+  "2026-08-25",
+  "2026-09-06",
+  "2026-09-18",
+  "2026-09-30",
+  "2026-10-12"
+ ],
+ "baseline": "2026-09-06",
+ "event": "2026-09-30",
+ "domain_km2": 23801,
+ "water_km2": [
+  869,
+  960,
+  919,
+  844,
+  899,
+  986,
+  1216,
+  1932,
+  1809
+ ],
+ "jrc_occ90_km2": 67,
+ "jrc_maxextent_km2": 4410,
+ "baseline_vs_occ90": {
+  "tp_km2": 43.2,
+  "fp_km2": 942.5,
+  "fn_km2": 24.1,
+  "tn_km2": 22791.6,
+  "ours_km2": 985.7,
+  "ref_km2": 67.3,
+  "iou": 0.0428,
+  "precision": 0.0438,
+  "recall": 0.6419
+ },
+ "baseline_vs_maxext": {
+  "tp_km2": 418.6,
+  "fp_km2": 567.0,
+  "fn_km2": 3991.3,
+  "tn_km2": 18824.3,
+  "ours_km2": 985.7,
+  "ref_km2": 4410.0,
+  "iou": 0.0841,
+  "precision": 0.4247,
+  "recall": 0.0949
+ },
+ "event_vs_maxext": {
+  "tp_km2": 1351.7,
+  "fp_km2": 580.8,
+  "fn_km2": 3058.3,
+  "tn_km2": 18810.6,
+  "ours_km2": 1932.4,
+  "ref_km2": 4410.0,
+  "iou": 0.2708,
+  "precision": 0.6995,
+  "recall": 0.3065
+ },
+ "new_km2": 1172,
+ "lost_km2": 225,
+ "new_inside_jrc_maxextent_share": 0.819,
+ "new_on_jrc_occ_gt0_share": 0.911,
+ "first_to_baseline_change_km2": 1137
+}
