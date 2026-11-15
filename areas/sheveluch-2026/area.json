@@ -10,5 +10,7 @@
   "track": 60,
   "frame": 60,
   "direction": "descending",
-  "pixel_m": 80
+  "pixel_m": 80,
+  "in_app": false,
+  "in_app_note": "Withdrawn from the app on 15 Nov 2026: the lost coherence rises steadily with elevation (8 % at 600-900 m to 77 % at 1500-1800 m) and hardly depends on distance from the domes, and it does not recover in the next pair, so first autumn snow explains it. Verdict marginal. Kept as a tried event."
 }

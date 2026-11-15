@@ -600,6 +600,36 @@
      "pair": "20260706_20260718",
      "granule": "NISAR_L2_PR_GUNW_024_152_A_030_025_2000_SH_20260706T174113_20260706T174137_20260718T174113_20260718T174137_P05023_N_P_J_001"
     }
+   },
+   "d_sep": {
+    "track": 60,
+    "frame": 60,
+    "direction": "D",
+    "label": "descending",
+    "data_view": "desc",
+    "co": {
+     "pair": "20260922_20261004",
+     "granule": "NISAR_L2_PR_GUNW_031_060_D_060_032_2000_SH_20260922T084852_20260922T084927_20261004T084852_20261004T084927_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260910_20260922",
+     "granule": "NISAR_L2_PR_GUNW_030_060_D_060_031_2000_SH_20260910T084852_20260910T084927_20260922T084852_20260922T084927_P05023_N_F_J_001"
+    }
+   },
+   "d_oct": {
+    "track": 60,
+    "frame": 60,
+    "direction": "D",
+    "label": "descending",
+    "data_view": "desc",
+    "co": {
+     "pair": "20261004_20261016",
+     "granule": "NISAR_L2_PR_GUNW_032_060_D_060_033_2000_SH_20261004T084852_20261004T084927_20261016T084852_20261016T084927_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260910_20260922",
+     "granule": "NISAR_L2_PR_GUNW_030_060_D_060_031_2000_SH_20260910T084852_20260910T084927_20260922T084852_20260922T084927_P05023_N_F_J_001"
+    }
    }
   },
   "verdict": null,
@@ -1833,9 +1863,24 @@
      "pair": "20260910_20260922",
      "granule": "NISAR_L2_PR_GUNW_030_060_D_060_031_2000_SH_20260910T084852_20260910T084927_20260922T084852_20260922T084927_P05023_N_F_J_001"
     }
+   },
+   "d_1004": {
+    "track": 60,
+    "frame": 60,
+    "direction": "D",
+    "label": "descending",
+    "data_view": "desc",
+    "co": {
+     "pair": "20261004_20261016",
+     "granule": "NISAR_L2_PR_GUNW_032_060_D_060_033_2000_SH_20261004T084852_20261004T084927_20261016T084852_20261016T084927_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260910_20260922",
+     "granule": "NISAR_L2_PR_GUNW_030_060_D_060_031_2000_SH_20260910T084852_20260910T084927_20260922T084852_20260922T084927_P05023_N_F_J_001"
+    }
    }
   },
-  "verdict": "clear",
+  "verdict": "marginal",
   "deformation": false,
   "loss_hi": 0.45,
   "loss_lo": 0.35,
@@ -1854,7 +1899,7 @@
   "zoom_km": 12,
   "summary_number": "\u2248 33 km\u00b2 of ground around the domes changed completely",
   "site_label": "Young Sheveluch lava domes (summit, Watchers/KVERT coordinates 56.653 N 161.36 E)",
-  "verdict_reason": "desc 22 Sep-4 Oct vs 10-22 Sep: 33.1 km2 within 6 km of the domes (52 % of the 64 km2 that was coherent before; 3.0 % elsewhere in the window; p95 of 150 equal discs 3.6 km2), two lobes of 27 and 25 km2 west and east of the dome; asc 23 Sep-5 Oct vs 11-23 Sep: 29 km2 (47 %, p95 4.5), lobes of 16.7 and 16.3 km2 at the same places; both control pairs end before the 25 Sep explosion. Small comparable ground (64 km2)",
+  "verdict_reason": "downgraded after the snow test: the loss rises steadily with elevation (8 % of the comparable ground at 600-900 m, 32 % at 900-1200 m, 60 % at 1200-1500 m, 77 % at 1500-1800 m, both looks), and at fixed elevation it hardly depends on the distance from the domes (900-1200 m: 40 % within 6 km, 30 % at 6-12 km), as first snow above a snow line would; ash from the 25-27 Sep explosions cannot be separated from it. Asc lobes stay at coherence 0.3 in 5-17 Oct (no recovery) and the loss moves south and down in that pair",
   "extra_spots": [
    {
     "id": "west",

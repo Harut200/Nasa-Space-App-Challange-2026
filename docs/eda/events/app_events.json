@@ -397,63 +397,6 @@
   "time_note": "fire began 22 Jul between Saumos and Le Porge (search summary of AFP/Reporterre); pair 17 Jul-10 Aug (24 days); the control pair ends 17 Jul"
  },
  {
-  "id": "sheveluch-2026",
-  "type": "volcano",
-  "title": "Sheveluch explosive eruptions, Kamchatka: ground around the lava domes changed, 22 Sep-4 Oct 2026",
-  "time": "2026-09-25T17:50:00Z",
-  "lat": 56.653,
-  "lon": 161.36,
-  "place": "Young Sheveluch, Kamchatka, Russia",
-  "summary_number": "≈ 33 km² of ground around the domes changed completely",
-  "radius_km": 6,
-  "views": [
-   {
-    "id": "d_0922",
-    "label": "descending",
-    "track": 60,
-    "before": "2026-09-22",
-    "after": "2026-10-04",
-    "p2p_cm": null,
-    "control_p2p_cm": null,
-    "control_before": "2026-09-10",
-    "control_after": "2026-09-22",
-    "control_is_before": true,
-    "exported": true
-   },
-   {
-    "id": "a_0923",
-    "label": "ascending",
-    "track": 80,
-    "before": "2026-09-23",
-    "after": "2026-10-05",
-    "p2p_cm": null,
-    "control_p2p_cm": null,
-    "control_before": "2026-09-11",
-    "control_after": "2026-09-23",
-    "control_is_before": true,
-    "exported": false
-   }
-  ],
-  "source_url": "https://watchers.news/2026/10/02/the-weekly-volcanic-activity-report-september-24-30-2026/",
-  "before_after": [
-   {
-    "view": "d_0922",
-    "before": "coherence_before",
-    "after": "coherence",
-    "label": "Radar coherence",
-    "before_dates": [
-     "2026-09-10",
-     "2026-09-22"
-    ],
-    "after_dates": [
-     "2026-09-22",
-     "2026-10-04"
-    ]
-   }
-  ],
-  "time_note": "explosions on 25 Sep 17:50 UTC and 27 Sep 21:20 UTC (KVERT via Watchers, 24-30 Sep report) and 4 Oct 22:40 UTC (1-7 Oct report); the event pairs span all three"
- },
- {
   "id": "niebla-fire-2026",
   "type": "fire",
   "title": "Niebla fire, Huelva and Seville, Spain: forest surface changed, 21 Jul-14 Aug 2026",
