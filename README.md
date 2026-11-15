@@ -6,7 +6,15 @@
 
 NASA Space Apps Challenge 2026 · challenge *Dancing with the SARs* · team **Constellation**: Harutyun Kesablyan, Arameh Haghverdian, Abel Babayan.
 
-![Tonle Sap: when each place changed](docs/design/screenshots/tonle-sap-when-desktop.png)
+![The app's opening screen: the title and a globe with a dot for every place](docs/design/screenshots/landing.jpg)
+
+| | |
+|---|---|
+| ![Tonle Sap story: when each place flooded](docs/design/screenshots/tonle-sap-story.jpg) | ![Tonle Sap explore: open water and flooded vegetation with the season curve](docs/design/screenshots/tonle-sap-explore.jpg) |
+| ![Tibet earthquake, How we found it: the pair before against the pair across the quake](docs/design/screenshots/tibet-how-we-found-it.jpg) | ![La Mierla fire: the patch of changed radar echo](docs/design/screenshots/la-mierla-fire-story.jpg) |
+| ![The 37 places by class](docs/design/screenshots/places.jpg) | ![The globe with every place](docs/design/screenshots/globe.jpg) |
+
+Screenshots of the app in `src/app` on 15 November 2026.
 
 ## What it shows
 
