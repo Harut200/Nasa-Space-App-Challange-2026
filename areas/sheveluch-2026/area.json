@@ -1,0 +1,14 @@
+{
+  "id": "sheveluch-2026",
+  "name": "Sheveluch explosive eruptions, Kamchatka: ground around the lava domes changed, 22 Sep-4 Oct 2026",
+  "bbox": [
+    161.05,
+    56.48,
+    161.65,
+    56.82
+  ],
+  "track": 60,
+  "frame": 60,
+  "direction": "descending",
+  "pixel_m": 80
+}

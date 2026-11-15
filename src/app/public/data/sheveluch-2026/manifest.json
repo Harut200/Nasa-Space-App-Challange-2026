@@ -1,0 +1,145 @@
+{
+  "id": "sheveluch-2026",
+  "name": "Sheveluch explosive eruptions, Kamchatka: ground around the lava domes changed, 22 Sep-4 Oct 2026",
+  "bounds": [
+    161.04999999999998,
+    56.47996407394253,
+    161.64993293399195,
+    56.81999999999999
+  ],
+  "dates": [],
+  "gaps": [],
+  "layers": [
+    {
+      "id": "coherence",
+      "label": "Radar coherence (how comparable the two passes are)",
+      "dates": null,
+      "legend": {
+        "type": "ramp",
+        "unit": "coherence 0-1",
+        "min": 0,
+        "max": 1,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    },
+    {
+      "id": "coh_loss",
+      "label": "Where the radar picture changed completely between the passes",
+      "dates": null,
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#ff5a00",
+            "label": "was comparable before (control pair), not comparable in the event pair"
+          }
+        ]
+      }
+    },
+    {
+      "id": "coherence_before",
+      "label": "Before the event: radar coherence (10 Sep\u201322 Sep)",
+      "dates": null,
+      "legend": {
+        "type": "ramp",
+        "unit": "coherence 0-1",
+        "min": 0,
+        "max": 1,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    }
+  ],
+  "story": {
+    "see": "Sheveluch, on Kamchatka, has been erupting from the lava domes on the north crater floor of Young Sheveluch, with near-daily explosions. KVERT reported explosions at 17:50 UTC on 25 September (ash to 10.5 km, drifting 300 km west, minor ashfall at Klyuchi, 50 km south-west), at 21:20 UTC on 27 September (about 10 km) and at 22:40 UTC on 4 October (6.5 km) (Watchers, 24-30 Sep and 1-7 Oct weekly reports). The orange areas are where the radar picture between NISAR's 22 September and 4 October passes no longer matches the pair just before it (10 to 22 September): two lobes, west and east of the domes.",
+    "physics": "Fresh ash, pyroclastic debris and new dome rock give the ground a surface that the radar cannot match with the earlier pass. Within 6 km of the domes 33 km2 lost coherence, about half of the ground that was still comparable there, against 3 % elsewhere in the 40 x 38 km map; equal circles placed elsewhere lose at most 4 km2. The ascending pass (23 September to 5 October, control 11 to 23 September) gives 29 km2 and the same two lobes. We cannot tell ash fall from flow deposits or new dome, and the pair holds three explosions, so we do not date or size them.",
+    "lband": "NISAR's L-band radar has a wavelength of about 24 cm. Only about 64 km2 around the domes was comparable in the control pair (most of the volcano is not coherent even in a quiet pair), so the result rests on a small area, but it appears from both look directions at the same places and not in the pairs before (1 to 4 km2). Snow cannot be excluded from coherence alone, but only the area around the domes changes, not the rest of the map.",
+    "people": "This map shows where the surface changed, not damage. We did not look at reports of damage, evacuations or casualties."
+  },
+  "spots": [
+    {
+      "id": "site",
+      "label": "Young Sheveluch lava domes (summit, Watchers/KVERT coordinates 56.653 N 161.36 E)",
+      "lngLat": [
+        161.36,
+        56.653
+      ]
+    },
+    {
+      "id": "west",
+      "label": "West lobe of lost coherence",
+      "lngLat": [
+        161.2126,
+        56.642
+      ]
+    },
+    {
+      "id": "east",
+      "label": "East lobe of lost coherence",
+      "lngLat": [
+        161.402,
+        56.6717
+      ]
+    },
+    {
+      "id": "reference",
+      "label": "Reference: stays coherent in both pairs",
+      "lngLat": [
+        161.421,
+        56.751
+      ]
+    }
+  ],
+  "credits": "NISAR data: NASA/JPL-Caltech and ISRO, distributed by ASF DAAC. PROVISIONAL calibration.",
+  "source": null,
+  "kind": "event",
+  "event": {
+    "type": "volcano",
+    "title": "Sheveluch explosive eruptions, Kamchatka: ground around the lava domes changed, 22 Sep-4 Oct 2026",
+    "time": "2026-09-25T17:50:00Z",
+    "time_note": "explosions on 25 Sep 17:50 UTC and 27 Sep 21:20 UTC (KVERT via Watchers, 24-30 Sep report) and 4 Oct 22:40 UTC (1-7 Oct report); the event pairs span all three",
+    "lngLat": [
+      161.36,
+      56.653
+    ],
+    "place": "Young Sheveluch, Kamchatka, Russia",
+    "summary": "\u2248 33 km\u00b2 of ground around the domes changed completely",
+    "radius_km": 6,
+    "source_url": "https://watchers.news/2026/10/02/the-weekly-volcanic-activity-report-september-24-30-2026/",
+    "views": [
+      {
+        "id": "d_0922",
+        "label": "descending",
+        "track": 60,
+        "before": "2026-09-22",
+        "after": "2026-10-04",
+        "p2p_cm": null,
+        "control_p2p_cm": null,
+        "control_before": "2026-09-10",
+        "control_after": "2026-09-22"
+      }
+    ],
+    "before_after": [
+      {
+        "view": "d_0922",
+        "before": "coherence_before",
+        "after": "coherence",
+        "label": "Radar coherence",
+        "before_dates": [
+          "2026-09-10",
+          "2026-09-22"
+        ],
+        "after_dates": [
+          "2026-09-22",
+          "2026-10-04"
+        ]
+      }
+    ]
+  },
+  "category": "volcano"
+}

@@ -1711,8 +1711,8 @@
  {
   "id": "sheveluch-2026",
   "type": "volcano",
-  "title": "Sheveluch lava domes, Kamchatka, Jul-Oct 2026",
-  "time": "2026-09-15T00:00:00Z",
+  "title": "Sheveluch explosive eruptions, Kamchatka: ground around the lava domes changed, 22 Sep-4 Oct 2026",
+  "time": "2026-09-25T17:50:00Z",
   "lat": 56.653,
   "lon": 161.36,
   "place": "Young Sheveluch, Kamchatka, Russia",
@@ -1727,9 +1727,9 @@
    3500
   ],
   "radius_km": 6,
-  "far_km": 18,
+  "far_km": 12,
   "gmin": 0.35,
-  "source_url": "https://watchers.news/2026/10/30/the-weekly-volcanic-activity-report-october-22-28-2026/",
+  "source_url": "https://watchers.news/2026/10/02/the-weekly-volcanic-activity-report-september-24-30-2026/",
   "views": {
    "asc": {
     "track": 80,
@@ -1758,15 +1758,138 @@
      "pair": "20260630_20260712",
      "granule": "NISAR_L2_PR_GUNW_024_060_D_060_025_2000_SH_20260630T084855_20260630T084930_20260712T084854_20260712T084930_P05023_N_F_J_001"
     }
+   },
+   "a_0830": {
+    "track": 80,
+    "frame": 30,
+    "direction": "A",
+    "label": "ascending",
+    "data_view": "asc",
+    "co": {
+     "pair": "20260830_20260911",
+     "granule": "NISAR_L2_PR_GUNW_029_080_A_030_030_2000_SH_20260830T174918_20260830T174954_20260911T174918_20260911T174954_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260818_20260830",
+     "granule": "NISAR_L2_PR_GUNW_028_080_A_030_029_2000_SH_20260818T174918_20260818T174954_20260830T174918_20260830T174954_P05023_N_F_J_001"
+    }
+   },
+   "a_0911": {
+    "track": 80,
+    "frame": 30,
+    "direction": "A",
+    "label": "ascending",
+    "data_view": "asc",
+    "co": {
+     "pair": "20260911_20260923",
+     "granule": "NISAR_L2_PR_GUNW_030_080_A_030_031_2000_SH_20260911T174918_20260911T174954_20260923T174918_20260923T174954_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260830_20260911",
+     "granule": "NISAR_L2_PR_GUNW_029_080_A_030_030_2000_SH_20260830T174918_20260830T174954_20260911T174918_20260911T174954_P05023_N_F_J_001"
+    }
+   },
+   "a_0923": {
+    "track": 80,
+    "frame": 30,
+    "direction": "A",
+    "label": "ascending",
+    "data_view": "asc",
+    "co": {
+     "pair": "20260923_20261005",
+     "granule": "NISAR_L2_PR_GUNW_031_080_A_030_032_2000_SH_20260923T174918_20260923T174954_20261005T174918_20261005T174954_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260911_20260923",
+     "granule": "NISAR_L2_PR_GUNW_030_080_A_030_031_2000_SH_20260911T174918_20260911T174954_20260923T174918_20260923T174954_P05023_N_F_J_001"
+    }
+   },
+   "a_1005": {
+    "track": 80,
+    "frame": 30,
+    "direction": "A",
+    "label": "ascending",
+    "data_view": "asc",
+    "co": {
+     "pair": "20261005_20261017",
+     "granule": "NISAR_L2_PR_GUNW_032_080_A_030_033_2000_SH_20261005T174918_20261005T174954_20261017T174918_20261017T174954_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260923_20261005",
+     "granule": "NISAR_L2_PR_GUNW_031_080_A_030_032_2000_SH_20260923T174918_20260923T174954_20261005T174918_20261005T174954_P05023_N_F_J_001"
+    }
+   },
+   "d_0922": {
+    "track": 60,
+    "frame": 60,
+    "direction": "D",
+    "label": "descending",
+    "data_view": "desc",
+    "co": {
+     "pair": "20260922_20261004",
+     "granule": "NISAR_L2_PR_GUNW_031_060_D_060_032_2000_SH_20260922T084852_20260922T084927_20261004T084852_20261004T084927_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260910_20260922",
+     "granule": "NISAR_L2_PR_GUNW_030_060_D_060_031_2000_SH_20260910T084852_20260910T084927_20260922T084852_20260922T084927_P05023_N_F_J_001"
+    }
    }
   },
-  "verdict": null,
+  "verdict": "clear",
   "deformation": false,
   "loss_hi": 0.45,
   "loss_lo": 0.35,
   "loss_drop": 0.25,
   "min_px": 12,
-  "time_note": "dome activity continuous through the window"
+  "time_note": "explosions on 25 Sep 17:50 UTC and 27 Sep 21:20 UTC (KVERT via Watchers, 24-30 Sep report) and 4 Oct 22:40 UTC (1-7 Oct report); the event pairs span all three",
+  "primary_view": "d_0922",
+  "export_views": [
+   "d_0922"
+  ],
+  "export_deformation": false,
+  "app_views": [
+   "d_0922",
+   "a_0923"
+  ],
+  "zoom_km": 12,
+  "summary_number": "\u2248 33 km\u00b2 of ground around the domes changed completely",
+  "site_label": "Young Sheveluch lava domes (summit, Watchers/KVERT coordinates 56.653 N 161.36 E)",
+  "verdict_reason": "desc 22 Sep-4 Oct vs 10-22 Sep: 33.1 km2 within 6 km of the domes (52 % of the 64 km2 that was coherent before; 3.0 % elsewhere in the window; p95 of 150 equal discs 3.6 km2), two lobes of 27 and 25 km2 west and east of the dome; asc 23 Sep-5 Oct vs 11-23 Sep: 29 km2 (47 %, p95 4.5), lobes of 16.7 and 16.3 km2 at the same places; both control pairs end before the 25 Sep explosion. Small comparable ground (64 km2)",
+  "extra_spots": [
+   {
+    "id": "west",
+    "label": "West lobe of lost coherence",
+    "lngLat": [
+     161.2126,
+     56.642
+    ],
+    "radius_m": 4000
+   },
+   {
+    "id": "east",
+    "label": "East lobe of lost coherence",
+    "lngLat": [
+     161.402,
+     56.6717
+    ],
+    "radius_m": 4000
+   },
+   {
+    "id": "reference",
+    "label": "Reference: stays coherent in both pairs",
+    "lngLat": [
+     161.421,
+     56.751
+    ],
+    "radius_m": 3000
+   }
+  ],
+  "story": {
+   "see": "Sheveluch, on Kamchatka, has been erupting from the lava domes on the north crater floor of Young Sheveluch, with near-daily explosions. KVERT reported explosions at 17:50 UTC on 25 September (ash to 10.5 km, drifting 300 km west, minor ashfall at Klyuchi, 50 km south-west), at 21:20 UTC on 27 September (about 10 km) and at 22:40 UTC on 4 October (6.5 km) (Watchers, 24-30 Sep and 1-7 Oct weekly reports). The orange areas are where the radar picture between NISAR's 22 September and 4 October passes no longer matches the pair just before it (10 to 22 September): two lobes, west and east of the domes.",
+   "physics": "Fresh ash, pyroclastic debris and new dome rock give the ground a surface that the radar cannot match with the earlier pass. Within 6 km of the domes 33 km2 lost coherence, about half of the ground that was still comparable there, against 3 % elsewhere in the 40 x 38 km map; equal circles placed elsewhere lose at most 4 km2. The ascending pass (23 September to 5 October, control 11 to 23 September) gives 29 km2 and the same two lobes. We cannot tell ash fall from flow deposits or new dome, and the pair holds three explosions, so we do not date or size them.",
+   "lband": "NISAR's L-band radar has a wavelength of about 24 cm. Only about 64 km2 around the domes was comparable in the control pair (most of the volcano is not coherent even in a quiet pair), so the result rests on a small area, but it appears from both look directions at the same places and not in the pairs before (1 to 4 km2). Snow cannot be excluded from coherence alone, but only the area around the domes changes, not the rest of the map.",
+   "people": "This map shows where the surface changed, not damage. We did not look at reports of damage, evacuations or casualties."
+  }
  },
  {
   "id": "isaias-2026",
@@ -2713,6 +2836,21 @@
      "pair": "20260702_20260714",
      "granule": "NISAR_L2_PR_GUNW_024_097_D_100_025_2000_SH_20260702T224705_20260702T224740_20260714T224705_20260714T224739_P05023_F_F_J_001"
     }
+   },
+   "a_early": {
+    "track": 46,
+    "frame": 166,
+    "direction": "A",
+    "label": "ascending",
+    "data_view": "a_late",
+    "co": {
+     "pair": "20260723_20260816",
+     "granule": "NISAR_L2_PR_GUNW_026_046_A_166_028_2000_SH_20260723T103042_20260723T103116_20260816T103041_20260816T103115_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260711_20260723",
+     "granule": "NISAR_L2_PR_GUNW_025_046_A_166_026_2000_SH_20260711T103043_20260711T103117_20260723T103042_20260723T103116_P05023_N_F_J_001"
+    }
    }
   },
   "verdict": "clear",
@@ -2734,7 +2872,7 @@
   "zoom_km": 35,
   "summary_number": "\u2248 6,000 km\u00b2 of desert lost coherence (window-limited)",
   "site_label": "Centre of the box (Atacama Desert west of the Salar de Atacama)",
-  "verdict_reason": "descending 26 Jul-19 Aug vs 2-14 Jul: window mean coherence 0.76 -> 0.41, 5,952 km2 lost (largest connected patch 3,806 km2, cut by the window); ascending 16-28 Aug vs 11-23 Jul: 0.82 -> 0.62, 1,004 km2; the ascending pair 23 Jul-16 Aug over the eastern window shows nothing. Cause (snow, rain-wet soil, mud or flash-flood deposits) not separable; a second control, 14-26 Jul, is itself dark; next descending pair 19-31 Aug: 0.48, 3,891 km2 lost; the ascending pair ending 16 Aug (before the 17-18 Aug rain) shows nothing, which brackets the change to 16-19 Aug; second box around Taltal (25.8-25.1 S) desc 26 Jul-19 Aug: 0.59 -> 0.38, 1,293 km2 lost; box around Tocopilla desc 26 Jul-19 Aug: 0.45 -> 0.24, 876 km2 within 30 km (loss ends at the coastal range); recovery: 31 Aug-12 Sep pair 0.77 and 12-24 Sep 0.80 (dry control 0.76); pre-storm pair 20 Jun-2 Jul 0.83, 0 km2 lost",
+  "verdict_reason": "descending 26 Jul-19 Aug vs 2-14 Jul: window mean coherence 0.76 -> 0.41, 5,952 km2 lost (largest connected patch 3,806 km2, cut by the window); ascending 16-28 Aug vs 11-23 Jul: 0.82 -> 0.62, 1,004 km2; the ascending pair 23 Jul-16 Aug over the eastern window shows nothing. Cause (snow, rain-wet soil, mud or flash-flood deposits) not separable; a second control, 14-26 Jul, is itself dark; next descending pair 19-31 Aug: 0.48, 3,891 km2 lost; the ascending pair ending 16 Aug (before the 17-18 Aug rain) shows nothing, which brackets the change to 16-19 Aug; second box around Taltal (25.8-25.1 S) desc 26 Jul-19 Aug: 0.59 -> 0.38, 1,293 km2 lost; box around Tocopilla desc 26 Jul-19 Aug: 0.45 -> 0.24, 876 km2 within 30 km (loss ends at the coastal range); recovery: 31 Aug-12 Sep pair 0.77 and 12-24 Sep 0.80 (dry control 0.76); pre-storm pair 20 Jun-2 Jul 0.83, 0 km2 lost; same box, asc 23 Jul-16 Aug: 0.81 vs control 0.82, 1 km2 lost",
   "extra_spots": [
    {
     "id": "patch",
@@ -2767,7 +2905,7 @@
   "story": {
    "see": "On 17 and 18 August 2026 a cut-off low brought record rain to northern Chile: more than 37 mm in two days at Tocopilla and 33 mm at Taltal, new daily records at Arica and Iquique, and a mudflow down the hills of Tocopilla on the afternoon of 18 August (Meteored). NASA Earth Observatory shows back-to-back winter storms that month with rare snow from the Andes to near the coast (Landsat 6 and 14 August, MODIS 19 August). The orange area is where the radar picture between NISAR's 26 July and 19 August passes no longer matches the dry pair before it (2 to 14 July): about 6,000 km2 in this 115 x 110 km box of the desert west of the Salar de Atacama, the box edge cutting it off.",
    "physics": "In the hyper-arid desert the ground hardly changes, so two radar passes match almost perfectly (the average coherence of this box was 0.76 in the dry pair). Snow, rain-wetted soil and fresh mud change the surface, and the average fell to 0.41. In the next descending pair (19 to 31 August) it is still 0.48, about 3,900 km2 lost; by 31 August to 12 September it is back at 0.77, the dry level, and a pair a month before the storm (20 June to 2 July) is at 0.83, so the desert lost its fingerprint for about three weeks. The ascending pass of 16 to 28 August shows the same: 0.82 down to 0.62, about 1,000 km2 lost. A second box 300 km further south, inland of Taltal, shows the same in the same pair: mean coherence 0.59 down to 0.38, about 1,300 km2 lost. We cannot say how much of the loss is snow, wet soil or flood deposits.",
-   "lband": "NISAR's L-band radar has a wavelength of about 24 cm. Dry snow is largely transparent to it, and the ascending pair of 23 July to 16 August, which ends the day before the rain, shows nothing; wet ground and moved sediment are not transparent. The dry pair before is bright almost everywhere, so a desert-wide drop stands out. One more pair we tried as a control (14 to 26 July) is itself dark over part of this desert; we do not know why, and we use the pair of 2 to 14 July.",
+   "lband": "NISAR's L-band radar has a wavelength of about 24 cm. Dry snow is largely transparent to it, and the ascending pair of 23 July to 16 August, which ends the day before the rain, shows nothing in this box either (0.81 against 0.82); wet ground and moved sediment are not transparent. The dry pair before is bright almost everywhere, so a desert-wide drop stands out. One more pair we tried as a control (14 to 26 July) is itself dark over part of this desert; we do not know why, and we use the pair of 2 to 14 July.",
    "people": "This map shows where the surface changed, not damage. We did not look at reports of damage or casualties."
   }
  },
@@ -3450,5 +3588,111 @@
   "loss_drop": 0.25,
   "min_px": 8,
   "time_note": "between 1 and 2 am local on 27 Jul (InDepth Solomons); the mine position is approximate"
+ },
+ {
+  "id": "bezymianny-2026",
+  "type": "volcano",
+  "title": "Bezymianny lava flows and dome growth, Kamchatka, Aug-Oct 2026",
+  "time": "2026-08-08T00:00:00Z",
+  "lat": 55.972,
+  "lon": 160.595,
+  "place": "Bezymianny, Kamchatka, Russia",
+  "window": [
+   160.35,
+   55.82,
+   160.85,
+   56.12
+  ],
+  "heights": [
+   0,
+   3000
+  ],
+  "radius_km": 5,
+  "far_km": 15,
+  "gmin": 0.35,
+  "source_url": "https://watchers.news/2026/08/15/the-weekly-volcanic-activity-report-august-6-12-2026/",
+  "views": {
+   "a_20260818": {
+    "track": 80,
+    "frame": 30,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260818_20260830",
+     "granule": "NISAR_L2_PR_GUNW_028_080_A_030_029_2000_SH_20260818T174918_20260818T174954_20260830T174918_20260830T174954_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260725_20260818",
+     "granule": "NISAR_L2_PR_GUNW_026_080_A_030_028_2000_SH_20260725T174920_20260725T174955_20260818T174918_20260818T174954_P05023_N_F_J_001"
+    }
+   },
+   "a_20260830": {
+    "track": 80,
+    "frame": 30,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260830_20260911",
+     "granule": "NISAR_L2_PR_GUNW_029_080_A_030_030_2000_SH_20260830T174918_20260830T174954_20260911T174918_20260911T174954_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260818_20260830",
+     "granule": "NISAR_L2_PR_GUNW_028_080_A_030_029_2000_SH_20260818T174918_20260818T174954_20260830T174918_20260830T174954_P05023_N_F_J_001"
+    },
+    "data_view": "a_20260818"
+   },
+   "a_20260911": {
+    "track": 80,
+    "frame": 30,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260911_20260923",
+     "granule": "NISAR_L2_PR_GUNW_030_080_A_030_031_2000_SH_20260911T174918_20260911T174954_20260923T174918_20260923T174954_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260830_20260911",
+     "granule": "NISAR_L2_PR_GUNW_029_080_A_030_030_2000_SH_20260830T174918_20260830T174954_20260911T174918_20260911T174954_P05023_N_F_J_001"
+    },
+    "data_view": "a_20260818"
+   },
+   "a_20260923": {
+    "track": 80,
+    "frame": 30,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260923_20261005",
+     "granule": "NISAR_L2_PR_GUNW_031_080_A_030_032_2000_SH_20260923T174918_20260923T174954_20261005T174918_20261005T174954_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260911_20260923",
+     "granule": "NISAR_L2_PR_GUNW_030_080_A_030_031_2000_SH_20260911T174918_20260911T174954_20260923T174918_20260923T174954_P05023_N_F_J_001"
+    },
+    "data_view": "a_20260818"
+   },
+   "a_20261005": {
+    "track": 80,
+    "frame": 30,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20261005_20261017",
+     "granule": "NISAR_L2_PR_GUNW_032_080_A_030_033_2000_SH_20261005T174918_20261005T174954_20261017T174918_20261017T174954_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260923_20261005",
+     "granule": "NISAR_L2_PR_GUNW_031_080_A_030_032_2000_SH_20260923T174918_20260923T174954_20261005T174918_20261005T174954_P05023_N_F_J_001"
+    },
+    "data_view": "a_20260818"
+   }
+  },
+  "verdict": null,
+  "deformation": false,
+  "loss_hi": 0.45,
+  "loss_lo": 0.35,
+  "loss_drop": 0.25,
+  "min_px": 12,
+  "time_note": "effusive activity with lava flows 6-10 Aug and continuing 8-14 Oct (Watchers); consecutive pairs used as before/after of each other"
  }
 ]

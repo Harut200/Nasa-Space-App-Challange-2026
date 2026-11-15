@@ -5330,6 +5330,52 @@
      "max": null
     },
     "incidence_deg_mean": null
+   },
+   "a_early": {
+    "event": "Atacama Desert after the 17-18 August 2026 rain and the snow storms: about 6,000 km2 lost coherence (west of the Salar)",
+    "view": "a_early",
+    "track": 46,
+    "frame": 166,
+    "direction": "A",
+    "event_pair": "20260723_20260816",
+    "control_pair": "20260711_20260723",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 40,
+    "far_km": 80,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.8033857941627502,
+    "mean_coh_control_within_radius": 0.8130065202713013,
+    "mean_coh_event_whole_window": 0.8073947429656982,
+    "mean_coh_control_whole_window": 0.8211373686790466,
+    "coherence_loss": {
+     "loss_area_km2": 0.0,
+     "comparable_area_km2": 4978.8096000000005,
+     "loss_fraction_inside": 0.0,
+     "loss_fraction_outside": 0.00010280619798006383,
+     "comparable_px_inside": 777939,
+     "loss_area_km2_whole_window": 0.9600000000000001
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 0.544,
+      "lon": -69.1366,
+      "lat": -23.0066,
+      "max_side_km": 1.12
+     },
+     {
+      "area_km2": 0.41600000000000004,
+      "lon": -70.0488,
+      "lat": -23.4428,
+      "max_side_km": 0.88
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": 42.68133544921875
    }
   },
   "verdict": "clear"
@@ -5876,6 +5922,336 @@
      "max": 0.08320000000000001
     },
     "incidence_deg_mean": 42.42255401611328
+   },
+   "a_0911": {
+    "event": "Sheveluch lava domes, Kamchatka, Jul-Oct 2026",
+    "view": "a_0911",
+    "track": 80,
+    "frame": 30,
+    "direction": "A",
+    "event_pair": "20260911_20260923",
+    "control_pair": "20260830_20260911",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 6,
+    "far_km": 18,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.5231415629386902,
+    "mean_coh_control_within_radius": 0.5366260409355164,
+    "mean_coh_event_whole_window": 0.5224382281303406,
+    "mean_coh_control_whole_window": 0.5261526703834534,
+    "coherence_loss": {
+     "loss_area_km2": 3.0976000000000004,
+     "comparable_area_km2": 66.2912,
+     "loss_fraction_inside": 0.046727167406835295,
+     "loss_fraction_outside": 0.006119721803217283,
+     "comparable_px_inside": 10358,
+     "loss_area_km2_whole_window": 10.8352,
+     "mean_coh_control_at_loss_px": 0.5891900658607483,
+     "mean_coh_event_at_loss_px": 0.18510742485523224
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 2.3616,
+      "lon": 161.2583,
+      "lat": 56.6284,
+      "max_side_km": 3.36
+     },
+     {
+      "area_km2": 1.4784000000000002,
+      "lon": 161.0621,
+      "lat": 56.8421,
+      "max_side_km": 3.44
+     },
+     {
+      "area_km2": 0.864,
+      "lon": 161.2905,
+      "lat": 56.6231,
+      "max_side_km": 1.52
+     },
+     {
+      "area_km2": 0.512,
+      "lon": 161.0291,
+      "lat": 56.5968,
+      "max_side_km": 1.76
+     },
+     {
+      "area_km2": 0.512,
+      "lon": 161.0272,
+      "lat": 56.8298,
+      "max_side_km": 1.36
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 137,
+     "median": 0.0,
+     "p95": 1.6832,
+     "max": 3.9744
+    },
+    "incidence_deg_mean": 37.530975341796875
+   },
+   "a_0830": {
+    "event": "Sheveluch lava domes, Kamchatka, Jul-Oct 2026",
+    "view": "a_0830",
+    "track": 80,
+    "frame": 30,
+    "direction": "A",
+    "event_pair": "20260830_20260911",
+    "control_pair": "20260818_20260830",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 6,
+    "far_km": 18,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.5366260409355164,
+    "mean_coh_control_within_radius": 0.5540253520011902,
+    "mean_coh_event_whole_window": 0.5261526703834534,
+    "mean_coh_control_whole_window": 0.5366702675819397,
+    "coherence_loss": {
+     "loss_area_km2": 1.1648,
+     "comparable_area_km2": 71.66720000000001,
+     "loss_fraction_inside": 0.016252902303982852,
+     "loss_fraction_outside": 0.0001416939033836504,
+     "comparable_px_inside": 11198,
+     "loss_area_km2_whole_window": 1.3568,
+     "mean_coh_control_at_loss_px": 0.5984175801277161,
+     "mean_coh_event_at_loss_px": 0.2316703200340271
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 0.3456,
+      "lon": 161.2837,
+      "lat": 56.6435,
+      "max_side_km": 1.12
+     },
+     {
+      "area_km2": 0.28800000000000003,
+      "lon": 161.3843,
+      "lat": 56.6476,
+      "max_side_km": 1.28
+     },
+     {
+      "area_km2": 0.11520000000000001,
+      "lon": 161.3064,
+      "lat": 56.6451,
+      "max_side_km": 0.48
+     },
+     {
+      "area_km2": 0.096,
+      "lon": 161.6959,
+      "lat": 56.4787,
+      "max_side_km": 0.32
+     },
+     {
+      "area_km2": 0.096,
+      "lon": 161.2302,
+      "lat": 56.6313,
+      "max_side_km": 0.4
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 139,
+     "median": 0.0,
+     "p95": 0.0,
+     "max": 0.096
+    },
+    "incidence_deg_mean": 37.52849197387695
+   },
+   "a_0923": {
+    "event": "Sheveluch lava domes, Kamchatka, Jul-Oct 2026",
+    "view": "a_0923",
+    "track": 80,
+    "frame": 30,
+    "direction": "A",
+    "event_pair": "20260923_20261005",
+    "control_pair": "20260911_20260923",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 6,
+    "far_km": 18,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.2846536636352539,
+    "mean_coh_control_within_radius": 0.5231415629386902,
+    "mean_coh_event_whole_window": 0.5113235116004944,
+    "mean_coh_control_whole_window": 0.5224382281303406,
+    "coherence_loss": {
+     "loss_area_km2": 28.96,
+     "comparable_area_km2": 61.824000000000005,
+     "loss_fraction_inside": 0.4684265010351967,
+     "loss_fraction_outside": 0.033914949488373106,
+     "comparable_px_inside": 9660,
+     "loss_area_km2_whole_window": 68.96640000000001,
+     "mean_coh_control_at_loss_px": 0.7329254746437073,
+     "mean_coh_event_at_loss_px": 0.2185104936361313
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 16.7296,
+      "lon": 161.2037,
+      "lat": 56.6317,
+      "max_side_km": 7.92
+     },
+     {
+      "area_km2": 16.3136,
+      "lon": 161.4123,
+      "lat": 56.6721,
+      "max_side_km": 10.08
+     },
+     {
+      "area_km2": 5.6576,
+      "lon": 161.3258,
+      "lat": 56.5957,
+      "max_side_km": 4.24
+     },
+     {
+      "area_km2": 4.2112,
+      "lon": 161.2824,
+      "lat": 56.6781,
+      "max_side_km": 4.5600000000000005
+     },
+     {
+      "area_km2": 3.9168000000000003,
+      "lon": 161.3496,
+      "lat": 56.6982,
+      "max_side_km": 3.68
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 141,
+     "median": 0.0,
+     "p95": 4.4736,
+     "max": 17.7408
+    },
+    "incidence_deg_mean": null
+   },
+   "a_1005": {
+    "event": "Sheveluch lava domes, Kamchatka, Jul-Oct 2026",
+    "view": "a_1005",
+    "track": 80,
+    "frame": 30,
+    "direction": "A",
+    "event_pair": "20261005_20261017",
+    "control_pair": "20260923_20261005",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 6,
+    "far_km": 18,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.24778346717357635,
+    "mean_coh_control_within_radius": 0.2846536636352539,
+    "mean_coh_event_whole_window": 0.4968471825122833,
+    "mean_coh_control_whole_window": 0.5113235116004944,
+    "coherence_loss": {
+     "loss_area_km2": 7.3536,
+     "comparable_area_km2": 19.2576,
+     "loss_fraction_inside": 0.3818544366899302,
+     "loss_fraction_outside": 0.0405573898037964,
+     "comparable_px_inside": 3009,
+     "loss_area_km2_whole_window": 59.3984,
+     "mean_coh_control_at_loss_px": 0.6182488799095154,
+     "mean_coh_event_at_loss_px": 0.20394429564476013
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 28.6784,
+      "lon": 161.3129,
+      "lat": 56.5626,
+      "max_side_km": 12.48
+     },
+     {
+      "area_km2": 6.1184,
+      "lon": 161.6032,
+      "lat": 56.7098,
+      "max_side_km": 4.8
+     },
+     {
+      "area_km2": 5.9648,
+      "lon": 161.4456,
+      "lat": 56.643,
+      "max_side_km": 5.76
+     },
+     {
+      "area_km2": 3.1296,
+      "lon": 161.5872,
+      "lat": 56.7402,
+      "max_side_km": 3.7600000000000002
+     },
+     {
+      "area_km2": 2.4512,
+      "lon": 161.4002,
+      "lat": 56.6068,
+      "max_side_km": 4.0
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 138,
+     "median": 0.0,
+     "p95": 12.957120000000002,
+     "max": 21.5872
+    },
+    "incidence_deg_mean": null
+   },
+   "d_0922": {
+    "event": "Sheveluch lava domes, Kamchatka, Jul-Oct 2026",
+    "view": "d_0922",
+    "track": 60,
+    "frame": 60,
+    "direction": "D",
+    "event_pair": "20260922_20261004",
+    "control_pair": "20260910_20260922",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 6,
+    "far_km": 18,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.26895084977149963,
+    "mean_coh_control_within_radius": 0.5231997966766357,
+    "mean_coh_event_whole_window": 0.5872278213500977,
+    "mean_coh_control_whole_window": 0.6421889066696167,
+    "coherence_loss": {
+     "loss_area_km2": 33.056000000000004,
+     "comparable_area_km2": 63.884800000000006,
+     "loss_fraction_inside": 0.5174313764776598,
+     "loss_fraction_outside": 0.030034395533207886,
+     "comparable_px_inside": 9982,
+     "loss_area_km2_whole_window": 82.9056,
+     "mean_coh_control_at_loss_px": 0.7250694632530212,
+     "mean_coh_event_at_loss_px": 0.20752371847629547
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 26.950400000000002,
+      "lon": 161.2126,
+      "lat": 56.642,
+      "max_side_km": 8.96
+     },
+     {
+      "area_km2": 24.736,
+      "lon": 161.402,
+      "lat": 56.6717,
+      "max_side_km": 10.56
+     },
+     {
+      "area_km2": 12.633600000000001,
+      "lon": 161.2601,
+      "lat": 56.6871,
+      "max_side_km": 7.84
+     },
+     {
+      "area_km2": 4.7488,
+      "lon": 161.2784,
+      "lat": 56.7082,
+      "max_side_km": 5.84
+     },
+     {
+      "area_km2": 3.0976000000000004,
+      "lon": 161.2882,
+      "lat": 56.61,
+      "max_side_km": 3.2800000000000002
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 150,
+     "median": 0.0,
+     "p95": 3.6115199999999885,
+     "max": 20.352
+    },
+    "incidence_deg_mean": 42.41841125488281
    }
   },
   "verdict": null
