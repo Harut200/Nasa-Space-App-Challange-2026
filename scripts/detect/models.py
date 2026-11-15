@@ -22,7 +22,7 @@ class TemporalAE(nn.Module):
     """GRU encoder -> low-dim embedding -> time-conditioned MLP decoder.
 
     x:     [B, T, F]  per-date features (e.g. HH, HV, HH-HV, day offset, valid flag)
-    t:     [B, T, 1]  day offset (normalised) — the decoder is asked "what was the
+    t:     [B, T, 1]  day offset (normalised): the decoder is asked "what was the
                       value on this day?" so irregular time steps (August gap) are fine.
     returns (recon [B, T, n_out], z [B, emb])
     """

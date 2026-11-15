@@ -39,7 +39,7 @@ function SpotCard({ place, spotId, index, onClose }) {
   const y = (v) => m.t + (1 - (v - lo) / (hi - lo)) * (H - m.t - m.b)
   const line = (arr) => arr.map((v, i) => (v == null ? null : `${x(dates[i])},${y(v)}`)).filter(Boolean)
   const hh = line(ser.hh), hv = line(ser.hv)
-  const val = (v) => (v == null ? '—' : db ? `${fmtKm(v)} dB` : v)
+  const val = (v) => (v == null ? '–' : db ? `${fmtKm(v)} dB` : v)
   return (
     <aside className="panel spot-card" aria-label={`Spot ${s.label}`}>
       <div className="row"><h3>{s.label}</h3><button className="icon-btn" onClick={onClose} aria-label="Close spot">{Icon.close}</button></div>
@@ -73,7 +73,7 @@ export default function Explore({ place, layerId, layer, setLayer, index, setInd
   const hasEcho = !!(E && E.inside && E.outside)
   const other = hasEcho && (P.kind === 'water' || P.kind === 'flood' || P.kind === 'pct')
   const chart = hasEcho && (!other || chartSel !== 'other') ? 'echo' : 'main'
-  const f1 = (v) => (v == null ? '—' : v.toFixed(1))
+  const f1 = (v) => (v == null ? '–' : v.toFixed(1))
   const isMain = modes.some((m) => m.id === layerId)
   const rest = place.layers.filter((l) => !modes.some((m) => m.id === l.id))
   const q = place.quality[place.dates[index]]
@@ -121,7 +121,7 @@ export default function Explore({ place, layerId, layer, setLayer, index, setInd
             <span className="mono date">{fmtDateLong(place.dates[index])} · pass {index + 1} of {n}</span>
             {chart === 'echo'
               ? <><strong>{f1(E.inside[index])} <small>inside</small></strong><span className="mono dim">outside {f1(E.outside[index])} · radar echo, {E.labels[0].toLowerCase().includes('burn') ? 'inside and outside the burn' : 'inside and outside the changed patch'}</span></>
-              : <><strong>{v != null ? <><Num value={v} /> <small>{unit}</small></> : '—'}</strong>
+              : <><strong>{v != null ? <><Num value={v} /> <small>{unit}</small></> : '–'}</strong>
                 <span className="mono dim">{P.label}{P.lo && v != null ? ` · range ${fmtKm(P.lo[index])}–${fmtKm(P.hi[index])}` : ''}{v == null && P.kind === 'pct' ? ' · the first pass has no earlier pass to compare with' : ''}</span></>}
             {place.caution && <span className="caution" role="note">{place.caution}</span>}
           </div>

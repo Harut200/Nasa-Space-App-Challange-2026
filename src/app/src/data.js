@@ -90,9 +90,9 @@ function buildPlace(m, ts0) {
 }
 
 const fmtAbs = (v) => (v === 0 ? '0' : v >= 100 ? Math.round(v).toLocaleString('en-US') : v >= 10 ? v.toFixed(0) : v.toFixed(1))
-export const fmtKm = (v) => (v == null || !Number.isFinite(v) ? '—' : v < 0 ? `−${fmtAbs(-v)}` : fmtAbs(v))
+export const fmtKm = (v) => (v == null || !Number.isFinite(v) ? '–' : v < 0 ? `−${fmtAbs(-v)}` : fmtAbs(v))
 // A value of the primary series with its unit, e.g. "5,046 km²", "43 %", "−11.0 dB".
-export const fmtVal = (P, v) => (v == null || !Number.isFinite(v) ? '—' : P.unit === 'dB' ? `${v < 0 ? '−' : ''}${Math.abs(v).toFixed(1)} dB` : P.unit === 'km²' ? `${fmtKm(v)} km²` : P.unit === '%' ? `${fmtKm(v)} %` : fmtKm(v))
+export const fmtVal = (P, v) => (v == null || !Number.isFinite(v) ? '–' : P.unit === 'dB' ? `${v < 0 ? '−' : ''}${Math.abs(v).toFixed(1)} dB` : P.unit === 'km²' ? `${fmtKm(v)} km²` : P.unit === '%' ? `${fmtKm(v)} %` : fmtKm(v))
 export const unitLabel = (P) => (P.unit === 'km²' || P.unit === '%' || P.unit === 'dB' ? P.unit : '')
 const ZERO = /^[−]?0(\.0)?$/
 export const isZeroChange = (v) => v == null || ZERO.test(fmtKm(Math.abs(v)))

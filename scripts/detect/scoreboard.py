@@ -657,7 +657,7 @@ def fig_tonle(board):
             if n == "math" else dict(lw=0.9, alpha=0.7, marker=".")
         ax.plot(d, o["water_km2"], label=n, **style)
     ax.set_ylabel("open water, km² (common footprint)")
-    ax.set_title("Tonle Sap open water per date — no 2026 truth exists here", fontsize=9)
+    ax.set_title("Tonle Sap open water per date, no 2026 truth exists here", fontsize=9)
     ax.xaxis.set_major_formatter(mdates.DateFormatter("%d %b"))
     ax.legend(fontsize=6, ncol=2); ax.grid(alpha=0.3)
     _save(fig, "tonle_area.png")
@@ -754,9 +754,9 @@ def summary_text(board):
     if cps:
         from collections import Counter
         c = Counter(cps)
-        s.append("The agreement matrix shows near-copies (last-date IoU ≥ 0.9) — most often " +
+        s.append("The agreement matrix shows near-copies (last-date IoU ≥ 0.9), most often " +
                  ", ".join(f"`{k}`" for k, _ in c.most_common(5)) +
-                 " — which is expected: several experts were trained on, or derived from, the math detector's masks.")
+                 ", which is expected: several experts were trained on, or derived from, the math detector's masks.")
     if "sevan" in board:
         r = board["sevan"]["rows"]
         mm = r.get("math")

@@ -799,7 +799,7 @@ def make_figures(area="tonle-sap", variant="ctx5res", variants=("base", "ctx5", 
         fig.colorbar(im, ax=axs[1, 3], shrink=0.7)
         for a in axs.flat:
             a.set_xticks([]); a.set_yticks([])
-        fig.suptitle(f"Hidden pass {E['dates'][k]} predicted from the other nine — east 30 % hold-out only", fontsize=10)
+        fig.suptitle(f"Hidden pass {E['dates'][k]} predicted from the other nine: east 30 % hold-out only", fontsize=10)
         _save(fig, "example_hidden_date.png")
 
     # 4 attention
@@ -866,7 +866,7 @@ def make_figures(area="tonle-sap", variant="ctx5res", variants=("base", "ctx5", 
         wmap(axs[1, 3], G["water_linear"][1], wa, f"linear interpolation {S['gap_days'][1]}: {S['water_linear_km2'][1]:,.0f} km²")
         for a in axs.flat:
             a.set_xticks([]); a.set_yticks([])
-        fig.suptitle("The outage pass (~6 Aug 2026) as estimated by the time transformer — a model estimate bounded by the passes on both sides, not an observation", fontsize=10)
+        fig.suptitle("The outage pass (~6 Aug 2026) as estimated by the time transformer: a model estimate bounded by the passes on both sides, not an observation", fontsize=10)
         _save(fig, f"outage_{area}.png")
 
         fig, ax = plt.subplots(figsize=(8, 4))

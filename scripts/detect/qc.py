@@ -757,7 +757,7 @@ def run_qc(x: torch.Tensor, valid: torch.Tensor, dates: list[str], *, meta_passe
                 reason += f" while {other[0]} is normal"
             if any(p["checks"].get(f"loo_{c}", {}).get("pattern") in ("uniform", "gradient")
                    and p["checks"].get(f"loo_{c}", {}).get("verdict") == "fail" for c in CH):
-                reason += " — likely instrument or processing effect"
+                reason += ", likely instrument or processing effect"
         p.update(score=int(max(0, round(score))), verdict=verdict, fail_channels=sorted(fail_ch, key=CH.index),
                  warn_channels=sorted(warn_ch, key=CH.index), reason=reason,
                  own={"verdict": verdict, "fail_channels": sorted(fail_ch, key=CH.index),

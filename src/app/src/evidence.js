@@ -2,7 +2,7 @@
 import { fmtDate, fmtKm } from './data.js'
 
 const rng = (a) => (!a || !a.length ? '' : a.length === 1 ? fmtDate(a[0]) : `${fmtDate(a[0])} to ${fmtDate(a[a.length - 1])}`)
-const sgn = (v, d = 2) => (v == null || !Number.isFinite(v) ? '—' : `${v < 0 ? '−' : '+'}${Math.abs(v).toFixed(d)}`)
+const sgn = (v, d = 2) => (v == null || !Number.isFinite(v) ? '–' : `${v < 0 ? '−' : '+'}${Math.abs(v).toFixed(d)}`)
 const isBurn = (p) => p.evi?.kind === 'burn'
 
 export function evidenceSteps(p) {

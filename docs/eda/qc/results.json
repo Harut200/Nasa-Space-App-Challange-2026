@@ -7836,7 +7836,7 @@
       "HV"
      ],
      "warn_channels": [],
-     "reason": "HV channel 4.6x more different from the other dates than usual (uniform across the frame); HH-HV over stable land -0.055 vs usual +0.065 (departure in HV); HV stable-land brightness +15% vs the other dates while HH is normal — likely instrument or processing effect",
+     "reason": "HV channel 4.6x more different from the other dates than usual (uniform across the frame); HH-HV over stable land -0.055 vs usual +0.065 (departure in HV); HV stable-land brightness +15% vs the other dates while HH is normal, likely instrument or processing effect",
      "key": {
       "loo_HH": {
        "value": 0.0223,

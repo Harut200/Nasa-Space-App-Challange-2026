@@ -327,7 +327,7 @@ def cmd_ae(args):
     fig, ax = plt.subplots(figsize=(5.5, 3.5))
     ax.plot(range(1, args.epochs + 1), hist["train"], "o-", label="train")
     ax.plot(range(1, args.epochs + 1), hist["val"], "s--", label="held-out pixels")
-    ax.set(xlabel="epoch", ylabel="masked MSE (brightness$^2$)", title=f"Temporal autoencoder — {args.area}")
+    ax.set(xlabel="epoch", ylabel="masked MSE (brightness$^2$)", title=f"Temporal autoencoder: {args.area}")
     ax.set_yscale("log")
     ax.legend()
     savefig(fig, f"ae_training_{args.area}.png")
@@ -352,7 +352,7 @@ def cmd_ae(args):
             ax.fill_between(dts, curves[c, :, ch] - curves_sd[c][:, ch], curves[c, :, ch] + curves_sd[c][:, ch],
                             color=col, alpha=0.15)
         ax.set_ylim(0, 1)
-        ax.set_title(f"[{c}] {frac[c] * 100:.0f}% — {names[c]}", fontsize=8, color=cmap(c), fontweight="bold")
+        ax.set_title(f"[{c}] {frac[c] * 100:.0f}%: {names[c]}", fontsize=8, color=cmap(c), fontweight="bold")
         ax.tick_params(labelsize=7)
         ax.xaxis.set_major_formatter(matplotlib.dates.DateFormatter("%b"))
         if c == 0:
@@ -364,7 +364,7 @@ def cmd_ae(args):
     fig, ax = plt.subplots(figsize=(7, 6.5))
     hi = np.nanpercentile(em, 99)
     im = ax.imshow(em[::2, ::2], cmap="magma", vmin=0, vmax=hi)
-    ax.set_title(f"Autoencoder reconstruction error — {args.area}\n(bright = season unlike the typical pixel; "
+    ax.set_title(f"Autoencoder reconstruction error: {args.area}\n(bright = season unlike the typical pixel; "
                  f"top 1% saturate)", fontsize=10)
     ax.axis("off")
     fig.colorbar(im, ax=ax, shrink=0.7, label="mean squared error over valid dates")
@@ -899,7 +899,7 @@ def cmd_robust(args):
             ax.plot(xs, [m[key][CLASS_NAMES[cls]] for m in res["math"][area]], "ko-", lw=2, label="math detector")
             for j, v in enumerate(versions):
                 ax.plot(xs, [m[key][CLASS_NAMES[cls]] for m in res[v][area]], "s--", color=f"C{j}", label=f"network {v}")
-            ax.set_title(f"{area} — {ttl}", fontsize=9)
+            ax.set_title(f"{area}: {ttl}", fontsize=9)
             ax.set_ylim(0, 1.02)
             ax.grid(alpha=0.3)
         axs[r, 0].set_ylabel("IoU (held-out part)")
@@ -961,12 +961,12 @@ def cmd_figs_v2(args):
     ar = lambda a, c: [((a[t] == c).sum() * km2).item() for t in range(a.shape[0])]  # noqa: E731
     ax = axs[0]
     shade_gap(ax)
-    ax.plot(dts, ar(md, WATER), "ko-", label="open water — math")
-    ax.plot(dts, ar(p2, WATER), "o-", color=SEG_COLORS[0], label="open water — v2 network")
-    ax.plot(dts, ar(p1, WATER), "o:", color=SEG_COLORS[0], alpha=0.5, label="open water — v1 network")
-    ax.plot(dts, ar(md, FLOODED_VEG), "ks--", label="flooded veg — math")
-    ax.plot(dts, ar(p2, FLOODED_VEG), "s-", color=SEG_COLORS[1], label="flooded veg — v2 network")
-    ax.plot(dts, ar(p1, FLOODED_VEG), "s:", color=SEG_COLORS[1], alpha=0.5, label="flooded veg — v1 network")
+    ax.plot(dts, ar(md, WATER), "ko-", label="open water: math")
+    ax.plot(dts, ar(p2, WATER), "o-", color=SEG_COLORS[0], label="open water: v2 network")
+    ax.plot(dts, ar(p1, WATER), "o:", color=SEG_COLORS[0], alpha=0.5, label="open water: v1 network")
+    ax.plot(dts, ar(md, FLOODED_VEG), "ks--", label="flooded veg: math")
+    ax.plot(dts, ar(p2, FLOODED_VEG), "s-", color=SEG_COLORS[1], label="flooded veg: v2 network")
+    ax.plot(dts, ar(p1, FLOODED_VEG), "s:", color=SEG_COLORS[1], alpha=0.5, label="flooded veg: v1 network")
     ax.set(ylabel="km² (same valid footprint)", title="Tonle Sap: area per date (not validated)")
     ax.legend(fontsize=7)
     st, md, p1, p2 = areas_out["sevan"]
@@ -975,11 +975,11 @@ def cmd_figs_v2(args):
     ax = axs[1]
     shade_gap(ax)
     ax.axhline(SEVAN_TRUE_KM2, color="r", lw=1.5, label="true lake area 1,242 km²")
-    ax.plot(dts, ar(md, WATER), "ko-", label="math — all water")
-    ax.plot(dts, lcc(md), "k^:", label="math — largest water body")
-    ax.plot(dts, ar(p2, WATER), "o-", color=SEG_COLORS[0], label="v2 network — all water")
-    ax.plot(dts, lcc(p2), "^--", color=SEG_COLORS[0], label="v2 network — largest water body")
-    ax.plot(dts, ar(p1, WATER), "o:", color="0.5", label="v1 network — all water")
+    ax.plot(dts, ar(md, WATER), "ko-", label="math: all water")
+    ax.plot(dts, lcc(md), "k^:", label="math: largest water body")
+    ax.plot(dts, ar(p2, WATER), "o-", color=SEG_COLORS[0], label="v2 network: all water")
+    ax.plot(dts, lcc(p2), "^--", color=SEG_COLORS[0], label="v2 network: largest water body")
+    ax.plot(dts, ar(p1, WATER), "o:", color="0.5", label="v1 network: all water")
     ax.set(ylabel="km²", title="Lake Sevan: water area per date")
     ax.legend(fontsize=7, loc="upper left")
     for ax in axs:
@@ -1086,17 +1086,17 @@ def cmd_predict(args):
             a.set_title(st.dates[t], fontsize=9)
     handles = [plt.Rectangle((0, 0), 1, 1, color=c) for c in SEG_COLORS]
     fig.legend(handles, CLASS_NAMES, loc="lower center", ncol=3)
-    fig.suptitle(f"U-Net segmentation per date — {args.area} (weights: {wa})")
+    fig.suptitle(f"U-Net segmentation per date: {args.area} (weights: {wa})")
     savefig(fig, f"unet_seg_dates_{args.area}.png")
 
     fig, ax = plt.subplots(figsize=(8, 4))
     dts = as_dates(st.dates)
     shade_gap(ax)
-    ax.plot(dts, water, "o-", color=SEG_COLORS[0], label="open water — U-Net")
-    ax.plot(dts, r_water, "o:", color=SEG_COLORS[0], alpha=0.6, label="open water — rules (confident only)")
-    ax.plot(dts, fveg, "s-", color=SEG_COLORS[1], label="flooded vegetation — U-Net")
-    ax.plot(dts, r_fveg, "s:", color=SEG_COLORS[1], alpha=0.6, label="flooded veg — rules (confident only)")
-    ax.set(ylabel="km²", title=f"Area per date — {args.area} (uncalibrated previews, not validated)")
+    ax.plot(dts, water, "o-", color=SEG_COLORS[0], label="open water: U-Net")
+    ax.plot(dts, r_water, "o:", color=SEG_COLORS[0], alpha=0.6, label="open water: rules (confident only)")
+    ax.plot(dts, fveg, "s-", color=SEG_COLORS[1], label="flooded vegetation: U-Net")
+    ax.plot(dts, r_fveg, "s:", color=SEG_COLORS[1], alpha=0.6, label="flooded veg: rules (confident only)")
+    ax.set(ylabel="km²", title=f"Area per date: {args.area} (uncalibrated previews, not validated)")
     ax.xaxis.set_major_formatter(matplotlib.dates.DateFormatter("%d %b"))
     ax.legend(fontsize=8)
     ax.grid(alpha=0.3)
