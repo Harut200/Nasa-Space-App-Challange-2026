@@ -1,6 +1,6 @@
 # Work plan — three branches
 
-Step-by-step version of [PLAN.md](../PLAN.md). PLAN.md says *what* and *why*; this directory says *who does what, in which order, and how to know it is done*.
+Step-by-step version of PLAN.md (the first plan, removed from the repository on 15 November; it is in the git history). PLAN.md says *what* and *why*; this directory says *who does what, in which order, and how to know it is done*.
 
 | File | Read it if you are |
 |---|---|
