@@ -1,6 +1,6 @@
 {
   "id": "atacama-west-2026",
-  "name": "Atacama Desert after the August 2026 snow and rain storms: about 6,000 km2 lost coherence (west of the Salar)",
+  "name": "Atacama Desert after the 17-18 August 2026 rain: about 1,000 km2 lost coherence",
   "bounds": [
     -70.15,
     -23.99987482440884,
@@ -41,7 +41,7 @@
     },
     {
       "id": "coherence_before",
-      "label": "Before the event: radar coherence (2 Jul\u201314 Jul)",
+      "label": "Before the event: radar coherence (11 Jul\u201323 Jul)",
       "dates": null,
       "legend": {
         "type": "ramp",
@@ -56,9 +56,9 @@
     }
   ],
   "story": {
-    "see": "In August 2026 back-to-back winter storms dropped rare snow on northern Chile: NASA Earth Observatory shows Landsat images of 6 and 14 August and a MODIS image of 19 August with snow reaching from the Andes across the hyper-arid core of the Atacama to near the Pacific coast, and it reports mudflows and flash flooding in parts of northern Chile. The orange area is where the radar picture between NISAR's 26 July and 19 August passes no longer matches the dry pair before it (2 to 14 July): about 6,000 km2 in this 115 x 110 km box, the box edge cutting it off.",
-    "physics": "In the hyper-arid desert the ground hardly changes, so two radar passes match almost perfectly (the average coherence of this box was 0.76 in the dry pair). Snow, rain-wetted soil and fresh mud change the surface, and the average fell to 0.41. The ascending pass of 16 to 28 August shows the same: 0.82 down to 0.62, about 1,000 km2 lost. We cannot say how much of the loss is snow, wet soil or flood deposits.",
-    "lband": "NISAR's L-band radar has a wavelength of about 24 cm. Dry snow is largely transparent to it, which is probably why the ascending pair of 23 July to 16 August, over the eastern half of the area, shows nothing; wet ground and moved sediment are not. The dry pair before is bright almost everywhere, so a desert-wide drop stands out. One more pair we tried as a control (14 to 26 July) is itself dark over part of this desert; we do not know why, and we use the pair of 2 to 14 July.",
+    "see": "On 17 and 18 August 2026 a cut-off low brought record rain to northern Chile: more than 37 mm in two days at Tocopilla and 33 mm at Taltal, new daily records at Arica and Iquique, and a mudflow down the hills of Tocopilla on the afternoon of 18 August (Meteored). NASA Earth Observatory shows back-to-back winter storms that month with rare snow from the Andes to near the coast. The orange area is where the radar picture between NISAR's 16 and 28 August passes no longer matches the dry pair of 11 to 23 July: about 1,000 km2 in this 115 x 110 km box of the desert west of the Salar de Atacama, the box edge cutting it off. The pair holds the 17-18 August rain and no other storm.",
+    "physics": "In the hyper-arid desert the ground hardly changes: the average coherence of this box was 0.82 in the dry control and 0.81 in the pair of 23 July to 16 August, which ends the day before the rain. In the pair of 16 to 28 August it fell to 0.62, and it was back to 0.75 for 28 August to 9 September and 0.77 after, so the effect lasts days to a couple of weeks, as long as the ground takes to dry. A longer descending pair (26 July to 19 August) that mixes several weather episodes shows more, about 6,000 km2, and boxes near Taltal and Tocopilla agree. The loss is not a snow line: 41 % of the comparable ground lost coherence at 800-1,200 m, the desert floor, and 72 % at 2,400-2,800 m. We cannot say how much is snow, wet soil or flood deposit.",
+    "lband": "NISAR's L-band radar has a wavelength of about 24 cm. Dry snow is largely transparent to it; wet ground and moved sediment are not. The dry control is bright almost everywhere, so a desert-wide drop stands out, and the same recipe applied to the dry pair before the rain finds about 1 km2. One other descending pair (14 to 26 July) is itself dark over part of this desert; we do not know why, so the control used here is the ascending pair of 11 to 23 July.",
     "people": "This map shows where the surface changed, not damage. We did not look at reports of damage or casualties."
   },
   "spots": [
@@ -72,26 +72,26 @@
     },
     {
       "id": "patch",
-      "label": "Centre of the largest patch of lost coherence",
+      "label": "Largest patch of lost coherence",
       "lngLat": [
-        -69.4819,
-        -23.8233
+        -69.3096,
+        -23.9814
       ]
     },
     {
       "id": "patch2",
       "label": "Second patch",
       "lngLat": [
-        -69.2439,
-        -23.1878
+        -69.0488,
+        -23.5559
       ]
     },
     {
       "id": "reference",
       "label": "Reference: stays coherent in both pairs",
       "lngLat": [
-        -69.746,
-        -23.1735
+        -69.8675,
+        -23.701
       ]
     }
   ],
@@ -100,43 +100,43 @@
   "kind": "event",
   "event": {
     "type": "storm",
-    "title": "Atacama Desert after the August 2026 snow and rain storms: about 6,000 km2 lost coherence (west of the Salar)",
-    "time": "2026-08-17T00:00:00Z",
-    "time_note": "back-to-back storms in early August and a second one in the second half of August (NASA Earth Observatory); pair 26 Jul-19 Aug (24 days)",
+    "title": "Atacama Desert after the 17-18 August 2026 rain: about 1,000 km2 lost coherence",
+    "time": "2026-08-18T00:00:00Z",
+    "time_note": "rain on 17-18 Aug (Meteored); ascending pair 16-28 Aug holds only that rain; control 11-23 Jul ends well before it",
     "lngLat": [
       -69.45,
       -23.5
     ],
     "place": "Atacama Desert west of the Salar de Atacama, Antofagasta region, Chile",
-    "summary": "\u2248 6,000 km\u00b2 of desert lost coherence (window-limited)",
+    "summary": "\u2248 1,000 km\u00b2 of desert lost coherence (0.82 \u2192 0.62, window-limited)",
     "radius_km": 40,
-    "source_url": "https://science.nasa.gov/earth/earth-observatory/rare-widespread-snow-in-the-atacama-desert/",
+    "source_url": "https://www.meteored.cl/noticias/actualidad/el-norte-de-chile-recibio-lluvias-historicas-aluvion-deja-enterrada-parte-de-tocopilla.html",
     "views": [
       {
-        "id": "d_both",
-        "label": "descending",
-        "track": 97,
-        "before": "2026-07-26",
-        "after": "2026-08-19",
+        "id": "a_late",
+        "label": "ascending",
+        "track": 46,
+        "before": "2026-08-16",
+        "after": "2026-08-28",
         "p2p_cm": null,
         "control_p2p_cm": null,
-        "control_before": "2026-07-02",
-        "control_after": "2026-07-14"
+        "control_before": "2026-07-11",
+        "control_after": "2026-07-23"
       }
     ],
     "before_after": [
       {
-        "view": "d_both",
+        "view": "a_late",
         "before": "coherence_before",
         "after": "coherence",
         "label": "Radar coherence",
         "before_dates": [
-          "2026-07-02",
-          "2026-07-14"
+          "2026-07-11",
+          "2026-07-23"
         ],
         "after_dates": [
-          "2026-07-26",
-          "2026-08-19"
+          "2026-08-16",
+          "2026-08-28"
         ]
       }
     ]

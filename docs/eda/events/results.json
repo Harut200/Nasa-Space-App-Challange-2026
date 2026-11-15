@@ -1283,6 +1283,138 @@
      "max": 1.1776
     },
     "incidence_deg_mean": 47.101806640625
+   },
+   "d_sep": {
+    "event": "Klyuchevskoy eruption and Bezymianny, Kamchatka, from mid-August 2026",
+    "view": "d_sep",
+    "track": 60,
+    "frame": 60,
+    "direction": "D",
+    "event_pair": "20260922_20261004",
+    "control_pair": "20260910_20260922",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 10,
+    "far_km": 30,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.2026626616716385,
+    "mean_coh_control_within_radius": 0.3485836684703827,
+    "mean_coh_event_whole_window": 0.3799647092819214,
+    "mean_coh_control_whole_window": 0.5722208619117737,
+    "coherence_loss": {
+     "loss_area_km2": 69.1328,
+     "comparable_area_km2": 98.8288,
+     "loss_fraction_inside": 0.6995207874627639,
+     "loss_fraction_outside": 0.30170203006525953,
+     "comparable_px_inside": 15442,
+     "loss_area_km2_whole_window": 624.7936000000001,
+     "mean_coh_control_at_loss_px": 0.6578826308250427,
+     "mean_coh_event_at_loss_px": 0.17500019073486328
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 413.2352,
+      "lon": 160.7636,
+      "lat": 56.1832,
+      "max_side_km": 35.28
+     },
+     {
+      "area_km2": 79.9872,
+      "lon": 160.551,
+      "lat": 55.9107,
+      "max_side_km": 17.52
+     },
+     {
+      "area_km2": 18.144000000000002,
+      "lon": 160.355,
+      "lat": 56.1345,
+      "max_side_km": 8.64
+     },
+     {
+      "area_km2": 16.9408,
+      "lon": 160.6819,
+      "lat": 55.8458,
+      "max_side_km": 8.64
+     },
+     {
+      "area_km2": 16.691200000000002,
+      "lon": 160.278,
+      "lat": 56.1547,
+      "max_side_km": 11.040000000000001
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 23,
+     "median": 22.5408,
+     "p95": 141.30112000000003,
+     "max": 178.752
+    },
+    "incidence_deg_mean": 41.95631408691406
+   },
+   "d_oct": {
+    "event": "Klyuchevskoy eruption and Bezymianny, Kamchatka, from mid-August 2026",
+    "view": "d_oct",
+    "track": 60,
+    "frame": 60,
+    "direction": "D",
+    "event_pair": "20261004_20261016",
+    "control_pair": "20260910_20260922",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 10,
+    "far_km": 30,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.1925678849220276,
+    "mean_coh_control_within_radius": 0.3485836684703827,
+    "mean_coh_event_whole_window": 0.3407836854457855,
+    "mean_coh_control_whole_window": 0.5722208619117737,
+    "coherence_loss": {
+     "loss_area_km2": 78.1696,
+     "comparable_area_km2": 98.8288,
+     "loss_fraction_inside": 0.7909597202434918,
+     "loss_fraction_outside": 0.5302112074058115,
+     "comparable_px_inside": 15442,
+     "loss_area_km2_whole_window": 1054.688,
+     "mean_coh_control_at_loss_px": 0.6656603813171387,
+     "mean_coh_event_at_loss_px": 0.1794602870941162
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 1014.7264,
+      "lon": 160.5727,
+      "lat": 56.074,
+      "max_side_km": 51.52
+     },
+     {
+      "area_km2": 10.1376,
+      "lon": 160.7375,
+      "lat": 55.8927,
+      "max_side_km": 7.68
+     },
+     {
+      "area_km2": 2.2784,
+      "lon": 160.9118,
+      "lat": 56.2439,
+      "max_side_km": 2.48
+     },
+     {
+      "area_km2": 1.856,
+      "lon": 160.9451,
+      "lat": 56.2281,
+      "max_side_km": 3.12
+     },
+     {
+      "area_km2": 1.1456,
+      "lon": 160.4355,
+      "lat": 56.1636,
+      "max_side_km": 2.88
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 23,
+     "median": 133.1904,
+     "p95": 189.02592,
+     "max": 195.8976
+    },
+    "incidence_deg_mean": null
    }
   },
   "verdict": null
@@ -2125,6 +2257,52 @@
      "max": 4.8064
     },
     "incidence_deg_mean": 41.311004638671875
+   },
+   "d_null": {
+    "event": "La Mierla fire, Guadalajara: forest and scrub surface changed, 14-26 July 2026",
+    "view": "d_null",
+    "track": 95,
+    "frame": 68,
+    "direction": "D",
+    "event_pair": "20260702_20260714",
+    "control_pair": "20260620_20260702",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 12,
+    "far_km": 24,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.7408542633056641,
+    "mean_coh_control_within_radius": 0.6603595018386841,
+    "mean_coh_event_whole_window": 0.7548660039901733,
+    "mean_coh_control_whole_window": 0.6700771450996399,
+    "coherence_loss": {
+     "loss_area_km2": 0.0,
+     "comparable_area_km2": 407.6224,
+     "loss_fraction_inside": 0.0,
+     "loss_fraction_outside": 0.00011979480860640132,
+     "comparable_px_inside": 63691,
+     "loss_area_km2_whole_window": 0.5376000000000001
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 0.3392,
+      "lon": -3.2949,
+      "lat": 40.8395,
+      "max_side_km": 0.8
+     },
+     {
+      "area_km2": 0.19840000000000002,
+      "lon": -3.3354,
+      "lat": 41.3476,
+      "max_side_km": 0.8
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 121,
+     "median": 0.0,
+     "p95": 0.19840000000000002,
+     "max": 0.19840000000000002
+    },
+    "incidence_deg_mean": null
    }
   },
   "verdict": "clear"
@@ -2381,6 +2559,58 @@
      "max": 102.5216
     },
     "incidence_deg_mean": 43.06556701660156
+   },
+   "a_null": {
+    "event": "Burgohondo fire, Avila: forest and scrub surface changed, 14-26 July 2026",
+    "view": "a_null",
+    "track": 87,
+    "frame": 22,
+    "direction": "A",
+    "event_pair": "20260702_20260714",
+    "control_pair": "20260620_20260702",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 15,
+    "far_km": 30,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.7901261448860168,
+    "mean_coh_control_within_radius": 0.74419105052948,
+    "mean_coh_event_whole_window": 0.7674123048782349,
+    "mean_coh_control_whole_window": 0.6921438574790955,
+    "coherence_loss": {
+     "loss_area_km2": 0.0,
+     "comparable_area_km2": 673.5424,
+     "loss_fraction_inside": 0.0,
+     "loss_fraction_outside": 0.00016646421562182225,
+     "comparable_px_inside": 105241,
+     "loss_area_km2_whole_window": 0.8832000000000001
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 0.39680000000000004,
+      "lon": -4.3697,
+      "lat": 40.1492,
+      "max_side_km": 2.0
+     },
+     {
+      "area_km2": 0.28800000000000003,
+      "lon": -4.7249,
+      "lat": 40.6339,
+      "max_side_km": 0.8
+     },
+     {
+      "area_km2": 0.19840000000000002,
+      "lon": -4.9495,
+      "lat": 40.1545,
+      "max_side_km": 0.56
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 63,
+     "median": 0.0,
+     "p95": 0.39680000000000004,
+     "max": 0.39680000000000004
+    },
+    "incidence_deg_mean": null
    }
   },
   "verdict": "clear"
@@ -2585,9 +2815,73 @@
      "max": 0.2048
     },
     "incidence_deg_mean": 40.38734817504883
+   },
+   "a_null": {
+    "event": "Gironde megafire, France: forest surface changed, 17 Jul-10 Aug 2026",
+    "view": "a_null",
+    "track": 130,
+    "frame": 24,
+    "direction": "A",
+    "event_pair": "20260705_20260717",
+    "control_pair": "20260623_20260705",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 12,
+    "far_km": 24,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.5743351578712463,
+    "mean_coh_control_within_radius": 0.5676694512367249,
+    "mean_coh_event_whole_window": 0.39021560549736023,
+    "mean_coh_control_whole_window": 0.40588849782943726,
+    "coherence_loss": {
+     "loss_area_km2": 0.0,
+     "comparable_area_km2": 344.30080000000004,
+     "loss_fraction_inside": 0.0,
+     "loss_fraction_outside": 0.0023706439417570213,
+     "comparable_px_inside": 53797,
+     "loss_area_km2_whole_window": 4.864
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 1.1072,
+      "lon": -1.1649,
+      "lat": 44.763,
+      "max_side_km": 2.32
+     },
+     {
+      "area_km2": 0.9472,
+      "lon": -1.1745,
+      "lat": 44.698,
+      "max_side_km": 1.28
+     },
+     {
+      "area_km2": 0.6144000000000001,
+      "lon": -1.0885,
+      "lat": 44.644,
+      "max_side_km": 1.76
+     },
+     {
+      "area_km2": 0.4736,
+      "lon": -0.7619,
+      "lat": 44.6838,
+      "max_side_km": 1.12
+     },
+     {
+      "area_km2": 0.4288,
+      "lon": -0.9559,
+      "lat": 44.7357,
+      "max_side_km": 0.96
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 28,
+     "median": 0.4736,
+     "p95": 1.5868799999999992,
+     "max": 1.8176
+    },
+    "incidence_deg_mean": null
    }
   },
-  "verdict": null
+  "verdict": "clear"
  },
  "mahanadi-coh-2026": {
   "event_id": "mahanadi-coh-2026",
@@ -3263,6 +3557,58 @@
      "max": 4.1728000000000005
     },
     "incidence_deg_mean": null
+   },
+   "a_null": {
+    "event": "Niebla fire, Huelva and Seville, Spain: forest surface changed, 21 Jul-14 Aug 2026",
+    "view": "a_null",
+    "track": 15,
+    "frame": 21,
+    "direction": "A",
+    "event_pair": "20260709_20260721",
+    "control_pair": "20260627_20260709",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 15,
+    "far_km": 30,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.803338885307312,
+    "mean_coh_control_within_radius": 0.7307257056236267,
+    "mean_coh_event_whole_window": 0.758960485458374,
+    "mean_coh_control_whole_window": 0.6833179593086243,
+    "coherence_loss": {
+     "loss_area_km2": 0.0,
+     "comparable_area_km2": 670.8096,
+     "loss_fraction_inside": 0.0,
+     "loss_fraction_outside": 0.0006086697924686145,
+     "comparable_px_inside": 104814,
+     "loss_area_km2_whole_window": 1.4016
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 0.608,
+      "lon": -6.9713,
+      "lat": 37.7626,
+      "max_side_km": 1.28
+     },
+     {
+      "area_km2": 0.5568000000000001,
+      "lon": -6.2846,
+      "lat": 37.4203,
+      "max_side_km": 1.2
+     },
+     {
+      "area_km2": 0.2368,
+      "lon": -6.2773,
+      "lat": 37.4907,
+      "max_side_km": 1.12
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": null
    }
   },
   "verdict": "clear"
@@ -3539,6 +3885,39 @@
      "max": 0.0
     },
     "incidence_deg_mean": 45.170711517333984
+   },
+   "a_null": {
+    "event": "Bald Range fire, British Columbia: forest surface changed, 25 Jul-18 Aug 2026",
+    "view": "a_null",
+    "track": 77,
+    "frame": 27,
+    "direction": "A",
+    "event_pair": "20260713_20260725",
+    "control_pair": "20260701_20260713",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 12,
+    "far_km": 24,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.726506233215332,
+    "mean_coh_control_within_radius": 0.7266457676887512,
+    "mean_coh_event_whole_window": 0.7123757600784302,
+    "mean_coh_control_whole_window": 0.7001346945762634,
+    "coherence_loss": {
+     "loss_area_km2": 0.0,
+     "comparable_area_km2": 414.3808,
+     "loss_fraction_inside": 0.0,
+     "loss_fraction_outside": 0.0,
+     "comparable_px_inside": 64747,
+     "loss_area_km2_whole_window": 0.0
+    },
+    "largest_loss_clusters": [],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 17,
+     "median": 0.0,
+     "p95": 0.0,
+     "max": 0.0
+    },
+    "incidence_deg_mean": null
    }
   },
   "verdict": "clear"
@@ -5135,6 +5514,445 @@
      "max": null
     },
     "incidence_deg_mean": null
+   },
+   "d_jun": {
+    "event": "Atacama Desert after the 17-18 August 2026 rain and the snow storms: about 6,000 km2 lost coherence (west of the Salar)",
+    "view": "d_jun",
+    "track": 97,
+    "frame": 100,
+    "direction": "D",
+    "event_pair": "20260620_20260702",
+    "control_pair": "20260702_20260714",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 40,
+    "far_km": 80,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.8192588686943054,
+    "mean_coh_control_within_radius": 0.7115811705589294,
+    "mean_coh_event_whole_window": 0.8315200805664062,
+    "mean_coh_control_whole_window": 0.7634966373443604,
+    "coherence_loss": {
+     "loss_area_km2": 0.0,
+     "comparable_area_km2": 4787.7952000000005,
+     "loss_fraction_inside": 0.0,
+     "loss_fraction_outside": 0.0,
+     "comparable_px_inside": 748093,
+     "loss_area_km2_whole_window": 0.0
+    },
+    "largest_loss_clusters": [],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": 40.788734436035156
+   },
+   "d_sep1": {
+    "event": "Atacama Desert after the 17-18 August 2026 rain and the snow storms: about 6,000 km2 lost coherence (west of the Salar)",
+    "view": "d_sep1",
+    "track": 97,
+    "frame": 100,
+    "direction": "D",
+    "event_pair": "20260831_20260912",
+    "control_pair": "20260702_20260714",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 40,
+    "far_km": 80,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.7674716114997864,
+    "mean_coh_control_within_radius": 0.7115811705589294,
+    "mean_coh_event_whole_window": 0.7659963369369507,
+    "mean_coh_control_whole_window": 0.7634966373443604,
+    "coherence_loss": {
+     "loss_area_km2": 0.2112,
+     "comparable_area_km2": 4787.7952000000005,
+     "loss_fraction_inside": 4.4112162525247526e-05,
+     "loss_fraction_outside": 0.0,
+     "comparable_px_inside": 748093,
+     "loss_area_km2_whole_window": 0.2112,
+     "mean_coh_control_at_loss_px": 0.6809697151184082,
+     "mean_coh_event_at_loss_px": 0.15357574820518494
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 0.2112,
+      "lon": -69.4948,
+      "lat": -23.4293,
+      "max_side_km": 0.56
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": null
+   },
+   "d_sep2": {
+    "event": "Atacama Desert after the 17-18 August 2026 rain and the snow storms: about 6,000 km2 lost coherence (west of the Salar)",
+    "view": "d_sep2",
+    "track": 97,
+    "frame": 100,
+    "direction": "D",
+    "event_pair": "20260912_20260924",
+    "control_pair": "20260702_20260714",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 40,
+    "far_km": 80,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.7984777688980103,
+    "mean_coh_control_within_radius": 0.7115811705589294,
+    "mean_coh_event_whole_window": 0.7985612750053406,
+    "mean_coh_control_whole_window": 0.7634966373443604,
+    "coherence_loss": {
+     "loss_area_km2": 0.21760000000000002,
+     "comparable_area_km2": 4787.7952000000005,
+     "loss_fraction_inside": 4.5448894722982304e-05,
+     "loss_fraction_outside": 0.002330189526257436,
+     "comparable_px_inside": 748093,
+     "loss_area_km2_whole_window": 21.6448,
+     "mean_coh_control_at_loss_px": 0.6110588312149048,
+     "mean_coh_event_at_loss_px": 0.16964706778526306
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 17.1264,
+      "lon": -68.9987,
+      "lat": -23.2106,
+      "max_side_km": 9.040000000000001
+     },
+     {
+      "area_km2": 0.9216000000000001,
+      "lon": -68.9763,
+      "lat": -23.1017,
+      "max_side_km": 1.6
+     },
+     {
+      "area_km2": 0.8384,
+      "lon": -69.0223,
+      "lat": -23.1701,
+      "max_side_km": 2.08
+     },
+     {
+      "area_km2": 0.7168,
+      "lon": -68.9748,
+      "lat": -23.1834,
+      "max_side_km": 1.68
+     },
+     {
+      "area_km2": 0.512,
+      "lon": -68.9752,
+      "lat": -23.1672,
+      "max_side_km": 1.2
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": null
+   },
+   "d_oct": {
+    "event": "Atacama Desert after the 17-18 August 2026 rain and the snow storms: about 6,000 km2 lost coherence (west of the Salar)",
+    "view": "d_oct",
+    "track": 97,
+    "frame": 100,
+    "direction": "D",
+    "event_pair": "20260924_20261006",
+    "control_pair": "20260702_20260714",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 40,
+    "far_km": 80,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.7403157353401184,
+    "mean_coh_control_within_radius": 0.7115811705589294,
+    "mean_coh_event_whole_window": 0.7650251984596252,
+    "mean_coh_control_whole_window": 0.7634966373443604,
+    "coherence_loss": {
+     "loss_area_km2": 0.2432,
+     "comparable_area_km2": 4787.7952000000005,
+     "loss_fraction_inside": 5.07958235139214e-05,
+     "loss_fraction_outside": 4.81911217985206e-05,
+     "comparable_px_inside": 748093,
+     "loss_area_km2_whole_window": 0.6848000000000001,
+     "mean_coh_control_at_loss_px": 0.697999894618988,
+     "mean_coh_event_at_loss_px": 0.15652631223201752
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 0.2432,
+      "lon": -69.4939,
+      "lat": -23.4297,
+      "max_side_km": 0.64
+     },
+     {
+      "area_km2": 0.224,
+      "lon": -69.0825,
+      "lat": -23.0756,
+      "max_side_km": 1.2
+     },
+     {
+      "area_km2": 0.21760000000000002,
+      "lon": -69.0886,
+      "lat": -23.0268,
+      "max_side_km": 1.04
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": null
+   },
+   "a_early": {
+    "event": "Atacama Desert after the 17-18 August 2026 rain and the snow storms: about 6,000 km2 lost coherence (west of the Salar)",
+    "view": "a_early",
+    "track": 46,
+    "frame": 166,
+    "direction": "A",
+    "event_pair": "20260723_20260816",
+    "control_pair": "20260711_20260723",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 40,
+    "far_km": 80,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.8033857941627502,
+    "mean_coh_control_within_radius": 0.8130065202713013,
+    "mean_coh_event_whole_window": 0.8073947429656982,
+    "mean_coh_control_whole_window": 0.8211373686790466,
+    "coherence_loss": {
+     "loss_area_km2": 0.0,
+     "comparable_area_km2": 4978.8096000000005,
+     "loss_fraction_inside": 0.0,
+     "loss_fraction_outside": 0.00010280619798006383,
+     "comparable_px_inside": 777939,
+     "loss_area_km2_whole_window": 0.9600000000000001
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 0.544,
+      "lon": -69.1366,
+      "lat": -23.0066,
+      "max_side_km": 1.12
+     },
+     {
+      "area_km2": 0.41600000000000004,
+      "lon": -70.0488,
+      "lat": -23.4428,
+      "max_side_km": 0.88
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": 42.68133544921875
+   },
+   "a_0828": {
+    "event": "Atacama Desert after the 17-18 August 2026 rain and the snow storms: about 6,000 km2 lost coherence (west of the Salar)",
+    "view": "a_0828",
+    "track": 46,
+    "frame": 166,
+    "direction": "A",
+    "event_pair": "20260828_20260909",
+    "control_pair": "20260711_20260723",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 40,
+    "far_km": 80,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.7498515248298645,
+    "mean_coh_control_within_radius": 0.8130065202713013,
+    "mean_coh_event_whole_window": 0.7482072710990906,
+    "mean_coh_control_whole_window": 0.8211373686790466,
+    "coherence_loss": {
+     "loss_area_km2": 0.2048,
+     "comparable_area_km2": 4978.8096000000005,
+     "loss_fraction_inside": 4.113433058376042e-05,
+     "loss_fraction_outside": 0.00013776030529328553,
+     "comparable_px_inside": 777939,
+     "loss_area_km2_whole_window": 1.4912,
+     "mean_coh_control_at_loss_px": 0.7210000157356262,
+     "mean_coh_event_at_loss_px": 0.17737500369548798
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 0.5504,
+      "lon": -70.022,
+      "lat": -23.7365,
+      "max_side_km": 1.68
+     },
+     {
+      "area_km2": 0.3264,
+      "lon": -70.0621,
+      "lat": -23.7534,
+      "max_side_km": 1.04
+     },
+     {
+      "area_km2": 0.21760000000000002,
+      "lon": -69.1257,
+      "lat": -23.0575,
+      "max_side_km": 0.56
+     },
+     {
+      "area_km2": 0.2048,
+      "lon": -69.5326,
+      "lat": -23.4585,
+      "max_side_km": 0.48
+     },
+     {
+      "area_km2": 0.192,
+      "lon": -70.0324,
+      "lat": -23.7416,
+      "max_side_km": 0.64
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": 42.6768798828125
+   },
+   "a_0909": {
+    "event": "Atacama Desert after the 17-18 August 2026 rain and the snow storms: about 6,000 km2 lost coherence (west of the Salar)",
+    "view": "a_0909",
+    "track": 46,
+    "frame": 166,
+    "direction": "A",
+    "event_pair": "20260909_20260921",
+    "control_pair": "20260711_20260723",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 40,
+    "far_km": 80,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.7736315727233887,
+    "mean_coh_control_within_radius": 0.8130065202713013,
+    "mean_coh_event_whole_window": 0.7674518823623657,
+    "mean_coh_control_whole_window": 0.8211373686790466,
+    "coherence_loss": {
+     "loss_area_km2": 0.7936000000000001,
+     "comparable_area_km2": 4978.8096000000005,
+     "loss_fraction_inside": 0.00015939553101207164,
+     "loss_fraction_outside": 0.00955275191630753,
+     "comparable_px_inside": 777939,
+     "loss_area_km2_whole_window": 89.99680000000001,
+     "mean_coh_control_at_loss_px": 0.8578065037727356,
+     "mean_coh_event_at_loss_px": 0.22090323269367218
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 74.3296,
+      "lon": -68.9996,
+      "lat": -23.2132,
+      "max_side_km": 18.48
+     },
+     {
+      "area_km2": 5.6576,
+      "lon": -68.9787,
+      "lat": -23.1085,
+      "max_side_km": 4.72
+     },
+     {
+      "area_km2": 3.2448,
+      "lon": -68.9776,
+      "lat": -23.3291,
+      "max_side_km": 4.5600000000000005
+     },
+     {
+      "area_km2": 1.8176,
+      "lon": -69.0273,
+      "lat": -23.2778,
+      "max_side_km": 2.24
+     },
+     {
+      "area_km2": 0.6848000000000001,
+      "lon": -68.9973,
+      "lat": -23.0842,
+      "max_side_km": 1.6
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": null
+   },
+   "a_0921": {
+    "event": "Atacama Desert after the 17-18 August 2026 rain and the snow storms: about 6,000 km2 lost coherence (west of the Salar)",
+    "view": "a_0921",
+    "track": 46,
+    "frame": 166,
+    "direction": "A",
+    "event_pair": "20260921_20261003",
+    "control_pair": "20260711_20260723",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 40,
+    "far_km": 80,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.7719827890396118,
+    "mean_coh_control_within_radius": 0.8130065202713013,
+    "mean_coh_event_whole_window": 0.7681447863578796,
+    "mean_coh_control_whole_window": 0.8211373686790466,
+    "coherence_loss": {
+     "loss_area_km2": 2.1824,
+     "comparable_area_km2": 4978.8096000000005,
+     "loss_fraction_inside": 0.000438337710283197,
+     "loss_fraction_outside": 0.0028470463093945675,
+     "comparable_px_inside": 777939,
+     "loss_area_km2_whole_window": 28.768,
+     "mean_coh_control_at_loss_px": 0.9039179682731628,
+     "mean_coh_event_at_loss_px": 0.22201760113239288
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 17.4144,
+      "lon": -68.9924,
+      "lat": -23.2376,
+      "max_side_km": 9.68
+     },
+     {
+      "area_km2": 1.3824,
+      "lon": -69.0144,
+      "lat": -23.1934,
+      "max_side_km": 2.16
+     },
+     {
+      "area_km2": 1.2096,
+      "lon": -69.0273,
+      "lat": -23.1618,
+      "max_side_km": 1.84
+     },
+     {
+      "area_km2": 1.1520000000000001,
+      "lon": -68.9842,
+      "lat": -23.1678,
+      "max_side_km": 2.24
+     },
+     {
+      "area_km2": 0.9024000000000001,
+      "lon": -69.0087,
+      "lat": -23.1754,
+      "max_side_km": 1.44
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": null
    }
   },
   "verdict": "clear"
@@ -5681,9 +6499,405 @@
      "max": 0.08320000000000001
     },
     "incidence_deg_mean": 42.42255401611328
+   },
+   "a_0911": {
+    "event": "Sheveluch lava domes, Kamchatka, Jul-Oct 2026",
+    "view": "a_0911",
+    "track": 80,
+    "frame": 30,
+    "direction": "A",
+    "event_pair": "20260911_20260923",
+    "control_pair": "20260830_20260911",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 6,
+    "far_km": 18,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.5231415629386902,
+    "mean_coh_control_within_radius": 0.5366260409355164,
+    "mean_coh_event_whole_window": 0.5224382281303406,
+    "mean_coh_control_whole_window": 0.5261526703834534,
+    "coherence_loss": {
+     "loss_area_km2": 3.0976000000000004,
+     "comparable_area_km2": 66.2912,
+     "loss_fraction_inside": 0.046727167406835295,
+     "loss_fraction_outside": 0.006119721803217283,
+     "comparable_px_inside": 10358,
+     "loss_area_km2_whole_window": 10.8352,
+     "mean_coh_control_at_loss_px": 0.5891900658607483,
+     "mean_coh_event_at_loss_px": 0.18510742485523224
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 2.3616,
+      "lon": 161.2583,
+      "lat": 56.6284,
+      "max_side_km": 3.36
+     },
+     {
+      "area_km2": 1.4784000000000002,
+      "lon": 161.0621,
+      "lat": 56.8421,
+      "max_side_km": 3.44
+     },
+     {
+      "area_km2": 0.864,
+      "lon": 161.2905,
+      "lat": 56.6231,
+      "max_side_km": 1.52
+     },
+     {
+      "area_km2": 0.512,
+      "lon": 161.0291,
+      "lat": 56.5968,
+      "max_side_km": 1.76
+     },
+     {
+      "area_km2": 0.512,
+      "lon": 161.0272,
+      "lat": 56.8298,
+      "max_side_km": 1.36
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 137,
+     "median": 0.0,
+     "p95": 1.6832,
+     "max": 3.9744
+    },
+    "incidence_deg_mean": 37.530975341796875
+   },
+   "a_0830": {
+    "event": "Sheveluch lava domes, Kamchatka, Jul-Oct 2026",
+    "view": "a_0830",
+    "track": 80,
+    "frame": 30,
+    "direction": "A",
+    "event_pair": "20260830_20260911",
+    "control_pair": "20260818_20260830",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 6,
+    "far_km": 18,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.5366260409355164,
+    "mean_coh_control_within_radius": 0.5540253520011902,
+    "mean_coh_event_whole_window": 0.5261526703834534,
+    "mean_coh_control_whole_window": 0.5366702675819397,
+    "coherence_loss": {
+     "loss_area_km2": 1.1648,
+     "comparable_area_km2": 71.66720000000001,
+     "loss_fraction_inside": 0.016252902303982852,
+     "loss_fraction_outside": 0.0001416939033836504,
+     "comparable_px_inside": 11198,
+     "loss_area_km2_whole_window": 1.3568,
+     "mean_coh_control_at_loss_px": 0.5984175801277161,
+     "mean_coh_event_at_loss_px": 0.2316703200340271
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 0.3456,
+      "lon": 161.2837,
+      "lat": 56.6435,
+      "max_side_km": 1.12
+     },
+     {
+      "area_km2": 0.28800000000000003,
+      "lon": 161.3843,
+      "lat": 56.6476,
+      "max_side_km": 1.28
+     },
+     {
+      "area_km2": 0.11520000000000001,
+      "lon": 161.3064,
+      "lat": 56.6451,
+      "max_side_km": 0.48
+     },
+     {
+      "area_km2": 0.096,
+      "lon": 161.6959,
+      "lat": 56.4787,
+      "max_side_km": 0.32
+     },
+     {
+      "area_km2": 0.096,
+      "lon": 161.2302,
+      "lat": 56.6313,
+      "max_side_km": 0.4
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 139,
+     "median": 0.0,
+     "p95": 0.0,
+     "max": 0.096
+    },
+    "incidence_deg_mean": 37.52849197387695
+   },
+   "a_0923": {
+    "event": "Sheveluch lava domes, Kamchatka, Jul-Oct 2026",
+    "view": "a_0923",
+    "track": 80,
+    "frame": 30,
+    "direction": "A",
+    "event_pair": "20260923_20261005",
+    "control_pair": "20260911_20260923",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 6,
+    "far_km": 18,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.2846536636352539,
+    "mean_coh_control_within_radius": 0.5231415629386902,
+    "mean_coh_event_whole_window": 0.5113235116004944,
+    "mean_coh_control_whole_window": 0.5224382281303406,
+    "coherence_loss": {
+     "loss_area_km2": 28.96,
+     "comparable_area_km2": 61.824000000000005,
+     "loss_fraction_inside": 0.4684265010351967,
+     "loss_fraction_outside": 0.033914949488373106,
+     "comparable_px_inside": 9660,
+     "loss_area_km2_whole_window": 68.96640000000001,
+     "mean_coh_control_at_loss_px": 0.7329254746437073,
+     "mean_coh_event_at_loss_px": 0.2185104936361313
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 16.7296,
+      "lon": 161.2037,
+      "lat": 56.6317,
+      "max_side_km": 7.92
+     },
+     {
+      "area_km2": 16.3136,
+      "lon": 161.4123,
+      "lat": 56.6721,
+      "max_side_km": 10.08
+     },
+     {
+      "area_km2": 5.6576,
+      "lon": 161.3258,
+      "lat": 56.5957,
+      "max_side_km": 4.24
+     },
+     {
+      "area_km2": 4.2112,
+      "lon": 161.2824,
+      "lat": 56.6781,
+      "max_side_km": 4.5600000000000005
+     },
+     {
+      "area_km2": 3.9168000000000003,
+      "lon": 161.3496,
+      "lat": 56.6982,
+      "max_side_km": 3.68
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 141,
+     "median": 0.0,
+     "p95": 4.4736,
+     "max": 17.7408
+    },
+    "incidence_deg_mean": null
+   },
+   "a_1005": {
+    "event": "Sheveluch lava domes, Kamchatka, Jul-Oct 2026",
+    "view": "a_1005",
+    "track": 80,
+    "frame": 30,
+    "direction": "A",
+    "event_pair": "20261005_20261017",
+    "control_pair": "20260923_20261005",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 6,
+    "far_km": 18,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.24778346717357635,
+    "mean_coh_control_within_radius": 0.2846536636352539,
+    "mean_coh_event_whole_window": 0.4968471825122833,
+    "mean_coh_control_whole_window": 0.5113235116004944,
+    "coherence_loss": {
+     "loss_area_km2": 7.3536,
+     "comparable_area_km2": 19.2576,
+     "loss_fraction_inside": 0.3818544366899302,
+     "loss_fraction_outside": 0.0405573898037964,
+     "comparable_px_inside": 3009,
+     "loss_area_km2_whole_window": 59.3984,
+     "mean_coh_control_at_loss_px": 0.6182488799095154,
+     "mean_coh_event_at_loss_px": 0.20394429564476013
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 28.6784,
+      "lon": 161.3129,
+      "lat": 56.5626,
+      "max_side_km": 12.48
+     },
+     {
+      "area_km2": 6.1184,
+      "lon": 161.6032,
+      "lat": 56.7098,
+      "max_side_km": 4.8
+     },
+     {
+      "area_km2": 5.9648,
+      "lon": 161.4456,
+      "lat": 56.643,
+      "max_side_km": 5.76
+     },
+     {
+      "area_km2": 3.1296,
+      "lon": 161.5872,
+      "lat": 56.7402,
+      "max_side_km": 3.7600000000000002
+     },
+     {
+      "area_km2": 2.4512,
+      "lon": 161.4002,
+      "lat": 56.6068,
+      "max_side_km": 4.0
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 138,
+     "median": 0.0,
+     "p95": 12.957120000000002,
+     "max": 21.5872
+    },
+    "incidence_deg_mean": null
+   },
+   "d_0922": {
+    "event": "Sheveluch lava domes, Kamchatka, Jul-Oct 2026",
+    "view": "d_0922",
+    "track": 60,
+    "frame": 60,
+    "direction": "D",
+    "event_pair": "20260922_20261004",
+    "control_pair": "20260910_20260922",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 6,
+    "far_km": 18,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.26895084977149963,
+    "mean_coh_control_within_radius": 0.5231997966766357,
+    "mean_coh_event_whole_window": 0.5872278213500977,
+    "mean_coh_control_whole_window": 0.6421889066696167,
+    "coherence_loss": {
+     "loss_area_km2": 33.056000000000004,
+     "comparable_area_km2": 63.884800000000006,
+     "loss_fraction_inside": 0.5174313764776598,
+     "loss_fraction_outside": 0.030034395533207886,
+     "comparable_px_inside": 9982,
+     "loss_area_km2_whole_window": 82.9056,
+     "mean_coh_control_at_loss_px": 0.7250694632530212,
+     "mean_coh_event_at_loss_px": 0.20752371847629547
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 26.950400000000002,
+      "lon": 161.2126,
+      "lat": 56.642,
+      "max_side_km": 8.96
+     },
+     {
+      "area_km2": 24.736,
+      "lon": 161.402,
+      "lat": 56.6717,
+      "max_side_km": 10.56
+     },
+     {
+      "area_km2": 12.633600000000001,
+      "lon": 161.2601,
+      "lat": 56.6871,
+      "max_side_km": 7.84
+     },
+     {
+      "area_km2": 4.7488,
+      "lon": 161.2784,
+      "lat": 56.7082,
+      "max_side_km": 5.84
+     },
+     {
+      "area_km2": 3.0976000000000004,
+      "lon": 161.2882,
+      "lat": 56.61,
+      "max_side_km": 3.2800000000000002
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 150,
+     "median": 0.0,
+     "p95": 3.6115199999999885,
+     "max": 20.352
+    },
+    "incidence_deg_mean": 42.41841125488281
+   },
+   "d_1004": {
+    "event": "Sheveluch explosive eruptions, Kamchatka: ground around the lava domes changed, 22 Sep-4 Oct 2026",
+    "view": "d_1004",
+    "track": 60,
+    "frame": 60,
+    "direction": "D",
+    "event_pair": "20261004_20261016",
+    "control_pair": "20260910_20260922",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 6,
+    "far_km": 12,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.22157689929008484,
+    "mean_coh_control_within_radius": 0.5231997966766357,
+    "mean_coh_event_whole_window": 0.6188886165618896,
+    "mean_coh_control_whole_window": 0.6421889066696167,
+    "coherence_loss": {
+     "loss_area_km2": 46.342400000000005,
+     "comparable_area_km2": 63.884800000000006,
+     "loss_fraction_inside": 0.7254057303145662,
+     "loss_fraction_outside": 0.08865333004287873,
+     "comparable_px_inside": 9982,
+     "loss_area_km2_whole_window": 193.4848,
+     "mean_coh_control_at_loss_px": 0.7223681807518005,
+     "mean_coh_event_at_loss_px": 0.18517164885997772
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 165.5232,
+      "lon": 161.3406,
+      "lat": 56.6203,
+      "max_side_km": 21.44
+     },
+     {
+      "area_km2": 21.4848,
+      "lon": 161.6459,
+      "lat": 56.7201,
+      "max_side_km": 8.64
+     },
+     {
+      "area_km2": 0.5248,
+      "lon": 161.3606,
+      "lat": 56.6911,
+      "max_side_km": 1.28
+     },
+     {
+      "area_km2": 0.37120000000000003,
+      "lon": 161.3066,
+      "lat": 56.54,
+      "max_side_km": 1.12
+     },
+     {
+      "area_km2": 0.28800000000000003,
+      "lon": 161.3181,
+      "lat": 56.6295,
+      "max_side_km": 0.88
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 150,
+     "median": 0.009600000000000001,
+     "p95": 21.386879999999998,
+     "max": 32.0576
+    },
+    "incidence_deg_mean": 42.41990661621094
    }
   },
-  "verdict": null
+  "verdict": "marginal"
  },
  "polo-newmexico-2026": {
   "event_id": "polo-newmexico-2026",
@@ -5856,9 +7070,108 @@
      "max": 0.0
     },
     "incidence_deg_mean": 46.74527359008789
+   },
+   "desc": {
+    "event": "Sakurajima (Aira) pyroclastic flows, Japan, 3-10 Aug 2026",
+    "view": "desc",
+    "track": 3,
+    "frame": 73,
+    "direction": "D",
+    "event_pair": "20260720_20260813",
+    "control_pair": "20260626_20260708",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 5,
+    "far_km": 15,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": NaN,
+    "mean_coh_control_within_radius": 0.1053842306137085,
+    "mean_coh_event_whole_window": NaN,
+    "mean_coh_control_whole_window": 0.1055198386311531,
+    "coherence_loss": {
+     "loss_area_km2": 0.0,
+     "comparable_area_km2": 0.0,
+     "loss_fraction_inside": 0.0,
+     "loss_fraction_outside": 0.0,
+     "comparable_px_inside": 0,
+     "loss_area_km2_whole_window": 0.0
+    },
+    "largest_loss_clusters": [],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": 39.68303680419922
+   },
+   "asc125": {
+    "event": "Sakurajima (Aira) pyroclastic flows, Japan, 3-10 Aug 2026",
+    "view": "asc125",
+    "track": 125,
+    "frame": 17,
+    "direction": "A",
+    "event_pair": "20260716_20260821",
+    "control_pair": "20260704_20260716",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 5,
+    "far_km": 15,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.4706099033355713,
+    "mean_coh_control_within_radius": 0.49311524629592896,
+    "mean_coh_event_whole_window": 0.3648054599761963,
+    "mean_coh_control_whole_window": 0.35038965940475464,
+    "coherence_loss": {
+     "loss_area_km2": 0.6208,
+     "comparable_area_km2": 49.856,
+     "loss_fraction_inside": 0.01245186136071887,
+     "loss_fraction_outside": 0.0003063777637827441,
+     "comparable_px_inside": 7790,
+     "loss_area_km2_whole_window": 0.736,
+     "mean_coh_control_at_loss_px": 0.5936082601547241,
+     "mean_coh_event_at_loss_px": 0.282020628452301
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 0.21760000000000002,
+      "lon": 130.6137,
+      "lat": 31.5916,
+      "max_side_km": 0.72
+     },
+     {
+      "area_km2": 0.1792,
+      "lon": 130.6399,
+      "lat": 31.6109,
+      "max_side_km": 0.88
+     },
+     {
+      "area_km2": 0.1408,
+      "lon": 130.6185,
+      "lat": 31.5858,
+      "max_side_km": 0.8
+     },
+     {
+      "area_km2": 0.11520000000000001,
+      "lon": 130.8094,
+      "lat": 31.4915,
+      "max_side_km": 0.64
+     },
+     {
+      "area_km2": 0.08320000000000001,
+      "lon": 130.6915,
+      "lat": 31.609,
+      "max_side_km": 0.48
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 70,
+     "median": 0.0,
+     "p95": 0.11520000000000001,
+     "max": 0.11520000000000001
+    },
+    "incidence_deg_mean": 36.76045608520508
    }
   },
-  "verdict": null
+  "verdict": "marginal"
  },
  "etna-june-2026": {
   "event_id": "etna-june-2026",
@@ -6275,6 +7588,1652 @@
      "max": 0.0
     },
     "incidence_deg_mean": 45.9990348815918
+   }
+  },
+  "verdict": null
+ },
+ "atacama-tocopilla-2026": {
+  "event_id": "atacama-tocopilla-2026",
+  "views": {
+   "a_ev": {
+    "event": "Record rain and mudflow at Tocopilla, northern Chile, 17-18 Aug 2026",
+    "view": "a_ev",
+    "track": 46,
+    "frame": 167,
+    "direction": "A",
+    "event_pair": "20260816_20260828",
+    "control_pair": "20260711_20260723",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 30,
+    "far_km": 90,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.3754274547100067,
+    "mean_coh_control_within_radius": 0.43863239884376526,
+    "mean_coh_event_whole_window": 0.37583932280540466,
+    "mean_coh_control_whole_window": 0.4304114580154419,
+    "coherence_loss": {
+     "loss_area_km2": 54.3936,
+     "comparable_area_km2": 1096.992,
+     "loss_fraction_inside": 0.04958431784370351,
+     "loss_fraction_outside": 0.049435016469999586,
+     "comparable_px_inside": 171405,
+     "loss_area_km2_whole_window": 92.3328,
+     "mean_coh_control_at_loss_px": 0.753404438495636,
+     "mean_coh_event_at_loss_px": 0.2631349563598633
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 57.696000000000005,
+      "lon": -70.0358,
+      "lat": -21.8645,
+      "max_side_km": 21.36
+     },
+     {
+      "area_km2": 8.9344,
+      "lon": -70.1487,
+      "lat": -22.2273,
+      "max_side_km": 6.4
+     },
+     {
+      "area_km2": 3.3984,
+      "lon": -70.0984,
+      "lat": -21.7898,
+      "max_side_km": 4.24
+     },
+     {
+      "area_km2": 2.5344,
+      "lon": -70.1864,
+      "lat": -22.2296,
+      "max_side_km": 2.88
+     },
+     {
+      "area_km2": 2.1184000000000003,
+      "lon": -70.072,
+      "lat": -21.7825,
+      "max_side_km": 2.64
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": 44.4658088684082
+   },
+   "d_ev": {
+    "event": "Record rain and mudflow at Tocopilla, northern Chile, 17-18 Aug 2026",
+    "view": "d_ev",
+    "track": 97,
+    "frame": 100,
+    "direction": "D",
+    "event_pair": "20260726_20260819",
+    "control_pair": "20260702_20260714",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 30,
+    "far_km": 90,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.17190591990947723,
+    "mean_coh_control_within_radius": 0.40418168902397156,
+    "mean_coh_event_whole_window": 0.23945246636867523,
+    "mean_coh_control_whole_window": 0.4475385844707489,
+    "coherence_loss": {
+     "loss_area_km2": 875.8848,
+     "comparable_area_km2": 1221.1712,
+     "loss_fraction_inside": 0.7172498008469247,
+     "loss_fraction_outside": 0.2929616979751159,
+     "comparable_px_inside": 190808,
+     "loss_area_km2_whole_window": 1337.0112000000001,
+     "mean_coh_control_at_loss_px": 0.7166743874549866,
+     "mean_coh_event_at_loss_px": 0.18051709234714508
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 1156.5824,
+      "lon": -70.0225,
+      "lat": -22.0847,
+      "max_side_km": 58.96
+     },
+     {
+      "area_km2": 89.5232,
+      "lon": -70.1109,
+      "lat": -22.4762,
+      "max_side_km": 14.0
+     },
+     {
+      "area_km2": 48.4928,
+      "lon": -69.9788,
+      "lat": -22.3948,
+      "max_side_km": 18.72
+     },
+     {
+      "area_km2": 5.408,
+      "lon": -70.1941,
+      "lat": -22.2194,
+      "max_side_km": 5.68
+     },
+     {
+      "area_km2": 3.584,
+      "lon": -70.1771,
+      "lat": -22.4333,
+      "max_side_km": 3.84
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": 35.62502670288086
+   }
+  },
+  "verdict": null
+ },
+ "atacama-taltal-2026": {
+  "event_id": "atacama-taltal-2026",
+  "views": {
+   "d_ev": {
+    "event": "Record rain around Taltal, northern Chile, 17-18 Aug 2026",
+    "view": "d_ev",
+    "track": 97,
+    "frame": 101,
+    "direction": "D",
+    "event_pair": "20260726_20260819",
+    "control_pair": "20260702_20260714",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 30,
+    "far_km": 90,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.42751115560531616,
+    "mean_coh_control_within_radius": 0.5261874198913574,
+    "mean_coh_event_whole_window": 0.3833749294281006,
+    "mean_coh_control_whole_window": 0.5941755175590515,
+    "coherence_loss": {
+     "loss_area_km2": 87.76960000000001,
+     "comparable_area_km2": 1614.4512,
+     "loss_fraction_inside": 0.05436497554091446,
+     "loss_fraction_outside": 0.3642389487369985,
+     "comparable_px_inside": 252258,
+     "loss_area_km2_whole_window": 1292.6464,
+     "mean_coh_control_at_loss_px": 0.6931129693984985,
+     "mean_coh_event_at_loss_px": 0.2293107807636261
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 563.6288000000001,
+      "lon": -70.1275,
+      "lat": -25.1964,
+      "max_side_km": 34.64
+     },
+     {
+      "area_km2": 256.192,
+      "lon": -70.1118,
+      "lat": -25.4674,
+      "max_side_km": 33.28
+     },
+     {
+      "area_km2": 153.8368,
+      "lon": -70.0364,
+      "lat": -25.6136,
+      "max_side_km": 20.400000000000002
+     },
+     {
+      "area_km2": 70.2016,
+      "lon": -70.3513,
+      "lat": -25.7627,
+      "max_side_km": 21.12
+     },
+     {
+      "area_km2": 50.4576,
+      "lon": -70.0561,
+      "lat": -25.7737,
+      "max_side_km": 14.08
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": 38.43177032470703
+   }
+  },
+  "verdict": null
+ },
+ "polo-sonora-2026": {
+  "event_id": "polo-sonora-2026",
+  "views": {
+   "d_ev": {
+    "event": "Hurricane Polo second landfall east of Guaymas, Sonora, Mexico, 29 Sep 2026",
+    "view": "d_ev",
+    "track": 128,
+    "frame": 74,
+    "direction": "D",
+    "event_pair": "20260927_20261009",
+    "control_pair": "20260915_20260927",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 30,
+    "far_km": 90,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.40586045384407043,
+    "mean_coh_control_within_radius": 0.41926419734954834,
+    "mean_coh_event_whole_window": 0.4048520028591156,
+    "mean_coh_control_whole_window": 0.3935684263706207,
+    "coherence_loss": {
+     "loss_area_km2": 10.528,
+     "comparable_area_km2": 1503.8912,
+     "loss_fraction_inside": 0.007000506419613334,
+     "loss_fraction_outside": 0.0030225710605563407,
+     "comparable_px_inside": 234983,
+     "loss_area_km2_whole_window": 19.1936,
+     "mean_coh_control_at_loss_px": 0.5834382772445679,
+     "mean_coh_event_at_loss_px": 0.2228255271911621
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 2.9696000000000002,
+      "lon": -110.4643,
+      "lat": 27.9738,
+      "max_side_km": 5.84
+     },
+     {
+      "area_km2": 2.176,
+      "lon": -110.4248,
+      "lat": 27.9944,
+      "max_side_km": 4.48
+     },
+     {
+      "area_km2": 1.7344000000000002,
+      "lon": -110.4797,
+      "lat": 27.9127,
+      "max_side_km": 4.08
+     },
+     {
+      "area_km2": 0.7232000000000001,
+      "lon": -110.3001,
+      "lat": 27.8635,
+      "max_side_km": 2.4
+     },
+     {
+      "area_km2": 0.6848000000000001,
+      "lon": -110.562,
+      "lat": 28.0014,
+      "max_side_km": 1.2
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": 45.37498092651367
+   },
+   "a_ev": {
+    "event": "Hurricane Polo second landfall east of Guaymas, Sonora, Mexico, 29 Sep 2026",
+    "view": "a_ev",
+    "track": 77,
+    "frame": 16,
+    "direction": "A",
+    "event_pair": "20260923_20261005",
+    "control_pair": "20260911_20260923",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 30,
+    "far_km": 90,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.418825626373291,
+    "mean_coh_control_within_radius": 0.5055487751960754,
+    "mean_coh_event_whole_window": 0.4311414361000061,
+    "mean_coh_control_whole_window": 0.4814346432685852,
+    "coherence_loss": {
+     "loss_area_km2": 51.507200000000005,
+     "comparable_area_km2": 1857.4080000000001,
+     "loss_fraction_inside": 0.027730687064985184,
+     "loss_fraction_outside": 0.017147882908378553,
+     "comparable_px_inside": 290220,
+     "loss_area_km2_whole_window": 116.2688,
+     "mean_coh_control_at_loss_px": 0.6520377397537231,
+     "mean_coh_event_at_loss_px": 0.23509791493415833
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 14.2592,
+      "lon": -110.4685,
+      "lat": 27.7998,
+      "max_side_km": 10.0
+     },
+     {
+      "area_km2": 5.5808,
+      "lon": -110.5697,
+      "lat": 27.8297,
+      "max_side_km": 7.76
+     },
+     {
+      "area_km2": 4.5056,
+      "lon": -110.5958,
+      "lat": 27.755,
+      "max_side_km": 5.44
+     },
+     {
+      "area_km2": 3.9360000000000004,
+      "lon": -110.4635,
+      "lat": 28.221,
+      "max_side_km": 8.32
+     },
+     {
+      "area_km2": 3.6288,
+      "lon": -110.5582,
+      "lat": 28.0056,
+      "max_side_km": 4.5600000000000005
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": 42.8165168762207
+   }
+  },
+  "verdict": null
+ },
+ "santamaria-2026": {
+  "event_id": "santamaria-2026",
+  "views": {
+   "desc": {
+    "event": "Santa Maria (Santiaguito) Caliente dome extrusion and pyroclastic flows, Guatemala, 7-12 Oct 2026",
+    "view": "desc",
+    "track": 55,
+    "frame": 81,
+    "direction": "D",
+    "event_pair": "20261004_20261016",
+    "control_pair": "20260922_20261004",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 5,
+    "far_km": 15,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.3217405080795288,
+    "mean_coh_control_within_radius": 0.30289337038993835,
+    "mean_coh_event_whole_window": 0.3606778383255005,
+    "mean_coh_control_whole_window": 0.39339280128479004,
+    "coherence_loss": {
+     "loss_area_km2": 0.0,
+     "comparable_area_km2": 17.8432,
+     "loss_fraction_inside": 0.0,
+     "loss_fraction_outside": 0.017866901090546224,
+     "comparable_px_inside": 2788,
+     "loss_area_km2_whole_window": 9.6256
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 1.2224000000000002,
+      "lon": -91.4333,
+      "lat": 14.7775,
+      "max_side_km": 1.84
+     },
+     {
+      "area_km2": 0.5952000000000001,
+      "lon": -91.4219,
+      "lat": 14.8335,
+      "max_side_km": 1.2
+     },
+     {
+      "area_km2": 0.5312,
+      "lon": -91.4113,
+      "lat": 14.8368,
+      "max_side_km": 1.28
+     },
+     {
+      "area_km2": 0.4864,
+      "lon": -91.377,
+      "lat": 14.8112,
+      "max_side_km": 1.6
+     },
+     {
+      "area_km2": 0.41600000000000004,
+      "lon": -91.3992,
+      "lat": 14.8935,
+      "max_side_km": 1.36
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 61,
+     "median": 0.3776,
+     "p95": 4.9728,
+     "max": 6.7008
+    },
+    "incidence_deg_mean": 46.118865966796875
+   },
+   "asc": {
+    "event": "Santa Maria (Santiaguito) Caliente dome extrusion and pyroclastic flows, Guatemala, 7-12 Oct 2026",
+    "view": "asc",
+    "track": 62,
+    "frame": 9,
+    "direction": "A",
+    "event_pair": "20261004_20261016",
+    "control_pair": "20260922_20261004",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 5,
+    "far_km": 15,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.30947309732437134,
+    "mean_coh_control_within_radius": 0.29398876428604126,
+    "mean_coh_event_whole_window": 0.3398975133895874,
+    "mean_coh_control_whole_window": 0.34465497732162476,
+    "coherence_loss": {
+     "loss_area_km2": 0.0,
+     "comparable_area_km2": 16.832,
+     "loss_fraction_inside": 0.0,
+     "loss_fraction_outside": 0.0006787258894466017,
+     "comparable_px_inside": 2630,
+     "loss_area_km2_whole_window": 0.2752
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 0.2752,
+      "lon": -91.58,
+      "lat": 14.8958,
+      "max_side_km": 0.8
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 35,
+     "median": 0.0,
+     "p95": 0.2752,
+     "max": 0.2752
+    },
+    "incidence_deg_mean": 37.99184799194336
+   }
+  },
+  "verdict": null
+ },
+ "gold-ridge-mine-2026": {
+  "event_id": "gold-ridge-mine-2026",
+  "views": {
+   "asc": {
+    "event": "Gold Ridge open-pit ground collapse, Guadalcanal, Solomon Islands, 27 Jul 2026",
+    "view": "asc",
+    "track": 152,
+    "frame": 173,
+    "direction": "A",
+    "event_pair": "20260718_20260811",
+    "control_pair": "20260706_20260718",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 4,
+    "far_km": 12,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.3082478642463684,
+    "mean_coh_control_within_radius": 0.43961986899375916,
+    "mean_coh_event_whole_window": 0.26840826869010925,
+    "mean_coh_control_whole_window": 0.3860490322113037,
+    "coherence_loss": {
+     "loss_area_km2": 0.5696,
+     "comparable_area_km2": 23.296,
+     "loss_fraction_inside": 0.02445054945054945,
+     "loss_fraction_outside": 0.17860773992612708,
+     "comparable_px_inside": 3640,
+     "loss_area_km2_whole_window": 89.3888,
+     "mean_coh_control_at_loss_px": 0.5315505862236023,
+     "mean_coh_event_at_loss_px": 0.2259325534105301
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 18.1184,
+      "lon": 160.0751,
+      "lat": -9.6936,
+      "max_side_km": 8.16
+     },
+     {
+      "area_km2": 5.228800000000001,
+      "lon": 160.2682,
+      "lat": -9.7173,
+      "max_side_km": 4.16
+     },
+     {
+      "area_km2": 4.3392,
+      "lon": 160.0379,
+      "lat": -9.6394,
+      "max_side_km": 3.7600000000000002
+     },
+     {
+      "area_km2": 2.8736,
+      "lon": 159.9773,
+      "lat": -9.6513,
+      "max_side_km": 3.7600000000000002
+     },
+     {
+      "area_km2": 2.3808000000000002,
+      "lon": 160.0283,
+      "lat": -9.7289,
+      "max_side_km": 3.2800000000000002
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 135,
+     "median": 0.8256,
+     "p95": 13.07264,
+     "max": 17.568
+    },
+    "incidence_deg_mean": 45.753028869628906
+   },
+   "desc": {
+    "event": "Gold Ridge open-pit ground collapse, Guadalcanal, Solomon Islands, 27 Jul 2026",
+    "view": "desc",
+    "track": 160,
+    "frame": 93,
+    "direction": "D",
+    "event_pair": "20260719_20260812",
+    "control_pair": "20260707_20260719",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 4,
+    "far_km": 12,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.29957202076911926,
+    "mean_coh_control_within_radius": 0.4675852656364441,
+    "mean_coh_event_whole_window": 0.2685493528842926,
+    "mean_coh_control_whole_window": 0.4040748178958893,
+    "coherence_loss": {
+     "loss_area_km2": 4.0192000000000005,
+     "comparable_area_km2": 28.9024,
+     "loss_fraction_inside": 0.13906111603188662,
+     "loss_fraction_outside": 0.2690618805022062,
+     "comparable_px_inside": 4516,
+     "loss_area_km2_whole_window": 165.5872,
+     "mean_coh_control_at_loss_px": 0.5485732555389404,
+     "mean_coh_event_at_loss_px": 0.2315031886100769
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 81.98400000000001,
+      "lon": 160.0041,
+      "lat": -9.7076,
+      "max_side_km": 15.36
+     },
+     {
+      "area_km2": 5.5808,
+      "lon": 160.1368,
+      "lat": -9.7353,
+      "max_side_km": 4.4
+     },
+     {
+      "area_km2": 5.4144000000000005,
+      "lon": 160.072,
+      "lat": -9.6219,
+      "max_side_km": 3.7600000000000002
+     },
+     {
+      "area_km2": 2.0224,
+      "lon": 160.2672,
+      "lat": -9.5252,
+      "max_side_km": 2.88
+     },
+     {
+      "area_km2": 1.4016,
+      "lon": 160.2832,
+      "lat": -9.7401,
+      "max_side_km": 2.32
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 125,
+     "median": 3.0976000000000004,
+     "p95": 31.61344,
+     "max": 37.894400000000005
+    },
+    "incidence_deg_mean": 41.250816345214844
+   }
+  },
+  "verdict": null
+ },
+ "bezymianny-2026": {
+  "event_id": "bezymianny-2026",
+  "views": {
+   "a_20260818": {
+    "event": "Bezymianny lava flows and dome growth, Kamchatka, Aug-Oct 2026",
+    "view": "a_20260818",
+    "track": 80,
+    "frame": 30,
+    "direction": "A",
+    "event_pair": "20260818_20260830",
+    "control_pair": "20260725_20260818",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 5,
+    "far_km": 15,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.5443645119667053,
+    "mean_coh_control_within_radius": 0.5686860680580139,
+    "mean_coh_event_whole_window": 0.5153120160102844,
+    "mean_coh_control_whole_window": 0.5016308426856995,
+    "coherence_loss": {
+     "loss_area_km2": 1.0816000000000001,
+     "comparable_area_km2": 57.0816,
+     "loss_fraction_inside": 0.018948312591097655,
+     "loss_fraction_outside": 0.006030966423888784,
+     "comparable_px_inside": 8919,
+     "loss_area_km2_whole_window": 6.598400000000001,
+     "mean_coh_control_at_loss_px": 0.6244024038314819,
+     "mean_coh_event_at_loss_px": 0.2376331090927124
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 0.9536,
+      "lon": 160.8029,
+      "lat": 55.9609,
+      "max_side_km": 3.2
+     },
+     {
+      "area_km2": 0.512,
+      "lon": 160.5779,
+      "lat": 55.9844,
+      "max_side_km": 1.44
+     },
+     {
+      "area_km2": 0.48000000000000004,
+      "lon": 160.6077,
+      "lat": 55.8753,
+      "max_side_km": 1.04
+     },
+     {
+      "area_km2": 0.35200000000000004,
+      "lon": 160.6775,
+      "lat": 55.827,
+      "max_side_km": 1.2
+     },
+     {
+      "area_km2": 0.32,
+      "lon": 160.7167,
+      "lat": 55.7928,
+      "max_side_km": 1.2
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 124,
+     "median": 0.0,
+     "p95": 1.2694399999999997,
+     "max": 1.7792000000000001
+    },
+    "incidence_deg_mean": 41.61594772338867
+   },
+   "a_20260830": {
+    "event": "Bezymianny lava flows and dome growth, Kamchatka, Aug-Oct 2026",
+    "view": "a_20260830",
+    "track": 80,
+    "frame": 30,
+    "direction": "A",
+    "event_pair": "20260830_20260911",
+    "control_pair": "20260818_20260830",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 5,
+    "far_km": 15,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.49024641513824463,
+    "mean_coh_control_within_radius": 0.5443645119667053,
+    "mean_coh_event_whole_window": 0.5039024353027344,
+    "mean_coh_control_whole_window": 0.5153120160102844,
+    "coherence_loss": {
+     "loss_area_km2": 3.3600000000000003,
+     "comparable_area_km2": 52.217600000000004,
+     "loss_fraction_inside": 0.06434612084814316,
+     "loss_fraction_outside": 0.03651760095178109,
+     "comparable_px_inside": 8159,
+     "loss_area_km2_whole_window": 36.7552,
+     "mean_coh_control_at_loss_px": 0.5949028134346008,
+     "mean_coh_event_at_loss_px": 0.2379428595304489
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 5.6448,
+      "lon": 160.4345,
+      "lat": 56.0395,
+      "max_side_km": 5.36
+     },
+     {
+      "area_km2": 5.1968000000000005,
+      "lon": 160.3773,
+      "lat": 55.8051,
+      "max_side_km": 6.16
+     },
+     {
+      "area_km2": 2.4832,
+      "lon": 160.493,
+      "lat": 56.0494,
+      "max_side_km": 2.88
+     },
+     {
+      "area_km2": 1.5424,
+      "lon": 160.3254,
+      "lat": 55.8213,
+      "max_side_km": 1.76
+     },
+     {
+      "area_km2": 1.2224000000000002,
+      "lon": 160.4254,
+      "lat": 55.8299,
+      "max_side_km": 1.76
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 124,
+     "median": 0.2368,
+     "p95": 8.599039999999999,
+     "max": 11.3856
+    },
+    "incidence_deg_mean": null
+   },
+   "a_20260911": {
+    "event": "Bezymianny lava flows and dome growth, Kamchatka, Aug-Oct 2026",
+    "view": "a_20260911",
+    "track": 80,
+    "frame": 30,
+    "direction": "A",
+    "event_pair": "20260911_20260923",
+    "control_pair": "20260830_20260911",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 5,
+    "far_km": 15,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.42274191975593567,
+    "mean_coh_control_within_radius": 0.49024641513824463,
+    "mean_coh_event_whole_window": 0.4825383424758911,
+    "mean_coh_control_whole_window": 0.5039024353027344,
+    "coherence_loss": {
+     "loss_area_km2": 7.372800000000001,
+     "comparable_area_km2": 43.712,
+     "loss_fraction_inside": 0.1686676427525622,
+     "loss_fraction_outside": 0.08726114179935543,
+     "comparable_px_inside": 6830,
+     "loss_area_km2_whole_window": 83.0976,
+     "mean_coh_control_at_loss_px": 0.6175104379653931,
+     "mean_coh_event_at_loss_px": 0.19834375381469727
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 43.692800000000005,
+      "lon": 160.392,
+      "lat": 56.0256,
+      "max_side_km": 12.4
+     },
+     {
+      "area_km2": 12.019200000000001,
+      "lon": 160.5105,
+      "lat": 55.994,
+      "max_side_km": 8.08
+     },
+     {
+      "area_km2": 2.2464,
+      "lon": 160.7295,
+      "lat": 56.067,
+      "max_side_km": 2.4
+     },
+     {
+      "area_km2": 1.5552000000000001,
+      "lon": 160.7069,
+      "lat": 56.0251,
+      "max_side_km": 2.16
+     },
+     {
+      "area_km2": 1.4848000000000001,
+      "lon": 160.3666,
+      "lat": 56.1099,
+      "max_side_km": 3.36
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 122,
+     "median": 0.4224,
+     "p95": 23.212799999999984,
+     "max": 35.9296
+    },
+    "incidence_deg_mean": null
+   },
+   "a_20260923": {
+    "event": "Bezymianny lava flows and dome growth, Kamchatka, Aug-Oct 2026",
+    "view": "a_20260923",
+    "track": 80,
+    "frame": 30,
+    "direction": "A",
+    "event_pair": "20260923_20261005",
+    "control_pair": "20260911_20260923",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 5,
+    "far_km": 15,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.27415066957473755,
+    "mean_coh_control_within_radius": 0.42274191975593567,
+    "mean_coh_event_whole_window": 0.33250534534454346,
+    "mean_coh_control_whole_window": 0.4825383424758911,
+    "coherence_loss": {
+     "loss_area_km2": 19.398400000000002,
+     "comparable_area_km2": 33.6128,
+     "loss_fraction_inside": 0.5771134805788272,
+     "loss_fraction_outside": 0.22212979687549514,
+     "comparable_px_inside": 5252,
+     "loss_area_km2_whole_window": 198.848,
+     "mean_coh_control_at_loss_px": 0.7120897173881531,
+     "mean_coh_event_at_loss_px": 0.23679181933403015
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 87.80160000000001,
+      "lon": 160.5639,
+      "lat": 55.9125,
+      "max_side_km": 20.72
+     },
+     {
+      "area_km2": 23.232000000000003,
+      "lon": 160.6914,
+      "lat": 55.825,
+      "max_side_km": 9.6
+     },
+     {
+      "area_km2": 14.72,
+      "lon": 160.3393,
+      "lat": 55.9681,
+      "max_side_km": 7.5200000000000005
+     },
+     {
+      "area_km2": 14.3168,
+      "lon": 160.3351,
+      "lat": 56.1317,
+      "max_side_km": 5.84
+     },
+     {
+      "area_km2": 6.2976,
+      "lon": 160.7315,
+      "lat": 56.0286,
+      "max_side_km": 7.28
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 110,
+     "median": 9.152000000000001,
+     "p95": 25.30112,
+     "max": 33.024
+    },
+    "incidence_deg_mean": null
+   },
+   "a_20261005": {
+    "event": "Bezymianny lava flows and dome growth, Kamchatka, Aug-Oct 2026",
+    "view": "a_20261005",
+    "track": 80,
+    "frame": 30,
+    "direction": "A",
+    "event_pair": "20261005_20261017",
+    "control_pair": "20260923_20261005",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 5,
+    "far_km": 15,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.25020116567611694,
+    "mean_coh_control_within_radius": 0.27415066957473755,
+    "mean_coh_event_whole_window": 0.2711807191371918,
+    "mean_coh_control_whole_window": 0.33250534534454346,
+    "coherence_loss": {
+     "loss_area_km2": 0.48000000000000004,
+     "comparable_area_km2": 8.7872,
+     "loss_fraction_inside": 0.05462490895848507,
+     "loss_fraction_outside": 0.25819804148949876,
+     "comparable_px_inside": 1373,
+     "loss_area_km2_whole_window": 103.0784,
+     "mean_coh_control_at_loss_px": 0.5643733143806458,
+     "mean_coh_event_at_loss_px": 0.2226133495569229
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 52.6912,
+      "lon": 160.3865,
+      "lat": 55.924,
+      "max_side_km": 15.84
+     },
+     {
+      "area_km2": 17.1904,
+      "lon": 160.5476,
+      "lat": 55.8452,
+      "max_side_km": 8.56
+     },
+     {
+      "area_km2": 3.9808000000000003,
+      "lon": 160.5048,
+      "lat": 55.8162,
+      "max_side_km": 4.64
+     },
+     {
+      "area_km2": 1.8176,
+      "lon": 160.4926,
+      "lat": 55.7985,
+      "max_side_km": 3.52
+     },
+     {
+      "area_km2": 1.6704,
+      "lon": 160.5375,
+      "lat": 55.7967,
+      "max_side_km": 2.8000000000000003
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 77,
+     "median": 2.72,
+     "p95": 30.791680000000003,
+     "max": 35.0848
+    },
+    "incidence_deg_mean": null
+   }
+  },
+  "verdict": null
+ },
+ "hotan-rain-2026": {
+  "event_id": "hotan-rain-2026",
+  "views": {
+   "d106_post": {
+    "event": "Record rain at Hotan, Taklamakan Desert margin, 20 Jun 2026",
+    "view": "d106_post",
+    "track": 106,
+    "frame": 70,
+    "direction": "D",
+    "event_pair": "20260621_20260703",
+    "control_pair": "20260703_20260715",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 25,
+    "far_km": 75,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.46378159523010254,
+    "mean_coh_control_within_radius": 0.5640028119087219,
+    "mean_coh_event_whole_window": 0.4286034405231476,
+    "mean_coh_control_whole_window": 0.5103341341018677,
+    "coherence_loss": {
+     "loss_area_km2": 18.4128,
+     "comparable_area_km2": 1429.4272,
+     "loss_fraction_inside": 0.012881243619821982,
+     "loss_fraction_outside": 0.03805313366676243,
+     "comparable_px_inside": 223348,
+     "loss_area_km2_whole_window": 101.4848,
+     "mean_coh_control_at_loss_px": 0.5734974145889282,
+     "mean_coh_event_at_loss_px": 0.20544594526290894
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 24.6784,
+      "lon": 80.3591,
+      "lat": 36.9536,
+      "max_side_km": 7.92
+     },
+     {
+      "area_km2": 7.648000000000001,
+      "lon": 80.2539,
+      "lat": 36.9516,
+      "max_side_km": 4.88
+     },
+     {
+      "area_km2": 7.1744,
+      "lon": 80.0007,
+      "lat": 36.9544,
+      "max_side_km": 5.84
+     },
+     {
+      "area_km2": 4.5440000000000005,
+      "lon": 80.2668,
+      "lat": 36.9767,
+      "max_side_km": 4.0
+     },
+     {
+      "area_km2": 4.4352,
+      "lon": 80.2939,
+      "lat": 37.0289,
+      "max_side_km": 3.2
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": 36.00926208496094
+   },
+   "d34_post": {
+    "event": "Record rain at Hotan, Taklamakan Desert margin, 20 Jun 2026",
+    "view": "d34_post",
+    "track": 34,
+    "frame": 70,
+    "direction": "D",
+    "event_pair": "20260628_20260710",
+    "control_pair": "20260710_20260722",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 25,
+    "far_km": 75,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.4770285487174988,
+    "mean_coh_control_within_radius": 0.5196865797042847,
+    "mean_coh_event_whole_window": 0.43719446659088135,
+    "mean_coh_control_whole_window": 0.4557570815086365,
+    "coherence_loss": {
+     "loss_area_km2": 4.5120000000000005,
+     "comparable_area_km2": 1260.6592,
+     "loss_fraction_inside": 0.0035790798972474085,
+     "loss_fraction_outside": 0.0020140878443874804,
+     "comparable_px_inside": 196978,
+     "loss_area_km2_whole_window": 6.905600000000001,
+     "mean_coh_control_at_loss_px": 0.6332368850708008,
+     "mean_coh_event_at_loss_px": 0.20131632685661316
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 0.4928,
+      "lon": 80.0074,
+      "lat": 37.1987,
+      "max_side_km": 1.52
+     },
+     {
+      "area_km2": 0.44160000000000005,
+      "lon": 79.9812,
+      "lat": 37.3682,
+      "max_side_km": 1.76
+     },
+     {
+      "area_km2": 0.4224,
+      "lon": 79.9259,
+      "lat": 37.2273,
+      "max_side_km": 1.12
+     },
+     {
+      "area_km2": 0.39680000000000004,
+      "lon": 79.8487,
+      "lat": 37.2288,
+      "max_side_km": 1.2
+     },
+     {
+      "area_km2": 0.35200000000000004,
+      "lon": 79.9374,
+      "lat": 37.2701,
+      "max_side_km": 0.96
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": 45.512901306152344
+   },
+   "d106_null": {
+    "event": "Record rain at Hotan, Taklamakan Desert margin, 20 Jun 2026",
+    "view": "d106_null",
+    "track": 106,
+    "frame": 70,
+    "direction": "D",
+    "event_pair": "20260703_20260715",
+    "control_pair": "20260715_20260727",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 25,
+    "far_km": 75,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.5640028119087219,
+    "mean_coh_control_within_radius": 0.5553738474845886,
+    "mean_coh_event_whole_window": 0.5103341341018677,
+    "mean_coh_control_whole_window": 0.4943285584449768,
+    "coherence_loss": {
+     "loss_area_km2": 1.3760000000000001,
+     "comparable_area_km2": 1391.3856,
+     "loss_fraction_inside": 0.0009889422457728468,
+     "loss_fraction_outside": 0.0008051295482544209,
+     "comparable_px_inside": 217404,
+     "loss_area_km2_whole_window": 2.9696000000000002,
+     "mean_coh_control_at_loss_px": 0.5912558436393738,
+     "mean_coh_event_at_loss_px": 0.17784185707569122
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 0.4672,
+      "lon": 79.7844,
+      "lat": 37.3051,
+      "max_side_km": 1.68
+     },
+     {
+      "area_km2": 0.4096,
+      "lon": 79.7405,
+      "lat": 37.1939,
+      "max_side_km": 0.88
+     },
+     {
+      "area_km2": 0.3648,
+      "lon": 80.379,
+      "lat": 37.5719,
+      "max_side_km": 1.28
+     },
+     {
+      "area_km2": 0.3584,
+      "lon": 79.5884,
+      "lat": 37.5673,
+      "max_side_km": 3.36
+     },
+     {
+      "area_km2": 0.2752,
+      "lon": 79.5326,
+      "lat": 37.411,
+      "max_side_km": 2.96
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": null
+   }
+  },
+  "verdict": "not detected"
+ },
+ "colombia-m74-2026": {
+  "event_id": "colombia-m74-2026",
+  "views": {
+   "asc47": {
+    "event": "M7.4 intermediate-depth earthquake, Valle del Cauca, Colombia, 10 Aug 2026 (depth 116 km)",
+    "view": "asc47",
+    "track": 47,
+    "frame": 4,
+    "direction": "A",
+    "event_pair": "20260723_20260816",
+    "control_pair": "20260711_20260723",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 40,
+    "far_km": 70,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.2683236300945282,
+    "mean_coh_control_within_radius": 0.3271927237510681,
+    "mean_coh_event_whole_window": 0.278461754322052,
+    "mean_coh_control_whole_window": 0.34716346859931946,
+    "coherence_loss": {
+     "loss_area_km2": 22.0992,
+     "comparable_area_km2": 757.8176000000001,
+     "loss_fraction_inside": 0.029161634673040056,
+     "loss_fraction_outside": 0.020692362524406243,
+     "comparable_px_inside": 118409,
+     "loss_area_km2_whole_window": 60.5568,
+     "mean_coh_control_at_loss_px": 0.567594587802887,
+     "mean_coh_event_at_loss_px": 0.19575093686580658
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 3.04,
+      "lon": -75.9163,
+      "lat": 5.2189,
+      "max_side_km": 3.52
+     },
+     {
+      "area_km2": 1.8624,
+      "lon": -75.6661,
+      "lat": 4.7269,
+      "max_side_km": 3.2
+     },
+     {
+      "area_km2": 1.6960000000000002,
+      "lon": -76.0002,
+      "lat": 4.6184,
+      "max_side_km": 2.8000000000000003
+     },
+     {
+      "area_km2": 1.4592,
+      "lon": -75.994,
+      "lat": 4.7003,
+      "max_side_km": 3.12
+     },
+     {
+      "area_km2": 1.3632,
+      "lon": -76.2856,
+      "lat": 5.3697,
+      "max_side_km": 2.48
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "valid_pixels_within_radius": 104940,
+    "valid_fraction_within_radius": 0.1336156569945772,
+    "p2p_cm_0.5_99.5pct": 6.5410903386235635,
+    "p0.5_cm": -3.647300035643042,
+    "p99.5_cm": 2.893790302980521,
+    "min_cm": -5.763468778656046,
+    "max_cm": 4.223247978446037,
+    "far_std_cm": 0.8874263187623069,
+    "control_far_std_cm": 1.3500191829526555,
+    "control_p2p_cm_0.5_99.5pct": 20.906535679609973,
+    "local_noise_cm_event_far": NaN,
+    "local_noise_cm_control_far": 0.643634577376978,
+    "unwrapping_components_event": 1,
+    "incidence_deg_mean": 46.588932037353516
+   },
+   "desc11": {
+    "event": "M7.4 intermediate-depth earthquake, Valle del Cauca, Colombia, 10 Aug 2026 (depth 116 km)",
+    "view": "desc11",
+    "track": 11,
+    "frame": 86,
+    "direction": "D",
+    "event_pair": "20260720_20260813",
+    "control_pair": "20260708_20260720",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 40,
+    "far_km": 70,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.20930537581443787,
+    "mean_coh_control_within_radius": 0.3065166771411896,
+    "mean_coh_event_whole_window": 0.2369796633720398,
+    "mean_coh_control_whole_window": 0.3412206172943115,
+    "coherence_loss": {
+     "loss_area_km2": 217.9712,
+     "comparable_area_km2": 1138.0608,
+     "loss_fraction_inside": 0.19152860725894433,
+     "loss_fraction_outside": 0.18757706710885744,
+     "comparable_px_inside": 177822,
+     "loss_area_km2_whole_window": 954.9696,
+     "mean_coh_control_at_loss_px": 0.5485965013504028,
+     "mean_coh_event_at_loss_px": 0.17965328693389893
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 166.3168,
+      "lon": -76.7114,
+      "lat": 4.8819,
+      "max_side_km": 28.48
+     },
+     {
+      "area_km2": 136.6592,
+      "lon": -76.6925,
+      "lat": 4.7228,
+      "max_side_km": 23.92
+     },
+     {
+      "area_km2": 73.28,
+      "lon": -76.3233,
+      "lat": 4.6901,
+      "max_side_km": 21.04
+     },
+     {
+      "area_km2": 65.792,
+      "lon": -76.7111,
+      "lat": 4.5455,
+      "max_side_km": 20.72
+     },
+     {
+      "area_km2": 43.104,
+      "lon": -76.7839,
+      "lat": 4.6366,
+      "max_side_km": 16.080000000000002
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "valid_pixels_within_radius": 93802,
+    "valid_fraction_within_radius": 0.119434113373407,
+    "p2p_cm_0.5_99.5pct": 9.283785645183173,
+    "p0.5_cm": 4.598807763684123,
+    "p99.5_cm": 13.882593408867296,
+    "min_cm": 2.1775652876950673,
+    "max_cm": 16.555399508978052,
+    "far_std_cm": 2.2848662555229775,
+    "control_far_std_cm": 4.950410056046606,
+    "control_p2p_cm_0.5_99.5pct": 15.53209325096267,
+    "local_noise_cm_event_far": 0.8296848904558085,
+    "local_noise_cm_control_far": 0.6129176865431173,
+    "unwrapping_components_event": 2,
+    "incidence_deg_mean": 40.340599060058594
+   },
+   "asc148": {
+    "event": "M7.4 intermediate-depth earthquake, Valle del Cauca, Colombia, 10 Aug 2026 (depth 116 km)",
+    "view": "asc148",
+    "track": 148,
+    "frame": 4,
+    "direction": "A",
+    "event_pair": "20260718_20260811",
+    "control_pair": "20260706_20260718",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 40,
+    "far_km": 70,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.2586607336997986,
+    "mean_coh_control_within_radius": 0.34509211778640747,
+    "mean_coh_event_whole_window": 0.2606411576271057,
+    "mean_coh_control_whole_window": 0.36141908168792725,
+    "coherence_loss": {
+     "loss_area_km2": 126.22720000000001,
+     "comparable_area_km2": 970.8672,
+     "loss_fraction_inside": 0.13001489802106816,
+     "loss_fraction_outside": 0.2133081423562833,
+     "comparable_px_inside": 151698,
+     "loss_area_km2_whole_window": 626.9696,
+     "mean_coh_control_at_loss_px": 0.561582088470459,
+     "mean_coh_event_at_loss_px": 0.18641141057014465
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 80.4928,
+      "lon": -76.7671,
+      "lat": 4.538,
+      "max_side_km": 22.8
+     },
+     {
+      "area_km2": 63.827200000000005,
+      "lon": -76.7585,
+      "lat": 4.3348,
+      "max_side_km": 15.280000000000001
+     },
+     {
+      "area_km2": 49.3952,
+      "lon": -76.1024,
+      "lat": 4.6099,
+      "max_side_km": 14.32
+     },
+     {
+      "area_km2": 25.9584,
+      "lon": -76.6565,
+      "lat": 4.9288,
+      "max_side_km": 12.48
+     },
+     {
+      "area_km2": 19.756800000000002,
+      "lon": -76.7926,
+      "lat": 4.6756,
+      "max_side_km": 13.76
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "valid_pixels_within_radius": 97620,
+    "valid_fraction_within_radius": 0.12429541105213099,
+    "p2p_cm_0.5_99.5pct": 12.503808907588695,
+    "p0.5_cm": -3.2864561204955516,
+    "p99.5_cm": 9.217352787093143,
+    "min_cm": -3.6009934337326466,
+    "max_cm": 11.362062476129013,
+    "far_std_cm": 0.5756917365206937,
+    "control_far_std_cm": 1.3497121422855658,
+    "control_p2p_cm_0.5_99.5pct": 7.185231159792012,
+    "local_noise_cm_event_far": 0.9136918178033497,
+    "local_noise_cm_control_far": 0.5721030078780323,
+    "unwrapping_components_event": 2,
+    "incidence_deg_mean": 35.396522521972656
+   }
+  },
+  "verdict": null
+ },
+ "minchumina-m56-2026": {
+  "event_id": "minchumina-m56-2026",
+  "views": {
+   "desc73": {
+    "event": "M5.6 earthquake near Lake Minchumina, Alaska, 15 Oct 2026 (depth 4.5 km)",
+    "view": "desc73",
+    "track": 73,
+    "frame": 55,
+    "direction": "D",
+    "event_pair": "20261005_20261017",
+    "control_pair": "20260923_20261005",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 25,
+    "far_km": 45,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.5409778952598572,
+    "mean_coh_control_within_radius": 0.4744093418121338,
+    "mean_coh_event_whole_window": 0.4862247109413147,
+    "mean_coh_control_whole_window": 0.46880561113357544,
+    "coherence_loss": {
+     "loss_area_km2": 0.0,
+     "comparable_area_km2": 1220.4608,
+     "loss_fraction_inside": 0.0,
+     "loss_fraction_outside": 0.0,
+     "comparable_px_inside": 190697,
+     "loss_area_km2_whole_window": 0.0
+    },
+    "largest_loss_clusters": [],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 11,
+     "median": 0.0,
+     "p95": 0.0,
+     "max": 0.0
+    },
+    "valid_pixels_within_radius": 289968,
+    "valid_fraction_within_radius": 0.9452293249013919,
+    "p2p_cm_0.5_99.5pct": 3.3823641884891944,
+    "p0.5_cm": -2.0096292053946825,
+    "p99.5_cm": 1.372734983094512,
+    "min_cm": -75.40252973388637,
+    "max_cm": 5.741922427247175,
+    "far_std_cm": 2.671571985466481,
+    "control_far_std_cm": 2.432044915189448,
+    "control_p2p_cm_0.5_99.5pct": 4.264205803124351,
+    "local_noise_cm_event_far": 0.8688694885526037,
+    "local_noise_cm_control_far": 0.7913945607492887,
+    "unwrapping_components_event": 1,
+    "incidence_deg_mean": 45.84794998168945
+   },
+   "asc49": {
+    "event": "M5.6 earthquake near Lake Minchumina, Alaska, 15 Oct 2026 (depth 4.5 km)",
+    "view": "asc49",
+    "track": 49,
+    "frame": 34,
+    "direction": "A",
+    "event_pair": "20261003_20261015",
+    "control_pair": "20260921_20261003",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 25,
+    "far_km": 45,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.2960667908191681,
+    "mean_coh_control_within_radius": 0.19540563225746155,
+    "mean_coh_event_whole_window": 0.2938297390937805,
+    "mean_coh_control_whole_window": 0.1957920342683792,
+    "coherence_loss": {
+     "loss_area_km2": 0.0,
+     "comparable_area_km2": 11.1552,
+     "loss_fraction_inside": 0.0,
+     "loss_fraction_outside": 0.003042837445918319,
+     "comparable_px_inside": 1743,
+     "loss_area_km2_whole_window": 0.4096
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 0.4096,
+      "lon": -152.1486,
+      "lat": 63.8855,
+      "max_side_km": 1.2
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "valid_pixels_within_radius": 77997,
+    "valid_fraction_within_radius": 0.25425237148352187,
+    "p2p_cm_0.5_99.5pct": 20.26636139354021,
+    "p0.5_cm": -9.448212770084766,
+    "p99.5_cm": 10.818148623455444,
+    "min_cm": -10.663224811628286,
+    "max_cm": 12.918219766406036,
+    "far_std_cm": 11.387680020278248,
+    "control_far_std_cm": 11.413466433401439,
+    "control_p2p_cm_0.5_99.5pct": 12.856544628830806,
+    "local_noise_cm_event_far": 7.394113942561202,
+    "local_noise_cm_control_far": NaN,
+    "unwrapping_components_event": 1,
+    "incidence_deg_mean": 37.55809020996094
+   }
+  },
+  "verdict": null
+ },
+ "skwentna-m56-2026": {
+  "event_id": "skwentna-m56-2026",
+  "views": {
+   "desc15": {
+    "event": "M5.6 earthquake 57 km WNW of Skwentna, Alaska, 8 Aug 2026 (depth 10 km)",
+    "view": "desc15",
+    "track": 15,
+    "frame": 57,
+    "direction": "D",
+    "event_pair": "20260721_20260814",
+    "control_pair": "20260709_20260721",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 25,
+    "far_km": 45,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.36911922693252563,
+    "mean_coh_control_within_radius": 0.4704979658126831,
+    "mean_coh_event_whole_window": 0.33390334248542786,
+    "mean_coh_control_whole_window": 0.4493352174758911,
+    "coherence_loss": {
+     "loss_area_km2": 26.6688,
+     "comparable_area_km2": 578.3296,
+     "loss_fraction_inside": 0.04611349652516489,
+     "loss_fraction_outside": 0.06792740059786875,
+     "comparable_px_inside": 90364,
+     "loss_area_km2_whole_window": 262.5536,
+     "mean_coh_control_at_loss_px": 0.6444924473762512,
+     "mean_coh_event_at_loss_px": 0.2023210972547531
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 8.832,
+      "lon": -152.6157,
+      "lat": 61.7754,
+      "max_side_km": 6.5600000000000005
+     },
+     {
+      "area_km2": 7.0208,
+      "lon": -151.1564,
+      "lat": 62.4272,
+      "max_side_km": 7.68
+     },
+     {
+      "area_km2": 6.4512,
+      "lon": -152.0354,
+      "lat": 62.5405,
+      "max_side_km": 5.68
+     },
+     {
+      "area_km2": 5.8432,
+      "lon": -152.8107,
+      "lat": 61.8501,
+      "max_side_km": 5.04
+     },
+     {
+      "area_km2": 5.8304,
+      "lon": -152.6859,
+      "lat": 61.7735,
+      "max_side_km": 4.48
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 11,
+     "median": 13.280000000000001,
+     "p95": 71.0848,
+     "max": 85.8304
+    },
+    "valid_pixels_within_radius": 80933,
+    "valid_fraction_within_radius": 0.263809300294016,
+    "p2p_cm_0.5_99.5pct": 46.538643465855685,
+    "p0.5_cm": -20.645373231040292,
+    "p99.5_cm": 25.893270234815393,
+    "min_cm": -21.459449637739027,
+    "max_cm": 30.01466731679539,
+    "far_std_cm": 16.26046602976522,
+    "control_far_std_cm": 2.0977922660368877,
+    "control_p2p_cm_0.5_99.5pct": 4.271011911064696,
+    "local_noise_cm_event_far": 9.42741749912762,
+    "local_noise_cm_control_far": 0.9625479200299258,
+    "unwrapping_components_event": 1,
+    "incidence_deg_mean": 33.680747985839844
+   },
+   "asc49": {
+    "event": "M5.6 earthquake 57 km WNW of Skwentna, Alaska, 8 Aug 2026 (depth 10 km)",
+    "view": "asc49",
+    "track": 49,
+    "frame": 33,
+    "direction": "A",
+    "event_pair": "20260723_20260816",
+    "control_pair": "20260711_20260723",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 25,
+    "far_km": 45,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.48393577337265015,
+    "mean_coh_control_within_radius": 0.3480719327926636,
+    "mean_coh_event_whole_window": 0.43042564392089844,
+    "mean_coh_control_whole_window": 0.3555143475532532,
+    "coherence_loss": {
+     "loss_area_km2": 0.0,
+     "comparable_area_km2": 556.5888,
+     "loss_fraction_inside": 0.0,
+     "loss_fraction_outside": 0.001773922775601567,
+     "comparable_px_inside": 86967,
+     "loss_area_km2_whole_window": 6.0864
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 0.9536,
+      "lon": -153.2581,
+      "lat": 62.4149,
+      "max_side_km": 4.24
+     },
+     {
+      "area_km2": 0.6592,
+      "lon": -153.172,
+      "lat": 62.3861,
+      "max_side_km": 4.72
+     },
+     {
+      "area_km2": 0.5824,
+      "lon": -151.3657,
+      "lat": 62.7333,
+      "max_side_km": 1.12
+     },
+     {
+      "area_km2": 0.5056,
+      "lon": -153.571,
+      "lat": 62.3043,
+      "max_side_km": 1.04
+     },
+     {
+      "area_km2": 0.4864,
+      "lon": -152.6442,
+      "lat": 61.7906,
+      "max_side_km": 1.76
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 2,
+     "median": 0.4384,
+     "p95": 0.83296,
+     "max": 0.8768
+    },
+    "valid_pixels_within_radius": 204064,
+    "valid_fraction_within_radius": 0.6651672501352734,
+    "p2p_cm_0.5_99.5pct": 7.026671354688763,
+    "p0.5_cm": -5.849259320849838,
+    "p99.5_cm": 1.1774120338389247,
+    "min_cm": -11.497795383670532,
+    "max_cm": 7.054643579331664,
+    "far_std_cm": 1.9896623363809527,
+    "control_far_std_cm": 3.6485033134938245,
+    "control_p2p_cm_0.5_99.5pct": 7.217233718618332,
+    "local_noise_cm_event_far": 0.6749101742923271,
+    "local_noise_cm_control_far": 0.9931125395044816,
+    "unwrapping_components_event": 1,
+    "incidence_deg_mean": 42.676361083984375
    }
   },
   "verdict": null

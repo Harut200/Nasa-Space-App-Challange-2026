@@ -167,3 +167,17 @@ def test_fire_rule_is_wider_than_default_and_catches_a_partial_drop():
     st_fire, _, _ = E.loss_stats(ev, ctl, X, Y, (cx, cy), 8000.0, pix, hi=0.5, lo=0.45, drop=0.3, min_px=30)
     assert st_default["loss_area_km2"] == 0.0
     assert abs(st_fire["loss_area_km2"] - 80 * 80 * pix) < 0.02 * 80 * 80 * pix
+
+
+def test_loss_by_elevation_separates_a_snow_line_from_a_local_patch():
+    n = 100
+    yy, xx = np.mgrid[0:n, 0:n]
+    height = yy * 20.0                                   # a ramp, 0-2000 m
+    ctl = np.full((n, n), 0.7)
+    snow = ctl.copy(); snow[height >= 1000] = 0.1          # everything above 1000 m decorrelates
+    local = ctl.copy(); local[40:60, 40:60] = 0.1         # one patch crossing the bands
+    edges = [0, 500, 1000, 1500, 2001]
+    s = E.loss_by_elevation(snow, ctl, height, edges)
+    l = E.loss_by_elevation(local, ctl, height, edges)
+    assert s[0]["lost_share"] == 0 and s[2]["lost_share"] > 0.99 and s[3]["lost_share"] > 0.99
+    assert max(r["lost_share"] for r in l) < 0.2 and sum(r["lost_km2"] for r in l) > 0

@@ -600,9 +600,39 @@
      "pair": "20260706_20260718",
      "granule": "NISAR_L2_PR_GUNW_024_152_A_030_025_2000_SH_20260706T174113_20260706T174137_20260718T174113_20260718T174137_P05023_N_P_J_001"
     }
+   },
+   "d_sep": {
+    "track": 60,
+    "frame": 60,
+    "direction": "D",
+    "label": "descending",
+    "data_view": "desc",
+    "co": {
+     "pair": "20260922_20261004",
+     "granule": "NISAR_L2_PR_GUNW_031_060_D_060_032_2000_SH_20260922T084852_20260922T084927_20261004T084852_20261004T084927_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260910_20260922",
+     "granule": "NISAR_L2_PR_GUNW_030_060_D_060_031_2000_SH_20260910T084852_20260910T084927_20260922T084852_20260922T084927_P05023_N_F_J_001"
+    }
+   },
+   "d_oct": {
+    "track": 60,
+    "frame": 60,
+    "direction": "D",
+    "label": "descending",
+    "data_view": "desc",
+    "co": {
+     "pair": "20261004_20261016",
+     "granule": "NISAR_L2_PR_GUNW_032_060_D_060_033_2000_SH_20261004T084852_20261004T084927_20261016T084852_20261016T084927_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260910_20260922",
+     "granule": "NISAR_L2_PR_GUNW_030_060_D_060_031_2000_SH_20260910T084852_20260910T084927_20260922T084852_20260922T084927_P05023_N_F_J_001"
+    }
    }
   },
-  "verdict": null,
+  "verdict": "not detected",
   "deformation": false,
   "time_note": "new eruption reported 15-18 Aug",
   "loss_hi": 0.45,
@@ -663,7 +693,7 @@
     "data_view": "a_aug"
    }
   },
-  "verdict": null,
+  "verdict": "not detected",
   "deformation": false,
   "time_note": "eruption ongoing since 2025",
   "loss_hi": 0.45,
@@ -723,7 +753,7 @@
     }
    }
   },
-  "verdict": null,
+  "verdict": "not detected",
   "deformation": false,
   "time_note": "flows reported July-August",
   "loss_hi": 0.45,
@@ -783,7 +813,7 @@
     }
    }
   },
-  "verdict": null,
+  "verdict": "not detected",
   "deformation": false,
   "time_note": "first seen 29 Sep",
   "loss_hi": 0.45,
@@ -843,7 +873,7 @@
     }
    }
   },
-  "verdict": null,
+  "verdict": "not detected",
   "deformation": false,
   "loss_hi": 0.45,
   "loss_lo": 0.35,
@@ -902,7 +932,7 @@
     }
    }
   },
-  "verdict": null,
+  "verdict": "not detected",
   "deformation": false,
   "loss_hi": 0.45,
   "loss_lo": 0.35,
@@ -1118,6 +1148,21 @@
      "pair": "20260625_20260707",
      "granule": "NISAR_L2_PR_GUNW_023_159_A_022_024_2000_SH_20260625T051544_20260625T051615_20260707T051543_20260707T051615_P05023_N_F_J_001"
     }
+   },
+   "d_null": {
+    "track": 95,
+    "frame": 68,
+    "direction": "D",
+    "label": "descending",
+    "data_view": "d_ign",
+    "co": {
+     "pair": "20260702_20260714",
+     "granule": "NISAR_L2_PR_GUNW_024_095_D_068_025_2000_SH_20260702T190926_20260702T191004_20260714T190925_20260714T191004_P05023_F_F_J_001"
+    },
+    "control": {
+     "pair": "20260620_20260702",
+     "granule": "NISAR_L2_PR_GUNW_023_095_D_068_024_2000_SH_20260620T190926_20260620T191005_20260702T190926_20260702T191004_P05023_N_F_J_001"
+    }
    }
   },
   "verdict": "clear",
@@ -1247,6 +1292,21 @@
      "pair": "20260709_20260721",
      "granule": "NISAR_L2_PR_GUNW_025_023_D_068_026_2000_SH_20260709T191745_20260709T191819_20260721T191744_20260721T191819_P05023_N_F_J_001"
     }
+   },
+   "a_null": {
+    "track": 87,
+    "frame": 22,
+    "direction": "A",
+    "label": "ascending",
+    "data_view": "a_late",
+    "co": {
+     "pair": "20260702_20260714",
+     "granule": "NISAR_L2_PR_GUNW_024_087_A_022_025_2000_SH_20260702T052402_20260702T052434_20260714T052401_20260714T052434_P05023_F_F_J_001"
+    },
+    "control": {
+     "pair": "20260620_20260702",
+     "granule": "NISAR_L2_PR_GUNW_023_087_A_022_024_2000_SH_20260620T052403_20260620T052435_20260702T052402_20260702T052434_P05023_N_F_J_001"
+    }
    }
   },
   "verdict": "clear",
@@ -1370,6 +1430,21 @@
      "pair": "20260702_20260714",
      "granule": "NISAR_L2_PR_GUNW_024_095_D_066_025_2000_SH_20260702T190818_20260702T190853_20260714T190817_20260714T190852_P05023_F_F_J_001"
     }
+   },
+   "a_null": {
+    "track": 130,
+    "frame": 24,
+    "direction": "A",
+    "label": "ascending",
+    "data_view": "a_late",
+    "co": {
+     "pair": "20260705_20260717",
+     "granule": "NISAR_L2_PR_GUNW_024_130_A_024_025_2000_SH_20260705T050009_20260705T050044_20260717T050008_20260717T050043_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260623_20260705",
+     "granule": "NISAR_L2_PR_GUNW_023_130_A_024_024_2000_SH_20260623T050010_20260623T050045_20260705T050009_20260705T050044_P05023_N_F_J_001"
+    }
    }
   },
   "verdict": "clear",
@@ -1463,7 +1538,7 @@
     "data_view": "a_peak"
    }
   },
-  "verdict": null,
+  "verdict": "not detected",
   "deformation": false,
   "loss_hi": 0.4,
   "loss_lo": 0.25,
@@ -1523,7 +1598,7 @@
     "data_view": "a_ev"
    }
   },
-  "verdict": null,
+  "verdict": "not detected",
   "deformation": false,
   "loss_hi": 0.4,
   "loss_lo": 0.25,
@@ -1583,7 +1658,7 @@
     "data_view": "d_ev"
    }
   },
-  "verdict": null,
+  "verdict": "not detected",
   "deformation": false,
   "loss_hi": 0.4,
   "loss_lo": 0.25,
@@ -1642,7 +1717,7 @@
     }
    }
   },
-  "verdict": null,
+  "verdict": "consistent with etna-valle-del-bove-2026",
   "deformation": false,
   "min_px": 20,
   "loss_hi": 0.45,
@@ -1701,7 +1776,7 @@
     }
    }
   },
-  "verdict": null,
+  "verdict": "not detected",
   "deformation": false,
   "loss_hi": 0.45,
   "loss_lo": 0.35,
@@ -1711,8 +1786,8 @@
  {
   "id": "sheveluch-2026",
   "type": "volcano",
-  "title": "Sheveluch lava domes, Kamchatka, Jul-Oct 2026",
-  "time": "2026-09-15T00:00:00Z",
+  "title": "Sheveluch explosive eruptions, Kamchatka: ground around the lava domes changed, 22 Sep-4 Oct 2026",
+  "time": "2026-09-25T17:50:00Z",
   "lat": 56.653,
   "lon": 161.36,
   "place": "Young Sheveluch, Kamchatka, Russia",
@@ -1727,9 +1802,9 @@
    3500
   ],
   "radius_km": 6,
-  "far_km": 18,
+  "far_km": 12,
   "gmin": 0.35,
-  "source_url": "https://watchers.news/2026/10/30/the-weekly-volcanic-activity-report-october-22-28-2026/",
+  "source_url": "https://watchers.news/2026/10/02/the-weekly-volcanic-activity-report-september-24-30-2026/",
   "views": {
    "asc": {
     "track": 80,
@@ -1758,15 +1833,153 @@
      "pair": "20260630_20260712",
      "granule": "NISAR_L2_PR_GUNW_024_060_D_060_025_2000_SH_20260630T084855_20260630T084930_20260712T084854_20260712T084930_P05023_N_F_J_001"
     }
+   },
+   "a_0830": {
+    "track": 80,
+    "frame": 30,
+    "direction": "A",
+    "label": "ascending",
+    "data_view": "asc",
+    "co": {
+     "pair": "20260830_20260911",
+     "granule": "NISAR_L2_PR_GUNW_029_080_A_030_030_2000_SH_20260830T174918_20260830T174954_20260911T174918_20260911T174954_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260818_20260830",
+     "granule": "NISAR_L2_PR_GUNW_028_080_A_030_029_2000_SH_20260818T174918_20260818T174954_20260830T174918_20260830T174954_P05023_N_F_J_001"
+    }
+   },
+   "a_0911": {
+    "track": 80,
+    "frame": 30,
+    "direction": "A",
+    "label": "ascending",
+    "data_view": "asc",
+    "co": {
+     "pair": "20260911_20260923",
+     "granule": "NISAR_L2_PR_GUNW_030_080_A_030_031_2000_SH_20260911T174918_20260911T174954_20260923T174918_20260923T174954_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260830_20260911",
+     "granule": "NISAR_L2_PR_GUNW_029_080_A_030_030_2000_SH_20260830T174918_20260830T174954_20260911T174918_20260911T174954_P05023_N_F_J_001"
+    }
+   },
+   "a_0923": {
+    "track": 80,
+    "frame": 30,
+    "direction": "A",
+    "label": "ascending",
+    "data_view": "asc",
+    "co": {
+     "pair": "20260923_20261005",
+     "granule": "NISAR_L2_PR_GUNW_031_080_A_030_032_2000_SH_20260923T174918_20260923T174954_20261005T174918_20261005T174954_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260911_20260923",
+     "granule": "NISAR_L2_PR_GUNW_030_080_A_030_031_2000_SH_20260911T174918_20260911T174954_20260923T174918_20260923T174954_P05023_N_F_J_001"
+    }
+   },
+   "a_1005": {
+    "track": 80,
+    "frame": 30,
+    "direction": "A",
+    "label": "ascending",
+    "data_view": "asc",
+    "co": {
+     "pair": "20261005_20261017",
+     "granule": "NISAR_L2_PR_GUNW_032_080_A_030_033_2000_SH_20261005T174918_20261005T174954_20261017T174918_20261017T174954_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260923_20261005",
+     "granule": "NISAR_L2_PR_GUNW_031_080_A_030_032_2000_SH_20260923T174918_20260923T174954_20261005T174918_20261005T174954_P05023_N_F_J_001"
+    }
+   },
+   "d_0922": {
+    "track": 60,
+    "frame": 60,
+    "direction": "D",
+    "label": "descending",
+    "data_view": "desc",
+    "co": {
+     "pair": "20260922_20261004",
+     "granule": "NISAR_L2_PR_GUNW_031_060_D_060_032_2000_SH_20260922T084852_20260922T084927_20261004T084852_20261004T084927_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260910_20260922",
+     "granule": "NISAR_L2_PR_GUNW_030_060_D_060_031_2000_SH_20260910T084852_20260910T084927_20260922T084852_20260922T084927_P05023_N_F_J_001"
+    }
+   },
+   "d_1004": {
+    "track": 60,
+    "frame": 60,
+    "direction": "D",
+    "label": "descending",
+    "data_view": "desc",
+    "co": {
+     "pair": "20261004_20261016",
+     "granule": "NISAR_L2_PR_GUNW_032_060_D_060_033_2000_SH_20261004T084852_20261004T084927_20261016T084852_20261016T084927_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260910_20260922",
+     "granule": "NISAR_L2_PR_GUNW_030_060_D_060_031_2000_SH_20260910T084852_20260910T084927_20260922T084852_20260922T084927_P05023_N_F_J_001"
+    }
    }
   },
-  "verdict": null,
+  "verdict": "marginal",
   "deformation": false,
   "loss_hi": 0.45,
   "loss_lo": 0.35,
   "loss_drop": 0.25,
   "min_px": 12,
-  "time_note": "dome activity continuous through the window"
+  "time_note": "explosions on 25 Sep 17:50 UTC and 27 Sep 21:20 UTC (KVERT via Watchers, 24-30 Sep report) and 4 Oct 22:40 UTC (1-7 Oct report); the event pairs span all three",
+  "primary_view": "d_0922",
+  "export_views": [
+   "d_0922"
+  ],
+  "export_deformation": false,
+  "app_views": [
+   "d_0922",
+   "a_0923"
+  ],
+  "zoom_km": 12,
+  "summary_number": "\u2248 33 km\u00b2 of ground around the domes changed completely",
+  "site_label": "Young Sheveluch lava domes (summit, Watchers/KVERT coordinates 56.653 N 161.36 E)",
+  "verdict_reason": "downgraded after the snow test: the loss rises steadily with elevation (8 % of the comparable ground at 600-900 m, 32 % at 900-1200 m, 60 % at 1200-1500 m, 77 % at 1500-1800 m, both looks), and at fixed elevation it hardly depends on the distance from the domes (900-1200 m: 40 % within 6 km, 30 % at 6-12 km), as first snow above a snow line would; ash from the 25-27 Sep explosions cannot be separated from it. Asc lobes stay at coherence 0.3 in 5-17 Oct (no recovery) and the loss moves south and down in that pair",
+  "extra_spots": [
+   {
+    "id": "west",
+    "label": "West lobe of lost coherence",
+    "lngLat": [
+     161.2126,
+     56.642
+    ],
+    "radius_m": 4000
+   },
+   {
+    "id": "east",
+    "label": "East lobe of lost coherence",
+    "lngLat": [
+     161.402,
+     56.6717
+    ],
+    "radius_m": 4000
+   },
+   {
+    "id": "reference",
+    "label": "Reference: stays coherent in both pairs",
+    "lngLat": [
+     161.421,
+     56.751
+    ],
+    "radius_m": 3000
+   }
+  ],
+  "story": {
+   "see": "Sheveluch, on Kamchatka, has been erupting from the lava domes on the north crater floor of Young Sheveluch, with near-daily explosions. KVERT reported explosions at 17:50 UTC on 25 September (ash to 10.5 km, drifting 300 km west, minor ashfall at Klyuchi, 50 km south-west), at 21:20 UTC on 27 September (about 10 km) and at 22:40 UTC on 4 October (6.5 km) (Watchers, 24-30 Sep and 1-7 Oct weekly reports). The orange areas are where the radar picture between NISAR's 22 September and 4 October passes no longer matches the pair just before it (10 to 22 September): two lobes, west and east of the domes.",
+   "physics": "Fresh ash, pyroclastic debris and new dome rock give the ground a surface that the radar cannot match with the earlier pass. Within 6 km of the domes 33 km2 lost coherence, about half of the ground that was still comparable there, against 3 % elsewhere in the 40 x 38 km map; equal circles placed elsewhere lose at most 4 km2. The ascending pass (23 September to 5 October, control 11 to 23 September) gives 29 km2 and the same two lobes. We cannot tell ash fall from flow deposits or new dome, and the pair holds three explosions, so we do not date or size them.",
+   "lband": "NISAR's L-band radar has a wavelength of about 24 cm. Only about 64 km2 around the domes was comparable in the control pair (most of the volcano is not coherent even in a quiet pair), so the result rests on a small area, but it appears from both look directions at the same places and not in the pairs before (1 to 4 km2). Snow cannot be excluded from coherence alone, but only the area around the domes changes, not the rest of the map.",
+   "people": "This map shows where the surface changed, not damage. We did not look at reports of damage, evacuations or casualties."
+  }
  },
  {
   "id": "isaias-2026",
@@ -1821,7 +2034,7 @@
     "data_view": "asc"
    }
   },
-  "verdict": null,
+  "verdict": "not detected",
   "deformation": false,
   "loss_hi": 0.4,
   "loss_lo": 0.3,
@@ -1881,7 +2094,7 @@
     "data_view": "desc"
    }
   },
-  "verdict": null,
+  "verdict": "not detected",
   "deformation": false,
   "loss_hi": 0.4,
   "loss_lo": 0.3,
@@ -1953,6 +2166,21 @@
      "pair": "20260709_20260721",
      "granule": "NISAR_L2_PR_GUNW_025_023_D_070_026_2000_SH_20260709T191852_20260709T191927_20260721T191851_20260721T191926_P05023_N_F_J_001"
     }
+   },
+   "a_null": {
+    "track": 15,
+    "frame": 21,
+    "direction": "A",
+    "label": "ascending",
+    "data_view": "a_ign",
+    "co": {
+     "pair": "20260709_20260721",
+     "granule": "NISAR_L2_PR_GUNW_025_015_A_021_026_2000_SH_20260709T053144_20260709T053219_20260721T053143_20260721T053218_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260627_20260709",
+     "granule": "NISAR_L2_PR_GUNW_024_015_A_021_025_2000_SH_20260627T053145_20260627T053220_20260709T053144_20260709T053219_P05023_N_F_J_001"
+    }
    }
   },
   "verdict": "clear",
@@ -1997,7 +2225,7 @@
   ],
   "story": {
    "see": "The Niebla fire was declared on a Thursday, probably 6 August 2026, in the province of Huelva and crossed into Seville; by 13 August it had burned more than 31,000 hectares, with a perimeter of about 120 km (Infobae). The orange area is where the radar picture between NISAR's 21 July and 14 August passes no longer matches the pair taken just before it (9 to 21 July). It forms a wide sharp-edged block north-east of Niebla.",
-   "physics": "Burning removes the leaves, twigs and scrub that gave this dry hill country a repeatable radar echo. About 218 km2 in the map lost coherence (110 km2 within 15 km of the centre, 50 km2 in the largest connected piece). Equal circles placed elsewhere in the same map lose at most 29 km2. We do not measure the burned area: only ground that was coherent before is counted, and the scar continues outside the map. The ascending pass (same dates, track 15) shows the same block: 145 km2 within 15 km, 113 km2 in the largest piece, against at most 7 km2 in equal circles elsewhere. The pair of 14 to 26 August, after the fire, shows nothing (the scar is coherent again). The north edge of the scar is almost straight over about 25 km, at the same latitude (37.57 to 37.61 N) in both passes, so it is a feature of the ground and not of the radar frame; we did not identify what lies there (a road, a firebreak or the edge of the woodland).",
+   "physics": "Burning removes the leaves, twigs and scrub that gave this dry hill country a repeatable radar echo. About 218 km2 in the map lost coherence (110 km2 within 15 km of the centre); equal circles elsewhere lose at most 29 km2. The ascending pass shows the same block (145 km2 within 15 km), and the pair of 14 to 26 August shows nothing. The north edge of the scar is almost straight over 25 km at the same latitude (37.57 to 37.61 N) in both passes, so it is a feature of the ground, not of the radar frame; we did not identify it. We do not measure the burned area.",
    "lband": "NISAR's L-band radar has a wavelength of about 24 cm. Here the pair is 24 days long while the control is 12, which lowers coherence everywhere a little; the control is bright almost everywhere and the scar stays dark with hard edges. Rain or dew on the ground cannot be fully excluded from coherence alone; the shape, the place and the date are what we rely on.",
    "people": "This map shows where the surface changed, not damage. We did not look at reports of damage, evacuations or casualties."
   }
@@ -2054,7 +2282,7 @@
     }
    }
   },
-  "verdict": null,
+  "verdict": "not detected",
   "deformation": false,
   "loss_hi": 0.35,
   "loss_lo": 0.25,
@@ -2099,7 +2327,7 @@
     }
    }
   },
-  "verdict": null,
+  "verdict": "not detected",
   "deformation": false,
   "loss_hi": 0.45,
   "loss_lo": 0.35,
@@ -2159,7 +2387,7 @@
     }
    }
   },
-  "verdict": null,
+  "verdict": "clear signal, not exported (fire class capped)",
   "deformation": false,
   "loss_hi": 0.5,
   "loss_lo": 0.45,
@@ -2216,6 +2444,21 @@
     "control": {
      "pair": "20260713_20260725",
      "granule": "NISAR_L2_PR_GUNW_025_077_A_027_026_4000_SH_20260713T124758_20260713T124833_20260725T124757_20260725T124832_P05023_N_F_J_001"
+    }
+   },
+   "a_null": {
+    "track": 77,
+    "frame": 27,
+    "direction": "A",
+    "label": "ascending",
+    "data_view": "a_ign",
+    "co": {
+     "pair": "20260713_20260725",
+     "granule": "NISAR_L2_PR_GUNW_025_077_A_027_026_4000_SH_20260713T124758_20260713T124833_20260725T124757_20260725T124832_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260701_20260713",
+     "granule": "NISAR_L2_PR_GUNW_024_077_A_027_025_4000_SH_20260701T124759_20260701T124834_20260713T124758_20260713T124833_P05023_N_F_J_001"
     }
    }
   },
@@ -2309,7 +2552,7 @@
     }
    }
   },
-  "verdict": null,
+  "verdict": "signal at the window edge, not exported",
   "deformation": false,
   "time_note": "lightning fires of 15-16 Jul (search summary); KPTV page opened gives >300,000 acres on 1 Aug",
   "loss_hi": 0.5,
@@ -2399,7 +2642,7 @@
     "data_view": "a_early"
    }
   },
-  "verdict": null,
+  "verdict": "supports atacama-west-2026 (east box)",
   "deformation": false,
   "loss_hi": 0.45,
   "loss_lo": 0.35,
@@ -2459,7 +2702,7 @@
     }
    }
   },
-  "verdict": null,
+  "verdict": "not detected",
   "deformation": false,
   "time_note": "stronger phase 3-5 Aug (Watchers, 6-12 Aug report)",
   "loss_hi": 0.45,
@@ -2517,9 +2760,23 @@
      "pair": "20260626_20260708",
      "granule": "NISAR_L2_PR_GUNW_024_003_D_073_025_2000_SH_20260626T100253_20260626T100327_20260708T100252_20260708T100327_P05023_N_F_J_001"
     }
+   },
+   "asc125": {
+    "track": 125,
+    "frame": 17,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260716_20260821",
+     "granule": "NISAR_L2_PR_GUNW_025_125_A_017_028_2000_SH_20260716T203646_20260716T203721_20260821T203644_20260821T203719_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260704_20260716",
+     "granule": "NISAR_L2_PR_GUNW_024_125_A_017_025_2000_SH_20260704T203647_20260704T203721_20260716T203646_20260716T203721_P05023_N_F_J_001"
+    }
    }
   },
-  "verdict": null,
+  "verdict": "marginal",
   "deformation": false,
   "time_note": "pyroclastic flows with Minamidake eruptions 3-10 Aug (Watchers)",
   "loss_hi": 0.45,
@@ -2579,7 +2836,7 @@
     }
    }
   },
-  "verdict": null,
+  "verdict": "not detected",
   "deformation": false,
   "loss_hi": 0.45,
   "loss_lo": 0.35,
@@ -2590,7 +2847,7 @@
  {
   "id": "atacama-west-2026",
   "type": "storm",
-  "title": "Atacama Desert after the 17-18 August 2026 rain and the snow storms: about 6,000 km2 lost coherence (west of the Salar)",
+  "title": "Atacama Desert after the 17-18 August 2026 rain: about 1,000 km2 lost coherence",
   "time": "2026-08-18T00:00:00Z",
   "lat": -23.5,
   "lon": -69.45,
@@ -2652,6 +2909,127 @@
      "pair": "20260711_20260723",
      "granule": "NISAR_L2_PR_GUNW_025_046_A_166_026_2000_SH_20260711T103043_20260711T103117_20260723T103042_20260723T103116_P05023_N_F_J_001"
     }
+   },
+   "d_jun": {
+    "track": 97,
+    "frame": 100,
+    "direction": "D",
+    "label": "descending",
+    "data_view": "d_both",
+    "co": {
+     "pair": "20260620_20260702",
+     "granule": "NISAR_L2_PR_GUNW_023_097_D_100_024_2000_SH_20260620T224706_20260620T224741_20260702T224705_20260702T224740_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260702_20260714",
+     "granule": "NISAR_L2_PR_GUNW_024_097_D_100_025_2000_SH_20260702T224705_20260702T224740_20260714T224705_20260714T224739_P05023_F_F_J_001"
+    },
+    "control_after_event": true
+   },
+   "d_sep1": {
+    "track": 97,
+    "frame": 100,
+    "direction": "D",
+    "label": "descending",
+    "data_view": "d_both",
+    "co": {
+     "pair": "20260831_20260912",
+     "granule": "NISAR_L2_PR_GUNW_029_097_D_100_030_2000_SH_20260831T224703_20260831T224737_20260912T224703_20260912T224737_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260702_20260714",
+     "granule": "NISAR_L2_PR_GUNW_024_097_D_100_025_2000_SH_20260702T224705_20260702T224740_20260714T224705_20260714T224739_P05023_F_F_J_001"
+    }
+   },
+   "d_sep2": {
+    "track": 97,
+    "frame": 100,
+    "direction": "D",
+    "label": "descending",
+    "data_view": "d_both",
+    "co": {
+     "pair": "20260912_20260924",
+     "granule": "NISAR_L2_PR_GUNW_030_097_D_100_031_2000_SH_20260912T224703_20260912T224737_20260924T224703_20260924T224737_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260702_20260714",
+     "granule": "NISAR_L2_PR_GUNW_024_097_D_100_025_2000_SH_20260702T224705_20260702T224740_20260714T224705_20260714T224739_P05023_F_F_J_001"
+    }
+   },
+   "d_oct": {
+    "track": 97,
+    "frame": 100,
+    "direction": "D",
+    "label": "descending",
+    "data_view": "d_both",
+    "co": {
+     "pair": "20260924_20261006",
+     "granule": "NISAR_L2_PR_GUNW_031_097_D_100_032_2000_SH_20260924T224703_20260924T224737_20261006T224703_20261006T224737_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260702_20260714",
+     "granule": "NISAR_L2_PR_GUNW_024_097_D_100_025_2000_SH_20260702T224705_20260702T224740_20260714T224705_20260714T224739_P05023_F_F_J_001"
+    }
+   },
+   "a_early": {
+    "track": 46,
+    "frame": 166,
+    "direction": "A",
+    "label": "ascending",
+    "data_view": "a_late",
+    "co": {
+     "pair": "20260723_20260816",
+     "granule": "NISAR_L2_PR_GUNW_026_046_A_166_028_2000_SH_20260723T103042_20260723T103116_20260816T103041_20260816T103115_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260711_20260723",
+     "granule": "NISAR_L2_PR_GUNW_025_046_A_166_026_2000_SH_20260711T103043_20260711T103117_20260723T103042_20260723T103116_P05023_N_F_J_001"
+    }
+   },
+   "a_0828": {
+    "track": 46,
+    "frame": 166,
+    "direction": "A",
+    "label": "ascending",
+    "data_view": "a_late",
+    "co": {
+     "pair": "20260828_20260909",
+     "granule": "NISAR_L2_PR_GUNW_029_046_A_166_030_2000_SH_20260828T103040_20260828T103115_20260909T103040_20260909T103115_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260711_20260723",
+     "granule": "NISAR_L2_PR_GUNW_025_046_A_166_026_2000_SH_20260711T103043_20260711T103117_20260723T103042_20260723T103116_P05023_N_F_J_001"
+    }
+   },
+   "a_0909": {
+    "track": 46,
+    "frame": 166,
+    "direction": "A",
+    "label": "ascending",
+    "data_view": "a_late",
+    "co": {
+     "pair": "20260909_20260921",
+     "granule": "NISAR_L2_PR_GUNW_030_046_A_166_031_2000_SH_20260909T103040_20260909T103115_20260921T103040_20260921T103115_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260711_20260723",
+     "granule": "NISAR_L2_PR_GUNW_025_046_A_166_026_2000_SH_20260711T103043_20260711T103117_20260723T103042_20260723T103116_P05023_N_F_J_001"
+    }
+   },
+   "a_0921": {
+    "track": 46,
+    "frame": 166,
+    "direction": "A",
+    "label": "ascending",
+    "data_view": "a_late",
+    "co": {
+     "pair": "20260921_20261003",
+     "granule": "NISAR_L2_PR_GUNW_031_046_A_166_032_2000_SH_20260921T103040_20260921T103115_20261003T103040_20261003T103115_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260711_20260723",
+     "granule": "NISAR_L2_PR_GUNW_025_046_A_166_026_2000_SH_20260711T103043_20260711T103117_20260723T103042_20260723T103116_P05023_N_F_J_001"
+    }
    }
   },
   "verdict": "clear",
@@ -2660,27 +3038,27 @@
   "loss_lo": 0.35,
   "loss_drop": 0.25,
   "min_px": 30,
-  "time_note": "rain on 17-18 Aug (Meteored); pair 26 Jul-19 Aug (24 days); the ascending pair that ends on 16 Aug shows nothing",
-  "primary_view": "d_both",
+  "time_note": "rain on 17-18 Aug (Meteored); ascending pair 16-28 Aug holds only that rain; control 11-23 Jul ends well before it",
+  "primary_view": "a_late",
   "export_views": [
-   "d_both"
+   "a_late"
   ],
   "export_deformation": false,
   "app_views": [
-   "d_both",
-   "a_late"
+   "a_late",
+   "d_both"
   ],
-  "zoom_km": 35,
-  "summary_number": "\u2248 6,000 km\u00b2 of desert lost coherence (window-limited)",
+  "zoom_km": 40,
+  "summary_number": "\u2248 1,000 km\u00b2 of desert lost coherence (0.82 \u2192 0.62, window-limited)",
   "site_label": "Centre of the box (Atacama Desert west of the Salar de Atacama)",
-  "verdict_reason": "descending 26 Jul-19 Aug vs 2-14 Jul: window mean coherence 0.76 -> 0.41, 5,952 km2 lost (largest connected patch 3,806 km2, cut by the window); ascending 16-28 Aug vs 11-23 Jul: 0.82 -> 0.62, 1,004 km2; the ascending pair 23 Jul-16 Aug over the eastern window shows nothing. Cause (snow, rain-wet soil, mud or flash-flood deposits) not separable; a second control, 14-26 Jul, is itself dark; next descending pair 19-31 Aug: 0.48, 3,891 km2 lost; the ascending pair ending 16 Aug (before the 17-18 Aug rain) shows nothing, which brackets the change to 16-19 Aug",
+  "verdict_reason": "ASCENDING single-storm pair 16-28 Aug (46/166) vs 11-23 Jul: box mean coherence 0.82 -> 0.62, 1,004 km2 lost (largest connected patch 128 km2) and the pair 23 Jul-16 Aug (before the rain) 0.81, then 28 Aug-9 Sep 0.75, 9-21 Sep 0.77, 21 Sep-3 Oct 0.77. Supporting, not exported: a longer descending pair 26 Jul-19 Aug (97/100) that mixes several weather episodes loses 5,952 km2 (0.76 -> 0.41; 14-26 Jul is itself dark); boxes around Taltal (0.59 -> 0.38, 1,293 km2) and Tocopilla (0.45 -> 0.24). Elevation test (SRTM, descending): lost share 23 % at 400-800 m, 41 % at 800-1200 m, 31 % at 1200-1600 m, 58 % at 2000-2400 m, 72 % at 2400-2800 m (not a snow line)",
   "extra_spots": [
    {
     "id": "patch",
-    "label": "Centre of the largest patch of lost coherence",
+    "label": "Largest patch of lost coherence",
     "lngLat": [
-     -69.4819,
-     -23.8233
+     -69.3096,
+     -23.9814
     ],
     "radius_m": 8000
    },
@@ -2688,8 +3066,8 @@
     "id": "patch2",
     "label": "Second patch",
     "lngLat": [
-     -69.2439,
-     -23.1878
+     -69.0488,
+     -23.5559
     ],
     "radius_m": 6000
    },
@@ -2697,16 +3075,16 @@
     "id": "reference",
     "label": "Reference: stays coherent in both pairs",
     "lngLat": [
-     -69.746,
-     -23.1735
+     -69.8675,
+     -23.701
     ],
     "radius_m": 4000
    }
   ],
   "story": {
-   "see": "On 17 and 18 August 2026 a cut-off low brought record rain to northern Chile: more than 37 mm in two days at Tocopilla and 33 mm at Taltal, new daily records at Arica and Iquique, and a mudflow down the hills of Tocopilla on the afternoon of 18 August (Meteored). NASA Earth Observatory shows back-to-back winter storms that month with rare snow from the Andes to near the coast (Landsat 6 and 14 August, MODIS 19 August). The orange area is where the radar picture between NISAR's 26 July and 19 August passes no longer matches the dry pair before it (2 to 14 July): about 6,000 km2 in this 115 x 110 km box of the desert west of the Salar de Atacama, the box edge cutting it off.",
-   "physics": "In the hyper-arid desert the ground hardly changes, so two radar passes match almost perfectly (the average coherence of this box was 0.76 in the dry pair). Snow, rain-wetted soil and fresh mud change the surface, and the average fell to 0.41. In the next descending pair (19 to 31 August) it is still 0.48, about 3,900 km2 lost. The ascending pass of 16 to 28 August shows the same: 0.82 down to 0.62, about 1,000 km2 lost. We cannot say how much of the loss is snow, wet soil or flood deposits.",
-   "lband": "NISAR's L-band radar has a wavelength of about 24 cm. Dry snow is largely transparent to it, and the ascending pair of 23 July to 16 August, which ends the day before the rain, shows nothing; wet ground and moved sediment are not transparent. The dry pair before is bright almost everywhere, so a desert-wide drop stands out. One more pair we tried as a control (14 to 26 July) is itself dark over part of this desert; we do not know why, and we use the pair of 2 to 14 July.",
+   "see": "On 17 and 18 August 2026 a cut-off low brought record rain to northern Chile: more than 37 mm in two days at Tocopilla and 33 mm at Taltal, new daily records at Arica and Iquique, and a mudflow down the hills of Tocopilla on the afternoon of 18 August (Meteored). NASA Earth Observatory shows back-to-back winter storms that month with rare snow from the Andes to near the coast. The orange area is where the radar picture between NISAR's 16 and 28 August passes no longer matches the dry pair of 11 to 23 July: about 1,000 km2 in this 115 x 110 km box of the desert west of the Salar de Atacama, the box edge cutting it off. The pair holds the 17-18 August rain and no other storm.",
+   "physics": "In the hyper-arid desert the ground hardly changes: the average coherence of this box was 0.82 in the dry control and 0.81 in the pair of 23 July to 16 August, which ends the day before the rain. In the pair of 16 to 28 August it fell to 0.62, and it was back to 0.75 for 28 August to 9 September and 0.77 after, so the effect lasts days to a couple of weeks, as long as the ground takes to dry. A longer descending pair (26 July to 19 August) that mixes several weather episodes shows more, about 6,000 km2, and boxes near Taltal and Tocopilla agree. The loss is not a snow line: 41 % of the comparable ground lost coherence at 800-1,200 m, the desert floor, and 72 % at 2,400-2,800 m. We cannot say how much is snow, wet soil or flood deposit.",
+   "lband": "NISAR's L-band radar has a wavelength of about 24 cm. Dry snow is largely transparent to it; wet ground and moved sediment are not. The dry control is bright almost everywhere, so a desert-wide drop stands out, and the same recipe applied to the dry pair before the rain finds about 1 km2. One other descending pair (14 to 26 July) is itself dark over part of this desert; we do not know why, so the control used here is the ascending pair of 11 to 23 July.",
    "people": "This map shows where the surface changed, not damage. We did not look at reports of damage or casualties."
   }
  },
@@ -2777,7 +3155,7 @@
     "data_view": "a_ev"
    }
   },
-  "verdict": null,
+  "verdict": "not detected",
   "deformation": false,
   "time_note": "rain ramped up 28 Sep, Polo's remnants 29 Sep, lasting into 2 Oct (weather.com)",
   "loss_hi": 0.45,
@@ -2837,7 +3215,7 @@
     }
    }
   },
-  "verdict": null,
+  "verdict": "not detected",
   "deformation": false,
   "time_note": "record wettest September at Albuquerque (4.49 in); rain 28 Sep-2 Oct (weather.com)",
   "loss_hi": 0.45,
@@ -2914,7 +3292,7 @@
     "data_view": "asc4w"
    }
   },
-  "verdict": null,
+  "verdict": "not attributed (epicentral zone)",
   "deformation": false,
   "loss_hi": 0.4,
   "loss_lo": 0.3,
@@ -2976,7 +3354,7 @@
     "control_after_event": true
    }
   },
-  "verdict": null,
+  "verdict": "not detected",
   "deformation": false,
   "loss_hi": 0.45,
   "loss_lo": 0.35,
@@ -3027,7 +3405,7 @@
    }
   },
   "time_note": "episode 53 began 12 Aug 15:45 HST (USGS HVO table); pair 11-23 Aug holds only this episode",
-  "verdict": null
+  "verdict": "not detected"
  },
  {
   "id": "polo-baja-2026",
@@ -3096,7 +3474,7 @@
     "data_view": "a_ev"
    }
   },
-  "verdict": null,
+  "verdict": "not detected",
   "deformation": false,
   "loss_hi": 0.45,
   "loss_lo": 0.35,
@@ -3156,7 +3534,7 @@
     }
    }
   },
-  "verdict": null,
+  "verdict": "supports atacama-west-2026",
   "deformation": false,
   "time_note": "rain on 17-18 Aug, mudflow in Tocopilla on the afternoon of 18 Aug (Meteored)",
   "loss_hi": 0.45,
@@ -3202,12 +3580,576 @@
     }
    }
   },
-  "verdict": null,
+  "verdict": "supports atacama-west-2026",
   "deformation": false,
   "time_note": "33.4 mm in two days at Taltal (Meteored)",
   "loss_hi": 0.45,
   "loss_lo": 0.35,
   "loss_drop": 0.25,
   "min_px": 30
+ },
+ {
+  "id": "polo-sonora-2026",
+  "type": "storm",
+  "title": "Hurricane Polo second landfall east of Guaymas, Sonora, Mexico, 29 Sep 2026",
+  "time": "2026-09-29T20:00:00Z",
+  "lat": 28.0,
+  "lon": -110.7,
+  "place": "coast of Sonora east of Guaymas, Mexico",
+  "window": [
+   -111.2,
+   27.6,
+   -110.3,
+   28.4
+  ],
+  "heights": [
+   0,
+   800
+  ],
+  "radius_km": 30,
+  "far_km": 90,
+  "gmin": 0.35,
+  "source_url": "https://goodmorningamerica.com/news/story/hurricane-polo-makes-baja-landfall-headed-2nd-mexico-136848159",
+  "views": {
+   "d_ev": {
+    "track": 128,
+    "frame": 74,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260927_20261009",
+     "granule": "NISAR_L2_PR_GUNW_031_128_D_074_032_4000_SH_20260927T020857_20260927T020931_20261009T020857_20261009T020931_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260915_20260927",
+     "granule": "NISAR_L2_PR_GUNW_030_128_D_074_031_4000_SH_20260915T020857_20260915T020931_20260927T020857_20260927T020931_P05023_N_F_J_001"
+    }
+   },
+   "a_ev": {
+    "track": 77,
+    "frame": 16,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260923_20261005",
+     "granule": "NISAR_L2_PR_GUNW_031_077_A_016_032_4000_SH_20260923T124143_20260923T124218_20261005T124143_20261005T124218_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260911_20260923",
+     "granule": "NISAR_L2_PR_GUNW_030_077_A_016_031_4000_SH_20260911T124143_20260911T124218_20260923T124143_20260923T124218_P05023_N_F_J_001"
+    }
+   }
+  },
+  "verdict": "not detected",
+  "deformation": false,
+  "loss_hi": 0.45,
+  "loss_lo": 0.35,
+  "loss_drop": 0.25,
+  "min_px": 30,
+  "time_note": "second landfall on mainland Mexico on Tuesday afternoon 29 Sep, east of Guaymas (ABC/GMA); time approximate"
+ },
+ {
+  "id": "santamaria-2026",
+  "type": "volcano",
+  "title": "Santa Maria (Santiaguito) Caliente dome extrusion and pyroclastic flows, Guatemala, 7-12 Oct 2026",
+  "time": "2026-10-10T00:00:00Z",
+  "lat": 14.757,
+  "lon": -91.552,
+  "place": "Santiaguito, Santa Maria volcano, Guatemala",
+  "window": [
+   -91.72,
+   14.62,
+   -91.38,
+   14.88
+  ],
+  "heights": [
+   200,
+   3800
+  ],
+  "radius_km": 5,
+  "far_km": 15,
+  "gmin": 0.35,
+  "source_url": "https://watchers.news/2026/10/16/the-weekly-volcanic-activity-report-october-8-14-2026/",
+  "views": {
+   "asc": {
+    "track": 62,
+    "frame": 9,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20261004_20261016",
+     "granule": "NISAR_L2_PR_GUNW_032_062_A_009_033_4000_SH_20261004T113933_20261004T114007_20261016T113933_20261016T114007_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260922_20261004",
+     "granule": "NISAR_L2_PR_GUNW_031_062_A_009_032_4000_SH_20260922T113932_20260922T114007_20261004T113933_20261004T114007_P05023_N_F_J_001"
+    }
+   },
+   "desc": {
+    "track": 55,
+    "frame": 81,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20261004_20261016",
+     "granule": "NISAR_L2_PR_GUNW_032_055_D_081_033_4000_SH_20261004T004118_20261004T004149_20261016T004118_20261016T004149_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260922_20261004",
+     "granule": "NISAR_L2_PR_GUNW_031_055_D_081_032_4000_SH_20260922T004118_20260922T004148_20261004T004118_20261004T004149_P05023_N_F_J_001"
+    }
+   }
+  },
+  "verdict": "not detected",
+  "deformation": false,
+  "loss_hi": 0.45,
+  "loss_lo": 0.35,
+  "loss_drop": 0.25,
+  "min_px": 12,
+  "time_note": "short pyroclastic flows 7-8 and 11-12 Oct (Watchers)"
+ },
+ {
+  "id": "gold-ridge-mine-2026",
+  "type": "mine",
+  "title": "Gold Ridge open-pit ground collapse, Guadalcanal, Solomon Islands, 27 Jul 2026",
+  "time": "2026-07-26T21:30:00Z",
+  "lat": -9.57,
+  "lon": 160.13,
+  "place": "Gold Ridge mine, Guadalcanal, Solomon Islands",
+  "window": [
+   159.98,
+   -9.72,
+   160.28,
+   -9.42
+  ],
+  "heights": [
+   0,
+   900
+  ],
+  "radius_km": 4,
+  "far_km": 12,
+  "gmin": 0.35,
+  "source_url": "https://indepthsolomons.com.sb/gold-ridge-pit-collapse-sparks-emergency-response/",
+  "views": {
+   "asc": {
+    "track": 152,
+    "frame": 173,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260718_20260811",
+     "granule": "NISAR_L2_PR_GUNW_025_152_A_173_027_2000_SH_20260718T190222_20260718T190258_20260811T190221_20260811T190255_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260706_20260718",
+     "granule": "NISAR_L2_PR_GUNW_024_152_A_173_025_2000_SH_20260706T190223_20260706T190257_20260718T190222_20260718T190258_P05023_N_F_J_001"
+    }
+   },
+   "desc": {
+    "track": 160,
+    "frame": 93,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260719_20260812",
+     "granule": "NISAR_L2_PR_GUNW_025_160_D_093_027_2000_SH_20260719T073553_20260719T073626_20260812T073552_20260812T073626_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260707_20260719",
+     "granule": "NISAR_L2_PR_GUNW_024_160_D_093_025_2000_SH_20260707T073557_20260707T073628_20260719T073553_20260719T073626_P05023_N_F_J_001"
+    }
+   }
+  },
+  "verdict": "not detected",
+  "deformation": false,
+  "loss_hi": 0.45,
+  "loss_lo": 0.35,
+  "loss_drop": 0.25,
+  "min_px": 8,
+  "time_note": "between 1 and 2 am local on 27 Jul (InDepth Solomons); the mine position is approximate"
+ },
+ {
+  "id": "bezymianny-2026",
+  "type": "volcano",
+  "title": "Bezymianny lava flows and dome growth, Kamchatka, Aug-Oct 2026",
+  "time": "2026-08-08T00:00:00Z",
+  "lat": 55.972,
+  "lon": 160.595,
+  "place": "Bezymianny, Kamchatka, Russia",
+  "window": [
+   160.35,
+   55.82,
+   160.85,
+   56.12
+  ],
+  "heights": [
+   0,
+   3000
+  ],
+  "radius_km": 5,
+  "far_km": 15,
+  "gmin": 0.35,
+  "source_url": "https://watchers.news/2026/08/15/the-weekly-volcanic-activity-report-august-6-12-2026/",
+  "views": {
+   "a_20260818": {
+    "track": 80,
+    "frame": 30,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260818_20260830",
+     "granule": "NISAR_L2_PR_GUNW_028_080_A_030_029_2000_SH_20260818T174918_20260818T174954_20260830T174918_20260830T174954_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260725_20260818",
+     "granule": "NISAR_L2_PR_GUNW_026_080_A_030_028_2000_SH_20260725T174920_20260725T174955_20260818T174918_20260818T174954_P05023_N_F_J_001"
+    }
+   },
+   "a_20260830": {
+    "track": 80,
+    "frame": 30,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260830_20260911",
+     "granule": "NISAR_L2_PR_GUNW_029_080_A_030_030_2000_SH_20260830T174918_20260830T174954_20260911T174918_20260911T174954_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260818_20260830",
+     "granule": "NISAR_L2_PR_GUNW_028_080_A_030_029_2000_SH_20260818T174918_20260818T174954_20260830T174918_20260830T174954_P05023_N_F_J_001"
+    },
+    "data_view": "a_20260818"
+   },
+   "a_20260911": {
+    "track": 80,
+    "frame": 30,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260911_20260923",
+     "granule": "NISAR_L2_PR_GUNW_030_080_A_030_031_2000_SH_20260911T174918_20260911T174954_20260923T174918_20260923T174954_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260830_20260911",
+     "granule": "NISAR_L2_PR_GUNW_029_080_A_030_030_2000_SH_20260830T174918_20260830T174954_20260911T174918_20260911T174954_P05023_N_F_J_001"
+    },
+    "data_view": "a_20260818"
+   },
+   "a_20260923": {
+    "track": 80,
+    "frame": 30,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260923_20261005",
+     "granule": "NISAR_L2_PR_GUNW_031_080_A_030_032_2000_SH_20260923T174918_20260923T174954_20261005T174918_20261005T174954_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260911_20260923",
+     "granule": "NISAR_L2_PR_GUNW_030_080_A_030_031_2000_SH_20260911T174918_20260911T174954_20260923T174918_20260923T174954_P05023_N_F_J_001"
+    },
+    "data_view": "a_20260818"
+   },
+   "a_20261005": {
+    "track": 80,
+    "frame": 30,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20261005_20261017",
+     "granule": "NISAR_L2_PR_GUNW_032_080_A_030_033_2000_SH_20261005T174918_20261005T174954_20261017T174918_20261017T174954_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260923_20261005",
+     "granule": "NISAR_L2_PR_GUNW_031_080_A_030_032_2000_SH_20260923T174918_20260923T174954_20261005T174918_20261005T174954_P05023_N_F_J_001"
+    },
+    "data_view": "a_20260818"
+   }
+  },
+  "verdict": "not detected",
+  "deformation": false,
+  "loss_hi": 0.45,
+  "loss_lo": 0.35,
+  "loss_drop": 0.25,
+  "min_px": 12,
+  "time_note": "effusive activity with lava flows 6-10 Aug and continuing 8-14 Oct (Watchers); consecutive pairs used as before/after of each other"
+ },
+ {
+  "id": "hotan-rain-2026",
+  "type": "storm",
+  "title": "Record rain at Hotan, Taklamakan Desert margin, 20 Jun 2026",
+  "time": "2026-06-20T06:00:00Z",
+  "lat": 37.11,
+  "lon": 79.92,
+  "place": "Hotan, Xinjiang, China",
+  "window": [
+   79.55,
+   36.95,
+   80.35,
+   37.55
+  ],
+  "heights": [
+   1200,
+   1800
+  ],
+  "radius_km": 25,
+  "far_km": 75,
+  "gmin": 0.35,
+  "source_url": "https://global.chinadaily.com.cn/a/202606/23/WS6a3a90e6a310986e2b4617ac.html",
+  "views": {
+   "d106_post": {
+    "track": 106,
+    "frame": 70,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260621_20260703",
+     "granule": "NISAR_L2_PR_GUNW_023_106_D_070_024_2000_SH_20260621T132918_20260621T132953_20260703T132917_20260703T132952_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260703_20260715",
+     "granule": "NISAR_L2_PR_GUNW_024_106_D_070_025_2000_SH_20260703T132917_20260703T132952_20260715T132917_20260715T132951_P05023_N_F_J_001"
+    },
+    "control_after_event": true
+   },
+   "d106_null": {
+    "track": 106,
+    "frame": 70,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260703_20260715",
+     "granule": "NISAR_L2_PR_GUNW_024_106_D_070_025_2000_SH_20260703T132917_20260703T132952_20260715T132917_20260715T132951_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260715_20260727",
+     "granule": "NISAR_L2_PR_GUNW_025_106_D_070_026_2000_SH_20260715T132917_20260715T132951_20260727T132916_20260727T132951_P05023_N_F_J_001"
+    },
+    "data_view": "d106_post",
+    "control_after_event": true
+   },
+   "d34_post": {
+    "track": 34,
+    "frame": 70,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260628_20260710",
+     "granule": "NISAR_L2_PR_GUNW_024_034_D_070_025_2000_SH_20260628T133737_20260628T133811_20260710T133736_20260710T133811_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260710_20260722",
+     "granule": "NISAR_L2_PR_GUNW_025_034_D_070_026_2000_SH_20260710T133736_20260710T133811_20260722T133735_20260722T133810_P05023_N_F_J_001"
+    },
+    "control_after_event": true
+   }
+  },
+  "verdict": "not detected",
+  "deformation": false,
+  "loss_hi": 0.45,
+  "loss_lo": 0.35,
+  "loss_drop": 0.25,
+  "min_px": 30,
+  "time_note": "64.7 mm in 24 h at Hotan on Saturday 20 Jun (China Daily); no NISAR pair starts before it: the first passes are 21 Jun (day after) and 28 Jun, so the control is a LATER pair"
+ },
+ {
+  "id": "colombia-m74-2026",
+  "type": "earthquake",
+  "title": "M7.4 intermediate-depth earthquake, Valle del Cauca, Colombia, 10 Aug 2026 (depth 116 km)",
+  "time": "2026-08-10T12:34:28Z",
+  "lat": 4.8601,
+  "lon": -76.2558,
+  "place": "San Jose del Palmar, Colombia",
+  "window": [
+   -76.85,
+   4.3,
+   -75.65,
+   5.4
+  ],
+  "heights": [
+   0,
+   4000
+  ],
+  "radius_km": 40,
+  "far_km": 70,
+  "gmin": 0.35,
+  "source_url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000tjl2",
+  "views": {
+   "asc47": {
+    "track": 47,
+    "frame": 4,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260723_20260816",
+     "granule": "NISAR_L2_PR_GUNW_026_047_A_004_028_4000_SH_20260723T103830_20260723T103905_20260816T103829_20260816T103904_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260711_20260723",
+     "granule": "NISAR_L2_PR_GUNW_025_047_A_004_026_4000_SH_20260711T103831_20260711T103906_20260723T103830_20260723T103905_P05023_N_F_J_001"
+    }
+   },
+   "desc11": {
+    "track": 11,
+    "frame": 86,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260720_20260813",
+     "granule": "NISAR_L2_PR_GUNW_026_011_D_086_028_4000_SH_20260720T232912_20260720T232946_20260813T232911_20260813T232945_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260708_20260720",
+     "granule": "NISAR_L2_PR_GUNW_025_011_D_086_026_4000_SH_20260708T232913_20260708T232947_20260720T232912_20260720T232946_P05023_N_F_J_001"
+    }
+   },
+   "asc148": {
+    "track": 148,
+    "frame": 4,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260718_20260811",
+     "granule": "NISAR_L2_PR_GUNW_025_148_A_004_027_2000_SH_20260718T104651_20260718T104725_20260811T104649_20260811T104724_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260706_20260718",
+     "granule": "NISAR_L2_PR_GUNW_024_148_A_004_025_2000_SH_20260706T104651_20260706T104726_20260718T104651_20260718T104725_P05023_N_F_J_001"
+    }
+   }
+  },
+  "verdict": "not detected",
+  "deformation": true,
+  "loss_hi": 0.45,
+  "loss_lo": 0.35,
+  "loss_drop": 0.25,
+  "min_px": 30,
+  "fringe_cm": 6,
+  "los_lim_cm": 10,
+  "time_note": "USGS us6000tjl2; depth 116 km; the event pairs are 24 days against 12-day controls"
+ },
+ {
+  "id": "minchumina-m56-2026",
+  "type": "earthquake",
+  "title": "M5.6 earthquake near Lake Minchumina, Alaska, 15 Oct 2026 (depth 4.5 km)",
+  "time": "2026-10-15T11:07:01Z",
+  "lat": 64.22,
+  "lon": -152.746,
+  "place": "43 km NNW of Lake Minchumina, interior Alaska",
+  "window": [
+   -153.7,
+   63.8,
+   -151.8,
+   64.65
+  ],
+  "heights": [
+   0,
+   1500
+  ],
+  "radius_km": 25,
+  "far_km": 45,
+  "gmin": 0.35,
+  "source_url": "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&eventid=aka2026ukynnb",
+  "views": {
+   "desc73": {
+    "track": 73,
+    "frame": 55,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20261005_20261017",
+     "granule": "NISAR_L2_PR_GUNW_032_073_D_055_033_4000_SH_20261005T062424_20261005T062502_20261017T062424_20261017T062502_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260923_20261005",
+     "granule": "NISAR_L2_PR_GUNW_031_073_D_055_032_4000_SH_20260923T062424_20260923T062502_20261005T062424_20261005T062502_P05023_N_F_J_001"
+    }
+   },
+   "asc49": {
+    "track": 49,
+    "frame": 34,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20261003_20261015",
+     "granule": "NISAR_L2_PR_GUNW_032_049_A_034_033_4000_SH_20261003T141513_20261003T141550_20261015T141513_20261015T141550_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260921_20261003",
+     "granule": "NISAR_L2_PR_GUNW_031_049_A_034_032_4000_SH_20260921T141513_20260921T141550_20261003T141513_20261003T141550_P05023_N_F_J_001"
+    }
+   }
+  },
+  "verdict": "not detected",
+  "deformation": true,
+  "loss_hi": 0.45,
+  "loss_lo": 0.35,
+  "loss_drop": 0.25,
+  "min_px": 30,
+  "fringe_cm": 5,
+  "los_lim_cm": 10,
+  "time_note": "USGS catalogue (ComCat query, 15 Oct 11:07 UTC, depth 4.5 km)"
+ },
+ {
+  "id": "skwentna-m56-2026",
+  "type": "earthquake",
+  "title": "M5.6 earthquake 57 km WNW of Skwentna, Alaska, 8 Aug 2026 (depth 10 km)",
+  "time": "2026-08-08T04:50:35Z",
+  "lat": 62.269,
+  "lon": -152.314,
+  "place": "57 km WNW of Skwentna, Alaska",
+  "window": [
+   -153.3,
+   61.9,
+   -151.3,
+   62.65
+  ],
+  "heights": [
+   0,
+   2500
+  ],
+  "radius_km": 25,
+  "far_km": 45,
+  "gmin": 0.35,
+  "source_url": "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&eventid=aka2026powmkf",
+  "views": {
+   "desc15": {
+    "track": 15,
+    "frame": 57,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260721_20260814",
+     "granule": "NISAR_L2_PR_GUNW_026_015_D_057_028_2000_SH_20260721T055222_20260721T055257_20260814T055219_20260814T055255_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260709_20260721",
+     "granule": "NISAR_L2_PR_GUNW_025_015_D_057_026_4000_SH_20260709T055223_20260709T055257_20260721T055222_20260721T055257_P05023_N_F_J_001"
+    }
+   },
+   "asc49": {
+    "track": 49,
+    "frame": 33,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260723_20260816",
+     "granule": "NISAR_L2_PR_GUNW_026_049_A_033_028_4000_SH_20260723T141439_20260723T141515_20260816T141438_20260816T141514_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260711_20260723",
+     "granule": "NISAR_L2_PR_GUNW_025_049_A_033_026_4000_SH_20260711T141440_20260711T141516_20260723T141439_20260723T141515_P05023_N_F_J_001"
+    }
+   }
+  },
+  "verdict": "not detected",
+  "deformation": true,
+  "loss_hi": 0.45,
+  "loss_lo": 0.35,
+  "loss_drop": 0.25,
+  "min_px": 30,
+  "fringe_cm": 5,
+  "los_lim_cm": 10,
+  "time_note": "USGS catalogue (ComCat query, 8 Aug 04:50 UTC); event pairs are 24 days against 12-day controls"
  }
 ]

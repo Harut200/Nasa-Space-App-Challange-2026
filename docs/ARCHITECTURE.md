@@ -131,7 +131,7 @@ Output: $\gamma_t(i)$, a water probability per pixel and date, in `data/processe
 
 | Check | Independent of the detector? | Result |
 |---|---|---|
-| Synthetic scenes with known answers | yes | 34 test files; the full run of 15 November (about 03:50) has 242 tests passed (223 in 33 files at 00:46) ([`pytest-full.txt`](evidence/pytest-full.txt); [DETECTION.md, section 7.1](DETECTION.md)) |
+| Synthetic scenes with known answers | yes | 243 passed in 34 files, 15 November about 06:20 (242 at 03:50, 223 at 00:46) ([`pytest-full.txt`](evidence/pytest-full.txt); [DETECTION.md, section 7.1](DETECTION.md)) |
 | Lake Sevan published area, 1,242 km² | partly: the water threshold was first tuned on it | sub-pixel 1,242.5 km²; HMM 1,235.3 km² every date |
 | 38 years of Landsat water maps | yes | permanent-water IoU 0.94 (Sevan), 0.84 (Tonle Sap); the source of every anchor below |
 | Tune on one strip, test on an untouched strip and another country | yes, but the TEST strip was looked at three times by the tuning | tuned thresholds rejected by the gate; old thresholds kept; transfer works from Sevan to Tonle Sap, not the other way |
@@ -268,7 +268,7 @@ All three read `src/app/public/data/` (37 places in 9 classes: Floods 8, Lakes 4
 |---|---|---|
 | Earthquake interferometry, six clear events of fifteen tried | control pairs flat (5–21 cm) against 38–133 cm for the large events; Qaidam M5.6 a compact patch in three pairs; Venezuela M7.2 and M7.5 not separable; no independent check | **yes**, six event places |
 | Earthquake interferometry, one marginal, eight not detected | offshore, deep, small or decorrelated | no (documented in `quake.md`) |
-| Other ground events (loss of coherence): Langtang, Kilauea ep. 55, Etna, six wildfires, the Atacama storms | as of 03:57 on 15 Nov (round 3 runs until 07:30): 10 clear, 3 marginal, 2 not detected, 28 without a verdict, of 43 candidates; no volume, burnt area, damage or motion claimed ([`events.md`](eda/events.md), `events.json`) | **yes**, ten event places |
+| Other ground events (loss of coherence): Langtang, Kilauea ep. 55, Etna, six wildfires, the Atacama rain storm | final (round 3 ended about 06:20, commit `6e3330c`): 10 clear, 5 marginal (Sheveluch exported then withdrawn after an elevation test: first snow), 31 not detected, of 53 configurations; no volume, burnt area, damage or motion claimed ([`events.md`](eda/events.md), `events.json`) | **yes**, ten event places |
 | Before/after evidence layers (three fires; Okavango, Sindh-Indus, Nile delta, Poyang, Haor, Urmia) | area of changed radar echo with a control test; control not clean at Thunder Bay 36, Sindh-Indus, Poyang, Urmia; Sudd, Gironde (brightness) and Rondônia negative ([`burn.md`](eda/burn.md)) | **yes**, nine places |
 | Visibility audit of 31 places | 12 show it, 10 weakly, 9 not, before the fixes; not repeated ([`visibility-audit.md`](eda/visibility-audit.md)) | fixes in the data: opening layer and date, caution labels, captions |
 | Comparison with NASA OPERA DSWx-S1 | 97.5 % agreement at Sevan and Tonle Sap; mean IoU 0.38 over 101 place-dates; wrong at Inner Niger, Lake Chad, Urmia | evaluation only ([`opera.md`](eda/opera.md)) |
@@ -282,7 +282,7 @@ All three read `src/app/public/data/` (37 places in 9 classes: Floods 8, Lakes 4
 
 ### 8.4 The coherence-loss path (volcanoes, landslide, wildfires, storm)
 
-The same remote-window path as 8.1, with a different statistic: instead of line-of-sight displacement, `scripts/detect/events.py` counts pixels whose coherence falls from the control pair to the event pair (rule and status: [DETECTION.md, section 3.24](DETECTION.md); numbers: [`events.md`](eda/events.md), `docs/eda/events/results.json`). Configuration is `docs/eda/events/events.json` (43 candidates on 15 November, about 03:50); a clear event is handed to the app through `app_events.json` and `events.py export`, which writes the layers `coherence`, `coh_loss` and `coherence_before` and an `event` record with the pairing for the before/after compare. Fires are in the app twice for three of them (brightness over the season, lost coherence in one pair); the event-hunt round 3 is still running until 07:30.
+The same remote-window path as 8.1, with a different statistic: instead of line-of-sight displacement, `scripts/detect/events.py` counts pixels whose coherence falls from the control pair to the event pair (rule and status: [DETECTION.md, section 3.24](DETECTION.md); numbers: [`events.md`](eda/events.md), `docs/eda/events/results.json`). Configuration is `docs/eda/events/events.json` (53 configurations; `events.py` also has `loss_by_elevation`, the elevation test that withdrew Sheveluch as snow); a clear event is handed to the app through `app_events.json` and `events.py export`, which writes the layers `coherence`, `coh_loss` and `coherence_before` and an `event` record with the pairing for the before/after compare. Fires are in the app twice for three of them (brightness over the season, lost coherence in one pair); round 3 of the event hunt ended at about 06:20 on 15 November.
 
 ### 8.5 The evidence path ("how we found it")
 

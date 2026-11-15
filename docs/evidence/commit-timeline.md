@@ -1,6 +1,6 @@
 # Commit timeline
 
-Generated 15 Nov 2026 from `git log --format='%h %ad %s' --date=format:'%d %b %H:%M'`, grouped by hour (Armenia time, oldest first). 120 commits on the branch (the last 16, from 00:47 to 03:20 on 15 Nov, were added at about 04:00). Account handles and remote names in merge subjects are removed or replaced by `<remote>`. Work after the newest commit is not committed yet (see EVIDENCE.md, known limits).
+Generated 15 Nov 2026 from `git log --format='%h %ad %s' --date=format:'%d %b %H:%M'`, grouped by hour (Armenia time, oldest first). 128 commits on the branch (the last 24, from 00:47 to 06:17 on 15 Nov, were added at about 04:00 and 06:30). Account handles and remote names in merge subjects are removed or replaced by `<remote>`. Work after the newest commit is not committed yet (see EVIDENCE.md, known limits).
 
 ## 14 Nov 09:00 (4 commits)
 
@@ -221,4 +221,32 @@ Generated 15 Nov 2026 from `git log --format='%h %ad %s' --date=format:'%d %b %H
 |---|---|---|
 | 03:12 | `3c2a0c7` | Use of AI: state the team's roles (research, data analysis, detection design, app design) and the assistant role of AI tools |
 | 03:20 | `13a1f4e` | Add the Atacama snow and rain storms of August 2026 as a Storms class (lost coherence against a dry control pair); record the volcano, landslide and cyclone candidates that showed nothing |
+
+## 15 Nov 03:00, commits after 13a1f4e (1 commits)
+
+| Time | Commit | What landed |
+|---|---|---|
+| 03:57 | `ad390ae` | Bring the summaries in line with their sources: 37 places in nine classes, the visibility audit, the evidence layers, round 3 of the event hunt as of 03:57, 242 tests |
+
+## 15 Nov 04:00, commits after 13a1f4e (4 commits)
+
+| Time | Commit | What landed |
+|---|---|---|
+| 04:28 | `b0f5c3d` | Atacama storm: rain dates sourced, the change bracketed to 16-19 August by a pair that ends before it, recovery within about three weeks; record more candidates that showed nothing |
+| 04:48 | `3985174` | Add the Sheveluch explosive eruptions of late September 2026 (Kamchatka): lost coherence around the lava domes on both look directions; snow not excluded |
+| 04:54 | `e3c13f5` | Withdraw Sheveluch from the app: the lost coherence follows elevation, not distance from the domes, and does not recover, so autumn snow explains it; kept as a marginal tried event |
+| 04:55 | `78f1394` | Langtang passes the elevation test: the lost coherence does not rise with height and is local at fixed height |
+
+## 15 Nov 05:00, commits after 13a1f4e (2 commits)
+
+| Time | Commit | What landed |
+|---|---|---|
+| 05:00 | `950eed7` | Elevation test as a reusable check (loss_by_elevation) with a synthetic test; the neighbouring Klyuchevskoy group confirms the snow reading at Sheveluch |
+| 05:24 | `5802ee5` | Atacama storm: show the clean single-storm pair (16-28 August, about 1,000 km2) instead of the longer pair that mixes several weather episodes |
+
+## 15 Nov 06:00, commits after 13a1f4e (1 commits)
+
+| Time | Commit | What landed |
+|---|---|---|
+| 06:17 | `6e3330c` | Round 3 of the event hunt: final log of 42 configurations, clear, marginal and not detected, with the do-not-claim list |
 

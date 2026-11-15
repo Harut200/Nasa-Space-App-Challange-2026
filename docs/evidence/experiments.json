@@ -1,5 +1,5 @@
 {
- "generated": "15 November 2026, 00:46 (Armenia time); updated about 04:00 with the evidence layers, the visibility audit, event-hunt round 3 and the new test counts (rows E01-E03, A01, G05; N01, N04, P02 changed)",
+ "generated": "15 November 2026, 00:46 (Armenia time); updated about 04:00 with the evidence layers, the visibility audit, event-hunt round 3 and the new test counts (rows E01-E03, A01, G05; N01, N04, P02 changed); round 3 final state added at about 06:30 (G05, Sheveluch withdrawal)",
  "note": "All paths are relative to the repository root. landed = first commit that touched the write-up (day month hour:minute, Armenia time).",
  "studies": [
   {
@@ -637,7 +637,7 @@
    "group": "Data and app engineering",
    "question": "Does the web app's own data layer hold up?",
    "method": "Node tests over the manifests and helpers in src/app (npm test).",
-   "result": "22 tests, 21 pass, 1 fails (15 Nov, about 03:50): 'event places: tooltip text, grouping, counts, summaries' expects the category list fire, earthquake, volcano, landslide and does not know the new storm class (src/app/tests/app.test.js line 115). Outdated expectation; not fixed.",
+   "result": "22 tests, 22 pass, 0 fail (15 November about 06:20; at 03:50 one failed on an outdated Storms expectation, now fixed in the test file)",
    "verdict": "evaluated (one failing test)",
    "writeup": "docs/evidence/app-tests.txt",
    "code": null,
@@ -719,13 +719,13 @@
   {
    "id": "G05",
    "group": "Other ground events",
-   "question": "Round 3: does pair coherence show fires, storms and more volcanoes and landslides?",
+   "question": "Round 3 (ended about 06:20): do fires, storms and more volcanoes and landslides show in pair coherence?",
    "method": "As G01; fires use a lower and wider rule set per event in events.json; several event pairs can share one control.",
-   "result": "As of 15 Nov about 03:57 (round 3 runs until 07:30): events.json has 43 candidates (results.json has results for all 43 at 03:57; it carries no verdict for Budhi Gandaki, Kali Gandaki, Kilauea 54 and Gironde, which events.json has); 10 clear (Langtang, Kilauea 55, Etna, six wildfires, Atacama storm; all 10 in the app, app_events.json), 3 marginal, 2 not detected, 28 without a verdict field. Gironde is clear by coherence (events.json) while results.json still has no verdict for it and the brightness log says marginal.",
-   "verdict": "ten shipped as event places; the rest not shown; counts provisional",
+   "result": "Round 3 ended at about 06:20 on 15 November (final commit 6e3330c). Final state (events.json, results.json, app_events.json, events.md): events.json holds 53 configurations (42 of them added in round 3, per events.md), all with results in results.json: 10 clear (all 10 are places in the app), 5 marginal (Brits, Kilauea 54, Ambrym, Sakurajima and Sheveluch, which was exported as clear and withdrawn, see below), 31 not detected (one of them decorrelated), 4 entries that support or repeat another event (the Atacama coast, Taltal and east boxes, and Etna's later pairs), 2 fire signals not exported (Hautes Fagnes, Rowe Creek) and 1 not attributed (the Panama earthquake landslides). Clear: Langtang, Kilauea 55, Etna, six wildfires, the Atacama rain storm (single-storm ascending pair 16-28 Aug, 1,004 km2, 0.82 to 0.62; the descending pair of about 5,950 km2 mixes several weather episodes and is text only). Sheveluch was exported as clear and withdrawn as marginal after an elevation test (loss 8/32/60/77 % at 600-1800 m, same in the Klyuchevskoy group, no recovery: first snow; in_app false); Langtang passed. Gironde: clear by coherence, marginal by brightness.",
+   "verdict": "ten shipped as event places; counts final",
    "writeup": "docs/eda/events.md",
    "code": "scripts/detect/events.py",
-   "test": "tests/test_events.py",
+   "test": "tests/test_events.py (13 tests, includes the elevation test)",
    "results": "docs/eda/events/results.json",
    "figure": "docs/eda/events/overview.png",
    "landed": "15 Nov 01:52"
@@ -1070,8 +1070,14 @@
   },
   {
    "kind": "Ground event",
-   "what": "Round 3 candidates that showed nothing (events.md log, as of 03:57)",
-   "number": "Klyuchevskoy, Krasheninnikov, Nyamulagira, Chillan, Semeru, Lewotolok, Fuego, Hanjia landslide, Hurricane Isaias, Big Grass fire; Mahanadi, Terai and Chao Phraya floods by coherence",
+   "what": "Round 3 candidates not detected (final log, 06:20)",
+   "number": "Budhi Gandaki and Kali Gandaki landslides, Klyuchevskoy, Krasheninnikov, Nyamulagira, Chillán, Lewotolok, Stromboli, Semeru, Fuego, Great Sitkin, Bezymianny, Etna June, Kilauea episode 53, Santa María, the Hanjia landslide, Hurricane Isaias, Typhoon Noul, the Polo remnants (Arizona, New Mexico, Baja California Sur, Sonora), the Hotan rain, the Big Grass fire, the Gold Ridge mine, the Colombia M7.4 and the two Alaska M5.6 earthquakes, and the Mahanadi, Terai and Chao Phraya floods by coherence",
+   "link": "docs/eda/events.md"
+  },
+  {
+   "kind": "Ground event",
+   "what": "Sheveluch lava domes: exported as clear, withdrawn (self-correction)",
+   "number": "Marginal after an elevation test: loss 8 / 32 / 60 / 77 % at 600-900 / 900-1200 / 1200-1500 / 1500-1800 m, same in the Klyuchevskoy group, no recovery (first snow); in_app false",
    "link": "docs/eda/events.md"
   }
  ]

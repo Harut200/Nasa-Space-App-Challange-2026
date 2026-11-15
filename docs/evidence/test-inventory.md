@@ -1,6 +1,6 @@
 # Test inventory
 
-Generated 15 Nov 2026, regenerated at about 04:00 (242 tests, 34 files, now including `tests/test_burn.py`) with `grep -n "^def test_\|^    def test_" tests/*.py` (line number is in the file). `tests/test_export.py` defines one function named `test` (not `test_...`), so grep does not list it; pytest runs it.
+Generated 15 Nov 2026, regenerated at about 06:20 (243 tests, 34 files, now including `tests/test_burn.py`) with `grep -n "^def test_\|^    def test_" tests/*.py` (line number is in the file). `tests/test_export.py` defines one function named `test` (not `test_...`), so grep does not list it; pytest runs it.
 
 ```
 tests/test_add_area.py:30:def test_point_in_poly_and_box_inside():
@@ -68,6 +68,7 @@ tests/test_events.py:107:def test_pairing_block_and_post_event_control():
 tests/test_events.py:117:def test_export_before_same_grid_ramp_and_legend(tmp_path, monkeypatch):
 tests/test_events.py:147:def test_views_sharing_a_data_folder_download_each_pair_once():
 tests/test_events.py:159:def test_fire_rule_is_wider_than_default_and_catches_a_partial_drop():
+tests/test_events.py:172:def test_loss_by_elevation_separates_a_snow_line_from_a_local_patch():
 tests/test_floodveg.py:54:def test_ring_patch_found_town_crop_not():
 tests/test_floodveg.py:72:def test_area_tolerance_and_shapes():
 tests/test_floodveg.py:85:def test_global_offset_invariance():

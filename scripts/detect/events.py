@@ -81,6 +81,40 @@ def loss_stats(coh_event, coh_control, X, Y, centre, radius_m, pix_km2, hi=0.45,
     return out, loss, comp
 
 
+def loss_by_elevation(coh_event, coh_control, height, edges, hi=0.45, lo=0.35, drop=0.25, pix_km2=0.0064):
+    """Snow check: for each elevation band [edges[i], edges[i+1]) the comparable ground (control >= hi), the lost ground and its share.
+    A first-snow signal rises with elevation and not with the distance from a site; a local event does not follow elevation."""
+    ce, cc, h = np.asarray(coh_event, float), np.asarray(coh_control, float), np.asarray(height, float)
+    comp = np.isfinite(ce) & np.isfinite(cc) & np.isfinite(h) & (cc >= hi)
+    lost = comp & (ce < lo) & ((cc - ce) >= drop)
+    rows = []
+    for a, b in zip(edges[:-1], edges[1:]):
+        m = comp & (h >= a) & (h < b)
+        rows.append({"from_m": float(a), "to_m": float(b), "comparable_km2": float(m.sum() * pix_km2),
+                     "lost_km2": float((lost & m).sum() * pix_km2), "lost_share": float((lost & m).sum() / m.sum()) if m.any() else None})
+    return rows
+
+
+def fetch_dem_grid(window, k=30, out=None):
+    """SRTM 30 m heights on a k x k grid over window (w, s, e, n) from a public elevation API (generic user agent, 100 points per
+    request, 1.2 s apart). Returns (lons, lats, z[k, k]); saved to `out` (.npz) if given. Only used for the snow check."""
+    import time
+    import urllib.request
+    w, s_, e, n = window
+    lons, lats = np.linspace(w, e, k), np.linspace(s_, n, k)
+    pts = [(la, lo) for la in lats for lo in lons]
+    z = []
+    for i in range(0, len(pts), 100):
+        q = "|".join(f"{a:.4f},{b:.4f}" for a, b in pts[i:i + 100])
+        req = urllib.request.Request("https://api.opentopodata.org/v1/srtm30m?locations=" + q, headers={"User-Agent": "Mozilla/5.0"})
+        z += [r["elevation"] for r in json.loads(urllib.request.urlopen(req, timeout=40).read())["results"]]
+        time.sleep(1.2)
+    z = np.array(z, float).reshape(k, k)
+    if out:
+        np.savez(out, lon=lons, lat=lats, z=z)
+    return lons, lats, z
+
+
 def top_clusters(loss, X, Y, epsg, pix_km2, n=5):
     """The n largest connected clusters of a loss mask: area, centroid (lon, lat) and longest bounding-box side (km)."""
     from scipy.ndimage import label
@@ -118,7 +152,7 @@ def get_event(eid):
 
 
 def proc_dir(ev):
-    return os.path.join(ROOT, "data", "processed", f"{ev['id']}-insar")
+    return os.path.join(ROOT, "data", "processed", f"{ev.get('insar_id', ev['id'])}-insar")  # insar_id: reuse windows downloaded by another study
 
 
 def data_view(ev, view):
@@ -251,8 +285,10 @@ def _save(ev, fig, name, dpi=80):
     p = os.path.join(d, name)
     fig.savefig(p, dpi=dpi, bbox_inches="tight")
     kb = os.path.getsize(p) // 1024
-    if kb > 380:
-        fig.savefig(p, dpi=55, bbox_inches="tight")
+    for d in (55, 45, 36):                       # figures must stay under 400 KB
+        if kb <= 380:
+            break
+        fig.savefig(p, dpi=d, bbox_inches="tight")
         kb = os.path.getsize(p) // 1024
     print("wrote", p, kb, "KB")
 
@@ -586,6 +622,32 @@ def before_after_fig(ev, half_km=None):
     plt.close(fig)
 
 
+def timeline_fig(ev, views, name="timeline.png"):
+    """timeline.png: window-mean coherence of the event pair of each listed view (results.json) against its mid-date, plus the
+    control pair of the first view; shows the drop and the recovery for a weather-type event."""
+    plt = _plt()
+    import datetime as dt
+    res = json.load(open(os.path.join(DOCS, "results.json")))[ev["id"]]["views"]
+    day = lambda a: dt.datetime.strptime(a, "%Y%m%d")
+    pts = []
+    for k in views:
+        a, b = ev["views"][k]["co"]["pair"].split("_")
+        pts.append((day(a) + (day(b) - day(a)) / 2, res[k]["mean_coh_event_whole_window"], f"{a[4:6]}-{a[6:]} to {b[4:6]}-{b[6:]}"))
+    a, b = ev["views"][views[0]]["control"]["pair"].split("_")
+    ctl = (day(a) + (day(b) - day(a)) / 2, res[views[0]]["mean_coh_control_whole_window"], f"control {a[4:6]}-{a[6:]} to {b[4:6]}-{b[6:]}")
+    pts = sorted(pts + [ctl], key=lambda t: t[0])
+    fig, ax = plt.subplots(figsize=(7.5, 3.6))
+    ax.plot([t[0] for t in pts], [t[1] for t in pts], "o-", color="#444")
+    ax.plot([ctl[0]], [ctl[1]], "o", color="#1f77b4", ms=9, label="control pair")
+    for t in pts:
+        ax.annotate(t[2], (t[0], t[1]), textcoords="offset points", xytext=(0, 7), ha="center", fontsize=6, rotation=40)
+    ax.set_ylim(0, 1); ax.set_ylabel("mean coherence of the box"); ax.legend(fontsize=7)
+    ax.set_title(f"{ev['place'][:60]}: mean coherence of the box, one point per pair (mid-date)", fontsize=8)
+    fig.autofmt_xdate()
+    _save(ev, fig, name, dpi=90)
+    plt.close(fig)
+
+
 def app_events():
     """docs/eda/events/app_events.json: one record per clear event with what the app exporter needs."""
     res = json.load(open(os.path.join(DOCS, "results.json")))
@@ -644,6 +706,8 @@ def main(argv):
         export_before(get_event(argv[2]))
     elif cmd == "fig_ba":
         before_after_fig(get_event(argv[2]))
+    elif cmd == "timeline":
+        timeline_fig(get_event(argv[2]), argv[3].split(","), argv[4] if len(argv) > 4 else "timeline.png")
     elif cmd == "overview":
         overview()
     elif cmd == "app_events":

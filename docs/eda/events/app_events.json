@@ -513,27 +513,14 @@
  {
   "id": "atacama-west-2026",
   "type": "storm",
-  "title": "Atacama Desert after the 17-18 August 2026 rain and the snow storms: about 6,000 km2 lost coherence (west of the Salar)",
+  "title": "Atacama Desert after the 17-18 August 2026 rain: about 1,000 km2 lost coherence",
   "time": "2026-08-18T00:00:00Z",
   "lat": -23.5,
   "lon": -69.45,
   "place": "Atacama Desert west of the Salar de Atacama, Antofagasta region, Chile",
-  "summary_number": "≈ 6,000 km² of desert lost coherence (window-limited)",
+  "summary_number": "≈ 1,000 km² of desert lost coherence (0.82 → 0.62, window-limited)",
   "radius_km": 40,
   "views": [
-   {
-    "id": "d_both",
-    "label": "descending",
-    "track": 97,
-    "before": "2026-07-26",
-    "after": "2026-08-19",
-    "p2p_cm": null,
-    "control_p2p_cm": null,
-    "control_before": "2026-07-02",
-    "control_after": "2026-07-14",
-    "control_is_before": true,
-    "exported": true
-   },
    {
     "id": "a_late",
     "label": "ascending",
@@ -545,26 +532,39 @@
     "control_before": "2026-07-11",
     "control_after": "2026-07-23",
     "control_is_before": true,
+    "exported": true
+   },
+   {
+    "id": "d_both",
+    "label": "descending",
+    "track": 97,
+    "before": "2026-07-26",
+    "after": "2026-08-19",
+    "p2p_cm": null,
+    "control_p2p_cm": null,
+    "control_before": "2026-07-02",
+    "control_after": "2026-07-14",
+    "control_is_before": true,
     "exported": false
    }
   ],
   "source_url": "https://www.meteored.cl/noticias/actualidad/el-norte-de-chile-recibio-lluvias-historicas-aluvion-deja-enterrada-parte-de-tocopilla.html",
   "before_after": [
    {
-    "view": "d_both",
+    "view": "a_late",
     "before": "coherence_before",
     "after": "coherence",
     "label": "Radar coherence",
     "before_dates": [
-     "2026-07-02",
-     "2026-07-14"
+     "2026-07-11",
+     "2026-07-23"
     ],
     "after_dates": [
-     "2026-07-26",
-     "2026-08-19"
+     "2026-08-16",
+     "2026-08-28"
     ]
    }
   ],
-  "time_note": "rain on 17-18 Aug (Meteored); pair 26 Jul-19 Aug (24 days); the ascending pair that ends on 16 Aug shows nothing"
+  "time_note": "rain on 17-18 Aug (Meteored); ascending pair 16-28 Aug holds only that rain; control 11-23 Jul ends well before it"
  }
 ]
