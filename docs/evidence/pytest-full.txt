@@ -1,7 +1,7 @@
 ........................................................................ [ 29%]
 ........................................................................ [ 59%]
-........................................................................ [ 89%]
-..........................                                               [100%]
+........................................................................ [ 88%]
+...........................                                              [100%]
 =============================== warnings summary ===============================
 tests/test_graphdet.py::test_laplacian_matches_hand_computed
   <repo>/scripts/detect/graphdet.py:139: UserWarning: Sparse invariant checks are implicitly disabled. Memory errors (e.g. SEGFAULT) will occur when operating on a sparse tensor which violates the invariants, but checks incur performance overhead. To silence this warning, explicitly opt in or out. See `torch.sparse.check_sparse_tensor_invariants.__doc__` for guidance.  (Triggered internally at <ci>/aten/src/ATen/Context.cpp:923.)
@@ -185,6 +185,7 @@ PASSED tests/test_events.py::test_pairing_block_and_post_event_control
 PASSED tests/test_events.py::test_export_before_same_grid_ramp_and_legend
 PASSED tests/test_events.py::test_views_sharing_a_data_folder_download_each_pair_once
 PASSED tests/test_events.py::test_fire_rule_is_wider_than_default_and_catches_a_partial_drop
+PASSED tests/test_events.py::test_loss_by_elevation_separates_a_snow_line_from_a_local_patch
 PASSED tests/test_export.py::test
 PASSED tests/test_floodveg.py::test_ring_patch_found_town_crop_not
 PASSED tests/test_floodveg.py::test_area_tolerance_and_shapes
@@ -356,4 +357,4 @@ PASSED tests/test_unmix.py::test_synthetic_study_dark_land_is_land
 PASSED tests/test_unmix.py::test_terrain_prior_moves_water_to_land
 PASSED tests/test_unmix.py::test_noise_floor_map_follows_a_swath_gradient
 PASSED tests/test_unmix.py::test_impute_bad_channel_uses_other_dates
-242 passed, 9 warnings in 79.57s (0:01:19)
+243 passed, 9 warnings in 80.76s (0:01:20)
