@@ -1,0 +1,129 @@
+{
+  "id": "gironde-coh-2026",
+  "name": "Gironde megafire, France: forest surface changed, 17 Jul-10 Aug 2026",
+  "bounds": [
+    -1.45,
+    44.54998672442989,
+    -0.7000192616542751,
+    45.099999999999994
+  ],
+  "dates": [],
+  "gaps": [],
+  "layers": [
+    {
+      "id": "coherence",
+      "label": "Radar coherence (how comparable the two passes are)",
+      "dates": null,
+      "legend": {
+        "type": "ramp",
+        "unit": "coherence 0-1",
+        "min": 0,
+        "max": 1,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    },
+    {
+      "id": "coh_loss",
+      "label": "Where the radar picture changed completely between the passes",
+      "dates": null,
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#ff5a00",
+            "label": "was comparable before (control pair), not comparable in the event pair"
+          }
+        ]
+      }
+    },
+    {
+      "id": "coherence_before",
+      "label": "Before the event: radar coherence (5 Jul\u201317 Jul)",
+      "dates": null,
+      "legend": {
+        "type": "ramp",
+        "unit": "coherence 0-1",
+        "min": 0,
+        "max": 1,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    }
+  ],
+  "story": {
+    "see": "The Gironde megafire began on Wednesday 22 July 2026 between Saumos and Le Porge and crossed the pine forest towards Lacanau and Lege-Cap-Ferret; the prefecture gave 42,000 hectares burned on 30 July (AFP, via Paris Match Belgium). The orange area is where the radar picture between NISAR's 17 July and 10 August passes no longer matches the pair taken just before it (5 to 17 July). It is a single large patch in the forest, with the Atlantic and the Arcachon basin dark in both pictures.",
+    "physics": "Fire strips the pine canopy and the litter beneath it, and the radar echo of that ground stops repeating. About 334 km2 in the map lost coherence, 261 km2 in one connected patch. Equal circles placed elsewhere in the same map lose at most 40 km2 (95th percentile of 39). The descending pass (14 to 26 July, 12 days) shows a smaller patch at the same forest, 31 km2 within 12 km; its water- and marsh-rich surface keeps less coherence to begin with. We do not measure the burned area; only ground that was coherent before is counted.",
+    "lband": "NISAR's L-band radar has a wavelength of about 24 cm and sees through much of a forest canopy, so a burned forest changes its echo strongly. The pair is 24 days long against a 12-day control, which lowers coherence everywhere a little. In the pair of 22 August to 3 September, after the fire, nothing like this patch remains, so the map marks the change inside 17 July to 10 August. Rain or soil moisture cannot be fully excluded from coherence alone; the shape, the place and the date are what we rely on.",
+    "people": "This map shows where the surface changed, not damage. We did not look at reports of damage, evacuations or casualties."
+  },
+  "spots": [
+    {
+      "id": "site",
+      "label": "Centre of the largest patch of lost coherence",
+      "lngLat": [
+        -1.04,
+        44.85
+      ]
+    },
+    {
+      "id": "reference",
+      "label": "Reference: stays coherent in both pairs",
+      "lngLat": [
+        -0.8,
+        44.85
+      ]
+    }
+  ],
+  "credits": "NISAR data: NASA/JPL-Caltech and ISRO, distributed by ASF DAAC. PROVISIONAL calibration.",
+  "source": null,
+  "kind": "event",
+  "event": {
+    "type": "fire",
+    "title": "Gironde megafire, France: forest surface changed, 17 Jul-10 Aug 2026",
+    "time": "2026-07-22T00:00:00Z",
+    "time_note": "fire began 22 Jul between Saumos and Le Porge (search summary of AFP/Reporterre); pair 17 Jul-10 Aug (24 days); the control pair ends 17 Jul",
+    "lngLat": [
+      -1.04,
+      44.85
+    ],
+    "place": "Landes de Gascogne, Gironde, France",
+    "summary": "\u2248 334 km\u00b2 of forest changed completely (largest connected patch 261 km\u00b2)",
+    "radius_km": 12,
+    "source_url": "https://www.parismatch.be/actualites/monde/2026/07/30/megafeu-en-gironde-lincendie-est-stabilise-et-la-meteo-favorable-PI3SAONZT5ELNDYIA5JBABKJAU/",
+    "views": [
+      {
+        "id": "a_ign",
+        "label": "ascending",
+        "track": 130,
+        "before": "2026-07-17",
+        "after": "2026-08-10",
+        "p2p_cm": null,
+        "control_p2p_cm": null,
+        "control_before": "2026-07-05",
+        "control_after": "2026-07-17"
+      }
+    ],
+    "before_after": [
+      {
+        "view": "a_ign",
+        "before": "coherence_before",
+        "after": "coherence",
+        "label": "Radar coherence",
+        "before_dates": [
+          "2026-07-05",
+          "2026-07-17"
+        ],
+        "after_dates": [
+          "2026-07-17",
+          "2026-08-10"
+        ]
+      }
+    ]
+  },
+  "category": "fire"
+}

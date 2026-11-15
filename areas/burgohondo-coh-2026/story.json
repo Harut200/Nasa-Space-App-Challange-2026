@@ -1,0 +1,46 @@
+{
+  "story": {
+    "see": "The Burgohondo fire was declared on Wednesday 22 July 2026 in Burgohondo, province of Avila (eldiario.es). By 26 July Spain's environment minister put it at about 50,000 hectares and called it the largest forest fire in recent Spanish history; it was managed together with connected fronts in Madrid and Toledo (El Espanol). The orange area is where the radar picture between NISAR's 14 and 26 July passes no longer matches the pair taken just before it (2 to 14 July). It stretches east from Navaluenga.",
+    "physics": "Burning removes the leaves, twigs and scrub that gave the ground a repeatable radar echo, and what is left looks different to the radar, so the two passes cannot be compared there. About 216 km2 in the map lost coherence (137 km2 within 15 km of the centre, 99 km2 in the largest connected patch). Equal circles placed elsewhere in the same map lose at most 50 km2 (95th percentile of 63), and about 1 % of the comparable ground outside the site changes like this. We do not measure the burned area: only ground that was coherent before is counted, and the fire continued east beyond this map. The descending pass (21 July to 26 August, 36 days, control 9 to 21 July) shows the same place: 196 km2 within 15 km, largest patch 198 km2.",
+    "lband": "NISAR's L-band radar has a wavelength of about 24 cm. Over this dry land the quiet pair before the fire is bright almost everywhere, so a burn shows as a dark scar with hard edges. In the pair of 19 to 31 August, after the fire, the same ground is coherent again, so the map marks the change that happened inside 14 to 26 July. Dew or rain on the ground cannot be fully excluded from coherence alone; the shape, the place and the date are what we rely on.",
+    "people": "This map shows where the surface changed, not damage. We did not look at reports of damage, evacuations or casualties."
+  },
+  "spots": [
+    {
+      "id": "site",
+      "label": "Navaluenga (Wikipedia, 40.41 N 4.71 W)",
+      "lngLat": [
+        -4.65,
+        40.38
+      ],
+      "radius_m": 3000
+    },
+    {
+      "id": "patch",
+      "label": "Centre of the largest patch of lost coherence",
+      "lngLat": [
+        -4.5986,
+        40.3717
+      ],
+      "radius_m": 6000
+    },
+    {
+      "id": "east",
+      "label": "Second patch, 30 km further east",
+      "lngLat": [
+        -4.3026,
+        40.3629
+      ],
+      "radius_m": 5000
+    },
+    {
+      "id": "reference",
+      "label": "Reference: stays coherent in both pairs",
+      "lngLat": [
+        -4.95,
+        40.55
+      ],
+      "radius_m": 4000
+    }
+  ]
+}

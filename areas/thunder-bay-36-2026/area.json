@@ -25,7 +25,7 @@
   ],
   "water_source": "fusion2",
   "category": "fire",
-  "default_layer": "change",
+  "default_layer": "burn_diff",
   "headline": "none",
-  "headline_note": "Radar echo brighter where the fire burned"
+  "headline_note": "Co-polarised (HH) radar echo about 0.12 higher (0–1 brightness) inside a patch of changed echo of about 1,875 km² after the fire"
 }

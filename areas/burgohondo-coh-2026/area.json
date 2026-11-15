@@ -1,0 +1,14 @@
+{
+  "id": "burgohondo-coh-2026",
+  "name": "Burgohondo fire, Avila: forest and scrub surface changed, 14-26 July 2026",
+  "bbox": [
+    -5.1,
+    40.1,
+    -4.1,
+    40.7
+  ],
+  "track": 87,
+  "frame": 22,
+  "direction": "ascending",
+  "pixel_m": 80
+}

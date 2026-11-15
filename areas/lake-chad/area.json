@@ -25,5 +25,7 @@
     "2026-10-19"
   ],
   "water_source": "fusion2",
-  "category": "lake"
+  "category": "lake",
+  "default_layer": "classes",
+  "caution": "Our water map disagrees with NASA's OPERA water product here: we find about half of the water it maps. Read the area as an underestimate."
 }

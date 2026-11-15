@@ -26,5 +26,6 @@
     "2026-07-06"
   ],
   "water_source": "fusion2",
-  "category": "flood"
+  "category": "flood",
+  "caution": "Our water map disagrees with NASA's OPERA water product here: we map about four times the open water it does, mostly flooded vegetation we label as open. Do not read the area as exact."
 }

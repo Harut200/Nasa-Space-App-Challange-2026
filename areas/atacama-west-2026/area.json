@@ -1,0 +1,14 @@
+{
+  "id": "atacama-west-2026",
+  "name": "Atacama Desert after the 17-18 August 2026 rain: about 1,000 km2 lost coherence",
+  "bbox": [
+    -70.15,
+    -24.0,
+    -69.0,
+    -23.0
+  ],
+  "track": 46,
+  "frame": 166,
+  "direction": "ascending",
+  "pixel_m": 80
+}

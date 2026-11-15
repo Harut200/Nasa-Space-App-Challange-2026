@@ -1,0 +1,37 @@
+{
+  "story": {
+    "see": "Thunder Bay 36 started on 12 July 2026 in Wabakimi Provincial Park, north-western Ontario, and was about 314,000 hectares (3,140 km2) on 29 July, the largest wildfire in the province's recorded history (Wikipedia, citing the provincial figures). The orange area is where the radar picture between NISAR's 11 and 23 July passes no longer matches the pair taken just before it (29 June to 11 July). It forms a sharp-edged blotch tens of kilometres across, far larger than the 40 x 40 km box the pair was cut to.",
+    "physics": "A fire changes the ground the radar sees: leaves, twigs and the litter on the ground burn or fall, so the tiny details that made the echo repeatable disappear. In the window about 1,540 km2 lost coherence (the biggest connected patch is 1,253 km2), at 50.65 N 89.29 W, 14 km from the published fire point. The ascending pass (track 47) sees a similar patch where its swath covers the area. We do not measure the burned area: the patch is cut by the window and the fire kept growing after 23 July.",
+    "lband": "NISAR's L-band radar (wavelength about 24 cm) normally keeps a good match between two passes 12 days apart over boreal forest, which is why the control pair is largely bright. Lost coherence here has a hard, irregular outline, not the gentle gradient of rain or soil moisture. In the autumn pair (21 September to 3 October) the same ground is coherent again, so the map marks the change that happened inside 11 to 23 July. As a check, the same recipe applied to the pair before it (29 June to 11 July against 17 to 29 June) finds only 12 km2 in the whole window. Rain on the ground in those days cannot be ruled out from coherence alone; the outline and the published fire place and date are what we rely on.",
+    "people": "This map shows where the surface changed, not damage. We did not look at reports of damage, evacuations or casualties. A second, independent look at this fire from the radar brightness is in the separate Thunder Bay 36 place."
+  },
+  "spots": [
+    {
+      "id": "site",
+      "label": "Published fire location (Wikipedia, 50.68 N 89.48 W)",
+      "lngLat": [
+        -89.48,
+        50.68
+      ],
+      "radius_m": 3000
+    },
+    {
+      "id": "patch",
+      "label": "Centre of the largest patch of lost coherence",
+      "lngLat": [
+        -89.2864,
+        50.6519
+      ],
+      "radius_m": 8000
+    },
+    {
+      "id": "reference",
+      "label": "Reference: coherence 0.56 before, 0.47 now (no loss)",
+      "lngLat": [
+        -89.02,
+        51.0
+      ],
+      "radius_m": 5000
+    }
+  ]
+}

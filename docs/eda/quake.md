@@ -341,6 +341,16 @@ Things the lead must do or decide:
 * `area.json` for the two-view events lists the first look direction's track and frame and `"direction": "ascending and descending"`.
 * `fringes.tif` and `coherence.tif` are 0.3-1.6 MB as GeoTIFF (Kumamoto the largest); the exporter converts to WebP.
 
+### Before layers (15 Nov 2026)
+
+Each clear event also exports the control pair as a true BEFORE picture of its primary view: `fringes_before` (re-wrapped at the same cycle as `fringes`) and `los_before_cm`
+(same diverging scale and legend as the primary `los..._cm`), computed by `quake.export_before` from the control map `ctl_cm` with the same masks, ramp removal and grid as the event pair
+(`python -m scripts.detect.quake before EVENT` adds them without touching the other layers, also for the frozen Tibet export). A view whose control is flagged `control_after_event` or ends after
+the event pair starts or after the event date gets no before layer (Qaidam asc11 is not exported anyway). What they show: Tibet is flat (control far-field std 0.7 cm, p2p 5 cm against 127 cm in the event pair);
+Kumamoto and Venezuela M7.5 are flat to a few cm. Venezuela M7.2 (std 2.9 cm), Panama (3.5 cm, several atmospheric fringes in the south) and Qaidam (3.5 cm against a 5 cm fringe cycle and a +/-10 cm scale)
+show real atmospheric signal in the control; their fringes_before layers (Qaidam also los_before_cm) are labelled "(noisy)" rather than hidden. The manifest pairs them in `event.before_after`.
+Figures: `docs/eda/quake/<id>/before_after.png` (Tibet, Panama, Qaidam).
+
 ## Server leftovers
 
 `~/work2/job_quake*.json`, `~/work2/queue_quake*.sh`, `~/work2/logs/quake_*.log`, `~/work2/out/quake/<event>/<view>/win/` (full-resolution `.npz`, 0.2-0.5 GB per

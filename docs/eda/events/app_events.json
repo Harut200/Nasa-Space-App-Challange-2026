@@ -18,6 +18,9 @@
     "after": "2026-08-31",
     "p2p_cm": null,
     "control_p2p_cm": null,
+    "control_before": "2026-07-14",
+    "control_after": "2026-07-26",
+    "control_is_before": true,
     "exported": true
    },
    {
@@ -28,10 +31,29 @@
     "after": "2026-08-28",
     "p2p_cm": null,
     "control_p2p_cm": null,
+    "control_before": "2026-07-11",
+    "control_after": "2026-07-23",
+    "control_is_before": true,
     "exported": false
    }
   ],
-  "source_url": "https://en.wikipedia.org/wiki/2026_Nepal%E2%80%93Tibet_floods"
+  "source_url": "https://en.wikipedia.org/wiki/2026_Nepal%E2%80%93Tibet_floods",
+  "before_after": [
+   {
+    "view": "asc",
+    "before": "coherence_before",
+    "after": "coherence",
+    "label": "Radar coherence",
+    "before_dates": [
+     "2026-07-14",
+     "2026-07-26"
+    ],
+    "after_dates": [
+     "2026-08-19",
+     "2026-08-31"
+    ]
+   }
+  ]
  },
  {
   "id": "kilauea-ep55-2026",
@@ -52,6 +74,9 @@
     "after": "2026-10-22",
     "p2p_cm": null,
     "control_p2p_cm": null,
+    "control_before": "2026-09-28",
+    "control_after": "2026-10-10",
+    "control_is_before": true,
     "exported": true
    },
    {
@@ -62,10 +87,29 @@
     "after": "2026-10-29",
     "p2p_cm": null,
     "control_p2p_cm": null,
+    "control_before": "2026-10-05",
+    "control_after": "2026-10-17",
+    "control_is_before": true,
     "exported": false
    }
   ],
-  "source_url": "https://www.usgs.gov/volcanoes/kilauea/recent-eruption"
+  "source_url": "https://www.usgs.gov/volcanoes/kilauea/recent-eruption",
+  "before_after": [
+   {
+    "view": "asc",
+    "before": "coherence_before",
+    "after": "coherence",
+    "label": "Radar coherence",
+    "before_dates": [
+     "2026-09-28",
+     "2026-10-10"
+    ],
+    "after_dates": [
+     "2026-10-10",
+     "2026-10-22"
+    ]
+   }
+  ]
  },
  {
   "id": "etna-valle-del-bove-2026",
@@ -86,6 +130,9 @@
     "after": "2026-08-16",
     "p2p_cm": null,
     "control_p2p_cm": null,
+    "control_before": "2026-06-29",
+    "control_after": "2026-07-23",
+    "control_is_before": true,
     "exported": true
    },
    {
@@ -96,10 +143,428 @@
     "after": "2026-08-16",
     "p2p_cm": null,
     "control_p2p_cm": null,
+    "control_before": "2026-07-11",
+    "control_after": "2026-07-23",
+    "control_is_before": true,
     "exported": false
    }
   ],
   "source_url": "https://www.euronews.com/2026/08/13/etna-eruption-enters-seventh-day-in-phenomenon-unseen-since-the-1970s",
+  "before_after": [
+   {
+    "view": "asc",
+    "before": "coherence_before",
+    "after": "coherence",
+    "label": "Radar coherence",
+    "before_dates": [
+     "2026-06-29",
+     "2026-07-23"
+    ],
+    "after_dates": [
+     "2026-07-23",
+     "2026-08-16"
+    ]
+   }
+  ],
   "time_note": "start of the August eruption inferred from 'seventh day' on 13 Aug (Euronews); the 24-day pair also holds the 30 Jul paroxysm"
+ },
+ {
+  "id": "thunder-bay-36-coh-2026",
+  "type": "fire",
+  "title": "Thunder Bay 36 fire, Ontario: forest surface changed over 1,500 km2, 11-23 July 2026",
+  "time": "2026-07-12T00:00:00Z",
+  "lat": 50.68,
+  "lon": -89.48,
+  "place": "Wabakimi, northwestern Ontario, Canada",
+  "summary_number": "≥ 1,540 km² of forest changed completely (window-limited)",
+  "radius_km": 25,
+  "views": [
+   {
+    "id": "d_ign",
+    "label": "descending",
+    "track": 41,
+    "before": "2026-07-11",
+    "after": "2026-07-23",
+    "p2p_cm": null,
+    "control_p2p_cm": null,
+    "control_before": "2026-06-29",
+    "control_after": "2026-07-11",
+    "control_is_before": true,
+    "exported": true
+   },
+   {
+    "id": "a_ign",
+    "label": "ascending",
+    "track": 47,
+    "before": "2026-07-11",
+    "after": "2026-07-23",
+    "p2p_cm": null,
+    "control_p2p_cm": null,
+    "control_before": "2026-06-29",
+    "control_after": "2026-07-11",
+    "control_is_before": true,
+    "exported": false
+   }
+  ],
+  "source_url": "https://en.wikipedia.org/wiki/Thunder_Bay_36_Fire",
+  "before_after": [
+   {
+    "view": "d_ign",
+    "before": "coherence_before",
+    "after": "coherence",
+    "label": "Radar coherence",
+    "before_dates": [
+     "2026-06-29",
+     "2026-07-11"
+    ],
+    "after_dates": [
+     "2026-07-11",
+     "2026-07-23"
+    ]
+   }
+  ],
+  "time_note": "fire started 12 Jul; pair 11-23 Jul; the control pair ends the day before"
+ },
+ {
+  "id": "la-mierla-coh-2026",
+  "type": "fire",
+  "title": "La Mierla fire, Guadalajara: forest and scrub surface changed, 14-26 July 2026",
+  "time": "2026-07-16T00:00:00Z",
+  "lat": 40.97,
+  "lon": -3.15,
+  "place": "Sierra Norte de Guadalajara, Spain",
+  "summary_number": "≈ 150 km² of ground changed completely (largest connected patch 44 km²)",
+  "radius_km": 12,
+  "views": [
+   {
+    "id": "d_ign",
+    "label": "descending",
+    "track": 95,
+    "before": "2026-07-14",
+    "after": "2026-07-26",
+    "p2p_cm": null,
+    "control_p2p_cm": null,
+    "control_before": "2026-07-02",
+    "control_after": "2026-07-14",
+    "control_is_before": true,
+    "exported": true
+   },
+   {
+    "id": "a_ign",
+    "label": "ascending",
+    "track": 159,
+    "before": "2026-07-07",
+    "after": "2026-07-19",
+    "p2p_cm": null,
+    "control_p2p_cm": null,
+    "control_before": "2026-06-25",
+    "control_after": "2026-07-07",
+    "control_is_before": true,
+    "exported": false
+   }
+  ],
+  "source_url": "https://www.thelocal.es/20260720/800-evacuated-as-spains-biggest-wildfire-of-the-year-rages-on",
+  "before_after": [
+   {
+    "view": "d_ign",
+    "before": "coherence_before",
+    "after": "coherence",
+    "label": "Radar coherence",
+    "before_dates": [
+     "2026-07-02",
+     "2026-07-14"
+    ],
+    "after_dates": [
+     "2026-07-14",
+     "2026-07-26"
+    ]
+   }
+  ],
+  "time_note": "fire began 16 Jul (The Local); pair 14-26 Jul; the control pair ends the day of 14 Jul, before it"
+ },
+ {
+  "id": "burgohondo-coh-2026",
+  "type": "fire",
+  "title": "Burgohondo fire, Avila: forest and scrub surface changed, 14-26 July 2026",
+  "time": "2026-07-22T00:00:00Z",
+  "lat": 40.38,
+  "lon": -4.65,
+  "place": "Valle del Alberche, Avila, Spain",
+  "summary_number": "≈ 216 km² of ground changed completely (largest connected patch 99 km²)",
+  "radius_km": 15,
+  "views": [
+   {
+    "id": "a_ign",
+    "label": "ascending",
+    "track": 87,
+    "before": "2026-07-14",
+    "after": "2026-07-26",
+    "p2p_cm": null,
+    "control_p2p_cm": null,
+    "control_before": "2026-07-02",
+    "control_after": "2026-07-14",
+    "control_is_before": true,
+    "exported": true
+   },
+   {
+    "id": "d_ign",
+    "label": "descending",
+    "track": 23,
+    "before": "2026-07-21",
+    "after": "2026-08-26",
+    "p2p_cm": null,
+    "control_p2p_cm": null,
+    "control_before": "2026-07-09",
+    "control_after": "2026-07-21",
+    "control_is_before": true,
+    "exported": false
+   }
+  ],
+  "source_url": "https://www.elespanol.com/castilla-y-leon/region/avila/20260726/incendio-burgohondo-hectareas-quemadas-mayor-historia-espana/1003744334616_0.html",
+  "before_after": [
+   {
+    "view": "a_ign",
+    "before": "coherence_before",
+    "after": "coherence",
+    "label": "Radar coherence",
+    "before_dates": [
+     "2026-07-02",
+     "2026-07-14"
+    ],
+    "after_dates": [
+     "2026-07-14",
+     "2026-07-26"
+    ]
+   }
+  ],
+  "time_note": "fire declared 22 Jul (eldiario.es); pair 14-26 Jul; the control pair ends 14 Jul"
+ },
+ {
+  "id": "gironde-coh-2026",
+  "type": "fire",
+  "title": "Gironde megafire, France: forest surface changed, 17 Jul-10 Aug 2026",
+  "time": "2026-07-22T00:00:00Z",
+  "lat": 44.85,
+  "lon": -1.04,
+  "place": "Landes de Gascogne, Gironde, France",
+  "summary_number": "≈ 334 km² of forest changed completely (largest connected patch 261 km²)",
+  "radius_km": 12,
+  "views": [
+   {
+    "id": "a_ign",
+    "label": "ascending",
+    "track": 130,
+    "before": "2026-07-17",
+    "after": "2026-08-10",
+    "p2p_cm": null,
+    "control_p2p_cm": null,
+    "control_before": "2026-07-05",
+    "control_after": "2026-07-17",
+    "control_is_before": true,
+    "exported": true
+   },
+   {
+    "id": "d_ign",
+    "label": "descending",
+    "track": 95,
+    "before": "2026-07-14",
+    "after": "2026-07-26",
+    "p2p_cm": null,
+    "control_p2p_cm": null,
+    "control_before": "2026-07-02",
+    "control_after": "2026-07-14",
+    "control_is_before": true,
+    "exported": false
+   }
+  ],
+  "source_url": "https://www.parismatch.be/actualites/monde/2026/07/30/megafeu-en-gironde-lincendie-est-stabilise-et-la-meteo-favorable-PI3SAONZT5ELNDYIA5JBABKJAU/",
+  "before_after": [
+   {
+    "view": "a_ign",
+    "before": "coherence_before",
+    "after": "coherence",
+    "label": "Radar coherence",
+    "before_dates": [
+     "2026-07-05",
+     "2026-07-17"
+    ],
+    "after_dates": [
+     "2026-07-17",
+     "2026-08-10"
+    ]
+   }
+  ],
+  "time_note": "fire began 22 Jul between Saumos and Le Porge (search summary of AFP/Reporterre); pair 17 Jul-10 Aug (24 days); the control pair ends 17 Jul"
+ },
+ {
+  "id": "niebla-fire-2026",
+  "type": "fire",
+  "title": "Niebla fire, Huelva and Seville, Spain: forest surface changed, 21 Jul-14 Aug 2026",
+  "time": "2026-08-06T00:00:00Z",
+  "lat": 37.53,
+  "lon": -6.63,
+  "place": "Niebla, Huelva and Seville provinces, Spain",
+  "summary_number": "≈ 218 km² of ground changed completely (largest connected patch 50 km²)",
+  "radius_km": 15,
+  "views": [
+   {
+    "id": "d_ign",
+    "label": "descending",
+    "track": 23,
+    "before": "2026-07-21",
+    "after": "2026-08-14",
+    "p2p_cm": null,
+    "control_p2p_cm": null,
+    "control_before": "2026-07-09",
+    "control_after": "2026-07-21",
+    "control_is_before": true,
+    "exported": true
+   },
+   {
+    "id": "a_ign",
+    "label": "ascending",
+    "track": 15,
+    "before": "2026-07-21",
+    "after": "2026-08-14",
+    "p2p_cm": null,
+    "control_p2p_cm": null,
+    "control_before": "2026-07-09",
+    "control_after": "2026-07-21",
+    "control_is_before": true,
+    "exported": false
+   }
+  ],
+  "source_url": "https://www.infobae.com/espana/2026/08/13/el-incendio-de-niebla-huelva-pierde-fuerza-tras-arrasar-31000-hectareas-y-dejar-a-700-vecinos-desalojados/",
+  "before_after": [
+   {
+    "view": "d_ign",
+    "before": "coherence_before",
+    "after": "coherence",
+    "label": "Radar coherence",
+    "before_dates": [
+     "2026-07-09",
+     "2026-07-21"
+    ],
+    "after_dates": [
+     "2026-07-21",
+     "2026-08-14"
+    ]
+   }
+  ],
+  "time_note": "fire declared on a Thursday, probably 6 Aug (Infobae, 13 Aug: 'el pasado jueves'); pair 21 Jul-14 Aug (24 days); the control pair ends 21 Jul"
+ },
+ {
+  "id": "bald-range-fire-2026",
+  "type": "fire",
+  "title": "Bald Range fire, British Columbia: forest surface changed, 25 Jul-18 Aug 2026",
+  "time": "2026-08-07T00:00:00Z",
+  "lat": 49.62,
+  "lon": -119.82,
+  "place": "Summerland, South Okanagan, British Columbia, Canada",
+  "summary_number": "≈ 137 km² of ground changed completely (one connected patch of 134 km²)",
+  "radius_km": 12,
+  "views": [
+   {
+    "id": "a_ign",
+    "label": "ascending",
+    "track": 77,
+    "before": "2026-07-25",
+    "after": "2026-08-18",
+    "p2p_cm": null,
+    "control_p2p_cm": null,
+    "control_before": "2026-07-13",
+    "control_after": "2026-07-25",
+    "control_is_before": true,
+    "exported": true
+   },
+   {
+    "id": "d_ign",
+    "label": "descending",
+    "track": 172,
+    "before": "2026-07-20",
+    "after": "2026-08-13",
+    "p2p_cm": null,
+    "control_p2p_cm": null,
+    "control_before": "2026-07-08",
+    "control_after": "2026-07-20",
+    "control_is_before": true,
+    "exported": false
+   }
+  ],
+  "source_url": "https://watchers.news/2026/08/09/b-c-declares-provincial-emergency-as-out-of-control-bald-range-wildfire-grows-to-over-10-000-ha-25-000-acres/",
+  "before_after": [
+   {
+    "view": "a_ign",
+    "before": "coherence_before",
+    "after": "coherence",
+    "label": "Radar coherence",
+    "before_dates": [
+     "2026-07-13",
+     "2026-07-25"
+    ],
+    "after_dates": [
+     "2026-07-25",
+     "2026-08-18"
+    ]
+   }
+  ],
+  "time_note": "first reported on the evening of 7 Aug (Watchers); pair 25 Jul-18 Aug (24 days); the control pair ends 25 Jul"
+ },
+ {
+  "id": "atacama-west-2026",
+  "type": "storm",
+  "title": "Atacama Desert after the 17-18 August 2026 rain: about 1,000 km2 lost coherence",
+  "time": "2026-08-18T00:00:00Z",
+  "lat": -23.5,
+  "lon": -69.45,
+  "place": "Atacama Desert west of the Salar de Atacama, Antofagasta region, Chile",
+  "summary_number": "≈ 1,000 km² of desert lost coherence (0.82 → 0.62, window-limited)",
+  "radius_km": 40,
+  "views": [
+   {
+    "id": "a_late",
+    "label": "ascending",
+    "track": 46,
+    "before": "2026-08-16",
+    "after": "2026-08-28",
+    "p2p_cm": null,
+    "control_p2p_cm": null,
+    "control_before": "2026-07-11",
+    "control_after": "2026-07-23",
+    "control_is_before": true,
+    "exported": true
+   },
+   {
+    "id": "d_both",
+    "label": "descending",
+    "track": 97,
+    "before": "2026-07-26",
+    "after": "2026-08-19",
+    "p2p_cm": null,
+    "control_p2p_cm": null,
+    "control_before": "2026-07-02",
+    "control_after": "2026-07-14",
+    "control_is_before": true,
+    "exported": false
+   }
+  ],
+  "source_url": "https://www.meteored.cl/noticias/actualidad/el-norte-de-chile-recibio-lluvias-historicas-aluvion-deja-enterrada-parte-de-tocopilla.html",
+  "before_after": [
+   {
+    "view": "a_late",
+    "before": "coherence_before",
+    "after": "coherence",
+    "label": "Radar coherence",
+    "before_dates": [
+     "2026-07-11",
+     "2026-07-23"
+    ],
+    "after_dates": [
+     "2026-08-16",
+     "2026-08-28"
+    ]
+   }
+  ],
+  "time_note": "rain on 17-18 Aug (Meteored); ascending pair 16-28 Aug holds only that rain; control 11-23 Jul ends well before it"
  }
 ]

@@ -1,6 +1,6 @@
 {
   "id": "rondonia",
-  "name": "Rond\u00f4nia forest frontier, Brazil",
+  "name": "Rondônia forest frontier, Brazil",
   "bbox": [
     -62.8,
     -10.06,
@@ -27,5 +27,7 @@
     "2026-07-24"
   ],
   "water_source": "fusion2",
-  "category": "land"
+  "category": "land",
+  "in_app": false,
+  "in_app_note": "Not shown in the app: no layer shows new forest clearing clearly (visibility audit and evidence test, 15 Nov 2026). Kept as a tried place."
 }

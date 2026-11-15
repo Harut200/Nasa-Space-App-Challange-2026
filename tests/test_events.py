@@ -93,3 +93,91 @@ def test_drop_rule_follows_partial_loss_and_clusters_rank_by_area():
     # without the drop rule a pixel just under `lo` but with a small drop would count; with it it does not
     ev2 = ctl.copy(); ev2[5, 5] = 0.5
     assert not E.coherence_loss(ev2, np.full(X.shape, 0.55), lo=0.6, drop=0.25)[0].any()
+
+
+# ---------------------------------------------------------------- BEFORE layer (control coherence)
+def _ev_syn(**kw):
+    ev = {"id": "syn-ev", "time": "2026-08-06T00:00:00Z", "window": [0.0, 0.0, 1.0, 1.0], "primary_view": "asc",
+          "views": {"asc": {"direction": "A", "label": "ascending", "co": {"pair": "20260723_20260816"},
+                            "control": {"pair": "20260629_20260723"}}}}
+    ev.update(kw)
+    return ev
+
+
+def test_pairing_block_and_post_event_control():
+    ba = E.before_pairing(_ev_syn())
+    assert ba == [{"view": "asc", "before": "coherence_before", "after": "coherence", "label": "Radar coherence",
+                   "before_dates": ["2026-06-29", "2026-07-23"], "after_dates": ["2026-07-23", "2026-08-16"]}]
+    e = _ev_syn(); e["views"]["asc"]["control_after_event"] = True      # kilauea-ep54-like: control is after the event
+    assert E.before_pairing(e) == []
+    e = _ev_syn(); e["views"]["asc"]["control"]["pair"] = "20260816_20260828"
+    assert E.before_pairing(e) == []
+
+
+def test_export_before_same_grid_ramp_and_legend(tmp_path, monkeypatch):
+    import json
+    import rasterio
+    ev = _ev_syn()
+    app, vd = tmp_path / "products", tmp_path / "insar"
+    app.mkdir(); vd.mkdir()
+    x, y = np.linspace(0.005, 0.995, 100), np.linspace(0.995, 0.005, 100)
+    coh_ctl = np.tile(np.linspace(0, 1, 100, dtype=np.float32), (100, 1)); coh_ctl[:5] = np.nan
+    np.savez(vd / "products_cm.npz", coh_ctl=coh_ctl, coh=coh_ctl, x=x, y=y, epsg=4326)
+    leg = {"type": "ramp", "unit": "coherence 0-1", "min": 0, "max": 1, "colors": ["#000000", "#ffffff"]}
+    ev_layers = [{"id": "coherence", "label": "C", "dated": False, "legend": leg}]
+    (app / "layers.json").write_text(json.dumps(ev_layers))
+    monkeypatch.setattr(E, "app_dir", lambda e: str(app)); monkeypatch.setattr(E, "view_dir", lambda e, v: str(vd))
+    E.export_before(ev); E.export_before(ev)
+    L = json.loads((app / "layers.json").read_text())
+    assert [l["id"] for l in L] == ["coherence", "coherence_before"] and L[0] == ev_layers[0]
+    assert L[1]["legend"] == leg and L[1]["dated"] is False and L[1]["label"] == "Before the event: radar coherence (29 Jun–23 Jul)"
+    with rasterio.open(app / "coherence_before.tif") as f:
+        a = f.read()
+    (W, S, Ee, N), w, h = E._grid(ev)
+    assert a.shape == (4, h, w) and a[3].max() == 255 and a[3].min() == 0          # NaN rows transparent
+    ok = a[3] == 255
+    assert a[0][ok].min() < 10 and a[0][ok].max() > 245                              # grey ramp black -> white
+    # control flagged after the event: nothing exported
+    (app / "coherence_before.tif").unlink()
+    e2 = _ev_syn(); e2["views"]["asc"]["control_after_event"] = True
+    E.export_before(e2)
+    assert not (app / "coherence_before.tif").exists() and json.loads((app / "layers.json").read_text()) == ev_layers
+
+
+def test_views_sharing_a_data_folder_download_each_pair_once():
+    mk = lambda p, g: {"pair": p, "granule": g}
+    ev = {"id": "y-2026", "window": [1, 2, 3, 4], "heights": [0, 100],
+          "views": {"a": {"co": mk("20260201_20260213", "NISAR_L2_PR_GUNW_1"), "control": mk("20260120_20260201", "NISAR_L2_PR_GUNW_0")},
+                    "b": {"data_view": "a", "co": mk("20260301_20260313", "NISAR_L2_PR_GUNW_2"), "control": mk("20260120_20260201", "NISAR_L2_PR_GUNW_0")},
+                    "c": {"co": mk("20260401_20260413", "NISAR_L2_PR_GUNW_3"), "control": mk("20260320_20260401", "NISAR_L2_PR_GUNW_4")}}}
+    ids = [p["id"] for p in E.job_for(ev, "a")["products"]]
+    assert ids == ["20260201_20260213", "20260120_20260201", "20260301_20260313"]
+    assert [p["id"] for p in E.job_for(ev, "c")["products"]] == ["20260401_20260413", "20260320_20260401"]
+    assert E.view_dir(ev, "b") == E.view_dir(ev, "a") and E.pcm_path(ev, "b") != E.pcm_path(ev, "a")
+
+
+def test_fire_rule_is_wider_than_default_and_catches_a_partial_drop():
+    X, Y = _grid()
+    ctl = np.full(X.shape, 0.75)
+    ev = ctl.copy()
+    ev[60:140, 60:140] = 0.32                      # a burn scar: coherence falls to about 0.3, not to zero
+    pix = 0.08 * 0.08
+    cx, cy = X[100, 100], Y[100, 100]
+    st_default, _, _ = E.loss_stats(ev, ctl, X, Y, (cx, cy), 8000.0, pix)
+    st_fire, _, _ = E.loss_stats(ev, ctl, X, Y, (cx, cy), 8000.0, pix, hi=0.5, lo=0.45, drop=0.3, min_px=30)
+    assert st_default["loss_area_km2"] == 0.0
+    assert abs(st_fire["loss_area_km2"] - 80 * 80 * pix) < 0.02 * 80 * 80 * pix
+
+
+def test_loss_by_elevation_separates_a_snow_line_from_a_local_patch():
+    n = 100
+    yy, xx = np.mgrid[0:n, 0:n]
+    height = yy * 20.0                                   # a ramp, 0-2000 m
+    ctl = np.full((n, n), 0.7)
+    snow = ctl.copy(); snow[height >= 1000] = 0.1          # everything above 1000 m decorrelates
+    local = ctl.copy(); local[40:60, 40:60] = 0.1         # one patch crossing the bands
+    edges = [0, 500, 1000, 1500, 2001]
+    s = E.loss_by_elevation(snow, ctl, height, edges)
+    l = E.loss_by_elevation(local, ctl, height, edges)
+    assert s[0]["lost_share"] == 0 and s[2]["lost_share"] > 0.99 and s[3]["lost_share"] > 0.99
+    assert max(r["lost_share"] for r in l) < 0.2 and sum(r["lost_km2"] for r in l) > 0

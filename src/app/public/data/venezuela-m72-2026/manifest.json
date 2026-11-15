@@ -126,6 +126,48 @@
           "green: up"
         ]
       }
+    },
+    {
+      "id": "fringes_before",
+      "label": "Before the earthquake: fringes (12 days, 1 Jun\u201313 Jun) (noisy)",
+      "dates": null,
+      "legend": {
+        "type": "ramp",
+        "unit": "one colour cycle = 10 cm of line-of-sight change",
+        "min": 0,
+        "max": 10.0,
+        "colors": [
+          "#e2d9e2",
+          "#95b5c7",
+          "#6276ba",
+          "#592a8f",
+          "#2f1436",
+          "#741e4f",
+          "#b25652",
+          "#cca389",
+          "#e2d9e2"
+        ]
+      }
+    },
+    {
+      "id": "los_before_cm",
+      "label": "Before the earthquake: ground motion (cm)",
+      "dates": null,
+      "legend": {
+        "type": "diverging",
+        "unit": "cm",
+        "min": -40.0,
+        "max": 40.0,
+        "colors": [
+          "#67001f",
+          "#f7f7f7",
+          "#053061"
+        ],
+        "labels": [
+          "red: ground moved away from the satellite",
+          "blue: ground moved toward the satellite (sign convention not confirmed by the product guide)"
+        ]
+      }
     }
   ],
   "story": {
@@ -192,7 +234,9 @@
         "before": "2026-06-13",
         "after": "2026-06-25",
         "p2p_cm": 51,
-        "control_p2p_cm": 12
+        "control_p2p_cm": 12,
+        "control_before": "2026-06-01",
+        "control_after": "2026-06-13"
       },
       {
         "id": "desc",
@@ -201,7 +245,39 @@
         "before": "2026-06-17",
         "after": "2026-06-29",
         "p2p_cm": 55,
-        "control_p2p_cm": 10
+        "control_p2p_cm": 10,
+        "control_before": "2026-06-05",
+        "control_after": "2026-06-17"
+      }
+    ],
+    "before_after": [
+      {
+        "view": "asc",
+        "before": "fringes_before",
+        "after": "fringes",
+        "label": "Fringes",
+        "before_dates": [
+          "2026-06-01",
+          "2026-06-13"
+        ],
+        "after_dates": [
+          "2026-06-13",
+          "2026-06-25"
+        ]
+      },
+      {
+        "view": "asc",
+        "before": "los_before_cm",
+        "after": "los_asc_cm",
+        "label": "Ground motion (cm)",
+        "before_dates": [
+          "2026-06-01",
+          "2026-06-13"
+        ],
+        "after_dates": [
+          "2026-06-13",
+          "2026-06-25"
+        ]
       }
     ]
   },

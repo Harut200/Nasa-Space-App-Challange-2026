@@ -1,0 +1,46 @@
+{
+  "story": {
+    "see": "On 17 and 18 August 2026 a cut-off low brought record rain to northern Chile: more than 37 mm in two days at Tocopilla and 33 mm at Taltal, new daily records at Arica and Iquique, and a mudflow down the hills of Tocopilla on the afternoon of 18 August (Meteored). NASA Earth Observatory shows back-to-back winter storms that month with rare snow from the Andes to near the coast. The orange area is where the radar picture between NISAR's 16 and 28 August passes no longer matches the dry pair of 11 to 23 July: about 1,000 km2 in this 115 x 110 km box of the desert west of the Salar de Atacama, the box edge cutting it off. The pair holds the 17-18 August rain and no other storm.",
+    "physics": "In the hyper-arid desert the ground hardly changes: the average coherence of this box was 0.82 in the dry control and 0.81 in the pair of 23 July to 16 August, which ends the day before the rain. In the pair of 16 to 28 August it fell to 0.62, and it was back to 0.75 for 28 August to 9 September and 0.77 after, so the effect lasts days to a couple of weeks, as long as the ground takes to dry. A longer descending pair (26 July to 19 August) that mixes several weather episodes shows more, about 6,000 km2, and boxes near Taltal and Tocopilla agree. The loss is not a snow line: 41 % of the comparable ground lost coherence at 800-1,200 m, the desert floor, and 72 % at 2,400-2,800 m. We cannot say how much is snow, wet soil or flood deposit.",
+    "lband": "NISAR's L-band radar has a wavelength of about 24 cm. Dry snow is largely transparent to it; wet ground and moved sediment are not. The dry control is bright almost everywhere, so a desert-wide drop stands out, and the same recipe applied to the dry pair before the rain finds about 1 km2. One other descending pair (14 to 26 July) is itself dark over part of this desert; we do not know why, so the control used here is the ascending pair of 11 to 23 July.",
+    "people": "This map shows where the surface changed, not damage. We did not look at reports of damage or casualties."
+  },
+  "spots": [
+    {
+      "id": "site",
+      "label": "Centre of the box (Atacama Desert west of the Salar de Atacama)",
+      "lngLat": [
+        -69.45,
+        -23.5
+      ],
+      "radius_m": 3000
+    },
+    {
+      "id": "patch",
+      "label": "Largest patch of lost coherence",
+      "lngLat": [
+        -69.3096,
+        -23.9814
+      ],
+      "radius_m": 8000
+    },
+    {
+      "id": "patch2",
+      "label": "Second patch",
+      "lngLat": [
+        -69.0488,
+        -23.5559
+      ],
+      "radius_m": 6000
+    },
+    {
+      "id": "reference",
+      "label": "Reference: stays coherent in both pairs",
+      "lngLat": [
+        -69.8675,
+        -23.701
+      ],
+      "radius_m": 4000
+    }
+  ]
+}

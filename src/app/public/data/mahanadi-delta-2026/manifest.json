@@ -35,7 +35,7 @@
       ],
       "legend": {
         "type": "ramp",
-        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "unit": "relative brightness (0–100, uncalibrated)",
         "min": 0,
         "max": 100,
         "colors": [
@@ -149,7 +149,7 @@
       ],
       "legend": {
         "type": "diverging",
-        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "unit": "relative brightness (0–100, uncalibrated)",
         "min": -35,
         "max": 35,
         "colors": [
@@ -185,7 +185,7 @@
       ],
       "legend": {
         "type": "ramp",
-        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "unit": "relative brightness (0–100, uncalibrated)",
         "min": 0,
         "max": 100,
         "colors": [
@@ -270,5 +270,7 @@
       ]
     }
   },
-  "category": "flood"
+  "category": "flood",
+  "defaultLayer": "water",
+  "defaultDate": "2026-08-14"
 }

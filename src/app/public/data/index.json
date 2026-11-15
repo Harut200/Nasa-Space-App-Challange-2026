@@ -11,7 +11,6 @@
     "urmia",
     "sindh-indus",
     "mekong-delta",
-    "rondonia",
     "nile-delta",
     "sudd",
     "pantanal",
@@ -30,6 +29,13 @@
     "up-terai-2026",
     "thunder-bay-36-2026",
     "la-mierla-fire-2026",
-    "avila-burgohondo-fire-2026"
+    "avila-burgohondo-fire-2026",
+    "thunder-bay-36-coh-2026",
+    "la-mierla-coh-2026",
+    "burgohondo-coh-2026",
+    "gironde-coh-2026",
+    "niebla-fire-2026",
+    "bald-range-fire-2026",
+    "atacama-west-2026"
   ]
 }

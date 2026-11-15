@@ -26,6 +26,70 @@
   ],
   "layers": [
     {
+      "id": "ev_before",
+      "label": "Before (HH, median of passes 26 Jun\u20138 Jul)",
+      "dates": null,
+      "legend": {
+        "type": "ramp",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": 25,
+        "max": 90,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    },
+    {
+      "id": "ev_after",
+      "label": "After (HH, median of passes 13 Aug\u201325 Aug)",
+      "dates": null,
+      "legend": {
+        "type": "ramp",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": 25,
+        "max": 90,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    },
+    {
+      "id": "ev_diff",
+      "label": "Radar echo change (HH)",
+      "dates": null,
+      "legend": {
+        "type": "diverging",
+        "unit": "change in echo brightness (0\u20131 preview scale), after minus before",
+        "min": -0.33,
+        "max": 0.33,
+        "colors": [
+          "#2166ac",
+          "#00000000",
+          "#b2182b"
+        ],
+        "labels": [
+          "darker after",
+          "brighter after"
+        ]
+      }
+    },
+    {
+      "id": "ev_mask",
+      "label": "Where the radar echo changed",
+      "dates": null,
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#ff5a1f",
+            "label": "Where the radar echo changed"
+          }
+        ]
+      }
+    },
+    {
       "id": "hh",
       "label": "HH brightness (preview)",
       "dates": [
@@ -273,5 +337,87 @@
   "credits": "NISAR GCOV preview images: NASA/JPL-Caltech and ISRO, distributed by ASF DAAC. Uncalibrated previews at about 180 m; values are display brightness, not backscatter.",
   "source": "preview",
   "quality": {},
-  "category": "wetland"
+  "defaultLayer": "change",
+  "defaultDate": "2026-08-25",
+  "headline": "none",
+  "headlineNote": "Fields across the delta change together: strongly changed pixels rise from about 10 % to about 28 % around 25 August, then fall back",
+  "category": "wetland",
+  "evidence": {
+    "kind": "ev",
+    "before": "ev_before",
+    "after": "ev_after",
+    "diff": "ev_diff",
+    "mask": "ev_mask",
+    "series": [
+      "Radar echo inside the changed patch",
+      "Radar echo outside the changed patch"
+    ],
+    "steps": [
+      "1. Radar image before, 26 Jun\u20138 Jul (median of 2 passes, HH channel).",
+      "2. Radar image after, 13 Aug\u201325 Aug (median of 2 passes).",
+      "3. The difference: the echo rose by about 0.21 (0\u20131 brightness scale) inside a patch of about 5,734 km\u00b2 of changed echo, summed over every changed patch in the frame.",
+      "4. A check: between 26 Jun\u20138 Jul, within the before group, the same test finds nothing there (mean change +0.04 in the same pixels).",
+      "5. It stays: the patch is still there on every later pass."
+    ],
+    "stats": {
+      "kind": "ev",
+      "channel": "hh",
+      "sign": 1,
+      "before_dates": [
+        "2026-06-26",
+        "2026-07-08"
+      ],
+      "after_dates": [
+        "2026-08-13",
+        "2026-08-25"
+      ],
+      "excluded_dates": [],
+      "ignition": null,
+      "ignition_between": null,
+      "control_dates": [
+        "2026-06-26",
+        "2026-07-08"
+      ],
+      "area_km2": 5734,
+      "area_label": "area of changed radar echo, not a measurement of land cover, crop or forest loss",
+      "mean_change": 0.2139,
+      "mean_change_db_like": 6.42,
+      "control_mean": 0.0383,
+      "control_frac_above": 0.04,
+      "rank_percentile": 0.0,
+      "rank_n_discs": 190429,
+      "disc_radius_km": 15.0,
+      "threshold": 0.1321,
+      "threshold_db_like": 3.96,
+      "sensitivity": {
+        "0.5": {
+          "threshold": 0.0661,
+          "area_km2": 11140
+        },
+        "1.0": {
+          "threshold": 0.1321,
+          "area_km2": 5734
+        },
+        "2.0": {
+          "threshold": 0.2642,
+          "area_km2": 738
+        }
+      },
+      "persistence": {
+        "2026-08-13": {
+          "patch_change": 0.2166,
+          "above_threshold": true
+        },
+        "2026-08-25": {
+          "patch_change": 0.2339,
+          "above_threshold": true
+        }
+      },
+      "unit_note": "brightness units are the preview's 0-1 display scale; dB-like = 30 x brightness assumes a ~30 dB stretch (unverified)",
+      "published": null,
+      "distance_to_ref_km": 9.0,
+      "mask_exported": true,
+      "method_note": "Preview brightness (uncalibrated, ~180 m), 3x3 boxcar + per-date gain normalisation; AFTER minus BEFORE (medians), 9x9 boxcar; threshold = median + 3.09 robust sigma of the same-signed change in a control built from two halves of a quiet interval (a Gaussian 99.9 % level that heavy tails do not inflate); connected patches of at least 20 km\u00b2 kept, the one nearest the reference position (else the largest) reported. The area is the area of changed radar echo, not a measurement of land cover, crop or forest loss."
+    }
+  }
 }

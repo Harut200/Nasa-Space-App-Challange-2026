@@ -216,7 +216,7 @@ Either a video of **30 seconds or less** or a deck of **7 slides or fewer**. Ove
 
 ### 6. Project page text — by 19:00
 
-Summary, detailed description, list of NASA data used, list of every other source, and the AI-use statement. For the last one: AI tools (Claude) were used for research, planning documents, code, and first drafts of the story text; the team chose the places, checked the results and edited the text. Say that plainly.
+Summary, detailed description, list of NASA data used, list of every other source, and the AI-use statement. For the last one use the wording in `README.md`, "Use of AI", unchanged: The team did the research, the data analysis and the planning, and designed the detection approach: which radar measurements to use, the formulas, the control tests and the experiments, and what counts as a result. Harutyun Kesablyan and Abel Babayan led detection, data analysis and science; Arameh Haghverdian led the design of the app's back end and front end. AI tools (Claude) were used as an assistant under the team's direction: to help with research, write code, run analyses and draft text. The team reviewed the code, the results and the text. Before submitting, make it true for your part: read and check every story text and figure.
 
 ## Also, any time today
 

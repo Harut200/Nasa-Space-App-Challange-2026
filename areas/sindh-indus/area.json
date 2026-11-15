@@ -25,5 +25,9 @@
     "2026-10-15"
   ],
   "water_source": "fusion2",
-  "category": "land"
+  "category": "land",
+  "default_layer": "ev_diff",
+  "headline_note": "Co-polarised (HH) radar echo about 0.26 higher (0–1 brightness) inside a patch of changed echo of about 2,146 km² in the later passes",
+  "caution": "Our water map holds no open water here, while NASA's OPERA water product maps 20–200 km². Read this place for the land change, not for water.",
+  "headline": "none"
 }

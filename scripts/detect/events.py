@@ -81,6 +81,40 @@ def loss_stats(coh_event, coh_control, X, Y, centre, radius_m, pix_km2, hi=0.45,
     return out, loss, comp
 
 
+def loss_by_elevation(coh_event, coh_control, height, edges, hi=0.45, lo=0.35, drop=0.25, pix_km2=0.0064):
+    """Snow check: for each elevation band [edges[i], edges[i+1]) the comparable ground (control >= hi), the lost ground and its share.
+    A first-snow signal rises with elevation and not with the distance from a site; a local event does not follow elevation."""
+    ce, cc, h = np.asarray(coh_event, float), np.asarray(coh_control, float), np.asarray(height, float)
+    comp = np.isfinite(ce) & np.isfinite(cc) & np.isfinite(h) & (cc >= hi)
+    lost = comp & (ce < lo) & ((cc - ce) >= drop)
+    rows = []
+    for a, b in zip(edges[:-1], edges[1:]):
+        m = comp & (h >= a) & (h < b)
+        rows.append({"from_m": float(a), "to_m": float(b), "comparable_km2": float(m.sum() * pix_km2),
+                     "lost_km2": float((lost & m).sum() * pix_km2), "lost_share": float((lost & m).sum() / m.sum()) if m.any() else None})
+    return rows
+
+
+def fetch_dem_grid(window, k=30, out=None):
+    """SRTM 30 m heights on a k x k grid over window (w, s, e, n) from a public elevation API (generic user agent, 100 points per
+    request, 1.2 s apart). Returns (lons, lats, z[k, k]); saved to `out` (.npz) if given. Only used for the snow check."""
+    import time
+    import urllib.request
+    w, s_, e, n = window
+    lons, lats = np.linspace(w, e, k), np.linspace(s_, n, k)
+    pts = [(la, lo) for la in lats for lo in lons]
+    z = []
+    for i in range(0, len(pts), 100):
+        q = "|".join(f"{a:.4f},{b:.4f}" for a, b in pts[i:i + 100])
+        req = urllib.request.Request("https://api.opentopodata.org/v1/srtm30m?locations=" + q, headers={"User-Agent": "Mozilla/5.0"})
+        z += [r["elevation"] for r in json.loads(urllib.request.urlopen(req, timeout=40).read())["results"]]
+        time.sleep(1.2)
+    z = np.array(z, float).reshape(k, k)
+    if out:
+        np.savez(out, lon=lons, lat=lats, z=z)
+    return lons, lats, z
+
+
 def top_clusters(loss, X, Y, epsg, pix_km2, n=5):
     """The n largest connected clusters of a loss mask: area, centroid (lon, lat) and longest bounding-box side (km)."""
     from scipy.ndimage import label
@@ -118,11 +152,22 @@ def get_event(eid):
 
 
 def proc_dir(ev):
-    return os.path.join(ROOT, "data", "processed", f"{ev['id']}-insar")
+    return os.path.join(ROOT, "data", "processed", f"{ev.get('insar_id', ev['id'])}-insar")  # insar_id: reuse windows downloaded by another study
+
+
+def data_view(ev, view):
+    """Views of one event may share the downloaded windows (several event pairs against one control): `data_view` names the folder."""
+    return ev["views"][view].get("data_view", view)
+
+
+def pcm_path(ev, view):
+    """Reduced arrays of a view; views with their own folder keep the historical name."""
+    name = "products_cm.npz" if "data_view" not in ev["views"][view] else f"products_cm_{view}.npz"
+    return os.path.join(view_dir(ev, view), name)
 
 
 def view_dir(ev, view):
-    return os.path.join(proc_dir(ev), view)
+    return os.path.join(proc_dir(ev), data_view(ev, view))
 
 
 def fig_dir(ev):
@@ -167,13 +212,21 @@ def resolve(ev):
 
 
 def job_for(ev, view):
-    v = ev["views"][view]
+    """Job for the data folder `view`: every pair (event or control) of every view that uses that folder, once."""
+    prods, seen = [], set()
+    for k, v in ev["views"].items():
+        if data_view(ev, k) != view:
+            continue
+        for w in ("co", "control"):
+            have = os.path.exists(os.path.join(view_dir(ev, k), f"GUNW_{v[w]['pair']}.npz"))  # already fetched: not extracted again
+            if v[w]["pair"] not in seen and not have:
+                seen.add(v[w]["pair"])
+                prods.append({"id": v[w]["pair"], "url": Q.granule_url(v[w]["granule"]), "kind": "GUNW"})
     return {"out": f"{WORK}/out/{ev['id']}/{view}",
             "windows": [{"id": "win", "bbox": ev["window"], "fine": False}],
             "gunw_fine": False, "cache_mb": 12, "hmin": ev["heights"][0], "hmax": ev["heights"][1],
             "layers": ["unwrappedPhase", "coherenceMagnitude", "connectedComponents"],
-            "products": [{"id": v[k]["pair"], "url": Q.granule_url(v[k]["granule"]), "kind": "GUNW"}
-                         for k in ("co", "control")]}
+            "products": prods}
 
 
 # ============================================================ server (address and key from the environment)
@@ -232,8 +285,10 @@ def _save(ev, fig, name, dpi=80):
     p = os.path.join(d, name)
     fig.savefig(p, dpi=dpi, bbox_inches="tight")
     kb = os.path.getsize(p) // 1024
-    if kb > 380:
-        fig.savefig(p, dpi=55, bbox_inches="tight")
+    for d in (55, 45, 36):                       # figures must stay under 400 KB
+        if kb <= 380:
+            break
+        fig.savefig(p, dpi=d, bbox_inches="tight")
         kb = os.path.getsize(p) // 1024
     print("wrote", p, kb, "KB")
 
@@ -350,7 +405,7 @@ def analyse_view(ev, view):
     arrays = {"los_cm": None if r is None else r.astype(np.float32), "ctl_cm": None if rt is None else rt.astype(np.float32),
               "coh": coh_c.astype(np.float32), "coh_ctl": coh_t.astype(np.float32), "loss": loss, "x": Pc["x"], "y": Pc["y"],
               "epsg": Pc["epsg"], "ex": ex, "ey": ey}
-    np.savez_compressed(os.path.join(view_dir(ev, view), "products_cm.npz"),
+    np.savez_compressed(pcm_path(ev, view),
                         **{k: v_ for k, v_ in arrays.items() if v_ is not None})
     return out, arrays
 
@@ -388,7 +443,7 @@ def export_products(ev):
     prim = ev.get("primary_view", views[0])
     lim, fcm = float(ev.get("los_lim_cm", 20)), float(ev.get("fringe_cm", 6))
     (W, S, E, N), w, h = _grid(ev)
-    D = {k: np.load(os.path.join(view_dir(ev, k), "products_cm.npz")) for k in views}
+    D = {k: np.load(pcm_path(ev, k)) for k in views}
     z = D[prim]
 
     def rgba(v, cmap, vmin, vmax, finite):
@@ -452,6 +507,45 @@ def export_products(ev):
                "product": "NISAR_L2 GUNW (PROVISIONAL / urgent response)", "script": "scripts/detect/events.py"},
               open(os.path.join(app, "source.json"), "w"), indent=2)
     print("exported", app)
+    export_before(ev)
+
+
+def before_pairing(ev, views=None):
+    """Pairing block for the manifest: coherence_before vs coherence (primary view), or [] if the control is not a true before."""
+    views = views or ev.get("export_views", list(ev["views"]))
+    prim = ev.get("primary_view", views[0])
+    if not Q.control_is_before(ev, prim):
+        return []
+    v = ev["views"][prim]
+    c1, c2 = v["control"]["pair"].split("_"); e1, e2 = v["co"]["pair"].split("_")
+    return [{"view": prim, "before": "coherence_before", "after": "coherence", "label": "Radar coherence",
+             "before_dates": [Q._iso(c1), Q._iso(c2)], "after_dates": [Q._iso(e1), Q._iso(e2)]}]
+
+
+def export_before(ev):
+    """coherence_before: the CONTROL pair's coherence on the same grid with the same grey ramp and legend as `coherence`.
+    Nothing is exported if the control pair is flagged control_after_event or is not before the event. Safe to re-run."""
+    views = ev.get("export_views", list(ev["views"]))
+    prim = ev.get("primary_view", views[0])
+    app = app_dir(ev)
+    if not before_pairing(ev, views):
+        print(f"{ev['id']}: {prim}: no before layer (control pair is not before the event)")
+        Q.append_layers(app, [])
+        return
+    z = np.load(pcm_path(ev, prim))
+    import matplotlib
+    cm = matplotlib.colormaps
+    g = to_grid(ev, z["coh_ctl"], z["x"], z["y"], int(z["epsg"]))
+    c = (cm["gray"](np.clip(np.nan_to_num(g), 0, 1)) * 255).astype(np.uint8)
+    c[..., 3] = np.where(np.isfinite(g), 255, 0)
+    Q.write_rgba_tifs({"app_bbox": ev.get("app_bbox", ev["window"]), "window": ev["window"]}, app, {"coherence_before": c})
+    d1, d2 = ev["views"][prim]["control"]["pair"].split("_")
+    L = {x["id"]: x for x in json.load(open(os.path.join(app, "layers.json")))}
+    import copy
+    tag = " (noisy)" if ev.get("before_noisy", {}).get(prim) else ""
+    Q.append_layers(app, [{"id": "coherence_before", "dated": False, "legend": copy.deepcopy(L["coherence"]["legend"]),
+                           "label": f"Before the event: radar coherence ({Q._short(d1)}\u2013{Q._short(d2)}){tag}"}])
+    print("before layer", ev["id"], prim, d1, d2)
 
 
 def write_area(ev):
@@ -477,7 +571,7 @@ def overview():
     fig, axs = plt.subplots(len(evs), 2, figsize=(7.4, 3.6 * len(evs)), squeeze=False)
     for row, ev in zip(axs, evs):
         k = ev.get("primary_view", list(ev["views"])[0])
-        z = np.load(os.path.join(view_dir(ev, k), "products_cm.npz"))
+        z = np.load(pcm_path(ev, k))
         res = json.load(open(os.path.join(DOCS, "results.json")))[ev["id"]]["views"][k]
         c = res["largest_loss_clusters"][0] if res.get("largest_loss_clusters") else {"lon": ev["lon"], "lat": ev["lat"]}
         cx, cy = lonlat_xy(int(z["epsg"]), c["lon"], c["lat"])
@@ -499,6 +593,61 @@ def overview():
     _save({"id": ""}, fig, "overview.png", dpi=75)
 
 
+def before_after_fig(ev, half_km=None):
+    """before_after.png: control (before) and event pair coherence side by side, zoomed to the largest loss patch of the primary view,
+    with the lost-coherence outline on the event panel."""
+    plt = _plt()
+    from scipy.ndimage import binary_dilation
+    k = ev.get("primary_view", list(ev["views"])[0])
+    z = np.load(pcm_path(ev, k))
+    res = json.load(open(os.path.join(DOCS, "results.json")))[ev["id"]]["views"][k]
+    c = res["largest_loss_clusters"][0] if res.get("largest_loss_clusters") else {"lon": ev["lon"], "lat": ev["lat"]}
+    cx, cy = lonlat_xy(int(z["epsg"]), c["lon"], c["lat"])
+    h = (half_km or ev.get("zoom_km", 12)) * 1e3
+    sx = (z["x"] >= cx - h) & (z["x"] <= cx + h)
+    sy = (z["y"] >= cy - h) & (z["y"] <= cy + h)
+    ext = ((z["x"][sx][0] - cx) / 1e3, (z["x"][sx][-1] - cx) / 1e3, (z["y"][sy][-1] - cy) / 1e3, (z["y"][sy][0] - cy) / 1e3)
+    sub = lambda a: a[np.ix_(sy, sx)]
+    v = ev["views"][k]
+    fig, axs = plt.subplots(1, 2, figsize=(9, 4.4))
+    for ax, key, pair, t in ((axs[0], "coh_ctl", v["control"]["pair"], "before"), (axs[1], "coh", v["co"]["pair"], "event pair")):
+        ax.imshow(sub(z[key]), extent=ext, cmap="gray", vmin=0, vmax=1)
+        ax.set_title(f"{t}: coherence {pair[:4]}-{pair[4:6]}-{pair[6:8]} to {pair[9:13]}-{pair[13:15]}-{pair[15:]}", fontsize=8)
+        ax.tick_params(labelsize=6)
+    L = sub(z["loss"])
+    ov = np.ma.masked_where(~binary_dilation(L, iterations=1), np.ones(L.shape))
+    axs[1].imshow(ov, extent=ext, cmap="autumn", vmin=0, vmax=1, alpha=0.5)
+    fig.suptitle(f"{ev['title']} ({v['label']}, track {v['track']}): orange = lost coherence", fontsize=8)
+    _save(ev, fig, "before_after.png", dpi=90)
+    plt.close(fig)
+
+
+def timeline_fig(ev, views, name="timeline.png"):
+    """timeline.png: window-mean coherence of the event pair of each listed view (results.json) against its mid-date, plus the
+    control pair of the first view; shows the drop and the recovery for a weather-type event."""
+    plt = _plt()
+    import datetime as dt
+    res = json.load(open(os.path.join(DOCS, "results.json")))[ev["id"]]["views"]
+    day = lambda a: dt.datetime.strptime(a, "%Y%m%d")
+    pts = []
+    for k in views:
+        a, b = ev["views"][k]["co"]["pair"].split("_")
+        pts.append((day(a) + (day(b) - day(a)) / 2, res[k]["mean_coh_event_whole_window"], f"{a[4:6]}-{a[6:]} to {b[4:6]}-{b[6:]}"))
+    a, b = ev["views"][views[0]]["control"]["pair"].split("_")
+    ctl = (day(a) + (day(b) - day(a)) / 2, res[views[0]]["mean_coh_control_whole_window"], f"control {a[4:6]}-{a[6:]} to {b[4:6]}-{b[6:]}")
+    pts = sorted(pts + [ctl], key=lambda t: t[0])
+    fig, ax = plt.subplots(figsize=(7.5, 3.6))
+    ax.plot([t[0] for t in pts], [t[1] for t in pts], "o-", color="#444")
+    ax.plot([ctl[0]], [ctl[1]], "o", color="#1f77b4", ms=9, label="control pair")
+    for t in pts:
+        ax.annotate(t[2], (t[0], t[1]), textcoords="offset points", xytext=(0, 7), ha="center", fontsize=6, rotation=40)
+    ax.set_ylim(0, 1); ax.set_ylabel("mean coherence of the box"); ax.legend(fontsize=7)
+    ax.set_title(f"{ev['place'][:60]}: mean coherence of the box, one point per pair (mid-date)", fontsize=8)
+    fig.autofmt_xdate()
+    _save(ev, fig, name, dpi=90)
+    plt.close(fig)
+
+
 def app_events():
     """docs/eda/events/app_events.json: one record per clear event with what the app exporter needs."""
     res = json.load(open(os.path.join(DOCS, "results.json")))
@@ -516,17 +665,20 @@ def app_events():
         else:
             summary = ev["summary_number"]
         vs = []
-        for k in ev["views"]:
+        for k in ev.get("app_views", list(ev["views"])):
             v = ev["views"][k]
             d1, d2 = v["co"]["pair"].split("_")
             vr = res[ev["id"]]["views"].get(k, {})
             vs.append({"id": k, "label": v["label"], "track": v["track"], "before": iso(d1), "after": iso(d2),
                        "p2p_cm": vr.get("p2p_cm_0.5_99.5pct") if ev.get("export_deformation", True) else None,
                        "control_p2p_cm": vr.get("control_p2p_cm_0.5_99.5pct") if ev.get("export_deformation", True) else None,
+                       "control_before": iso(v["control"]["pair"].split("_")[0]), "control_after": iso(v["control"]["pair"].split("_")[1]),
+                       "control_is_before": bool(Q.control_is_before(ev, k)),
                        "exported": k in views})
         out.append({"id": ev["id"], "type": ev["type"].split(" (")[0].split(" +")[0], "title": ev["title"], "time": ev["time"],
                     "lat": ev["lat"], "lon": ev["lon"], "place": ev["place"], "summary_number": summary,
                     "radius_km": ev.get("radius_km"), "views": vs, "source_url": ev["source_url"],
+                    "before_after": before_pairing(ev, views),
                     **({"time_note": ev["time_note"]} if ev.get("time_note") else {})})
     json.dump(out, open(os.path.join(DOCS, "app_events.json"), "w"), indent=1, ensure_ascii=False)
     print("wrote app_events.json", [o["id"] for o in out])
@@ -541,12 +693,21 @@ def main(argv):
         resolve(get_event(argv[2]))
     elif cmd in ("launch", "fetch"):
         ev = get_event(argv[2]); only = argv[3] if len(argv) > 3 else None
+        done = set()
         for k in views_of(ev, only):
-            (launch if cmd == "launch" else fetch)(ev, k)
+            if data_view(ev, k) not in done:
+                done.add(data_view(ev, k))
+                (launch if cmd == "launch" else fetch)(ev, data_view(ev, k))
     elif cmd == "run":
         run(get_event(argv[2]), argv[3] if len(argv) > 3 else None)
     elif cmd == "export":
         ev = get_event(argv[2]); export_products(ev); write_area(ev)
+    elif cmd == "before":  # only the before layer; existing layers and areas/ are not touched
+        export_before(get_event(argv[2]))
+    elif cmd == "fig_ba":
+        before_after_fig(get_event(argv[2]))
+    elif cmd == "timeline":
+        timeline_fig(get_event(argv[2]), argv[3].split(","), argv[4] if len(argv) > 4 else "timeline.png")
     elif cmd == "overview":
         overview()
     elif cmd == "app_events":

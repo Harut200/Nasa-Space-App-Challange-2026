@@ -233,8 +233,8 @@ def _series_headline(ts):
     return water, "peak"
 
 
-CATEGORIES = [("flood", "Floods"), ("lake", "Lakes"), ("wetland", "Wetlands and deltas"), ("land", "Farmland and forest"), ("fire", "Wildfires"),
-              ("earthquake", "Earthquakes"), ("volcano", "Volcanoes"), ("landslide", "Landslides")]
+CATEGORIES = [("flood", "Floods"), ("lake", "Lakes"), ("wetland", "Wetlands and deltas"), ("land", "Farmland"), ("fire", "Wildfires"),
+              ("earthquake", "Earthquakes"), ("volcano", "Volcanoes"), ("landslide", "Landslides"), ("storm", "Storms")]
 CAT_LABEL = dict(CATEGORIES)
 
 
@@ -252,6 +252,8 @@ def summarise(place, m, ts):
     cat = m.get("category") or (ev["type"] if ev else None) or "other"
     out = {"id": place, "name": m["name"], "kind": kind, "category": cat, "eventType": ev["type"] if ev else None,
            "source": m.get("source"), "centre": centre, "bounds": [round(x, 4) for x in m["bounds"]]}
+    if m.get("caution"):  # where an independent product contradicts our map: the app must say so
+        out["caution"] = m["caution"]
     words = [m["name"], place.replace("-", " "), kind, m.get("source") or "", cat_label(cat), cat]
     if kind == "event":
         views = ev.get("views") or []
@@ -275,6 +277,7 @@ def summarise(place, m, ts):
         # a place whose story is not about water (a burn scar) must not be summarised by its open-water area
         fh = None if m.get("headline") == "none" else _series_headline(ts)
         out["note"] = m.get("headlineNote")
+        out["defaultDate"] = m.get("defaultDate") if m.get("defaultDate") in d else None
         out["headline"], out["spark"], out["change"] = None, None, None
         if fh:
             f, mode = fh

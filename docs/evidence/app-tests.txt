@@ -2,52 +2,33 @@
 > dancing-with-the-sars@0.0.0 test
 > node --test tests/app.test.js
 
-✔ frame: contract C paths and nearest date (0.907667ms)
-✔ link format: #/<place>?layer=&date= (0.251208ms)
-✔ layers: the four clearest come first, nothing is dropped (0.094458ms)
-✔ nearest place and peak water come from data (0.09975ms)
-✔ Strip and Chart render with gaps, nulls and one date (12.258ms)
-✔ published data is complete and has no demo place (3.288ms)
-✔ no invented events, planets or demo data in the app source (1.945542ms)
-✖ event places: data shape, layers on disk, helpers survive dates: [] (0.783375ms)
-✔ event places: tooltip text, grouping, counts, summaries (3.321167ms)
-✔ event places: before/after and honesty text, no NaN (0.437542ms)
-✔ event places: dot size grows with magnitude; link with a date param parses (0.065417ms)
-✔ viewing note: same-direction passes are written plainly (0.0475ms)
-✔ link: compare and split survive a reload, other date is optional (0.039416ms)
-✔ layer labels: known ids get a short name, unknown ids fall back to the manifest label, cut at a word (0.079833ms)
-✔ numbers: percent, dB and nulls display cleanly (0.050208ms)
-✔ calibrated place (dB, negative values, axis not from 0) and a % fact with a null first value render without NaN (2.380375ms)
-ℹ tests 16
+✔ frame: contract C paths and nearest date (0.919166ms)
+✔ link format: #/<place>?layer=&date= (0.235875ms)
+✔ layers: the four clearest come first, nothing is dropped (0.094791ms)
+✔ nearest place and peak water come from data (0.093875ms)
+✔ Strip and Chart render with gaps, nulls and one date (12.208334ms)
+✔ published data is complete and has no demo place (4.569458ms)
+✔ no invented events, planets or demo data in the app source (0.745292ms)
+✔ event places: data shape, layers on disk, helpers survive dates: [] (0.370375ms)
+✔ event places: tooltip text, grouping, counts, summaries (5.514542ms)
+✔ event types: volcano and landslide wording, noisy view rule, fringe cycle, fire and headline-none places (0.428792ms)
+✔ event places: before/after and honesty text, no NaN (0.406083ms)
+✔ event places: dot size grows with magnitude; link with a date param parses (0.056916ms)
+✔ viewing note: same-direction passes are written plainly (0.041458ms)
+✔ link: compare and split survive a reload, other date is optional (0.036ms)
+✔ layer labels: known ids get a short name, unknown ids fall back to the manifest label, cut at a word (0.065916ms)
+✔ numbers: percent, dB and nulls display cleanly (0.057583ms)
+✔ calibrated place (dB, negative values, axis not from 0) and a % fact with a null first value render without NaN (2.458125ms)
+✔ caution: on every place that has one, in the tooltip, never dropped (0.395166ms)
+✔ opening layer and date come from the manifest; every default layer is a real layer (0.125792ms)
+✔ evidence places: layers, steps without their numbers, twin for compare, chart series (1.232041ms)
+✔ fire places: no water numbers; event fire places are treated like volcano events (0.80075ms)
+✔ venezuela m75: the view whose control is at least 0.8 x its signal is too noisy, the other is not (0.777541ms)
+ℹ tests 22
 ℹ suites 0
-ℹ pass 15
-ℹ fail 1
+ℹ pass 22
+ℹ fail 0
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 248.710541
-
-✖ failing tests:
-
-test at tests/app.test.js:85:1
-✖ event places: data shape, layers on disk, helpers survive dates: [] (0.783375ms)
-  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
-  + actual - expected
-  
-  + 'coherence'
-  - 'fringes'
-  
-      at TestContext.<anonymous> (file://<repo>/src/app/tests/app.test.js:89:12)
-      at Test.runInAsyncScope (node:async_hooks:226:14)
-      at Test.run (node:internal/test_runner/test:1201:25)
-      at Test.processPendingSubtests (node:internal/test_runner/test:831:18)
-      at Test.postRun (node:internal/test_runner/test:1330:19)
-      at Test.run (node:internal/test_runner/test:1258:12)
-      at async Test.processPendingSubtests (node:internal/test_runner/test:831:7) {
-    generatedMessage: true,
-    code: 'ERR_ASSERTION',
-    actual: 'coherence',
-    expected: 'fringes',
-    operator: 'strictEqual',
-    diff: 'simple'
-  }
+ℹ duration_ms 248.345333
