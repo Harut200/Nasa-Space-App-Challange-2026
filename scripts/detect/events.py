@@ -81,6 +81,20 @@ def loss_stats(coh_event, coh_control, X, Y, centre, radius_m, pix_km2, hi=0.45,
     return out, loss, comp
 
 
+def loss_by_elevation(coh_event, coh_control, height, edges, hi=0.45, lo=0.35, drop=0.25, pix_km2=0.0064):
+    """Snow check: for each elevation band [edges[i], edges[i+1]) the comparable ground (control >= hi), the lost ground and its share.
+    A first-snow signal rises with elevation and not with the distance from a site; a local event does not follow elevation."""
+    ce, cc, h = np.asarray(coh_event, float), np.asarray(coh_control, float), np.asarray(height, float)
+    comp = np.isfinite(ce) & np.isfinite(cc) & np.isfinite(h) & (cc >= hi)
+    lost = comp & (ce < lo) & ((cc - ce) >= drop)
+    rows = []
+    for a, b in zip(edges[:-1], edges[1:]):
+        m = comp & (h >= a) & (h < b)
+        rows.append({"from_m": float(a), "to_m": float(b), "comparable_km2": float(m.sum() * pix_km2),
+                     "lost_km2": float((lost & m).sum() * pix_km2), "lost_share": float((lost & m).sum() / m.sum()) if m.any() else None})
+    return rows
+
+
 def top_clusters(loss, X, Y, epsg, pix_km2, n=5):
     """The n largest connected clusters of a loss mask: area, centroid (lon, lat) and longest bounding-box side (km)."""
     from scipy.ndimage import label

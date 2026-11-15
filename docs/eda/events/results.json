@@ -1283,6 +1283,72 @@
      "max": 1.1776
     },
     "incidence_deg_mean": 47.101806640625
+   },
+   "d_sep": {
+    "event": "Klyuchevskoy eruption and Bezymianny, Kamchatka, from mid-August 2026",
+    "view": "d_sep",
+    "track": 60,
+    "frame": 60,
+    "direction": "D",
+    "event_pair": "20260922_20261004",
+    "control_pair": "20260910_20260922",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 10,
+    "far_km": 30,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.2026626616716385,
+    "mean_coh_control_within_radius": 0.3485836684703827,
+    "mean_coh_event_whole_window": 0.3799647092819214,
+    "mean_coh_control_whole_window": 0.5722208619117737,
+    "coherence_loss": {
+     "loss_area_km2": 69.1328,
+     "comparable_area_km2": 98.8288,
+     "loss_fraction_inside": 0.6995207874627639,
+     "loss_fraction_outside": 0.30170203006525953,
+     "comparable_px_inside": 15442,
+     "loss_area_km2_whole_window": 624.7936000000001,
+     "mean_coh_control_at_loss_px": 0.6578826308250427,
+     "mean_coh_event_at_loss_px": 0.17500019073486328
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 413.2352,
+      "lon": 160.7636,
+      "lat": 56.1832,
+      "max_side_km": 35.28
+     },
+     {
+      "area_km2": 79.9872,
+      "lon": 160.551,
+      "lat": 55.9107,
+      "max_side_km": 17.52
+     },
+     {
+      "area_km2": 18.144000000000002,
+      "lon": 160.355,
+      "lat": 56.1345,
+      "max_side_km": 8.64
+     },
+     {
+      "area_km2": 16.9408,
+      "lon": 160.6819,
+      "lat": 55.8458,
+      "max_side_km": 8.64
+     },
+     {
+      "area_km2": 16.691200000000002,
+      "lon": 160.278,
+      "lat": 56.1547,
+      "max_side_km": 11.040000000000001
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 23,
+     "median": 22.5408,
+     "p95": 141.30112000000003,
+     "max": 178.752
+    },
+    "incidence_deg_mean": 41.95631408691406
    }
   },
   "verdict": null
@@ -6252,9 +6318,75 @@
      "max": 20.352
     },
     "incidence_deg_mean": 42.41841125488281
+   },
+   "d_1004": {
+    "event": "Sheveluch explosive eruptions, Kamchatka: ground around the lava domes changed, 22 Sep-4 Oct 2026",
+    "view": "d_1004",
+    "track": 60,
+    "frame": 60,
+    "direction": "D",
+    "event_pair": "20261004_20261016",
+    "control_pair": "20260910_20260922",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 6,
+    "far_km": 12,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.22157689929008484,
+    "mean_coh_control_within_radius": 0.5231997966766357,
+    "mean_coh_event_whole_window": 0.6188886165618896,
+    "mean_coh_control_whole_window": 0.6421889066696167,
+    "coherence_loss": {
+     "loss_area_km2": 46.342400000000005,
+     "comparable_area_km2": 63.884800000000006,
+     "loss_fraction_inside": 0.7254057303145662,
+     "loss_fraction_outside": 0.08865333004287873,
+     "comparable_px_inside": 9982,
+     "loss_area_km2_whole_window": 193.4848,
+     "mean_coh_control_at_loss_px": 0.7223681807518005,
+     "mean_coh_event_at_loss_px": 0.18517164885997772
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 165.5232,
+      "lon": 161.3406,
+      "lat": 56.6203,
+      "max_side_km": 21.44
+     },
+     {
+      "area_km2": 21.4848,
+      "lon": 161.6459,
+      "lat": 56.7201,
+      "max_side_km": 8.64
+     },
+     {
+      "area_km2": 0.5248,
+      "lon": 161.3606,
+      "lat": 56.6911,
+      "max_side_km": 1.28
+     },
+     {
+      "area_km2": 0.37120000000000003,
+      "lon": 161.3066,
+      "lat": 56.54,
+      "max_side_km": 1.12
+     },
+     {
+      "area_km2": 0.28800000000000003,
+      "lon": 161.3181,
+      "lat": 56.6295,
+      "max_side_km": 0.88
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 150,
+     "median": 0.009600000000000001,
+     "p95": 21.386879999999998,
+     "max": 32.0576
+    },
+    "incidence_deg_mean": 42.41990661621094
    }
   },
-  "verdict": null
+  "verdict": "marginal"
  },
  "polo-newmexico-2026": {
   "event_id": "polo-newmexico-2026",
@@ -7611,6 +7743,204 @@
      "median": 0.2368,
      "p95": 8.599039999999999,
      "max": 11.3856
+    },
+    "incidence_deg_mean": null
+   },
+   "a_20260911": {
+    "event": "Bezymianny lava flows and dome growth, Kamchatka, Aug-Oct 2026",
+    "view": "a_20260911",
+    "track": 80,
+    "frame": 30,
+    "direction": "A",
+    "event_pair": "20260911_20260923",
+    "control_pair": "20260830_20260911",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 5,
+    "far_km": 15,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.42274191975593567,
+    "mean_coh_control_within_radius": 0.49024641513824463,
+    "mean_coh_event_whole_window": 0.4825383424758911,
+    "mean_coh_control_whole_window": 0.5039024353027344,
+    "coherence_loss": {
+     "loss_area_km2": 7.372800000000001,
+     "comparable_area_km2": 43.712,
+     "loss_fraction_inside": 0.1686676427525622,
+     "loss_fraction_outside": 0.08726114179935543,
+     "comparable_px_inside": 6830,
+     "loss_area_km2_whole_window": 83.0976,
+     "mean_coh_control_at_loss_px": 0.6175104379653931,
+     "mean_coh_event_at_loss_px": 0.19834375381469727
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 43.692800000000005,
+      "lon": 160.392,
+      "lat": 56.0256,
+      "max_side_km": 12.4
+     },
+     {
+      "area_km2": 12.019200000000001,
+      "lon": 160.5105,
+      "lat": 55.994,
+      "max_side_km": 8.08
+     },
+     {
+      "area_km2": 2.2464,
+      "lon": 160.7295,
+      "lat": 56.067,
+      "max_side_km": 2.4
+     },
+     {
+      "area_km2": 1.5552000000000001,
+      "lon": 160.7069,
+      "lat": 56.0251,
+      "max_side_km": 2.16
+     },
+     {
+      "area_km2": 1.4848000000000001,
+      "lon": 160.3666,
+      "lat": 56.1099,
+      "max_side_km": 3.36
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 122,
+     "median": 0.4224,
+     "p95": 23.212799999999984,
+     "max": 35.9296
+    },
+    "incidence_deg_mean": null
+   },
+   "a_20260923": {
+    "event": "Bezymianny lava flows and dome growth, Kamchatka, Aug-Oct 2026",
+    "view": "a_20260923",
+    "track": 80,
+    "frame": 30,
+    "direction": "A",
+    "event_pair": "20260923_20261005",
+    "control_pair": "20260911_20260923",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 5,
+    "far_km": 15,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.27415066957473755,
+    "mean_coh_control_within_radius": 0.42274191975593567,
+    "mean_coh_event_whole_window": 0.33250534534454346,
+    "mean_coh_control_whole_window": 0.4825383424758911,
+    "coherence_loss": {
+     "loss_area_km2": 19.398400000000002,
+     "comparable_area_km2": 33.6128,
+     "loss_fraction_inside": 0.5771134805788272,
+     "loss_fraction_outside": 0.22212979687549514,
+     "comparable_px_inside": 5252,
+     "loss_area_km2_whole_window": 198.848,
+     "mean_coh_control_at_loss_px": 0.7120897173881531,
+     "mean_coh_event_at_loss_px": 0.23679181933403015
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 87.80160000000001,
+      "lon": 160.5639,
+      "lat": 55.9125,
+      "max_side_km": 20.72
+     },
+     {
+      "area_km2": 23.232000000000003,
+      "lon": 160.6914,
+      "lat": 55.825,
+      "max_side_km": 9.6
+     },
+     {
+      "area_km2": 14.72,
+      "lon": 160.3393,
+      "lat": 55.9681,
+      "max_side_km": 7.5200000000000005
+     },
+     {
+      "area_km2": 14.3168,
+      "lon": 160.3351,
+      "lat": 56.1317,
+      "max_side_km": 5.84
+     },
+     {
+      "area_km2": 6.2976,
+      "lon": 160.7315,
+      "lat": 56.0286,
+      "max_side_km": 7.28
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 110,
+     "median": 9.152000000000001,
+     "p95": 25.30112,
+     "max": 33.024
+    },
+    "incidence_deg_mean": null
+   },
+   "a_20261005": {
+    "event": "Bezymianny lava flows and dome growth, Kamchatka, Aug-Oct 2026",
+    "view": "a_20261005",
+    "track": 80,
+    "frame": 30,
+    "direction": "A",
+    "event_pair": "20261005_20261017",
+    "control_pair": "20260923_20261005",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 5,
+    "far_km": 15,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.25020116567611694,
+    "mean_coh_control_within_radius": 0.27415066957473755,
+    "mean_coh_event_whole_window": 0.2711807191371918,
+    "mean_coh_control_whole_window": 0.33250534534454346,
+    "coherence_loss": {
+     "loss_area_km2": 0.48000000000000004,
+     "comparable_area_km2": 8.7872,
+     "loss_fraction_inside": 0.05462490895848507,
+     "loss_fraction_outside": 0.25819804148949876,
+     "comparable_px_inside": 1373,
+     "loss_area_km2_whole_window": 103.0784,
+     "mean_coh_control_at_loss_px": 0.5643733143806458,
+     "mean_coh_event_at_loss_px": 0.2226133495569229
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 52.6912,
+      "lon": 160.3865,
+      "lat": 55.924,
+      "max_side_km": 15.84
+     },
+     {
+      "area_km2": 17.1904,
+      "lon": 160.5476,
+      "lat": 55.8452,
+      "max_side_km": 8.56
+     },
+     {
+      "area_km2": 3.9808000000000003,
+      "lon": 160.5048,
+      "lat": 55.8162,
+      "max_side_km": 4.64
+     },
+     {
+      "area_km2": 1.8176,
+      "lon": 160.4926,
+      "lat": 55.7985,
+      "max_side_km": 3.52
+     },
+     {
+      "area_km2": 1.6704,
+      "lon": 160.5375,
+      "lat": 55.7967,
+      "max_side_km": 2.8000000000000003
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 77,
+     "median": 2.72,
+     "p95": 30.791680000000003,
+     "max": 35.0848
     },
     "incidence_deg_mean": null
    }
