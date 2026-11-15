@@ -2,7 +2,20 @@
 
 # Dancing with the SARs
 
-**Press play on a season of radar.** A web app that lets anyone see the Earth's surface change as seen by NASA and ISRO's NISAR radar satellite, June to October 2026, and read what is physically happening and why radar can see it. It shows four kinds of change: **water through a season** (18 places: floods 8, lakes 4, wetlands and deltas 4, farmland 2), **the ground moving in earthquakes** (6 places, before and after one event), **ground events seen as loss of radar coherence** (10 places: 2 volcanoes, 1 landslide, 1 storm and 6 wildfires) and **wildfires seen as a change of radar brightness** (3 places, over the season). That makes 37 places in 9 classes in `src/app/public/data/` (`summary.json`, field `categories`: Floods 8, Lakes 4, Wetlands and deltas 4, Farmland 2, Wildfires 9, Earthquakes 6, Volcanoes 2, Landslides 1, Storms 1). By kind (`kind` in `summary.json`): 21 places are a season of ten passes (the 18 water and farmland places and 3 fires) and 16 are events seen in a before/after pair (6 earthquakes, 6 fires, 2 volcanoes, 1 landslide, 1 storm). Three of the nine wildfires are seen both ways (by brightness change and by lost coherence). Rondônia (Brazil) was taken out of the app: no layer shows new forest clearing (`areas/rondonia/area.json`, `in_app: false`, with the reason); it is kept as a tried place. Sheveluch (Kamchatka) was exported and then withdrawn (`areas/sheveluch-2026/area.json`, `in_app: false`): the lost coherence follows elevation, so first snow explains it. The places lie in Asia (Cambodia, China, Armenia, Bangladesh, Iran, Pakistan, Vietnam, Thailand, India, Nepal, Tibet, Japan; Armenia sits on the Europe–Asia boundary), Africa (Mali, Botswana, Egypt, South Sudan, Chad), South America (Brazil, Venezuela, Chile), North America (Canada, Panama, Hawaii) and Europe (Spain, France, Etna in Italy). There is one app, `src/app/` (globe, gallery, story, Explore with timeline chart, a "How we found it" stepper for every kind of place, before/after compare, caution labels). It was developed as `src/app3` ("the merged app") on branch `front_harut` and moved to `src/app` on 15 November; two earlier designs were removed then and are in git history only. The deploy workflow `.github/workflows/deploy.yml` builds `src/app` for GitHub Pages.
+**Press play on a season of radar.** A web app that lets anyone see the Earth's surface change as seen by NASA and ISRO's NISAR radar satellite, June to October 2026, and read what is physically happening and why radar can see it.
+
+It shows **37 places in 9 classes** (`src/app/public/data/summary.json`: Floods 8, Lakes 4, Wetlands and deltas 4, Farmland 2, Wildfires 9, Earthquakes 6, Volcanoes 2, Landslides 1, Storms 1) and four kinds of change:
+
+- **Water through a season**: 18 places (floods 8, lakes 4, wetlands and deltas 4, farmland 2).
+- **The ground moving in earthquakes**: 6 places, before and after one event.
+- **Ground events seen as loss of radar coherence**: 10 places (2 volcanoes, 1 landslide, 1 storm and 6 wildfires).
+- **Wildfires seen as a change of radar brightness**: 3 places, over the season. Three of the nine wildfires are seen both ways.
+
+By kind, 21 places are a season of ten passes (the 18 water and farmland places and 3 fires) and 16 are events seen in a before/after pair (6 earthquakes, 6 fires, 2 volcanoes, 1 landslide, 1 storm).
+
+The places lie in Asia (Cambodia, China including Tibet, Armenia, Bangladesh, Iran, Pakistan, Vietnam, Thailand, India, Nepal, Japan; Armenia sits on the Europe–Asia boundary), Africa (Mali, Botswana, Egypt, South Sudan, Chad), South America (Brazil, Venezuela, Chile), North America (Canada, Panama, and Hawaii in the United States) and Europe (Spain, France, Etna in Italy).
+
+Two candidates were taken out of the app and are kept as tried places, each with the reason in its `area.json` (`in_app: false`): Rondônia (Brazil), where no layer shows new forest clearing, and Sheveluch (Kamchatka), where the lost coherence follows elevation, so first snow explains it.
 
 **Open the app: https://harut200.github.io/Nasa-Space-App-Challange-2026/**
 
@@ -26,7 +39,7 @@ Screenshots of the app in `src/app` on 15 November 2026.
 | **Lake Sevan, Armenia** | A lake that does not change, and how wind and rain can fool a naive method into thinking it shrank |
 | **Ararat Valley, Armenia** | What radar at this resolution does not show: fields smaller than a pixel. (Interferometry does show the farming season there: [docs/eda/insar.md](docs/eda/insar.md)) |
 
-Eleven more water places are in the table below (it had twelve rows of places until Rondônia was taken out of the app). Balanced accuracy of the water map against Landsat water pixels that never change, from [docs/eda/fusion2.md](docs/eda/fusion2.md), section 8. **This is an easy test: it is measured only on pixels where the answer is certain (always water or never water); shorelines and floodplains are not in it. It does not show that a place is solved.** Against NASA's own water product several of these places look much worse (next section):
+Eleven more water places are in the table below. Balanced accuracy of the water map against Landsat water pixels that never change, from [docs/eda/fusion2.md](docs/eda/fusion2.md), section 8. **This is an easy test: it is measured only on pixels where the answer is certain (always water or never water); shorelines and floodplains are not in it. It does not show that a place is solved.** Against NASA's own water product several of these places look much worse (next section):
 
 | Place | Accuracy | Place | Accuracy |
 |---|---|---|---|
@@ -73,6 +86,8 @@ NISAR also records the phase of the radar wave. Two passes 12 to 24 days apart t
 
 ![Earthquakes at one fringe interval](docs/eda/quake/overview.png)
 
+What we do not claim for earthquakes: damage, casualties or any effect on people; the fault plane, slip or rupture length of any earthquake; that Venezuela M7.2 and M7.5 are separate ruptures; vertical or horizontal motion, except Venezuela's approximate split; agreement with GNSS or other satellites (no such check was made); that the sign (toward or away from the satellite) is confirmed. The products are PROVISIONAL, some of them urgent-response. Method, every number and the full list: [docs/eda/quake.md](docs/eda/quake.md).
+
 ### Other ground events: loss of coherence
 
 We also looked at other ground events between 17 June and 31 October 2026 ([docs/eda/events.md](docs/eda/events.md)). Round 3 of the event hunt (more kinds of event, same pair-coherence rule) ended at about 06:20 on 15 November (final commit `6e3330c`). Final state, read from `docs/eda/events/events.json`, `results.json`, `app_events.json` and `events.md`: `events.json` holds 53 configurations (42 of them added in round 3, per `events.md`), all with results in `results.json`: 10 clear (all 10 are places in the app), 5 marginal (Brits, Kilauea 54, Ambrym, Sakurajima and Sheveluch, which was exported as clear and withdrawn, see below), 31 not detected (one of them decorrelated), 4 entries that support or repeat another event (the Atacama coast, Taltal and east boxes, and Etna's later pairs), 2 fire signals not exported (Hautes Fagnes, Rowe Creek) and 1 not attributed (the Panama earthquake landslides). `results.json` repeats the verdict only for the clear events; `events.json` is the source.
@@ -87,11 +102,10 @@ Where sources disagree: the Gironde megafire is **clear** by lost coherence (`ev
 
 We tried further 2026 events as new places from the free previews ([docs/research/events-2026.md](docs/research/events-2026.md)). Its cumulative summary (state at 00:50 on 15 November) lists six clear (Chao Phraya, Mahanadi and Terai floods, three burn scars), four marginal and the rest not detected. All six clear are now places in the app. Chao Phraya (Thailand): open water about 990 km² on 6 September to about 1,930 km² on 30 September, and 82 % of the new water lies inside the JRC maximum water extent (Landsat, 1984–2021). The fires are described above ("How we found it"). Small, town-scale and narrow-channel floods vanish at 180 m.
 
-What we do not claim for earthquakes: damage, casualties or any effect on people; the fault plane, slip or rupture length of any earthquake; that Venezuela M7.2 and M7.5 are separate ruptures; vertical or horizontal motion, except Venezuela's approximate split; agreement with GNSS or other satellites (no such check was made); that the sign (toward or away from the satellite) is confirmed. The products are PROVISIONAL, some of them urgent-response. Method, every number and the full list: [docs/eda/quake.md](docs/eda/quake.md).
 
 ## Honest status
 
-State of 15 November 2026, about 04:00 (Armenia time; the 00:50 text was updated for the 37-place app, the evidence layers, the visibility audit and event-hunt round 3). One-page summary of results: [docs/RESULTS.md](docs/RESULTS.md).
+State of 15 November 2026, about 14:00 (Armenia time). One-page summary of results: [docs/RESULTS.md](docs/RESULTS.md).
 
 - **The app shows previews.** Everything in the app uses NISAR's free preview images: about 180 m per pixel and not calibrated. Patterns and timing are reliable; exact values and areas are not. The app says so on screen.
 - **Calibrated data: Tonle Sap is in the app as its own place (`tonle-sap-cal`); the rest is analysed only.** A small remote server reads windows of the large calibrated files, so nothing big is downloaded. All ten Tonle Sap dates (80 m) are analysed, and most Armenia dates (30 m) are extracted. In the app the calibrated open water goes from 2,340 km² (19 June) to about 5,660 km² on 17 October; the study quotes 5,625 km² for the same date, about 5,600 in both, the small difference being the footprint (the study counts inside the preview footprint, the app map covers its own window). On Tonle Sap a dB water rule gives 5,625 km² on 17 October, 5.9 % from the independent estimate on average (previews: 20 %), and its area moves by a factor 1.25 over a justified threshold range at the flood peak (previews: 2.39). The same thresholds find 0 km² at Lake Sevan, because the Armenian product has a noise floor 7–8 dB higher. The calibration is PROVISIONAL. Details: [docs/eda/calibrated.md](docs/eda/calibrated.md).
@@ -102,7 +116,6 @@ State of 15 November 2026, about 04:00 (Armenia time; the 00:50 text was updated
 - **Tried, did not help**: learned despeckling, a physics autoencoder, a network trained on independent labels (a cross-check only), and other models, listed in [docs/RESULTS.md](docs/RESULTS.md).
 - **Earthquakes: six of fifteen clear (one marginal, eight not detected), none validated independently.** Each map is one pair per event, not a time series. Ground movement is along the line of sight only; with one look direction, up, east and north movement are mixed. The evidence is a control pair from before the event on the same track (flat), and agreement with the USGS location and mechanism. There is no check against GNSS, Sentinel-1 or any other data, and the sign convention is unconfirmed. Panama's frames cover only part of the pattern. Details and limits: [docs/eda/quake.md](docs/eda/quake.md).
 - **Visibility and evidence (15 Nov):** a visibility audit of 31 places (12 show it, 10 weakly, 9 not) led to a per-place opening layer and date, caution labels on five places and captions for steady places; before/after/difference evidence layers exist for three fires and six other places, each with a control test (the control is not clean at Thunder Bay, Sindh-Indus, Poyang and Urmia). See the two sections above and [docs/eda/visibility-audit.md](docs/eda/visibility-audit.md), [docs/eda/burn.md](docs/eda/burn.md).
-- **In progress:** Ararat coherence layers (not in the app), and nothing else open in the event hunt (round 3 ended at about 06:20 on 15 November; counts above are final as of commit `6e3330c`).
 - **Data size:** the app data folder was 65.7 MB after optimisation (90.0 MB before) when it held 25 places, with thumbnails and a one-file summary ([docs/eda/data-size.md](docs/eda/data-size.md)); with 37 places `du -sm src/app/public/data` shows 81 MB on 15 November (not re-optimised or re-measured in that file).
 - **Tests:** 243 passed in 34 test files in the full run of 15 November, about 06:20 (242 at 03:50; [docs/evidence/pytest-full.txt](docs/evidence/pytest-full.txt)). The earlier app design A had its own Node tests (22 of 22 passed, [docs/evidence/app-tests.txt](docs/evidence/app-tests.txt)); that design was removed from `main` on 15 November when the final app took its place in `src/app`.
 - **No radar passes exist from 27 July to 10 August 2026** (instrument outage). The timeline shows the gap.
@@ -168,6 +181,7 @@ Train the networks (Apple GPU or CPU):
 | Path | Holds |
 |---|---|
 | `src/app/` | The web app: globe, story, "How we found it" stepper, before/after compare, caution labels (Vite, React, MapLibre GL JS). `public/data/` holds the exported app data (images, manifests, summaries) written by `scripts/ingest/export.py`. Older documents under `docs/` call this app `src/app3` or "the merged app", and call two earlier designs, removed on 15 November and kept in the git history, `src/app` (A) and `src/app2` (B) |
+| `.github/workflows/deploy.yml` | Builds `src/app` and publishes it to GitHub Pages on every push to `main` |
 | `scripts/ingest/` | Search, download, cut, export; the calibrated-data extractor that runs on a remote server |
 | `scripts/detect/` | Loader, detection maths, detector entry point, fusion, validation, neural networks, calibrated-data detector, earthquake interferometry (`quake.py`, tests in `tests/test_quake.py`) |
 | `areas/` | One folder per place: box, track and frame, story text, spots |
@@ -181,7 +195,10 @@ Train the networks (Apple GPU or CPU):
 - **NISAR GCOV calibrated, GUNW and SME2 products** (PROVISIONAL): NASA/JPL-Caltech and ISRO, distributed by the ASF DAAC. The earthquake maps use NISAR L2 GUNW (urgent-response and PROVISIONAL).
 - **Earthquake locations, magnitudes and mechanisms**: U.S. Geological Survey, Earthquake Hazards Program.
 - **Global Surface Water** (validation, and labels for some evaluated networks): Pekel, Cottam, Gorelick, Belward (2016), *High-resolution mapping of global surface water and its long-term changes*, Nature 540, 418–422. Source: EC JRC/Google.
-- **Basemap**: OpenFreeMap, OpenMapTiles, OpenStreetMap contributors.
+- **Basemap imagery**: NASA GIBS, Blue Marble (NASA Earth Observatory); Sentinel-2 cloudless by EOX IT Services GmbH (contains modified Copernicus Sentinel data 2020), CC BY-NC-SA 4.0.
+- **OPERA DSWx water products** (comparison only): NASA JPL, OPERA project.
+- **Lake level** (validation): G-REALM satellite altimetry (USDA and NASA).
+- **Elevation**: Copernicus DEM GLO-90 (European Space Agency, Copernicus programme) for the terrain mask; NASA SRTM for the elevation test of the mountain events.
 - Sources for every figure quoted in the stories: [docs/research/story-sources.md](docs/research/story-sources.md).
 
 ## Use of AI
