@@ -1349,6 +1349,72 @@
      "max": 178.752
     },
     "incidence_deg_mean": 41.95631408691406
+   },
+   "d_oct": {
+    "event": "Klyuchevskoy eruption and Bezymianny, Kamchatka, from mid-August 2026",
+    "view": "d_oct",
+    "track": 60,
+    "frame": 60,
+    "direction": "D",
+    "event_pair": "20261004_20261016",
+    "control_pair": "20260910_20260922",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 10,
+    "far_km": 30,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.1925678849220276,
+    "mean_coh_control_within_radius": 0.3485836684703827,
+    "mean_coh_event_whole_window": 0.3407836854457855,
+    "mean_coh_control_whole_window": 0.5722208619117737,
+    "coherence_loss": {
+     "loss_area_km2": 78.1696,
+     "comparable_area_km2": 98.8288,
+     "loss_fraction_inside": 0.7909597202434918,
+     "loss_fraction_outside": 0.5302112074058115,
+     "comparable_px_inside": 15442,
+     "loss_area_km2_whole_window": 1054.688,
+     "mean_coh_control_at_loss_px": 0.6656603813171387,
+     "mean_coh_event_at_loss_px": 0.1794602870941162
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 1014.7264,
+      "lon": 160.5727,
+      "lat": 56.074,
+      "max_side_km": 51.52
+     },
+     {
+      "area_km2": 10.1376,
+      "lon": 160.7375,
+      "lat": 55.8927,
+      "max_side_km": 7.68
+     },
+     {
+      "area_km2": 2.2784,
+      "lon": 160.9118,
+      "lat": 56.2439,
+      "max_side_km": 2.48
+     },
+     {
+      "area_km2": 1.856,
+      "lon": 160.9451,
+      "lat": 56.2281,
+      "max_side_km": 3.12
+     },
+     {
+      "area_km2": 1.1456,
+      "lon": 160.4355,
+      "lat": 56.1636,
+      "max_side_km": 2.88
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 23,
+     "median": 133.1904,
+     "p95": 189.02592,
+     "max": 195.8976
+    },
+    "incidence_deg_mean": null
    }
   },
   "verdict": null
@@ -5442,6 +5508,204 @@
      "max": null
     },
     "incidence_deg_mean": 42.68133544921875
+   },
+   "a_0828": {
+    "event": "Atacama Desert after the 17-18 August 2026 rain and the snow storms: about 6,000 km2 lost coherence (west of the Salar)",
+    "view": "a_0828",
+    "track": 46,
+    "frame": 166,
+    "direction": "A",
+    "event_pair": "20260828_20260909",
+    "control_pair": "20260711_20260723",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 40,
+    "far_km": 80,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.7498515248298645,
+    "mean_coh_control_within_radius": 0.8130065202713013,
+    "mean_coh_event_whole_window": 0.7482072710990906,
+    "mean_coh_control_whole_window": 0.8211373686790466,
+    "coherence_loss": {
+     "loss_area_km2": 0.2048,
+     "comparable_area_km2": 4978.8096000000005,
+     "loss_fraction_inside": 4.113433058376042e-05,
+     "loss_fraction_outside": 0.00013776030529328553,
+     "comparable_px_inside": 777939,
+     "loss_area_km2_whole_window": 1.4912,
+     "mean_coh_control_at_loss_px": 0.7210000157356262,
+     "mean_coh_event_at_loss_px": 0.17737500369548798
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 0.5504,
+      "lon": -70.022,
+      "lat": -23.7365,
+      "max_side_km": 1.68
+     },
+     {
+      "area_km2": 0.3264,
+      "lon": -70.0621,
+      "lat": -23.7534,
+      "max_side_km": 1.04
+     },
+     {
+      "area_km2": 0.21760000000000002,
+      "lon": -69.1257,
+      "lat": -23.0575,
+      "max_side_km": 0.56
+     },
+     {
+      "area_km2": 0.2048,
+      "lon": -69.5326,
+      "lat": -23.4585,
+      "max_side_km": 0.48
+     },
+     {
+      "area_km2": 0.192,
+      "lon": -70.0324,
+      "lat": -23.7416,
+      "max_side_km": 0.64
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": 42.6768798828125
+   },
+   "a_0909": {
+    "event": "Atacama Desert after the 17-18 August 2026 rain and the snow storms: about 6,000 km2 lost coherence (west of the Salar)",
+    "view": "a_0909",
+    "track": 46,
+    "frame": 166,
+    "direction": "A",
+    "event_pair": "20260909_20260921",
+    "control_pair": "20260711_20260723",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 40,
+    "far_km": 80,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.7736315727233887,
+    "mean_coh_control_within_radius": 0.8130065202713013,
+    "mean_coh_event_whole_window": 0.7674518823623657,
+    "mean_coh_control_whole_window": 0.8211373686790466,
+    "coherence_loss": {
+     "loss_area_km2": 0.7936000000000001,
+     "comparable_area_km2": 4978.8096000000005,
+     "loss_fraction_inside": 0.00015939553101207164,
+     "loss_fraction_outside": 0.00955275191630753,
+     "comparable_px_inside": 777939,
+     "loss_area_km2_whole_window": 89.99680000000001,
+     "mean_coh_control_at_loss_px": 0.8578065037727356,
+     "mean_coh_event_at_loss_px": 0.22090323269367218
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 74.3296,
+      "lon": -68.9996,
+      "lat": -23.2132,
+      "max_side_km": 18.48
+     },
+     {
+      "area_km2": 5.6576,
+      "lon": -68.9787,
+      "lat": -23.1085,
+      "max_side_km": 4.72
+     },
+     {
+      "area_km2": 3.2448,
+      "lon": -68.9776,
+      "lat": -23.3291,
+      "max_side_km": 4.5600000000000005
+     },
+     {
+      "area_km2": 1.8176,
+      "lon": -69.0273,
+      "lat": -23.2778,
+      "max_side_km": 2.24
+     },
+     {
+      "area_km2": 0.6848000000000001,
+      "lon": -68.9973,
+      "lat": -23.0842,
+      "max_side_km": 1.6
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": null
+   },
+   "a_0921": {
+    "event": "Atacama Desert after the 17-18 August 2026 rain and the snow storms: about 6,000 km2 lost coherence (west of the Salar)",
+    "view": "a_0921",
+    "track": 46,
+    "frame": 166,
+    "direction": "A",
+    "event_pair": "20260921_20261003",
+    "control_pair": "20260711_20260723",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 40,
+    "far_km": 80,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.7719827890396118,
+    "mean_coh_control_within_radius": 0.8130065202713013,
+    "mean_coh_event_whole_window": 0.7681447863578796,
+    "mean_coh_control_whole_window": 0.8211373686790466,
+    "coherence_loss": {
+     "loss_area_km2": 2.1824,
+     "comparable_area_km2": 4978.8096000000005,
+     "loss_fraction_inside": 0.000438337710283197,
+     "loss_fraction_outside": 0.0028470463093945675,
+     "comparable_px_inside": 777939,
+     "loss_area_km2_whole_window": 28.768,
+     "mean_coh_control_at_loss_px": 0.9039179682731628,
+     "mean_coh_event_at_loss_px": 0.22201760113239288
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 17.4144,
+      "lon": -68.9924,
+      "lat": -23.2376,
+      "max_side_km": 9.68
+     },
+     {
+      "area_km2": 1.3824,
+      "lon": -69.0144,
+      "lat": -23.1934,
+      "max_side_km": 2.16
+     },
+     {
+      "area_km2": 1.2096,
+      "lon": -69.0273,
+      "lat": -23.1618,
+      "max_side_km": 1.84
+     },
+     {
+      "area_km2": 1.1520000000000001,
+      "lon": -68.9842,
+      "lat": -23.1678,
+      "max_side_km": 2.24
+     },
+     {
+      "area_km2": 0.9024000000000001,
+      "lon": -69.0087,
+      "lat": -23.1754,
+      "max_side_km": 1.44
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": null
    }
   },
   "verdict": "clear"
@@ -6592,9 +6856,75 @@
      "max": null
     },
     "incidence_deg_mean": 39.68303680419922
+   },
+   "asc125": {
+    "event": "Sakurajima (Aira) pyroclastic flows, Japan, 3-10 Aug 2026",
+    "view": "asc125",
+    "track": 125,
+    "frame": 17,
+    "direction": "A",
+    "event_pair": "20260716_20260821",
+    "control_pair": "20260704_20260716",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 5,
+    "far_km": 15,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.4706099033355713,
+    "mean_coh_control_within_radius": 0.49311524629592896,
+    "mean_coh_event_whole_window": 0.3648054599761963,
+    "mean_coh_control_whole_window": 0.35038965940475464,
+    "coherence_loss": {
+     "loss_area_km2": 0.6208,
+     "comparable_area_km2": 49.856,
+     "loss_fraction_inside": 0.01245186136071887,
+     "loss_fraction_outside": 0.0003063777637827441,
+     "comparable_px_inside": 7790,
+     "loss_area_km2_whole_window": 0.736,
+     "mean_coh_control_at_loss_px": 0.5936082601547241,
+     "mean_coh_event_at_loss_px": 0.282020628452301
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 0.21760000000000002,
+      "lon": 130.6137,
+      "lat": 31.5916,
+      "max_side_km": 0.72
+     },
+     {
+      "area_km2": 0.1792,
+      "lon": 130.6399,
+      "lat": 31.6109,
+      "max_side_km": 0.88
+     },
+     {
+      "area_km2": 0.1408,
+      "lon": 130.6185,
+      "lat": 31.5858,
+      "max_side_km": 0.8
+     },
+     {
+      "area_km2": 0.11520000000000001,
+      "lon": 130.8094,
+      "lat": 31.4915,
+      "max_side_km": 0.64
+     },
+     {
+      "area_km2": 0.08320000000000001,
+      "lon": 130.6915,
+      "lat": 31.609,
+      "max_side_km": 0.48
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 70,
+     "median": 0.0,
+     "p95": 0.11520000000000001,
+     "max": 0.11520000000000001
+    },
+    "incidence_deg_mean": 36.76045608520508
    }
   },
-  "verdict": null
+  "verdict": "marginal"
  },
  "etna-june-2026": {
   "event_id": "etna-june-2026",
@@ -7946,5 +8276,209 @@
    }
   },
   "verdict": null
+ },
+ "hotan-rain-2026": {
+  "event_id": "hotan-rain-2026",
+  "views": {
+   "d106_post": {
+    "event": "Record rain at Hotan, Taklamakan Desert margin, 20 Jun 2026",
+    "view": "d106_post",
+    "track": 106,
+    "frame": 70,
+    "direction": "D",
+    "event_pair": "20260621_20260703",
+    "control_pair": "20260703_20260715",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 25,
+    "far_km": 75,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.46378159523010254,
+    "mean_coh_control_within_radius": 0.5640028119087219,
+    "mean_coh_event_whole_window": 0.4286034405231476,
+    "mean_coh_control_whole_window": 0.5103341341018677,
+    "coherence_loss": {
+     "loss_area_km2": 18.4128,
+     "comparable_area_km2": 1429.4272,
+     "loss_fraction_inside": 0.012881243619821982,
+     "loss_fraction_outside": 0.03805313366676243,
+     "comparable_px_inside": 223348,
+     "loss_area_km2_whole_window": 101.4848,
+     "mean_coh_control_at_loss_px": 0.5734974145889282,
+     "mean_coh_event_at_loss_px": 0.20544594526290894
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 24.6784,
+      "lon": 80.3591,
+      "lat": 36.9536,
+      "max_side_km": 7.92
+     },
+     {
+      "area_km2": 7.648000000000001,
+      "lon": 80.2539,
+      "lat": 36.9516,
+      "max_side_km": 4.88
+     },
+     {
+      "area_km2": 7.1744,
+      "lon": 80.0007,
+      "lat": 36.9544,
+      "max_side_km": 5.84
+     },
+     {
+      "area_km2": 4.5440000000000005,
+      "lon": 80.2668,
+      "lat": 36.9767,
+      "max_side_km": 4.0
+     },
+     {
+      "area_km2": 4.4352,
+      "lon": 80.2939,
+      "lat": 37.0289,
+      "max_side_km": 3.2
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": 36.00926208496094
+   },
+   "d34_post": {
+    "event": "Record rain at Hotan, Taklamakan Desert margin, 20 Jun 2026",
+    "view": "d34_post",
+    "track": 34,
+    "frame": 70,
+    "direction": "D",
+    "event_pair": "20260628_20260710",
+    "control_pair": "20260710_20260722",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 25,
+    "far_km": 75,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.4770285487174988,
+    "mean_coh_control_within_radius": 0.5196865797042847,
+    "mean_coh_event_whole_window": 0.43719446659088135,
+    "mean_coh_control_whole_window": 0.4557570815086365,
+    "coherence_loss": {
+     "loss_area_km2": 4.5120000000000005,
+     "comparable_area_km2": 1260.6592,
+     "loss_fraction_inside": 0.0035790798972474085,
+     "loss_fraction_outside": 0.0020140878443874804,
+     "comparable_px_inside": 196978,
+     "loss_area_km2_whole_window": 6.905600000000001,
+     "mean_coh_control_at_loss_px": 0.6332368850708008,
+     "mean_coh_event_at_loss_px": 0.20131632685661316
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 0.4928,
+      "lon": 80.0074,
+      "lat": 37.1987,
+      "max_side_km": 1.52
+     },
+     {
+      "area_km2": 0.44160000000000005,
+      "lon": 79.9812,
+      "lat": 37.3682,
+      "max_side_km": 1.76
+     },
+     {
+      "area_km2": 0.4224,
+      "lon": 79.9259,
+      "lat": 37.2273,
+      "max_side_km": 1.12
+     },
+     {
+      "area_km2": 0.39680000000000004,
+      "lon": 79.8487,
+      "lat": 37.2288,
+      "max_side_km": 1.2
+     },
+     {
+      "area_km2": 0.35200000000000004,
+      "lon": 79.9374,
+      "lat": 37.2701,
+      "max_side_km": 0.96
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": 45.512901306152344
+   },
+   "d106_null": {
+    "event": "Record rain at Hotan, Taklamakan Desert margin, 20 Jun 2026",
+    "view": "d106_null",
+    "track": 106,
+    "frame": 70,
+    "direction": "D",
+    "event_pair": "20260703_20260715",
+    "control_pair": "20260715_20260727",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 25,
+    "far_km": 75,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.5640028119087219,
+    "mean_coh_control_within_radius": 0.5553738474845886,
+    "mean_coh_event_whole_window": 0.5103341341018677,
+    "mean_coh_control_whole_window": 0.4943285584449768,
+    "coherence_loss": {
+     "loss_area_km2": 1.3760000000000001,
+     "comparable_area_km2": 1391.3856,
+     "loss_fraction_inside": 0.0009889422457728468,
+     "loss_fraction_outside": 0.0008051295482544209,
+     "comparable_px_inside": 217404,
+     "loss_area_km2_whole_window": 2.9696000000000002,
+     "mean_coh_control_at_loss_px": 0.5912558436393738,
+     "mean_coh_event_at_loss_px": 0.17784185707569122
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 0.4672,
+      "lon": 79.7844,
+      "lat": 37.3051,
+      "max_side_km": 1.68
+     },
+     {
+      "area_km2": 0.4096,
+      "lon": 79.7405,
+      "lat": 37.1939,
+      "max_side_km": 0.88
+     },
+     {
+      "area_km2": 0.3648,
+      "lon": 80.379,
+      "lat": 37.5719,
+      "max_side_km": 1.28
+     },
+     {
+      "area_km2": 0.3584,
+      "lon": 79.5884,
+      "lat": 37.5673,
+      "max_side_km": 3.36
+     },
+     {
+      "area_km2": 0.2752,
+      "lon": 79.5326,
+      "lat": 37.411,
+      "max_side_km": 2.96
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": null
+   }
+  },
+  "verdict": "not detected"
  }
 }

@@ -632,7 +632,7 @@
     }
    }
   },
-  "verdict": null,
+  "verdict": "not detected",
   "deformation": false,
   "time_note": "new eruption reported 15-18 Aug",
   "loss_hi": 0.45,
@@ -693,7 +693,7 @@
     "data_view": "a_aug"
    }
   },
-  "verdict": null,
+  "verdict": "not detected",
   "deformation": false,
   "time_note": "eruption ongoing since 2025",
   "loss_hi": 0.45,
@@ -753,7 +753,7 @@
     }
    }
   },
-  "verdict": null,
+  "verdict": "not detected",
   "deformation": false,
   "time_note": "flows reported July-August",
   "loss_hi": 0.45,
@@ -813,7 +813,7 @@
     }
    }
   },
-  "verdict": null,
+  "verdict": "not detected",
   "deformation": false,
   "time_note": "first seen 29 Sep",
   "loss_hi": 0.45,
@@ -873,7 +873,7 @@
     }
    }
   },
-  "verdict": null,
+  "verdict": "not detected",
   "deformation": false,
   "loss_hi": 0.45,
   "loss_lo": 0.35,
@@ -932,7 +932,7 @@
     }
    }
   },
-  "verdict": null,
+  "verdict": "not detected",
   "deformation": false,
   "loss_hi": 0.45,
   "loss_lo": 0.35,
@@ -1493,7 +1493,7 @@
     "data_view": "a_peak"
    }
   },
-  "verdict": null,
+  "verdict": "not detected",
   "deformation": false,
   "loss_hi": 0.4,
   "loss_lo": 0.25,
@@ -1553,7 +1553,7 @@
     "data_view": "a_ev"
    }
   },
-  "verdict": null,
+  "verdict": "not detected",
   "deformation": false,
   "loss_hi": 0.4,
   "loss_lo": 0.25,
@@ -1613,7 +1613,7 @@
     "data_view": "d_ev"
    }
   },
-  "verdict": null,
+  "verdict": "not detected",
   "deformation": false,
   "loss_hi": 0.4,
   "loss_lo": 0.25,
@@ -1672,7 +1672,7 @@
     }
    }
   },
-  "verdict": null,
+  "verdict": "consistent with etna-valle-del-bove-2026",
   "deformation": false,
   "min_px": 20,
   "loss_hi": 0.45,
@@ -1731,7 +1731,7 @@
     }
    }
   },
-  "verdict": null,
+  "verdict": "not detected",
   "deformation": false,
   "loss_hi": 0.45,
   "loss_lo": 0.35,
@@ -1989,7 +1989,7 @@
     "data_view": "asc"
    }
   },
-  "verdict": null,
+  "verdict": "not detected",
   "deformation": false,
   "loss_hi": 0.4,
   "loss_lo": 0.3,
@@ -2049,7 +2049,7 @@
     "data_view": "desc"
    }
   },
-  "verdict": null,
+  "verdict": "not detected",
   "deformation": false,
   "loss_hi": 0.4,
   "loss_lo": 0.3,
@@ -2222,7 +2222,7 @@
     }
    }
   },
-  "verdict": null,
+  "verdict": "not detected",
   "deformation": false,
   "loss_hi": 0.35,
   "loss_lo": 0.25,
@@ -2267,7 +2267,7 @@
     }
    }
   },
-  "verdict": null,
+  "verdict": "not detected",
   "deformation": false,
   "loss_hi": 0.45,
   "loss_lo": 0.35,
@@ -2327,7 +2327,7 @@
     }
    }
   },
-  "verdict": null,
+  "verdict": "clear signal, not exported (fire class capped)",
   "deformation": false,
   "loss_hi": 0.5,
   "loss_lo": 0.45,
@@ -2477,7 +2477,7 @@
     }
    }
   },
-  "verdict": null,
+  "verdict": "signal at the window edge, not exported",
   "deformation": false,
   "time_note": "lightning fires of 15-16 Jul (search summary); KPTV page opened gives >300,000 acres on 1 Aug",
   "loss_hi": 0.5,
@@ -2567,7 +2567,7 @@
     "data_view": "a_early"
    }
   },
-  "verdict": null,
+  "verdict": "supports atacama-west-2026 (east box)",
   "deformation": false,
   "loss_hi": 0.45,
   "loss_lo": 0.35,
@@ -2627,7 +2627,7 @@
     }
    }
   },
-  "verdict": null,
+  "verdict": "not detected",
   "deformation": false,
   "time_note": "stronger phase 3-5 Aug (Watchers, 6-12 Aug report)",
   "loss_hi": 0.45,
@@ -2685,9 +2685,23 @@
      "pair": "20260626_20260708",
      "granule": "NISAR_L2_PR_GUNW_024_003_D_073_025_2000_SH_20260626T100253_20260626T100327_20260708T100252_20260708T100327_P05023_N_F_J_001"
     }
+   },
+   "asc125": {
+    "track": 125,
+    "frame": 17,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260716_20260821",
+     "granule": "NISAR_L2_PR_GUNW_025_125_A_017_028_2000_SH_20260716T203646_20260716T203721_20260821T203644_20260821T203719_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260704_20260716",
+     "granule": "NISAR_L2_PR_GUNW_024_125_A_017_025_2000_SH_20260704T203647_20260704T203721_20260716T203646_20260716T203721_P05023_N_F_J_001"
+    }
    }
   },
-  "verdict": null,
+  "verdict": "marginal",
   "deformation": false,
   "time_note": "pyroclastic flows with Minamidake eruptions 3-10 Aug (Watchers)",
   "loss_hi": 0.45,
@@ -2747,7 +2761,7 @@
     }
    }
   },
-  "verdict": null,
+  "verdict": "not detected",
   "deformation": false,
   "loss_hi": 0.45,
   "loss_lo": 0.35,
@@ -2758,7 +2772,7 @@
  {
   "id": "atacama-west-2026",
   "type": "storm",
-  "title": "Atacama Desert after the 17-18 August 2026 rain and the snow storms: about 6,000 km2 lost coherence (west of the Salar)",
+  "title": "Atacama Desert after the 17-18 August 2026 rain: about 1,000 km2 lost coherence",
   "time": "2026-08-18T00:00:00Z",
   "lat": -23.5,
   "lon": -69.45,
@@ -2896,6 +2910,51 @@
      "pair": "20260711_20260723",
      "granule": "NISAR_L2_PR_GUNW_025_046_A_166_026_2000_SH_20260711T103043_20260711T103117_20260723T103042_20260723T103116_P05023_N_F_J_001"
     }
+   },
+   "a_0828": {
+    "track": 46,
+    "frame": 166,
+    "direction": "A",
+    "label": "ascending",
+    "data_view": "a_late",
+    "co": {
+     "pair": "20260828_20260909",
+     "granule": "NISAR_L2_PR_GUNW_029_046_A_166_030_2000_SH_20260828T103040_20260828T103115_20260909T103040_20260909T103115_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260711_20260723",
+     "granule": "NISAR_L2_PR_GUNW_025_046_A_166_026_2000_SH_20260711T103043_20260711T103117_20260723T103042_20260723T103116_P05023_N_F_J_001"
+    }
+   },
+   "a_0909": {
+    "track": 46,
+    "frame": 166,
+    "direction": "A",
+    "label": "ascending",
+    "data_view": "a_late",
+    "co": {
+     "pair": "20260909_20260921",
+     "granule": "NISAR_L2_PR_GUNW_030_046_A_166_031_2000_SH_20260909T103040_20260909T103115_20260921T103040_20260921T103115_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260711_20260723",
+     "granule": "NISAR_L2_PR_GUNW_025_046_A_166_026_2000_SH_20260711T103043_20260711T103117_20260723T103042_20260723T103116_P05023_N_F_J_001"
+    }
+   },
+   "a_0921": {
+    "track": 46,
+    "frame": 166,
+    "direction": "A",
+    "label": "ascending",
+    "data_view": "a_late",
+    "co": {
+     "pair": "20260921_20261003",
+     "granule": "NISAR_L2_PR_GUNW_031_046_A_166_032_2000_SH_20260921T103040_20260921T103115_20261003T103040_20261003T103115_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260711_20260723",
+     "granule": "NISAR_L2_PR_GUNW_025_046_A_166_026_2000_SH_20260711T103043_20260711T103117_20260723T103042_20260723T103116_P05023_N_F_J_001"
+    }
    }
   },
   "verdict": "clear",
@@ -2904,27 +2963,27 @@
   "loss_lo": 0.35,
   "loss_drop": 0.25,
   "min_px": 30,
-  "time_note": "rain on 17-18 Aug (Meteored); pair 26 Jul-19 Aug (24 days); the ascending pair that ends on 16 Aug shows nothing",
-  "primary_view": "d_both",
+  "time_note": "rain on 17-18 Aug (Meteored); ascending pair 16-28 Aug holds only that rain; control 11-23 Jul ends well before it",
+  "primary_view": "a_late",
   "export_views": [
-   "d_both"
+   "a_late"
   ],
   "export_deformation": false,
   "app_views": [
-   "d_both",
-   "a_late"
+   "a_late",
+   "d_both"
   ],
-  "zoom_km": 35,
-  "summary_number": "\u2248 6,000 km\u00b2 of desert lost coherence (window-limited)",
+  "zoom_km": 40,
+  "summary_number": "\u2248 1,000 km\u00b2 of desert lost coherence (0.82 \u2192 0.62, window-limited)",
   "site_label": "Centre of the box (Atacama Desert west of the Salar de Atacama)",
-  "verdict_reason": "descending 26 Jul-19 Aug vs 2-14 Jul: window mean coherence 0.76 -> 0.41, 5,952 km2 lost (largest connected patch 3,806 km2, cut by the window); ascending 16-28 Aug vs 11-23 Jul: 0.82 -> 0.62, 1,004 km2; the ascending pair 23 Jul-16 Aug over the eastern window shows nothing. Cause (snow, rain-wet soil, mud or flash-flood deposits) not separable; a second control, 14-26 Jul, is itself dark; next descending pair 19-31 Aug: 0.48, 3,891 km2 lost; the ascending pair ending 16 Aug (before the 17-18 Aug rain) shows nothing, which brackets the change to 16-19 Aug; second box around Taltal (25.8-25.1 S) desc 26 Jul-19 Aug: 0.59 -> 0.38, 1,293 km2 lost; box around Tocopilla desc 26 Jul-19 Aug: 0.45 -> 0.24, 876 km2 within 30 km (loss ends at the coastal range); recovery: 31 Aug-12 Sep pair 0.77 and 12-24 Sep 0.80 (dry control 0.76); pre-storm pair 20 Jun-2 Jul 0.83, 0 km2 lost; same box, asc 23 Jul-16 Aug: 0.81 vs control 0.82, 1 km2 lost; elevation test (SRTM): lost share 23 % at 400-800 m, 41 % at 800-1200 m, 31 % at 1200-1600 m, 48 % at 1600-2000 m, 58 % at 2000-2400 m, 72 % at 2400-2800 m (not confined to a snow line)",
+  "verdict_reason": "ASCENDING single-storm pair 16-28 Aug (46/166) vs 11-23 Jul: box mean coherence 0.82 -> 0.62, 1,004 km2 lost (largest connected patch 128 km2) and the pair 23 Jul-16 Aug (before the rain) 0.81, then 28 Aug-9 Sep 0.75, 9-21 Sep 0.77, 21 Sep-3 Oct 0.77. Supporting, not exported: a longer descending pair 26 Jul-19 Aug (97/100) that mixes several weather episodes loses 5,952 km2 (0.76 -> 0.41; 14-26 Jul is itself dark); boxes around Taltal (0.59 -> 0.38, 1,293 km2) and Tocopilla (0.45 -> 0.24). Elevation test (SRTM, descending): lost share 23 % at 400-800 m, 41 % at 800-1200 m, 31 % at 1200-1600 m, 58 % at 2000-2400 m, 72 % at 2400-2800 m (not a snow line)",
   "extra_spots": [
    {
     "id": "patch",
-    "label": "Centre of the largest patch of lost coherence",
+    "label": "Largest patch of lost coherence",
     "lngLat": [
-     -69.4819,
-     -23.8233
+     -69.3096,
+     -23.9814
     ],
     "radius_m": 8000
    },
@@ -2932,8 +2991,8 @@
     "id": "patch2",
     "label": "Second patch",
     "lngLat": [
-     -69.2439,
-     -23.1878
+     -69.0488,
+     -23.5559
     ],
     "radius_m": 6000
    },
@@ -2941,16 +3000,16 @@
     "id": "reference",
     "label": "Reference: stays coherent in both pairs",
     "lngLat": [
-     -69.746,
-     -23.1735
+     -69.8675,
+     -23.701
     ],
     "radius_m": 4000
    }
   ],
   "story": {
-   "see": "On 17 and 18 August 2026 a cut-off low brought record rain to northern Chile: more than 37 mm in two days at Tocopilla and 33 mm at Taltal, new daily records at Arica and Iquique, and a mudflow down the hills of Tocopilla on the afternoon of 18 August (Meteored). NASA Earth Observatory shows back-to-back winter storms that month with rare snow from the Andes to near the coast (Landsat 6 and 14 August, MODIS 19 August). The orange area is where the radar picture between NISAR's 26 July and 19 August passes no longer matches the dry pair before it (2 to 14 July): about 6,000 km2 in this 115 x 110 km box of the desert west of the Salar de Atacama, the box edge cutting it off.",
-   "physics": "In the hyper-arid desert the ground hardly changes: the average coherence of this box was 0.76 in the dry pair, 0.83 a month earlier. After the rain it fell to 0.41 (19 to 31 August: 0.48), and by 31 August to 12 September it was back at 0.77, so the desert lost its fingerprint for about three weeks. The ascending pass of 16 to 28 August shows the same (0.82 to 0.62), and so do boxes near Taltal and Tocopilla. The loss is not a snow line: 41 % of the comparable ground lost coherence at 800-1,200 m, the desert floor, and 72 % at 2,400-2,800 m. We cannot say how much is snow, wet soil or flood deposit.",
-   "lband": "NISAR's L-band radar has a wavelength of about 24 cm. Dry snow is largely transparent to it, and the ascending pair of 23 July to 16 August, which ends the day before the rain, shows nothing in this box either (0.81 against 0.82); wet ground and moved sediment are not transparent. The dry pair before is bright almost everywhere, so a desert-wide drop stands out. One more pair we tried as a control (14 to 26 July) is itself dark over part of this desert; we do not know why, and we use the pair of 2 to 14 July.",
+   "see": "On 17 and 18 August 2026 a cut-off low brought record rain to northern Chile: more than 37 mm in two days at Tocopilla and 33 mm at Taltal, new daily records at Arica and Iquique, and a mudflow down the hills of Tocopilla on the afternoon of 18 August (Meteored). NASA Earth Observatory shows back-to-back winter storms that month with rare snow from the Andes to near the coast. The orange area is where the radar picture between NISAR's 16 and 28 August passes no longer matches the dry pair of 11 to 23 July: about 1,000 km2 in this 115 x 110 km box of the desert west of the Salar de Atacama, the box edge cutting it off. The pair holds the 17-18 August rain and no other storm.",
+   "physics": "In the hyper-arid desert the ground hardly changes: the average coherence of this box was 0.82 in the dry control and 0.81 in the pair of 23 July to 16 August, which ends the day before the rain. In the pair of 16 to 28 August it fell to 0.62, and it was back to 0.75 for 28 August to 9 September and 0.77 after, so the effect lasts days to a couple of weeks, as long as the ground takes to dry. A longer descending pair (26 July to 19 August) that mixes several weather episodes shows more, about 6,000 km2, and boxes near Taltal and Tocopilla agree. The loss is not a snow line: 41 % of the comparable ground lost coherence at 800-1,200 m, the desert floor, and 72 % at 2,400-2,800 m. We cannot say how much is snow, wet soil or flood deposit.",
+   "lband": "NISAR's L-band radar has a wavelength of about 24 cm. Dry snow is largely transparent to it; wet ground and moved sediment are not. The dry control is bright almost everywhere, so a desert-wide drop stands out, and the same recipe applied to the dry pair before the rain finds about 1 km2. One other descending pair (14 to 26 July) is itself dark over part of this desert; we do not know why, so the control used here is the ascending pair of 11 to 23 July.",
    "people": "This map shows where the surface changed, not damage. We did not look at reports of damage or casualties."
   }
  },
@@ -3021,7 +3080,7 @@
     "data_view": "a_ev"
    }
   },
-  "verdict": null,
+  "verdict": "not detected",
   "deformation": false,
   "time_note": "rain ramped up 28 Sep, Polo's remnants 29 Sep, lasting into 2 Oct (weather.com)",
   "loss_hi": 0.45,
@@ -3081,7 +3140,7 @@
     }
    }
   },
-  "verdict": null,
+  "verdict": "not detected",
   "deformation": false,
   "time_note": "record wettest September at Albuquerque (4.49 in); rain 28 Sep-2 Oct (weather.com)",
   "loss_hi": 0.45,
@@ -3158,7 +3217,7 @@
     "data_view": "asc4w"
    }
   },
-  "verdict": null,
+  "verdict": "not attributed (epicentral zone)",
   "deformation": false,
   "loss_hi": 0.4,
   "loss_lo": 0.3,
@@ -3220,7 +3279,7 @@
     "control_after_event": true
    }
   },
-  "verdict": null,
+  "verdict": "not detected",
   "deformation": false,
   "loss_hi": 0.45,
   "loss_lo": 0.35,
@@ -3271,7 +3330,7 @@
    }
   },
   "time_note": "episode 53 began 12 Aug 15:45 HST (USGS HVO table); pair 11-23 Aug holds only this episode",
-  "verdict": null
+  "verdict": "not detected"
  },
  {
   "id": "polo-baja-2026",
@@ -3340,7 +3399,7 @@
     "data_view": "a_ev"
    }
   },
-  "verdict": null,
+  "verdict": "not detected",
   "deformation": false,
   "loss_hi": 0.45,
   "loss_lo": 0.35,
@@ -3400,7 +3459,7 @@
     }
    }
   },
-  "verdict": null,
+  "verdict": "supports atacama-west-2026",
   "deformation": false,
   "time_note": "rain on 17-18 Aug, mudflow in Tocopilla on the afternoon of 18 Aug (Meteored)",
   "loss_hi": 0.45,
@@ -3446,7 +3505,7 @@
     }
    }
   },
-  "verdict": null,
+  "verdict": "supports atacama-west-2026",
   "deformation": false,
   "time_note": "33.4 mm in two days at Taltal (Meteored)",
   "loss_hi": 0.45,
@@ -3506,7 +3565,7 @@
     }
    }
   },
-  "verdict": null,
+  "verdict": "not detected",
   "deformation": false,
   "loss_hi": 0.45,
   "loss_lo": 0.35,
@@ -3566,7 +3625,7 @@
     }
    }
   },
-  "verdict": null,
+  "verdict": "not detected",
   "deformation": false,
   "loss_hi": 0.45,
   "loss_lo": 0.35,
@@ -3626,7 +3685,7 @@
     }
    }
   },
-  "verdict": null,
+  "verdict": "not detected",
   "deformation": false,
   "loss_hi": 0.45,
   "loss_lo": 0.35,
@@ -3732,12 +3791,90 @@
     "data_view": "a_20260818"
    }
   },
-  "verdict": null,
+  "verdict": "not detected",
   "deformation": false,
   "loss_hi": 0.45,
   "loss_lo": 0.35,
   "loss_drop": 0.25,
   "min_px": 12,
   "time_note": "effusive activity with lava flows 6-10 Aug and continuing 8-14 Oct (Watchers); consecutive pairs used as before/after of each other"
+ },
+ {
+  "id": "hotan-rain-2026",
+  "type": "storm",
+  "title": "Record rain at Hotan, Taklamakan Desert margin, 20 Jun 2026",
+  "time": "2026-06-20T06:00:00Z",
+  "lat": 37.11,
+  "lon": 79.92,
+  "place": "Hotan, Xinjiang, China",
+  "window": [
+   79.55,
+   36.95,
+   80.35,
+   37.55
+  ],
+  "heights": [
+   1200,
+   1800
+  ],
+  "radius_km": 25,
+  "far_km": 75,
+  "gmin": 0.35,
+  "source_url": "https://global.chinadaily.com.cn/a/202606/23/WS6a3a90e6a310986e2b4617ac.html",
+  "views": {
+   "d106_post": {
+    "track": 106,
+    "frame": 70,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260621_20260703",
+     "granule": "NISAR_L2_PR_GUNW_023_106_D_070_024_2000_SH_20260621T132918_20260621T132953_20260703T132917_20260703T132952_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260703_20260715",
+     "granule": "NISAR_L2_PR_GUNW_024_106_D_070_025_2000_SH_20260703T132917_20260703T132952_20260715T132917_20260715T132951_P05023_N_F_J_001"
+    },
+    "control_after_event": true
+   },
+   "d106_null": {
+    "track": 106,
+    "frame": 70,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260703_20260715",
+     "granule": "NISAR_L2_PR_GUNW_024_106_D_070_025_2000_SH_20260703T132917_20260703T132952_20260715T132917_20260715T132951_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260715_20260727",
+     "granule": "NISAR_L2_PR_GUNW_025_106_D_070_026_2000_SH_20260715T132917_20260715T132951_20260727T132916_20260727T132951_P05023_N_F_J_001"
+    },
+    "data_view": "d106_post",
+    "control_after_event": true
+   },
+   "d34_post": {
+    "track": 34,
+    "frame": 70,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260628_20260710",
+     "granule": "NISAR_L2_PR_GUNW_024_034_D_070_025_2000_SH_20260628T133737_20260628T133811_20260710T133736_20260710T133811_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260710_20260722",
+     "granule": "NISAR_L2_PR_GUNW_025_034_D_070_026_2000_SH_20260710T133736_20260710T133811_20260722T133735_20260722T133810_P05023_N_F_J_001"
+    },
+    "control_after_event": true
+   }
+  },
+  "verdict": "not detected",
+  "deformation": false,
+  "loss_hi": 0.45,
+  "loss_lo": 0.35,
+  "loss_drop": 0.25,
+  "min_px": 30,
+  "time_note": "64.7 mm in 24 h at Hotan on Saturday 20 Jun (China Daily); no NISAR pair starts before it: the first passes are 21 Jun (day after) and 28 Jun, so the control is a LATER pair"
  }
 ]

@@ -602,7 +602,7 @@ def before_after_fig(ev, half_km=None):
     plt.close(fig)
 
 
-def timeline_fig(ev, views):
+def timeline_fig(ev, views, name="timeline.png"):
     """timeline.png: window-mean coherence of the event pair of each listed view (results.json) against its mid-date, plus the
     control pair of the first view; shows the drop and the recovery for a weather-type event."""
     plt = _plt()
@@ -624,7 +624,7 @@ def timeline_fig(ev, views):
     ax.set_ylim(0, 1); ax.set_ylabel("mean coherence of the box"); ax.legend(fontsize=7)
     ax.set_title(f"{ev['place'][:60]}: mean coherence of the box, one point per pair (mid-date)", fontsize=8)
     fig.autofmt_xdate()
-    _save(ev, fig, "timeline.png", dpi=90)
+    _save(ev, fig, name, dpi=90)
     plt.close(fig)
 
 
@@ -687,7 +687,7 @@ def main(argv):
     elif cmd == "fig_ba":
         before_after_fig(get_event(argv[2]))
     elif cmd == "timeline":
-        timeline_fig(get_event(argv[2]), argv[3].split(","))
+        timeline_fig(get_event(argv[2]), argv[3].split(","), argv[4] if len(argv) > 4 else "timeline.png")
     elif cmd == "overview":
         overview()
     elif cmd == "app_events":
