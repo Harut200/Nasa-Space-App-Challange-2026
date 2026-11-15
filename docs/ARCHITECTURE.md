@@ -6,7 +6,7 @@ Formulas and every number in detail: [DETECTION.md](DETECTION.md). One-page summ
 
 ## 1. The idea in four sentences
 
-Each radar pass is weak evidence about the state of each pixel: open water, vegetation standing in water, or dry land. Several independent "experts" read that evidence in different ways — physics rules, fitted probability distributions, statistical tests, the pixel graph, learned features — and each reports a probability, not a verdict. Three kinds of prior knowledge constrain the answer: terrain (water lies flat and low), time (states persist and follow a physical order), and space (neighbours agree). The system combines evidence and priors into one probability per pixel per date, and the products shown to the user — maps, dates of change, areas with error bars, the flood's arrival time — are read from that result or, where the result is known to be biased, from the expert that is not.
+Each radar pass is weak evidence about the state of each pixel: open water, vegetation standing in water, or dry land. Several independent "experts" read that evidence in different ways, physics rules, fitted probability distributions, statistical tests, the pixel graph, learned features, and each reports a probability, not a verdict. Three kinds of prior knowledge constrain the answer: terrain (water lies flat and low), time (states persist and follow a physical order), and space (neighbours agree). The system combines evidence and priors into one probability per pixel per date, and the products shown to the user, maps, dates of change, areas with error bars, the flood's arrival time, are read from that result or, where the result is known to be biased, from the expert that is not.
 
 The last clause is the main lesson of the day (section 5): the first fused system (v1) was the best answer for lakes and mountains but shrank a rising floodplain. Fusion v2 changed the time model, added a floodplain zone found without any reference and added a self-calibrating detector as an expert. It is now the water source for the water places (15 when this was written; the app has 18 water and farmland places on 15 November), and the choice per kind of terrain happens inside it.
 
@@ -60,7 +60,7 @@ Solid arrows carry data; dotted arrows carry measurements, references and the ca
 
 ## 3. Layers
 
-### Layer 0 — Quality control and conditioning (built, in the app)
+### Layer 0: Quality control and conditioning (built, in the app)
 
 **Quality control** ([`qc.py`](../scripts/detect/qc.py), [`qc.md`](eda/qc.md)) runs first: it scores every pass of every area against the other dates on stable land (gain, contrast, channel balance, across-track slope, leave-one-date-out departure and its spatial pattern, residual misregistration, metadata) and writes `qc.json`. A channel that fails is replaced by the per-pixel median of the other dates before detection, so it can create neither a fake step nor a fake gain. Result: 134 passes in 15 areas; 3 pass-channels fail, including Armenia's 6 October HV (Sevan: departure 4.6× usual, channel balance $z = -12$); no false alarm on the Tonle Sap flood dates. Neutralising that HV pass halves the HV noise of stable land at Ararat and removes 14–17 % of the spurious change points in Armenia. [`run.py`](../scripts/detect/run.py) applies it.
 
@@ -68,7 +68,7 @@ Solid arrows carry data; dotted arrows carry measurements, references and the ca
 
 Output: $L_{t,c}(i)$, the filtered log-like intensity of pixel $i$ on date $t$ in channel $c \in \{\text{HH}, \text{HV}\}$, and a validity mask.
 
-### Layer 1 — Evidence experts (results)
+### Layer 1: Evidence experts (results)
 
 Each expert $k$ maps the conditioned data to a probability over states $s \in \{\text{water}, \text{flooded vegetation}, \text{land}\}$ for every pixel and date, $p_k(s \mid L_t(i))$, or to evidence that a change happened between dates.
 
@@ -82,7 +82,7 @@ Each expert $k$ maps the conditioned data to a probability over states $s \in \{
 | Seeded (self-calibrating) detector | each date relative to the scene's own permanent-water seeds, no absolute brightness ([`crossscene.md`](eda/crossscene.md)) | Pantanal 0.500 → 0.994 and Lake Chad 0.503 → 0.976 balanced accuracy (on certain pixels only; against NASA's OPERA product Lake Chad is wrong and the Pantanal weak, [`opera.md`](eda/opera.md)); 10 of 15 places work (fixed thresholds: 9); fails on the Nile delta, thin rivers (Mekong) and, held out, Rondônia | **admitted** as a fusion v2 expert (weight 0.37) and as the source of its per-scene switch |
 | Sub-pixel water fraction | how dark a shoreline pixel is between pure water and nearby land | Sevan calm-date area 1,242.5 km² against the published 1,242 km² (hard mask −16 km²); shoreline placed to 52–63 m median from 180 m pixels | **admitted** (Sevan only) |
 
-### Layer 2 — Priors (results)
+### Layer 2: Priors (results)
 
 | Prior | Statement | Source | Result |
 |---|---|---|---|
@@ -91,7 +91,7 @@ Each expert $k$ maps the conditioned data to a probability over states $s \in \{
 | Time | water tends to stay water | transition matrix learned by Baum–Welch on tune-strip pixels | **admitted**; fixes the Sevan rough-surface dip (66 → 0.8 km²); but learned on pixels that almost never change, so it resists late flooding (land → water 0.0013 per 12 days at Tonle Sap) |
 | Space | neighbours share a state | a masked 3 × 3 mean of the posterior (the graph-weighted smoothing was not built) | **admitted** (small gains) |
 
-### Layer 3 — Fusion (v2 shipped; v1 described for its failure)
+### Layer 3: Fusion (v2 shipped; v1 described for its failure)
 
 Per pixel and date, experts and the terrain prior are combined by a weighted product (log-linear pooling), written in log-odds:
 
@@ -115,7 +115,7 @@ Planned in the first draft of v1 but **not built**: three states (flooded vegeta
 
 Output: $\gamma_t(i)$, a water probability per pixel and date, in `data/processed/<area>/fusion/products.pt`.
 
-### Layer 4 — Products (results)
+### Layer 4: Products (results)
 
 | Product | Definition | Read from | Result |
 |---|---|---|---|
@@ -127,7 +127,7 @@ Output: $\gamma_t(i)$, a water probability per pixel and date, in `data/processe
 | Floodplain height from flood order | earlier flooded means lower | flood front | against the elevation model ρ = 0.45 (0.25 without its flattened water); against 38-year Landsat water frequency ρ = −0.47 |
 | Choreography map | per pixel, a fitted logistic step: moment, size and tempo, painted as one colour image | conditioned data | step moment agrees with the change point (ρ = 0.95); a REACTIV-style composite with a significance test |
 
-### Layer 5 — Verification (results)
+### Layer 5: Verification (results)
 
 | Check | Independent of the detector? | Result |
 |---|---|---|
@@ -152,7 +152,7 @@ Output: $\gamma_t(i)$, a water probability per pixel and date, in `data/processe
 For fusion v1, a module was added to the fused system only if, on the untouched TEST strip and on Lake Sevan (declared in code as `fusion.RULE` before any TEST number was read):
 
 1. it did not lower balanced accuracy on always-water and never-water pixels by more than 0.1 percentage point in any area, and
-2. it improved at least one named weakness by a measurable amount — mountain false water by ≥ 10 % and ≥ 1 km², the Sevan rough-surface dip by ≥ 10 km², or date-to-date flips on stable pixels by ≥ 10 % and ≥ 0.005 — and
+2. it improved at least one named weakness by a measurable amount, mountain false water by ≥ 10 % and ≥ 1 km², the Sevan rough-surface dip by ≥ 10 km², or date-to-date flips on stable pixels by ≥ 10 % and ≥ 0.005, and
 3. it ran on a laptop in under 10 minutes per area.
 
 Flooded-vegetation stability, listed in the first draft, could not be measured, because the fused model has two states.
@@ -223,7 +223,7 @@ Modules that failed stay in the repository as documented experiments. Reporting 
 Judges score impact, creativity, validity, relevance and presentation. A longer list of algorithms does not move any of those. What can, and where we stand:
 
 - **One original result people remember.** *Exists*: a map of the day the flood arrived at each place, including the 24 days the satellite was blind, with a measured skill (hiding real passes) and the finding that there was no hidden surge; and a relative height map of the floodplain read from the order of flooding alone, checked against an elevation model it never saw. The prior-art check is done ([`novel.md`](eda/novel.md)): the waterline idea is about 30 years old; the chain and the order-as-height reading are, to our knowledge, a new combination, never "first".
-- **Validity nobody else at the hackathon will have.** *Exists*: held-out testing with an adoption gate written in advance, one scoreboard for every detector, uncertainty bands on every area, independent 2026 checks against a NASA altimeter and river gauges, and a public list of our own errors — including the two claims the 2026 data corrected and the gap in our own admission rule.
+- **Validity nobody else at the hackathon will have.** *Exists*: held-out testing with an adoption gate written in advance, one scoreboard for every detector, uncertainty bands on every area, independent 2026 checks against a NASA altimeter and river gauges, and a public list of our own errors, including the two claims the 2026 data corrected and the gap in our own admission rule.
 - **Real NISAR science.** *Partly*: water under vegetation, which L-band sees and optical sensors and C-band radar miss, is now a stable layer whose July rise matches the river gauge. Calibrated data are extracted and analysed for Tonle Sap (the area uncertainty at the flood peak narrows from a factor 2.4 to 1.25), but only Tonle Sap is in the app (`tonle-sap-cal`), the vegetation area is still unvalidated, and the same thresholds fail in Armenia. Coherence adds a second line of evidence in the Ararat Valley.
 - **A live app that works on a phone, with places on several continents.** *Partly*: 37 places in Asia, Africa, South America, North America and Europe (Armenia on the Europe–Asia boundary) are exported for the app. Against NASA's OPERA water product our maps agree at Sevan and Tonle Sap (97.5 % of pixels, IoU 0.84) but are wrong at Inner Niger, Lake Chad and Urmia ([`opera.md`](eda/opera.md)). **Deployment** and a phone check are not confirmed in any document we read.
 - **A clear story.** One sentence ("NISAR saw the Tonle Sap rise first under the trees, then on open water, and our area follows NASA's altimeter at 0.98"), one animation (the arrival-day map), one number.

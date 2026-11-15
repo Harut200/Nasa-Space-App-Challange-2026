@@ -1,4 +1,4 @@
-# Submission Rules — Space Apps 2026
+# Submission Rules: Space Apps 2026
 
 Gathered 14 November 2026. The official site would not load directly, so these were read through a translated mirror of the official pages and are close paraphrase, not exact wording. **Read the originals in a browser before relying on any detail:**
 
@@ -35,8 +35,8 @@ Path: profile → My Team → Project.
 4. Link to final project
 5. Detailed project description
 6. Use of AI tools (the form calls this "Use of Super Intelligence (SI)")
-7. NASA data used — at least one NASA source is required for global awards
-8. Space agency partner data and other references — all data, tools, code, text and images used
+7. NASA data used, at least one NASA source is required for global awards
+8. Space agency partner data and other references: all data, tools, code, text and images used
 
 Length limits for the fields were not found. Images (JPG, PNG, GIF, up to 10 MB) upload directly; video and documents do not.
 

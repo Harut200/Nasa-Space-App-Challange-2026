@@ -13,7 +13,7 @@ cd src/app2 && ln -s ../app/node_modules node_modules && npx vite --port 5174   
 
 Open `http://localhost:5173/Nasa-Space-App-Challange-2026/` and `http://localhost:5174/Nasa-Space-App-Challange-2026/`.
 
-## A — Natural map (`src/app`)
+## A: Natural map (`src/app`)
 
 Real satellite globe (NASA Blue Marble, Sentinel-2 detail). Dots are the places (37 now). Click, fly in, press Play: the flood spreads over real terrain. Floating glass panels. Big number that follows the date. Drag-to-compare two dates.
 
@@ -22,7 +22,7 @@ Real satellite globe (NASA Blue Marble, Sentinel-2 detail). Dots are the places 
 - State: tried by hand in Chrome; compare bug found and fixed. Phone layout and two extra themes not re-checked.
 - Try: `#/tonle-sap?layer=water&date=2026-10-17&compare&split=50`
 
-## B — Story mode (`src/app2`)
+## B: Story mode (`src/app2`)
 
 "A season, performed." Opening with the flood already playing. Six scenes per place driven by arrow keys. Timeline is the water curve itself, with the uncertainty band and the outage as a gap. Gallery of all places with sparklines. "How sure are we?" sheet.
 

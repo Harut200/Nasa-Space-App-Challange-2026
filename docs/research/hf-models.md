@@ -35,8 +35,8 @@ Possible adaptations, from cheapest to most expensive:
 
 | Model (HF repo) | Licence | Architecture, params | Pretraining sensor / data | Input | Weights (size, format) | Plain PyTorch? | Fit to NISAR L-band HH/HV | Verified |
 |---|---|---|---|---|---|---|---|---|
-| [gsvrg/ALOS-2_FM](https://huggingface.co/gsvrg/ALOS-2_FM) (SAR-W-SimMIM, [code](https://github.com/gsvrg/SAR-W-SimMIM), [paper](https://arxiv.org/abs/2603.15119)) | MIT (+ JAXA data credit required) | Swin-B (embed 128, depths 2-2-18-2, window 8, abs. pos. emb.), ≈88 M | **ALOS-2 PALSAR-2 L-band HH**, Japan, SimMIM 800 epochs | 1 ch, 256², dB normalised (mean −10.43, std 5.80) | encoder 352 MB `.pth`; LULC-finetuned 1.1 GB | yes — our own Swin module in `foundation.py` (shape-tested, weights not loaded) | **best**: same band, HH; no HV; Japan only | yes |
-| [torchgeo/ai4g_flood](https://huggingface.co/torchgeo/ai4g_flood) (Microsoft [ai4g-flood](https://github.com/microsoft/ai4g-flood), Nature Comms 2025) | MIT | U-Net + MobileNetV2, 6.6 M | Sentinel-1 RTC VV/VH, global floods, 10 years | 2 **binary change** channels (VV, VH "became dark" pre→post), 128² | 27 MB `.pth` (state dict) | **yes** (torchvision MobileNetV2 + our decoder) — **loaded, strict key match** | medium: rules are dB thresholds, transferable via channel mapping; floods only, not permanent water | yes |
+| [gsvrg/ALOS-2_FM](https://huggingface.co/gsvrg/ALOS-2_FM) (SAR-W-SimMIM, [code](https://github.com/gsvrg/SAR-W-SimMIM), [paper](https://arxiv.org/abs/2603.15119)) | MIT (+ JAXA data credit required) | Swin-B (embed 128, depths 2-2-18-2, window 8, abs. pos. emb.), ≈88 M | **ALOS-2 PALSAR-2 L-band HH**, Japan, SimMIM 800 epochs | 1 ch, 256², dB normalised (mean −10.43, std 5.80) | encoder 352 MB `.pth`; LULC-finetuned 1.1 GB | yes: our own Swin module in `foundation.py` (shape-tested, weights not loaded) | **best**: same band, HH; no HV; Japan only | yes |
+| [torchgeo/ai4g_flood](https://huggingface.co/torchgeo/ai4g_flood) (Microsoft [ai4g-flood](https://github.com/microsoft/ai4g-flood), Nature Comms 2025) | MIT | U-Net + MobileNetV2, 6.6 M | Sentinel-1 RTC VV/VH, global floods, 10 years | 2 **binary change** channels (VV, VH "became dark" pre→post), 128² | 27 MB `.pth` (state dict) | **yes** (torchvision MobileNetV2 + our decoder): **loaded, strict key match** | medium: rules are dB thresholds, transferable via channel mapping; floods only, not permanent water | yes |
 | [Fabien-Ctrees/sentinel1-water-unet](https://huggingface.co/Fabien-Ctrees/sentinel1-water-unet) | CC BY 4.0 | plain U-Net, 34.6 M | Sentinel-1 VV/VH 10 m, Amazon, 59k labelled water patches | 4 ch (VV,VH,VV,VH) 8-bit from dB | 138 MB `.safetensors` | yes (simple U-Net; card documents layers) | medium: real **water labels** from elsewhere; C-band; Amazon only | yes |
 | [wangyi111/SSL4EO-S12](https://huggingface.co/wangyi111/SSL4EO-S12) (`B2_vits16_mae_ep99_enc.pth`, `B2_rn50_moco_0099_backbone.pth`); safetensors copies in [BiliSakura/SSL4EO-S12-transformers](https://huggingface.co/BiliSakura/SSL4EO-S12-transformers) | CC BY 4.0 | ViT-S/16 ≈22 M, ResNet-50 ≈23 M, up to ViT-H | Sentinel-1 GRD VV/VH (B2), global SSL4EO-S12 | 2 ch, 224² | 86 MB (ViT-S enc), 112 MB (RN50) | yes (timm/torchvision layouts) | C-band SSL features, no labels | yes |
 | [torchgeo/resnet50_sentinel1_all_moco](https://huggingface.co/torchgeo/resnet50_sentinel1_all_moco) | CC BY 4.0 | ResNet-50, ≈23 M | SSL4EO-S12 Sentinel-1 | 2 ch | 94 MB | yes (torchvision ResNet-50) | as above | yes |
@@ -45,9 +45,9 @@ Possible adaptations, from cheapest to most expensive:
 | [wangyi111/FGMAE](https://huggingface.co/wangyi111/FGMAE) | CC BY 4.0 | ViT-S/B/L/H | SSL4EO-S12 S1 (B2), feature-guided MAE | 2 ch | 86 MB (ViT-S enc) up to 2.5 GB | yes | C-band | yes |
 | [nasaharvest/galileo](https://huggingface.co/nasaharvest/galileo) | MIT | ViT nano/tiny/base | multimodal: S1 VV/VH, S2, ERA5, DEM, … | many token groups, months | nano 4 MB, tiny 23 MB, base 346 MB (`.pt`) | not quickly (complex multimodal tokenisation; we would have to re-implement it) | C-band; tiny download | yes |
 | [allenai/satlas-pretrain](https://huggingface.co/allenai/satlas-pretrain) (`sentinel1_swinb_si.pth`) | repo Apache-2.0, **weights ODC-BY** | Swin-v2-B ≈88 M | Sentinel-1 VV/VH, supervised on many labels | 2 ch | 434 MB | yes (torchvision `swin_v2_b`) | C-band, supervised features include water | yes |
-| [ibm-esa-geospatial/TerraMind-1.0-tiny](https://huggingface.co/ibm-esa-geospatial/TerraMind-1.0-tiny) / small / base | Apache-2.0 | any-to-any multimodal ViT | S1GRD, S1RTC, S2, DEM, LULC, NDVI (TerraMesh) | per-modality tokens | 212 MB / 504 MB / 1.5 GB | **no** — needs `terratorch` (not installed by design) | C-band | yes |
+| [ibm-esa-geospatial/TerraMind-1.0-tiny](https://huggingface.co/ibm-esa-geospatial/TerraMind-1.0-tiny) / small / base | Apache-2.0 | any-to-any multimodal ViT | S1GRD, S1RTC, S2, DEM, LULC, NDVI (TerraMesh) | per-modality tokens | 212 MB / 504 MB / 1.5 GB | **no**: needs `terratorch` (not installed by design) | C-band | yes |
 | [ibm-esa-geospatial/TerraMind-base-Flood](https://huggingface.co/ibm-esa-geospatial/TerraMind-base-Flood) | Apache-2.0 | TerraMind-base + temporal decoder | ImpactMesh-Flood (S1RTC+S2+DEM, 4 dates, EMS labels) | S2 12 ch + S1 2 ch + DEM | 673 MB | no (terratorch 1.2.1) | C-band flood labels, needs S2 | yes |
-| [ibm-nasa-geospatial/Prithvi-EO-2.0-300M-TL-Sen1Floods11](https://huggingface.co/ibm-nasa-geospatial/Prithvi-EO-2.0-300M-TL-Sen1Floods11) (also 1.0-100M-sen1floods11) | Apache-2.0 | ViT-L ≈300 M (+ decoder) | **Sentinel-2/HLS optical** 6 bands | optical only | 1.28 GB `.pt` | no (terratorch) | **none — optical, cannot read radar** | yes |
+| [ibm-nasa-geospatial/Prithvi-EO-2.0-300M-TL-Sen1Floods11](https://huggingface.co/ibm-nasa-geospatial/Prithvi-EO-2.0-300M-TL-Sen1Floods11) (also 1.0-100M-sen1floods11) | Apache-2.0 | ViT-L ≈300 M (+ decoder) | **Sentinel-2/HLS optical** 6 bands | optical only | 1.28 GB `.pt` | no (terratorch) | **none: optical, cannot read radar** | yes |
 | [ibm-nasa-geospatial/Prithvi-EO-2.0-300M](https://huggingface.co/ibm-nasa-geospatial/Prithvi-EO-2.0-300M) (also tiny-TL, 100M-TL, 600M) | Apache-2.0 | ViT ≈300 M | HLS optical | optical | 1.33 GB | partly | none for radar | yes |
 | [ibm-granite/granite-geospatial-uki-flooddetection](https://huggingface.co/ibm-granite/granite-geospatial-uki-flooddetection) | Apache-2.0 | Prithvi-type | S1 + S2, UK/Ireland floods | S1+S2 | 1.13 GB `.ckpt` | no (terratorch) | needs optical | yes |
 | [made-with-clay/Clay](https://huggingface.co/made-with-clay/Clay) v1.5 | Apache-2.0 | ViT MAE ≈630 M | S1, S2, Landsat, NAIP, … | dynamic | 5.2 GB `.ckpt` | no (too large; Lightning ckpt) | C-band | yes |
@@ -56,8 +56,8 @@ Possible adaptations, from cheapest to most expensive:
 | [wangyi111/Copernicus-FM](https://huggingface.co/wangyi111/Copernicus-FM) | CC BY 4.0 | ViT-B, hypernetwork patch embedding | Copernicus S1/S2/S3/S5P | any | 558 MB | yes with their code | C-band; metadata-flexible | yes |
 | [g-astruc/AnySat](https://huggingface.co/g-astruc/AnySat) | MIT | multi-resolution JEPA | many sensors incl. S1 | any | 504 MB | needs their code | C-band | yes |
 | [waterdisappear/SARATR-X](https://huggingface.co/waterdisappear/SARATR-X) (and -v2) | **CC BY-NC 4.0** (v1, gated); v2 MIT but **manually gated** | HiViT-B | SAR target-recognition images (ships, aircraft) | 1 ch | 263 MB – 4 GB | needs mmdet/mmseg | poor: object chips, not land/water | yes |
-| SAR-W-MixMAE (AIST, [arXiv 2601.15705](https://arxiv.org/abs/2601.15705)) | — | — | ALOS-2 | — | **no weights found on HF** | — | would be L-band | searched, not found |
-| DINOv2/DINOv3, SAM/SAM 2, SegFormer | various | photo models | RGB photos | 3 ch | — | yes | weak: speckle statistics and dB brightness are nothing like photos; at 180 m there are few shapes to segment | **not re-checked today** |
+| SAR-W-MixMAE (AIST, [arXiv 2601.15705](https://arxiv.org/abs/2601.15705)) | - | - | ALOS-2 | - | **no weights found on HF** | - | would be L-band | searched, not found |
+| DINOv2/DINOv3, SAM/SAM 2, SegFormer | various | photo models | RGB photos | 3 ch | - | yes | weak: speckle statistics and dB brightness are nothing like photos; at 180 m there are few shapes to segment | **not re-checked today** |
 
 **L-band search.** We searched the HF model hub for "ALOS", "PALSAR", "L-band", "NISAR", "UAVSAR" and "SAR", and the web for L-band, ALOS-2 and NISAR foundation models. Results: only `gsvrg/ALOS-2_FM` (HH, Japan). The AIST/JAXA national PALSAR-2 model and SAR-W-MixMAE are described in papers and press but have no public weights that we could find. No NISAR-pretrained model exists. The only NISAR item on HF is `WORLDSAR/nisar-outputs` (GSLC tiles, no labels, no licence tag).
 
@@ -65,12 +65,12 @@ Possible adaptations, from cheapest to most expensive:
 
 | Dataset | Sensor | Labels | Licence | Size | Usable tonight? |
 |---|---|---|---|---|---|
-| Sen1Floods11 ([blumenstiel/Sen1Floods11](https://huggingface.co/datasets/blumenstiel/Sen1Floods11), copy of [cloudtostreet](https://github.com/cloudtostreet/Sen1Floods11)) | S1 VV/VH + S2, 10 m | 446 hand-labelled 512² chips, water/flood, 11 events | original CC BY 4.0 (HF copy has no licence tag) | 1.77 GB (labelled subset) | ~10 h at 50 KB/s — no |
+| Sen1Floods11 ([blumenstiel/Sen1Floods11](https://huggingface.co/datasets/blumenstiel/Sen1Floods11), copy of [cloudtostreet](https://github.com/cloudtostreet/Sen1Floods11)) | S1 VV/VH + S2, 10 m | 446 hand-labelled 512² chips, water/flood, 11 events | original CC BY 4.0 (HF copy has no licence tag) | 1.77 GB (labelled subset) | ~10 h at 50 KB/s: no |
 | Kuro Siwo ([orion-ai-lab/Kuro-Siwo-GeoTIFFs](https://huggingface.co/datasets/orion-ai-lab/Kuro-Siwo-GeoTIFFs), webdataset version too) | S1 GRD + SLC, 1 post + 2 pre dates, DEM | expert flood / permanent water, 43 events | CC BY 4.0 | tens of GB (not summed) | no |
 | ImpactMesh-Flood ([ibm-esa-geospatial/ImpactMesh-Flood](https://huggingface.co/datasets/ibm-esa-geospatial/ImpactMesh-Flood)) | S1RTC + S2 + DEM, 4 dates | Copernicus EMS flood masks, 206 events, 24,578 samples | CC BY 4.0 | 73 GB total; S1RTC test split 2.1 GB | no |
 | ai4g-flood-dataset ([ai-for-good-lab/ai4g-flood-dataset](https://huggingface.co/datasets/ai-for-good-lab/ai4g-flood-dataset)) | S1 | flood maps from the ai4g model | not verified (API timed out) | not verified | no |
-| WorldFloods, S1GFloods, UrbanSARFloods, STURM-Flood, SentForFlood | S2 (WorldFloods), S1 (others) | flood masks | not verified today | — | no |
-| L-band (ALOS-2/PALSAR, UAVSAR, NISAR) labelled water or flood sets | — | — | — | — | **none found.** The JAXA LULC labels used for ALOS-2_FM are not distributed |
+| WorldFloods, S1GFloods, UrbanSARFloods, STURM-Flood, SentForFlood | S2 (WorldFloods), S1 (others) | flood masks | not verified today | - | no |
+| L-band (ALOS-2/PALSAR, UAVSAR, NISAR) labelled water or flood sets | - | - | - | - | **none found.** The JAXA LULC labels used for ALOS-2_FM are not distributed |
 
 So **no labelled set is realistic tonight**. Our labels remain the math detector (terrain-masked), and the independent check remains JRC Global Surface Water.
 
@@ -80,21 +80,21 @@ So **no labelled set is realistic tonight**. Our labels remain the math detector
 |---|---|---|---|---|---|---|---|---|---|
 | 1 | **gsvrg/ALOS-2_FM** Swin-B encoder + light head | **high** (L-band HH) | MIT + JAXA credit | 352 MB | ≈88 M | yes (our module) | frozen encoder, head only: ~5–10 min at 224², batch 4 | L-band texture and backscatter features from many scenes | loaded and tested (§6b): beats random init, below the math detector on previews; Japan-only HH; 180 m previews ≠ ALOS-2 stripmap |
 | 2 | **torchgeo/ai4g_flood** | medium (via dB rules) | MIT | 27 MB | 6.6 M | **yes, tested** | decoder only: 2–3 min | a flood-cleaning network trained on 10 years of global floods | input is a binary rule mask; ignores permanent water and flooded vegetation |
-| 3 | Fabien-Ctrees/sentinel1-water-unet | medium | CC BY 4.0 | 138 MB | 34.6 M | yes (needs a U-Net rewrite) | decoder: ~10 min | **independent** water labels (Amazon) — a second opinion that is not our detector | C-band 10 m; Amazon only; 8-bit dB scaling must be imitated |
+| 3 | Fabien-Ctrees/sentinel1-water-unet | medium | CC BY 4.0 | 138 MB | 34.6 M | yes (needs a U-Net rewrite) | decoder: ~10 min | **independent** water labels (Amazon): a second opinion that is not our detector | C-band 10 m; Amazon only; 8-bit dB scaling must be imitated |
 | 4 | SSL4EO-S12 S1 ViT-S/16 MAE or SoftCon ViT-S/14 | low–medium | CC BY 4.0 | 86 MB | 22 M | yes | head: ~5 min | generic C-band SAR features | no labels; patch 16 at 180 m is very coarse |
-| 5 | Galileo nano/tiny | low–medium | MIT | 4–23 MB | ≈1–6 M | no (complex input) | — | multimodal (S1 + DEM + weather) priors | re-implementation cost |
+| 5 | Galileo nano/tiny | low–medium | MIT | 4–23 MB | ≈1–6 M | no (complex input) | - | multimodal (S1 + DEM + weather) priors | re-implementation cost |
 
 Not practical here: TerraMind, Prithvi flood, granite flood and Clay (they need terratorch/Lightning, are optical, or exceed 1 GB). SARATR-X is non-commercial or gated and was trained on object chips.
 
 ## 5. Recipes
 
-### Primary plan — L-band encoder (gsvrg/ALOS-2_FM)
+### Primary plan: L-band encoder (gsvrg/ALOS-2_FM)
 1. Finish the download with `.venv/bin/python -m scripts.detect.foundation download alos2`. It resumes and needs a fast network, about 352 MB. Check the encoder with `load_alos2_encoder()`: `missing` and `unexpected` must be empty apart from the HV channel.
 2. **Input:** HH in dB → `(dB + 10.43) / 5.80`. On previews, first convert to pseudo-dB (30 dB per unit brightness, water anchored at −22 dB). HV goes in as channel 2 through a zero-initialised patch-embedding slice. Use 224 or 256 px tiles (the absolute position embedding is fixed at 256²).
 3. **Model:** freeze the encoder and train `LightFPNHead` (≈80k parameters, 3 classes). Use cross-entropy with ignore 255 and the class weights from the U-Net v2 run.
 4. **Labels:** v2 `math_labels` from the terrain-masked math detector on Tonle Sap west 70 %, Sevan west two-thirds and Ararat. Train for 3 epochs × 100 steps with batch 4, then unfreeze the last Swin stage at lr 1e-5 for 2 more epochs.
 5. **Validation:** IoU against the math labels on the Tonle Sap east 30 % and the Sevan east third. Agreement with JRC Global Surface Water through `scripts/detect/validate.py`, the same metric as the detector. Sevan's largest water body per date against 1,242 km² (the U-Net v2 mean absolute error is 12 km²). False water on slopes: water pixels outside the terrain `water_possible` mask.
-6. **Chance it beats the math detector:** on previews **~10–15 %** — the inputs are not dB, the pixels are 180 m, and the labels come from the detector itself. On calibrated 20 m γ⁰ **~35–40 %**, mainly for flooded vegetation, where L-band pretraining knows double-bounce texture that thresholds miss. Anything it "wins" must be shown against JRC, not against the math labels.
+6. **Chance it beats the math detector:** on previews **~10–15 %**: the inputs are not dB, the pixels are 180 m, and the labels come from the detector itself. On calibrated 20 m γ⁰ **~35–40 %**, mainly for flooded vegetation, where L-band pretraining knows double-bounce texture that thresholds miss. Anything it "wins" must be shown against JRC, not against the math labels.
 7. **What we actually ran (§6b), and how it differs from steps 2–5:**
    * Labels were the independent JRC anchors, with one water/land output, instead of the 3-class math labels.
    * We held out by place: Sevan was never seen.
@@ -103,7 +103,7 @@ Not practical here: TerraMind, Prithvi flood, granite flood and Clay (they need 
    * Result: the frozen pretrained encoder scored 0.91 balanced accuracy at Sevan, against 0.67 with random weights and 0.99 for the math detector. Unfreezing the last stage did not help.
    * Next step on calibrated γ⁰: real dB input, longer training (at least 20 min), several seeds, and HV given a learned weight before any unfreezing.
 
-### Fallback — ai4g flood network (tested; see below)
+### Fallback: ai4g flood network (tested; see below)
 1. Take the reference date (first date) and each later date as pre/post. Convert both to pseudo-dB as above, with HH in the VV slot and HV in the VH slot. Apply the ai4g dB rules (2·dB+135 scaling; VV<100, VH<90, a drop >10, minima 75/70) to get two binary change channels.
 2. Zero-shot: run the network and keep flood only where both rule channels fire (the official behaviour). This gives a **flood-extent** map, the change from the dry reference, not permanent water.
 3. Fine-tune the decoder only (encoder frozen), then decoder plus the last MobileNet stage. The target is "math water now AND NOT math water on the reference date" (terrain-masked). Train on Tonle Sap west with 128² patches, batch 4, CE with weight 3 on flood, about 2 min each.
@@ -183,7 +183,7 @@ What this shows (one seed and 2 minutes each, so treat these as indications, not
 * **It does not beat the math detector** on previews. Sevan balanced accuracy is 0.91 vs 0.99, the lake-area error is 50 vs 29 km², false far water is 74 vs 32 km² (terrain-masked), and the windy 31 Aug date is worse (1,085 vs 1,187 km²).
 * **Unfreezing the last stage hurts transfer** in a 2-minute budget: it fits the training places and loses Lake Sevan (0.66). Training on **math-detector labels** gives near-perfect agreement on Tonle Sap east (0.996), because the network copies the detector there, but it fails at Sevan (0.54). Independent labels and a frozen encoder are the combination that generalises.
 
-## 7. What to say in the pitch — and what not to
+## 7. What to say in the pitch: and what not to
 
 Say:
 * "We checked the open radar foundation models on Hugging Face. Almost all were trained on Sentinel-1 C-band. The one L-band model (AIST ALOS-2) is our upgrade path for calibrated NISAR data."
@@ -191,9 +191,9 @@ Say:
 * "Our small U-Net learns from our physics-based detector. Pretrained models did not give it knowledge it lacked on preview images, because the bottleneck is input quality and labels, not network size."
 
 Do not say:
-* that any pretrained model is "more accurate" — we have no ground truth, and every score here is agreement with our own detector;
-* that Prithvi maps our floods — the Prithvi flood model is optical (Sentinel-2) only;
-* that the L-band foundation model beats our detector — on previews it does not (Sevan balanced accuracy 0.91 vs 0.99).
+* that any pretrained model is "more accurate": we have no ground truth, and every score here is agreement with our own detector;
+* that Prithvi maps our floods: the Prithvi flood model is optical (Sentinel-2) only;
+* that the L-band foundation model beats our detector, on previews it does not (Sevan balanced accuracy 0.91 vs 0.99).
 
 Can say: "A Japanese L-band (ALOS-2) foundation model, with a small head trained on Landsat-derived JRC labels from eight other places, finds Lake Sevan without ever seeing it. Random weights do not. That is evidence that L-band pretraining transfers to NISAR." Always add: previews, one seed, 2 minutes of training.
 

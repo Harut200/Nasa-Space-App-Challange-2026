@@ -1,17 +1,17 @@
 # Data Sources and Access
 
-For Harutyun. Coverage figures come from the ASF search service on 14 November 2026; file layout and code come from ASF's NISAR Cookbook notebooks and the NISAR Data User Guide. Nothing here has been run against a real file yet — the first task is to confirm it.
+For Harutyun. Coverage figures come from the ASF search service on 14 November 2026; file layout and code come from ASF's NISAR Cookbook notebooks and the NISAR Data User Guide. Nothing here has been run against a real file yet: the first task is to confirm it.
 
 ## 1. What exists
 
-NISAR L-band, 12-day repeat, free. Product: Level-2 **GCOV** — terrain-corrected backscatter on a map grid, HDF5, one file per frame of about 240 × 240 km.
+NISAR L-band, 12-day repeat, free. Product: Level-2 **GCOV**: terrain-corrected backscatter on a map grid, HDF5, one file per frame of about 240 × 240 km.
 
 | Collection | Acquired | Use |
 |---|---|---|
 | `NISAR_L2_GCOV_PROVISIONAL_V1` | 17 Jun – 18 Oct 2026 | **Our stack.** Calibrated |
 | `NISAR_L2_GCOV_V1` (validated) | from 21 Oct 2026 | One or two passes per track so far |
 | `NISAR_L2_GCOV_BETA_V1` | Oct 2025 – Jan 2026 | Uncalibrated. Do not difference against the others |
-| `NISAR_UR_L2` | — | Urgent-response duplicates. Exclude |
+| `NISAR_UR_L2` | - | Urgent-response duplicates. Exclude |
 
 No acquisitions between 27 July and 10 August 2026 (instrument gap). On every track the pass after late July is 17–19 August.
 
@@ -22,8 +22,8 @@ All five places have ten provisional passes on at least one track and frame.
 | Place | Track / frame / direction | Provisional dates (2026) | Channels | File size |
 |---|---|---|---|---|
 | **Armenia** (valley and Sevan in one frame) | 85 / 22 / ascending | 06-20, 07-02, 07-14, 07-26, 08-19, 08-31, 09-12, 09-24, 10-06, 10-18 | HH+HV on all | 7.4–7.6 GB |
-| Ararat Valley, lighter but partial | 13 / 22 / ascending | 9 dates | HH+HV | 2.0 GB — frame cuts off the east of the valley box |
-| Sevan, opposite look direction, partial | 93 / 68 / descending | same 10 dates as 85 / 22 | HH+HV | about 7.4 GB — frame cuts off the west of the lake box |
+| Ararat Valley, lighter but partial | 13 / 22 / ascending | 9 dates | HH+HV | 2.0 GB: frame cuts off the east of the valley box |
+| Sevan, opposite look direction, partial | 93 / 68 / descending | same 10 dates as 85 / 22 | HH+HV | about 7.4 GB: frame cuts off the west of the lake box |
 | **Tonle Sap** | 83 / 8 / ascending | 06-19, 07-01, 07-13, 07-25, 08-18, 08-30, 09-11, 09-23, 10-05, 10-17 | HH+HV on all | about 1.9 GB |
 | Tonle Sap, alternative | 148 / 82 / descending | 06-24 … 10-10 (9 provisional) | some HH only | about 1.7 GB |
 | **Rondônia** | 60 / 173 / ascending | 10 dates, 06-18 … 10-16 | HH+HV except 09-22 | about 1.9 GB |
@@ -73,13 +73,13 @@ urls = results.find_urls(extension=".h5", directAccess=False,
 
 Useful fields per result: `path` (track), `frame`, `flightDirection`, `startTime`, `wkt` (footprint), `downloadUrl`, `browse[]`, and under `nisar`: `crid`, `mainBandPolarization`, `rangeBandwidth`, `frameCoverage`. If a date appears twice with different `crid`, keep the higher one.
 
-## 4. Preview images — no login
+## 4. Preview images: no login
 
 Each result's `browse[]` list includes ready-made pictures: `…LATLON.png` (about 4 MB, already in latitude/longitude), a thumbnail, and per-channel versions (`…NATIVE_A_HHHH.png`, `…NATIVE_A_HVHV.png`). They download without credentials. With the footprint from `wkt` they can be placed on a map directly.
 
 Use: give Arameh real imagery in the first hour, and keep as a fallback layer. They are not calibrated values, so no charts or change maps from them.
 
-NASA Worldview also carries NISAR GCOV colour mosaics (daily and 12-day) — handy for a quick look at any place, not tested as a map layer for our app.
+NASA Worldview also carries NISAR GCOV colour mosaics (daily and 12-day): handy for a quick look at any place, not tested as a map layer for our app.
 
 ## 5. Inside a GCOV file
 
@@ -129,9 +129,9 @@ with fs.open(url, "rb") as f:
 
 Alternatives if streaming is too slow:
 
-1. **NASA Harmony** — returns a chosen layer as a cloud-optimised GeoTIFF, optionally cut to a box and reprojected. Needs the login. Untested by us.
-2. **Download** — Armenia is ten files of 7.5 GB; Tonle Sap ten of 1.9 GB. Leave running overnight.
-3. **Lighter track** — track 13 / 22 at 2 GB per file covers only the western part of the Ararat Valley and none of Sevan; the box would have to shrink to about 44.0–44.5°E.
+1. **NASA Harmony**: returns a chosen layer as a cloud-optimised GeoTIFF, optionally cut to a box and reprojected. Needs the login. Untested by us.
+2. **Download**: Armenia is ten files of 7.5 GB; Tonle Sap ten of 1.9 GB. Leave running overnight.
+3. **Lighter track**: track 13 / 22 at 2 GB per file covers only the western part of the Ararat Valley and none of Sevan; the box would have to shrink to about 44.0–44.5°E.
 
 The team's step-by-step pipeline in `plan/02-backend.md` reads windows with `h5py` directly rather than xarray; both work on the same paths.
 
@@ -139,7 +139,7 @@ The team's step-by-step pipeline in `plan/02-backend.md` reads windows with `h5p
 
 Repository: `github.com/ASFOpenSARlab/NISAR_Cookbook`, folder `notebooks/`.
 
-- **Time series** (`NISAR_GCOV_Time_Series_Example`): cut a box, average in linear power, then convert to dB; animate with display limits at the 5th and 95th percentiles. Their example removed two faulty provisional scenes — look at every pass.
+- **Time series** (`NISAR_GCOV_Time_Series_Example`): cut a box, average in linear power, then convert to dB; animate with display limits at the 5th and 95th percentiles. Their example removed two faulty provisional scenes: look at every pass.
 - **Change detection** (`NISAR_GCOV_SARChangeDetectionMethods`), on HV:
   - pair of dates: `10 * log10(later / earlier)`, flag below −2 dB for losses;
   - whole series, per pixel: 95th minus 5th percentile, standard deviation, or coefficient of variation (standard deviation ÷ mean); flag the top 5 % of pixels.
@@ -173,4 +173,4 @@ Context: Sentinel-2 optical imagery, ESA WorldCover, JRC Global Surface Water, O
 - Earthdata Login: https://urs.earthdata.nasa.gov/
 - NISAR Cookbook: https://asfopensarlab.github.io/NISAR_Cookbook/
 
-Credit line: NISAR data — NASA/JPL-Caltech and ISRO, distributed by the Alaska Satellite Facility DAAC.
+Credit line: NISAR data: NASA/JPL-Caltech and ISRO, distributed by the Alaska Satellite Facility DAAC.

@@ -1,4 +1,4 @@
-# Work plan — three branches
+# Work plan: three branches
 
 Step-by-step version of PLAN.md (the first plan, removed from the repository on 15 November; it is in the git history). PLAN.md says *what* and *why*; this directory says *who does what, in which order, and how to know it is done*.
 
@@ -40,12 +40,12 @@ GitHub Pages
 
 Because nobody edits a path owned by another branch, merges cannot conflict. If you need a change in someone else's path, ask them.
 
-## Hour 0 — together, before splitting (45 minutes)
+## Hour 0: together, before splitting (45 minutes)
 
 1. Everyone: create a NASA Earthdata Login at https://urs.earthdata.nasa.gov/ and put it in `~/.netrc` (see [02-backend.md](02-backend.md) step B1).
 2. Everyone: open the submission guide in a browser and write the deadline, demo format and limits into [04-pitch-and-repo.md](04-pitch-and-repo.md) section 1. We could not load that page while planning.
 3. Everyone: read [00-contracts.md](00-contracts.md) aloud once. Change it now if anyone disagrees; after this it changes only when all three agree.
-4. Decide whether to fix the repository name typo ("Challange") **now or never** — renaming later changes the live URL.
+4. Decide whether to fix the repository name typo ("Challange") **now or never**: renaming later changes the live URL.
 5. Repository owner: confirm the repository is public, then Settings → Pages → Source → **GitHub Actions**.
 6. Write names in the Owner column above, commit, then create the branches:
 
@@ -59,7 +59,7 @@ for b in frontend backend detection; do git branch $b && git push -u origin $b; 
 - Merge your branch into `main` by pull request **every time something works**, not at the end. `main` deploys to the live URL on every push.
 - Run `git merge origin/main` into your branch at every checkpoint below, and whenever someone says "it's on main".
 - `data/raw/` and `data/processed/` are not in git. To get data another person produced, pull `main` and run their script, or copy the folder from the shared drive.
-- `src/app/public/data/` **is** in git — it is the product. Only the backend owner commits there.
+- `src/app/public/data/` **is** in git: it is the product. Only the backend owner commits there.
 - Never commit Earthdata credentials. `.netrc` lives in your home directory, not in the repository.
 - Commit messages say what changed ("Add timeline scrubber"), because judges read the history.
 
@@ -80,6 +80,6 @@ Hours count from the start of hacking. These match PLAN.md section 7.
 
 ## Sources checked while writing this plan (14 November 2026)
 
-- ASF NISAR Data User Guide — search parameters and calibration tiers: https://nisar-docs.asf.alaska.edu/asf-search, https://nisar-docs.asf.alaska.edu/availability-overview
+- ASF NISAR Data User Guide: search parameters and calibration tiers: https://nisar-docs.asf.alaska.edu/asf-search, https://nisar-docs.asf.alaska.edu/availability-overview
 - GCOV file layout as shown by real files: https://docs.maap-project.org/en/hub/science/NISAR/NISAR_access.html and the ASF NISAR Cookbook
 - Not loaded (certificate error from our machine): the Space Apps submission guide and judging guide. Everything about them in this plan is marked **(verify)**.

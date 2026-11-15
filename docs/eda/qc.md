@@ -31,7 +31,7 @@ Only dates that are not `ok`. "F" = channels to leave out of detection, "W" = ca
 
 | Area | Date | Verdict | Channel | Reason (from `qc.json`) |
 |---|---|---|---|---|
-| sevan | 2026-10-06 | **fail** | F: HV | HV channel 4.6× more different from the other dates than usual (uniform across the frame); HH−HV over stable land −0.055 vs usual +0.065; HV stable-land brightness +15 % while HH is normal — likely instrument or processing effect |
+| sevan | 2026-10-06 | **fail** | F: HV | HV channel 4.6× more different from the other dates than usual (uniform across the frame); HH−HV over stable land −0.055 vs usual +0.065; HV stable-land brightness +15 % while HH is normal: likely instrument or processing effect |
 | sevan | 2026-08-31 | warn | W: HH, HV | HH stable-land brightness +11 %; HH 10.7 % of pixels at the display floor vs usual 22.1 % (wind on the lake); HV 2.9× (gradient) |
 | ararat | 2026-10-06 | **fail** | F: HV | HV 2.1× more different than usual (widespread); HV also fails in sevan (same acquisition) and departs here too; HH is normal |
 | ararat | 2026-08-31 | warn | W: HH | HH 2.9× more different than usual (widespread across the frame) |
@@ -46,13 +46,13 @@ Only dates that are not `ok`. "F" = channels to leave out of detection, "W" = ca
 | poyang | 2026-07-05 | warn | W: HH, HV | HH 9.7 % at floor vs 7.4 %; HV stable land +5 % |
 | poyang | 2026-09-03 | warn | W: HV | HV across-swath change −0.076 vs usual −0.274 |
 | rondonia | 2026-06-30 | warn | W: HH, HV | both channels 3.5× more different than usual, uniform; the first date, then a 48-day gap (likely the dry-season change, not the instrument) |
-| rondonia | 2026-10-04 | warn | — | 1 pass missing that is not in the outage or the config (2026-09-22) |
+| rondonia | 2026-10-04 | warn | - | 1 pass missing that is not in the outage or the config (2026-09-22) |
 | sindh-indus | 2026-07-23 | warn | W: HH | HH across-swath change −0.160 vs −0.209 (monsoon rain cells visible in the preview) |
 | sudd | 2026-06-20 | warn | W: HH, HV | HH stable land +11 %, HV +7 %, HH 3.1× widespread (first date; wet-season onset?) |
-| sudd | 2026-10-18 | warn | — | 1 pass missing that is not in the outage or the config (2026-09-24); 2026-10-06 is missing too, at a 36-day step |
+| sudd | 2026-10-18 | warn | - | 1 pass missing that is not in the outage or the config (2026-09-24); 2026-10-06 is missing too, at a 36-day step |
 | urmia | 2026-07-02 | warn | W: HV | HV across-swath change −0.146 vs usual −0.300 |
-| urmia | 2026-10-06 | warn | — | 1 pass missing that is not in the outage or the config (2026-09-24) |
-| tonle-sap, mekong-delta, nile-delta | — | all `ok` | | Tonle Sap note: the dim swath edge is 9–10 px wide, wider than the detector's 8-px trim |
+| urmia | 2026-10-06 | warn | - | 1 pass missing that is not in the outage or the config (2026-09-24) |
+| tonle-sap, mekong-delta, nile-delta | - | all `ok` | | Tonle Sap note: the dim swath edge is 9–10 px wide, wider than the detector's 8-px trim |
 
 Area-level notes:
 
@@ -91,10 +91,10 @@ Area-level notes:
 |---|---|---|---|---|---|---|
 | HV temporal sd, stable land (no change point, never water) | 0.0267 | **0.0239 (−10 %)** | 0.0252 | 0.0250 | **0.0117 (−53 %)** | 0.0123 |
 | HH temporal sd, stable land | 0.0342 | 0.0342 | 0.0343 | 0.0205 | 0.0206 | 0.0200 |
-| HV normalisation gain on 6 Oct | 0.964 | 0.998 | — | 1.002 | 0.999 | — |
+| HV normalisation gain on 6 Oct | 0.964 | 0.998 | - | 1.002 | 0.999 | - |
 | Change-point area, km² | 39.3 | **32.5 (−17 %)** | 35.6 | 16.9 | **14.6 (−14 %)** | 12.5 |
 | of which "changed for good" on 31 Aug / 12 Sep / 24 Sep | 3.5 / 5.9 / 4.6 | 1.3 / 2.9 / 3.5 | 5.5 / 9.6 / 1.1 | 0.3 / 3.3 / 0.3 | 0.2 / 2.0 / 0.3 | 0.2 / 1.5 / 0.3 |
-| Open water on 6 Oct, km² | 1251.6 | 1251.7 | — | 3.8 | **0.6** | — |
+| Open water on 6 Oct, km² | 1251.6 | 1251.7 | - | 3.8 | **0.6** | - |
 
 What this shows:
 
@@ -190,7 +190,7 @@ Example result (Sevan):
 
 ```json
 "quality": {
-  "2026-10-06": {"quality": "fail", "quality_note": "HV channel 4.6x more different from the other dates than usual (uniform across the frame); ... while HH is normal — likely instrument or processing effect", "channels": ["HV"]},
+  "2026-10-06": {"quality": "fail", "quality_note": "HV channel 4.6x more different from the other dates than usual (uniform across the frame); ... while HH is normal: likely instrument or processing effect", "channels": ["HV"]},
   "2026-08-31": {"quality": "warn", "quality_note": "HH stable-land brightness +11% vs the other dates; ...", "channels": ["HH", "HV"]},
   "2026-06-20": {"quality": "ok", "quality_note": "all checks within the usual range", "channels": []}
 }
@@ -255,11 +255,11 @@ A sweep over 10 random seeds gave no false alarm in the clean and flood cases, a
 | 4 | `noise_HH/HV` | Is the image noisier than usual? | median local coefficient of variation (5 × 5) in the 20 % most homogeneous stable windows | robust z, floor 0.01, warn only |
 | 4 | `floor_*`, `ceiling_*` | Share of pixels stuck at the darkest / brightest display level (they cannot show change) | share of interior pixels ≤ 1.5/255 or ≥ 253.5/255 | robust z, floor 0.3 percentage points, warn only |
 | 5 | `loo_HH/HV` | **Leave-one-date-out outlier**: how far the date sits from the others' median on stable land, relative to the usual date-to-date spread | $A_t = \operatorname{median}_{\text{stable}}\lvert x_t - \tilde x_{-t}\rvert$, ratio $A_t/\operatorname{median}_s A_s$ | robust z, floor 0.15 × median A; **can only fail if the pattern is `uniform` or `gradient`** |
-| 5 | `pattern` (inside `loo_*`) | **Whole frame or part of the scene?** The frame is cut into 6 × 6 blocks; in each, the median signed departure on stable land | `uniform`: median block > 3× the usual block value and ≥ 70 % of blocks agree in sign; `gradient`: a straight line in across-track distance explains ≥ 50 % of the block-to-block variance and spans > 4× the usual block value; `widespread`: ≥ 50 % of blocks depart but without one sign or line (contrast change, weather): warn at most; `patchy`: some blocks depart: **real change, never flagged**; `none` | — |
+| 5 | `pattern` (inside `loo_*`) | **Whole frame or part of the scene?** The frame is cut into 6 × 6 blocks; in each, the median signed departure on stable land | `uniform`: median block > 3× the usual block value and ≥ 70 % of blocks agree in sign; `gradient`: a straight line in across-track distance explains ≥ 50 % of the block-to-block variance and spans > 4× the usual block value; `widespread`: ≥ 50 % of blocks depart but without one sign or line (contrast change, weather): warn at most; `patchy`: some blocks depart: **real change, never flagged**; `none` | - |
 | 6 | `stripes_HH/HV` | Bright streaks along a line (radio-frequency interference) | high-pass image (minus 9 × 9 mean), averaged along every along-track and every across-track line; the largest robust z of those line means | robust z across dates, floor 1, warn only |
 | 6 | `fixed_marks` (area level) | A **burned-in mark** at identical raw-image coordinates on every date | in the raw PNGs (not re-gridded), connected groups of ≥ 4 pixels whose value changes by ≤ 1 display level over **all** dates, not at the display floor or ceiling, ≥ 0.08 different from their surroundings | any → area note, mask them |
 | 6 | `edge_width` | How wide the dim swath edge is | rings 1–30 px inside the footprint edge (the box edge does not count) whose median brightness is < 0.85 × the interior | warn > max(8 px, area median + 3); area note if the median exceeds the detector's 8-px edge trim |
-| — | `same_pass` | Areas cut from the same track and frame share each acquisition (Sevan and Ararat): a channel that fails in one sibling is upgraded from warn to fail in the other, or flagged warn if the other crop saw nothing | uses each area's own verdict (`own` in `qc.json`), so reruns give the same answer | — |
+| - | `same_pass` | Areas cut from the same track and frame share each acquisition (Sevan and Ararat): a channel that fails in one sibling is upgraded from warn to fail in the other, or flagged warn if the other crop saw nothing | uses each area's own verdict (`own` in `qc.json`), so reruns give the same answer | - |
 
 All arithmetic is PyTorch on the CPU (`run_qc`); thresholds are the constants at the top of `qc.py` and are copied into every `qc.json` under `method`.
 

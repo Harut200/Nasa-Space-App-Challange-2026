@@ -71,7 +71,7 @@ All numbers below are from the same speckle-filtered, normalised stack that `ops
 Entry point: `detect_flooded_veg(L, valid, water, kn=None, terrain=None)` on the `L`, `valid`, `water`
 that `ops.run_pipeline` returns. Knobs: `FV_KNOBS` in `floodveg.py`.
 
-**Step 0 — self-calibration on "null land".** Null land on date *t* = valid, not water, more than 20 px
+**Step 0: self-calibration on "null land".** Null land on date *t* = valid, not water, more than 20 px
 (3.6 km) from open water on any date. Reference = mean of the first 2 dates. For each pixel and date:
 ΔHH, ΔHV, ΔD with D = HH − HV. From each we subtract the **median over null land on that date**
 (so a per-date brightness offset cancels), and σ_t = 1.4826 · MAD(ΔD over null land) is the noise floor
@@ -80,7 +80,7 @@ that `ops.run_pipeline` returns. Knobs: `FV_KNOBS` in `floodveg.py`.
 **Evidence** (each a soft 0..1 score, `sig(x) = 1/(1+exp(−x/0.02))`):
 
 * `e_db` (state 1, double bounce appearing): `sig(ΔD_c − max(0.08, 3σ_t)) · sig(ΔHH_c + 0.10) · sig(HH − 0.30)`
-  — HH−HV rose clearly above noise, HH did not fall by more than 0.10, and the pixel is not dark.
+: HH−HV rose clearly above noise, HH did not fall by more than 0.10, and the pixel is not dark.
 * `e_abs` (state 1, also on date 0): `sig(D − Q95_t(D | HV bin) − 0.02) · sig(HH − 0.30)` and the pixel is
   within 2 px of open water on that date; not "built-up" (D above the null 95th percentile on ≥ 90 % of
   dates with temporal std < 0.04, more than 2 px from any water).
@@ -185,7 +185,7 @@ shrub/rice too far from open water, or a harvest; we cannot tell.
 **Supported by evidence**
 * The new layer sits where flooding happens: 77 % inside and 88 % within one pixel of the Landsat
   maximum water extent (old: 40 % / 59 %), median historical occurrence 9 % (old 0.4 %), i.e. land that is
-  occasionally water — what a seasonally flooded fringe should look like.
+  occasionally water: what a seasonally flooded fringe should look like.
 * It is near zero where there is no flooded forest (Armenia: ≤ 1.4 km² on any pass, vs 39 km² old).
 * It is stable: the largest one-step threshold change moves the peak by 1.5× (spatial context) and
   1.07–1.3× for the radar thresholds, vs 7.8× for the old rule; normalisation changes it by < 6 % vs 41 %.

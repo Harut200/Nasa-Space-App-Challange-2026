@@ -16,8 +16,8 @@ figures: `docs/eda/despeckle/*.png` · weights: `data/processed/models/despeckle
 **Keep the current filter (Quegan multi-temporal, 3×3) in the pipeline.** None of the learned filters improves water
 detection beyond the bootstrap noise: on the held-out TEST anchors the best learned filter scores balanced accuracy
 0.9951 at Tonle Sap and 0.9963 at Lake Sevan against 0.9957 and 0.9958 for the current filter (95 % intervals are
-±0.003). The learned filters do exactly what they were built to do — they never move an edge and keep 97–100 % of a real
-flood step on its date, where the current filter keeps 89 % — but on our 180 m previews they remove only a small part
+±0.003). The learned filters do exactly what they were built to do: they never move an edge and keep 97–100 % of a real
+flood step on its date, where the current filter keeps 89 %, but on our 180 m previews they remove only a small part
 of the noise (equivalent number of looks gained ×1.1–1.5, against ×2.5–3.1 for the current filter), because the previews
 are already heavily averaged and the noise that is left is spatially correlated. On calibrated 80 m data, and even
 more at 20 m (ENL ≈ 4), the learned filters start to pay off (below); that is where to use them next.
@@ -25,10 +25,10 @@ more at 20 m (ENL ≈ 4), the learned filters start to pay off (below); that is 
 ## 1. The idea in plain words
 
 Radar images are grainy ("speckle"). A filter averages neighbouring pixels to remove the grain, but averaging also
-blurs shorelines and smears floods into the dates before they happened. A neural network could do better — if we had
+blurs shorelines and smears floods into the dates before they happened. A neural network could do better: if we had
 clean images to train it on. We don't. The trick: speckle is different on every satellite pass, the ground mostly is not.
 So two passes are two noisy looks at the same ground, and a network trained to predict one look from the other can only
-learn the part they share — the ground — not the noise (Noise2Noise, Lehtinen et al. 2018). Where the ground *really*
+learn the part they share, the ground, not the noise (Noise2Noise, Lehtinen et al. 2018). Where the ground *really*
 changed (a flood), "predict date B from date A" would teach the network to erase floods, so each variant has a guard:
 
 | variant | what it sees | guard against real change |
@@ -62,7 +62,7 @@ speckle is roughly additive and level-independent (`docs/eda/stats-change.md`).
 ## 2. What the noise looks like
 
 Measured from consecutive-date differences on stable ground (11 training areas): **noise std ≈ 0.012–0.018 in
-brightness** (≈ 0.4–0.5 dB at the assumed 30 dB stretch), nearly constant with level — a little lower than the
+brightness** (≈ 0.4–0.5 dB at the assumed 30 dB stretch), nearly constant with level: a little lower than the
 0.02–0.05 quoted earlier, which included real date-to-date change.
 
 **The noise is spatially correlated.** Autocorrelation of the noise: lag 1 px = **0.56**, lag 2 = 0.20, lag 3 = 0.08
@@ -108,14 +108,14 @@ How to read it:
   except the boxcars (−0.3 and −0.5 px towards the water); water/land levels each side change by ≤ 0.002, except plain
   N2N, which raises the water level from 0.023 to 0.063 (it brightens water).
 - *Bias*: mean (filtered − raw) over the whole footprint; all ≤ 0.002 except plain N2N (−0.011 at Tonle Sap, +0.010 at
-  Sevan) — it learns a date-average and so shifts every date towards the mean.
+  Sevan): it learns a date-average and so shifts every date towards the mean.
 - *Change*: 37,791 Tonle Sap pixels (1,234 km²) that changed once between 13 Jul and 23 Sep (single-step fit, step
   ≥ 0.25). "Kept" = filtered jump on the change date / raw jump. "Leaked" = share of the step already visible on the date
   before; the raw image itself shows 0.066 (partial flooding), so only the excess over 0.066 is leakage.
   See `temporal_leakage.png`.
 
 **Residuals** (`residuals.png`, raw − filtered on a Tonle Sap floodplain crop): the box and Quegan residuals show field
-boundaries and river channels — they eat a little real structure at edges. Plain N2N's residual is a solid colour (bias)
+boundaries and river channels: they eat a little real structure at edges. Plain N2N's residual is a solid colour (bias)
 plus the lake outline. N2N-masked shows faint field edges. The 5×5 blind-spot residual is almost blank (it removes very
 little). Multi-temporal S shows one river channel that it partly smooths. No learned filter's residual has a lake
 outline.
@@ -126,7 +126,7 @@ outline.
 ![tradeoff](despeckle/tradeoff.png)
 ![leakage](despeckle/temporal_leakage.png)
 
-### 3.2 Downstream detection — the result that matters
+### 3.2 Downstream detection: the result that matters
 
 The existing detector (`ops.run_pipeline`, preview knobs) was run on each filter's output with its own filter switched
 off (`box=1, quegan=False`; the classic filters use their own knob settings), terrain mask applied
@@ -206,7 +206,7 @@ an island); noise = the measured level, measured spatial correlation, clipped an
 
 At this noise level (~0.45 dB, already multilooked) every classic filter is *worse* than no filter against the truth,
 because the truth has real fine texture that averaging destroys. The learned multi-temporal and 5×5 blind-spot filters
-are the only ones better than no filter (+0.1–0.4 dB) — a real but tiny gain, which is the honest summary of this whole
+are the only ones better than no filter (+0.1–0.4 dB): a real but tiny gain, which is the honest summary of this whole
 study on previews.
 
 ![synthetic](despeckle/synthetic.png)
@@ -240,7 +240,7 @@ preview-like scale (dB + 30) / 30 and filtered with the **preview-trained** sing
 
 On the real 80 m image the 5×5 blind-spot gains ENL 94 → 128 with no edge loss (box 3×3 gains far more noise reduction
 but widens the shoreline from 1.8 to 3.0 px). With strong speckle the learned N2N-masked filter beats the boxcar by
-+1.5 dB PSNR with a sharper edge (2.8 vs 3.0 px) — the regime where a learned filter is worth its cost. A filter trained
++1.5 dB PSNR with a sharper edge (2.8 vs 3.0 px): the regime where a learned filter is worth its cost. A filter trained
 on preview-strength noise does nothing on 4-look data (last row): **weights must be trained at the noise level they
 will meet.** Only one calibrated date existed, so the multi-temporal variant could not be tried on calibrated data.
 
@@ -252,7 +252,7 @@ will meet.** Only one calibrated date existed, so the multi-temporal variant cou
 adds a 0.35–2 MB weight file, and does not improve any downstream number beyond noise; it would make specks worse.
 
 If the lead wants to try one anyway (e.g. on calibrated 20–80 m data once several dates exist, retrained there), the
-change is two lines in `scripts/detect/run.py` around line 236 — no change to `ops.py` is needed:
+change is two lines in `scripts/detect/run.py` around line 236: no change to `ops.py` is needed:
 
 ```python
 from scripts.detect import despeckle
@@ -276,10 +276,10 @@ footprint keep their input value, so `run_pipeline`'s footprint is unchanged. Th
   multi-temporal and blind-spot models was still falling; longer training might add noise reduction but would not
   change the conclusion that the detector is not noise-limited.
 - The Bayesian step relies on the measured noise table; if the noise is under-estimated (correlated noise lowers the
-  difference-based estimate), the posterior trusts the observation too much — one reason the Bayes variants remove so
+  difference-based estimate), the posterior trusts the observation too much: one reason the Bayes variants remove so
   little noise. The no-Bayes variant shows the other extreme. A tuned blend between them was not tried.
-- Noise-reduction regions: only 253 stable homogeneous HH pixels (8 HV) at Lake Sevan — wind makes the lake too
-  variable — so Sevan's ENL figures are less certain than Tonle Sap's (8,696 px).
+- Noise-reduction regions: only 253 stable homogeneous HH pixels (8 HV) at Lake Sevan: wind makes the lake too
+  variable, so Sevan's ENL figures are less certain than Tonle Sap's (8,696 px).
 - Change preservation is measured on pixels chosen by a single-step fit to the raw image, which slightly favours the
   raw image; leakage is quoted relative to the raw value (0.066).
 - Synthetic truth is a time-mean of Ararat, which itself still carries ~1/√10 of the noise; flood shape is synthetic.

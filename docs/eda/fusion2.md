@@ -18,7 +18,7 @@ Reduced inputs are cached in `$FUSION_CACHE` (default: system temp folder), keye
 
 ## In one paragraph
 
-Fusion v1 was our best map for lakes and mountains but it **ate the Tonle Sap flood**: on 17 October it said 3,120 km² where the strict math detector says 3,837 km² (itself too low) and the independent lake-level estimate says 5,421 km² (range 4,198–7,222). Fusion v2 keeps v1's pooling of experts, and changes three things: (1) the time model now **knows when a pixel darkens** — the chance of land turning into water is 0.3 % per 12 days normally but 65 % in an interval where the radar brightness drops into the water range; (2) inside a **floodplain zone found without any reference** (flat, low, and changing over the season) the strict threshold is relaxed from 0.12 to 0.19; (3) the **self-calibrating seeded detector** joins the experts. A third state, *water under vegetation*, is computed as a separate layer. Result: Tonle Sap 17 October = **5,046 km²** (inside the independent band on 7 of 10 dates, against 1 of 10 for v1 and for the math detector), mean area error against the independent estimate 8.5 % (v1 25 %, math 20 %), and Lake Sevan and Ararat at least as good as v1 (Sevan largest body 1,233 km² on every date, calm error 8.6 km², rough-date dip 0.1 km²; mountain false water 9.7 → 6.3 km²). On the 13 other places, v2 has the best balanced accuracy on 5 of the 8 that have anchors and is within 0.6 pp of the best on the other 3.
+Fusion v1 was our best map for lakes and mountains but it **ate the Tonle Sap flood**: on 17 October it said 3,120 km² where the strict math detector says 3,837 km² (itself too low) and the independent lake-level estimate says 5,421 km² (range 4,198–7,222). Fusion v2 keeps v1's pooling of experts, and changes three things: (1) the time model now **knows when a pixel darkens**: the chance of land turning into water is 0.3 % per 12 days normally but 65 % in an interval where the radar brightness drops into the water range; (2) inside a **floodplain zone found without any reference** (flat, low, and changing over the season) the strict threshold is relaxed from 0.12 to 0.19; (3) the **self-calibrating seeded detector** joins the experts. A third state, *water under vegetation*, is computed as a separate layer. Result: Tonle Sap 17 October = **5,046 km²** (inside the independent band on 7 of 10 dates, against 1 of 10 for v1 and for the math detector), mean area error against the independent estimate 8.5 % (v1 25 %, math 20 %), and Lake Sevan and Ararat at least as good as v1 (Sevan largest body 1,233 km² on every date, calm error 8.6 km², rough-date dip 0.1 km²; mountain false water 9.7 → 6.3 km²). On the 13 other places, v2 has the best balanced accuracy on 5 of the 8 that have anchors and is within 0.6 pp of the best on the other 3.
 
 **Verdict: yes, the app can switch every area to `fusion2`** (section 9 gives the exact change). Caveats in section 10: v2's floodplain gain is in *area*, much less in *location* (pixel precision against the independent map falls to 0.76 in October), and the "water under vegetation" layer is about a third the size of the existing rule and is not validated.
 
@@ -30,7 +30,7 @@ Fusion v1 was our best map for lakes and mountains but it **ate the Tonle Sap fl
 | Admission measured only lakes and mountains | the rule never saw that the flood shrank 19 % | floodplain criteria + "no flood eaten" guard (section 3) |
 | One global threshold | 0.12 is right for Sevan, too strict on the floodplain; 0.20 everywhere breaks Sevan (1,467 km²) and triples Armenian false water | looser threshold only inside a reference-free floodplain regime (section 2.4) |
 | Two states | flooded forest/rice is "land" until it opens up | third state, water under vegetation (section 2.2) |
-| Band from the model only | — | band and its coverage checked against Sevan's known area and the hydro estimate (section 7) |
+| Band from the model only | - | band and its coverage checked against Sevan's known area and the hydro estimate (section 7) |
 
 ## 2. The model
 
@@ -47,7 +47,7 @@ Fusion v1 was our best map for lakes and mountains but it **ate the Tonle Sap fl
 | $\mathcal R$ | reference-free floodplain regime (section 2.4) |
 | $d_t(i)\in\{0,1\}$ | darkening flag for the interval $t \to t+1$ |
 | $A^{(k)}$ | $3\times 3$ transition matrix for input class $k$ (rows = from) |
-| $\gamma_t(i,s)$ | posterior $P(S_t = s \mid \text{all dates})$ — what the app reads |
+| $\gamma_t(i,s)$ | posterior $P(S_t = s \mid \text{all dates})$: what the app reads |
 
 ### 2.2 Emissions (three states)
 
@@ -128,10 +128,10 @@ Declared before the TEST strip was looked at (`RULE2` in the code). A change is 
 | 5 | space smoothing off | reject | mountain false water up |
 | 6 | **relaxed threshold θ = 0.19 inside $\mathcal R$** | **admit** | hydro error 0.198 → 0.093, in-band dates 1 → 7, IoU 0.501 → 0.513, rank 0.46 → 0.52 |
 | 7 | regime = JRC maximum extent (comparison only) | never admissible | uses the validation reference; would give hydro error 0.076 |
-| A1 | *amendment 1:* a capability addition with no metric of its own (three states) may enter if nothing degrades | — | written after the first run; the three-state step still failed the hydro test, so it stays a separate layer |
+| A1 | *amendment 1:* a capability addition with no metric of its own (three states) may enter if nothing degrades | - | written after the first run; the three-state step still failed the hydro test, so it stays a separate layer |
 | A2 | **amendment 2:** main set + seeded detector | **admit** | mountain false water (TEST) 4.2 → 2.3 km²; flips −37 %; Sevan calm error 10.0 → 8.6 km² |
 | A2 | amendment 2: floodplain set + seeded | reject | hydro error 0.093 → 0.130, rank consistency down |
-| A3 | **amendment 3:** scene switch from the seeded detector's own mode | adopted | identical on the three study areas; on lake-mode places it removes false floodplain water (Lake Chad far-from-record water 62 → 0.09 km²). Decided *after* seeing those places — see section 8 |
+| A3 | **amendment 3:** scene switch from the seeded detector's own mode | adopted | identical on the three study areas; on lake-mode places it removes false floodplain water (Lake Chad far-from-record water 62 → 0.09 km²). Decided *after* seeing those places, see section 8 |
 
 ![admission](fusion2/admission.png)
 
@@ -156,7 +156,7 @@ All six options inside the same floodplain package (two states, relaxed threshol
 
 ![transitions](fusion2/transitions.png)
 
-*Figure 2. Left: Tonle Sap transitions per 12 days, without and with darkening. Right: option (a)'s per-interval rates — never far above v1's.*
+*Figure 2. Left: Tonle Sap transitions per 12 days, without and with darkening. Right: option (a)'s per-interval rates: never far above v1's.*
 
 ## 5. The comparison table
 
@@ -181,7 +181,7 @@ The graph detector is perfect on Sevan's anchors but loses 92 km² of lake on 12
 
 | | math + terrain | Markov | graph | seeded | fusion v1 | **fusion v2** |
 |---|---|---|---|---|---|---|
-| 17 Oct open water (km²) — hydro 5,421 (4,198–7,222) | 3,837 | 3,326 | 2,766 | 4,388 | 3,120 | **5,046** |
+| 17 Oct open water (km²): hydro 5,421 (4,198–7,222) | 3,837 | 3,326 | 2,766 | 4,388 | 3,120 | **5,046** |
 | Spearman with the altimeter level (10 dates) | 0.976 | 0.976 | 0.964 | 0.952 | 0.976 | **0.976** |
 | Pearson with the altimeter level | 0.959 | 0.979 | 0.931 | 0.934 | 0.990 | 0.952 |
 | Rank consistency in the ambiguous zone (TEST, ρ [95 %]) | 0.497 [0.472, 0.517] | 0.362 | 0.340 | 0.534 [0.509, 0.553] | 0.334 [0.306, 0.360] | **0.527 [0.502, 0.548]** |
@@ -192,16 +192,16 @@ The graph detector is perfect on Sevan's anchors but loses 92 km² of lake on 12
 | Pixel IoU with the hydro map, mean of dates (whole domain / TEST strip) | 0.692 / 0.481 | 0.689 / 0.458 | 0.698 / 0.445 | 0.696 / 0.494 | 0.699 / 0.474 | **0.707 / 0.520** |
 | 17 Oct precision / recall against the hydro map | 0.86 / 0.61 | 0.89 / 0.55 | 0.97 / 0.50 | 0.82 / 0.67 | 0.93 / 0.54 | 0.76 / **0.71** |
 | "No flood eaten" guard (worst area / confident core) | 1.00 ✓ | 0.87 ✗ | 0.72 ✗ | 1.13 ✓ | 0.81 ✗ | **1.12 ✓** |
-| Water under vegetation, peak (km²) | — | — | — | — | — | 751 (11 Sep) |
+| Water under vegetation, peak (km²) | - | - | - | - | - | 751 (11 Sep) |
 
 ### 5.3 Tonle Sap per date
 
 | date | hydro expected (low–high) | math + terrain | fusion v1 | seeded | **fusion v2** | v2 / expected | v2 in band | v2 under vegetation |
 |---|---|---|---|---|---|---|---|---|
-| 19 Jun | 2,458 (2,415–2,496) | 2,234 | 2,207 | 2,301 | 2,281 | 0.93 | — | 0 |
+| 19 Jun | 2,458 (2,415–2,496) | 2,234 | 2,207 | 2,301 | 2,281 | 0.93 | - | 0 |
 | 1 Jul | 2,361 (2,137–2,425) | 2,297 | 2,219 | 2,385 | 2,355 | 1.00 | ✓ | 0 |
-| 13 Jul | 2,772 (2,729–2,826) | 2,310 | 2,268 | 2,370 | 2,418 | 0.87 | — | 24 |
-| 25 Jul | 2,822 (2,766–2,908) | 2,421 | 2,359 | 2,540 | 2,537 | 0.90 | — | 78 |
+| 13 Jul | 2,772 (2,729–2,826) | 2,310 | 2,268 | 2,370 | 2,418 | 0.87 | - | 24 |
+| 25 Jul | 2,822 (2,766–2,908) | 2,421 | 2,359 | 2,540 | 2,537 | 0.90 | - | 78 |
 | 18 Aug | 3,189 (2,969–3,541) | 2,803 | 2,646 | 3,051 | 3,152 | 0.99 | ✓ | 483 |
 | 30 Aug | 3,609 (3,216–4,231) | 2,954 | 2,782 | 3,146 | 3,461 | 0.96 | ✓ | 697 |
 | 11 Sep | 4,185 (3,533–5,233) | 3,147 | 2,908 | 3,468 | 3,818 | 0.91 | ✓ | 751 |
@@ -242,8 +242,8 @@ v2 does **not** flood early: on the June–July dates it is 0–13 % *below* the
 
 **Two bands are saved:**
 
-1. `water_km2_lo/hi` — a deliberately wide envelope: three half-widths in quadrature — the statistical study's threshold interval, the spread of the experts' areas, and half a pixel along every shoreline.
-2. The probability band — area at $\gamma(W) > 0.75$ to area at $\gamma(W) > 0.25$ (as in v1; `p_band` in results.json).
+1. `water_km2_lo/hi`, a deliberately wide envelope: three half-widths in quadrature, the statistical study's threshold interval, the spread of the experts' areas, and half a pixel along every shoreline.
+2. The probability band: area at $\gamma(W) > 0.75$ to area at $\gamma(W) > 0.25$ (as in v1; `p_band` in results.json).
 
 | | wide envelope | probability band |
 |---|---|---|
@@ -271,7 +271,7 @@ Thirteen places outside the three study areas. Experts there: the math detector,
 | Lake Chad (lake) | 50.3 % | 50.0 % | 99.1 % | **99.3 %** | 13.6 / 3.6 / 0.03 / 0.09 | 19 / 1.0 |
 | Nile delta (lake) | 50.0 % | 50.0 % | **71.7 %** | 71.4 % | 0 / 0 / 0 / 0 | 0 / 0.2 |
 | Pantanal (lake) | 50.0 % | 50.0 % | 99.97 % | **99.98 %** | 0.2 / 0 / 5.4 / 1.8 | 0.04 / 0.13 |
-| Okavango / Rondônia / Sindh (no anchors) | — | — | — | — | 0 / 0 / 0 / 0; 38 / 38 / 173 / 47; 12 / 9 / 0 / 0 | |
+| Okavango / Rondônia / Sindh (no anchors) | - | - | - | - | 0 / 0 / 0 / 0; 38 / 38 / 173 / 47; 12 / 9 / 0 / 0 | |
 
 (Balanced accuracy unless noted; numbers are with the final configuration. The six first places were the declared hold-out; the last six were added in this run.)
 
@@ -316,7 +316,7 @@ What it shows, honestly:
         out["classes"] = ops.classify(out["water"], out["flooded_veg"], out["valid"], out["change_date"], out["knobs"])
 ```
 
-and in every `areas/<id>/area.json`: `"water_source": "fusion2"`. Keep the flooded-vegetation rule as the default (`fv_source` unset); `"fv_source": "fusion2"` swaps in the three-state layer — we do not recommend that for the demo, because the layer is unvalidated and a third of the rule's size. For an area-uncertainty display use `p_water`: area at `p_water > 0.75` to area at `p_water > 0.25`. If the grid or dates of an area change, rerun `python -m scripts.detect.fusion2 <id>` (2–20 s; Tonle Sap needs its experts first).
+and in every `areas/<id>/area.json`: `"water_source": "fusion2"`. Keep the flooded-vegetation rule as the default (`fv_source` unset); `"fv_source": "fusion2"` swaps in the three-state layer: we do not recommend that for the demo, because the layer is unvalidated and a third of the rule's size. For an area-uncertainty display use `p_water`: area at `p_water > 0.75` to area at `p_water > 0.25`. If the grid or dates of an area change, rerun `python -m scripts.detect.fusion2 <id>` (2–20 s; Tonle Sap needs its experts first).
 
 ## 10. Limits
 
@@ -325,7 +325,7 @@ and in every `areas/<id>/area.json`: `"water_source": "fusion2"`. Keep the flood
 3. **One floodplain.** Every floodplain criterion comes from Tonle Sap; the darkening thresholds (0.03, 0.12) and the regime rule (1°, 5 m, IQR 0.08) were set by hand, not tuned on other floodplains.
 4. **Fresh hold-out is not perfectly fresh** (section 8): the seeded detector's knobs saw those places, and amendment 3 was decided after seeing them. The clean, pre-amendment result is "no better than v1 on new places".
 5. **Three amendments after first results.** Amendment 1 (capability additions) changed nothing in the end; amendment 2 used the same rule; amendment 3 is a judgement call. All are logged in results.json.
-6. **Water under vegetation is unvalidated** (no reference), smaller than the rule, and only exists where `floodveg` products exist (Tonle Sap, Sevan, Ararat) — 0 km² everywhere else.
+6. **Water under vegetation is unvalidated** (no reference), smaller than the rule, and only exists where `floodveg` products exist (Tonle Sap, Sevan, Ararat): 0 km² everywhere else.
 7. **Uncalibrated preview images at ~180 m.** Shorelines, rivers and canals below a pixel are invisible (Mekong); the TEST anchors used for accuracy and calibration are the easy pixels, so the 99.9 % figures overstate accuracy in mixed or changing areas.
 8. **Altimeter correlation cannot separate methods**: with 10 dates, math, v1 and v2 all score Spearman 0.976.
 9. Running fusion2 needs the expert products of an area for the full model; on places without them (12 of 15) it is a three-expert model (math, HH score, seeded, plus supervised where present).

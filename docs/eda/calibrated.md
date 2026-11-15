@@ -38,8 +38,8 @@ occurrence 1–50 %; ring = 3 km around the Prek Toal flooded-forest spot).
 |---|---|---|---|---|---|
 | calm lake core | −19.5 | −25.8 | −20.7 … −18.4 | −26.8 … −25.5 | water −20 to −25; HV at the noise floor |
 | upland forest | −5.0 | −9.7 | −5.0 … −4.4 | −9.7 … −9.2 | forest −6 to −9 HH, −12 to −15 HV |
-| open land (fields, grass) | −8.5 | −16.1 | −8.5 … −6.5 | −16.1 … −14.2 | — |
-| floodplain (Landsat 1–50 %) | −9.9 | −18.1 | −9.3 … −15.0 | −17.6 … −22.7 | — |
+| open land (fields, grass) | −8.5 | −16.1 | −8.5 … −6.5 | −16.1 … −14.2 | - |
+| floodplain (Landsat 1–50 %) | −9.9 | −18.1 | −9.3 … −15.0 | −17.6 … −22.7 | - |
 | Prek Toal ring (3 km) | −7.4 | −14.3 | −7.4 → −18.4 | −14.3 → −24.9 | flooded forest: HH +3–8 dB |
 
 * **Water** is where the textbook says, but at its bright end: calm lake HH −19.5 dB in June, so the untested
@@ -110,7 +110,7 @@ flooding dry land: 0.18 % false alarms, 14 km²/date). Ten dates, 40 evaluations
 The tuned values land almost exactly on the values the physics gives without any search: strong = 1 dB
 below the calm-lake median (−19.5), weak inside the interval [−17.7, −15.0] dB that keeps 95 % of the calm
 lake and leaves 99 % of never-wet land out, HV = the noise floor + 2 dB. The search was run three times while
-the dates arrived (1, 5 and 10 dates): −20.2/−15.8, −20.2/−16.3, −20.15/−15.7 dB — **the thresholds are stable**.
+the dates arrived (1, 5 and 10 dates): −20.2/−15.8, −20.2/−16.3, −20.15/−15.7 dB: **the thresholds are stable**.
 
 **The self-calibrating seeded detector (`crossscene.detect_water_adaptive(..., source="gamma0")`) does NOT
 transfer to dB as designed.** Its scene-relative levels were fitted on preview logits, where the clipped black
@@ -125,7 +125,7 @@ fills. Its claim of "no re-tuning in decibels" is therefore not confirmed. Note 
 ## 5. THE key number: how much does the area depend on the threshold?
 
 On previews, the 17 October area ranged **1,967–4,769 km²** across defensible thresholds (here recomputed:
-2,015–4,819 km² for weak 0.04–0.17, the Sevan-compatible range) — a factor of 2.4. On calibrated data, with
+2,015–4,819 km² for weak 0.04–0.17, the Sevan-compatible range): a factor of 2.4. On calibrated data, with
 the weak threshold anywhere in the physically justified interval [−17.7, −15.0] dB (strong = weak − 3 dB):
 
 | date | calibrated, weak −17.5 … −15.5 dB | max/min | preview, weak 0.04 … 0.17 | max/min |
@@ -206,7 +206,7 @@ and 1 Jul.
   (4,282 vs 3,175 km²), mostly narrow fringes the 180 m previews could not resolve.
 * **HH/HV ratio in dB.** Near the lake (not water) the median ratio is a steady 7.6–8.1 dB all season. In the
   Prek Toal ring it rises from 5.2 dB (June) to 7.4 dB (18 Aug) and stays ~7 dB: HV falls faster than HH
-  (HV −14.3 → −17.6, HH −7.4 → −9.7 by 18 Aug) — the same "HV falls, HH holds" signature the previews
+  (HV −14.3 → −17.6, HH −7.4 → −9.7 by 18 Aug): the same "HV falls, HH holds" signature the previews
   showed, now measured: +2.2 dB of ratio.
 * **The simple textbook rule (HH rises > 3 dB) finds almost nothing** (≤ 494 km²): at L-band in this forest,
   HH mostly does not brighten by 3 dB. The rebuilt rule is needed.
@@ -330,7 +330,7 @@ product's noise-equivalent sigma-zero in the GCOV metadata.
 
 `docs/eda/calibrated_det/gamma0_knobs.json` holds the recommended values with one reason each.
 
-1. **`scripts/detect/run.py`, gamma0 branch** — replace
+1. **`scripts/detect/run.py`, gamma0 branch**: replace
    `out = ops.run_pipeline(x, valid_det, source, dev=dev, water_ok=water_ok)` by
    ```python
    if source == "gamma0":
@@ -357,7 +357,7 @@ product's noise-equivalent sigma-zero in the GCOV metadata.
    −36 … −6 dB). `calibrated._db_cond_quantile` does this by a temporary patch.
 6. **`crossscene`**: for `source="gamma0"` use `calibrated.SEEDED_DB` levels and report thresholds with
    `calibrated.seeded_equiv_db` (`_equiv` converts to preview brightness).
-7. **`stats_change`**: on calibrated data pass the measured ENL (HH 80, HV 100) — see section 7b for whether
+7. **`stats_change`**: on calibrated data pass the measured ENL (HH 80, HV 100), see section 7b for whether
    the theoretical null is calibrated.
 
 ## 12. Commands

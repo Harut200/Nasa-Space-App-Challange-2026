@@ -38,7 +38,7 @@ We combined ten water detectors and three kinds of prior knowledge (terrain, tim
 | $q_t(i)$ | fused per-date probability, before time and space |
 | $\gamma_t(i)$ | fused probability after the Markov chain (what the app reads) |
 
-**Step 1 — each expert becomes a log-odds feature.**
+**Step 1: each expert becomes a log-odds feature.**
 
 - **Probabilistic experts** keep their own probability: $f_k = \operatorname{logit}\big(\operatorname{clip}(p_k, \varepsilon, 1-\varepsilon)\big)$.
 - **Hard-mask experts** (math detector, U-Net, flood-order) use a two-value mapping estimated on the TUNE anchors, with equal class weights and Laplace smoothing:
@@ -51,7 +51,7 @@ $$
   For the math detector this gives $+3.8$ and $-3.0$.
 - **The math HH score** is the distance to the hysteresis threshold, in units of half the threshold gap: $p = \sigma\big((0.09 - \text{HH})/0.03\big)$.
 
-**Step 2 — log-linear pooling** (the weighted product of ARCHITECTURE.md written in log-odds):
+**Step 2: log-linear pooling** (the weighted product of ARCHITECTURE.md written in log-odds):
 
 $$
 \operatorname{logit} q_t(i) = b + \sum_k w_k\, f_k(i,t) \;-\; c\,\big[\pi_{\text{terrain}}(i) = 0\big], \qquad w_k \ge 0,\; c \ge 0 .
@@ -68,7 +68,7 @@ Because the classes are balanced, $q/(1-q)$ is a likelihood ratio. That is exact
 
 **Missing experts.** An expert can exist in one area and not another (Ararat has no U-Net, no deep autoencoder and no sub-pixel product). Setting it to "no evidence" would be wrong, because the bias $b$ was fitted with the expert present: in a first version this created 1,392 km² of false water in Ararat. So each area gets its own refit on exactly the experts it has (`params["sub"][area]`).
 
-**Step 3 — time.** A two-state chain (water / not water) runs per pixel over the ten dates, with emissions $(q_t, 1 - q_t)$.
+**Step 3: time.** A two-state chain (water / not water) runs per pixel over the ten dates, with emissions $(q_t, 1 - q_t)$.
 
 - The start probabilities $\pi$ and the transition matrix $A$ are fitted by Baum–Welch on 30,000 random TUNE-strip pixels per area, with a weak diagonal Dirichlet prior.
 - The 24-day gap from 27 July to 10 August is one unobserved slot, so that step uses $A^2$ exactly.
@@ -84,7 +84,7 @@ Fitted per 12-day step (rows: from water, from land):
 - Sevan (fitted on Sevan alone): $\begin{pmatrix}0.99937 & 0.00063\\ 0.0000083 & 0.99999\end{pmatrix}$.
 - Ararat (refit with the math expert only): $\begin{pmatrix}0.99940 & 0.00060\\ 0.00166 & 0.99834\end{pmatrix}$.
 
-**Step 4 — space.** A masked 3 × 3 mean of $\gamma$ inside the footprint.
+**Step 4: space.** A masked 3 × 3 mean of $\gamma$ inside the footprint.
 
 **Products.**
 

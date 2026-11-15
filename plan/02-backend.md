@@ -8,7 +8,7 @@
 
 Libraries: `asf_search`, `earthaccess`, `h5py`, `numpy`, `rasterio`, `Pillow`. PLAN.md also lists xarray and rioxarray; h5py plus rasterio do the same job with fewer moving parts, so leave them out unless a cookbook notebook you copy needs them.
 
-## Hours 0–1 — access, fixture, coverage gate
+## Hours 0–1: access, fixture, coverage gate
 
 **B1. Environment and login.**
 
@@ -34,7 +34,7 @@ then `chmod 600 ~/.netrc`. Merge `requirements.txt` to `main` straight away so t
 
 Commit the contract C output and merge to `main`. Tell the team "fixture is on main".
 
-**B3. Coverage gate for area 1.** In ASF Vertex (https://search.asf.alaska.edu/), draw the Tonle Sap box, dataset NISAR, product GCOV, and look for one track and frame with at least six PROVISIONAL passes in one acquisition mode. Then confirm in code — these parameters are confirmed by the ASF guide:
+**B3. Coverage gate for area 1.** In ASF Vertex (https://search.asf.alaska.edu/), draw the Tonle Sap box, dataset NISAR, product GCOV, and look for one track and frame with at least six PROVISIONAL passes in one acquisition mode. Then confirm in code: these parameters are confirmed by the ASF guide:
 
 ```python
 import asf_search as asf
@@ -46,13 +46,13 @@ results = asf.search(
 print(len(results)); print(results[0].properties)
 ```
 
-Read the printed properties to find the exact names for track, frame, flight direction, bandwidth and polarization **(not confirmed — do not guess them)**, then group results by track + frame + direction and count.
+Read the printed properties to find the exact names for track, frame, flight direction, bandwidth and polarization **(not confirmed: do not guess them)**, then group results by track + frame + direction and count.
 
 Fewer than six in every group → switch to the Bangladesh haor substitute. Hard limit: 30 minutes on this decision.
 
 **Done when:** `areas/tonle-sap/area.json` has `track`, `frame`, `direction` filled in, and the team knows the list of dates.
 
-## Hours 1–3 — one real date, end to end
+## Hours 1–3: one real date, end to end
 
 **B4. Open one file and print its tree.** Before writing anything else. Stream it rather than downloading:
 
@@ -69,7 +69,7 @@ Expected in that group, as seen in real files: `HHHH`, `HVHV`, `mask`, `numberOf
 
 - `int(g['projection'][()])` is the EPSG code of the grid.
 - `xCoordinates` / `yCoordinates` are one-dimensional **pixel centres**. Is `yCoordinates` descending (north first)?
-- The pixel spacing. Do not assume 20 m — one sample file is about 37,000 pixels on a side.
+- The pixel spacing. Do not assume 20 m: one sample file is about 37,000 pixels on a side.
 - What no-data looks like in `HHHH` (NaN, zero) and what the `mask` values mean **(not confirmed)**.
 - If the first download asks you to accept a data-use agreement, every team member must accept it too.
 
@@ -82,7 +82,7 @@ Expected in that group, as seen in real files: `HHHH`, `HVHV`, `mask`, `numberOf
 5. Define the area's target grid once (snap the padded box to multiples of `pixel_m`) and save it to `data/processed/{area}/grid.json`. Every later date reuses it.
 6. Resample onto the target grid with `rasterio.warp.reproject(..., resampling=Resampling.average)` and write contract A.
 
-**B6. `scripts/ingest/export.py {area}`.** Runs on any contract B folder — develop it against the demo area as soon as detection's first output exists (or colour the fixture grey yourself to start).
+**B6. `scripts/ingest/export.py {area}`.** Runs on any contract B folder: develop it against the demo area as soon as detection's first output exists (or colour the fixture grey yourself to start).
 
 1. For each product GeoTIFF: reproject to EPSG:3857 with **nearest** resampling (the pixels are already coloured; other methods smear colours into transparent edges). Use one target grid per area so all images share bounds; cap the longer side at 3,000 pixels.
 2. Save with Pillow as WebP, quality 80, keeping alpha.
@@ -94,13 +94,13 @@ Expected in that group, as seen in real files: `HHHH`, `HVHV`, `mask`, `numberOf
 
 **Done when (hour-3 checkpoint):** one real Tonle Sap date is on the live URL and lines up with the lake shoreline on the basemap.
 
-## Hours 3–7 — the full stack for area 1
+## Hours 3–7: the full stack for area 1
 
 **B8. `scripts/ingest/search.py {area}`.** The B3 query filtered to the chosen track, frame, direction and mode; writes `data/raw/{area}/passes.json` (date, URL, granule name). Two granules on the same date → keep one and log it.
 
 **B9. Loop extract over all passes.** Skip dates already on disk so a failed run resumes. Log one line per date with read time and the share of valid pixels; a date under 80% valid goes in the log and is reported to detection.
 
-**B10. `scripts/build_area.sh {area}`** — the whole pipeline in order:
+**B10. `scripts/build_area.sh {area}`**: the whole pipeline in order:
 
 ```bash
 set -e

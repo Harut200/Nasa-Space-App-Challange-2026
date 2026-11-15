@@ -25,9 +25,9 @@ methods overall (water RMSE 0.110 vs 0.158 hard, 0.281 classical unmixing, 0.317
 the wind on a windy date (4.7 / 7.6 dB learned vs 5 / 8 dB true) and keeps the lake water while the threshold loses
 half of it; (2) at Lake Sevan its learned water roughness jumps only on **31 Aug** (the pass after 29 mm of rain),
 by +0.5 dB HH / +1.4 dB HV; (3) it splits the floodveg "going under" state cleanly into *open water* (96 % of those
-pixel-dates) — it says that state is partly open water, not submerging canopy; (4) its rank agreement with long-term
+pixel-dates): it says that state is partly open water, not submerging canopy; (4) its rank agreement with long-term
 occurrence in the Tonle Sap floodplain is the highest of all methods (Spearman 0.596 vs 0.519 hard, 0.569 subpixel).
-It is a working, honest piece of unsupervised physics + deep learning — a good *talk* item, not a product layer.
+It is a working, honest piece of unsupervised physics + deep learning: a good *talk* item, not a product layer.
 
 ## 1. The idea in three sentences
 
@@ -35,7 +35,7 @@ Every ~180 m radar pixel is a mix of open water, vegetation standing in water, a
 those parts add up in **power**. A small neural network (the *encoder*) looks at one pixel's whole season (plus its
 neighbourhood) and proposes, for every date, the three fractions and the pixel's dry-land brightness. A fixed piece
 of physics (the *decoder*, the radar mixing equation) turns that proposal back into the HH and HV images, and the
-network is trained only by asking that the rebuilt images match the real ones — no labels anywhere.
+network is trained only by asking that the rebuilt images match the real ones: no labels anywhere.
 
 ![model](unmix/01_model_diagram.png)
 
@@ -104,7 +104,7 @@ pixels (`prior_driven`: second-brightest HH below 0.30 and above the floor, and 
 own noise level). On the synthetic scene the flag catches 84 % of the constant dark-land patch but only 7 % of a
 constant 70 %-water patch (its speckle makes it look "changing"), and the network calls **both** patches land
 (water 0.002 and 0.001; truth 0 and 0.7). That is the right default for dark land and the wrong one for a
-permanently half-flooded pixel — no unsupervised model can know the difference from these data. At Tonle Sap
+permanently half-flooded pixel: no unsupervised model can know the difference from these data. At Tonle Sap
 1,022 km² are prior-driven and the model puts on average 833 km² of water on them: a large part of its over-count
 (§5) is exactly this unidentifiable case. A second identifiability problem: $f_v$ and $G$ trade off ($f_vG$ is what
 the data see); $G^{HH}$ ends at its upper bound (+5.3 dB synthetic vs +3 true; +6.0 dB on real data).
@@ -182,7 +182,7 @@ noise-floor map (§2) recovered half of that. The rest are shoreline pixels push
 | HV | 0.00 | 0.00 | 0.01 | 0.01 | 0.35 | **1.40** | 4.57 | 5.43 | (1.13, HV imputed) | 4.62 |
 | weather | calm | calm | calm | calm | calm | 29 mm rain the night before | 2–4 m/s breeze | calm | – | calm |
 
-HH roughness rises on **31 Aug only** — the one clear match. 12 Sep (breeze) is not seen in HH. HV roughness drifts up
+HH roughness rises on **31 Aug only**: the one clear match. 12 Sep (breeze) is not seen in HH. HV roughness drifts up
 from late August to October regardless of weather (4.6–5.4 dB on calm 24 Sep and 18 Oct as well as on 12 Sep): it
 tracks the late-season HV noise level over the lake, not wind. No source shows wind above ~3 m/s at pass time, so
 the honest reading is "HH roughness is a usable rough-water flag; HV roughness is not".
@@ -201,16 +201,16 @@ the honest reading is "HH roughness is a usable rough-water flag; HV roughness i
 | hard detector | 2,234 | 2,297 | 2,310 | 2,421 | 2,803 | 2,954 | 3,147 | 3,522 | 3,541 | 3,837 |
 | subpixel.py | 2,315 | 2,388 | 2,405 | 2,535 | 2,999 | 3,177 | 3,396 | 3,738 | 3,757 | 4,127 |
 
-The autoencoder is the only method that reaches the expected late-season range — and overshoots it on every date,
+The autoencoder is the only method that reaches the expected late-season range, and overshoots it on every date,
 already by 1,500 km² in June. Share of its water inside the expected set: 0.49–0.65 (hard detector 0.86–0.97);
 recall of the expected set: 0.83–0.91 (hard 0.53–0.91); IoU at 0.5: 0.45–0.60 (hard 0.49–0.86). So it finds most of
 the water the strict detector misses late in the season, but adds as much again outside the expected set (dark,
-flat floodplain fields — the prior-driven pixels of §3).
+flat floodplain fields: the prior-driven pixels of §3).
 
 Other checks: Spearman rank correlation of the mean water fraction with long-term occurrence in the ambiguous
 floodplain: **0.596** (hard 0.519, subpixel.py 0.569, classical unmixing 0.554; math detector 0.50–0.52). Held-out
 TEST-strip anchors, fraction ≥ 0.5: recall 0.995, false-positive rate 0.015, balanced accuracy 0.990 (hard 0.996,
-subpixel.py 0.996) — 84 km² of false water per date on the "never water" anchors vs 0.3 km² for the hard detector.
+subpixel.py 0.996): 84 km² of false water per date on the "never water" anchors vs 0.3 km² for the hard detector.
 
 **Flooded vegetation** (km², summed $f_v$): AE 2,143 / 1,712 / 1,157 / 2,021 / 1,721 / 2,380 / 2,940 / 1,954 / 2,530 /
 3,045 (19 Jun → 17 Oct) vs the rebuilt rule 1 / 1 / 213 / 462 / 1,591 / **2,113** / 1,865 / 1,423 / 1,282 / 836. The AE's
@@ -220,7 +220,7 @@ dry June: it uses $f_v$ for any pixel whose HH is above its own land level (brig
 **The "going under" question.** On the rule's state 2 (both channels fall: submerging canopy *or* partly open water),
 the AE says open water: mean $f_w$ 0.87, 96 % of those pixel-dates mostly water, $f_v$ 0.015; their long-term JRC
 occurrence is 29 %. On state 1 (double bounce) it says $f_w$ 0.29, $f_v$ 0.29 (occurrence 6 %). So the mixing model
-does separate the two states, and it answers "partly open water" for state 2 — consistent with the floodveg note that
+does separate the two states, and it answers "partly open water" for state 2: consistent with the floodveg note that
 open water appears in 25–36 % of the surrounding window from 30 Aug, but unverified per pixel.
 
 ![areas](unmix/05_area_curves.png)
@@ -230,7 +230,7 @@ open water appears in 25–36 % of the surrounding window from 30 Aug, but unver
 ### 5.3 Armenia controls (Ararat valley: no lake)
 
 Water fraction summed, km² per date: **0.7–4.9** with the terrain prior, 5.7–8.9 without (hard detector 0.5–3.8).
-Away from any JRC water: 0.5–3.6 km². Flooded vegetation: **37–142 km²** (peak 31 Aug, the QC-flagged HH date) — a
+Away from any JRC water: 0.5–3.6 km². Flooded vegetation: **37–142 km²** (peak 31 Aug, the QC-flagged HH date): a
 clear false signal on irrigated fields; the terrain mask does not remove it (flat valley floor). Sevan scene, water
 outside the lake zone: 3.3–11.3 km² per date (hard detector 7.1–18.1).
 
@@ -252,7 +252,7 @@ decoder is the physically correct one (see §10).
 ## 7. Reconstruction and residuals
 
 Brightness RMSE of the rebuilt images: Tonle Sap 0.031 (explains 98.8 % of all variance, **86 % of the temporal
-variance**), Sevan 0.034 (98.3 %; 14 % temporal — the lake hardly changes), Ararat 0.023 (98.5 %; 5 % temporal). World
+variance**), Sevan 0.034 (98.3 %; 14 % temporal: the lake hardly changes), Ararat 0.023 (98.5 %; 5 % temporal). World
 areas: 0.027–0.047. Largest residuals: steep mountain slopes around Sevan (terrain brightness the three-type model
 has no term for), the south-east of the lake in HV (noise), towns. Residual maps say where the three-surface physics
 is wrong, not where water is.
@@ -270,7 +270,7 @@ is wrong, not where water is.
 | no_tv (no temporal smoothness) | 0.486 / −0.248 | 1,157 (1,041, 968) | 4,467 → 9,461 | 0.52 | 122 | 7.8 / 135 | 0.634 |
 
 * **Sparsity is load-bearing and is the trade-off.** Without it the shoreline fraction becomes as good as
-  subpixel.py (0.357 vs 0.354) — but the lake loses 240 km², Tonle Sap's water doubles in June and Ararat gets 115 km²
+  subpixel.py (0.357 vs 0.354), but the lake loses 240 km², Tonle Sap's water doubles in June and Ararat gets 115 km²
   of water. With it, dark land stays dry and the shoreline turns binary.
 * **Temporal smoothness** mainly protects the rough dates (no_tv: −201 km² on 31 Aug/12 Sep vs −28/−73) and halves
   false flooded vegetation in Ararat.
@@ -300,7 +300,7 @@ detector for extent. If anything is used, use the Sevan HH roughness as a "rough
 state-2 answer ("mostly open water") as a supporting sentence in the flooded-vegetation explanation.
 
 **Calibrated data** (`data/processed/tonle-sap-cal/gamma0/{hh,hv}/<date>.tif`, linear power, 80 m): what the code
-needs — a `prepare` path that reads γ⁰ and converts to "brightness" with $b = 1 + \frac{10}{D}\log_{10}\gamma^0$ for a
+needs: a `prepare` path that reads γ⁰ and converts to "brightness" with $b = 1 + \frac{10}{D}\log_{10}\gamma^0$ for a
 chosen $D$ (or a decoder that takes power directly: replace `to_power`/`to_bright` by identity/log and drop the
 display soft-clip); the land floor and the water end-member re-expressed in dB (e.g. land ≥ −18 dB HH, water ≈ −25 dB);
 the noise-floor map from the product's NESZ instead of from dark water; a retrain (the scene parameters are

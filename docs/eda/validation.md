@@ -64,7 +64,7 @@ FN 54.2; Ararat TP 0.0 / FP 8.9 / FN 1.1.
   (around 45.0 E, 40.6 N), the area that the wind roughens on 31 Aug / 12 Sep (see `math-detection.md`);
   it is missed because it is not water on ≥ 90 % of our dates, not because it is invisible.
 * **Tonle Sap:** our permanent water is the lake as it looked on every pass from June to October. That is
-  not the same as "≥ 90 % of all observations since 1984" — the lake shrinks in March–May, outside our
+  not the same as "≥ 90 % of all observations since 1984": the lake shrinks in March–May, outside our
   season, so its shallow north-western half has long-term occurrence 75–90 % (37.8 % of our permanent pixels
   fall in that bin, 61.5 % in 90–100 %). Against occurrence ≥ 75 % or against "water all 12 months of 2021"
   precision is 0.99 / 0.98. The ≥ 95 % row only shows that very few Tonle Sap pixels are water in ≥ 95 % of
@@ -91,8 +91,8 @@ is the large NW lake area discussed above (a definition difference, not a shorel
 
 **Reference occurrence over our seasonal open water** (share of pixels per occurrence bin):
 Tonle Sap 0 %: 3.9 %, 1–10: 13.2 %, 10–25: 37.4 %, 25–50: 21.0 %, 50–75: 7.3 %, 75–90: 10.7 %,
-90–100: 6.7 % (median 22.6 %) — i.e. mostly *intermediate* occurrence, exactly where seasonally flooded land
-should be. Sevan: 65.4 % at 0 % and 31.8 % at 90–100 % (median 0) — Sevan's "seasonal" water is either lake
+90–100: 6.7 % (median 22.6 %): i.e. mostly *intermediate* occurrence, exactly where seasonally flooded land
+should be. Sevan: 65.4 % at 0 % and 31.8 % at 90–100 % (median 0): Sevan's "seasonal" water is either lake
 pixels lost on windy dates or land that has never been water.
 
 **Where is the late-season water outside the maximum extent?**
@@ -101,7 +101,7 @@ pixels lost on windy dates or land that has never been water.
   3; none near the frame edge. It is shoreline blur / small growth at the edge of known floodplain (largest
   pieces 8.2 km² at 104.67 E 12.65 N, 5.0 km² at 105.08 E 12.17 N). **No sign of false water.**
 * **Sevan (126.7 km², 9 %):** 96 % lies more than 3 pixels (> 540 m) from any water ever mapped by Landsat;
-  none near the frame edge. **These are false positives** — dark land, not lake. Largest clusters:
+  none near the frame edge. **These are false positives**: dark land, not lake. Largest clusters:
   16.8 km² at 45.67 E 40.29 N (east of the lake), 10.2 km² at 45.14 E 40.12 N, 9.1 km² at 45.12 E 40.20 N,
   8.4 km² at 45.13 E 40.17 N (south-west of the lake), 8.6 km² at 45.20 E 40.37 N, 6.8 km² at 45.08 E 40.30 N.
 * **Ararat (30.5 km², 97 %):** 94 % more than 3 pixels from any reference water. Our "water" sits in the
@@ -137,7 +137,7 @@ and ≥ 92.8 % of Sevan water lies inside the max extent.
   (IoU 0.34). What we call water in October is almost all inside the historical flood zone, but we see only
   about a third of the historical maximum. Two reasons we cannot separate here: (a) the maximum extent is the
   union of *all* floods 1984–2021 (big years such as 2000 and 2011) plus every rice field ever seen wet;
-  (b) **our detector only sees open water** — flooded forest and shrubland (most of the Tonle Sap
+  (b) **our detector only sees open water**: flooded forest and shrubland (most of the Tonle Sap
   floodplain) is bright in L-band, not dark. Excluding a 1-pixel boundary band recall is still 0.39, so this
   is not a resolution effect. Sevan last date vs max extent: IoU 0.92, precision 0.94, recall 0.97.
 
@@ -191,12 +191,12 @@ shoreline pixel.)
    our 180 m pixels; "Ararat fish ponds" claims are not supported by this data.
 3. **Sevan "seasonal open water" (125 km²) is not seasonal water**: 65 % is land never seen as water,
    32 % is lake lost on windy dates. Do not present it as lake change.
-4. **Flooded vegetation in Armenia** (39 km² Ararat, 8 km² Sevan on any date) lies outside known water —
+4. **Flooded vegetation in Armenia** (39 km² Ararat, 8 km² Sevan on any date) lies outside known water
    false alarms.
 
 ## 5. What this does and does not prove
 
-**Does show:** where our method says water, there usually was water in 38 years of Landsat — at Tonle Sap
+**Does show:** where our method says water, there usually was water in 38 years of Landsat, at Tonle Sap
 98–99 % of our late-season water and 96 % of our seasonal water lie inside the historical maximum extent, and
 seasonal water sits on intermediate-occurrence land; at Sevan the permanent lake matches with IoU 0.94 and the
 remaining mismatch is mostly one shoreline pixel wide. The maps are correctly geolocated.
@@ -212,7 +212,7 @@ remaining mismatch is mostly one shoreline pixel wide. The maps are correctly ge
 * **Different physics.** Landsat is blind under clouds (frequent in the Cambodian wet season, so high-water
   states are under-sampled in GSW) and under canopy; radar sees through clouds but sees flooded forest as
   bright. The October recall of 0.34 at Tonle Sap mixes "smaller flood this year" with "radar open-water rule
-  misses flooded forest" — we cannot tell them apart with this reference.
+  misses flooded forest": we cannot tell them apart with this reference.
 * **No accuracy for small water bodies** (< a few hundred m), and the Armenian false positives show the
   method is not reliable on dry land without a prior.
 

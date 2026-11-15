@@ -22,7 +22,7 @@ Sections 3 and 4 assume the 7-slide limit. If the real limit differs, adjust the
 
 ## 2. What judges score, and where we show it
 
-The five criteria are confirmed. The descriptions are our paraphrase — replace them with the official wording when you have it.
+The five criteria are confirmed. The descriptions are our paraphrase: replace them with the official wording when you have it.
 
 | Criterion | What it asks | Our answer | Where a judge sees it |
 |---|---|---|---|
@@ -34,16 +34,16 @@ The five criteria are confirmed. The descriptions are our paraphrase — replace
 
 **The one sentence** (agree on it at day 2, hour 0; use it unchanged on the deck, the page and the README):
 
-> *Dancing with the SARs lets anyone press play on a season of NISAR radar images and watch a lake, a forest and a valley change — and understand why radar can see it.*
+> *Dancing with the SARs lets anyone press play on a season of NISAR radar images and watch a lake, a forest and a valley change, and understand why radar can see it.*
 
-## 3. The deck — 7 slides
+## 3. The deck: 7 slides
 
 Owner: ______ (one person holds the pen; others supply pieces). Build in Google Slides, 16:9, dark background to match the app. Rules: at most 25 words per slide outside the title, text no smaller than 24 pt, one idea per slide, live URL in the footer of every slide.
 
 | # | Slide | Content | Criterion | Supplied by |
 |---|---|---|---|---|
 | 1 | **Title** | Project name, the one sentence, an animated image of the lake growing, team name, challenge name, live URL and QR code | Creativity | frontend (animation) |
-| 2 | **The problem** | Radar sees through cloud and night, and NISAR now images nearly all land every 12 days — but a radar image means nothing to most people. One grey raw image as proof | Relevance | detection |
+| 2 | **The problem** | Radar sees through cloud and night, and NISAR now images nearly all land every 12 days, but a radar image means nothing to most people. One grey raw image as proof | Relevance | detection |
 | 3 | **What we built** | One annotated screenshot: timeline, swipe, change layer, story panel. "Live now at …" | Relevance, Presentation | frontend |
 | 4 | **How it works and why you can trust it** | Four-box pipeline (NISAR → cut and align → detect change → static web app). Three trust points: one calibration tier; gap shown; checked against optical. The side-by-side figure from D12 | Validity | detection + backend |
 | 5 | **What the radar showed** | One measured number per area, large, each with a small before/after pair. Example form: "Tonle Sap open water: X → Y km², June to October" | Impact | detection |
@@ -69,7 +69,7 @@ Checks before sharing:
 | 15–22 | Swipe on the Amazon area; story panel | "Swipe to compare. Read why radar sees it." |
 | 22–30 | Armenia, then URL card | "Three places, one season, open to everyone. Dancing with the SARs." |
 
-Record at 1920×1080 from the live URL. Captions on screen — many judges watch muted.
+Record at 1920×1080 from the live URL. Captions on screen: many judges watch muted.
 
 **Live local pitch** (if there is one): same seven beats, three minutes, one speaker, a second person driving the app. Rehearse twice with a timer. Have the backup screen capture open in another tab.
 
@@ -77,26 +77,26 @@ Record at 1920×1080 from the live URL. Captions on screen — many judges watch
 
 Draft in `docs/pitch/project-page.md` so all three can edit; paste into the form at the end.
 
-- **High-level summary** — the one sentence, then three more: what it does, what data, why it matters.
-- **Detailed description** — headings in this order: What it does · How it works · Data and method · What we found · Limitations · What is next · Tools used. Reuse the README text; do not write it twice.
-- **Space agency data** — NISAR L2 GCOV, PROVISIONAL, via ASF DAAC, with the collection name and date range. List any other source separately with its terms.
-- **References** — every source behind a number in the story panels; libraries; basemap provider.
-- **Use of AI** — state plainly which AI tools were used and for what (planning documents and code assistance, at minimum). No AI-generated imagery in the app or deck.
+- **High-level summary**: the one sentence, then three more: what it does, what data, why it matters.
+- **Detailed description**: headings in this order: What it does · How it works · Data and method · What we found · Limitations · What is next · Tools used. Reuse the README text; do not write it twice.
+- **Space agency data**: NISAR L2 GCOV, PROVISIONAL, via ASF DAAC, with the collection name and date range. List any other source separately with its terms.
+- **References**: every source behind a number in the story panels; libraries; basemap provider.
+- **Use of AI**: state plainly which AI tools were used and for what (planning documents and code assistance, at minimum). No AI-generated imagery in the app or deck.
 
 ## 6. Repository
 
 Owner of the README: ______ (one person, to avoid edit conflicts). Do this on day 2 after the freeze, on `main`, in small pull requests.
 
-**README, top to bottom** — a judge gives it about 30 seconds, so the first screen must contain items 1–4:
+**README, top to bottom**: a judge gives it about 30 seconds, so the first screen must contain items 1–4:
 
 1. Project name and the one sentence.
 2. **Live demo** link, and the deck link.
 3. An animated image of the app playing (under 5 MB, in `assets/images/`).
-4. One line: "NASA Space Apps Challenge 2026 — Dancing with the SARs".
+4. One line: "NASA Space Apps Challenge 2026: Dancing with the SARs".
 5. What you can do in the app (four bullets) with two screenshots.
 6. How it works: the data-flow diagram from [README.md](README.md), then the methods and knob table from detection.
 7. Data and credits: product, tier, date range, the gap, the credit line.
-8. Limitations — the paragraph from detection.
+8. Limitations: the paragraph from detection.
 9. Reproduce: prerequisites, Earthdata login, `pip install -r requirements.txt`, `scripts/build_area.sh tonle-sap`, `cd src/app && npm install && npm run dev`. Tested on a second laptop.
 10. Team, licence, AI-use statement.
 

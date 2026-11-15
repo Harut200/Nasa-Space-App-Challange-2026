@@ -8,7 +8,7 @@ Stack: Vite + React + MapLibre GL JS. No router, no state library, no component 
 
 The app is finished when a stranger can open the URL on a phone, press play, and understand what changed and why.
 
-## Hours 0–1 — empty map, live
+## Hours 0–1: empty map, live
 
 **F1. Scaffold.**
 
@@ -66,7 +66,7 @@ Merge to `main`. This needs hour-0 step 5 (Pages source = GitHub Actions) to be 
 
 **Done when:** the live URL shows the map on your phone.
 
-## Hours 1–3 — one overlay from a manifest
+## Hours 1–3: one overlay from a manifest
 
 **F5. Load data.** Merge `main` to get the `demo` area. On start, fetch `data/index.json`, then every `data/{area}/manifest.json`. Keep three pieces of state: `area`, `dateIndex`, `layer`.
 
@@ -88,11 +88,11 @@ To change the frame: `map.getSource('sar').updateImage({ url: newUrl })`. For a 
 
 **Done when:** the demo disc sits on the map and area buttons fly between areas. At hour 3, the first real Tonle Sap date replaces it with no code change.
 
-## Hours 3–7 — timeline
+## Hours 3–7: timeline
 
 **F8. Scrubber.** `<input type="range" min=0 max={dates.length-1}>` bound to `dateIndex`. It is keyboard-accessible for free. Show the selected date in words ("14 July 2026").
 
-**F9. True-time strip.** Above the range, a thin SVG: one tick per pass placed by real date, and a shaded band for each entry of `manifest.gaps`, labelled "no data (instrument)". Passes are not evenly spaced and the July–August hole must be visible — this is part of our validity claim.
+**F9. True-time strip.** Above the range, a thin SVG: one tick per pass placed by real date, and a shaded band for each entry of `manifest.gaps`, labelled "no data (instrument)". Passes are not evenly spaced and the July–August hole must be visible: this is part of our validity claim.
 
 **F10. Play.** A play/pause button that advances `dateIndex` every 800 ms and loops. Before playing, preload every frame of the current layer (`new Image().src = url`) so playback does not flicker.
 
@@ -100,7 +100,7 @@ To change the frame: `map.getSource('sar').updateImage({ url: newUrl })`. For a 
 
 **Done when:** pressing play on area 1 shows the lake grow, with the gap drawn.
 
-## Hours 7–10 — swipe, layers, story
+## Hours 7–10: swipe, layers, story
 
 **F12. Layer toggle.** One button per `manifest.layers` entry. If the chosen layer lacks the current date, show the nearest date it has and say so.
 
@@ -122,7 +122,7 @@ To change the frame: `map.getSource('sar').updateImage({ url: newUrl })`. For a 
 
 **F19. Restorable link.** Write `#area=…&date=…&layer=…` on every state change with `URLSearchParams`; read it on load.
 
-## Day 2, hours 3–5 — polish, then freeze
+## Day 2, hours 3–5: polish, then freeze
 
 **F20.** Loading indicator while manifests and the first frame load. A plain message if a fetch fails.
 **F21.** Check at 375 px wide and on a projector (1280×720): nothing overlaps, text readable from the back of a room.

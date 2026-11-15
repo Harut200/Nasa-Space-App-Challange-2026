@@ -7,7 +7,7 @@ Weights: `data/processed/models/`. Products: `data/processed/<area>/dl/products.
 
 We did not build a region-proposal detector such as R-CNN. Those find boxed objects, and floods and lakes are not boxed objects, so we use per-pixel models instead.
 
-## 0. U-Net v2 (current default) — trained on the math detector's labels
+## 0. U-Net v2 (current default): trained on the math detector's labels
 
 ### Why v2
 The v1 U-Net (sections 1–4 below) was trained on loose rule labels with ~60–80 % "not sure" pixels and scored 0.97–1.0 agreement with those rules, which only proved it copied them. Where the rules were unsure it guessed badly: Tonle Sap 17 Oct = 10,149 km² open water (math detector: 3,837) and 6,098 km² flooded vegetation (math: 144); Lake Sevan (true 1,242 km²) = 1,500–2,300 km² water because dark slopes and radar shadow look like water.
@@ -108,7 +108,7 @@ Open-water IoU, Tonle Sap east, self-consistency (perturbed vs own clean output)
 | gain +10 % | 0.856 | 0.851 | 0.884 | **0.894** |
 | 4 looks + gain +10 % | 0.774 | 0.776 | 0.757 | **0.791** |
 
-Sevan open water: everyone stays ≥ 0.95; the best network is slightly steadier (2 looks: 0.972 vs math 0.962; other-land 0.991 vs 0.953). Flooded vegetation collapses for **both** methods under speckle (math 0.11 at 16 looks; network 0.21, noise-augmented network 0.53) — it is a small, noise-sensitive class.
+Sevan open water: everyone stays ≥ 0.95; the best network is slightly steadier (2 looks: 0.972 vs math 0.962; other-land 0.991 vs 0.953). Flooded vegetation collapses for **both** methods under speckle (math 0.11 at 16 looks; network 0.21, noise-augmented network 0.53): it is a small, noise-sensitive class.
 
 **Honest reading:** the network is **about as stable as the math detector, not clearly more**. The best model is a few IoU points steadier for mild-to-moderate speckle and equal under gain errors; the noise-augmented model is the steadiest under gain errors and for flooded vegetation, but agrees less with the math detector on clean data. The math detector has its own multi-temporal speckle filter, so the network has little to add here. Note that a ±10 % gain on every date is **not** removed by the math detector's per-date normalisation (it is relative between dates), which is why both drop to ~0.85.
 
@@ -125,7 +125,7 @@ Sevan open water: everyone stays ≥ 0.95; the best network is slightly steadier
 - Sevan west two-thirds and all of Ararat are in the training set, so the Sevan whole-lake numbers are partly in-sample (the Tonle-Sap-only model, which never saw Armenia, gives the same picture).
 - Model selection used the held-out parts (no separate test split); with 6 versions the selection bias is small but non-zero.
 - One seed per version; differences below ~0.02 IoU between versions are probably noise.
-- Robustness noise is synthetic, applied to display brightness and clipped to 0..1, so calm water at the floor (1/255) is barely affected by multiplicative noise — this makes water look easier than in real data.
+- Robustness noise is synthetic, applied to display brightness and clipped to 0..1, so calm water at the floor (1/255) is barely affected by multiplicative noise: this makes water look easier than in real data.
 - The math pipeline uses only pixels valid on all dates (common footprint); network predictions outside it are unscored (products still contain them).
 - Flooded-vegetation IoU on Sevan is undefined/0 (no such class there) and was left out of the score.
 - Training times were measured with 3 runs (and other agents' jobs) sharing the GPU.

@@ -10,7 +10,7 @@ Shared conventions:
 
 ## Area configuration (inputs written by hand)
 
-`areas/{area}/area.json` — owner: **backend**
+`areas/{area}/area.json`: owner: **backend**
 
 ```json
 {
@@ -26,7 +26,7 @@ Shared conventions:
 
 `bbox` is `[west, south, east, north]` in degrees. `track`, `frame`, `direction` are filled in after the coverage gate. Choose `pixel_m` so the longer side is 2,000–3,000 pixels (100 km at 40 m = 2,500).
 
-`areas/{area}/story.json` — owner: **detection**
+`areas/{area}/story.json`: owner: **detection**
 
 ```json
 {
@@ -42,7 +42,7 @@ Shared conventions:
 }
 ```
 
-## Contract A — backend → detection
+## Contract A: backend → detection
 
 ```
 data/processed/{area}/gamma0/{pol}/{date}.tif
@@ -54,7 +54,7 @@ data/processed/{area}/gamma0/{pol}/{date}.tif
 - Pixel size is `pixel_m` from `area.json`, made by **averaging** source pixels (this also reduces speckle).
 - Compression: deflate.
 
-## Contract B — detection → backend
+## Contract B: detection → backend
 
 ```
 data/processed/{area}/products/{layer}/{date}.tif     one per date
@@ -81,11 +81,11 @@ data/processed/{area}/products/timeseries.json
 ]
 ```
 
-- `timeseries.json` — the same shape the app receives (see contract C).
+- `timeseries.json`: the same shape the app receives (see contract C).
 
 **The change layer for date D is "D compared with the first pass".** The first date therefore has no change image. This replaces "change between any two dates" in PLAN.md: any-pair change needs 45 images per area and a second date picker; cumulative change tells the seasonal story with 9. The swipe (feature 3) still compares any two dates.
 
-## Contract C — backend → frontend
+## Contract C: backend → frontend
 
 Everything under `src/app/public/data/`, fetched by the app relative to its base URL.
 
@@ -123,7 +123,7 @@ src/app/public/data/{area}/{layer}.webp            for layers with "dates": null
 }
 ```
 
-- `bounds` is `[west, south, east, north]` in degrees — the exact edges of the images. All images of one area share these bounds.
+- `bounds` is `[west, south, east, north]` in degrees: the exact edges of the images. All images of one area share these bounds.
 - Images are in **Web Mercator (EPSG:3857), north up**, longer side at most 3,000 pixels (never above 4,096: phone graphics limit). WebP with transparency.
 - `dates` is ascending. A layer's own `dates` may be shorter than the area's (the change layer skips the first). The app shows nothing for a layer on a date it lacks.
 - `gaps` are date ranges with no data by instrument fault. The timeline shades them.

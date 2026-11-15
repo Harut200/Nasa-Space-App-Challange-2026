@@ -15,7 +15,7 @@ figures: `docs/eda/supervised/` · products: `data/processed/<area>/supervised/p
   Sap floodplain it tracks the independent expected extent far better (7 of 10 dates inside the expected range against 1).
 * **Should the app use it?** **No, not as the water source.** It is a useful independent check (a second opinion that never
   saw our detector's output), its sub-pixel fraction head is the best sub-pixel estimate we have, and its windy-date lake
-  area is the steadiest of all methods — but it does not earn a place in `run.py` ahead of fusion v2.
+  area is the steadiest of all methods, but it does not earn a place in `run.py` ahead of fusion v2.
 
 ## Why this network is different from every earlier one
 
@@ -26,7 +26,7 @@ labels**, so at best they copied it, mistakes included. This one learns from the
 * **water** = the long-term record says permanent water (≥ 90 % of the cell has occurrence ≥ 90 % and is water in all 12
   months of 2021), minus a shoreline band;
 * **land** = no water ever recorded within 3 pixels;
-* **ignored** = everything else (shorelines, seasonal floodplain) — except the weak land target below.
+* **ignored** = everything else (shorelines, seasonal floodplain), except the weak land target below.
 
 A lake that does not change is "water" on every date, including the windy and rainy dates on which radar loses part of
 it; a dark mountain slope is "land" on every date. The test is always on a **place** the network never saw.
@@ -90,7 +90,7 @@ both; the math detector's knobs and the terrain mask were tuned there), so for t
 Sub-pixel fraction on Sevan's stable shoreline pixels (106 px): fraction-head RMSE **0.113** (bias +0.025), against 0.39
 for the hard mask. The analytic sub-pixel method reported RMSE 0.354 in `subpixel.md` on its own pixel set (not the same
 pixels; the comparison is indicative only). The pretrained L-band encoder (frozen backbone, same labels) reached 0.912 on
-held-out Sevan with 74 km² false far water — this purpose-built network is clearly better than that (0.994).
+held-out Sevan with 74 km² false far water: this purpose-built network is clearly better than that (0.994).
 
 ### Tonle Sap
 
@@ -114,7 +114,7 @@ The `supervised` product the hydrology lane saw said **7,123 km²** of open wate
 from the first model (HH + HV inputs, no weak target). Diagnosis on Tonle Sap:
 
 * 94 % of the excess lay in the **ignored** zone, almost all of it (622 of 790 km² with the 9-place model) on pixels JRC saw
-  as water **less than 10 % of the time** in 38 years — never supervised, so the network extrapolated there.
+  as water **less than 10 % of the time** in 38 years: never supervised, so the network extrapolated there.
 * Those pixels are moderately dark (HH ≈ 0.46 × scene median, HV ≈ 0.34), the same appearance as the Lake Chad and
   Pantanal "permanent water" it learned from (HH 0.29–0.41 × median, often vegetated or wind-roughened). Not flooded
   vegetation: the Markov detector flags only 0–104 km² of it as flooded vegetation.
@@ -180,25 +180,25 @@ area between seeds (see the two seeds above), so only large differences mean any
   from 0.67 to 0.82 and removing the neighbour channels changed little on Sevan (0.70) but **dropped** Tonle Sap to 0.76.
   Not re-run for the HH-only recipe (out of time).
 * Terrain channels: +0.02 on Sevan (0.966/0.978 → 0.985), little change elsewhere.
-* Model size, and the learning curve by number of training places (1, 2, 4, 8): **not run** — the machine time went to
+* Model size, and the learning curve by number of training places (1, 2, 4, 8): **not run**: the machine time went to
   diagnosing and fixing the two failures above. What we can say: with the earlier HH + HV recipe, 8 places (no Tonle Sap)
   gave 0.75–0.87 on Sevan and 9 places (adding Tonle Sap) gave 0.915; with the reported recipe 8 places gave 0.994 and 9
-  gave 0.987 — adding a place shifts the errors around rather than steadily reducing them.
+  gave 0.987: adding a place shifts the errors around rather than steadily reducing them.
 
 ## Figures
 
-* `training_curves.png` — loss and validation balanced accuracy of the reported model.
-* `sevan_windy.png` — Sevan on 12 Sep (breeze): radar, math, math + terrain, Markov model, this network, reference.
-* `sevan_area.png` — Sevan largest water body per date for all methods vs 1,242 km².
-* `sevan_slope_false_water.png` — false water on the land around Sevan per method.
-* `tonle_sap_area.png` — Tonle Sap open water per date for all methods with the expected range.
-* `reliability.png` — reliability of the predicted probability on held-out anchors.
-* `loao_heatmap.png` — leave-one-place-out.
+* `training_curves.png`: loss and validation balanced accuracy of the reported model.
+* `sevan_windy.png`: Sevan on 12 Sep (breeze): radar, math, math + terrain, Markov model, this network, reference.
+* `sevan_area.png`: Sevan largest water body per date for all methods vs 1,242 km².
+* `sevan_slope_false_water.png`: false water on the land around Sevan per method.
+* `tonle_sap_area.png`: Tonle Sap open water per date for all methods with the expected range.
+* `reliability.png`: reliability of the predicted probability on held-out anchors.
+* `loao_heatmap.png`: leave-one-place-out.
 
 ## Verdict
 
 It is the first network in this project that did not just copy our detector, and on places it never saw it is about as
-good as the math detector with terrain mask — better on the lake on rough-surface dates, worse on false water around the
+good as the math detector with terrain mask: better on the lake on rough-surface dates, worse on false water around the
 lake. It loses to fusion v2 (the app's source) on every summary number except the windy-date lake area, and a simple
 per-pixel logistic regression on the same inputs and labels is as good or better on Sevan, and on unseen Lake Chad
 it finds only 70 % of the lake (fusion v2: 99 %), so the spatial network adds
@@ -210,7 +210,7 @@ independent cross-check and for its sub-pixel fraction head.
 * Labels and test anchors come from the **same reference type** (JRC) at different places; agreement with JRC is not
   agreement with 2026 truth. The reference ends in 2021.
 * Only **unambiguous** pixels are labelled and tested (deep lake interiors, land far from any water). Shorelines and
-  seasonal floodplains — where the hard decisions are — are not in the anchors; there only the hydrology comparison
+  seasonal floodplains, where the hard decisions are, are not in the anchors; there only the hydrology comparison
   (one place) speaks.
 * Inputs are **uncalibrated previews** (display brightness); HV had to be dropped because its noise floor varies by
   scene and across the swath. A calibrated product would likely change the picture.

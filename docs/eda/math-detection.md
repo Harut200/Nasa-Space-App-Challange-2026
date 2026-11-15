@@ -71,7 +71,7 @@ The `gamma0` values are textbook L-band starting points and **have never been te
   gives 1,190–1,240 km² on the previews. The same numbers are then used at Tonle Sap. Not independent.
   Cross-checks from the EDA: a flood-fill of dark pixels connected to Sevan gives 1,231–1,238 km² on calm
   dates (we get 1,235–1,261 on calm dates); at Tonle Sap a second Otsu split inside the dark class gives
-  ≈0.24, i.e. our 0.12 is the stricter side — "dark land" between 0.12 and 0.24 is not called water.
+  ≈0.24, i.e. our 0.12 is the stricter side: "dark land" between 0.12 and 0.24 is not called water.
 * `fv_hh_rise=0.15`: picked between 0.12 and 0.20 using Sevan/Ararat (no flooded forest there) as a
   negative control. **Very sensitive**: Tonle Sap peak flooded-veg area is 1,083 / 611 / 139 km² at
   0.12 / 0.15 / 0.20. Treat flooded-veg areas as order-of-magnitude.

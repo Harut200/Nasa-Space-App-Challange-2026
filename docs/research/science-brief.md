@@ -2,8 +2,8 @@
 
 For Abel. Gathered 14 November 2026 from web sources. Confidence marks:
 
-- **[S]** sourced — a link is given and was read or seen in search results
-- **[1]** single source, or a source that could not be opened — check before putting it on screen
+- **[S]** sourced: a link is given and was read or seen in search results
+- **[1]** single source, or a source that could not be opened: check before putting it on screen
 - **[T]** typical value from the radar literature, approximate, not verified against a paper
 - **[?]** not found for 2026
 
@@ -25,7 +25,7 @@ NISAR sends 24 cm microwaves and measures what comes back. Brightness depends on
 | Growing crop | Rises | Rises with biomass | More plant material |
 | Harvested field | Drops | Drops sharply | Stubble or bare soil |
 | Wet bare soil | A few dB brighter than dry | Small change | Water raises reflectivity |
-| Buildings, embankments, boats | Very bright points | — | Corner reflections |
+| Buildings, embankments, boats | Very bright points | - | Corner reflections |
 
 All values **[T]**. Do not print dB numbers from this table as facts; print what Harutyun measures.
 
@@ -33,7 +33,7 @@ All values **[T]**. Do not print dB numbers from this table as facts; print what
 
 **L-band versus C-band (Sentinel-1).** C-band's 5.6 cm waves stop at the top of a canopy: it maps open water well but misses flooding under trees and saturates over forest. L-band passes through. Worth one sentence, or a side-by-side if time allows.
 
-**False signals — things that change brightness without the ground changing**
+**False signals: things that change brightness without the ground changing**
 
 - Speckle: grainy noise in every radar image. Average over an area; never read single pixels.
 - Rain or irrigation just before a pass: wet soil is brighter.
@@ -47,7 +47,7 @@ All values **[T]**. Do not print dB numbers from this table as facts; print what
 
 ---
 
-## 2. Armenia — Ararat Valley and Lake Sevan
+## 2. Armenia: Ararat Valley and Lake Sevan
 
 One satellite frame covers both. Ten passes: 20 June – 18 October 2026, with nothing between 26 July and 19 August.
 
@@ -83,14 +83,14 @@ One satellite frame covers both. Ten passes: 20 June – 18 October 2026, with n
 - Irrigated plots flickering bright after watering.
 - Fish ponds dark throughout; a drained or abandoned pond would brighten.
 - Orchards and vineyards steady.
-- Sevan: dark, with wind patches. A level change of a few tens of centimetres moves the waterline only on the gentlest shores — likely near or below one pixel. Expect little; that is a finding.
+- Sevan: dark, with wind patches. A level change of a few tens of centimetres moves the waterline only on the gentlest shores: likely near or below one pixel. Expect little; that is a finding.
 - Blooms: invisible to radar. Optical satellites are the tool for that.
 
 ### Why it matters
 
 - Artesian aquifer pressure in the valley has fallen by about two-thirds since the early 1980s **[S]** (https://iah.org/news/as-armenian-fish-farming-expands-a-pristine-aquifer-is-drying-up); artesian zone area down about 30 % **[S]** (https://evnreport.com/?p=14655).
 - More than 200 fish farms **[S]** (https://e360.yale.edu/features/armenia-fish-farms-groundwater-agriculture). Water-use figures differ between sources (1.7 billion m³ abstraction in 2013 with 65 % to fish farms; about 681 million m³ a year for fish farms in a 2017 registry). Pick one and cite it.
-- Sevan: about 1,242 km², about 33 km³ today against about 58 km³ before Soviet-era drawdown of roughly 20 m **[S]** (https://en.wikipedia.org/wiki/Lake_Sevan). It feeds irrigation in the valley — the link between the two halves of the story.
+- Sevan: about 1,242 km², about 33 km³ today against about 58 km³ before Soviet-era drawdown of roughly 20 m **[S]** (https://en.wikipedia.org/wiki/Lake_Sevan). It feeds irrigation in the valley: the link between the two halves of the story.
 - IMF flagged growing water scarcity and irrigation losses in 2026 **[S]** (https://www.arka.am/en/news/economy/imf-has-highlighted-growing-water-resource-scarcity-and-infrastructure-problems-in-armenia-/).
 - A "share of Armenia's fresh water" figure for Sevan was not found. Do not state one.
 
@@ -103,7 +103,7 @@ One satellite frame covers both. Ten passes: 20 June – 18 October 2026, with n
 | Martuni shore | 40.14, 45.30 | Shoreline |
 | Sevan town / peninsula | 40.55–40.57, 44.95–44.99 | Landmark; built-up bright target |
 | Fields near Masis | 40.07, 44.43 | Wheat and vegetables |
-| Armavir orchards and fields | 40.15, 43.90 | May fall outside the cut-out — check |
+| Armavir orchards and fields | 40.15, 43.90 | May fall outside the cut-out: check |
 | Lake Aknalich / Metsamor | 40.07, 44.15–44.20 | Groundwater-fed lake |
 | Fish ponds, Ararat–Vedi | 39.90, 44.60 | Dark rectangles |
 | Vineyards near Vedi | 39.91, 44.73 | Steady reference |
@@ -121,7 +121,7 @@ Ten passes: 19 June – 17 October 2026, nothing between 25 July and 18 August.
 ### What changes
 
 - Lake grows from about 2,500 km² in the dry season to somewhere between 10,000 and 16,000 km² at peak, depth from about 1 m to 7–10 m **[S]** (https://hess.copernicus.org/articles/26/609/2022/). Sources differ on the peak; give a range.
-- The Tonle Sap River reverses and flows into the lake as the Mekong rises (around June–July), the lake usually peaks late September to mid-October, then drains **[T]** — typical calendar; no month-by-month table found.
+- The Tonle Sap River reverses and flows into the lake as the Mekong rises (around June–July), the lake usually peaks late September to mid-October, then drains **[T]**: typical calendar; no month-by-month table found.
 - Wet-season levels in 2010–2019 were 1.05 m lower than in 1996–2009, about 20 % less lake area **[S]** (same paper).
 
 ### 2026
@@ -153,7 +153,7 @@ Ten passes: 19 June – 17 October 2026, nothing between 25 July and 18 August.
 | Prek Toal flooded forest | 13.1, 103.7 |
 | Chong Kneas floating village | 13.27, 103.84 |
 | Mid-lake open water (control) | 12.8, 104.1 |
-| Kampong Luong | 12.2–12.3, 104.2 — near the edge of the cut-out, check |
+| Kampong Luong | 12.2–12.3, 104.2: near the edge of the cut-out, check |
 | Floodplain rice, Kampong Thom side | choose on basemap |
 
 ### Future uses
@@ -205,7 +205,7 @@ Pre-monsoon flash floods in April–May 2026 damaged the rice harvest; a monsoon
 
 - NISAR applications and white papers: https://science.nasa.gov/mission/nisar/applications , https://science.nasa.gov/mission/nisar/societal-benefits ; list of white-paper PDFs at https://nisar-docs.asf.alaska.edu/documents/
 - NASA ARSET NISAR training, 2026: https://www.earthdata.nasa.gov/s3fs-public/2026-06/arset-2026-nisar-part1.pdf
-- SAR Handbook (NASA SERVIR, 2019) — wetlands and forest chapters; search by title
+- SAR Handbook (NASA SERVIR, 2019): wetlands and forest chapters; search by title
 - Mapping inundation with L-band: Chapman et al. 2015, https://www.mdpi.com/2072-4292/7/5/5415
 - Crop time series with airborne L-band: https://www.research.lancs.ac.uk/portal/en/publications/full-year-crop-monitoring-and-separability-assessment-with-fullypolarimetric-lband-uavsar(54066e52-8de5-45f9-8022-1e5faabd8b77).html
 

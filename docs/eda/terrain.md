@@ -86,7 +86,7 @@ Open water is **not** possible in a pixel if
 ≥ 0.5 km²). A lake surface is flat in the DEM, so its 180 m shore pixels (half water, half bank) and a
 reservoir held above the valley floor by a dam are kept. Shadow is never waived.
 
-How they were chosen: from the physics above, then checked on the real lakes — Lake Sevan's water
+How they were chosen: from the physics above, then checked on the real lakes: Lake Sevan's water
 (1,239 km² overlapping the reference) loses 0.5 km² (0.04 %), and the 2 % shore band is kept by the
 guard. Variants: relative height 40 m removes 79 % of Sevan's false water instead of 70 % but cuts more
 than half of the (tiny, 1 km²) real water in the Ararat box, so we kept the more conservative 60 m.

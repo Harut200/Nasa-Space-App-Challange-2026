@@ -13,7 +13,7 @@ NASA Space Apps Challenge 2026 · challenge *Dancing with the SARs* · team **Co
 | Place | What the radar shows |
 |---|---|
 | **Tonle Sap, Cambodia** | The monsoon flood spreading like a wave: the river plain south-east of the lake goes under in late August, the ring around the lake in September |
-| **Lake Sevan, Armenia** | A lake that does not change — and how wind and rain can fool a naive method into thinking it shrank |
+| **Lake Sevan, Armenia** | A lake that does not change, and how wind and rain can fool a naive method into thinking it shrank |
 | **Ararat Valley, Armenia** | What radar at this resolution does not show: fields smaller than a pixel. (Interferometry does show the farming season there: [docs/eda/insar.md](docs/eda/insar.md)) |
 
 Eleven more water places are in the table below (it had twelve rows of places until Rondônia was taken out of the app). Balanced accuracy of the water map against Landsat water pixels that never change, from [docs/eda/fusion2.md](docs/eda/fusion2.md), section 8. **This is an easy test: it is measured only on pixels where the answer is certain (always water or never water); shorelines and floodplains are not in it. It does not show that a place is solved.** Against NASA's own water product several of these places look much worse (next section):
