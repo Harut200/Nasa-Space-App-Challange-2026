@@ -252,7 +252,7 @@ will meet.** Only one calibrated date existed, so the multi-temporal variant cou
 adds a 0.35–2 MB weight file, and does not improve any downstream number beyond noise; it would make specks worse.
 
 If the lead wants to try one anyway (e.g. on calibrated 20–80 m data once several dates exist, retrained there), the
-change is two lines in `scripts/detect/run.py` around line 236: no change to `ops.py` is needed:
+change is two lines in `scripts/detect/run.py` around line 236, and no change to `ops.py` is needed:
 
 ```python
 from scripts.detect import despeckle

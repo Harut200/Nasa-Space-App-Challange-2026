@@ -1,5 +1,7 @@
 # Branch `detection`
 
+> This is the plan as written on 14 November 2026, kept as it was. What differs now: the `detection` branch (and `detect-eda`, `detect-math`, `detect-dl`) was merged into `main` and deleted on 15 November. What was built and measured is in `docs/DETECTION.md`, `docs/RESULTS.md` and `docs/EVIDENCE.md`.
+
 **You own:** `scripts/detect/`, `areas/*/story.json`, `notebooks/`, `tests/test_detect.py`.
 **You receive:** contract A: linear-power GeoTIFFs on one grid ([00-contracts.md](00-contracts.md)).
 **You deliver:** contract B: coloured GeoTIFFs, `layers.json`, `timeseries.json`; and the story text.

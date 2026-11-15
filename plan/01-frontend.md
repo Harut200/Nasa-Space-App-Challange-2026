@@ -1,5 +1,7 @@
 # Branch `frontend`
 
+> This is the plan as written on 14 November 2026, kept as it was. What differs now: the `frontend` branch was merged into `main` and deleted on 15 November. The app in `src/app/` (Vite, React 19, MapLibre GL) was developed as `src/app3` on branch `front_harut` and moved to `src/app` on 15 November; the two earlier designs were removed (git history only). The deploy workflow `.github/workflows/deploy.yml` builds `src/app` for GitHub Pages.
+
 **You own:** `src/app/` (except `src/app/public/data/`, which backend writes) and `.github/workflows/`.
 **You receive:** contract C in [00-contracts.md](00-contracts.md).
 **You deliver:** the live site at `https://harut200.github.io/Nasa-Space-App-Challange-2026/`.

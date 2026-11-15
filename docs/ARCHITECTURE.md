@@ -6,7 +6,7 @@ Formulas and every number in detail: [DETECTION.md](DETECTION.md). One-page summ
 
 ## 1. The idea in four sentences
 
-Each radar pass is weak evidence about the state of each pixel: open water, vegetation standing in water, or dry land. Several independent "experts" read that evidence in different ways, physics rules, fitted probability distributions, statistical tests, the pixel graph, learned features, and each reports a probability, not a verdict. Three kinds of prior knowledge constrain the answer: terrain (water lies flat and low), time (states persist and follow a physical order), and space (neighbours agree). The system combines evidence and priors into one probability per pixel per date, and the products shown to the user, maps, dates of change, areas with error bars, the flood's arrival time, are read from that result or, where the result is known to be biased, from the expert that is not.
+Each radar pass is weak evidence about the state of each pixel: open water, vegetation standing in water, or dry land. Several independent "experts" read that evidence in different ways (physics rules, fitted probability distributions, statistical tests, the pixel graph, learned features), and each reports a probability, not a verdict. Three kinds of prior knowledge constrain the answer: terrain (water lies flat and low), time (states persist and follow a physical order), and space (neighbours agree). The system combines evidence and priors into one probability per pixel per date, and the products shown to the user, maps, dates of change, areas with error bars, the flood's arrival time, are read from that result or, where the result is known to be biased, from the expert that is not.
 
 The last clause is the main lesson of the day (section 5): the first fused system (v1) was the best answer for lakes and mountains but shrank a rising floodplain. Fusion v2 changed the time model, added a floodplain zone found without any reference and added a self-calibrating detector as an expert. It is now the water source for the water places (15 when this was written; the app has 18 water and farmland places on 15 November), and the choice per kind of terrain happens inside it.
 
@@ -152,7 +152,7 @@ Output: $\gamma_t(i)$, a water probability per pixel and date, in `data/processe
 For fusion v1, a module was added to the fused system only if, on the untouched TEST strip and on Lake Sevan (declared in code as `fusion.RULE` before any TEST number was read):
 
 1. it did not lower balanced accuracy on always-water and never-water pixels by more than 0.1 percentage point in any area, and
-2. it improved at least one named weakness by a measurable amount, mountain false water by ≥ 10 % and ≥ 1 km², the Sevan rough-surface dip by ≥ 10 km², or date-to-date flips on stable pixels by ≥ 10 % and ≥ 0.005, and
+2. it improved at least one named weakness by a measurable amount: mountain false water by ≥ 10 % and ≥ 1 km², the Sevan rough-surface dip by ≥ 10 km², or date-to-date flips on stable pixels by ≥ 10 % and ≥ 0.005, and
 3. it ran on a laptop in under 10 minutes per area.
 
 Flooded-vegetation stability, listed in the first draft, could not be measured, because the fused model has two states.
@@ -225,10 +225,10 @@ Judges score impact, creativity, validity, relevance and presentation. A longer 
 - **One original result people remember.** *Exists*: a map of the day the flood arrived at each place, including the 24 days the satellite was blind, with a measured skill (hiding real passes) and the finding that there was no hidden surge; and a relative height map of the floodplain read from the order of flooding alone, checked against an elevation model it never saw. The prior-art check is done ([`novel.md`](eda/novel.md)): the waterline idea is about 30 years old; the chain and the order-as-height reading are, to our knowledge, a new combination, never "first".
 - **Validity nobody else at the hackathon will have.** *Exists*: held-out testing with an adoption gate written in advance, one scoreboard for every detector, uncertainty bands on every area, independent 2026 checks against a NASA altimeter and river gauges, and a public list of our own errors, including the two claims the 2026 data corrected and the gap in our own admission rule.
 - **Real NISAR science.** *Partly*: water under vegetation, which L-band sees and optical sensors and C-band radar miss, is now a stable layer whose July rise matches the river gauge. Calibrated data are extracted and analysed for Tonle Sap (the area uncertainty at the flood peak narrows from a factor 2.4 to 1.25), but only Tonle Sap is in the app (`tonle-sap-cal`), the vegetation area is still unvalidated, and the same thresholds fail in Armenia. Coherence adds a second line of evidence in the Ararat Valley.
-- **A live app that works on a phone, with places on several continents.** *Partly*: 37 places in Asia, Africa, South America, North America and Europe (Armenia on the Europe–Asia boundary) are exported for the app. Against NASA's OPERA water product our maps agree at Sevan and Tonle Sap (97.5 % of pixels, IoU 0.84) but are wrong at Inner Niger, Lake Chad and Urmia ([`opera.md`](eda/opera.md)). **Deployment** and a phone check are not confirmed in any document we read.
+- **A live app that works on a phone, with places on several continents.** *Partly*: 37 places in Asia, Africa, South America, North America and Europe (Armenia on the Europe–Asia boundary) are exported for the app. Against NASA's OPERA water product our maps agree at Sevan and Tonle Sap (97.5 % of pixels, IoU 0.84) but are wrong at Inner Niger, Lake Chad and Urmia ([`opera.md`](eda/opera.md)). The deploy workflow exists (`.github/workflows/deploy.yml`); a live address and a phone check are not confirmed in any document we read.
 - **A clear story.** One sentence ("NISAR saw the Tonle Sap rise first under the trees, then on open water, and our area follows NASA's altimeter at 0.98"), one animation (the arrival-day map), one number.
 
-**Still missing**: the work is on the `eda` branch and not yet merged; the app is not yet deployed and its redesign is in progress; the demo video and project page are not started (a pitch deck file exists under `docs/pitch/`); the calibrated detector is connected to the app for Tonle Sap only and does not work in Armenia without its own thresholds. The largest remaining risk is not an algorithm.
+**Still missing** (as written on the night of 14 to 15 November; the work was developed on the `eda` branch and merged into `main` on 15 November, and the deploy workflow now builds the app for GitHub Pages): the demo video and project page were not started (a pitch deck file exists under `docs/pitch/`); the calibrated detector is connected to the app for Tonle Sap only and does not work in Armenia without its own thresholds. The largest remaining risk is not an algorithm.
 
 ## 8. Earthquakes, and the app designs (added about 22:00; counts corrected 15 November)
 
@@ -251,16 +251,9 @@ USGS catalogue  →  ASF search for NISAR L2 GUNW pairs  →  remote window extr
 
 Manifests also carry, for water places, per-date `quality` flags from the quality-control step and `lo`/`hi` arrays next to the area values in `timeseries.json` (the range).
 
-### 8.2 Three app designs on the same data
+### 8.2 The app
 
-All three read `src/app/public/data/` (37 places in 9 classes: Floods 8, Lakes 4, Wetlands and deltas 4, Farmland 2, Wildfires 9, Earthquakes 6, Volcanoes 2, Landslides 1, Storms 1). The third, `src/app3/` (the merged app: story, a "How we found it" stepper per kind of place, before/after compare, caution labels), is not in the table below because the table was written for A and B. The front-end code lives on branch `front_harut` and is deliberately not merged to `main` yet. No design is chosen in this document; the brief for the choice is [`docs/pitch/app-choice.md`](pitch/app-choice.md). None is deployed; the deploy workflow builds `src/app`.
-
-| | Design A: `src/app/` | Design B: `src/app2/` |
-|---|---|---|
-| Idea | A real-imagery globe; click a place, fly in, press Play | Story mode: scenes walked with the arrow keys |
-| Main parts | Satellite-imagery globe, glass panels, headline number, drag-to-compare dates, reveal against satellite imagery for events, before/after bar | Opening with the flood playing, six scenes per place, chart timeline with the range and the outage as a gap, gallery with sparklines, "How sure are we?" sheet |
-| Deep link, water | `#/tonle-sap?layer=water&date=2026-10-17&compare&split=50` | `#/tonle-sap?mode=story&scene=1` |
-| Deep link, Tibet | `#/tibet-m70-2026?layer=fringes` | `#/tibet-m70-2026?mode=story&scene=2` |
+One app, `src/app/` (Vite, React 19, MapLibre GL), reads `src/app/public/data/` (37 places in 9 classes: Floods 8, Lakes 4, Wetlands and deltas 4, Farmland 2, Wildfires 9, Earthquakes 6, Volcanoes 2, Landslides 1, Storms 1). It has a globe landing page, a place gallery with classes and search, a story with arrow-key scenes, an Explore view with a timeline chart and before/after compare, a "How we found it" stepper for every kind of place, caution labels and a corner globe. It was developed as `src/app3/` ("the merged app", branch `front_harut`) and moved to `src/app/` on 15 November. Two earlier designs, A (the old `src/app/`, a satellite-imagery globe with glass panels) and B (`src/app2/`, story mode), were removed on 15 November and exist only in git history; the older parts of this document and the brief [`docs/pitch/app-choice.md`](pitch/app-choice.md) describe them. The deploy workflow `.github/workflows/deploy.yml` builds `src/app` for GitHub Pages. The app has no Node tests; the Python tests do not cover it.
 
 ### 8.3 Shipped or only evaluated (earthquake and app additions)
 
@@ -274,11 +267,9 @@ All three read `src/app/public/data/` (37 places in 9 classes: Floods 8, Lakes 4
 | Comparison with NASA OPERA DSWx-S1 | 97.5 % agreement at Sevan and Tonle Sap; mean IoU 0.38 over 101 place-dates; wrong at Inner Niger, Lake Chad, Urmia | evaluation only ([`opera.md`](eda/opera.md)) |
 | Two-look east/up split (Venezuela) | approximate; north neglected; pairs not simultaneous | **yes**, labelled approximate |
 | East/up split for Panama | computed as a check, not trustworthy | no |
-| Design A (`src/app/`) | finished, tested | yes, if chosen; the deploy workflow builds it today |
-| Design B (`src/app2/`) | finished, tested | yes, if chosen |
-| Merged app (`src/app3/`, branch `front_harut`) | story, "How we found it" stepper, before/after compare, caution labels; not merged to `main`, not deployed | not decided; no live URL |
+| The app (`src/app/`, developed as `src/app3/` on `front_harut`, merged 15 Nov) | globe, story, "How we found it" stepper, before/after compare, caution labels; designs A and B removed | **yes**; the deploy workflow builds it for GitHub Pages |
 | Calibrated Tonle Sap as its own place (`tonle-sap-cal`) | done (commit 17fcaf9) | yes, in the data |
-| Ararat coherence layers | in progress at 22:00 | not yet |
+| Ararat coherence layers | in progress at 22:00; the app data now has `ararat/coh/` and `coh_change.webp` | yes, as images; no numbers claimed for them |
 
 ### 8.4 The coherence-loss path (volcanoes, landslide, wildfires, storm)
 

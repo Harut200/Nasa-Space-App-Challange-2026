@@ -1,6 +1,6 @@
 # Data size audit and the optimiser
 
-Everything the web apps load from `src/app/public/data/` (shared by `src/app`, `src/app2`, `src/app3`). Measured on 2026-11-14 on the 25 places then in the app (a 26th, qaidam-m56-2026, arrived during the work and was optimised by the same run). The baseline is a copy of the folder taken before the first run; `git` also holds it.
+Everything the web apps load from `src/app/public/data/` (then shared by three app designs, `src/app`, `src/app2` and `src/app3`; only `src/app` remains since 15 November). Measured on 2026-11-14 on the 25 places then in the app (a 26th, qaidam-m56-2026, arrived during the work and was optimised by the same run). The baseline is a copy of the folder taken before the first run; `git` also holds it.
 
 ## Headline
 

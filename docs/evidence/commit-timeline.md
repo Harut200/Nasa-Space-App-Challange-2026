@@ -1,6 +1,6 @@
 # Commit timeline
 
-Generated 15 Nov 2026 from `git log --format='%h %ad %s' --date=format:'%d %b %H:%M'`, grouped by hour (Armenia time, oldest first). 128 commits on the branch (the last 24, from 00:47 to 06:17 on 15 Nov, were added at about 04:00 and 06:30). Account handles and remote names in merge subjects are removed or replaced by `<remote>`. Work after the newest commit is not committed yet (see EVIDENCE.md, known limits).
+Generated 15 Nov 2026 from `git log --format='%h %ad %s' --date=format:'%d %b %H:%M'`, grouped by hour (Armenia time, oldest first). 128 commits on the branch `eda` at that time as of about 06:30 on 15 Nov. The last 24 of them, from 00:47 to 06:17 on 15 Nov, were added to this log at about 04:00 and 06:30. `main` had 174 commits at 13:38 on 15 Nov, after the branches were merged and deleted; later commits are not listed here. Account handles and remote names in merge subjects are removed or replaced by `<remote>`. Work after the newest commit is not committed yet (see EVIDENCE.md, known limits).
 
 ## 14 Nov 09:00 (4 commits)
 

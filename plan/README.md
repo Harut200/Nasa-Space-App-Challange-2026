@@ -1,5 +1,7 @@
 # Work plan: three branches
 
+> This is the plan as written on 14 November 2026, kept as it was. What differs now: the work was done on the branches named here and on others (`eda`, `detect-eda`, `detect-math`, `detect-dl`, `front_harut`, `docs/project-plan`); all were merged into `main` on 15 November and deleted, so `main` is the only branch. `PLAN.md`, `ABEL.md`, `ARAMEH.md` and `HANDOFF.md` were removed from the repository on 15 November (git history only).
+
 Step-by-step version of PLAN.md (the first plan, removed from the repository on 15 November; it is in the git history). PLAN.md says *what* and *why*; this directory says *who does what, in which order, and how to know it is done*.
 
 | File | Read it if you are |

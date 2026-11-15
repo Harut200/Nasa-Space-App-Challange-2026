@@ -1,6 +1,6 @@
 # Deck audit: Dancing-with-the-SARs.pptx
 
-Audited Sat 14 Nov 2026, 18:31. Text taken from the slide XML and the speaker notes of `docs/pitch/Dancing-with-the-SARs.pptx` (7 slides, within the 7-slide limit). Images were not inspected, so claims inside pictures are unchecked. The deck predates the fusion-v2 app numbers and the calibrated run.
+Audited Sat 14 Nov 2026, 18:31. Text taken from the slide XML and the speaker notes of `docs/pitch/Dancing-with-the-SARs.pptx` (7 slides, within the 7-slide limit). Images were not inspected, so claims inside pictures are unchecked. The deck predates the fusion-v2 app numbers and the calibrated run. Status on 15 November: the checks below are as of 14 November; the app is now `src/app` (the merged design) with 37 places, so references to the app's code and place count are marked where they changed.
 Status key: correct / outdated / unsupported / overclaim. Facts in `docs/pitch/FACTS.md`.
 
 ## Slide 1: Dancing with the SARs (title)
@@ -27,11 +27,11 @@ Status key: correct / outdated / unsupported / overclaim. Facts in `docs/pitch/F
 | Statement | Status | Note and source |
 |---|---|---|
 | Play: advance through radar passes on a timeline | correct | App feature. |
-| Compare: swipe across two observations | correct | `CompareMap` in `src/app/src/MapView.jsx`. |
+| Compare: swipe across two observations | correct | before/after compare in the app (`src/app/src/Explore.jsx`; on 14 November it was `CompareMap` in design A's `MapView.jsx`, since removed). |
 | Explore: see where persistent change first appeared | correct | `when` layer. |
 | Notes: "timeline displays the NISAR outage rather than inventing observations" | correct | Manifest gap 27 Jul to 10 Aug. |
 | Notes: "choose a map marker to read its local story" | correct | App spots and story. |
-| Missing: 15 places in the app | outdated (gap) | `src/app/public/data/index.json` lists 15. The deck shows 3. |
+| Missing: 15 places in the app | outdated (gap) | On 14 November `src/app/public/data/index.json` listed 15; it now lists 37 (`summary.json`). The deck shows 3. |
 
 ## Slide 4: From radar brightness to change dates
 

@@ -1,5 +1,7 @@
 # Contracts between the branches
 
+> This is the plan as written on 14 November 2026, kept as it was. What differs now: the branches no longer exist (merged into `main` on 15 November); the file formats below are the ones the pipeline still uses, and the app reads them from `src/app/public/data/`. `PLAN.md`, mentioned below, was removed on 15 November (git history only).
+
 Three hand-offs. If your output matches the contract, the next person's code works without talking to you.
 
 Shared conventions:

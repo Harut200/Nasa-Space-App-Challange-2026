@@ -1,5 +1,7 @@
 # Pitch deck, project page and repository
 
+> This is the plan as written on 14 November 2026, kept as it was. What differs now: all branches, including `docs/project-plan`, were merged into `main` and deleted on 15 November, so the item about the stale remote branch no longer applies. The deck and recording script are in `docs/pitch/`.
+
 Global judges will not meet us. They see three things: the project page, the demo (deck or video), and the repository. This file plans those three so that each of the five judging criteria is answered in plain sight.
 
 ## 1. Fill this in at hour 0

@@ -1,5 +1,7 @@
 # Branch `backend`
 
+> This is the plan as written on 14 November 2026, kept as it was. What differs now: the `backend` branch was merged into `main` and deleted on 15 November. The pipeline grew beyond this plan (calibrated data, earthquake and event paths, evidence layers); see `docs/ARCHITECTURE.md`. `PLAN.md`, mentioned below, was removed on 15 November (git history only).
+
 **You own:** `scripts/ingest/`, `scripts/build_area.sh`, `areas/*/area.json`, `requirements.txt`, `src/app/public/data/`, `tests/test_export.py`.
 **You deliver:** contract A to detection and contract C to frontend ([00-contracts.md](00-contracts.md)).
 **You receive:** contract B from detection.
