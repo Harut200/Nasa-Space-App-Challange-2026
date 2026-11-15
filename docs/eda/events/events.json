@@ -2652,6 +2652,67 @@
      "pair": "20260711_20260723",
      "granule": "NISAR_L2_PR_GUNW_025_046_A_166_026_2000_SH_20260711T103043_20260711T103117_20260723T103042_20260723T103116_P05023_N_F_J_001"
     }
+   },
+   "d_jun": {
+    "track": 97,
+    "frame": 100,
+    "direction": "D",
+    "label": "descending",
+    "data_view": "d_both",
+    "co": {
+     "pair": "20260620_20260702",
+     "granule": "NISAR_L2_PR_GUNW_023_097_D_100_024_2000_SH_20260620T224706_20260620T224741_20260702T224705_20260702T224740_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260702_20260714",
+     "granule": "NISAR_L2_PR_GUNW_024_097_D_100_025_2000_SH_20260702T224705_20260702T224740_20260714T224705_20260714T224739_P05023_F_F_J_001"
+    },
+    "control_after_event": true
+   },
+   "d_sep1": {
+    "track": 97,
+    "frame": 100,
+    "direction": "D",
+    "label": "descending",
+    "data_view": "d_both",
+    "co": {
+     "pair": "20260831_20260912",
+     "granule": "NISAR_L2_PR_GUNW_029_097_D_100_030_2000_SH_20260831T224703_20260831T224737_20260912T224703_20260912T224737_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260702_20260714",
+     "granule": "NISAR_L2_PR_GUNW_024_097_D_100_025_2000_SH_20260702T224705_20260702T224740_20260714T224705_20260714T224739_P05023_F_F_J_001"
+    }
+   },
+   "d_sep2": {
+    "track": 97,
+    "frame": 100,
+    "direction": "D",
+    "label": "descending",
+    "data_view": "d_both",
+    "co": {
+     "pair": "20260912_20260924",
+     "granule": "NISAR_L2_PR_GUNW_030_097_D_100_031_2000_SH_20260912T224703_20260912T224737_20260924T224703_20260924T224737_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260702_20260714",
+     "granule": "NISAR_L2_PR_GUNW_024_097_D_100_025_2000_SH_20260702T224705_20260702T224740_20260714T224705_20260714T224739_P05023_F_F_J_001"
+    }
+   },
+   "d_oct": {
+    "track": 97,
+    "frame": 100,
+    "direction": "D",
+    "label": "descending",
+    "data_view": "d_both",
+    "co": {
+     "pair": "20260924_20261006",
+     "granule": "NISAR_L2_PR_GUNW_031_097_D_100_032_2000_SH_20260924T224703_20260924T224737_20261006T224703_20261006T224737_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260702_20260714",
+     "granule": "NISAR_L2_PR_GUNW_024_097_D_100_025_2000_SH_20260702T224705_20260702T224740_20260714T224705_20260714T224739_P05023_F_F_J_001"
+    }
    }
   },
   "verdict": "clear",
@@ -2673,7 +2734,7 @@
   "zoom_km": 35,
   "summary_number": "\u2248 6,000 km\u00b2 of desert lost coherence (window-limited)",
   "site_label": "Centre of the box (Atacama Desert west of the Salar de Atacama)",
-  "verdict_reason": "descending 26 Jul-19 Aug vs 2-14 Jul: window mean coherence 0.76 -> 0.41, 5,952 km2 lost (largest connected patch 3,806 km2, cut by the window); ascending 16-28 Aug vs 11-23 Jul: 0.82 -> 0.62, 1,004 km2; the ascending pair 23 Jul-16 Aug over the eastern window shows nothing. Cause (snow, rain-wet soil, mud or flash-flood deposits) not separable; a second control, 14-26 Jul, is itself dark; next descending pair 19-31 Aug: 0.48, 3,891 km2 lost; the ascending pair ending 16 Aug (before the 17-18 Aug rain) shows nothing, which brackets the change to 16-19 Aug",
+  "verdict_reason": "descending 26 Jul-19 Aug vs 2-14 Jul: window mean coherence 0.76 -> 0.41, 5,952 km2 lost (largest connected patch 3,806 km2, cut by the window); ascending 16-28 Aug vs 11-23 Jul: 0.82 -> 0.62, 1,004 km2; the ascending pair 23 Jul-16 Aug over the eastern window shows nothing. Cause (snow, rain-wet soil, mud or flash-flood deposits) not separable; a second control, 14-26 Jul, is itself dark; next descending pair 19-31 Aug: 0.48, 3,891 km2 lost; the ascending pair ending 16 Aug (before the 17-18 Aug rain) shows nothing, which brackets the change to 16-19 Aug; second box around Taltal (25.8-25.1 S) desc 26 Jul-19 Aug: 0.59 -> 0.38, 1,293 km2 lost; box around Tocopilla desc 26 Jul-19 Aug: 0.45 -> 0.24, 876 km2 within 30 km (loss ends at the coastal range); recovery: 31 Aug-12 Sep pair 0.77 and 12-24 Sep 0.80 (dry control 0.76); pre-storm pair 20 Jun-2 Jul 0.83, 0 km2 lost",
   "extra_spots": [
    {
     "id": "patch",
@@ -2705,7 +2766,7 @@
   ],
   "story": {
    "see": "On 17 and 18 August 2026 a cut-off low brought record rain to northern Chile: more than 37 mm in two days at Tocopilla and 33 mm at Taltal, new daily records at Arica and Iquique, and a mudflow down the hills of Tocopilla on the afternoon of 18 August (Meteored). NASA Earth Observatory shows back-to-back winter storms that month with rare snow from the Andes to near the coast (Landsat 6 and 14 August, MODIS 19 August). The orange area is where the radar picture between NISAR's 26 July and 19 August passes no longer matches the dry pair before it (2 to 14 July): about 6,000 km2 in this 115 x 110 km box of the desert west of the Salar de Atacama, the box edge cutting it off.",
-   "physics": "In the hyper-arid desert the ground hardly changes, so two radar passes match almost perfectly (the average coherence of this box was 0.76 in the dry pair). Snow, rain-wetted soil and fresh mud change the surface, and the average fell to 0.41. In the next descending pair (19 to 31 August) it is still 0.48, about 3,900 km2 lost. The ascending pass of 16 to 28 August shows the same: 0.82 down to 0.62, about 1,000 km2 lost. We cannot say how much of the loss is snow, wet soil or flood deposits.",
+   "physics": "In the hyper-arid desert the ground hardly changes, so two radar passes match almost perfectly (the average coherence of this box was 0.76 in the dry pair). Snow, rain-wetted soil and fresh mud change the surface, and the average fell to 0.41. In the next descending pair (19 to 31 August) it is still 0.48, about 3,900 km2 lost; by 31 August to 12 September it is back at 0.77, the dry level, and a pair a month before the storm (20 June to 2 July) is at 0.83, so the desert lost its fingerprint for about three weeks. The ascending pass of 16 to 28 August shows the same: 0.82 down to 0.62, about 1,000 km2 lost. A second box 300 km further south, inland of Taltal, shows the same in the same pair: mean coherence 0.59 down to 0.38, about 1,300 km2 lost. We cannot say how much of the loss is snow, wet soil or flood deposits.",
    "lband": "NISAR's L-band radar has a wavelength of about 24 cm. Dry snow is largely transparent to it, and the ascending pair of 23 July to 16 August, which ends the day before the rain, shows nothing; wet ground and moved sediment are not transparent. The dry pair before is bright almost everywhere, so a desert-wide drop stands out. One more pair we tried as a control (14 to 26 July) is itself dark over part of this desert; we do not know why, and we use the pair of 2 to 14 July.",
    "people": "This map shows where the surface changed, not damage. We did not look at reports of damage or casualties."
   }
@@ -3209,5 +3270,185 @@
   "loss_lo": 0.35,
   "loss_drop": 0.25,
   "min_px": 30
+ },
+ {
+  "id": "polo-sonora-2026",
+  "type": "storm",
+  "title": "Hurricane Polo second landfall east of Guaymas, Sonora, Mexico, 29 Sep 2026",
+  "time": "2026-09-29T20:00:00Z",
+  "lat": 28.0,
+  "lon": -110.7,
+  "place": "coast of Sonora east of Guaymas, Mexico",
+  "window": [
+   -111.2,
+   27.6,
+   -110.3,
+   28.4
+  ],
+  "heights": [
+   0,
+   800
+  ],
+  "radius_km": 30,
+  "far_km": 90,
+  "gmin": 0.35,
+  "source_url": "https://goodmorningamerica.com/news/story/hurricane-polo-makes-baja-landfall-headed-2nd-mexico-136848159",
+  "views": {
+   "d_ev": {
+    "track": 128,
+    "frame": 74,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260927_20261009",
+     "granule": "NISAR_L2_PR_GUNW_031_128_D_074_032_4000_SH_20260927T020857_20260927T020931_20261009T020857_20261009T020931_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260915_20260927",
+     "granule": "NISAR_L2_PR_GUNW_030_128_D_074_031_4000_SH_20260915T020857_20260915T020931_20260927T020857_20260927T020931_P05023_N_F_J_001"
+    }
+   },
+   "a_ev": {
+    "track": 77,
+    "frame": 16,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260923_20261005",
+     "granule": "NISAR_L2_PR_GUNW_031_077_A_016_032_4000_SH_20260923T124143_20260923T124218_20261005T124143_20261005T124218_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260911_20260923",
+     "granule": "NISAR_L2_PR_GUNW_030_077_A_016_031_4000_SH_20260911T124143_20260911T124218_20260923T124143_20260923T124218_P05023_N_F_J_001"
+    }
+   }
+  },
+  "verdict": null,
+  "deformation": false,
+  "loss_hi": 0.45,
+  "loss_lo": 0.35,
+  "loss_drop": 0.25,
+  "min_px": 30,
+  "time_note": "second landfall on mainland Mexico on Tuesday afternoon 29 Sep, east of Guaymas (ABC/GMA); time approximate"
+ },
+ {
+  "id": "santamaria-2026",
+  "type": "volcano",
+  "title": "Santa Maria (Santiaguito) Caliente dome extrusion and pyroclastic flows, Guatemala, 7-12 Oct 2026",
+  "time": "2026-10-10T00:00:00Z",
+  "lat": 14.757,
+  "lon": -91.552,
+  "place": "Santiaguito, Santa Maria volcano, Guatemala",
+  "window": [
+   -91.72,
+   14.62,
+   -91.38,
+   14.88
+  ],
+  "heights": [
+   200,
+   3800
+  ],
+  "radius_km": 5,
+  "far_km": 15,
+  "gmin": 0.35,
+  "source_url": "https://watchers.news/2026/10/16/the-weekly-volcanic-activity-report-october-8-14-2026/",
+  "views": {
+   "asc": {
+    "track": 62,
+    "frame": 9,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20261004_20261016",
+     "granule": "NISAR_L2_PR_GUNW_032_062_A_009_033_4000_SH_20261004T113933_20261004T114007_20261016T113933_20261016T114007_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260922_20261004",
+     "granule": "NISAR_L2_PR_GUNW_031_062_A_009_032_4000_SH_20260922T113932_20260922T114007_20261004T113933_20261004T114007_P05023_N_F_J_001"
+    }
+   },
+   "desc": {
+    "track": 55,
+    "frame": 81,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20261004_20261016",
+     "granule": "NISAR_L2_PR_GUNW_032_055_D_081_033_4000_SH_20261004T004118_20261004T004149_20261016T004118_20261016T004149_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260922_20261004",
+     "granule": "NISAR_L2_PR_GUNW_031_055_D_081_032_4000_SH_20260922T004118_20260922T004148_20261004T004118_20261004T004149_P05023_N_F_J_001"
+    }
+   }
+  },
+  "verdict": null,
+  "deformation": false,
+  "loss_hi": 0.45,
+  "loss_lo": 0.35,
+  "loss_drop": 0.25,
+  "min_px": 12,
+  "time_note": "short pyroclastic flows 7-8 and 11-12 Oct (Watchers)"
+ },
+ {
+  "id": "gold-ridge-mine-2026",
+  "type": "mine",
+  "title": "Gold Ridge open-pit ground collapse, Guadalcanal, Solomon Islands, 27 Jul 2026",
+  "time": "2026-07-26T21:30:00Z",
+  "lat": -9.57,
+  "lon": 160.13,
+  "place": "Gold Ridge mine, Guadalcanal, Solomon Islands",
+  "window": [
+   159.98,
+   -9.72,
+   160.28,
+   -9.42
+  ],
+  "heights": [
+   0,
+   900
+  ],
+  "radius_km": 4,
+  "far_km": 12,
+  "gmin": 0.35,
+  "source_url": "https://indepthsolomons.com.sb/gold-ridge-pit-collapse-sparks-emergency-response/",
+  "views": {
+   "asc": {
+    "track": 152,
+    "frame": 173,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260718_20260811",
+     "granule": "NISAR_L2_PR_GUNW_025_152_A_173_027_2000_SH_20260718T190222_20260718T190258_20260811T190221_20260811T190255_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260706_20260718",
+     "granule": "NISAR_L2_PR_GUNW_024_152_A_173_025_2000_SH_20260706T190223_20260706T190257_20260718T190222_20260718T190258_P05023_N_F_J_001"
+    }
+   },
+   "desc": {
+    "track": 160,
+    "frame": 93,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260719_20260812",
+     "granule": "NISAR_L2_PR_GUNW_025_160_D_093_027_2000_SH_20260719T073553_20260719T073626_20260812T073552_20260812T073626_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260707_20260719",
+     "granule": "NISAR_L2_PR_GUNW_024_160_D_093_025_2000_SH_20260707T073557_20260707T073628_20260719T073553_20260719T073626_P05023_N_F_J_001"
+    }
+   }
+  },
+  "verdict": null,
+  "deformation": false,
+  "loss_hi": 0.45,
+  "loss_lo": 0.35,
+  "loss_drop": 0.25,
+  "min_px": 8,
+  "time_note": "between 1 and 2 am local on 27 Jul (InDepth Solomons); the mine position is approximate"
  }
 ]

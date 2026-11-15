@@ -118,7 +118,7 @@ def get_event(eid):
 
 
 def proc_dir(ev):
-    return os.path.join(ROOT, "data", "processed", f"{ev['id']}-insar")
+    return os.path.join(ROOT, "data", "processed", f"{ev.get('insar_id', ev['id'])}-insar")  # insar_id: reuse windows downloaded by another study
 
 
 def data_view(ev, view):
@@ -251,8 +251,10 @@ def _save(ev, fig, name, dpi=80):
     p = os.path.join(d, name)
     fig.savefig(p, dpi=dpi, bbox_inches="tight")
     kb = os.path.getsize(p) // 1024
-    if kb > 380:
-        fig.savefig(p, dpi=55, bbox_inches="tight")
+    for d in (55, 45, 36):                       # figures must stay under 400 KB
+        if kb <= 380:
+            break
+        fig.savefig(p, dpi=d, bbox_inches="tight")
         kb = os.path.getsize(p) // 1024
     print("wrote", p, kb, "KB")
 
@@ -586,6 +588,32 @@ def before_after_fig(ev, half_km=None):
     plt.close(fig)
 
 
+def timeline_fig(ev, views):
+    """timeline.png: window-mean coherence of the event pair of each listed view (results.json) against its mid-date, plus the
+    control pair of the first view; shows the drop and the recovery for a weather-type event."""
+    plt = _plt()
+    import datetime as dt
+    res = json.load(open(os.path.join(DOCS, "results.json")))[ev["id"]]["views"]
+    day = lambda a: dt.datetime.strptime(a, "%Y%m%d")
+    pts = []
+    for k in views:
+        a, b = ev["views"][k]["co"]["pair"].split("_")
+        pts.append((day(a) + (day(b) - day(a)) / 2, res[k]["mean_coh_event_whole_window"], f"{a[4:6]}-{a[6:]} to {b[4:6]}-{b[6:]}"))
+    a, b = ev["views"][views[0]]["control"]["pair"].split("_")
+    ctl = (day(a) + (day(b) - day(a)) / 2, res[views[0]]["mean_coh_control_whole_window"], f"control {a[4:6]}-{a[6:]} to {b[4:6]}-{b[6:]}")
+    pts = sorted(pts + [ctl], key=lambda t: t[0])
+    fig, ax = plt.subplots(figsize=(7.5, 3.6))
+    ax.plot([t[0] for t in pts], [t[1] for t in pts], "o-", color="#444")
+    ax.plot([ctl[0]], [ctl[1]], "o", color="#1f77b4", ms=9, label="control pair")
+    for t in pts:
+        ax.annotate(t[2], (t[0], t[1]), textcoords="offset points", xytext=(0, 7), ha="center", fontsize=6, rotation=40)
+    ax.set_ylim(0, 1); ax.set_ylabel("mean coherence of the box"); ax.legend(fontsize=7)
+    ax.set_title(f"{ev['place'][:60]}: mean coherence of the box, one point per pair (mid-date)", fontsize=8)
+    fig.autofmt_xdate()
+    _save(ev, fig, "timeline.png", dpi=90)
+    plt.close(fig)
+
+
 def app_events():
     """docs/eda/events/app_events.json: one record per clear event with what the app exporter needs."""
     res = json.load(open(os.path.join(DOCS, "results.json")))
@@ -644,6 +672,8 @@ def main(argv):
         export_before(get_event(argv[2]))
     elif cmd == "fig_ba":
         before_after_fig(get_event(argv[2]))
+    elif cmd == "timeline":
+        timeline_fig(get_event(argv[2]), argv[3].split(","))
     elif cmd == "overview":
         overview()
     elif cmd == "app_events":

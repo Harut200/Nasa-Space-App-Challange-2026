@@ -1,6 +1,6 @@
 {
   "id": "atacama-west-2026",
-  "name": "Atacama Desert after the August 2026 snow and rain storms: about 6,000 km2 lost coherence (west of the Salar)",
+  "name": "Atacama Desert after the 17-18 August 2026 rain and the snow storms: about 6,000 km2 lost coherence (west of the Salar)",
   "bounds": [
     -70.15,
     -23.99987482440884,
@@ -56,9 +56,9 @@
     }
   ],
   "story": {
-    "see": "In August 2026 back-to-back winter storms dropped rare snow on northern Chile: NASA Earth Observatory shows Landsat images of 6 and 14 August and a MODIS image of 19 August with snow reaching from the Andes across the hyper-arid core of the Atacama to near the Pacific coast, and it reports mudflows and flash flooding in parts of northern Chile. The orange area is where the radar picture between NISAR's 26 July and 19 August passes no longer matches the dry pair before it (2 to 14 July): about 6,000 km2 in this 115 x 110 km box, the box edge cutting it off.",
-    "physics": "In the hyper-arid desert the ground hardly changes, so two radar passes match almost perfectly (the average coherence of this box was 0.76 in the dry pair). Snow, rain-wetted soil and fresh mud change the surface, and the average fell to 0.41. The ascending pass of 16 to 28 August shows the same: 0.82 down to 0.62, about 1,000 km2 lost. We cannot say how much of the loss is snow, wet soil or flood deposits.",
-    "lband": "NISAR's L-band radar has a wavelength of about 24 cm. Dry snow is largely transparent to it, which is probably why the ascending pair of 23 July to 16 August, over the eastern half of the area, shows nothing; wet ground and moved sediment are not. The dry pair before is bright almost everywhere, so a desert-wide drop stands out. One more pair we tried as a control (14 to 26 July) is itself dark over part of this desert; we do not know why, and we use the pair of 2 to 14 July.",
+    "see": "On 17 and 18 August 2026 a cut-off low brought record rain to northern Chile: more than 37 mm in two days at Tocopilla and 33 mm at Taltal, new daily records at Arica and Iquique, and a mudflow down the hills of Tocopilla on the afternoon of 18 August (Meteored). NASA Earth Observatory shows back-to-back winter storms that month with rare snow from the Andes to near the coast (Landsat 6 and 14 August, MODIS 19 August). The orange area is where the radar picture between NISAR's 26 July and 19 August passes no longer matches the dry pair before it (2 to 14 July): about 6,000 km2 in this 115 x 110 km box of the desert west of the Salar de Atacama, the box edge cutting it off.",
+    "physics": "In the hyper-arid desert the ground hardly changes, so two radar passes match almost perfectly (the average coherence of this box was 0.76 in the dry pair). Snow, rain-wetted soil and fresh mud change the surface, and the average fell to 0.41. In the next descending pair (19 to 31 August) it is still 0.48, about 3,900 km2 lost; by 31 August to 12 September it is back at 0.77, the dry level, and a pair a month before the storm (20 June to 2 July) is at 0.83, so the desert lost its fingerprint for about three weeks. The ascending pass of 16 to 28 August shows the same: 0.82 down to 0.62, about 1,000 km2 lost. A second box 300 km further south, inland of Taltal, shows the same in the same pair: mean coherence 0.59 down to 0.38, about 1,300 km2 lost. We cannot say how much of the loss is snow, wet soil or flood deposits.",
+    "lband": "NISAR's L-band radar has a wavelength of about 24 cm. Dry snow is largely transparent to it, and the ascending pair of 23 July to 16 August, which ends the day before the rain, shows nothing; wet ground and moved sediment are not transparent. The dry pair before is bright almost everywhere, so a desert-wide drop stands out. One more pair we tried as a control (14 to 26 July) is itself dark over part of this desert; we do not know why, and we use the pair of 2 to 14 July.",
     "people": "This map shows where the surface changed, not damage. We did not look at reports of damage or casualties."
   },
   "spots": [
@@ -100,9 +100,9 @@
   "kind": "event",
   "event": {
     "type": "storm",
-    "title": "Atacama Desert after the August 2026 snow and rain storms: about 6,000 km2 lost coherence (west of the Salar)",
-    "time": "2026-08-17T00:00:00Z",
-    "time_note": "back-to-back storms in early August and a second one in the second half of August (NASA Earth Observatory); pair 26 Jul-19 Aug (24 days)",
+    "title": "Atacama Desert after the 17-18 August 2026 rain and the snow storms: about 6,000 km2 lost coherence (west of the Salar)",
+    "time": "2026-08-18T00:00:00Z",
+    "time_note": "rain on 17-18 Aug (Meteored); pair 26 Jul-19 Aug (24 days); the ascending pair that ends on 16 Aug shows nothing",
     "lngLat": [
       -69.45,
       -23.5
@@ -110,7 +110,7 @@
     "place": "Atacama Desert west of the Salar de Atacama, Antofagasta region, Chile",
     "summary": "\u2248 6,000 km\u00b2 of desert lost coherence (window-limited)",
     "radius_km": 40,
-    "source_url": "https://science.nasa.gov/earth/earth-observatory/rare-widespread-snow-in-the-atacama-desert/",
+    "source_url": "https://www.meteored.cl/noticias/actualidad/el-norte-de-chile-recibio-lluvias-historicas-aluvion-deja-enterrada-parte-de-tocopilla.html",
     "views": [
       {
         "id": "d_both",
