@@ -7478,5 +7478,143 @@
    }
   },
   "verdict": null
+ },
+ "bezymianny-2026": {
+  "event_id": "bezymianny-2026",
+  "views": {
+   "a_20260818": {
+    "event": "Bezymianny lava flows and dome growth, Kamchatka, Aug-Oct 2026",
+    "view": "a_20260818",
+    "track": 80,
+    "frame": 30,
+    "direction": "A",
+    "event_pair": "20260818_20260830",
+    "control_pair": "20260725_20260818",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 5,
+    "far_km": 15,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.5443645119667053,
+    "mean_coh_control_within_radius": 0.5686860680580139,
+    "mean_coh_event_whole_window": 0.5153120160102844,
+    "mean_coh_control_whole_window": 0.5016308426856995,
+    "coherence_loss": {
+     "loss_area_km2": 1.0816000000000001,
+     "comparable_area_km2": 57.0816,
+     "loss_fraction_inside": 0.018948312591097655,
+     "loss_fraction_outside": 0.006030966423888784,
+     "comparable_px_inside": 8919,
+     "loss_area_km2_whole_window": 6.598400000000001,
+     "mean_coh_control_at_loss_px": 0.6244024038314819,
+     "mean_coh_event_at_loss_px": 0.2376331090927124
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 0.9536,
+      "lon": 160.8029,
+      "lat": 55.9609,
+      "max_side_km": 3.2
+     },
+     {
+      "area_km2": 0.512,
+      "lon": 160.5779,
+      "lat": 55.9844,
+      "max_side_km": 1.44
+     },
+     {
+      "area_km2": 0.48000000000000004,
+      "lon": 160.6077,
+      "lat": 55.8753,
+      "max_side_km": 1.04
+     },
+     {
+      "area_km2": 0.35200000000000004,
+      "lon": 160.6775,
+      "lat": 55.827,
+      "max_side_km": 1.2
+     },
+     {
+      "area_km2": 0.32,
+      "lon": 160.7167,
+      "lat": 55.7928,
+      "max_side_km": 1.2
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 124,
+     "median": 0.0,
+     "p95": 1.2694399999999997,
+     "max": 1.7792000000000001
+    },
+    "incidence_deg_mean": 41.61594772338867
+   },
+   "a_20260830": {
+    "event": "Bezymianny lava flows and dome growth, Kamchatka, Aug-Oct 2026",
+    "view": "a_20260830",
+    "track": 80,
+    "frame": 30,
+    "direction": "A",
+    "event_pair": "20260830_20260911",
+    "control_pair": "20260818_20260830",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 5,
+    "far_km": 15,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.49024641513824463,
+    "mean_coh_control_within_radius": 0.5443645119667053,
+    "mean_coh_event_whole_window": 0.5039024353027344,
+    "mean_coh_control_whole_window": 0.5153120160102844,
+    "coherence_loss": {
+     "loss_area_km2": 3.3600000000000003,
+     "comparable_area_km2": 52.217600000000004,
+     "loss_fraction_inside": 0.06434612084814316,
+     "loss_fraction_outside": 0.03651760095178109,
+     "comparable_px_inside": 8159,
+     "loss_area_km2_whole_window": 36.7552,
+     "mean_coh_control_at_loss_px": 0.5949028134346008,
+     "mean_coh_event_at_loss_px": 0.2379428595304489
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 5.6448,
+      "lon": 160.4345,
+      "lat": 56.0395,
+      "max_side_km": 5.36
+     },
+     {
+      "area_km2": 5.1968000000000005,
+      "lon": 160.3773,
+      "lat": 55.8051,
+      "max_side_km": 6.16
+     },
+     {
+      "area_km2": 2.4832,
+      "lon": 160.493,
+      "lat": 56.0494,
+      "max_side_km": 2.88
+     },
+     {
+      "area_km2": 1.5424,
+      "lon": 160.3254,
+      "lat": 55.8213,
+      "max_side_km": 1.76
+     },
+     {
+      "area_km2": 1.2224000000000002,
+      "lon": 160.4254,
+      "lat": 55.8299,
+      "max_side_km": 1.76
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 124,
+     "median": 0.2368,
+     "p95": 8.599039999999999,
+     "max": 11.3856
+    },
+    "incidence_deg_mean": null
+   }
+  },
+  "verdict": null
  }
 }
