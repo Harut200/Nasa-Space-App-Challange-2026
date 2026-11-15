@@ -1,3 +1,19 @@
 {
-  "areas": []
+  "areas": [
+    "tonle-sap",
+    "inner-niger",
+    "poyang",
+    "sevan",
+    "bangladesh-haor",
+    "okavango",
+    "ararat",
+    "urmia",
+    "sindh-indus",
+    "mekong-delta",
+    "rondonia",
+    "nile-delta",
+    "sudd",
+    "mock-lake",
+    "mock-bare"
+  ]
 }

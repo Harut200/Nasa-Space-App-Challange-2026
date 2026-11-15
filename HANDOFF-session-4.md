@@ -2,9 +2,9 @@
 
 Frontend speed pass on the `frontend` branch. Continues from `HANDOFF.md`.
 
-## Speed pass (uncommitted, not browser-tested)
+## Speed pass (committed in 20cd784)
 
-Aim: faster page with nothing a user can notice. All of it sits in the working tree of `src/app`. Build and lint pass. Nobody has clicked through it in a browser yet.
+Aim: faster page with nothing a user can notice. All of it sits in the working tree of `src/app`. Build and lint pass.
 
 What changed:
 
@@ -17,12 +17,11 @@ What changed:
 - **`vite.config.js`**: MapLibre in its own chunk named `maplibre`.
 - **`index.css`**: one dead `.hint { bottom: 92px }` rule removed.
 
-Still to do:
+Checked afterwards (same day):
 
-- `npm test` in `src/app` reports 8 pass, 1 fail. The failing test was not identified, so it is unknown whether this pass caused it.
-- Click through in a browser: region select and deselect, planet switch, Play, compare, phone width.
-- If the radar map looks empty right after the "Radar record" link, raise `rootMargin` in `MapView.jsx`.
-- No review of the combined diff was done.
+- `npm test` in `src/app`: 8 pass, 1 skipped, 0 fail. The earlier "1 fail" was the skipped headless-browser test.
+- Headless Chrome click-through of a build with the synthetic fixture area: region select and deselect, pin click, planet switch, "Radar record" link, Play, timeline tick, layer switch, compare on and off, 390 px width. All passed, no console errors. The radar map was already built before the link was clicked, so `rootMargin` stays as is.
+- Not covered: spot markers and the backscatter chart in a browser (the fixture has no spots and no series; `tests/frontend.test.js` covers the chart logic), and a real phone.
 
 Changes seen in the tree that this pass did not make: `src/app/src/data.js` and `src/app/tests/` appeared, `public/data/demo/*` is staged for deletion, and `public/data/index.json` lists no areas. With no areas the radar section shows "No study areas published yet", so the map, timeline and chart cannot be checked until an area is back.
 

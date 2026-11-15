@@ -5,9 +5,11 @@ import { memo, useMemo } from 'react'
 const t = (d) => Date.parse(d)
 const W = 600
 
-function scale(dates) {
+const short = (d) => new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', timeZone: 'UTC' })
+
+function scale(dates, l = 10) {
   const t0 = t(dates[0]), span = t(dates[dates.length - 1]) - t0 || 1
-  return (d) => 10 + ((t(d) - t0) / span) * (W - 20)
+  return (d) => l + ((t(d) - t0) / span) * (W - l - 10)
 }
 
 function Gaps({ gaps, x, h }) {
@@ -40,18 +42,34 @@ export const Strip = memo(function Strip({ dates, gaps, index, onPick }) {
   )
 })
 
-export const Chart = memo(function Chart({ ts, pol, gaps, index, onPick, colors, spots }) {
-  const H = 160
+export const Chart = memo(function Chart({ ts, pol: wanted, gaps, index, onPick, colors, spots }) {
+  const H = 180
+  // A place without the wanted polarity (a calibrated product may carry one channel) falls back to the one it has.
+  const has = (k) => ts.series.some((s) => (s[k] || []).some((v) => v != null))
+  const pol = has(wanted) ? wanted : ['hh', 'hv'].find(has) || wanted
+  const unit = ts.unit || 'dB'
   // everything except the cursor is independent of index
   const m = useMemo(() => {
-    const x = scale(ts.dates), xs = ts.dates.map(x)
+    const x = scale(ts.dates, 44), xs = ts.dates.map(x)
     const all = ts.series.flatMap((s) => s[pol] || []).filter((v) => v != null)
     if (!all.length) return null
     const lo = Math.min(...all), hi = Math.max(...all)
-    const y = (v) => H - 15 - ((v - lo) / (hi - lo || 1)) * (H - 35)
+    const y = (v) => H - 24 - ((v - lo) / (hi - lo || 1)) * (H - 44)
+    const num = (v) => (hi - lo >= 10 ? v.toFixed(0) : v.toFixed(1)).replace(/^-(?=\d)/, '\u2212')
+    const last = ts.dates.length - 1
+    const axes = (
+      <g className="chart-axes">
+        <line x1="44" x2={W - 10} y1={y(hi)} y2={y(hi)} />
+        <line x1="44" x2={W - 10} y1={y(lo)} y2={y(lo)} />
+        <text x="38" y={y(hi) + 4} textAnchor="end">{num(hi)}</text>
+        {hi !== lo && <text x="38" y={y(lo) + 4} textAnchor="end">{num(lo)}</text>}
+        <text x={xs[0]} y={H - 4}>{short(ts.dates[0])}</text>
+        {last > 0 && <text x={xs[last]} y={H - 4} textAnchor="end">{short(ts.dates[last])}</text>}
+      </g>
+    )
     const label = (id) => spots.find((s) => s.id === id)?.label || id
     const key = ts.series.map((s, i) => <span key={s.spot} style={{ color: colors[i % colors.length] }}>● {label(s.spot)}</span>)
-    const gapEls = <Gaps gaps={gaps} x={x} h={H} />
+    const gapEls = <Gaps gaps={gaps} x={x} h={H - 20} />
     const lines = ts.series.map((s, i) => {
       const c = colors[i % colors.length], vals = s[pol] || []
       // null = no valid pixels: break the line there
@@ -61,27 +79,28 @@ export const Chart = memo(function Chart({ ts, pol, gaps, index, onPick, colors,
       }, [[]])
       return (
         <g key={s.spot}>
-          {runs.map((r, k) => <polyline key={k} points={r.join(' ')} fill="none" stroke={c} strokeWidth="2" />)}
+          {runs.map((r, k) => <polyline key={k} points={r.join(' ')} fill="none" stroke={c} strokeWidth="2.5" strokeLinejoin="round" />)}
           {vals.map((v, j) => v != null && (
             <circle key={j} cx={xs[j]} cy={y(v)} r="4.5" fill={c} stroke="var(--bg)" strokeWidth="1.5" style={{ cursor: 'pointer' }} onClick={() => onPick(j)}>
-              <title>{`${label(s.spot)}, ${ts.dates[j]}: ${v} dB`}</title>
+              <title>{`${label(s.spot)}, ${short(ts.dates[j])}: ${v} ${unit}`}</title>
             </circle>
           ))}
         </g>
       )
     })
-    return { xs, lo, hi, key, gapEls, lines }
-  }, [ts, pol, gaps, colors, spots, onPick])
+    return { xs, key, gapEls, lines, axes }
+  }, [ts, pol, unit, gaps, colors, spots, onPick])
   if (!m) return null
   return (
     <figure>
       <figcaption>
-        <span className="label">Average {pol.toUpperCase()} backscatter (dB), {m.lo.toFixed(1)} to {m.hi.toFixed(1)}</span>
+        <span className="label"><strong>Average {pol.toUpperCase()} brightness at each spot</strong> · {unit}</span>
         <span className="key">{m.key}</span>
       </figcaption>
-      <svg className="chart" viewBox={`0 0 ${W} ${H}`} role="img" aria-label="Backscatter over time">
+      <svg className="chart" viewBox={`0 0 ${W} ${H}`} role="img" aria-label={`Brightness over time, ${unit}`}>
         {m.gapEls}
-        <line x1={m.xs[index]} x2={m.xs[index]} y1="0" y2={H} stroke="var(--text)" strokeDasharray="2 4" />
+        {m.axes}
+        <line x1={m.xs[index]} x2={m.xs[index]} y1="0" y2={H - 20} stroke="var(--teal)" strokeDasharray="3 3" />
         {m.lines}
       </svg>
     </figure>

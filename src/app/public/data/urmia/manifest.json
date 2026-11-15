@@ -1,0 +1,267 @@
+{
+  "id": "urmia",
+  "name": "Lake Urmia, Iran",
+  "bounds": [
+    45.0,
+    37.49931207979482,
+    45.98103535386079,
+    38.29999999999999
+  ],
+  "dates": [
+    "2026-06-20",
+    "2026-07-02",
+    "2026-07-14",
+    "2026-07-26",
+    "2026-08-19",
+    "2026-08-31",
+    "2026-09-12",
+    "2026-10-06",
+    "2026-10-18"
+  ],
+  "gaps": [
+    [
+      "2026-07-27",
+      "2026-08-10"
+    ]
+  ],
+  "layers": [
+    {
+      "id": "hh",
+      "label": "HH brightness (preview)",
+      "dates": [
+        "2026-06-20",
+        "2026-07-02",
+        "2026-07-14",
+        "2026-07-26",
+        "2026-08-19",
+        "2026-08-31",
+        "2026-09-12",
+        "2026-10-06",
+        "2026-10-18"
+      ],
+      "legend": {
+        "type": "ramp",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": 0,
+        "max": 100,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    },
+    {
+      "id": "water",
+      "label": "Water and flooded vegetation",
+      "dates": [
+        "2026-06-20",
+        "2026-07-02",
+        "2026-07-14",
+        "2026-07-26",
+        "2026-08-19",
+        "2026-08-31",
+        "2026-09-12",
+        "2026-10-06",
+        "2026-10-18"
+      ],
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#2f6fde",
+            "label": "Open water"
+          },
+          {
+            "color": "#35b04a",
+            "label": "Possible water under vegetation"
+          },
+          {
+            "color": "#7fd3c4",
+            "label": "Going under: vegetation submerging, or part open water"
+          },
+          {
+            "color": "#f28e2b",
+            "label": "Usually water, not today (rain or wind?)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "when",
+      "label": "When it changed for good",
+      "dates": null,
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#440154",
+            "label": "2 Jul"
+          },
+          {
+            "color": "#46327e",
+            "label": "14 Jul"
+          },
+          {
+            "color": "#365c8d",
+            "label": "26 Jul"
+          },
+          {
+            "color": "#277f8e",
+            "label": "19 Aug"
+          },
+          {
+            "color": "#1fa187",
+            "label": "31 Aug"
+          },
+          {
+            "color": "#4ac16d",
+            "label": "12 Sep"
+          },
+          {
+            "color": "#a0da39",
+            "label": "6 Oct"
+          },
+          {
+            "color": "#fde725",
+            "label": "18 Oct"
+          }
+        ]
+      }
+    },
+    {
+      "id": "classes",
+      "label": "Season classes",
+      "dates": null,
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#08306b",
+            "label": "Permanent water"
+          },
+          {
+            "color": "#4292c6",
+            "label": "Seasonal open water"
+          },
+          {
+            "color": "#41ab5d",
+            "label": "Flooded vegetation"
+          },
+          {
+            "color": "#9ecae1",
+            "label": "Got darker, not open water (wetter ground, shallow or partial flooding)"
+          },
+          {
+            "color": "#c994c7",
+            "label": "Got brighter (growing crops and other causes)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "change",
+      "label": "Change since first pass (HH)",
+      "dates": [
+        "2026-07-02",
+        "2026-07-14",
+        "2026-07-26",
+        "2026-08-19",
+        "2026-08-31",
+        "2026-09-12",
+        "2026-10-06",
+        "2026-10-18"
+      ],
+      "legend": {
+        "type": "diverging",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": -35,
+        "max": 35,
+        "colors": [
+          "#2166ac",
+          "#00000000",
+          "#b2182b"
+        ],
+        "labels": [
+          "darker: new water, cleared forest",
+          "brighter: flooded vegetation, growth"
+        ]
+      }
+    },
+    {
+      "id": "rgb",
+      "label": "Three-date composite",
+      "dates": null,
+      "legend": {
+        "type": "text",
+        "text": "HH: red = 20 Jun, green = 19 Aug, blue = 18 Oct. Grey = no change."
+      }
+    },
+    {
+      "id": "hv",
+      "label": "HV brightness (preview)",
+      "dates": [
+        "2026-06-20",
+        "2026-07-02",
+        "2026-07-14",
+        "2026-07-26",
+        "2026-08-19",
+        "2026-08-31",
+        "2026-09-12",
+        "2026-10-06",
+        "2026-10-18"
+      ],
+      "legend": {
+        "type": "ramp",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": 0,
+        "max": 100,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    }
+  ],
+  "story": {
+    "see": "Our box covers the northern half of the lake. The open lake is black all season. From late July the western and northern shores brighten as the water edge pulls back; the 'when' layer dates this to August and September. On 18 October the pool south of the causeway brightens too, but one date cannot rule out wind.",
+    "physics": "Lake Urmia is a salt lake with no outlet: it gains water from rivers and rain and loses it only by evaporation. Every summer it shrinks. Over decades, drought, river dams and pumping of groundwater for farms have cut its inflow, so the lake has shrunk dramatically and left wide salt flats.",
+    "lband": "Calm brine mirrors L-band radar away and looks black in HH. Exposed mud and salt crust are rougher and send more signal back, so a retreating shoreline turns brighter. Caution: smooth, wet salt flats can also look almost as dark as water, so our water layer probably includes some wet flats at the edges.",
+    "people": "Once about 6,000 km\u00b2 and among the largest salt lakes on Earth, Lake Urmia had shrunk to 10% of its former size by late 2017, and NASA images showed it almost entirely dried up in September 2025. In 2018 trees were planted to slow the wind that carries salt particles from the exposed bed."
+  },
+  "spots": [
+    {
+      "id": "open-lake",
+      "label": "Open lake (dark all season)",
+      "lngLat": [
+        45.5,
+        38.0
+      ]
+    },
+    {
+      "id": "west-shore",
+      "label": "Western shore (water edge pulls back)",
+      "lngLat": [
+        45.1,
+        38.0
+      ]
+    },
+    {
+      "id": "south-of-causeway",
+      "label": "Pool south of the causeway",
+      "lngLat": [
+        45.3,
+        37.78
+      ]
+    },
+    {
+      "id": "eslami-island",
+      "label": "Eslami island (land reference)",
+      "lngLat": [
+        45.55,
+        37.85
+      ]
+    }
+  ],
+  "credits": "NISAR GCOV preview images: NASA/JPL-Caltech and ISRO, distributed by ASF DAAC. Uncalibrated previews at about 180 m; values are display brightness, not backscatter.",
+  "source": "preview"
+}

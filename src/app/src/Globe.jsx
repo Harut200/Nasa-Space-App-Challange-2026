@@ -1,4 +1,4 @@
-import { memo, useEffect, useRef } from 'react'
+import { memo, useEffect, useRef, useState } from 'react'
 import * as maplibregl from 'maplibre-gl'
 import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?url'
 import 'maplibre-gl/dist/maplibre-gl.css'
@@ -15,23 +15,37 @@ const label = (id, filter, size, minzoom = 0) => ({
   id, type: 'symbol', source: 'ofm', 'source-layer': 'place', minzoom, filter,
   layout: { 'text-field': ['coalesce', ['get', 'name_en'], ['get', 'name']], 'text-font': FONT, 'text-size': size,
     'text-transform': 'uppercase', 'text-letter-spacing': 0.12 },
-  paint: { 'text-color': '#8b8b8b', 'text-halo-color': '#000', 'text-halo-width': 1 },
+  paint: { 'text-color': '#e8f1f5', 'text-halo-color': '#03090fcc', 'text-halo-width': 1.4 },
 })
 
 function styleFor(p) {
   const base = {
     version: 8, glyphs: GLYPHS, projection: { type: 'globe' },
-    sky: { 'sky-color': '#000', 'horizon-color': p.tint, 'fog-color': '#000', 'sky-horizon-blend': 0.6,
+    sky: { 'sky-color': '#02050a', 'horizon-color': p.tint, 'fog-color': '#02050a', 'sky-horizon-blend': 0.6,
       'horizon-fog-blend': 0.5, 'fog-ground-blend': 0.9, 'atmosphere-blend': ['interpolate', ['linear'], ['zoom'], 0, 0.9, 5, 0.4, 7, 0] },
   }
   if (p.tiles) return { ...base,
-    // `lo` is one whole-planet tile (prefetched below): it paints at once, blurry, and `img` sharpens over it as tiles arrive.
-    sources: { lo: { type: 'raster', tiles: [p.tiles], tileSize: 256, maxzoom: 0 },
+    // `lo` is one bundled whole-planet image (prefetched below): it paints at once, and `img` sharpens over it as tiles arrive.
+    sources: { lo: { type: 'raster', tiles: [p.lo], tileSize: 512, maxzoom: 0 },
       img: { type: 'raster', tiles: [p.tiles], tileSize: 256, maxzoom: p.maxzoom, attribution: p.credit } },
     layers: [{ id: 'bg', type: 'background', paint: { 'background-color': '#000' } },
       { id: 'lo', type: 'raster', source: 'lo', paint: { 'raster-saturation': -0.15, 'raster-fade-duration': 0 } },
       { id: 'img', type: 'raster', source: 'img', paint: { 'raster-saturation': -0.15, 'raster-fade-duration': 200 } }] }
   const c = (id, layer, extra) => ({ id, source: 'ofm', 'source-layer': layer, ...extra })
+  // Earth: NASA Blue Marble, with Sentinel-2 cloudless fading in as you zoom (teammate's natural basemap). No API key.
+  if (p.imagery) return { ...base,
+    sources: { bm: { type: 'raster', tiles: [p.imagery.far], tileSize: 256, maxzoom: 8, attribution: p.credit },
+      s2: { type: 'raster', tiles: [p.imagery.near], tileSize: 256, maxzoom: 13 },
+      ofm: { type: 'vector', url: 'https://tiles.openfreemap.org/planet' } },
+    layers: [
+      { id: 'bg', type: 'background', paint: { 'background-color': '#0a1018' } },
+      { id: 'bm', type: 'raster', source: 'bm', paint: { 'raster-fade-duration': 300 } },
+      { id: 's2', type: 'raster', source: 's2', minzoom: 4, paint: { 'raster-fade-duration': 300, 'raster-opacity': ['interpolate', ['linear'], ['zoom'], 4, 0, 6, 1] } },
+      c('border', 'boundary', { type: 'line', filter: ['==', ['get', 'admin_level'], 2], paint: { 'line-color': '#e8f1f5', 'line-opacity': 0.35, 'line-width': 0.6 } }),
+      label('country', ['==', ['get', 'class'], 'country'], 11),
+      label('city', ['in', ['get', 'class'], ['literal', ['city']]], 10, 4),
+      label('town', ['in', ['get', 'class'], ['literal', ['town', 'village']]], 9, 8),
+    ] }
   return { ...base,
     sources: { ofm: { type: 'vector', url: 'https://tiles.openfreemap.org/planet', attribution: p.credit } },
     layers: [
@@ -49,10 +63,12 @@ function styleFor(p) {
     ] }
 }
 
-function Globe({ planet = 'earth', regions = [], selectedId = null, onSelect, padding }) {
+const NONE = []
+function Globe({ planet = 'earth', regions = [], selectedId = null, onSelect, padding, overlays = NONE }) {
   const box = useRef(null)
   const mapEl = useRef(null)
   const map = useRef(null)
+  const [ready, setReady] = useState(false) // a fly started before 'load' does not run, so the fly effect repeats on load
   const live = useRef({}) // latest props for long-lived listeners
   const pad = padding ?? { top: 0, right: 0, bottom: 0, left: 0 }
   const region = regions.find((r) => r.id === selectedId)
@@ -82,10 +98,11 @@ function Globe({ planet = 'earth', regions = [], selectedId = null, onSelect, pa
       attributionControl: { compact: true }, pixelRatio: Math.min(devicePixelRatio, 2), scrollZoom: false, // 3x screens: 2.25x fewer pixels, no visible loss // ponytail: wheel zoom is opt-in, see below
     })
     map.current = m
+    m.once('load', () => setReady(true))
     m.setPadding(live.current.pad)
     m.jumpTo({ zoom: idleZoom() })
-    // Once Earth is drawn, warm the HTTP cache with each planet's whole-planet tile (the server takes 1-4 s per tile).
-    m.once('idle', () => PLANETS.forEach((x) => x.tiles && fetch(x.tiles.replace('{z}/{x}/{y}', '0/0/0')).catch(() => {})))
+    // Once Earth is drawn, warm the HTTP cache with each planet's whole-planet image.
+    m.once('idle', () => PLANETS.forEach((x) => x.lo && fetch(x.lo).catch(() => {})))
 
     // Scroll-zoom only after the globe is clicked/focused; leaving it gives page scroll back.
     m.getCanvas().tabIndex = 0
@@ -136,14 +153,14 @@ function Globe({ planet = 'earth', regions = [], selectedId = null, onSelect, pa
 
   // Padding or selection changed: fly to the region, or back to idle.
   const padKey = Object.values(pad).join()
-  const regionKey = region ? `${region.lngLat}|${region.zoom}` : ''
+  const regionKey = region ? `${region.focus ?? region.lngLat}|${region.zoom}` : ''
   useEffect(() => {
     const m = map.current
     m.setPadding(pad)
-    if (region) m.flyTo({ center: region.lngLat, zoom: region.zoom ?? focusZoom(), pitch: 0, bearing: 0, duration: 2800, curve: 1.6, essential: true })
+    if (region) m.flyTo({ center: region.focus ?? region.lngLat, zoom: region.zoom ?? focusZoom(), pitch: 0, bearing: 0, duration: 2800, curve: 1.6, essential: true })
     else goIdle(true)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [regionKey, padKey])
+  }, [regionKey, padKey, ready])
 
   // Planet switch: fade out, swap style, reset view, fade in.
   const first = useRef(true)
@@ -159,6 +176,29 @@ function Globe({ planet = 'earth', regions = [], selectedId = null, onSelect, pa
     return () => clearTimeout(t)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [planet])
+
+  // Detection overlays (Earth only): soft colour washes that fade in only once zoomed in to a place.
+  useEffect(() => {
+    const m = map.current
+    if (planet !== 'earth' || !overlays.length) return
+    const add = () => {
+      try {
+        for (const { id, url, bounds: [w, s, e, n] } of overlays) {
+          if (m.getSource('det-' + id)) continue
+          m.addSource('det-' + id, { type: 'image', url, coordinates: [[w, n], [e, n], [e, s], [w, s]] })
+          m.addLayer({ id: 'det-' + id, type: 'raster', source: 'det-' + id, minzoom: 4.5,
+            paint: { 'raster-opacity': ['interpolate', ['linear'], ['zoom'], 4.5, 0, 6.5, 0.6], 'raster-fade-duration': 0 } }, // knobs: how gentle
+          m.getLayer('country') ? 'country' : undefined) // under the place labels
+        }
+      } catch { /* style still loading: 'style.load' calls again */ }
+    }
+    add()
+    m.on('style.load', add)
+    return () => {
+      m.off('style.load', add)
+      try { for (const { id } of overlays) { m.removeLayer('det-' + id); m.removeSource('det-' + id) } } catch { /* style swapped or map removed */ }
+    }
+  }, [overlays, planet])
 
   // Pins (Earth only), built per regions/planet; selection updates them in place. MapLibre fades far-side markers (0 is treated as default 0.2, so 0.01).
   const pins = useRef([])

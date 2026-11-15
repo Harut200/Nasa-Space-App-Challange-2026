@@ -1,0 +1,275 @@
+{
+  "id": "okavango",
+  "name": "Okavango Delta, Botswana",
+  "bounds": [
+    22.479999999999997,
+    -19.999850078420668,
+    23.80017927198529,
+    -18.6
+  ],
+  "dates": [
+    "2026-06-26",
+    "2026-07-08",
+    "2026-07-20",
+    "2026-08-13",
+    "2026-08-25",
+    "2026-09-06",
+    "2026-09-18",
+    "2026-09-30",
+    "2026-10-12"
+  ],
+  "gaps": [
+    [
+      "2026-07-27",
+      "2026-08-10"
+    ]
+  ],
+  "layers": [
+    {
+      "id": "hh",
+      "label": "HH brightness (preview)",
+      "dates": [
+        "2026-06-26",
+        "2026-07-08",
+        "2026-07-20",
+        "2026-08-13",
+        "2026-08-25",
+        "2026-09-06",
+        "2026-09-18",
+        "2026-09-30",
+        "2026-10-12"
+      ],
+      "legend": {
+        "type": "ramp",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": 0,
+        "max": 100,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    },
+    {
+      "id": "water",
+      "label": "Water and flooded vegetation",
+      "dates": [
+        "2026-06-26",
+        "2026-07-08",
+        "2026-07-20",
+        "2026-08-13",
+        "2026-08-25",
+        "2026-09-06",
+        "2026-09-18",
+        "2026-09-30",
+        "2026-10-12"
+      ],
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#2f6fde",
+            "label": "Open water"
+          },
+          {
+            "color": "#35b04a",
+            "label": "Possible water under vegetation"
+          },
+          {
+            "color": "#7fd3c4",
+            "label": "Going under: vegetation submerging, or part open water"
+          },
+          {
+            "color": "#f28e2b",
+            "label": "Usually water, not today (rain or wind?)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "when",
+      "label": "When it changed for good",
+      "dates": null,
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#440154",
+            "label": "8 Jul"
+          },
+          {
+            "color": "#46327e",
+            "label": "20 Jul"
+          },
+          {
+            "color": "#365c8d",
+            "label": "13 Aug"
+          },
+          {
+            "color": "#277f8e",
+            "label": "25 Aug"
+          },
+          {
+            "color": "#1fa187",
+            "label": "6 Sep"
+          },
+          {
+            "color": "#4ac16d",
+            "label": "18 Sep"
+          },
+          {
+            "color": "#a0da39",
+            "label": "30 Sep"
+          },
+          {
+            "color": "#fde725",
+            "label": "12 Oct"
+          }
+        ]
+      }
+    },
+    {
+      "id": "classes",
+      "label": "Season classes",
+      "dates": null,
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#08306b",
+            "label": "Permanent water"
+          },
+          {
+            "color": "#4292c6",
+            "label": "Seasonal open water"
+          },
+          {
+            "color": "#41ab5d",
+            "label": "Flooded vegetation"
+          },
+          {
+            "color": "#9ecae1",
+            "label": "Got darker, not open water (wetter ground, shallow or partial flooding)"
+          },
+          {
+            "color": "#c994c7",
+            "label": "Got brighter (growing crops and other causes)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "change",
+      "label": "Change since first pass (HH)",
+      "dates": [
+        "2026-07-08",
+        "2026-07-20",
+        "2026-08-13",
+        "2026-08-25",
+        "2026-09-06",
+        "2026-09-18",
+        "2026-09-30",
+        "2026-10-12"
+      ],
+      "legend": {
+        "type": "diverging",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": -35,
+        "max": 35,
+        "colors": [
+          "#2166ac",
+          "#00000000",
+          "#b2182b"
+        ],
+        "labels": [
+          "darker: new water, cleared forest",
+          "brighter: flooded vegetation, growth"
+        ]
+      }
+    },
+    {
+      "id": "rgb",
+      "label": "Three-date composite",
+      "dates": null,
+      "legend": {
+        "type": "text",
+        "text": "HH: red = 26 Jun, green = 25 Aug, blue = 12 Oct. Grey = no change."
+      }
+    },
+    {
+      "id": "hv",
+      "label": "HV brightness (preview)",
+      "dates": [
+        "2026-06-26",
+        "2026-07-08",
+        "2026-07-20",
+        "2026-08-13",
+        "2026-08-25",
+        "2026-09-06",
+        "2026-09-18",
+        "2026-09-30",
+        "2026-10-12"
+      ],
+      "legend": {
+        "type": "ramp",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": 0,
+        "max": 100,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    }
+  ],
+  "story": {
+    "see": "In late June the delta's channels and floodplains are dark grey. From July the upper delta in the north-west starts to brighten, and the brightening moves down the fans to the east and south through August and September: the 'when' layer runs purple to green across the delta. Our water layer finds only scattered pools.",
+    "physics": "Summer rain in the Angolan highlands feeds the Okavango River, which spreads out into the Kalahari instead of reaching the sea. The flood takes months to travel and spread through the delta, then the water sinks in and evaporates. Floodplains dry out and grasses grow as the water pulls back.",
+    "lband": "Shallow water among grasses and reeds is grey, not black, to L-band radar, so the detector rarely calls it open water. As water leaves a floodplain, the wet soil and plants scatter more signal back and HH brightens. The papyrus-lined channels stay bright all season. Uncalibrated previews cannot fully separate drying from plant growth.",
+    "people": "The delta became the 1,000th site on the UNESCO World Heritage List in 2014. Its peoples traditionally combined fishing, hunting and farming, and plant crops on land left moist by the retreating flood. The yearly flood also sustains wildlife and the tourism that depends on it."
+  },
+  "spots": [
+    {
+      "id": "papyrus-channel",
+      "label": "Permanent swamp channel (always bright)",
+      "lngLat": [
+        22.6,
+        -19.0
+      ]
+    },
+    {
+      "id": "upper-floodplain",
+      "label": "Upper floodplain (brightens from July)",
+      "lngLat": [
+        22.6,
+        -19.1
+      ]
+    },
+    {
+      "id": "eastern-floodplain",
+      "label": "Eastern floodplain (brightens August\u2013September)",
+      "lngLat": [
+        23.348,
+        -19.221
+      ]
+    },
+    {
+      "id": "southern-floodplain",
+      "label": "Southern floodplain (stays dark)",
+      "lngLat": [
+        23.3,
+        -19.7
+      ]
+    },
+    {
+      "id": "sandveld",
+      "label": "Dry sandveld (reference)",
+      "lngLat": [
+        23.6,
+        -18.75
+      ]
+    }
+  ],
+  "credits": "NISAR GCOV preview images: NASA/JPL-Caltech and ISRO, distributed by ASF DAAC. Uncalibrated previews at about 180 m; values are display brightness, not backscatter.",
+  "source": "preview"
+}

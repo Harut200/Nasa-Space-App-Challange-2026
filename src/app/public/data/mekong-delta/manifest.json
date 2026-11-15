@@ -1,0 +1,284 @@
+{
+  "id": "mekong-delta",
+  "name": "Mekong floodplain, Vietnam\u2013Cambodia",
+  "bounds": [
+    105.3,
+    10.199850462381947,
+    106.19977649224691,
+    11.499999999999996
+  ],
+  "dates": [
+    "2026-06-17",
+    "2026-06-29",
+    "2026-07-11",
+    "2026-07-23",
+    "2026-08-16",
+    "2026-08-28",
+    "2026-09-09",
+    "2026-09-21",
+    "2026-10-03",
+    "2026-10-15"
+  ],
+  "gaps": [
+    [
+      "2026-07-27",
+      "2026-08-10"
+    ]
+  ],
+  "layers": [
+    {
+      "id": "hh",
+      "label": "HH brightness (preview)",
+      "dates": [
+        "2026-06-17",
+        "2026-06-29",
+        "2026-07-11",
+        "2026-07-23",
+        "2026-08-16",
+        "2026-08-28",
+        "2026-09-09",
+        "2026-09-21",
+        "2026-10-03",
+        "2026-10-15"
+      ],
+      "legend": {
+        "type": "ramp",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": 0,
+        "max": 100,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    },
+    {
+      "id": "water",
+      "label": "Water and flooded vegetation",
+      "dates": [
+        "2026-06-17",
+        "2026-06-29",
+        "2026-07-11",
+        "2026-07-23",
+        "2026-08-16",
+        "2026-08-28",
+        "2026-09-09",
+        "2026-09-21",
+        "2026-10-03",
+        "2026-10-15"
+      ],
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#2f6fde",
+            "label": "Open water"
+          },
+          {
+            "color": "#35b04a",
+            "label": "Water under vegetation"
+          },
+          {
+            "color": "#7fd3c4",
+            "label": "Going under: vegetation submerging, or part open water"
+          },
+          {
+            "color": "#f28e2b",
+            "label": "Usually water, not today (rain or wind?)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "when",
+      "label": "When it changed for good",
+      "dates": null,
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#440154",
+            "label": "29 Jun"
+          },
+          {
+            "color": "#472d7b",
+            "label": "11 Jul"
+          },
+          {
+            "color": "#3b528b",
+            "label": "23 Jul"
+          },
+          {
+            "color": "#2c728e",
+            "label": "16 Aug"
+          },
+          {
+            "color": "#21918c",
+            "label": "28 Aug"
+          },
+          {
+            "color": "#28ae80",
+            "label": "9 Sep"
+          },
+          {
+            "color": "#5ec962",
+            "label": "21 Sep"
+          },
+          {
+            "color": "#addc30",
+            "label": "3 Oct"
+          },
+          {
+            "color": "#fde725",
+            "label": "15 Oct"
+          }
+        ]
+      }
+    },
+    {
+      "id": "classes",
+      "label": "Season classes",
+      "dates": null,
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#08306b",
+            "label": "Permanent water"
+          },
+          {
+            "color": "#4292c6",
+            "label": "Seasonal open water"
+          },
+          {
+            "color": "#41ab5d",
+            "label": "Flooded vegetation"
+          },
+          {
+            "color": "#9ecae1",
+            "label": "Got darker, not open water (wetter ground, shallow or partial flooding)"
+          },
+          {
+            "color": "#c994c7",
+            "label": "Got brighter (growing crops and other causes)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "change",
+      "label": "Change since first pass (HH)",
+      "dates": [
+        "2026-06-29",
+        "2026-07-11",
+        "2026-07-23",
+        "2026-08-16",
+        "2026-08-28",
+        "2026-09-09",
+        "2026-09-21",
+        "2026-10-03",
+        "2026-10-15"
+      ],
+      "legend": {
+        "type": "diverging",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": -35,
+        "max": 35,
+        "colors": [
+          "#2166ac",
+          "#00000000",
+          "#b2182b"
+        ],
+        "labels": [
+          "darker: new water, cleared forest",
+          "brighter: flooded vegetation, growth"
+        ]
+      }
+    },
+    {
+      "id": "rgb",
+      "label": "Three-date composite",
+      "dates": null,
+      "legend": {
+        "type": "text",
+        "text": "HH: red = 17 Jun, green = 28 Aug, blue = 15 Oct. Grey = no change."
+      }
+    },
+    {
+      "id": "hv",
+      "label": "HV brightness (preview)",
+      "dates": [
+        "2026-06-17",
+        "2026-06-29",
+        "2026-07-11",
+        "2026-07-23",
+        "2026-08-16",
+        "2026-08-28",
+        "2026-09-09",
+        "2026-09-21",
+        "2026-10-03",
+        "2026-10-15"
+      ],
+      "legend": {
+        "type": "ramp",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": 0,
+        "max": 100,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    }
+  ],
+  "story": {
+    "see": "Little changes until mid-August. Then field after field across the plain north of the Mekong turns darker, mostly in September and October, and a few patches become open water. Most of the flood shows as 'got darker' rather than clear open water: the water is shallow and broken up by dikes, canals and crops. Orchards and towns stay bright.",
+    "physics": "Each wet season the Mekong rises and spills onto the low plain on the Vietnam\u2013Cambodia border, including the Plain of Reeds. Farmers have built dikes to hold some of it back and grow extra rice crops; water spreads across fields between the dikes and drains again after the season.",
+    "lband": "Shallow water lying between rice stalks and reeds partly mirrors the radar away, so HH gets darker but not black. L-band's long wavelength sees through the crop to the water beneath. Where fields are fully open water, they turn black and our water layer marks them blue.",
+    "people": "The Mekong Delta in Vietnam is home to about 19 million people and grew more than half of Vietnam's rice in 2011. The yearly flood brings fish and silt but also damages homes and roads, so knowing when and where it spreads helps farmers and planners."
+  },
+  "spots": [
+    {
+      "id": "plain-of-reeds",
+      "label": "Plain of Reeds (darkens from September)",
+      "lngLat": [
+        105.9,
+        10.75
+      ]
+    },
+    {
+      "id": "flooded-fields",
+      "label": "Fields flooded August\u2013September",
+      "lngLat": [
+        105.8,
+        10.8
+      ]
+    },
+    {
+      "id": "cambodia-side",
+      "label": "Fields on the Cambodian side (water by October)",
+      "lngLat": [
+        105.54,
+        11.097
+      ]
+    },
+    {
+      "id": "rice-cycle",
+      "label": "Rice fields (dark, bright, dark again)",
+      "lngLat": [
+        106.1,
+        10.7
+      ]
+    },
+    {
+      "id": "orchards",
+      "label": "Orchards and settlements (stable reference)",
+      "lngLat": [
+        106.016,
+        10.385
+      ]
+    }
+  ],
+  "credits": "NISAR GCOV preview images: NASA/JPL-Caltech and ISRO, distributed by ASF DAAC. Uncalibrated previews at about 180 m; values are display brightness, not backscatter.",
+  "source": "preview"
+}

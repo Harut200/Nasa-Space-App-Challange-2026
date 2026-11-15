@@ -1,0 +1,266 @@
+{
+  "id": "inner-niger",
+  "name": "Inner Niger Delta, Mali",
+  "bounds": [
+    -5.0,
+    14.020785294086165,
+    -3.7394371801992152,
+    15.579999999999998
+  ],
+  "dates": [
+    "2026-06-24",
+    "2026-07-18",
+    "2026-08-11",
+    "2026-08-23",
+    "2026-09-04",
+    "2026-09-16",
+    "2026-09-28",
+    "2026-10-10"
+  ],
+  "gaps": [
+    [
+      "2026-07-27",
+      "2026-08-10"
+    ]
+  ],
+  "layers": [
+    {
+      "id": "hh",
+      "label": "HH brightness (preview)",
+      "dates": [
+        "2026-06-24",
+        "2026-07-18",
+        "2026-08-11",
+        "2026-08-23",
+        "2026-09-04",
+        "2026-09-16",
+        "2026-09-28",
+        "2026-10-10"
+      ],
+      "legend": {
+        "type": "ramp",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": 0,
+        "max": 100,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    },
+    {
+      "id": "water",
+      "label": "Water and flooded vegetation",
+      "dates": [
+        "2026-06-24",
+        "2026-07-18",
+        "2026-08-11",
+        "2026-08-23",
+        "2026-09-04",
+        "2026-09-16",
+        "2026-09-28",
+        "2026-10-10"
+      ],
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#2f6fde",
+            "label": "Open water"
+          },
+          {
+            "color": "#35b04a",
+            "label": "Water under vegetation"
+          },
+          {
+            "color": "#7fd3c4",
+            "label": "Going under: vegetation submerging, or part open water"
+          },
+          {
+            "color": "#f28e2b",
+            "label": "Usually water, not today (rain or wind?)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "when",
+      "label": "When it changed for good",
+      "dates": null,
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#440154",
+            "label": "18 Jul"
+          },
+          {
+            "color": "#443983",
+            "label": "11 Aug"
+          },
+          {
+            "color": "#31688e",
+            "label": "23 Aug"
+          },
+          {
+            "color": "#21918c",
+            "label": "4 Sep"
+          },
+          {
+            "color": "#35b779",
+            "label": "16 Sep"
+          },
+          {
+            "color": "#90d743",
+            "label": "28 Sep"
+          },
+          {
+            "color": "#fde725",
+            "label": "10 Oct"
+          }
+        ]
+      }
+    },
+    {
+      "id": "classes",
+      "label": "Season classes",
+      "dates": null,
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#08306b",
+            "label": "Permanent water"
+          },
+          {
+            "color": "#4292c6",
+            "label": "Seasonal open water"
+          },
+          {
+            "color": "#41ab5d",
+            "label": "Flooded vegetation"
+          },
+          {
+            "color": "#9ecae1",
+            "label": "Got darker, not open water (wetter ground, shallow or partial flooding)"
+          },
+          {
+            "color": "#c994c7",
+            "label": "Got brighter (growing crops and other causes)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "change",
+      "label": "Change since first pass (HH)",
+      "dates": [
+        "2026-07-18",
+        "2026-08-11",
+        "2026-08-23",
+        "2026-09-04",
+        "2026-09-16",
+        "2026-09-28",
+        "2026-10-10"
+      ],
+      "legend": {
+        "type": "diverging",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": -35,
+        "max": 35,
+        "colors": [
+          "#2166ac",
+          "#00000000",
+          "#b2182b"
+        ],
+        "labels": [
+          "darker: new water, cleared forest",
+          "brighter: flooded vegetation, growth"
+        ]
+      }
+    },
+    {
+      "id": "rgb",
+      "label": "Three-date composite",
+      "dates": null,
+      "legend": {
+        "type": "text",
+        "text": "HH: red = 24 Jun, green = 4 Sep, blue = 10 Oct. Grey = no change."
+      }
+    },
+    {
+      "id": "hv",
+      "label": "HV brightness (preview)",
+      "dates": [
+        "2026-06-24",
+        "2026-07-18",
+        "2026-08-11",
+        "2026-08-23",
+        "2026-09-04",
+        "2026-09-16",
+        "2026-09-28",
+        "2026-10-10"
+      ],
+      "legend": {
+        "type": "ramp",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": 0,
+        "max": 100,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    }
+  ],
+  "story": {
+    "see": "On 24 June the floodplain is mostly bright, dry ground. Dark water spreads through August and September; the biggest jump comes between 28 September and 10 October, our last image, when the western floodplain turns dark. The flood is still rising when our record ends. Dark sand dunes in the north-west are wrongly marked as water on some dates.",
+    "physics": "Rain falling far upstream in Guinea swells the Niger in the wet season. The river spills across a flat inland delta in central Mali, filling lakes and channels; the western and southern edges are often not flooded until early to mid-October. In the dry season the water shrinks back to a network of lakes and channels.",
+    "lband": "Open water is a mirror for L-band radar and turns black in HH, so the spreading flood is easy to follow. Grasses and rice standing in shallow water glow instead, from a water-to-stem double bounce: our water layer marks patches on the eastern side green as flooded vegetation in October. One corrupt preview (6 July) was removed.",
+    "people": "Wetlands International says the delta's ecosystem sustains two million people, and at its peak the flood covers an area the size of Belgium. Fishers, herders and rice farmers time their year to this flood. Dams and irrigation upstream would make it smaller, so measuring the flood each year matters."
+  },
+  "spots": [
+    {
+      "id": "open-water",
+      "label": "Open water all season",
+      "lngLat": [
+        -4.5,
+        15.0
+      ]
+    },
+    {
+      "id": "western-floodplain",
+      "label": "Western floodplain (flooded by October)",
+      "lngLat": [
+        -4.745,
+        14.725
+      ]
+    },
+    {
+      "id": "northern-floodplain",
+      "label": "Northern floodplain (darkens late)",
+      "lngLat": [
+        -4.293,
+        15.334
+      ]
+    },
+    {
+      "id": "east-bank",
+      "label": "East bank (got brighter: vegetation)",
+      "lngLat": [
+        -3.857,
+        14.908
+      ]
+    },
+    {
+      "id": "dry-reference",
+      "label": "Dry ground south-east (reference)",
+      "lngLat": [
+        -3.998,
+        14.177
+      ]
+    }
+  ],
+  "credits": "NISAR GCOV preview images: NASA/JPL-Caltech and ISRO, distributed by ASF DAAC. Uncalibrated previews at about 180 m; values are display brightness, not backscatter.",
+  "source": "preview"
+}

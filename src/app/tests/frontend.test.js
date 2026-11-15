@@ -61,6 +61,17 @@ test('Chart: nulls break the line, gap, unknown spot, single date', () => {
   assert.ok(!one.includes('NaN'))
 })
 
+test('TimelineChart: water curve, range band, nulls and no data', async () => {
+  const { default: TimelineChart } = await vite.ssrLoadModule('/src/TimelineChart.jsx')
+  const dates = ['2026-06-20', '2026-07-02', '2026-08-10']
+  const facts = [{ label: 'Open water', unit: 'km²', values: [10, null, 30], lo: [8, null, 25], hi: [12, null, 36] }, { label: 'Flooded vegetation', unit: 'km²', values: [0, 2, 4] }]
+  const s = html(h(TimelineChart, { dates, facts, gaps: [['2026-07-10', '2026-08-01']], index: 2, onIndex: noop }))
+  assert.equal(count(s, /<circle/g), 2) // the null pass has no dot
+  assert.ok(s.includes('pt-tl-band') && s.includes('pt-tl-fv') && s.includes('No passes'))
+  assert.ok(!s.includes('NaN') && !s.includes('undefined'))
+  assert.ok(!html(h(TimelineChart, { dates: [], facts: [], gaps: [], index: 0 })).includes('NaN'))
+})
+
 test('published data is clean and complete', () => {
   const idx = JSON.parse(fs.readFileSync(path.join(pub, 'index.json'), 'utf8'))
   assert.ok(Array.isArray(idx.areas))

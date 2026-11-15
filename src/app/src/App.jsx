@@ -1,12 +1,13 @@
 import { lazy, memo, Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Chart, Strip } from './Charts.jsx'
+import TimelineChart from './TimelineChart.jsx'
 import { PLANETS } from './planets.js'
 import { REGIONS } from './regions.js'
 import { frame } from './data.js'
 
 const DATA = import.meta.env.BASE_URL + 'data/'
 const REPO = 'https://github.com/Harut200/Nasa-Space-App-Challange-2026'
-const COLORS = ['#e9a23b', '#6aa6d6', '#ecebe6', '#7fb77e', '#c9798f'] // chart series; red stays reserved for severe
+const COLORS = ['#3b9eff', '#2dd4bf', '#e8f1f5', '#e9a23b', '#c9798f', '#9b8cff'] // chart series: blue and teal lead; red stays reserved for severe
 const STORY = [['see', 'What you see'], ['physics', 'What is happening'], ['lband', 'Why radar shows it'], ['people', 'Why it matters']]
 const NONE = []
 const GEOCODE = 'https://geocoding-api.open-meteo.com/v1/search?count=1&name=' // free, no key
@@ -28,6 +29,7 @@ const words = fmt({ day: 'numeric', month: 'long', year: 'numeric' })
 const Legend = memo(function Legend({ legend }) {
   if (!legend?.type) return null
   if (legend.type === 'text') return <p className="legend">{legend.text}</p>
+  if (legend.type === 'classes') return <ul className="legend classes">{legend.items.map((it) => <li key={it.label}><i style={{ background: it.color }} />{it.label}</li>)}</ul>
   return (
     <div className="legend">
       <span>{legend.min} {legend.unit}</span>
@@ -81,7 +83,8 @@ export default function App() {
   const [series, setSeries] = useState({})
   const [maps, setMaps] = useState({})
   const [planetId, setPlanetId] = useState(PLANETS[0].id)
-  const [regionId, setRegionId] = useState(null)
+  const [regionId, setRegionId] = useState(HASH.get('region'))
+  const [filters, setFilters] = useState(true) // detection overlays on the globe
   const [wide, mid, vh] = useViewport()
   const about = useRef(null)
   const where = useRef(null)
@@ -145,7 +148,24 @@ export default function App() {
 
   const earth = planetId === PLANETS[0].id
   const planet = PLANETS.find((p) => p.id === planetId)
-  const globeRegions = useMemo(() => (custom ? [...GLOBE_REGIONS, custom] : GLOBE_REGIONS), [custom])
+  // Detection overlays for the globe: each area's newest "water" map (detector output, contract C).
+  const overlays = useMemo(() => (manifests || NONE).flatMap((x) => {
+    const l = x.layers.find((y) => y.id === 'water' && y.dates?.length)
+    return l ? [{ id: x.id, name: x.name, bounds: x.bounds, date: l.dates.at(-1), legend: l.legend, url: `${DATA}${x.id}/water/${l.dates.at(-1)}.webp` }] : []
+  }), [manifests])
+  // A region inside a detected area flies to that area, close enough to read the overlay. A detected area with no sample region gets its own pin.
+  const globeRegions = useMemo(() => {
+    const inside = (r, [w, s, e, n]) => r.lngLat[0] > w && r.lngLat[0] < e && r.lngLat[1] > s && r.lngLat[1] < n
+    const base = custom ? [...GLOBE_REGIONS, custom] : GLOBE_REGIONS
+    const extra = overlays.filter((o) => !base.some((r) => inside(r, o.bounds)))
+      .map(({ id, name, bounds: [w, s, e, n] }) => ({ id, name, lngLat: [(w + e) / 2, (s + n) / 2], events: [], severity: null }))
+    return [...base, ...extra].map((r) => {
+      const o = overlays.find((x) => inside(r, x.bounds))
+      if (!o) return r
+      const [w, s, e, n] = o.bounds
+      return { ...r, overlay: o, focus: [(w + e) / 2, (s + n) / 2], zoom: Math.log2((360 * 380) / (512 * (e - w))) } // area ~380 px wide
+    })
+  }, [custom, overlays])
   const region = earth ? globeRegions.find((r) => r.id === regionId) : null
   const open = !!region
   // Pixels of the hero that the overlay covers, so the globe centres on the free area.
@@ -163,7 +183,7 @@ export default function App() {
   const clip = useMemo(() => ({ clipPath: `inset(0 0 0 ${split}%)` }), [split])
   const onPick = useCallback((j) => setDateIndex(Math.max(0, m.dates.indexOf(ts.dates[j]))), [m, ts])
   const pickArea = (id) => { setAreaId(id); setDateIndex(0); setOtherIndex(0); setPlaying(false) }
-  const random = () => { const rest = REGIONS.filter((r) => r.id !== regionId); setRegionId(rest[Math.floor(Math.random() * rest.length)].id) }
+  const random = () => { const rest = globeRegions.filter((r) => r.id !== regionId); setRegionId(rest[Math.floor(Math.random() * rest.length)].id) }
   // Coordinates win over the city name; a city is a sample region if the name matches, else geocoded.
   const locate = async (e) => {
     e.preventDefault()
@@ -188,11 +208,15 @@ export default function App() {
   return (
     <>
       <section className={`hero${open ? ' open' : ''}`} aria-label="Forecast globe">
-        <Suspense fallback={null}><Globe planet={planetId} regions={earth ? globeRegions : NONE} selectedId={region?.id ?? null} onSelect={onSelect} padding={padding} /></Suspense>
+        <div className="ghost" style={{ inset: `${top}px ${right}px ${bottom}px ${left}px` }} aria-hidden="true" />
+        <Suspense fallback={null}><Globe planet={planetId} regions={earth ? globeRegions : NONE} selectedId={region?.id ?? null} onSelect={onSelect} padding={padding} overlays={filters ? overlays : NONE} /></Suspense>
         <div className="hero-ui">
           <header className="bar">
             <h1>Dancing with the <em>SARs</em></h1>
-            <button className="pill" onClick={() => about.current.showModal()}>About</button>
+            <div className="row">
+              {earth && <label className="switch"><input type="checkbox" checked={filters} onChange={(e) => setFilters(e.target.checked)} /><span>Detection</span></label>}
+              <button className="pill" onClick={() => about.current.showModal()}>About</button>
+            </div>
           </header>
 
           {earth ? (
@@ -213,6 +237,7 @@ export default function App() {
               <h2>{region.name}</h2>
               <p className="label">{coord(region.lngLat)}</p>
               <p className="label count">{region.events.length} predicted {region.events.length === 1 ? 'event' : 'events'}</p>
+              {filters && region.overlay && <div className="detected"><p className="label">Detected by radar · {words(region.overlay.date)}</p><Legend legend={region.overlay.legend} /></div>}
               {!region.events.length && <p className="empty">No forecast for this place yet.</p>}
               <ul className="events">{region.events.map((e) => <Event key={e.type + e.from} e={e} />)}</ul>
             </aside>
@@ -287,6 +312,15 @@ export default function App() {
                 )}
               </section>
 
+              {ts?.facts?.[0]?.values?.some((x) => x != null) && (
+                <section aria-label="Water area over time" className="card">
+                  <figcaption>
+                    <span className="label"><strong>Water area on each pass</strong> · drag to move through time</span>
+                    <span className="key"><span style={{ color: 'var(--accent)' }}>● Open water</span><span style={{ color: 'var(--teal)' }}>● Flooded vegetation</span></span>
+                  </figcaption>
+                  <TimelineChart dates={ts.dates} facts={ts.facts} gaps={m.gaps} quality={m.quality} index={Math.max(0, ti)} onIndex={onPick} playing={playing} />
+                </section>
+              )}
               {ts?.series?.length > 0 && (
                 <section aria-label="Backscatter over time" className="card">
                   <Chart ts={ts} pol={pol} gaps={m.gaps} index={Math.max(0, ti)} colors={COLORS} spots={m.spots} onPick={onPick} />
@@ -314,7 +348,7 @@ export default function App() {
 
       <footer>
         <p>{m?.credits}</p>
-        <p>Basemap: OpenFreeMap, OpenMapTiles, OpenStreetMap contributors. <a href={REPO}>Source code</a></p>
+        <p>Globe imagery: NASA GIBS Blue Marble; Sentinel-2 cloudless by EOX. Basemap: OpenFreeMap, OpenMapTiles, OpenStreetMap contributors. <a href={REPO}>Source code</a></p>
       </footer>
 
       <dialog ref={about} onClick={(e) => e.target === about.current && about.current.close()}>

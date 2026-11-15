@@ -1,0 +1,257 @@
+{
+  "id": "poyang",
+  "name": "Poyang Lake, China",
+  "bounds": [
+    115.7,
+    28.5004552634027,
+    117.00056393852124,
+    29.66
+  ],
+  "dates": [
+    "2026-07-05",
+    "2026-07-17",
+    "2026-08-10",
+    "2026-09-03",
+    "2026-09-15",
+    "2026-09-27",
+    "2026-10-09"
+  ],
+  "gaps": [
+    [
+      "2026-07-27",
+      "2026-08-10"
+    ]
+  ],
+  "layers": [
+    {
+      "id": "hh",
+      "label": "HH brightness (preview)",
+      "dates": [
+        "2026-07-05",
+        "2026-07-17",
+        "2026-08-10",
+        "2026-09-03",
+        "2026-09-15",
+        "2026-09-27",
+        "2026-10-09"
+      ],
+      "legend": {
+        "type": "ramp",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": 0,
+        "max": 100,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    },
+    {
+      "id": "water",
+      "label": "Water and flooded vegetation",
+      "dates": [
+        "2026-07-05",
+        "2026-07-17",
+        "2026-08-10",
+        "2026-09-03",
+        "2026-09-15",
+        "2026-09-27",
+        "2026-10-09"
+      ],
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#2f6fde",
+            "label": "Open water"
+          },
+          {
+            "color": "#35b04a",
+            "label": "Possible water under vegetation"
+          },
+          {
+            "color": "#7fd3c4",
+            "label": "Going under: vegetation submerging, or part open water"
+          },
+          {
+            "color": "#f28e2b",
+            "label": "Usually water, not today (rain or wind?)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "when",
+      "label": "When it changed for good",
+      "dates": null,
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#440154",
+            "label": "17 Jul"
+          },
+          {
+            "color": "#414487",
+            "label": "10 Aug"
+          },
+          {
+            "color": "#2a788e",
+            "label": "3 Sep"
+          },
+          {
+            "color": "#22a884",
+            "label": "15 Sep"
+          },
+          {
+            "color": "#7ad151",
+            "label": "27 Sep"
+          },
+          {
+            "color": "#fde725",
+            "label": "9 Oct"
+          }
+        ]
+      }
+    },
+    {
+      "id": "classes",
+      "label": "Season classes",
+      "dates": null,
+      "legend": {
+        "type": "classes",
+        "items": [
+          {
+            "color": "#08306b",
+            "label": "Permanent water"
+          },
+          {
+            "color": "#4292c6",
+            "label": "Seasonal open water"
+          },
+          {
+            "color": "#41ab5d",
+            "label": "Flooded vegetation"
+          },
+          {
+            "color": "#9ecae1",
+            "label": "Got darker, not open water (wetter ground, shallow or partial flooding)"
+          },
+          {
+            "color": "#c994c7",
+            "label": "Got brighter (growing crops and other causes)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "change",
+      "label": "Change since first pass (HH)",
+      "dates": [
+        "2026-07-17",
+        "2026-08-10",
+        "2026-09-03",
+        "2026-09-15",
+        "2026-09-27",
+        "2026-10-09"
+      ],
+      "legend": {
+        "type": "diverging",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": -35,
+        "max": 35,
+        "colors": [
+          "#2166ac",
+          "#00000000",
+          "#b2182b"
+        ],
+        "labels": [
+          "darker: new water, cleared forest",
+          "brighter: flooded vegetation, growth"
+        ]
+      }
+    },
+    {
+      "id": "rgb",
+      "label": "Three-date composite",
+      "dates": null,
+      "legend": {
+        "type": "text",
+        "text": "HH: red = 5 Jul, green = 3 Sep, blue = 9 Oct. Grey = no change."
+      }
+    },
+    {
+      "id": "hv",
+      "label": "HV brightness (preview)",
+      "dates": [
+        "2026-07-05",
+        "2026-07-17",
+        "2026-08-10",
+        "2026-09-03",
+        "2026-09-15",
+        "2026-09-27",
+        "2026-10-09"
+      ],
+      "legend": {
+        "type": "ramp",
+        "unit": "relative brightness (0\u2013100, uncalibrated)",
+        "min": 0,
+        "max": 100,
+        "colors": [
+          "#000000",
+          "#ffffff"
+        ]
+      }
+    }
+  ],
+  "story": {
+    "see": "On 5 July the lake is one wide black sheet. From August it pulls back: the western and southern lake bed turns grey, then bright, and winding channels and separate pools appear inside the old lake. The 'when' layer dates most of this to August and September. Green 'flooded vegetation' patches on the drained edges are wet grass and fields.",
+    "physics": "Poyang is China's largest freshwater lake and is fed by rivers and connected to the Yangtze. It swells in the summer wet season and shrinks in autumn and winter to channels, pools and grassy mudflats. Its area changes dramatically between seasons; in early 2012 drought and the Three Gorges Dam reduced it to about 200 km\u00b2.",
+    "lband": "Calm lake water mirrors L-band radar away and looks black in HH. As the water retreats, wet mud and grass scatter the signal back, so the lake bed brightens. Where grass still stands in shallow water, the water-to-stem double bounce makes it glow, which our detector marks as flooded vegetation.",
+    "people": "The lake provides habitat for half a million migratory birds, and up to 90% of the critically endangered Siberian crane winter there, on the very mudflats and grasslands that appear as the water drops in autumn. Its level also matters for fishing, farming and the cities around it, including Nanchang."
+  },
+  "spots": [
+    {
+      "id": "open-lake",
+      "label": "Open lake (water all season)",
+      "lngLat": [
+        116.2,
+        29.2
+      ]
+    },
+    {
+      "id": "western-lake-bed",
+      "label": "Western lake bed (exposed from August)",
+      "lngLat": [
+        116.05,
+        29.15
+      ]
+    },
+    {
+      "id": "southern-floodplain",
+      "label": "Southern floodplain (drains after July)",
+      "lngLat": [
+        116.3,
+        29.0
+      ]
+    },
+    {
+      "id": "eastern-fields",
+      "label": "Low fields east of the lake (wet from September)",
+      "lngLat": [
+        116.836,
+        28.928
+      ]
+    },
+    {
+      "id": "nanchang",
+      "label": "Nanchang city (bright reference)",
+      "lngLat": [
+        115.9,
+        28.68
+      ]
+    }
+  ],
+  "credits": "NISAR GCOV preview images: NASA/JPL-Caltech and ISRO, distributed by ASF DAAC. Uncalibrated previews at about 180 m; values are display brightness, not backscatter.",
+  "source": "preview"
+}

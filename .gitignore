@@ -9,3 +9,6 @@ __pycache__/
 .ipynb_checkpoints/
 .venv/
 dist/
+
+# invented test data from scripts/ingest/make_mock.py
+src/app/public/data/mock-*/
