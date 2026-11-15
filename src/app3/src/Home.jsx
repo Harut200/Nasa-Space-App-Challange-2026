@@ -1,24 +1,24 @@
-import { useMemo } from 'react'
-import Opening from './Opening.jsx'
-import { classesIn } from './data.js'
+const B = `${import.meta.env.BASE_URL}brand/`
 
-const one = (l) => (/ /.test(l) ? l : /oes$/.test(l) ? l.slice(0, -2) : l.replace(/s$/, ''))
-
-// B's opening as it was, with one primary and two quiet actions and a single quiet line that opens place selection.
-export default function Home({ place, index, list, onWatch, onFeel, onChoose }) {
-  const summary = useMemo(() => classesIn(list), [list])
-  const total = summary.reduce((s, c) => s + c.count, 0)
+// The landing: team name, title, and the partner logos with the challenge line at the bottom left. The top bar and the globe are the way in.
+export default function Home({ onGlobe }) {
   return (
     <>
-      <Opening place={place} index={index} onWatch={onWatch} onFeel={onFeel} onChoose={onChoose} bare />
-      <p className="credit"><img src={`${import.meta.env.BASE_URL}brand/lockup.svg`} height="22" width="104" alt="Constellation" /><span className="mono">Team Constellation · NASA Space Apps 2026</span></p>
-      {total > 0 && (
-        <p className="landing-line">
-          <button onClick={onChoose} aria-label="Choose a place">
-            <b>{total} places</b>{summary.map((c) => <span key={c.id}> · {c.count} {c.count === 1 ? one(c.label.toLowerCase()) : c.label.toLowerCase()}</span>)} <span aria-hidden>→</span>
-          </button>
-        </p>
-      )}
+      <div className="opening">
+        <div className="opening-copy">
+          <p className="eyebrow">Team Constellation</p>
+          <h1>Dancing<br /><em>with the SARs</em></h1>
+          <div className="actions"><button className="btn primary big" onClick={onGlobe}>Jump in <span aria-hidden>→</span></button></div>
+        </div>
+      </div>
+      <div className="landing-foot">
+        <div className="landing-logos">
+          <img src={`${B}nasa.svg`} height="34" alt="NASA" />
+          <img src={`${B}isro.svg`} height="34" alt="ISRO" />
+          <img src={`${B}lockup.svg`} height="22" alt="Constellation" />
+        </div>
+        <p className="mono">NASA Space Apps Challenge 2026</p>
+      </div>
     </>
   )
 }

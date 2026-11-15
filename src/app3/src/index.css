@@ -992,3 +992,11 @@ button:active:not(:disabled):not(.handle):not(.globe-hit):not(.beat):not(.spot) 
   .story:not(.how) .beats-wrap { margin-top: 4px; }
 }
 .beat.q.on i { transform: rotate(45deg) scale(1.5); }
+
+/* landing: only the team name, the title, and the logos with the challenge line at the bottom left */
+.phone .eyebrow { display: block; }
+.landing-foot { position: absolute; z-index: 6; left: 6vw; bottom: 24px; animation: fade-in .5s ease both; }
+.landing-logos { display: flex; align-items: center; gap: 18px; margin-bottom: 10px; }
+.landing-logos img { display: block; width: auto; }
+.landing-foot p { margin: 0; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
+.phone .landing-foot { left: 22px; bottom: 18px; }

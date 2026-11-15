@@ -463,8 +463,6 @@ export default function App() {
   const missing = place && layer && dated && !rawUrl
   const emptyPass = !!place && !ev && layerId === 'water' && place.primary?.kind === 'water' && place.primary.values[index] != null && place.primary.values[index] < 0.5
   const heroPlace = !inPlace
-  const quakeId = ids.find((id) => places[id] && isEvent(places[id]) && places[id].event.type === 'earthquake') || ids.find((id) => places[id] && isEvent(places[id])) || null
-  const quakePick = ids.includes('tibet-m70-2026') ? 'tibet-m70-2026' : quakeId
 
   const globeMode = diving ? diveKeep : globeFull ? 'full' : inPlace && !phone ? 'mini' : mode === 'open' ? 'landing' : 'hidden'
   useEffect(() => { if (globeMode !== 'hidden') setGMounted(true) }, [globeMode])
@@ -512,7 +510,7 @@ export default function App() {
         onHome={goHome} onBack={goBack} onPick={pickFromSearch} onPrev={() => hop(-1)} onNext={() => hop(1)} onRandom={random} onName={focusSearch} onMode={setMode}
         onPlaces={goPlaces} onGlobe={openGlobe} onInfo={() => setInfo((x) => !x)} onSheet={() => setSheet(true)} onSearchSheet={() => setSearchSheet(true)} infoOpen={info} />
 
-      {mode === 'open' && <Home place={shownPlace} index={index} list={list} onWatch={() => openPlace(FLAGSHIP, 'story', 'home')} onChoose={goPlaces} onFeel={quakePick ? () => openPlace(quakePick, 'story', 'home') : null} />}
+      {mode === 'open' && <Home onGlobe={openGlobe} />}
       {mode === 'places' && <S><Gallery places={places} ids={galIds} total={ids.length} current={placeId} onPick={(id) => openPlace(id, 'story', 'places')} onClose={goBack}
         filter={<S><GalleryFilter places={list} shown={galShown} q={q} setQ={setQ} kind={kind} setKind={setKind} onPick={(p) => openPlace(p.id, 'story', 'places')} /></S>} /></S>}
       {!diving && how && place && hstep && <S><Explainer place={place} steps={howSteps} n={howN} index={index} onStep={setStep} onIndex={(i) => { setPlaying(false); setIndex(i) }} onClose={() => setHow(false)} emptyPass={emptyPass} /></S>}
