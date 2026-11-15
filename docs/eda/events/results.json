@@ -2257,6 +2257,52 @@
      "max": 4.8064
     },
     "incidence_deg_mean": 41.311004638671875
+   },
+   "d_null": {
+    "event": "La Mierla fire, Guadalajara: forest and scrub surface changed, 14-26 July 2026",
+    "view": "d_null",
+    "track": 95,
+    "frame": 68,
+    "direction": "D",
+    "event_pair": "20260702_20260714",
+    "control_pair": "20260620_20260702",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 12,
+    "far_km": 24,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.7408542633056641,
+    "mean_coh_control_within_radius": 0.6603595018386841,
+    "mean_coh_event_whole_window": 0.7548660039901733,
+    "mean_coh_control_whole_window": 0.6700771450996399,
+    "coherence_loss": {
+     "loss_area_km2": 0.0,
+     "comparable_area_km2": 407.6224,
+     "loss_fraction_inside": 0.0,
+     "loss_fraction_outside": 0.00011979480860640132,
+     "comparable_px_inside": 63691,
+     "loss_area_km2_whole_window": 0.5376000000000001
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 0.3392,
+      "lon": -3.2949,
+      "lat": 40.8395,
+      "max_side_km": 0.8
+     },
+     {
+      "area_km2": 0.19840000000000002,
+      "lon": -3.3354,
+      "lat": 41.3476,
+      "max_side_km": 0.8
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 121,
+     "median": 0.0,
+     "p95": 0.19840000000000002,
+     "max": 0.19840000000000002
+    },
+    "incidence_deg_mean": null
    }
   },
   "verdict": "clear"
@@ -2513,6 +2559,58 @@
      "max": 102.5216
     },
     "incidence_deg_mean": 43.06556701660156
+   },
+   "a_null": {
+    "event": "Burgohondo fire, Avila: forest and scrub surface changed, 14-26 July 2026",
+    "view": "a_null",
+    "track": 87,
+    "frame": 22,
+    "direction": "A",
+    "event_pair": "20260702_20260714",
+    "control_pair": "20260620_20260702",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 15,
+    "far_km": 30,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.7901261448860168,
+    "mean_coh_control_within_radius": 0.74419105052948,
+    "mean_coh_event_whole_window": 0.7674123048782349,
+    "mean_coh_control_whole_window": 0.6921438574790955,
+    "coherence_loss": {
+     "loss_area_km2": 0.0,
+     "comparable_area_km2": 673.5424,
+     "loss_fraction_inside": 0.0,
+     "loss_fraction_outside": 0.00016646421562182225,
+     "comparable_px_inside": 105241,
+     "loss_area_km2_whole_window": 0.8832000000000001
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 0.39680000000000004,
+      "lon": -4.3697,
+      "lat": 40.1492,
+      "max_side_km": 2.0
+     },
+     {
+      "area_km2": 0.28800000000000003,
+      "lon": -4.7249,
+      "lat": 40.6339,
+      "max_side_km": 0.8
+     },
+     {
+      "area_km2": 0.19840000000000002,
+      "lon": -4.9495,
+      "lat": 40.1545,
+      "max_side_km": 0.56
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 63,
+     "median": 0.0,
+     "p95": 0.39680000000000004,
+     "max": 0.39680000000000004
+    },
+    "incidence_deg_mean": null
    }
   },
   "verdict": "clear"
@@ -2717,9 +2815,73 @@
      "max": 0.2048
     },
     "incidence_deg_mean": 40.38734817504883
+   },
+   "a_null": {
+    "event": "Gironde megafire, France: forest surface changed, 17 Jul-10 Aug 2026",
+    "view": "a_null",
+    "track": 130,
+    "frame": 24,
+    "direction": "A",
+    "event_pair": "20260705_20260717",
+    "control_pair": "20260623_20260705",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 12,
+    "far_km": 24,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.5743351578712463,
+    "mean_coh_control_within_radius": 0.5676694512367249,
+    "mean_coh_event_whole_window": 0.39021560549736023,
+    "mean_coh_control_whole_window": 0.40588849782943726,
+    "coherence_loss": {
+     "loss_area_km2": 0.0,
+     "comparable_area_km2": 344.30080000000004,
+     "loss_fraction_inside": 0.0,
+     "loss_fraction_outside": 0.0023706439417570213,
+     "comparable_px_inside": 53797,
+     "loss_area_km2_whole_window": 4.864
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 1.1072,
+      "lon": -1.1649,
+      "lat": 44.763,
+      "max_side_km": 2.32
+     },
+     {
+      "area_km2": 0.9472,
+      "lon": -1.1745,
+      "lat": 44.698,
+      "max_side_km": 1.28
+     },
+     {
+      "area_km2": 0.6144000000000001,
+      "lon": -1.0885,
+      "lat": 44.644,
+      "max_side_km": 1.76
+     },
+     {
+      "area_km2": 0.4736,
+      "lon": -0.7619,
+      "lat": 44.6838,
+      "max_side_km": 1.12
+     },
+     {
+      "area_km2": 0.4288,
+      "lon": -0.9559,
+      "lat": 44.7357,
+      "max_side_km": 0.96
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 28,
+     "median": 0.4736,
+     "p95": 1.5868799999999992,
+     "max": 1.8176
+    },
+    "incidence_deg_mean": null
    }
   },
-  "verdict": null
+  "verdict": "clear"
  },
  "mahanadi-coh-2026": {
   "event_id": "mahanadi-coh-2026",
@@ -3395,6 +3557,58 @@
      "max": 4.1728000000000005
     },
     "incidence_deg_mean": null
+   },
+   "a_null": {
+    "event": "Niebla fire, Huelva and Seville, Spain: forest surface changed, 21 Jul-14 Aug 2026",
+    "view": "a_null",
+    "track": 15,
+    "frame": 21,
+    "direction": "A",
+    "event_pair": "20260709_20260721",
+    "control_pair": "20260627_20260709",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 15,
+    "far_km": 30,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.803338885307312,
+    "mean_coh_control_within_radius": 0.7307257056236267,
+    "mean_coh_event_whole_window": 0.758960485458374,
+    "mean_coh_control_whole_window": 0.6833179593086243,
+    "coherence_loss": {
+     "loss_area_km2": 0.0,
+     "comparable_area_km2": 670.8096,
+     "loss_fraction_inside": 0.0,
+     "loss_fraction_outside": 0.0006086697924686145,
+     "comparable_px_inside": 104814,
+     "loss_area_km2_whole_window": 1.4016
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 0.608,
+      "lon": -6.9713,
+      "lat": 37.7626,
+      "max_side_km": 1.28
+     },
+     {
+      "area_km2": 0.5568000000000001,
+      "lon": -6.2846,
+      "lat": 37.4203,
+      "max_side_km": 1.2
+     },
+     {
+      "area_km2": 0.2368,
+      "lon": -6.2773,
+      "lat": 37.4907,
+      "max_side_km": 1.12
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "incidence_deg_mean": null
    }
   },
   "verdict": "clear"
@@ -3671,6 +3885,39 @@
      "max": 0.0
     },
     "incidence_deg_mean": 45.170711517333984
+   },
+   "a_null": {
+    "event": "Bald Range fire, British Columbia: forest surface changed, 25 Jul-18 Aug 2026",
+    "view": "a_null",
+    "track": 77,
+    "frame": 27,
+    "direction": "A",
+    "event_pair": "20260713_20260725",
+    "control_pair": "20260701_20260713",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 12,
+    "far_km": 24,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.726506233215332,
+    "mean_coh_control_within_radius": 0.7266457676887512,
+    "mean_coh_event_whole_window": 0.7123757600784302,
+    "mean_coh_control_whole_window": 0.7001346945762634,
+    "coherence_loss": {
+     "loss_area_km2": 0.0,
+     "comparable_area_km2": 414.3808,
+     "loss_fraction_inside": 0.0,
+     "loss_fraction_outside": 0.0,
+     "comparable_px_inside": 64747,
+     "loss_area_km2_whole_window": 0.0
+    },
+    "largest_loss_clusters": [],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 17,
+     "median": 0.0,
+     "p95": 0.0,
+     "max": 0.0
+    },
+    "incidence_deg_mean": null
    }
   },
   "verdict": "clear"
@@ -8480,5 +8727,515 @@
    }
   },
   "verdict": "not detected"
+ },
+ "colombia-m74-2026": {
+  "event_id": "colombia-m74-2026",
+  "views": {
+   "asc47": {
+    "event": "M7.4 intermediate-depth earthquake, Valle del Cauca, Colombia, 10 Aug 2026 (depth 116 km)",
+    "view": "asc47",
+    "track": 47,
+    "frame": 4,
+    "direction": "A",
+    "event_pair": "20260723_20260816",
+    "control_pair": "20260711_20260723",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 40,
+    "far_km": 70,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.2683236300945282,
+    "mean_coh_control_within_radius": 0.3271927237510681,
+    "mean_coh_event_whole_window": 0.278461754322052,
+    "mean_coh_control_whole_window": 0.34716346859931946,
+    "coherence_loss": {
+     "loss_area_km2": 22.0992,
+     "comparable_area_km2": 757.8176000000001,
+     "loss_fraction_inside": 0.029161634673040056,
+     "loss_fraction_outside": 0.020692362524406243,
+     "comparable_px_inside": 118409,
+     "loss_area_km2_whole_window": 60.5568,
+     "mean_coh_control_at_loss_px": 0.567594587802887,
+     "mean_coh_event_at_loss_px": 0.19575093686580658
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 3.04,
+      "lon": -75.9163,
+      "lat": 5.2189,
+      "max_side_km": 3.52
+     },
+     {
+      "area_km2": 1.8624,
+      "lon": -75.6661,
+      "lat": 4.7269,
+      "max_side_km": 3.2
+     },
+     {
+      "area_km2": 1.6960000000000002,
+      "lon": -76.0002,
+      "lat": 4.6184,
+      "max_side_km": 2.8000000000000003
+     },
+     {
+      "area_km2": 1.4592,
+      "lon": -75.994,
+      "lat": 4.7003,
+      "max_side_km": 3.12
+     },
+     {
+      "area_km2": 1.3632,
+      "lon": -76.2856,
+      "lat": 5.3697,
+      "max_side_km": 2.48
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "valid_pixels_within_radius": 104940,
+    "valid_fraction_within_radius": 0.1336156569945772,
+    "p2p_cm_0.5_99.5pct": 6.5410903386235635,
+    "p0.5_cm": -3.647300035643042,
+    "p99.5_cm": 2.893790302980521,
+    "min_cm": -5.763468778656046,
+    "max_cm": 4.223247978446037,
+    "far_std_cm": 0.8874263187623069,
+    "control_far_std_cm": 1.3500191829526555,
+    "control_p2p_cm_0.5_99.5pct": 20.906535679609973,
+    "local_noise_cm_event_far": NaN,
+    "local_noise_cm_control_far": 0.643634577376978,
+    "unwrapping_components_event": 1,
+    "incidence_deg_mean": 46.588932037353516
+   },
+   "desc11": {
+    "event": "M7.4 intermediate-depth earthquake, Valle del Cauca, Colombia, 10 Aug 2026 (depth 116 km)",
+    "view": "desc11",
+    "track": 11,
+    "frame": 86,
+    "direction": "D",
+    "event_pair": "20260720_20260813",
+    "control_pair": "20260708_20260720",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 40,
+    "far_km": 70,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.20930537581443787,
+    "mean_coh_control_within_radius": 0.3065166771411896,
+    "mean_coh_event_whole_window": 0.2369796633720398,
+    "mean_coh_control_whole_window": 0.3412206172943115,
+    "coherence_loss": {
+     "loss_area_km2": 217.9712,
+     "comparable_area_km2": 1138.0608,
+     "loss_fraction_inside": 0.19152860725894433,
+     "loss_fraction_outside": 0.18757706710885744,
+     "comparable_px_inside": 177822,
+     "loss_area_km2_whole_window": 954.9696,
+     "mean_coh_control_at_loss_px": 0.5485965013504028,
+     "mean_coh_event_at_loss_px": 0.17965328693389893
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 166.3168,
+      "lon": -76.7114,
+      "lat": 4.8819,
+      "max_side_km": 28.48
+     },
+     {
+      "area_km2": 136.6592,
+      "lon": -76.6925,
+      "lat": 4.7228,
+      "max_side_km": 23.92
+     },
+     {
+      "area_km2": 73.28,
+      "lon": -76.3233,
+      "lat": 4.6901,
+      "max_side_km": 21.04
+     },
+     {
+      "area_km2": 65.792,
+      "lon": -76.7111,
+      "lat": 4.5455,
+      "max_side_km": 20.72
+     },
+     {
+      "area_km2": 43.104,
+      "lon": -76.7839,
+      "lat": 4.6366,
+      "max_side_km": 16.080000000000002
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "valid_pixels_within_radius": 93802,
+    "valid_fraction_within_radius": 0.119434113373407,
+    "p2p_cm_0.5_99.5pct": 9.283785645183173,
+    "p0.5_cm": 4.598807763684123,
+    "p99.5_cm": 13.882593408867296,
+    "min_cm": 2.1775652876950673,
+    "max_cm": 16.555399508978052,
+    "far_std_cm": 2.2848662555229775,
+    "control_far_std_cm": 4.950410056046606,
+    "control_p2p_cm_0.5_99.5pct": 15.53209325096267,
+    "local_noise_cm_event_far": 0.8296848904558085,
+    "local_noise_cm_control_far": 0.6129176865431173,
+    "unwrapping_components_event": 2,
+    "incidence_deg_mean": 40.340599060058594
+   },
+   "asc148": {
+    "event": "M7.4 intermediate-depth earthquake, Valle del Cauca, Colombia, 10 Aug 2026 (depth 116 km)",
+    "view": "asc148",
+    "track": 148,
+    "frame": 4,
+    "direction": "A",
+    "event_pair": "20260718_20260811",
+    "control_pair": "20260706_20260718",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 40,
+    "far_km": 70,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.2586607336997986,
+    "mean_coh_control_within_radius": 0.34509211778640747,
+    "mean_coh_event_whole_window": 0.2606411576271057,
+    "mean_coh_control_whole_window": 0.36141908168792725,
+    "coherence_loss": {
+     "loss_area_km2": 126.22720000000001,
+     "comparable_area_km2": 970.8672,
+     "loss_fraction_inside": 0.13001489802106816,
+     "loss_fraction_outside": 0.2133081423562833,
+     "comparable_px_inside": 151698,
+     "loss_area_km2_whole_window": 626.9696,
+     "mean_coh_control_at_loss_px": 0.561582088470459,
+     "mean_coh_event_at_loss_px": 0.18641141057014465
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 80.4928,
+      "lon": -76.7671,
+      "lat": 4.538,
+      "max_side_km": 22.8
+     },
+     {
+      "area_km2": 63.827200000000005,
+      "lon": -76.7585,
+      "lat": 4.3348,
+      "max_side_km": 15.280000000000001
+     },
+     {
+      "area_km2": 49.3952,
+      "lon": -76.1024,
+      "lat": 4.6099,
+      "max_side_km": 14.32
+     },
+     {
+      "area_km2": 25.9584,
+      "lon": -76.6565,
+      "lat": 4.9288,
+      "max_side_km": 12.48
+     },
+     {
+      "area_km2": 19.756800000000002,
+      "lon": -76.7926,
+      "lat": 4.6756,
+      "max_side_km": 13.76
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "valid_pixels_within_radius": 97620,
+    "valid_fraction_within_radius": 0.12429541105213099,
+    "p2p_cm_0.5_99.5pct": 12.503808907588695,
+    "p0.5_cm": -3.2864561204955516,
+    "p99.5_cm": 9.217352787093143,
+    "min_cm": -3.6009934337326466,
+    "max_cm": 11.362062476129013,
+    "far_std_cm": 0.5756917365206937,
+    "control_far_std_cm": 1.3497121422855658,
+    "control_p2p_cm_0.5_99.5pct": 7.185231159792012,
+    "local_noise_cm_event_far": 0.9136918178033497,
+    "local_noise_cm_control_far": 0.5721030078780323,
+    "unwrapping_components_event": 2,
+    "incidence_deg_mean": 35.396522521972656
+   }
+  },
+  "verdict": null
+ },
+ "minchumina-m56-2026": {
+  "event_id": "minchumina-m56-2026",
+  "views": {
+   "desc73": {
+    "event": "M5.6 earthquake near Lake Minchumina, Alaska, 15 Oct 2026 (depth 4.5 km)",
+    "view": "desc73",
+    "track": 73,
+    "frame": 55,
+    "direction": "D",
+    "event_pair": "20261005_20261017",
+    "control_pair": "20260923_20261005",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 25,
+    "far_km": 45,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.5409778952598572,
+    "mean_coh_control_within_radius": 0.4744093418121338,
+    "mean_coh_event_whole_window": 0.4862247109413147,
+    "mean_coh_control_whole_window": 0.46880561113357544,
+    "coherence_loss": {
+     "loss_area_km2": 0.0,
+     "comparable_area_km2": 1220.4608,
+     "loss_fraction_inside": 0.0,
+     "loss_fraction_outside": 0.0,
+     "comparable_px_inside": 190697,
+     "loss_area_km2_whole_window": 0.0
+    },
+    "largest_loss_clusters": [],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 11,
+     "median": 0.0,
+     "p95": 0.0,
+     "max": 0.0
+    },
+    "valid_pixels_within_radius": 289968,
+    "valid_fraction_within_radius": 0.9452293249013919,
+    "p2p_cm_0.5_99.5pct": 3.3823641884891944,
+    "p0.5_cm": -2.0096292053946825,
+    "p99.5_cm": 1.372734983094512,
+    "min_cm": -75.40252973388637,
+    "max_cm": 5.741922427247175,
+    "far_std_cm": 2.671571985466481,
+    "control_far_std_cm": 2.432044915189448,
+    "control_p2p_cm_0.5_99.5pct": 4.264205803124351,
+    "local_noise_cm_event_far": 0.8688694885526037,
+    "local_noise_cm_control_far": 0.7913945607492887,
+    "unwrapping_components_event": 1,
+    "incidence_deg_mean": 45.84794998168945
+   },
+   "asc49": {
+    "event": "M5.6 earthquake near Lake Minchumina, Alaska, 15 Oct 2026 (depth 4.5 km)",
+    "view": "asc49",
+    "track": 49,
+    "frame": 34,
+    "direction": "A",
+    "event_pair": "20261003_20261015",
+    "control_pair": "20260921_20261003",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 25,
+    "far_km": 45,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.2960667908191681,
+    "mean_coh_control_within_radius": 0.19540563225746155,
+    "mean_coh_event_whole_window": 0.2938297390937805,
+    "mean_coh_control_whole_window": 0.1957920342683792,
+    "coherence_loss": {
+     "loss_area_km2": 0.0,
+     "comparable_area_km2": 11.1552,
+     "loss_fraction_inside": 0.0,
+     "loss_fraction_outside": 0.003042837445918319,
+     "comparable_px_inside": 1743,
+     "loss_area_km2_whole_window": 0.4096
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 0.4096,
+      "lon": -152.1486,
+      "lat": 63.8855,
+      "max_side_km": 1.2
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 0,
+     "median": null,
+     "p95": null,
+     "max": null
+    },
+    "valid_pixels_within_radius": 77997,
+    "valid_fraction_within_radius": 0.25425237148352187,
+    "p2p_cm_0.5_99.5pct": 20.26636139354021,
+    "p0.5_cm": -9.448212770084766,
+    "p99.5_cm": 10.818148623455444,
+    "min_cm": -10.663224811628286,
+    "max_cm": 12.918219766406036,
+    "far_std_cm": 11.387680020278248,
+    "control_far_std_cm": 11.413466433401439,
+    "control_p2p_cm_0.5_99.5pct": 12.856544628830806,
+    "local_noise_cm_event_far": 7.394113942561202,
+    "local_noise_cm_control_far": NaN,
+    "unwrapping_components_event": 1,
+    "incidence_deg_mean": 37.55809020996094
+   }
+  },
+  "verdict": null
+ },
+ "skwentna-m56-2026": {
+  "event_id": "skwentna-m56-2026",
+  "views": {
+   "desc15": {
+    "event": "M5.6 earthquake 57 km WNW of Skwentna, Alaska, 8 Aug 2026 (depth 10 km)",
+    "view": "desc15",
+    "track": 15,
+    "frame": 57,
+    "direction": "D",
+    "event_pair": "20260721_20260814",
+    "control_pair": "20260709_20260721",
+    "wavelength_m": 0.24393202441008952,
+    "radius_km": 25,
+    "far_km": 45,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.36911922693252563,
+    "mean_coh_control_within_radius": 0.4704979658126831,
+    "mean_coh_event_whole_window": 0.33390334248542786,
+    "mean_coh_control_whole_window": 0.4493352174758911,
+    "coherence_loss": {
+     "loss_area_km2": 26.6688,
+     "comparable_area_km2": 578.3296,
+     "loss_fraction_inside": 0.04611349652516489,
+     "loss_fraction_outside": 0.06792740059786875,
+     "comparable_px_inside": 90364,
+     "loss_area_km2_whole_window": 262.5536,
+     "mean_coh_control_at_loss_px": 0.6444924473762512,
+     "mean_coh_event_at_loss_px": 0.2023210972547531
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 8.832,
+      "lon": -152.6157,
+      "lat": 61.7754,
+      "max_side_km": 6.5600000000000005
+     },
+     {
+      "area_km2": 7.0208,
+      "lon": -151.1564,
+      "lat": 62.4272,
+      "max_side_km": 7.68
+     },
+     {
+      "area_km2": 6.4512,
+      "lon": -152.0354,
+      "lat": 62.5405,
+      "max_side_km": 5.68
+     },
+     {
+      "area_km2": 5.8432,
+      "lon": -152.8107,
+      "lat": 61.8501,
+      "max_side_km": 5.04
+     },
+     {
+      "area_km2": 5.8304,
+      "lon": -152.6859,
+      "lat": 61.7735,
+      "max_side_km": 4.48
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 11,
+     "median": 13.280000000000001,
+     "p95": 71.0848,
+     "max": 85.8304
+    },
+    "valid_pixels_within_radius": 80933,
+    "valid_fraction_within_radius": 0.263809300294016,
+    "p2p_cm_0.5_99.5pct": 46.538643465855685,
+    "p0.5_cm": -20.645373231040292,
+    "p99.5_cm": 25.893270234815393,
+    "min_cm": -21.459449637739027,
+    "max_cm": 30.01466731679539,
+    "far_std_cm": 16.26046602976522,
+    "control_far_std_cm": 2.0977922660368877,
+    "control_p2p_cm_0.5_99.5pct": 4.271011911064696,
+    "local_noise_cm_event_far": 9.42741749912762,
+    "local_noise_cm_control_far": 0.9625479200299258,
+    "unwrapping_components_event": 1,
+    "incidence_deg_mean": 33.680747985839844
+   },
+   "asc49": {
+    "event": "M5.6 earthquake 57 km WNW of Skwentna, Alaska, 8 Aug 2026 (depth 10 km)",
+    "view": "asc49",
+    "track": 49,
+    "frame": 33,
+    "direction": "A",
+    "event_pair": "20260723_20260816",
+    "control_pair": "20260711_20260723",
+    "wavelength_m": 0.2419632429378531,
+    "radius_km": 25,
+    "far_km": 45,
+    "pixel_km2": 0.0064,
+    "mean_coh_event_within_radius": 0.48393577337265015,
+    "mean_coh_control_within_radius": 0.3480719327926636,
+    "mean_coh_event_whole_window": 0.43042564392089844,
+    "mean_coh_control_whole_window": 0.3555143475532532,
+    "coherence_loss": {
+     "loss_area_km2": 0.0,
+     "comparable_area_km2": 556.5888,
+     "loss_fraction_inside": 0.0,
+     "loss_fraction_outside": 0.001773922775601567,
+     "comparable_px_inside": 86967,
+     "loss_area_km2_whole_window": 6.0864
+    },
+    "largest_loss_clusters": [
+     {
+      "area_km2": 0.9536,
+      "lon": -153.2581,
+      "lat": 62.4149,
+      "max_side_km": 4.24
+     },
+     {
+      "area_km2": 0.6592,
+      "lon": -153.172,
+      "lat": 62.3861,
+      "max_side_km": 4.72
+     },
+     {
+      "area_km2": 0.5824,
+      "lon": -151.3657,
+      "lat": 62.7333,
+      "max_side_km": 1.12
+     },
+     {
+      "area_km2": 0.5056,
+      "lon": -153.571,
+      "lat": 62.3043,
+      "max_side_km": 1.04
+     },
+     {
+      "area_km2": 0.4864,
+      "lon": -152.6442,
+      "lat": 61.7906,
+      "max_side_km": 1.76
+     }
+    ],
+    "background_loss_area_km2_discs_of_same_size": {
+     "n": 2,
+     "median": 0.4384,
+     "p95": 0.83296,
+     "max": 0.8768
+    },
+    "valid_pixels_within_radius": 204064,
+    "valid_fraction_within_radius": 0.6651672501352734,
+    "p2p_cm_0.5_99.5pct": 7.026671354688763,
+    "p0.5_cm": -5.849259320849838,
+    "p99.5_cm": 1.1774120338389247,
+    "min_cm": -11.497795383670532,
+    "max_cm": 7.054643579331664,
+    "far_std_cm": 1.9896623363809527,
+    "control_far_std_cm": 3.6485033134938245,
+    "control_p2p_cm_0.5_99.5pct": 7.217233718618332,
+    "local_noise_cm_event_far": 0.6749101742923271,
+    "local_noise_cm_control_far": 0.9931125395044816,
+    "unwrapping_components_event": 1,
+    "incidence_deg_mean": 42.676361083984375
+   }
+  },
+  "verdict": null
  }
 }

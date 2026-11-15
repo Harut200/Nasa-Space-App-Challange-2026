@@ -1148,6 +1148,21 @@
      "pair": "20260625_20260707",
      "granule": "NISAR_L2_PR_GUNW_023_159_A_022_024_2000_SH_20260625T051544_20260625T051615_20260707T051543_20260707T051615_P05023_N_F_J_001"
     }
+   },
+   "d_null": {
+    "track": 95,
+    "frame": 68,
+    "direction": "D",
+    "label": "descending",
+    "data_view": "d_ign",
+    "co": {
+     "pair": "20260702_20260714",
+     "granule": "NISAR_L2_PR_GUNW_024_095_D_068_025_2000_SH_20260702T190926_20260702T191004_20260714T190925_20260714T191004_P05023_F_F_J_001"
+    },
+    "control": {
+     "pair": "20260620_20260702",
+     "granule": "NISAR_L2_PR_GUNW_023_095_D_068_024_2000_SH_20260620T190926_20260620T191005_20260702T190926_20260702T191004_P05023_N_F_J_001"
+    }
    }
   },
   "verdict": "clear",
@@ -1277,6 +1292,21 @@
      "pair": "20260709_20260721",
      "granule": "NISAR_L2_PR_GUNW_025_023_D_068_026_2000_SH_20260709T191745_20260709T191819_20260721T191744_20260721T191819_P05023_N_F_J_001"
     }
+   },
+   "a_null": {
+    "track": 87,
+    "frame": 22,
+    "direction": "A",
+    "label": "ascending",
+    "data_view": "a_late",
+    "co": {
+     "pair": "20260702_20260714",
+     "granule": "NISAR_L2_PR_GUNW_024_087_A_022_025_2000_SH_20260702T052402_20260702T052434_20260714T052401_20260714T052434_P05023_F_F_J_001"
+    },
+    "control": {
+     "pair": "20260620_20260702",
+     "granule": "NISAR_L2_PR_GUNW_023_087_A_022_024_2000_SH_20260620T052403_20260620T052435_20260702T052402_20260702T052434_P05023_N_F_J_001"
+    }
    }
   },
   "verdict": "clear",
@@ -1399,6 +1429,21 @@
     "control": {
      "pair": "20260702_20260714",
      "granule": "NISAR_L2_PR_GUNW_024_095_D_066_025_2000_SH_20260702T190818_20260702T190853_20260714T190817_20260714T190852_P05023_F_F_J_001"
+    }
+   },
+   "a_null": {
+    "track": 130,
+    "frame": 24,
+    "direction": "A",
+    "label": "ascending",
+    "data_view": "a_late",
+    "co": {
+     "pair": "20260705_20260717",
+     "granule": "NISAR_L2_PR_GUNW_024_130_A_024_025_2000_SH_20260705T050009_20260705T050044_20260717T050008_20260717T050043_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260623_20260705",
+     "granule": "NISAR_L2_PR_GUNW_023_130_A_024_024_2000_SH_20260623T050010_20260623T050045_20260705T050009_20260705T050044_P05023_N_F_J_001"
     }
    }
   },
@@ -2121,6 +2166,21 @@
      "pair": "20260709_20260721",
      "granule": "NISAR_L2_PR_GUNW_025_023_D_070_026_2000_SH_20260709T191852_20260709T191927_20260721T191851_20260721T191926_P05023_N_F_J_001"
     }
+   },
+   "a_null": {
+    "track": 15,
+    "frame": 21,
+    "direction": "A",
+    "label": "ascending",
+    "data_view": "a_ign",
+    "co": {
+     "pair": "20260709_20260721",
+     "granule": "NISAR_L2_PR_GUNW_025_015_A_021_026_2000_SH_20260709T053144_20260709T053219_20260721T053143_20260721T053218_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260627_20260709",
+     "granule": "NISAR_L2_PR_GUNW_024_015_A_021_025_2000_SH_20260627T053145_20260627T053220_20260709T053144_20260709T053219_P05023_N_F_J_001"
+    }
    }
   },
   "verdict": "clear",
@@ -2384,6 +2444,21 @@
     "control": {
      "pair": "20260713_20260725",
      "granule": "NISAR_L2_PR_GUNW_025_077_A_027_026_4000_SH_20260713T124758_20260713T124833_20260725T124757_20260725T124832_P05023_N_F_J_001"
+    }
+   },
+   "a_null": {
+    "track": 77,
+    "frame": 27,
+    "direction": "A",
+    "label": "ascending",
+    "data_view": "a_ign",
+    "co": {
+     "pair": "20260713_20260725",
+     "granule": "NISAR_L2_PR_GUNW_025_077_A_027_026_4000_SH_20260713T124758_20260713T124833_20260725T124757_20260725T124832_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260701_20260713",
+     "granule": "NISAR_L2_PR_GUNW_024_077_A_027_025_4000_SH_20260701T124759_20260701T124834_20260713T124758_20260713T124833_P05023_N_F_J_001"
     }
    }
   },
@@ -3876,5 +3951,205 @@
   "loss_drop": 0.25,
   "min_px": 30,
   "time_note": "64.7 mm in 24 h at Hotan on Saturday 20 Jun (China Daily); no NISAR pair starts before it: the first passes are 21 Jun (day after) and 28 Jun, so the control is a LATER pair"
+ },
+ {
+  "id": "colombia-m74-2026",
+  "type": "earthquake",
+  "title": "M7.4 intermediate-depth earthquake, Valle del Cauca, Colombia, 10 Aug 2026 (depth 116 km)",
+  "time": "2026-08-10T12:34:28Z",
+  "lat": 4.8601,
+  "lon": -76.2558,
+  "place": "San Jose del Palmar, Colombia",
+  "window": [
+   -76.85,
+   4.3,
+   -75.65,
+   5.4
+  ],
+  "heights": [
+   0,
+   4000
+  ],
+  "radius_km": 40,
+  "far_km": 70,
+  "gmin": 0.35,
+  "source_url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000tjl2",
+  "views": {
+   "asc47": {
+    "track": 47,
+    "frame": 4,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260723_20260816",
+     "granule": "NISAR_L2_PR_GUNW_026_047_A_004_028_4000_SH_20260723T103830_20260723T103905_20260816T103829_20260816T103904_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260711_20260723",
+     "granule": "NISAR_L2_PR_GUNW_025_047_A_004_026_4000_SH_20260711T103831_20260711T103906_20260723T103830_20260723T103905_P05023_N_F_J_001"
+    }
+   },
+   "desc11": {
+    "track": 11,
+    "frame": 86,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260720_20260813",
+     "granule": "NISAR_L2_PR_GUNW_026_011_D_086_028_4000_SH_20260720T232912_20260720T232946_20260813T232911_20260813T232945_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260708_20260720",
+     "granule": "NISAR_L2_PR_GUNW_025_011_D_086_026_4000_SH_20260708T232913_20260708T232947_20260720T232912_20260720T232946_P05023_N_F_J_001"
+    }
+   },
+   "asc148": {
+    "track": 148,
+    "frame": 4,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260718_20260811",
+     "granule": "NISAR_L2_PR_GUNW_025_148_A_004_027_2000_SH_20260718T104651_20260718T104725_20260811T104649_20260811T104724_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260706_20260718",
+     "granule": "NISAR_L2_PR_GUNW_024_148_A_004_025_2000_SH_20260706T104651_20260706T104726_20260718T104651_20260718T104725_P05023_N_F_J_001"
+    }
+   }
+  },
+  "verdict": "not detected",
+  "deformation": true,
+  "loss_hi": 0.45,
+  "loss_lo": 0.35,
+  "loss_drop": 0.25,
+  "min_px": 30,
+  "fringe_cm": 6,
+  "los_lim_cm": 10,
+  "time_note": "USGS us6000tjl2; depth 116 km; the event pairs are 24 days against 12-day controls"
+ },
+ {
+  "id": "minchumina-m56-2026",
+  "type": "earthquake",
+  "title": "M5.6 earthquake near Lake Minchumina, Alaska, 15 Oct 2026 (depth 4.5 km)",
+  "time": "2026-10-15T11:07:01Z",
+  "lat": 64.22,
+  "lon": -152.746,
+  "place": "43 km NNW of Lake Minchumina, interior Alaska",
+  "window": [
+   -153.7,
+   63.8,
+   -151.8,
+   64.65
+  ],
+  "heights": [
+   0,
+   1500
+  ],
+  "radius_km": 25,
+  "far_km": 45,
+  "gmin": 0.35,
+  "source_url": "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&eventid=aka2026ukynnb",
+  "views": {
+   "desc73": {
+    "track": 73,
+    "frame": 55,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20261005_20261017",
+     "granule": "NISAR_L2_PR_GUNW_032_073_D_055_033_4000_SH_20261005T062424_20261005T062502_20261017T062424_20261017T062502_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260923_20261005",
+     "granule": "NISAR_L2_PR_GUNW_031_073_D_055_032_4000_SH_20260923T062424_20260923T062502_20261005T062424_20261005T062502_P05023_N_F_J_001"
+    }
+   },
+   "asc49": {
+    "track": 49,
+    "frame": 34,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20261003_20261015",
+     "granule": "NISAR_L2_PR_GUNW_032_049_A_034_033_4000_SH_20261003T141513_20261003T141550_20261015T141513_20261015T141550_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260921_20261003",
+     "granule": "NISAR_L2_PR_GUNW_031_049_A_034_032_4000_SH_20260921T141513_20260921T141550_20261003T141513_20261003T141550_P05023_N_F_J_001"
+    }
+   }
+  },
+  "verdict": "not detected",
+  "deformation": true,
+  "loss_hi": 0.45,
+  "loss_lo": 0.35,
+  "loss_drop": 0.25,
+  "min_px": 30,
+  "fringe_cm": 5,
+  "los_lim_cm": 10,
+  "time_note": "USGS catalogue (ComCat query, 15 Oct 11:07 UTC, depth 4.5 km)"
+ },
+ {
+  "id": "skwentna-m56-2026",
+  "type": "earthquake",
+  "title": "M5.6 earthquake 57 km WNW of Skwentna, Alaska, 8 Aug 2026 (depth 10 km)",
+  "time": "2026-08-08T04:50:35Z",
+  "lat": 62.269,
+  "lon": -152.314,
+  "place": "57 km WNW of Skwentna, Alaska",
+  "window": [
+   -153.3,
+   61.9,
+   -151.3,
+   62.65
+  ],
+  "heights": [
+   0,
+   2500
+  ],
+  "radius_km": 25,
+  "far_km": 45,
+  "gmin": 0.35,
+  "source_url": "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&eventid=aka2026powmkf",
+  "views": {
+   "desc15": {
+    "track": 15,
+    "frame": 57,
+    "direction": "D",
+    "label": "descending",
+    "co": {
+     "pair": "20260721_20260814",
+     "granule": "NISAR_L2_PR_GUNW_026_015_D_057_028_2000_SH_20260721T055222_20260721T055257_20260814T055219_20260814T055255_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260709_20260721",
+     "granule": "NISAR_L2_PR_GUNW_025_015_D_057_026_4000_SH_20260709T055223_20260709T055257_20260721T055222_20260721T055257_P05023_N_F_J_001"
+    }
+   },
+   "asc49": {
+    "track": 49,
+    "frame": 33,
+    "direction": "A",
+    "label": "ascending",
+    "co": {
+     "pair": "20260723_20260816",
+     "granule": "NISAR_L2_PR_GUNW_026_049_A_033_028_4000_SH_20260723T141439_20260723T141515_20260816T141438_20260816T141514_P05023_N_F_J_001"
+    },
+    "control": {
+     "pair": "20260711_20260723",
+     "granule": "NISAR_L2_PR_GUNW_025_049_A_033_026_4000_SH_20260711T141440_20260711T141516_20260723T141439_20260723T141515_P05023_N_F_J_001"
+    }
+   }
+  },
+  "verdict": "not detected",
+  "deformation": true,
+  "loss_hi": 0.45,
+  "loss_lo": 0.35,
+  "loss_drop": 0.25,
+  "min_px": 30,
+  "fringe_cm": 5,
+  "los_lim_cm": 10,
+  "time_note": "USGS catalogue (ComCat query, 8 Aug 04:50 UTC); event pairs are 24 days against 12-day controls"
  }
 ]

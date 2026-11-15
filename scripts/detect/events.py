@@ -95,6 +95,26 @@ def loss_by_elevation(coh_event, coh_control, height, edges, hi=0.45, lo=0.35, d
     return rows
 
 
+def fetch_dem_grid(window, k=30, out=None):
+    """SRTM 30 m heights on a k x k grid over window (w, s, e, n) from a public elevation API (generic user agent, 100 points per
+    request, 1.2 s apart). Returns (lons, lats, z[k, k]); saved to `out` (.npz) if given. Only used for the snow check."""
+    import time
+    import urllib.request
+    w, s_, e, n = window
+    lons, lats = np.linspace(w, e, k), np.linspace(s_, n, k)
+    pts = [(la, lo) for la in lats for lo in lons]
+    z = []
+    for i in range(0, len(pts), 100):
+        q = "|".join(f"{a:.4f},{b:.4f}" for a, b in pts[i:i + 100])
+        req = urllib.request.Request("https://api.opentopodata.org/v1/srtm30m?locations=" + q, headers={"User-Agent": "Mozilla/5.0"})
+        z += [r["elevation"] for r in json.loads(urllib.request.urlopen(req, timeout=40).read())["results"]]
+        time.sleep(1.2)
+    z = np.array(z, float).reshape(k, k)
+    if out:
+        np.savez(out, lon=lons, lat=lats, z=z)
+    return lons, lats, z
+
+
 def top_clusters(loss, X, Y, epsg, pix_km2, n=5):
     """The n largest connected clusters of a loss mask: area, centroid (lon, lat) and longest bounding-box side (km)."""
     from scipy.ndimage import label
