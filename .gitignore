@@ -12,3 +12,4 @@ __pycache__/
 dist/
 
 # symlink to the first app's packages
+src/app/node_modules

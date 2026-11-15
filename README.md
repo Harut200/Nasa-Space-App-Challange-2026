@@ -94,7 +94,7 @@ State of 15 November 2026, about 04:00 (Armenia time; the 00:50 text was updated
 - **Visibility and evidence (15 Nov):** a visibility audit of 31 places (12 show it, 10 weakly, 9 not) led to a per-place opening layer and date, caution labels on five places and captions for steady places; before/after/difference evidence layers exist for three fires and six other places, each with a control test (the control is not clean at Thunder Bay, Sindh-Indus, Poyang and Urmia). See the two sections above and [docs/eda/visibility-audit.md](docs/eda/visibility-audit.md), [docs/eda/burn.md](docs/eda/burn.md).
 - **In progress:** Ararat coherence layers (not in the app), and nothing else open in the event hunt (round 3 ended at about 06:20 on 15 November; counts above are final as of commit `6e3330c`).
 - **Data size:** the app data folder was 65.7 MB after optimisation (90.0 MB before) when it held 25 places, with thumbnails and a one-file summary ([docs/eda/data-size.md](docs/eda/data-size.md)); with 37 places `du -sm src/app/public/data` shows 81 MB on 15 November (not re-optimised or re-measured in that file).
-- **Tests:** 243 passed in 34 test files in the full run of 15 November, about 06:20 (242 at 03:50; [docs/evidence/pytest-full.txt](docs/evidence/pytest-full.txt)). The earlier app design A had its own Node tests (22 of 22 passed, [docs/evidence/app-tests.txt](docs/evidence/app-tests.txt)); that design was removed from `main` on 15 November when `src/app3` became the app.
+- **Tests:** 243 passed in 34 test files in the full run of 15 November, about 06:20 (242 at 03:50; [docs/evidence/pytest-full.txt](docs/evidence/pytest-full.txt)). The earlier app design A had its own Node tests (22 of 22 passed, [docs/evidence/app-tests.txt](docs/evidence/app-tests.txt)); that design was removed from `main` on 15 November when the final app took its place in `src/app`.
 - **No radar passes exist from 27 July to 10 August 2026** (instrument outage). The timeline shows the gap.
 - **One season**, ten passes. All work is on `main`.
 
@@ -102,7 +102,7 @@ State of 15 November 2026, about 04:00 (Armenia time; the 00:50 text was updated
 
 ```
 NISAR GCOV (ASF)  →  cut and align  →  detect  →  export  →  static web app
-                     scripts/ingest    scripts/detect  scripts/ingest  src/app3
+                     scripts/ingest    scripts/detect  scripts/ingest  src/app
 
 USGS catalogue  →  ASF GUNW pair search  →  windows cut on a remote server  →  interferometry  →  event place in the app
                                                                              scripts/detect/quake.py
@@ -124,7 +124,7 @@ Detection is mathematics on PyTorch tensors: speckle filtering across all dates,
 Web app (Node 20.19 or newer):
 
 ```bash
-cd src/app3 && npm install && npm run dev -- --port 5173
+cd src/app && npm install && npm run dev -- --port 5173
 ```
 
 Rebuild the detections from scratch (Python 3.12 or newer; no login needed for previews):
@@ -157,8 +157,7 @@ Train the networks (Apple GPU or CPU):
 
 | Path | Holds |
 |---|---|
-| `src/app3/` | The web app: globe, story, "How we found it" stepper, before/after compare, caution labels (Vite, React, MapLibre GL JS). Two earlier designs (A and B) were removed on 15 November and are in the git history |
-| `src/app/public/data/` | The exported app data (images, manifests, summaries) written by `scripts/ingest/export.py`; `src/app3/public/data` links to it |
+| `src/app/` | The web app: globe, story, "How we found it" stepper, before/after compare, caution labels (Vite, React, MapLibre GL JS). `public/data/` holds the exported app data (images, manifests, summaries) written by `scripts/ingest/export.py`. Older documents under `docs/` call this app `src/app3` or "the merged app", and call two earlier designs, removed on 15 November and kept in the git history, `src/app` (A) and `src/app2` (B) |
 | `scripts/ingest/` | Search, download, cut, export; the calibrated-data extractor that runs on a remote server |
 | `scripts/detect/` | Loader, detection maths, detector entry point, fusion, validation, neural networks, calibrated-data detector, earthquake interferometry (`quake.py`, tests in `tests/test_quake.py`) |
 | `areas/` | One folder per place: box, track and frame, story text, spots |
