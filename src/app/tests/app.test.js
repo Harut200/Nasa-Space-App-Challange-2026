@@ -1,0 +1,277 @@
+import test, { after } from 'node:test'
+import assert from 'node:assert/strict'
+import fs from 'node:fs'
+import path from 'node:path'
+import { createElement as h } from 'react'
+import { renderToStaticMarkup as html } from 'react-dom/server'
+import { createServer } from 'vite'
+
+const root = path.resolve(import.meta.dirname, '..')
+const pub = path.join(root, 'public/data')
+const vite = await createServer({ root, server: { middlewareMode: true }, appType: 'custom', logLevel: 'error' })
+after(() => vite.close())
+const { frame, nearest } = await vite.ssrLoadModule('/src/data.js')
+const meta = await vite.ssrLoadModule('/src/meta.js')
+const { Fact } = await vite.ssrLoadModule('/src/Panels.jsx')
+const { Strip, Chart } = await vite.ssrLoadModule('/src/Charts.jsx')
+const count = (s, re) => (s.match(re) || []).length
+const noop = () => {}
+
+test('frame: contract C paths and nearest date', () => {
+  const dated = { id: 'hh', dates: ['2026-06-20', '2026-07-02', '2026-07-14'] }
+  assert.deepEqual(frame('data/', 'a', dated, '2026-07-02'), { url: 'data/a/hh/2026-07-02.webp', shown: '2026-07-02' })
+  assert.deepEqual(frame('data/', 'a', { id: 'rgb', dates: null }, '2026-07-02'), { url: 'data/a/rgb.webp', shown: null })
+  assert.equal(nearest(dated.dates, '2026-07-10'), '2026-07-14')
+})
+
+test('link format: #/<place>?layer=&date=', () => {
+  assert.deepEqual(meta.parseHash('#/tonle-sap?layer=water&date=2026-10-17'), { id: 'tonle-sap', layer: 'water', date: '2026-10-17', about: false, compare: false, split: 50 })
+  assert.deepEqual(meta.parseHash(''), { id: null, layer: null, date: null, about: false, compare: false, split: 50 })
+  assert.equal(meta.parseHash('#/sevan?about').about, true)
+})
+
+test('layers: the four clearest come first, nothing is dropped', () => {
+  const layers = ['hv', 'sig', 'hh', 'classes', 'change', 'when', 'water'].map((id) => ({ id, label: id }))
+  const { main, more } = meta.splitLayers(layers)
+  assert.deepEqual(main.map((l) => l.id), ['water', 'when', 'change', 'hh'])
+  assert.equal(main.length + more.length, layers.length)
+})
+
+test('nearest place and peak water come from data', () => {
+  const places = [{ id: 'a', lngLat: [104, 12] }, { id: 'b', lngLat: [45, 40] }]
+  assert.equal(meta.nearestPlace(places, [44, 41]).id, 'b')
+  const peak = meta.peakWater({ dates: ['d1', 'd2'], facts: [{ label: 'Open water', unit: 'km²', values: [1, 5] }] })
+  assert.deepEqual(peak, { v: 5, date: 'd2', unit: 'km²' })
+  assert.equal(meta.peakWater({ dates: [], facts: [] }), null)
+})
+
+test('Strip and Chart render with gaps, nulls and one date', () => {
+  const s = html(h(Strip, { dates: ['2026-06-20', '2026-07-02', '2026-08-10'], gaps: [['2026-07-10', '2026-08-01']], index: 1, onPick: noop }))
+  assert.ok(s.includes('Outage') && !s.includes('NaN'))
+  const ts = { dates: ['2026-06-20', '2026-07-02', '2026-07-14'], series: [{ spot: 'lake', hh: [-18, null, -20] }] }
+  const c = html(h(Chart, { ts, pol: 'hh', gaps: [], index: 0, onPick: noop, colors: ['#f00'], spots: [{ id: 'lake', label: 'Open lake' }] }))
+  assert.equal(count(c, /<circle/g), 2)
+  assert.ok(c.includes('Open lake') && !c.includes('NaN'))
+})
+
+test('published data is complete and has no demo place', () => {
+  const idx = JSON.parse(fs.readFileSync(path.join(pub, 'index.json'), 'utf8'))
+  assert.equal(idx.areas[0], 'tonle-sap')
+  assert.ok(!idx.areas.includes('demo') && !fs.existsSync(path.join(pub, 'demo')))
+  for (const a of idx.areas) {
+    const m = JSON.parse(fs.readFileSync(path.join(pub, a, 'manifest.json'), 'utf8'))
+    assert.ok(Array.isArray(m.bounds) && m.bounds.length === 4)
+    for (const l of m.layers) for (const d of m.dates) {
+      assert.ok(fs.existsSync(path.join(root, 'public', frame('data/', a, l, d).url)), `${a} ${l.id} ${d}`)
+    }
+  }
+})
+
+test('no invented events, planets or demo data in the app source', () => {
+  assert.ok(!fs.existsSync(path.join(root, 'src/regions.js')) && !fs.existsSync(path.join(root, 'src/planets.js')))
+  const re = /data\/demo|Demo \(synthetic\)|PLANETS|predicted event/
+  const bad = fs.readdirSync(path.join(root, 'src')).filter((f) => /\.(jsx?|css)$/.test(f) && re.test(fs.readFileSync(path.join(root, 'src', f), 'utf8')))
+  assert.deepEqual(bad, [])
+})
+
+// ---- earthquake event places ----
+const readManifest = (a) => JSON.parse(fs.readFileSync(path.join(pub, a, 'manifest.json'), 'utf8'))
+const idxAreas = JSON.parse(fs.readFileSync(path.join(pub, 'index.json'), 'utf8')).areas
+const manifests = idxAreas.map(readManifest)
+const events = manifests.filter(meta.isEvent)
+const places = manifests.map((m) => meta.makePlace(m, null))
+const BAD = /NaN|undefined|null|Infinity/
+
+test('event places: data shape, layers on disk, helpers survive dates: []', () => {
+  assert.ok(events.length >= 9)
+  for (const m of events) {
+    assert.deepEqual(m.dates, [])
+    assert.equal(meta.defaultLayer(m), m.layers.some((l) => l.id === 'fringes') ? 'fringes' : m.layers.some((l) => l.id === 'coh_loss') ? 'coh_loss' : m.layers[0].id)
+    for (const l of m.layers) assert.ok(fs.existsSync(path.join(root, 'public', frame('data/', m.id, l, undefined).url)), `${m.id} ${l.id}`)
+    assert.equal(meta.splitLayers(m.layers, true).main.length, m.layers.length)
+    assert.ok(meta.eventViews(m.event).length >= 1)
+  }
+  assert.equal(meta.peakWater({ dates: [], series: [], facts: [] }), null)
+})
+
+test('event places: tooltip text, grouping, counts, summaries', () => {
+  const tibet = places.find((p) => p.id === 'tibet-m70-2026')
+  assert.equal(tibet.kind, 'event')
+  const { head, rest } = meta.eventTip(tibet)
+  assert.equal(`${head} · ${rest}`, "Tibet earthquake, M7.0 · 22 Oct 2026 · ground moved ≈ 127 cm along the radar's line of sight")
+  const noNum = { ...tibet, event: { ...tibet.event, views: [{ ...tibet.event.views[0], p2p_cm: null }] } }
+  assert.equal(meta.eventTip(noNum).rest, '22 Oct 2026')
+  for (const p of places) {
+    const t = html(h(Fact, { p })) + meta.placeSummary(p)
+    assert.ok(!BAD.test(t), `${p.id}: ${t}`)
+  }
+  const g = meta.groupPlaces(places)
+  const summary = JSON.parse(fs.readFileSync(path.join(pub, 'summary.json'), 'utf8')).categories
+  assert.deepEqual(g.map((x) => x.key), [...new Set(places.map((p) => p.category))].sort((a, b) => summary.findIndex((c) => c.id === a) - summary.findIndex((c) => c.id === b)))
+  for (const p of places) assert.ok(summary.some((c) => c.id === p.category), p.id) // every class in use is named in summary.json
+  assert.equal(g.reduce((n, x) => n + x.items.length, 0), places.length)
+  assert.ok(g.find((x) => x.key === 'earthquake').items.every((p) => p.kind === 'event'))
+  assert.equal(meta.groupPlaces(places, [{ id: 'volcano', label: 'Volcano places' }])[0].title, 'Volcano places')
+  assert.deepEqual(meta.groupPlaces(places.filter((p) => p.kind === 'event')).map((x) => x.key), ['fire', 'earthquake', 'volcano', 'landslide', 'storm'])
+  const unknown = [{ ...places[0], category: 'glacier-lake' }, ...places]
+  assert.equal(meta.groupPlaces(unknown).at(-1).title, 'Glacier Lake')
+  const counts = meta.classList(places).map((c) => `${c.label.toLowerCase()} (${c.n})`).join(', ')
+  assert.equal(meta.landingText(places), `NISAR watched ${places.length} places between June and October 2026: ${counts}.`)
+  assert.equal(places.length, idxAreas.length)
+  assert.equal(meta.landingText(places.slice(0, 1)), 'NISAR watched 1 place between June and October 2026: floods (1).')
+  assert.equal(meta.eventSummary(tibet), 'M7.0 · 22 Oct 2026')
+})
+
+test('event types: volcano and landslide wording, noisy view rule, fringe cycle, fire and headline-none places', () => {
+  const kil = places.find((p) => p.id === 'kilauea-ep55-2026')
+  assert.deepEqual(meta.eventTip(kil), { head: 'Kilauea summit eruption', rest: '17 Oct 2026 · ≈ 10.2 km² of surface changed completely' })
+  assert.ok(!/ M\d|ground moved/.test(meta.eventTip(kil).head + meta.eventTip(kil).rest))
+  const ven = readManifest('venezuela-m75-2026').event.views
+  assert.equal(meta.noisyView(ven[0]), false)
+  assert.equal(meta.noisyView(ven[1]), true)
+  assert.equal(meta.noisyView({ p2p_cm: 10, control_p2p_cm: 8 }), true)
+  assert.equal(meta.noisyView({ p2p_cm: 10, control_p2p_cm: null }), false)
+  assert.equal(meta.fringeCycle(readManifest('qaidam-m56-2026').layers), '5')
+  assert.equal(meta.fringeCycle(readManifest('tibet-m70-2026').layers), '10')
+  assert.equal(meta.fringeCycle([{ id: 'coherence' }]), null)
+  const fire = manifests.find((m) => m.id === 'thunder-bay-36-2026'), fp = places.find((p) => p.id === fire.id)
+  assert.equal(fp.peak, null)
+  assert.equal(meta.placeSummary(fp), fire.headlineNote)
+  assert.ok(html(h(Fact, { p: fp })).includes(fire.headlineNote.replace(/&/g, '&amp;')))
+  assert.equal(meta.defaultLayer(fire), fire.defaultLayer)
+  const ararat = manifests.find((m) => m.id === 'ararat')
+  assert.deepEqual(meta.splitLayers(ararat.layers, false).main.map((l) => l.id), ['water', 'when', 'change', 'hh', 'coh', 'coh_change'])
+  assert.ok(meta.splitLayers(fire.layers, false, [fire.defaultLayer]).main.some((l) => l.id === fire.defaultLayer))
+  for (const p of places) assert.ok(['big', 'some', 'land', 'quake', 'fire', 'volcano', 'landslide', 'other'].includes(meta.placeStyle(p)), p.id)
+})
+
+test('event places: before/after and honesty text, no NaN', () => {
+  for (const m of events) {
+    const e = m.event
+    const txt = [meta.viewingNote(e), meta.utcStamp(e.time), ...meta.eventViews(e).flatMap((v) => [meta.dayMon(v.before), meta.dayMon(v.after), meta.viewMotion(v), meta.viewControl(v)])].filter(Boolean).join(' ')
+    assert.ok(!BAD.test(txt), txt)
+  }
+  const t = readManifest('tibet-m70-2026').event
+  assert.equal(meta.dayMon(t.views[0].before), '19 Oct')
+  assert.match(meta.viewingNote(t), /one viewing direction/)
+  assert.match(meta.viewingNote({ views: [{ label: 'ascending' }, { label: 'descending' }] }), /two viewing directions/)
+  assert.equal(meta.viewMotion({ p2p_cm: null }), null)
+})
+
+test('event places: dot size grows with magnitude; link with a date param parses', () => {
+  assert.ok(meta.quakeRadius(7.7) > meta.quakeRadius(6.8))
+  assert.ok(Number.isFinite(meta.quakeRadius(undefined)))
+  assert.equal(meta.parseHash('#/tibet-m70-2026?layer=fringes&date=2026-10-19').id, 'tibet-m70-2026')
+})
+
+// ---- polish pass ----
+test('viewing note: same-direction passes are written plainly', () => {
+  const same = meta.viewingNote({ views: [{ label: 'ascending' }, { label: 'ascending' }] })
+  assert.equal(same, "Provisional data, two passes of the same viewing direction: this is motion along the radar's line of sight, not up/down or sideways.")
+  assert.match(meta.viewingNote({ views: [{ label: 'ascending' }, { label: 'ascending' }, { label: 'ascending' }] }), /three passes of the same viewing direction/)
+  assert.match(meta.viewingNote({ views: [{ label: 'ascending' }, { label: 'descending' }] }), /two viewing directions/)
+  assert.doesNotMatch(same, /tracks, all/)
+})
+
+test('link: compare and split survive a reload, other date is optional', () => {
+  const h = meta.parseHash('#/tonle-sap?layer=water&date=2026-10-17&compare=1&split=35&other=2026-07-02')
+  assert.equal(h.compare, true); assert.equal(h.split, 35); assert.equal(h.other, '2026-07-02')
+  assert.ok(!('other' in meta.parseHash('#/tonle-sap?compare')))
+})
+
+test('layer labels: known ids get a short name, unknown ids fall back to the manifest label, cut at a word', () => {
+  assert.equal(meta.shortLabel({ id: 'water', label: 'x' }), 'Water and flooded vegetation')
+  assert.equal(meta.shortLabel({ id: 'coh', label: 'Coherence' }), 'Coherence')
+  const t = meta.shortLabel({ id: 'coh_change', label: 'Coherence change since the first pass of the season (unitless)' })
+  assert.ok(t.endsWith('…') && t.length <= 31 && !/\s…$/.test(t), t)
+  assert.equal(meta.shortLabel({ id: 'zz' }), 'zz')
+})
+
+test('numbers: percent, dB and nulls display cleanly', () => {
+  assert.equal(meta.withUnit(63.44, '%'), '63.4%')
+  assert.equal(meta.withUnit(-18.26, 'dB'), '−18.3 dB')
+  assert.equal(meta.withUnit(1234.4, 'km²'), '1,234 km²')
+  assert.equal(meta.fmtVal(null, '%'), '')
+})
+
+test('calibrated place (dB, negative values, axis not from 0) and a % fact with a null first value render without NaN', () => {
+  const ts = { dates: ['2026-08-12', '2026-08-24', '2026-09-05'], unit: 'dB', series: [{ spot: 'lake', hh: [-21.4, -20.9, -22.1], hv: [-27, -26.5, null] }, { spot: 'rice', hh: [-12.2, -11.8, -9.5] }] }
+  for (const pol of ['hh', 'hv', 'vv']) {
+    const c = html(h(Chart, { ts, pol, gaps: [], index: 1, onPick: noop, colors: ['#f00', '#00f'], spots: [{ id: 'lake', label: 'Lake' }, { id: 'rice', label: 'Rice' }] }))
+    assert.ok(!BAD.test(c.replace(/null/g, '')) && c.includes('−'), pol)
+  }
+  const one = { dates: ['2026-08-12'], series: [{ spot: 'lake', hh: [-20] }] }
+  assert.ok(html(h(Chart, { ts: one, pol: 'hh', gaps: [], index: 0, onPick: noop, colors: ['#f00'], spots: [] })).includes('−20'))
+  const noData = { dates: ['2026-08-12'], series: [{ spot: 'lake', hh: [null] }] }
+  assert.equal(html(h(Chart, { ts: noData, pol: 'hh', gaps: [], index: 0, onPick: noop, colors: ['#f00'], spots: [] })), '')
+  const peak = meta.peakWater({ dates: ['a', 'b'], facts: [{ label: 'Open water', unit: '%', values: [null, 12.5] }] })
+  assert.deepEqual(peak, { v: 12.5, date: 'b', unit: '%' })
+})
+
+// ---- data refresh: caution, evidence, default layer and date, fire events ----
+test('caution: on every place that has one, in the tooltip, never dropped', () => {
+  const withC = manifests.filter((m) => m.caution)
+  assert.ok(withC.length >= 5)
+  for (const m of withC) {
+    const p = places.find((x) => x.id === m.id)
+    assert.equal(p.caution, m.caution)
+    assert.ok(html(h(Fact, { p })).includes(m.caution.replace(/'/g, '&#x27;')), m.id)
+  }
+  assert.equal(places.find((p) => p.id === 'sevan').caution, null)
+})
+
+test('opening layer and date come from the manifest; every default layer is a real layer', () => {
+  for (const m of manifests) {
+    assert.ok(m.layers.some((l) => l.id === meta.defaultLayer(m)), m.id)
+    if (m.defaultDate) assert.equal(meta.defaultDateIndex(m), m.dates.indexOf(m.defaultDate), m.id)
+  }
+  assert.equal(meta.defaultLayer(manifests.find((m) => m.id === 'okavango')), 'ev_diff')
+  assert.equal(meta.defaultLayer(manifests.find((m) => m.id === 'poyang')), 'change')
+  const poy = manifests.find((m) => m.id === 'poyang')
+  assert.equal(poy.dates[meta.defaultDateIndex(poy)], '2026-09-27')
+  assert.equal(meta.defaultDateIndex(manifests.find((m) => m.id === 'sevan')), 0)
+})
+
+test('evidence places: layers, steps without their numbers, twin for compare, chart series', () => {
+  const ev = manifests.filter((m) => m.evidence)
+  assert.ok(ev.length >= 5)
+  for (const m of ev) {
+    const ids = meta.evidenceLayerIds(m)
+    assert.ok(ids.includes(m.evidence.before) && ids.includes(m.evidence.after) && ids.includes(m.evidence.diff), m.id)
+    assert.equal(ids.includes(m.evidence.mask), !!m.evidence.mask)
+    const steps = meta.evidenceSteps(m)
+    assert.equal(steps.length, 5)
+    assert.ok(steps.every((t, i) => t === m.evidence.steps[i].replace(/^\d+\. /, '')))
+    assert.equal(meta.compareTwin(m, m.layers.find((l) => l.id === m.evidence.after)).id, m.evidence.before)
+    assert.equal(meta.compareTwin(m, m.layers.find((l) => l.id === m.evidence.before)).id, m.evidence.after)
+    assert.equal(meta.compareTwin(m, m.layers.find((l) => l.id === 'hh')), null)
+    const ts = JSON.parse(fs.readFileSync(path.join(pub, m.id, 'timeseries.json'), 'utf8'))
+    for (const lab of m.evidence.series) assert.ok(ts.facts.some((f) => f.label === lab), `${m.id}: ${lab}`)
+    const { main } = meta.splitLayers(m.layers, false, ids, true)
+    assert.ok(ids.every((id) => main.some((l) => l.id === id)))
+    for (const l of m.layers) assert.ok(l.label && l.legend, `${m.id} ${l.id}`)
+  }
+  assert.equal(meta.compareTwin(manifests.find((m) => m.id === 'sevan'), { id: 'hh' }), null)
+})
+
+test('fire places: no water numbers; event fire places are treated like volcano events', () => {
+  for (const p of places.filter((x) => x.category === 'fire')) {
+    assert.equal(p.peak, null, p.id)
+    assert.ok(!/km² (peak|open)|open water/i.test(html(h(Fact, { p })) + meta.placeSummary(p)), p.id)
+  }
+  const gir = places.find((p) => p.id === 'gironde-coh-2026')
+  assert.equal(gir.kind, 'event'); assert.equal(gir.category, 'fire'); assert.equal(meta.placeStyle(gir), 'fire')
+  const tip = meta.eventTip(gir)
+  assert.ok(!/ M\d|ground moved| cm/.test(tip.head + tip.rest), tip.rest)
+  assert.equal(meta.classList(places, JSON.parse(fs.readFileSync(path.join(pub, 'summary.json'), 'utf8')).categories).find((c) => c.id === 'fire').label, 'Wildfires')
+  assert.equal(meta.fmtVal(44.78, 'relative brightness (0–100, uncalibrated)'), '44.8')
+})
+
+test('venezuela m75: the view whose control is at least 0.8 x its signal is too noisy, the other is not', () => {
+  const m = readManifest('venezuela-m75-2026')
+  const noisy = m.event.views.filter(meta.noisyView).map((v) => v.label)
+  assert.deepEqual(noisy, ['ascending'])
+  assert.equal(meta.noisyLayer(m, m.layers.find((l) => l.id === 'los_asc_cm')), true)
+  assert.equal(meta.noisyLayer(m, m.layers.find((l) => l.id === 'los_desc_cm')), false)
+  assert.ok(!meta.eventTip(places.find((p) => p.id === m.id)).rest.includes('66'))
+})
